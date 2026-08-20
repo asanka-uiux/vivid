@@ -192,8 +192,8 @@ button{font:inherit;color:inherit}
 .burger:hover{background:rgba(255,255,255,.08)}
 .burger:active{background:rgba(255,255,255,.12)}
 
-/* Disabled states */
-button:disabled,input:disabled{opacity:.5;cursor:not-allowed;color:var(--text-muted)}
+/* Disabled states — opacity only (avoids contrast issues across backgrounds) */
+button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 
 /* Transitions for hover polish */
 .search,.util,.subnav__link,.chat,.burger,button{transition:background-color 150ms,border-color 150ms,color 150ms}
@@ -1728,7 +1728,70 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed;color:var(--text-mu
   <nav class="subnav" aria-label="Product categories">
     <div class="shell subnav__inner">
       <ul class="subnav__list">
-        <li><a class="subnav__link" href="suspension.html">Suspension <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a></li>
+        <li class="subnav__item">
+          <a class="subnav__link" href="suspension.html" aria-haspopup="true" aria-expanded="false" aria-controls="mega-suspension">Suspension <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a>
+          <!-- Figma VWl8YFYeeS1d3nGfsliTtI, node 305:1754 "VR / Mega Menu — Suspension".
+               JetBrains Mono in the source is NOT used here — per
+               vivid_font_use_instructions.md §6 it's retired site-wide and every
+               small uppercase label maps to Inter uppercase instead. #e10600 is
+               swapped for --action-primary on the CTA/eyebrow TEXT, matching this
+               file's own documented precedent (.btn-outline) that the literal
+               Figma red fails 1.4.3 at small text sizes; the icon glyph keeps its
+               real #E10600 fill since icons only need the 3:1 non-text minimum,
+               which pure red on white clears easily.
+               Reveal is CSS-only (:hover/:focus-within on .subnav__item) — works
+               with no JS. The aria-expanded sync + Escape-to-close is the one bit
+               that needs the script at the bottom of the page. -->
+          <div class="mega" id="mega-suspension">
+            <div class="shell mega__inner">
+              <div class="mega__cols">
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/suspension-red.svg" alt="" aria-hidden="true" width="16" height="16">Shop Suspension</p>
+                  <ul class="mega__list">
+                    <li><a href="coilover-specs.html">Coilovers</a></li>
+                    <li><a href="suspension.html">Lowering Springs</a></li>
+                    <li><a href="suspension.html">Air Suspension</a></li>
+                    <li><a href="suspension.html">Shocks &amp; Struts</a></li>
+                    <li><a href="suspension.html">Sport Springs</a></li>
+                  </ul>
+                </div>
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/check-red.svg" alt="" aria-hidden="true" width="14" height="14">Handling</p>
+                  <ul class="mega__list">
+                    <li><a href="suspension.html">Sway Bars</a></li>
+                    <li><a href="suspension.html">Control Arms</a></li>
+                    <li><a href="suspension.html">Bushings &amp; Mounts</a></li>
+                    <li><a href="suspension.html">Strut Braces</a></li>
+                    <li><a href="suspension.html">Camber &amp; Alignment</a></li>
+                  </ul>
+                  <a class="mega__cta" href="suspension.html">Shop all suspension
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></a>
+                </div>
+                <div class="mega__col mega__col--brands">
+                  <p class="mega__label"><img src="assets/icons/star.svg" alt="" aria-hidden="true" width="14" height="14">Top Brands</p>
+                  <ul class="mega__list mega__list--bold">
+                    <li><a href="suspension.html">KW Suspensions</a></li>
+                    <li><a href="suspension.html">&Ouml;hlins</a></li>
+                    <li><a href="suspension.html">Bilstein</a></li>
+                    <li><a href="suspension.html">H&amp;R</a></li>
+                    <li><a href="suspension.html">Eibach</a></li>
+                    <li><a href="suspension.html">Fox Factory</a></li>
+                  </ul>
+                </div>
+              </div>
+              <!-- feature card — placeholder product/promo tile, per the mockup -->
+              <a class="mega__feature" href="deal-machine.html">
+                <span class="mega__feature-img" aria-hidden="true"></span>
+                <span class="mega__feature-body">
+                  <span class="mega__feature-eyebrow">Spring Event</span>
+                  <span class="mega__feature-title">Up to 25% off KW coilovers</span>
+                  <span class="mega__cta">Shop the event
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </li>
         <li><a class="subnav__link" href="wheels-cat.html">Wheels &amp; Tires <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a></li>
         <li><a class="subnav__link" href="brakes.html">Brakes <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a></li>
         <li><a class="subnav__link" href="exhaust.html">Exhaust <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a></li>

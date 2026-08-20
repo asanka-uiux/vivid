@@ -25,6 +25,9 @@ file is a placeholder.
 | `index.html` | Source of truth. The header lives at markup lines **1603–1719**, its CSS at **18–83** (prerequisites) and **85–182** (header), plus header rules inside the media queries at **1470–1594**. |
 | `_partials/header.html` | The header markup, cut verbatim from `index.html`. Paste source only — **not a viewable page** (its `logos/…` paths are written relative to the page root, so it renders broken if you open it from inside `_partials/`). |
 | `_partials/header.css` | The header CSS in three labelled sections: prerequisites, header, responsive. |
+| `_partials/footer.html` | The footer markup (132 lines). Paste it inside `<body>` before `</body>`, or at the end of the page after all `<main>` content. |
+| `_partials/footer.css` | The footer CSS: base rules + responsive overrides for ≤1180 and ≤900 breakpoints. |
+| `_partials/footer-script.js` | The `<details>` sync script (60 lines). Paste it at the very end of the page, just before `</body>`. It runs once on load and keeps disclosure state in sync with breakpoint. Degrades gracefully (columns stay open without it). |
 | `_page-template.html` | A blank page with the header already in place, sitting at the root so its relative paths work. **Start new pages by copying this.** Open it in a browser to see the header on its own. |
 | `_partials/template-head.html`<br>`_partials/template-mid.html`<br>`_partials/template-tail.html` | The doctype/head, the `</style>`→`<body>` seam, and the `<main>`/footer-placeholder tail of the template. Only needed to rebuild `_page-template.html`; ignore them otherwise. |
 
@@ -47,9 +50,11 @@ cp _page-template.html your-page.html
 ```
 
 Then fill in the two values between the `EDIT PER PAGE` markers in `<head>`
-(`<title>` and the meta description) and apply the per-page header rules in the
-table below. Page CSS goes under the `PAGE CSS` banner inside `<style>`; content
-goes inside `<main id="main">`.
+(`<title>` and the meta description), and apply the per-page header rules below.
+The template has the header in place and an `<!-- PAGE CONTENT GOES HERE -->` 
+placeholder inside `<main id="main">`. The footer is not yet in the template — 
+paste it in when your page is ready (see retrofit section). Page CSS goes under 
+the `PAGE CSS` banner inside `<style>`; content goes inside `<main id="main">`.
 
 ### An existing page (retrofit)
 
@@ -67,9 +72,12 @@ below it, and no brand switcher. To bring one in line:
 4. Paste `_partials/header.css` sections 2 and 3. Paste section 1 **only** if the
    page has no `:root` block yet — a second `:root` fights the first one.
 5. Delete the page's existing `<a class="skip-link">`; the new header has its own.
-6. Read "Retrofit conflicts" immediately below — the shared stylesheet overrides
+6. Paste the footer: `_partials/footer.html` before `</body>`, `_partials/footer.css`
+   in `<style>`, and `_partials/footer-script.js` just before `</body>` (after
+   the footer markup).
+7. Read "Retrofit conflicts" immediately below — the shared stylesheet overrides
    part of the header.
-7. Work through the per-page table and the invariants below.
+8. Work through the per-page table and the invariants below.
 
 > Read the `html-retrofit` skill first if the page has any wired-up JS or forms.
 > Several pages (`cart.html`, `signin.html`, `tire-calculator.html`,
@@ -355,9 +363,149 @@ unaffected, but the line numbers moved by 7 mid-task. Re-cut from a settled file
 
 ## Footer
 
-**Not yet standardised — coming next.** Until then, copy `<footer class="foot">`
-from `index.html` (markup lines 4872–5003) along with its CSS *and* the
-`<details open>` sync script at the bottom of the file (5006–5065) — the footer columns are
-`<details>` elements that collapse on phones, and that script keeps them in sync
-with the breakpoint. It degrades gracefully without JS (columns stay open), but
-the mobile behaviour needs it.
+**Standardised.** Use `_partials/footer.html`, `_partials/footer.css`, and
+`_partials/footer-script.js` exactly as you do for the header.
+
+---
+
+## Files
+
+| File | What it is |
+|---|---|
+| `index.html` | Source of truth. The footer lives at markup lines **4917–5048**, its CSS at **1343–1435** (base) + **1553–1590** (≤1180) + **1592–1612** (≤900), and the script at **5051–5110**. |
+| `_partials/footer.html` | The footer markup, cut verbatim from `index.html`. Like the header, it is **not a viewable page on its own** — relative paths break. |
+| `_partials/footer.css` | The footer CSS in three blocks: base + two responsive overrides. |
+| `_partials/footer-script.js` | The `<details open>` sync script. Runs once on page load, keeps footer column disclosure state in sync with the breakpoint. Degrades gracefully (columns stay open without it). |
+
+---
+
+## Footer anatomy
+
+One `<footer class="foot">` element with three regions:
+
+| Region | Element | Notes |
+|---|---|---|
+| **Brand** | `.foot__brand` | Left: Vivid logo, customer service hours, HQ address, email signup, social links. Flex: 0 0 300px (fixed width). |
+| **Columns** | `.foot__cols` | Right: Five disclosure columns (Shop / Platforms / Community / Tools / Account) as `<details open>` elements. Grid: 5 equal columns on desktop, stacked accordions on mobile (≤900px). |
+| **Legal** | `.foot__legal` | Bottom: Copyright, privacy, terms, accessibility. Centered on mobile. |
+
+The footer's job: navigation depth, link collection, email capture, social proof, legal coverage, and collapsible category browsing on phones.
+
+---
+
+## What you change per page
+
+| Thing | Rule |
+|---|---|
+| All links | Point them at real pages. The template has 8 Shop links, 2 Platforms (commented), 2 Community, 4 Tools, 4 Account. Most are correct on `index.html`; adjust to your own nav structure. |
+| Social links | `aria-label`, `href`, icon src — these four links are branded per platform (YouTube red, Facebook blue, Instagram gradient, TikTok black). Leave the aria-label + href + src in sync. |
+| Email signup | The `<form>` and `.foot__go` button wire to an action. On `index.html` it points to `action="#"` (no backend). Wire it when you implement email capture. |
+| Phone number | `href="tel:+14809663040"` and display text `480-966-3040` — match the header's phone (keep them in sync). |
+| Legal links | Copyright year, links to your policies. On `index.html`: privacy.html, terms.html. |
+| Nothing else | The disclosure columns, layout, styling, script — all identical on every page. |
+
+**Why disclose columns are `<details>` and not plain lists:**
+They collapse on phones (`≤900px`) without JS, improving mobile usability. The script
+is optional — the page works (columns stay open) without it. Once wired, the script
+syncs the open/closed state to the breakpoint: on desktop they stay open; on mobile
+they close/open per user click and the sync keeps them in step.
+
+---
+
+## What you must not change
+
+### Canonical values — identical on every page
+
+| | Value |
+|---|---|
+| Brand logo | `logos/flat-system/vivid-master-creme.svg` (cream-on-black). Size: `width="183" height="38"`. |
+| Phone | `tel:+14809663040` → display `480-966-3040` — **keep in sync with header.** |
+| Social platforms | 4 links only: YouTube / Instagram / Facebook / TikTok. aria-label + href + icon src must stay together. |
+| Column titles | "Shop" / "Platforms" / "Community" / "Tools" / "Account" — these are the disclosure labels. Don't change them without changing the layout. |
+| Disclosure mechanic | `<details class="foot__col" open>` — the `open` attribute is required for desktop (columns start expanded). Mobile collapses them via media query. Do not remove `open`. |
+| Script scope | The sync script targets `.foot__col` elements. If you rename the class, the script breaks. |
+
+### Accessibility decisions that look like mistakes but aren't
+
+- **`<details>` without a drawer button.** The disclosure is native HTML, not a custom button. It meets WCAG 2.1 for keyboard access (Enter/Space to toggle) and is announced as an expandable group. Do not replace it with a custom `<button>` + hidden content unless you reimplement the keyboard behavior.
+- **No `aria-expanded` on the disclosure.** Native `<details>` automatically announces open/closed state via `aria-expanded` internally. Do not add a redundant one to the `<summary>`. The script syncs the `open` attribute, and the browser handles announcements.
+- **Script timing: `DOMContentLoaded`.** The script runs once at page load, not on every resize, and uses `matchMedia` with a `change` listener — efficient and non-blocking. Do not convert it to a resize listener or continuous polling.
+- **Column link minimum height: 24px.** `.foot__list a` has `min-height:24px` (WCAG 2.5.8). At ≤900px this becomes 44px. Do not reduce it.
+
+### Don't invent states
+
+There is **no active/current state on footer links** — they point outward, not to the current page. The footer is global navigation; add state only if the design demands it.
+
+---
+
+## Dependencies
+
+- **Script:** The `<details open>` sync script at the bottom of every page that has a footer. Must run for mobile disclosure behavior. Pages without the script still work (columns stay expanded).
+- **CSS:** Section in the page's `<style>`. Exactly one footer CSS rule set per page.
+- **Assets:** 
+  - `logos/flat-system/vivid-master-creme.svg` (cream logo for dark background)
+  - `assets/icons/youtube-f.svg`, `instagram.svg`, `facebook.svg`, `tiktok.svg` (social icons)
+- **Links:** All href values must point to valid pages on the same domain. Broken links are immediately visible and harm UX.
+- **Paths:** Every page is a flat sibling of `logos/` and `assets/`. Relative paths work because they are relative to the page root.
+
+---
+
+## Breakpoints the footer responds to
+
+| Width | What happens |
+|---|---|
+| ≤1180 | No footer-specific change (header search caps, but footer is unaffected). |
+| ≤900 | **Mobile layout.** Brand block moves to center, columns collapse to accordions (all start closed except the current interaction), legal links stack, social links become 44×44. Grid → single column. |
+
+---
+
+## Verification checklist
+
+After adding the footer to a page:
+
+- [ ] All social links have `href`, `aria-label`, and matching icon `src`.
+- [ ] Email signup form wired (or left as `action="#"` if backend is not ready).
+- [ ] Phone number matches the header exactly.
+- [ ] All navigation links resolve:
+      `for a in $(grep -o 'href="[^"]*"' your-page.html | sed 's/href="//;s/"//'); do [ -f "$a" ] || [ "$a" = "#" ] || echo "MISS $a"; done`
+- [ ] Social icon assets exist:
+      `for f in youtube-f.svg instagram.svg facebook.svg tiktok.svg; do [ -f "assets/icons/$f" ] || echo "MISS $f"; done`
+- [ ] `<details class="foot__col" open>` unchanged (all five columns).
+- [ ] Script is present and inside `</body>` (not inside `</footer>`).
+- [ ] Renders correctly at 1440 / 900 / 320 px.
+- [ ] On mobile: tap a disclosure, it opens; tap another, the first closes and the second opens. No overlap, no stuck accordions.
+- [ ] Run the `ada-compliance` skill as the final pass.
+
+---
+
+## Re-cutting the partials
+
+After you change the footer in `index.html`, regenerate the partials using the same
+grep-based approach as the header (to survive line number drift):
+
+```sh
+cd ~/Documents/ViViD/vivid_pages
+
+# 1 · find the ranges
+grep -n '^<footer class="foot">' index.html     # markup start
+grep -n '^</footer>'                index.html     # markup end
+grep -n "^/\* =.*FOOTER\|^/\* =.*REVIEWS" index.html  # CSS start → REVIEWS line
+grep -n "^@media (max-width:1180px){" index.html | tail -3  # 1180 block
+grep -n "^@media (max-width:900px){" index.html | tail -1   # last 900 block
+grep -n "^<script>" index.html                  # script start
+grep -n "^</script>" index.html                 # script end
+
+# 2 · re-cut using the numbers from step 1
+sed -n '4917,5048p' index.html > _partials/footer.html
+sed -n '1343,1435p' index.html > _partials/footer_base.css
+sed -n '1553,1590p' index.html > _partials/footer_1180.css
+sed -n '1592,1612p' index.html > _partials/footer_900.css
+sed -n '5051,5110p' index.html > _partials/footer_script.js
+
+# 3 · assemble footer.css (prepend the comments from the assembled version)
+cat _partials/footer.css  # verify it has all three blocks and the comments between them
+```
+
+The same rules apply as the header: **do not do this while another session has
+`index.html` open.** The footer content should be stable, but line numbers will
+drift as the page grows.

@@ -214,8 +214,8 @@ button{font:inherit;color:inherit}
 .burger:hover{background:rgba(255,255,255,.08)}
 .burger:active{background:rgba(255,255,255,.12)}
 
-/* Disabled states */
-button:disabled,input:disabled{opacity:.5;cursor:not-allowed;color:var(--text-muted)}
+/* Disabled states — opacity only (avoids contrast issues across backgrounds) */
+button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 
 /* Transitions for hover polish */
 .search,.util,.subnav__link,.chat,.burger,button{transition:background-color 150ms,border-color 150ms,color 150ms}
