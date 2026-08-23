@@ -62,7 +62,7 @@
           </span>
         </a>
 
-        <a class="util" href="cart.html" aria-label="Cart — 2 items, $11,310">
+        <a class="util util--cart" href="cart.html" aria-label="Cart — 2 items, $11,310">
           <span class="util__tile util__tile--dark" aria-hidden="true">
             <svg viewBox="0 0 14.9939 15" focusable="false"><path d="M2.55712 0L0 0.013181L0.00732279 1.51289L1.55975 1.50557L4.03046 7.43263L3.13269 8.86936C2.83275 9.34927 2.81723 9.95547 3.09168 10.4496C3.36613 10.9438 3.88687 11.2507 4.45226 11.2507H13.4944V9.75103H4.45226L4.40393 9.66315L5.28559 8.25132H10.8861C11.4312 8.25132 11.9329 7.9549 12.1968 7.4795L14.8989 2.61716C15.0287 2.38471 15.0251 2.10116 14.8902 1.8717C14.7552 1.643 14.5083 1.50264 14.2428 1.50264H3.18395L2.55712 0ZM3.80785 3.00234H12.9687L10.8861 6.75161H5.37053L3.80785 3.00234ZM4.49619 12.0006C4.09845 12.0006 3.71699 12.1586 3.43574 12.4398C3.15449 12.7211 2.99649 13.1025 2.99649 13.5003C2.99649 13.898 3.15449 14.2795 3.43574 14.5607C3.71699 14.842 4.09845 15 4.49619 15C4.89394 15 5.2754 14.842 5.55664 14.5607C5.83789 14.2795 5.9959 13.898 5.9959 13.5003C5.9959 13.1025 5.83789 12.7211 5.55664 12.4398C5.2754 12.1586 4.89394 12.0006 4.49619 12.0006ZM11.9947 12.0006C11.597 12.0006 11.2155 12.1586 10.9343 12.4398C10.653 12.7211 10.495 13.1025 10.495 13.5003C10.495 13.898 10.653 14.2795 10.9343 14.5607C11.2155 14.842 11.597 15 11.9947 15C12.3925 15 12.7739 14.842 13.0552 14.5607C13.3364 14.2795 13.4944 13.898 13.4944 13.5003C13.4944 13.1025 13.3364 12.7211 13.0552 12.4398C12.7739 12.1586 12.3925 12.0006 11.9947 12.0006Z"/></svg>
             <span class="util__badge">2</span>
@@ -80,21 +80,348 @@
   <nav class="subnav" aria-label="Product categories">
     <div class="shell subnav__inner">
       <ul class="subnav__list">
-        <li><a class="subnav__link" href="suspension.html">Suspension <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a></li>
-        <li><a class="subnav__link" href="wheels-cat.html">Wheels &amp; Tires <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a></li>
-        <li><a class="subnav__link" href="brakes.html">Brakes <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a></li>
-        <li><a class="subnav__link" href="exhaust.html">Exhaust <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a></li>
-        <li><a class="subnav__link" href="aero-body.html">Aero &amp; Body <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a></li>
-        <li><a class="subnav__link" href="engine-turbo.html">Engine &amp; Turbo <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a></li>
+        <li class="subnav__item">
+          <a class="subnav__link" href="suspension.html" aria-haspopup="true" aria-expanded="false" aria-controls="mega-suspension">Suspension <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a>
+          <!-- Figma VWl8YFYeeS1d3nGfsliTtI, node 305:1754 "VR / Mega Menu — Suspension".
+               JetBrains Mono in the source is NOT used here — per
+               vivid_font_use_instructions.md §6 it's retired site-wide and every
+               small uppercase label maps to Inter uppercase instead. #e10600 is
+               swapped for --action-primary on the CTA/eyebrow TEXT, matching this
+               file's own documented precedent (.btn-outline) that the literal
+               Figma red fails 1.4.3 at small text sizes; the icon glyph keeps its
+               real #E10600 fill since icons only need the 3:1 non-text minimum,
+               which pure red on white clears easily.
+               Reveal is CSS-only (:hover/:focus-within on .subnav__item) — works
+               with no JS. The aria-expanded sync + Escape-to-close is the one bit
+               that needs the script at the bottom of the page. -->
+          <div class="mega" id="mega-suspension">
+            <div class="shell mega__inner">
+              <div class="mega__cols">
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/suspension-red.svg" alt="" aria-hidden="true" width="16" height="16">Shop Suspension</p>
+                  <ul class="mega__list">
+                    <li><a href="coilover-specs.html">Coilovers</a></li>
+                    <li><a href="suspension.html">Lowering Springs</a></li>
+                    <li><a href="suspension.html">Air Suspension</a></li>
+                    <li><a href="suspension.html">Shocks &amp; Struts</a></li>
+                    <li><a href="suspension.html">Sport Springs</a></li>
+                  </ul>
+                </div>
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/check-red.svg" alt="" aria-hidden="true" width="14" height="14">Handling</p>
+                  <ul class="mega__list">
+                    <li><a href="suspension.html">Sway Bars</a></li>
+                    <li><a href="suspension.html">Control Arms</a></li>
+                    <li><a href="suspension.html">Bushings &amp; Mounts</a></li>
+                    <li><a href="suspension.html">Strut Braces</a></li>
+                    <li><a href="suspension.html">Camber &amp; Alignment</a></li>
+                  </ul>
+                  <a class="mega__cta" href="suspension.html">Shop all suspension
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></a>
+                </div>
+                <div class="mega__col mega__col--brands">
+                  <p class="mega__label"><img src="assets/icons/star.svg" alt="" aria-hidden="true" width="14" height="14">Top Brands</p>
+                  <ul class="mega__list mega__list--bold">
+                    <li><a href="suspension.html">KW Suspensions</a></li>
+                    <li><a href="suspension.html">&Ouml;hlins</a></li>
+                    <li><a href="suspension.html">Bilstein</a></li>
+                    <li><a href="suspension.html">H&amp;R</a></li>
+                    <li><a href="suspension.html">Eibach</a></li>
+                    <li><a href="suspension.html">Fox Factory</a></li>
+                  </ul>
+                </div>
+              </div>
+              <!-- feature card — placeholder product/promo tile, per the mockup -->
+              <a class="mega__feature" href="deal-machine.html">
+                <span class="mega__feature-img"><img src="product-images/suspension.webp" alt="" loading="lazy" decoding="async"></span>
+                <span class="mega__feature-body">
+                  <span class="mega__feature-eyebrow">Spring Event</span>
+                  <span class="mega__feature-title">Up to 25% off KW coilovers</span>
+                  <span class="mega__cta">Shop the event
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="subnav__item">
+          <a class="subnav__link" href="wheels-cat.html" aria-haspopup="true" aria-expanded="false" aria-controls="mega-wheels-tires">Wheels &amp; Tires <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a>
+          <!-- Figma VWl8YFYeeS1d3nGfsliTtI, node 328:1740 "VR / Mega Menu — Wheels & Tires".
+               icon/wheel and icon/tire are 22- and 19-path illustrations (not the
+               single-path style used by every other category icon) — flattened
+               PNGs at 4x rather than an SVG, since Figma's SVG export for these two
+               kept pulling in the whole mega-menu frame instead of just the icon
+               (same failure mode hit once already on the suspension icon; there the
+               fix was picking the right svgAssets entry, but here the pieces genuinely
+               aren't pre-combined, so a raster export was the reliable option). -->
+          <div class="mega" id="mega-wheels-tires">
+            <div class="shell mega__inner">
+              <div class="mega__cols">
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/wheel-red.png" alt="" aria-hidden="true" width="16" height="16">Wheels</p>
+                  <ul class="mega__list">
+                    <li><a href="wheels-cat.html">Forged Wheels</a></li>
+                    <li><a href="wheels-cat.html">Flow-Formed Wheels</a></li>
+                    <li><a href="wheels-cat.html">Cast Wheels</a></li>
+                    <li><a href="wheels-cat.html">Wheel &amp; Tire Packages</a></li>
+                    <li><a href="wheels-cat.html">Track Wheels</a></li>
+                  </ul>
+                </div>
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/tire-red.png" alt="" aria-hidden="true" width="16" height="16">Tires &amp; Fitment</p>
+                  <ul class="mega__list">
+                    <li><a href="wheels-cat.html">Performance Tires</a></li>
+                    <li><a href="wheels-cat.html">Wheel Spacers</a></li>
+                    <li><a href="wheels-cat.html">Lug Nuts &amp; Bolts</a></li>
+                    <li><a href="wheels-cat.html">TPMS Sensors</a></li>
+                    <li><a href="wheels-cat.html">Hub Rings</a></li>
+                  </ul>
+                  <a class="mega__cta" href="wheels-cat.html">Shop all wheels &amp; tires
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></a>
+                </div>
+                <div class="mega__col mega__col--brands">
+                  <p class="mega__label"><img src="assets/icons/star.svg" alt="" aria-hidden="true" width="14" height="14">Top Brands</p>
+                  <ul class="mega__list mega__list--bold">
+                    <li><a href="wheels-cat.html">BBS</a></li>
+                    <li><a href="wheels-cat.html">HRE Wheels</a></li>
+                    <li><a href="wheels-cat.html">Vossen</a></li>
+                    <li><a href="wheels-cat.html">Michelin</a></li>
+                    <li><a href="wheels-cat.html">Pirelli</a></li>
+                    <li><a href="wheels-cat.html">fifteen52</a></li>
+                  </ul>
+                </div>
+              </div>
+              <a class="mega__feature" href="wheels-cat.html">
+                <span class="mega__feature-img"><img src="product-images/wheels.webp" alt="" loading="lazy" decoding="async"></span>
+                <span class="mega__feature-body">
+                  <span class="mega__feature-eyebrow">New Arrivals</span>
+                  <span class="mega__feature-title">Forged wheels for your platform</span>
+                  <span class="mega__cta">Shop wheels
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="subnav__item">
+          <a class="subnav__link" href="brakes.html" aria-haspopup="true" aria-expanded="false" aria-controls="mega-brakes">Brakes <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a>
+          <!-- Figma VWl8YFYeeS1d3nGfsliTtI, node 328:1775 "VR / Mega Menu — Brakes" -->
+          <div class="mega" id="mega-brakes">
+            <div class="shell mega__inner">
+              <div class="mega__cols">
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/brakes-red.svg" alt="" aria-hidden="true" width="14" height="14">Brake Kits</p>
+                  <ul class="mega__list">
+                    <li><a href="brakes.html">Big Brake Kits</a></li>
+                    <li><a href="brakes.html">Two-Piece Rotors</a></li>
+                    <li><a href="brakes.html">Performance Rotors</a></li>
+                    <li><a href="brakes.html">Caliper Upgrades</a></li>
+                    <li><a href="brakes.html">Kits by Vehicle</a></li>
+                  </ul>
+                </div>
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/check-red.svg" alt="" aria-hidden="true" width="14" height="14">Pads, Lines &amp; Fluid</p>
+                  <ul class="mega__list">
+                    <li><a href="brakes.html">Brake Pads</a></li>
+                    <li><a href="brakes.html">Stainless Brake Lines</a></li>
+                    <li><a href="brakes.html">Brake Fluid</a></li>
+                    <li><a href="brakes.html">Cooling Ducts</a></li>
+                    <li><a href="brakes.html">Hardware</a></li>
+                  </ul>
+                  <a class="mega__cta" href="brakes.html">Shop all brakes
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></a>
+                </div>
+                <div class="mega__col mega__col--brands">
+                  <p class="mega__label"><img src="assets/icons/star.svg" alt="" aria-hidden="true" width="14" height="14">Top Brands</p>
+                  <ul class="mega__list mega__list--bold">
+                    <li><a href="brakes.html">Brembo</a></li>
+                    <li><a href="brakes.html">StopTech</a></li>
+                    <li><a href="brakes.html">AP Racing</a></li>
+                    <li><a href="brakes.html">Girodisc</a></li>
+                    <li><a href="brakes.html">EBC Brakes</a></li>
+                    <li><a href="brakes.html">Ferodo</a></li>
+                  </ul>
+                </div>
+              </div>
+              <a class="mega__feature" href="brakes.html">
+                <span class="mega__feature-img"><img src="product-images/brakes.webp" alt="" loading="lazy" decoding="async"></span>
+                <span class="mega__feature-body">
+                  <span class="mega__feature-eyebrow">Track-Ready</span>
+                  <span class="mega__feature-title">Stopping power that holds up</span>
+                  <span class="mega__cta">Shop brakes
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="subnav__item">
+          <a class="subnav__link" href="exhaust.html" aria-haspopup="true" aria-expanded="false" aria-controls="mega-exhaust">Exhaust <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a>
+          <!-- Figma VWl8YFYeeS1d3nGfsliTtI, node 328:1810 "VR / Mega Menu — Exhaust" -->
+          <div class="mega" id="mega-exhaust">
+            <div class="shell mega__inner">
+              <div class="mega__cols">
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/exhaust-red.svg" alt="" aria-hidden="true" width="14" height="14">Exhaust Systems</p>
+                  <ul class="mega__list">
+                    <li><a href="exhaust.html">Cat-Back Systems</a></li>
+                    <li><a href="exhaust.html">Axle-Back Systems</a></li>
+                    <li><a href="exhaust.html">Valved Systems</a></li>
+                    <li><a href="exhaust.html">Full Systems</a></li>
+                    <li><a href="exhaust.html">Mufflers</a></li>
+                  </ul>
+                </div>
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/check-red.svg" alt="" aria-hidden="true" width="14" height="14">Headers &amp; Tips</p>
+                  <ul class="mega__list">
+                    <li><a href="exhaust.html">Downpipes</a></li>
+                    <li><a href="exhaust.html">Headers</a></li>
+                    <li><a href="exhaust.html">Exhaust Tips</a></li>
+                    <li><a href="exhaust.html">Resonators</a></li>
+                    <li><a href="exhaust.html">Hardware &amp; Gaskets</a></li>
+                  </ul>
+                  <a class="mega__cta" href="exhaust.html">Shop all exhaust
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></a>
+                </div>
+                <div class="mega__col mega__col--brands">
+                  <p class="mega__label"><img src="assets/icons/star.svg" alt="" aria-hidden="true" width="14" height="14">Top Brands</p>
+                  <ul class="mega__list mega__list--bold">
+                    <li><a href="exhaust.html">Akrapovi&#269;</a></li>
+                    <li><a href="exhaust.html">Fabspeed</a></li>
+                    <li><a href="exhaust.html">Armytrix</a></li>
+                    <li><a href="exhaust.html">Borla</a></li>
+                    <li><a href="exhaust.html">Milltek</a></li>
+                    <li><a href="exhaust.html">Tomei</a></li>
+                  </ul>
+                </div>
+              </div>
+              <a class="mega__feature" href="exhaust.html">
+                <span class="mega__feature-img"><img src="product-images/exhaust.webp" alt="" loading="lazy" decoding="async"></span>
+                <span class="mega__feature-body">
+                  <span class="mega__feature-eyebrow">Sound + Power</span>
+                  <span class="mega__feature-title">Titanium systems in stock</span>
+                  <span class="mega__cta">Shop exhaust
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="subnav__item">
+          <a class="subnav__link" href="aero-body.html" aria-haspopup="true" aria-expanded="false" aria-controls="mega-aero-body">Aero &amp; Body <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a>
+          <!-- Figma VWl8YFYeeS1d3nGfsliTtI, node 328:1845 "VR / Mega Menu — Aero & Body" -->
+          <div class="mega" id="mega-aero-body">
+            <div class="shell mega__inner">
+              <div class="mega__cols">
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/aero-red.svg" alt="" aria-hidden="true" width="14" height="14">Aerodynamics</p>
+                  <ul class="mega__list">
+                    <li><a href="aero-body.html">Front Splitters</a></li>
+                    <li><a href="aero-body.html">Rear Wings</a></li>
+                    <li><a href="aero-body.html">Diffusers</a></li>
+                    <li><a href="aero-body.html">Canards</a></li>
+                    <li><a href="aero-body.html">Side Skirts</a></li>
+                  </ul>
+                </div>
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/check-red.svg" alt="" aria-hidden="true" width="14" height="14">Body &amp; Carbon</p>
+                  <ul class="mega__list">
+                    <li><a href="aero-body.html">Carbon Fiber</a></li>
+                    <li><a href="aero-body.html">Hoods</a></li>
+                    <li><a href="aero-body.html">Fenders</a></li>
+                    <li><a href="aero-body.html">Mirror Caps</a></li>
+                    <li><a href="aero-body.html">Full Body Kits</a></li>
+                  </ul>
+                  <a class="mega__cta" href="aero-body.html">Shop all aero &amp; body
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></a>
+                </div>
+                <div class="mega__col mega__col--brands">
+                  <p class="mega__label"><img src="assets/icons/star.svg" alt="" aria-hidden="true" width="14" height="14">Top Brands</p>
+                  <ul class="mega__list mega__list--bold">
+                    <li><a href="aero-body.html">Manthey Racing</a></li>
+                    <li><a href="aero-body.html">Vorsteiner</a></li>
+                    <li><a href="aero-body.html">Seibon</a></li>
+                    <li><a href="aero-body.html">APR Performance</a></li>
+                    <li><a href="aero-body.html">Verus Engineering</a></li>
+                    <li><a href="aero-body.html">TechArt</a></li>
+                  </ul>
+                </div>
+              </div>
+              <a class="mega__feature" href="aero-body.html">
+                <span class="mega__feature-img"><img src="product-images/aero.webp" alt="" loading="lazy" decoding="async"></span>
+                <span class="mega__feature-body">
+                  <span class="mega__feature-eyebrow">Downforce</span>
+                  <span class="mega__feature-title">Track aero, street-legal looks</span>
+                  <span class="mega__cta">Shop aero
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="subnav__item">
+          <a class="subnav__link" href="engine-turbo.html" aria-haspopup="true" aria-expanded="false" aria-controls="mega-engine-turbo">Engine &amp; Turbo <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a>
+          <!-- Figma VWl8YFYeeS1d3nGfsliTtI, node 328:1880 "VR / Mega Menu — Engine & Turbo" -->
+          <div class="mega" id="mega-engine-turbo">
+            <div class="shell mega__inner">
+              <div class="mega__cols">
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/engine-red.svg" alt="" aria-hidden="true" width="14" height="14">Power</p>
+                  <ul class="mega__list">
+                    <li><a href="engine-turbo.html">Turbo Kits</a></li>
+                    <li><a href="engine-turbo.html">Superchargers</a></li>
+                    <li><a href="engine-turbo.html">Turbo Upgrades</a></li>
+                    <li><a href="engine-turbo.html">Intercoolers</a></li>
+                    <li><a href="engine-turbo.html">Charge Pipes</a></li>
+                  </ul>
+                </div>
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/check-red.svg" alt="" aria-hidden="true" width="14" height="14">Air, Fuel &amp; Tune</p>
+                  <ul class="mega__list">
+                    <li><a href="engine-turbo.html">Cold Air Intakes</a></li>
+                    <li><a href="engine-turbo.html">ECU Tuning</a></li>
+                    <li><a href="engine-turbo.html">Fuel Systems</a></li>
+                    <li><a href="engine-turbo.html">Downpipes</a></li>
+                    <li><a href="engine-turbo.html">Catch Cans</a></li>
+                  </ul>
+                  <a class="mega__cta" href="engine-turbo.html">Shop all engine &amp; turbo
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></a>
+                </div>
+                <div class="mega__col mega__col--brands">
+                  <p class="mega__label"><img src="assets/icons/star.svg" alt="" aria-hidden="true" width="14" height="14">Top Brands</p>
+                  <ul class="mega__list mega__list--bold">
+                    <li><a href="engine-turbo.html">ProCharger</a></li>
+                    <li><a href="engine-turbo.html">Eventuri</a></li>
+                    <li><a href="engine-turbo.html">Dinan</a></li>
+                    <li><a href="engine-turbo.html">HKS</a></li>
+                    <li><a href="engine-turbo.html">Garrett</a></li>
+                    <li><a href="engine-turbo.html">Cobb Tuning</a></li>
+                  </ul>
+                </div>
+              </div>
+              <a class="mega__feature" href="engine-turbo.html">
+                <span class="mega__feature-img"><img src="product-images/engine.webp" alt="" loading="lazy" decoding="async"></span>
+                <span class="mega__feature-body">
+                  <span class="mega__feature-eyebrow">Make Power</span>
+                  <span class="mega__feature-title">Stage kits for your platform</span>
+                  <span class="mega__cta">Shop engine
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </li>
       </ul>
-      <a class="subnav__promo" href="deal-machine.html">Spring Event — 25% Off</a>
+      <!-- spacer moved here (was between promo and fin) so it pushes BOTH
+           Spring Event and 0% APR right, as one group, instead of just fin.
+           Affirm/Katapult logos removed per request — .subnav__finlogos and
+           its CSS are now unused by this markup (left in place in case
+           another instance still references them; nothing currently does). -->
       <span class="subnav__spacer"></span>
+      <a class="subnav__promo" href="deal-machine.html">Spring Event — 25% Off</a>
+      <span class="subnav__divider" aria-hidden="true">|</span>
       <a class="subnav__fin" href="financing.html">
         <em>0% APR</em> <span>/ Pre-qualify in 60s</span>
-        <span class="subnav__finlogos">
-          <img src="logos/affirm.png" alt="Affirm" width="356" height="141" loading="lazy" decoding="async">
-          <img src="logos/katapult.webp" alt="Katapult" width="477" height="146" loading="lazy" decoding="async">
-        </span>
       </a>
     </div>
   </nav>

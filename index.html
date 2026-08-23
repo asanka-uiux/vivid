@@ -96,6 +96,15 @@ button{font:inherit;color:inherit}
 .brandbar__link[aria-current="page"]{background:rgba(179,20,20,.08);
   border-bottom-color:var(--action-primary)}
 .brandbar__link[aria-current="page"] .brandbar__dot{background:var(--action-primary);opacity:1}
+.brandbar__link{transition:background-color .16s ease,border-color .16s ease}
+.brandbar__dot{transition:opacity .16s ease}
+/* :not([aria-current="page"]) so hovering the already-active tab doesn't
+   fight its own red underline/background above */
+.brandbar__link:not([aria-current="page"]):hover,
+.brandbar__link:not([aria-current="page"]):focus-visible{
+  background:rgba(255,255,255,.06);border-bottom-color:rgba(255,255,255,.35)}
+.brandbar__link:not([aria-current="page"]):hover .brandbar__dot,
+.brandbar__link:not([aria-current="page"]):focus-visible .brandbar__dot{opacity:1}
 
 /* row 2 — logo · search · utilities */
 .masthead{background:var(--bg-surface);border-bottom:1px solid var(--border-default)}
@@ -115,40 +124,61 @@ button{font:inherit;color:inherit}
   font:700 12px/17px var(--font-ui);letter-spacing:1.44px;text-transform:uppercase}
 .search__submit svg{width:18px;height:18px;fill:currentColor;flex:none}
 
-.utils{flex:none;margin-left:auto;display:flex;align-items:stretch;height:54px;
-  border-left:1px solid var(--border-default)}
-.util{display:flex;align-items:center;gap:12px;padding:8px 19px 8px 18px;
-  border-right:1px solid var(--border-default)}
-.utils > :last-child{border-right:0}
-.util__tile{flex:none;display:grid;place-items:center;width:38px;height:38px}
+/* De-noised 2026-08-20 — layout/content unchanged, only spacing + sizing:
+   1. Dividers were full-height (54px), edge to edge, on .utils AND on every
+      .util — 4 hard vertical rules stacked right next to 4 dense two-line
+      items read as a grid. Same divider, now a short centred tick (24px) via
+      ::after instead of a border, so it separates without drawing a cage.
+   2. .util padding went from an asymmetric 18/19px to an even, slightly
+      larger 22px — more air around each item before its neighbour's divider.
+   3. The two icon TREATMENTS (red/dark 38px filled tiles vs. 28px plain line
+      glyphs) alternate heavy-light-light-heavy across the row, which is what
+      actually reads as "busy" at a glance. Narrowing the size gap between
+      them (38→36, 28→30) softens that zig-zag without restyling either
+      treatment — still two tiles + two glyphs, just closer in visual weight. */
+.utils{flex:none;margin-left:auto;display:flex;align-items:stretch;height:54px}
+.util{position:relative;display:flex;align-items:center;gap:12px;padding:10px 22px}
+/* the badge's own padding/radius grew (10px 8px, 24px), so its right edge now
+   sits past the tile and a few px into "CART" at the default 12px gap — a
+   wider gap just on this item clears it instead of shrinking the badge back */
+.util--cart{gap:20px}
+.util::after{content:"";position:absolute;right:0;top:50%;width:1px;height:24px;
+  transform:translateY(-50%);background:var(--border-default)}
+.utils > :last-child::after{content:none}
+.util__tile{flex:none;display:grid;place-items:center;width:36px;height:36px}
 .util__tile--red{background:var(--action-primary)}
 .util__tile--dark{background:var(--bg-inverse);position:relative}
-.util__tile svg{width:18px;height:18px;fill:#fff}
-.util__glyph{flex:none;display:grid;place-items:center;width:28px;height:28px}
-.util__glyph svg{width:22px;height:22px;fill:var(--text-primary)}
-.util__label{display:block;font:700 12px/14px var(--font-ui);letter-spacing:.72px;
+.util__tile svg{width:17px;height:17px;fill:#fff}
+.util__glyph{flex:none;display:grid;place-items:center;width:30px;height:30px}
+.util__glyph svg{width:23px;height:23px;fill:var(--text-primary)}
+.util__label{display:block;font:600 10px/14px var(--font-ui);letter-spacing:.72px;
   text-transform:uppercase;color:var(--text-muted)}
 .util__value{display:block;font:700 14px/21px var(--font-ui);letter-spacing:-.065px;
   color:var(--text-primary)}
 .util__value--phone{font-weight:800;letter-spacing:-.14px}
 .util__badge{position:absolute;top:-6px;left:24px;min-width:18px;height:18px;
-  display:flex;align-items:center;justify-content:center;padding:4px 7px;
-  border:2px solid #fff;border-radius:9px;background:var(--action-primary);
+  display:flex;align-items:center;justify-content:center;padding:10px 8px;
+  border:2px solid #fff;border-radius:24px;background:var(--action-primary);
   font:700 12px/14px var(--font-ui);color:#fff}
 
 /* row 3 — category nav + promos */
-.subnav{background:var(--bg-surface);border-bottom:1px solid var(--border-default)}
+/* position:relative so the mega menu (.mega) — nested inside a .subnav__item
+   several levels down — can anchor to THIS element's full-viewport-wide box
+   with position:absolute;left:0;right:0, rather than the width of whatever
+   li/ul happens to be its literal DOM parent. */
+.subnav{position:relative;background:var(--bg-surface);border-bottom:1px solid var(--border-default)}
 .subnav__inner{display:flex;align-items:center;gap:20px;height:50px}
 .subnav__list{display:flex;align-items:center;gap:20px;list-style:none;margin:0;padding:0}
 .subnav__link{display:flex;align-items:center;gap:6px;padding:15px 0;
   font:600 14px/21px var(--font-ui);color:var(--text-primary);white-space:nowrap}
-.subnav__link svg{width:8px;height:8px;stroke:#6b7280;fill:none;
+.subnav__link svg{width:12px;height:12px;stroke:#6b7280;fill:none;
   stroke-linecap:round;stroke-linejoin:round}
 /* min-height keeps these standalone links at the 24px target minimum (2.5.8) */
 .subnav__promo{display:flex;align-items:center;min-height:24px;
-  font:700 12px/17px var(--font-ui);letter-spacing:1.2px;
+  font:600 12px/17px var(--font-ui);letter-spacing:1.2px;
   text-transform:uppercase;color:var(--action-primary);white-space:nowrap}
 .subnav__spacer{flex:1 1 auto}
+.subnav__divider{color:var(--border-default)}
 .subnav__fin{display:flex;align-items:center;gap:12px;min-height:24px;white-space:nowrap;
   font:700 12px/17px var(--font-ui);letter-spacing:1.2px;text-transform:uppercase}
 .subnav__fin em{font-style:normal;color:var(--action-primary)}
@@ -169,7 +199,85 @@ button{font:inherit;color:inherit}
    of canvas. Centred at 16px that leaves Katapult's baseline 2.4px high — hence
    the nudge, which is the one thing left doing optical work in CSS. */
 .subnav__finlogos img[alt="Katapult"]{transform:translateY(2px)}
-.finance__chip img[alt="Katapult"]{transform:translateY(3px)}
+/* was 3px, tuned for the old (broken/distorted) 20px height. Now that
+   .finance__chip img is 16px too — same height as this pair above — the
+   correct nudge is the same 2px. */
+.finance__chip img[alt="Katapult"]{transform:translateY(2px)}
+
+/* ===== SUSPENSION MEGA MENU · Figma VWl8YFYeeS1d3nGfsliTtI, node 305:1754 ===
+   Full viewport width, not just full .shell width — .mega is positioned off
+   .subnav (see the position:relative note on that rule above), which itself
+   already spans edge-to-edge, so left:0;right:0 here reaches the browser
+   window, not just the 1320px content column. The content INSIDE still uses
+   .shell so its three columns line up under the same gutter as the rest of
+   the page.
+   Reveal is opacity/visibility/transform, not display — display can't
+   transition, and this project's own convention (.mchip, .cat__arrow, …) is
+   reveal-and-nudge, never a hard cut. visibility:hidden doubles as the a11y
+   guard: it drops the panel's links out of tab order and the a11y tree on its
+   own, so no separate aria-hidden bookkeeping is needed on the panel itself —
+   aria-expanded on the trigger link (kept in sync by the script at the bottom
+   of the page) is the single source of truth for assistive tech. */
+/* .subnav__item deliberately does NOT get position:relative — that would make
+   the <li> itself (only ~90px wide) the nearest positioned ancestor for .mega
+   below, instead of .subnav, and the panel would anchor to the link's own
+   width rather than the full nav. .subnav is already position:relative
+   (above), and CSS walks past this non-positioned li straight to it. */
+.mega{position:absolute;top:100%;left:0;right:0;z-index:20;
+  background:var(--bg-surface);border-bottom:3px solid var(--action-primary);
+  box-shadow:0 26px 50px -18px rgba(10,10,10,.22);
+  opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-6px);
+  transition:opacity .16s ease,transform .16s ease,visibility .16s}
+.subnav__item:hover .mega,.subnav__item:focus-within .mega{
+  opacity:1;visibility:visible;pointer-events:auto;transform:none}
+@media (prefers-reduced-motion:reduce){.mega{transition:opacity .01ms;transform:none}}
+
+.mega__inner{display:flex;flex-wrap:wrap;gap:72px;padding:36px 0}
+.mega__cols{flex:1 1 480px;min-width:0;display:flex;gap:56px}
+.mega__col{flex:1 1 0;min-width:0}
+/* the extra 24px (on top of the 32px column gap) is the divider's own
+   breathing room, same rhythm as the 24px used everywhere else on this page */
+.mega__col--brands{flex-basis:0%;padding-left:24px;border-left:1px solid var(--hairline)}
+.mega__label{display:flex;align-items:center;gap:6px;margin:0 0 14px;
+  padding-bottom:9px;border-bottom:1px solid var(--hairline);
+  font:600 13px/16px var(--font-ui);letter-spacing:.7px;text-transform:uppercase;
+  color:var(--text-muted)}
+.mega__label img{flex:none}
+.mega__list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px}
+.mega__list a{display:block;font:500 14px/17px var(--font-ui);color:var(--ink);
+  transition:color .16s ease}
+.mega__list a:hover,.mega__list a:focus-visible{color:var(--action-primary);
+  text-decoration:underline}
+.mega__list--bold a{font-weight:700}
+.mega__cta{display:inline-flex;align-items:center;gap:5px;margin-top:16px;
+  font:700 11px/14px var(--font-ui);letter-spacing:1.2px;text-transform:uppercase;
+  color:var(--action-primary)}
+.mega__cta img{transition:transform .18s ease}
+.mega__cta:hover img,.mega__cta:focus-visible img{transform:translateX(3px)}
+
+/* feature — a placeholder product/promo tile, per the mockup: a flat dark
+   panel standing in for a real photo, not a broken-image state. */
+.mega__feature{flex:0 0 296px;display:block;border:1px solid var(--hairline);
+  border-radius:4px;overflow:hidden;transition:border-color .16s ease}
+.mega__feature:hover,.mega__feature:focus-visible{border-color:var(--action-primary)}
+/* was a flat placeholder box (background:var(--bg-inverse), no img) — now
+   holds a real photo. background stays as the letterbox colour behind
+   object-fit:cover on any photo whose aspect doesn't exactly match 296x150. */
+.mega__feature-img{display:block;position:relative;height:150px;overflow:hidden;
+  background:var(--bg-inverse)}
+.mega__feature-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.mega__feature-img::before{content:"";position:absolute;left:0;top:0;z-index:1;
+  width:118px;height:3px;background:var(--action-primary)}
+.mega__feature-body{display:flex;flex-direction:column;gap:5px;padding:15px 16px 16px}
+.mega__feature-eyebrow{font:700 11px/14px var(--font-ui);letter-spacing:1.4px;
+  text-transform:uppercase;color:var(--action-primary)}
+.mega__feature-title{font:800 17px/22px var(--font-ui);color:var(--ink)}
+.mega__feature-body .mega__cta{margin-top:2px}
+
+@media (prefers-reduced-motion:reduce){
+  .mega__cta img,.mega__feature{transition:none}
+  .mega__cta:hover img,.mega__cta:focus-visible img{transform:none}
+}
 
 /* ============================== INTERACTION STATES ======================== */
 
@@ -219,8 +327,13 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
   text-align:center;font:600 12px/17px var(--font-ui);letter-spacing:1.5px;color:#fff}
 .deal b{font-weight:900}
 
+/* 75vh, not 100vh — the next section (deal-strip, category grid) will now
+   sit closer to the fold and may peek in on shorter windows; that's the
+   direct trade of this value. min-height is a floor for very short windows.
+   align-items:flex-start keeps content flush under the deal banner instead
+   of centering in the box — centering was the earlier "huge top margin" bug. */
 .hero__stage{position:relative;isolation:isolate;overflow:hidden;
-  min-height:608px;display:flex;align-items:center}
+  height:75vh;min-height:560px;display:flex;align-items:flex-start}
 .hero__photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
 /* the Figma "Left Fade Overlay" layer exports empty — reproduced as a gradient */
 .hero__stage::before{content:"";position:absolute;inset:0;z-index:-1;
@@ -228,7 +341,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
              rgba(0,0,0,.42) 56%,rgba(0,0,0,.10) 78%,rgba(0,0,0,.02) 100%)}
 
 .hero__inner{display:flex;align-items:center;justify-content:space-between;
-  width:100%;max-width:var(--shell);margin-inline:auto;padding:48px 32px}
+  width:100%;max-width:var(--shell);margin-inline:auto;padding:60px 32px}
 .hero__copy{flex:0 1 auto;min-width:0}
 
 .eyebrow{display:inline-flex;align-items:center;gap:10px;padding:7px 13px;
@@ -238,14 +351,14 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .eyebrow::before{content:"";width:6px;height:6px;border-radius:3px;
   background:var(--action-primary);opacity:.41;flex:none}
 
-.hero__title{margin:18px 0 0;font-family:var(--font-display);font-weight:900;
+.hero__title{margin:14px 0 0;font-family:var(--font-display);font-weight:900;
   font-size:64px;line-height:64px;letter-spacing:-1.3px;text-transform:uppercase;
   color:#fff;font-variation-settings:"YTLC" 500,"wdth" 100}
 
-.hero__lede{margin:14px 0 0;max-width:493px;
+.hero__lede{margin:14px 0 0;max-width:550px;
   font:400 15px/22px var(--font-ui);color:var(--text-on-dark)}
 
-.finance{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:18px}
+.finance{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px}
 .finance__text{font:700 12px/14px var(--font-ui);letter-spacing:.66px;
   text-transform:uppercase;color:rgba(255,255,255,.7)}
 .finance__text b{color:#fff;font-weight:700}
@@ -254,14 +367,26 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .finance__chip{display:flex;align-items:center;justify-content:center;width:70px;
   height:24px;padding:2px 8px;background:var(--bg-surface);border-radius:2px;
   filter:drop-shadow(0 1px 0 rgba(0,0,0,.06))}
-.finance__chip img{max-height:20px;width:auto;object-fit:contain}
+/* max-height was 20px — fine for affirm.png (2.52:1, needs 50px width at that
+   height) but katapult.webp is proportionally wider (3.27:1, needs 65px), which
+   didn't fit the pill's 54px inner content width (70px chip minus 2×8px
+   padding). With no flex-shrink guard, the flex row silently squeezed the img's
+   OWN BOX down to fit — 54×20 — before object-fit:contain ever got a say,
+   distorting the wordmark rather than shrinking it cleanly. That distortion is
+   what read as "misaligned".
+   16px matches .subnav__finlogos's already-correct height for this exact pair
+   (verified there earlier) — at 16px Katapult needs only 52px, comfortably
+   inside 54px, so it renders undistorted and flex-shrink never engages.
+   flex:none is the actual fix, not just this specific number: it stops any
+   future padding/width tweak from silently re-squeezing either logo. */
+.finance__chip img{flex:none;max-height:16px;width:auto;object-fit:contain}
 
 /* cells are sized by their labels, as in Figma (136 / 157 / 135 = 430 total) */
-.stats{display:inline-flex;margin:20px 0 0;background:var(--bg-inverse);
+.stats{display:inline-flex;margin:16px 0 0;background:var(--bg-inverse);
   border:1px solid rgba(255,255,255,.15);padding:1px}
-.stats__cell{flex:0 0 auto;padding:10px 20px;border-right:1px solid rgba(255,255,255,.15)}
+.stats__cell{flex:0 0 auto;padding:8px 18px;border-right:1px solid rgba(255,255,255,.15)}
 .stats__cell:last-child{border-right:0}
-.stats__label{display:block;font:700 12px/14px var(--font-ui);letter-spacing:.8px;
+.stats__label{display:block;font:600 12px/14px var(--font-ui);letter-spacing:.8px;
   text-transform:uppercase;color:var(--text-on-dark);white-space:nowrap}
 /* dd carries a 40px margin-inline-start by default — reset it */
 .stats__value{display:flex;align-items:baseline;gap:4px;margin:4px 0 0}
@@ -271,17 +396,21 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .stats__suffix{font:800 18px/27px var(--font-ui);color:var(--accent-red-on-dark)}
 
 /* Shop by vehicle card */
+/* Trimmed for the 100vh hero above — 6 selects stacked in one card add up
+   fast, so this is spacing/sizing only (same 6 fields, same button, same
+   type), squeezed enough that the card's natural height clears typical
+   desktop/laptop viewports without .hero__stage ever needing to clip it. */
 .ymm{flex:none;width:450px;padding:1px;background:rgba(255,255,255,.12);
   border:1px solid rgba(255,255,255,.18);box-shadow:0 4px 30px rgba(0,0,0,.25);
   backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  display:flex;flex-direction:column;gap:12px}
-.ymm__title{margin:0;padding:13px 16px 15px;background:var(--bg-inverse);
+  display:flex;flex-direction:column;gap:8px}
+.ymm__title{margin:0;padding:10px 16px;background:var(--bg-inverse);
   border-bottom:2px solid rgba(155,27,27,.65);text-align:center;
   font-family:var(--font-form);font-weight:600;font-size:16px;line-height:24px;
   text-transform:uppercase;color:#fff;font-variation-settings:"wdth" 100}
-.ymm__fields{display:flex;flex-direction:column;gap:8px;padding:18px 20px 10px}
+.ymm__fields{display:flex;flex-direction:column;gap:12px;padding:14px 18px 8px}
 .ymm__select{width:100%;appearance:none;-webkit-appearance:none;
-  padding:13px 44px 13px 15px;background-color:rgba(255,255,255,.92);
+  padding:10px 40px 10px 14px;background-color:rgba(255,255,255,.92);
   background-image:url("assets/icons/chevron-down.svg");
   background-repeat:no-repeat;background-position:right 15px center;
   background-size:11px 7px;
@@ -289,8 +418,8 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
   font-family:var(--font-form);font-weight:600;font-size:16px;line-height:24px;
   text-transform:uppercase;color:var(--field-ink);
   font-variation-settings:"wdth" 100;cursor:pointer}
-.ymm__cta{padding:12px 20px}
-.ymm__button{display:block;width:100%;padding:14px;background:var(--action-primary);
+.ymm__cta{padding:8px 18px 12px}
+.ymm__button{display:block;width:100%;padding:12px;background:var(--action-primary);
   border:0;border-radius:4px;cursor:pointer;text-align:center;
   font-family:var(--font-form);font-weight:600;font-size:16px;line-height:24px;
   text-transform:uppercase;color:#fff;font-variation-settings:"wdth" 100}
@@ -354,10 +483,19 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
    moves as those, so the grid answers the pointer the way the rest does:
    photo scales, edge goes brand red, arrow fades in while nudging into place.
    Reveal and nudge only — no lift, per the convention documented below. */
-.cat{transition:border-color .16s ease}
+/* one notch more than before, same "reveal/nudge, never lift" rule: the photo
+   zooms a touch further (1.05→1.08), the tile now picks up a shadow instead of
+   staying flush with the grid (presence without a translate), and the overlay
+   darkens slightly so the white name/count read a bit more crisply against it. */
+.cat{transition:border-color .16s ease,box-shadow .2s ease}
 .cat__img{transition:transform .3s ease}
-.cat:hover,.cat:focus-visible{border-color:var(--action-primary)}
-.cat:hover .cat__img,.cat:focus-visible .cat__img{transform:scale(1.05)}
+.cat::after{transition:background .2s ease}
+.cat:hover,.cat:focus-visible{border-color:var(--action-primary);
+  box-shadow:0 10px 24px rgba(10,10,10,.28)}
+.cat:hover .cat__img,.cat:focus-visible .cat__img{transform:scale(1.08)}
+.cat:hover::after,.cat:focus-visible::after{
+  background:linear-gradient(180deg,rgba(10,10,10,.1) 0%,rgba(10,10,10,.46) 50%,
+             rgba(10,10,10,.96) 100%)}
 .cat:hover .cat__arrow,.cat:focus-visible .cat__arrow{opacity:1;transform:translateX(0)}
 
 /* clearance tile — flat red, no photo */
@@ -1023,16 +1161,45 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 /* Figma hardcodes #a3acb3 here (2.31:1) — using the corrected muted token */
 .vids__sub{margin:8px 0 0;font:400 14px/21px var(--font-ui);color:var(--text-muted)}
 .vids__sub b{font-weight:700}
+/* Updated 2026-08-21 — was a flat black pill with the full-colour YouTube
+   logo riding on it, which read like a generic "dark button," not a YouTube
+   subscribe action, and didn't match this page's own red-accent CTA language
+   (.btn-outline, .mega__cta, etc. all key off --action-primary).
+   Now: --action-primary fill (white text on #b31414 is 6.94:1, comfortably
+   over 1.4.3's 4.5:1 — literal YouTube #FF0000 only clears ~4.0:1 with white
+   at this weight/size, so it's the wrong red to use here even though it's
+   the "real" one) + the white monochrome mark
+   (assets/icons/youtube-f.svg, already used in the footer social row) instead
+   of the multicolour logo, since a solid icon-on-brand-colour pairing is what
+   actually signals "platform action" rather than "here's a logo". Radius
+   bumped 2→4px to match this page's other elevated CTAs (.mega__feature,
+   .pcard). Hover/focus darkens the fill and lifts it with a shadow instead of
+   just swapping to a near-black — shadow, not translate, per this page's own
+   "reveal/nudge, never lift" convention. */
 .vids__cta{display:inline-flex;align-items:center;gap:9px;margin-top:14px;
-  padding:10px 16px;border-radius:2px;background:var(--bg-inverse);
+  padding:11px 18px;border-radius:4px;background:var(--action-primary);
   font:700 12px/14px var(--font-ui);letter-spacing:1.32px;text-transform:uppercase;
-  color:var(--text-on-dark);transition:background-color .16s ease}
-/* the real YouTube mark, not a hand-drawn outline — legible at button size */
-.vids__cta img{width:20px;height:20px;flex:none}
-.vids__cta:hover,.vids__cta:focus-visible{background:#1a1a1a}
+  color:var(--text-on-dark);
+  transition:background-color .16s ease,box-shadow .2s ease}
+.vids__cta img{width:19px;height:14px;flex:none}
+.vids__cta:hover,.vids__cta:focus-visible{
+  background:#8f1010;box-shadow:0 6px 16px rgba(179,20,20,.35)}
+@media (prefers-reduced-motion:reduce){.vids__cta{transition:none}}
 
-.vids__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;
+/* Horizontal scroll, all widths — was a 3-col grid (wrapping to 2 rows once
+   the 6th card was added). This project already has this exact pattern for
+   .promos__row/.builds__grid/.guides__grid/.revs__grid, but only inside the
+   ≤900px "MOBILE CARD CAROUSELS" block further down; that block still wins at
+   ≤900px (later in source order, so it overrides this), keeping its own
+   84%-width/edge-bleed tuning for phones untouched. This is the desktop/
+   tablet version: a fixed per-card width instead of a viewport-relative one,
+   since 84% of a 1320px shell would make one card almost the whole row. */
+.vids__grid{display:flex;flex-wrap:nowrap;gap:18px;overflow-x:auto;
+  scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
   margin:28px 0 0;padding:0;list-style:none;text-align:left}
+.vids__grid::-webkit-scrollbar{display:none}
+.vids__grid > li{flex:0 0 380px;scroll-snap-align:start}
 .vid{display:block;background:var(--bg-surface)}
 .vid__thumb{position:relative;display:block;aspect-ratio:406.66/228.73;overflow:hidden;
   background:linear-gradient(151deg,#1c1c20 0%,#0d0d10 60%,#050507 100%)}
@@ -1553,8 +1720,13 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 @media (max-width:900px){
   :root{--gutter:16px}
 
-  /* single centred column; the vehicle picker rises to sit under the H1 */
-  .hero__stage{min-height:0;display:block}
+  /* single centred column; the vehicle picker rises to sit under the H1.
+     height:100vh on the base rule is desktop's "hide the next section" rule —
+     cancelled back to content-driven here on purpose: at mobile widths the
+     stacked layout (title+lede+finance+stats+YMM, one column) runs taller
+     than many phones' 100vh, and locking it would clip the Shop Now button
+     under the photo instead of it being reachable after a normal scroll. */
+  .hero__stage{height:auto;min-height:0;display:block}
   /* copy now spans the full width, so a left-to-right fade no longer covers it */
   .hero__stage::before{
     background:linear-gradient(180deg,rgba(0,0,0,.90) 0%,rgba(0,0,0,.80) 45%,
@@ -1710,7 +1882,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
           </span>
         </a>
 
-        <a class="util" href="cart.html" aria-label="Cart — 2 items, $11,310">
+        <a class="util util--cart" href="cart.html" aria-label="Cart — 2 items, $11,310">
           <span class="util__tile util__tile--dark" aria-hidden="true">
             <svg viewBox="0 0 14.9939 15" focusable="false"><path d="M2.55712 0L0 0.013181L0.00732279 1.51289L1.55975 1.50557L4.03046 7.43263L3.13269 8.86936C2.83275 9.34927 2.81723 9.95547 3.09168 10.4496C3.36613 10.9438 3.88687 11.2507 4.45226 11.2507H13.4944V9.75103H4.45226L4.40393 9.66315L5.28559 8.25132H10.8861C11.4312 8.25132 11.9329 7.9549 12.1968 7.4795L14.8989 2.61716C15.0287 2.38471 15.0251 2.10116 14.8902 1.8717C14.7552 1.643 14.5083 1.50264 14.2428 1.50264H3.18395L2.55712 0ZM3.80785 3.00234H12.9687L10.8861 6.75161H5.37053L3.80785 3.00234ZM4.49619 12.0006C4.09845 12.0006 3.71699 12.1586 3.43574 12.4398C3.15449 12.7211 2.99649 13.1025 2.99649 13.5003C2.99649 13.898 3.15449 14.2795 3.43574 14.5607C3.71699 14.842 4.09845 15 4.49619 15C4.89394 15 5.2754 14.842 5.55664 14.5607C5.83789 14.2795 5.9959 13.898 5.9959 13.5003C5.9959 13.1025 5.83789 12.7211 5.55664 12.4398C5.2754 12.1586 4.89394 12.0006 4.49619 12.0006ZM11.9947 12.0006C11.597 12.0006 11.2155 12.1586 10.9343 12.4398C10.653 12.7211 10.495 13.1025 10.495 13.5003C10.495 13.898 10.653 14.2795 10.9343 14.5607C11.2155 14.842 11.597 15 11.9947 15C12.3925 15 12.7739 14.842 13.0552 14.5607C13.3364 14.2795 13.4944 13.898 13.4944 13.5003C13.4944 13.1025 13.3364 12.7211 13.0552 12.4398C12.7739 12.1586 12.3925 12.0006 11.9947 12.0006Z"/></svg>
             <span class="util__badge">2</span>
@@ -1781,7 +1953,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
               </div>
               <!-- feature card — placeholder product/promo tile, per the mockup -->
               <a class="mega__feature" href="deal-machine.html">
-                <span class="mega__feature-img" aria-hidden="true"></span>
+                <span class="mega__feature-img"><img src="product-images/suspension.webp" alt="" loading="lazy" decoding="async"></span>
                 <span class="mega__feature-body">
                   <span class="mega__feature-eyebrow">Spring Event</span>
                   <span class="mega__feature-title">Up to 25% off KW coilovers</span>
@@ -1792,20 +1964,284 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             </div>
           </div>
         </li>
-        <li><a class="subnav__link" href="wheels-cat.html">Wheels &amp; Tires <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a></li>
-        <li><a class="subnav__link" href="brakes.html">Brakes <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a></li>
-        <li><a class="subnav__link" href="exhaust.html">Exhaust <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a></li>
-        <li><a class="subnav__link" href="aero-body.html">Aero &amp; Body <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a></li>
-        <li><a class="subnav__link" href="engine-turbo.html">Engine &amp; Turbo <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a></li>
+        <li class="subnav__item">
+          <a class="subnav__link" href="wheels-cat.html" aria-haspopup="true" aria-expanded="false" aria-controls="mega-wheels-tires">Wheels &amp; Tires <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a>
+          <!-- Figma VWl8YFYeeS1d3nGfsliTtI, node 328:1740 "VR / Mega Menu — Wheels & Tires".
+               icon/wheel and icon/tire are 22- and 19-path illustrations (not the
+               single-path style used by every other category icon) — flattened
+               PNGs at 4x rather than an SVG, since Figma's SVG export for these two
+               kept pulling in the whole mega-menu frame instead of just the icon
+               (same failure mode hit once already on the suspension icon; there the
+               fix was picking the right svgAssets entry, but here the pieces genuinely
+               aren't pre-combined, so a raster export was the reliable option). -->
+          <div class="mega" id="mega-wheels-tires">
+            <div class="shell mega__inner">
+              <div class="mega__cols">
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/wheel-red.png" alt="" aria-hidden="true" width="16" height="16">Wheels</p>
+                  <ul class="mega__list">
+                    <li><a href="wheels-cat.html">Forged Wheels</a></li>
+                    <li><a href="wheels-cat.html">Flow-Formed Wheels</a></li>
+                    <li><a href="wheels-cat.html">Cast Wheels</a></li>
+                    <li><a href="wheels-cat.html">Wheel &amp; Tire Packages</a></li>
+                    <li><a href="wheels-cat.html">Track Wheels</a></li>
+                  </ul>
+                </div>
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/tire-red.png" alt="" aria-hidden="true" width="16" height="16">Tires &amp; Fitment</p>
+                  <ul class="mega__list">
+                    <li><a href="wheels-cat.html">Performance Tires</a></li>
+                    <li><a href="wheels-cat.html">Wheel Spacers</a></li>
+                    <li><a href="wheels-cat.html">Lug Nuts &amp; Bolts</a></li>
+                    <li><a href="wheels-cat.html">TPMS Sensors</a></li>
+                    <li><a href="wheels-cat.html">Hub Rings</a></li>
+                  </ul>
+                  <a class="mega__cta" href="wheels-cat.html">Shop all wheels &amp; tires
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></a>
+                </div>
+                <div class="mega__col mega__col--brands">
+                  <p class="mega__label"><img src="assets/icons/star.svg" alt="" aria-hidden="true" width="14" height="14">Top Brands</p>
+                  <ul class="mega__list mega__list--bold">
+                    <li><a href="wheels-cat.html">BBS</a></li>
+                    <li><a href="wheels-cat.html">HRE Wheels</a></li>
+                    <li><a href="wheels-cat.html">Vossen</a></li>
+                    <li><a href="wheels-cat.html">Michelin</a></li>
+                    <li><a href="wheels-cat.html">Pirelli</a></li>
+                    <li><a href="wheels-cat.html">fifteen52</a></li>
+                  </ul>
+                </div>
+              </div>
+              <a class="mega__feature" href="wheels-cat.html">
+                <span class="mega__feature-img"><img src="product-images/wheels.webp" alt="" loading="lazy" decoding="async"></span>
+                <span class="mega__feature-body">
+                  <span class="mega__feature-eyebrow">New Arrivals</span>
+                  <span class="mega__feature-title">Forged wheels for your platform</span>
+                  <span class="mega__cta">Shop wheels
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="subnav__item">
+          <a class="subnav__link" href="brakes.html" aria-haspopup="true" aria-expanded="false" aria-controls="mega-brakes">Brakes <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a>
+          <!-- Figma VWl8YFYeeS1d3nGfsliTtI, node 328:1775 "VR / Mega Menu — Brakes" -->
+          <div class="mega" id="mega-brakes">
+            <div class="shell mega__inner">
+              <div class="mega__cols">
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/brakes-red.svg" alt="" aria-hidden="true" width="14" height="14">Brake Kits</p>
+                  <ul class="mega__list">
+                    <li><a href="brakes.html">Big Brake Kits</a></li>
+                    <li><a href="brakes.html">Two-Piece Rotors</a></li>
+                    <li><a href="brakes.html">Performance Rotors</a></li>
+                    <li><a href="brakes.html">Caliper Upgrades</a></li>
+                    <li><a href="brakes.html">Kits by Vehicle</a></li>
+                  </ul>
+                </div>
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/check-red.svg" alt="" aria-hidden="true" width="14" height="14">Pads, Lines &amp; Fluid</p>
+                  <ul class="mega__list">
+                    <li><a href="brakes.html">Brake Pads</a></li>
+                    <li><a href="brakes.html">Stainless Brake Lines</a></li>
+                    <li><a href="brakes.html">Brake Fluid</a></li>
+                    <li><a href="brakes.html">Cooling Ducts</a></li>
+                    <li><a href="brakes.html">Hardware</a></li>
+                  </ul>
+                  <a class="mega__cta" href="brakes.html">Shop all brakes
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></a>
+                </div>
+                <div class="mega__col mega__col--brands">
+                  <p class="mega__label"><img src="assets/icons/star.svg" alt="" aria-hidden="true" width="14" height="14">Top Brands</p>
+                  <ul class="mega__list mega__list--bold">
+                    <li><a href="brakes.html">Brembo</a></li>
+                    <li><a href="brakes.html">StopTech</a></li>
+                    <li><a href="brakes.html">AP Racing</a></li>
+                    <li><a href="brakes.html">Girodisc</a></li>
+                    <li><a href="brakes.html">EBC Brakes</a></li>
+                    <li><a href="brakes.html">Ferodo</a></li>
+                  </ul>
+                </div>
+              </div>
+              <a class="mega__feature" href="brakes.html">
+                <span class="mega__feature-img"><img src="product-images/brakes.webp" alt="" loading="lazy" decoding="async"></span>
+                <span class="mega__feature-body">
+                  <span class="mega__feature-eyebrow">Track-Ready</span>
+                  <span class="mega__feature-title">Stopping power that holds up</span>
+                  <span class="mega__cta">Shop brakes
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="subnav__item">
+          <a class="subnav__link" href="exhaust.html" aria-haspopup="true" aria-expanded="false" aria-controls="mega-exhaust">Exhaust <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a>
+          <!-- Figma VWl8YFYeeS1d3nGfsliTtI, node 328:1810 "VR / Mega Menu — Exhaust" -->
+          <div class="mega" id="mega-exhaust">
+            <div class="shell mega__inner">
+              <div class="mega__cols">
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/exhaust-red.svg" alt="" aria-hidden="true" width="14" height="14">Exhaust Systems</p>
+                  <ul class="mega__list">
+                    <li><a href="exhaust.html">Cat-Back Systems</a></li>
+                    <li><a href="exhaust.html">Axle-Back Systems</a></li>
+                    <li><a href="exhaust.html">Valved Systems</a></li>
+                    <li><a href="exhaust.html">Full Systems</a></li>
+                    <li><a href="exhaust.html">Mufflers</a></li>
+                  </ul>
+                </div>
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/check-red.svg" alt="" aria-hidden="true" width="14" height="14">Headers &amp; Tips</p>
+                  <ul class="mega__list">
+                    <li><a href="exhaust.html">Downpipes</a></li>
+                    <li><a href="exhaust.html">Headers</a></li>
+                    <li><a href="exhaust.html">Exhaust Tips</a></li>
+                    <li><a href="exhaust.html">Resonators</a></li>
+                    <li><a href="exhaust.html">Hardware &amp; Gaskets</a></li>
+                  </ul>
+                  <a class="mega__cta" href="exhaust.html">Shop all exhaust
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></a>
+                </div>
+                <div class="mega__col mega__col--brands">
+                  <p class="mega__label"><img src="assets/icons/star.svg" alt="" aria-hidden="true" width="14" height="14">Top Brands</p>
+                  <ul class="mega__list mega__list--bold">
+                    <li><a href="exhaust.html">Akrapovi&#269;</a></li>
+                    <li><a href="exhaust.html">Fabspeed</a></li>
+                    <li><a href="exhaust.html">Armytrix</a></li>
+                    <li><a href="exhaust.html">Borla</a></li>
+                    <li><a href="exhaust.html">Milltek</a></li>
+                    <li><a href="exhaust.html">Tomei</a></li>
+                  </ul>
+                </div>
+              </div>
+              <a class="mega__feature" href="exhaust.html">
+                <span class="mega__feature-img"><img src="product-images/exhaust.webp" alt="" loading="lazy" decoding="async"></span>
+                <span class="mega__feature-body">
+                  <span class="mega__feature-eyebrow">Sound + Power</span>
+                  <span class="mega__feature-title">Titanium systems in stock</span>
+                  <span class="mega__cta">Shop exhaust
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="subnav__item">
+          <a class="subnav__link" href="aero-body.html" aria-haspopup="true" aria-expanded="false" aria-controls="mega-aero-body">Aero &amp; Body <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a>
+          <!-- Figma VWl8YFYeeS1d3nGfsliTtI, node 328:1845 "VR / Mega Menu — Aero & Body" -->
+          <div class="mega" id="mega-aero-body">
+            <div class="shell mega__inner">
+              <div class="mega__cols">
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/aero-red.svg" alt="" aria-hidden="true" width="14" height="14">Aerodynamics</p>
+                  <ul class="mega__list">
+                    <li><a href="aero-body.html">Front Splitters</a></li>
+                    <li><a href="aero-body.html">Rear Wings</a></li>
+                    <li><a href="aero-body.html">Diffusers</a></li>
+                    <li><a href="aero-body.html">Canards</a></li>
+                    <li><a href="aero-body.html">Side Skirts</a></li>
+                  </ul>
+                </div>
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/check-red.svg" alt="" aria-hidden="true" width="14" height="14">Body &amp; Carbon</p>
+                  <ul class="mega__list">
+                    <li><a href="aero-body.html">Carbon Fiber</a></li>
+                    <li><a href="aero-body.html">Hoods</a></li>
+                    <li><a href="aero-body.html">Fenders</a></li>
+                    <li><a href="aero-body.html">Mirror Caps</a></li>
+                    <li><a href="aero-body.html">Full Body Kits</a></li>
+                  </ul>
+                  <a class="mega__cta" href="aero-body.html">Shop all aero &amp; body
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></a>
+                </div>
+                <div class="mega__col mega__col--brands">
+                  <p class="mega__label"><img src="assets/icons/star.svg" alt="" aria-hidden="true" width="14" height="14">Top Brands</p>
+                  <ul class="mega__list mega__list--bold">
+                    <li><a href="aero-body.html">Manthey Racing</a></li>
+                    <li><a href="aero-body.html">Vorsteiner</a></li>
+                    <li><a href="aero-body.html">Seibon</a></li>
+                    <li><a href="aero-body.html">APR Performance</a></li>
+                    <li><a href="aero-body.html">Verus Engineering</a></li>
+                    <li><a href="aero-body.html">TechArt</a></li>
+                  </ul>
+                </div>
+              </div>
+              <a class="mega__feature" href="aero-body.html">
+                <span class="mega__feature-img"><img src="product-images/aero.webp" alt="" loading="lazy" decoding="async"></span>
+                <span class="mega__feature-body">
+                  <span class="mega__feature-eyebrow">Downforce</span>
+                  <span class="mega__feature-title">Track aero, street-legal looks</span>
+                  <span class="mega__cta">Shop aero
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="subnav__item">
+          <a class="subnav__link" href="engine-turbo.html" aria-haspopup="true" aria-expanded="false" aria-controls="mega-engine-turbo">Engine &amp; Turbo <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a>
+          <!-- Figma VWl8YFYeeS1d3nGfsliTtI, node 328:1880 "VR / Mega Menu — Engine & Turbo" -->
+          <div class="mega" id="mega-engine-turbo">
+            <div class="shell mega__inner">
+              <div class="mega__cols">
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/engine-red.svg" alt="" aria-hidden="true" width="14" height="14">Power</p>
+                  <ul class="mega__list">
+                    <li><a href="engine-turbo.html">Turbo Kits</a></li>
+                    <li><a href="engine-turbo.html">Superchargers</a></li>
+                    <li><a href="engine-turbo.html">Turbo Upgrades</a></li>
+                    <li><a href="engine-turbo.html">Intercoolers</a></li>
+                    <li><a href="engine-turbo.html">Charge Pipes</a></li>
+                  </ul>
+                </div>
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/check-red.svg" alt="" aria-hidden="true" width="14" height="14">Air, Fuel &amp; Tune</p>
+                  <ul class="mega__list">
+                    <li><a href="engine-turbo.html">Cold Air Intakes</a></li>
+                    <li><a href="engine-turbo.html">ECU Tuning</a></li>
+                    <li><a href="engine-turbo.html">Fuel Systems</a></li>
+                    <li><a href="engine-turbo.html">Downpipes</a></li>
+                    <li><a href="engine-turbo.html">Catch Cans</a></li>
+                  </ul>
+                  <a class="mega__cta" href="engine-turbo.html">Shop all engine &amp; turbo
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></a>
+                </div>
+                <div class="mega__col mega__col--brands">
+                  <p class="mega__label"><img src="assets/icons/star.svg" alt="" aria-hidden="true" width="14" height="14">Top Brands</p>
+                  <ul class="mega__list mega__list--bold">
+                    <li><a href="engine-turbo.html">ProCharger</a></li>
+                    <li><a href="engine-turbo.html">Eventuri</a></li>
+                    <li><a href="engine-turbo.html">Dinan</a></li>
+                    <li><a href="engine-turbo.html">HKS</a></li>
+                    <li><a href="engine-turbo.html">Garrett</a></li>
+                    <li><a href="engine-turbo.html">Cobb Tuning</a></li>
+                  </ul>
+                </div>
+              </div>
+              <a class="mega__feature" href="engine-turbo.html">
+                <span class="mega__feature-img"><img src="product-images/engine.webp" alt="" loading="lazy" decoding="async"></span>
+                <span class="mega__feature-body">
+                  <span class="mega__feature-eyebrow">Make Power</span>
+                  <span class="mega__feature-title">Stage kits for your platform</span>
+                  <span class="mega__cta">Shop engine
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </li>
       </ul>
-      <a class="subnav__promo" href="deal-machine.html">Spring Event — 25% Off</a>
+      <!-- spacer moved here (was between promo and fin) so it pushes BOTH
+           Spring Event and 0% APR right, as one group, instead of just fin.
+           Affirm/Katapult logos removed per request — .subnav__finlogos and
+           its CSS are now unused by this markup (left in place in case
+           another instance still references them; nothing currently does). -->
       <span class="subnav__spacer"></span>
+      <a class="subnav__promo" href="deal-machine.html">Spring Event — 25% Off</a>
+      <span class="subnav__divider" aria-hidden="true">|</span>
       <a class="subnav__fin" href="financing.html">
         <em>0% APR</em> <span>/ Pre-qualify in 60s</span>
-        <span class="subnav__finlogos">
-          <img src="logos/affirm.png" alt="Affirm" width="356" height="141" loading="lazy" decoding="async">
-          <img src="logos/katapult.webp" alt="Katapult" width="477" height="146" loading="lazy" decoding="async">
-        </span>
       </a>
     </div>
   </nav>
@@ -1842,7 +2278,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 
           <h1 class="hero__title" id="hero-title">Chosen with intent.<br>Built with taste.</h1>
 
-          <p class="hero__lede">Authorized performance parts for the 911 GT3, M3, RS6, C63, GT-R, and A90 Supra. Verified fitment. Expert installs. Since 2001.</p>
+          <p class="hero__lede">The top performance parts for all of the top manufacturers in automotive history. Find our favorite mods for Mercedes, Nissan, Honda, and all the other brands that are writing the book on car culture.</p>
 
           <div class="finance">
             <p class="finance__text">Finance from <b>$0 down</b> · <em>0% APR available</em></p>
@@ -2244,7 +2680,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                 </p>
               </div>
               <ul class="apanel__grid">
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="assets/img/porsche/manthey-mr-coilover-992-gt3.png" alt="" width="420" height="336" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2260,7 +2696,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="assets/img/porsche/akrapovic-slip-on-race-line-991-gt3.png" alt="" width="420" height="280" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2276,7 +2712,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="assets/img/porsche/bbs-fi-r-forged-20-992-carrera.png" alt="" width="420" height="336" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2292,7 +2728,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="assets/img/porsche/brembo-gt-bbk-front-6-piston-911.png" alt="" width="420" height="336" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2308,7 +2744,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="assets/img/porsche/manthey-mr-coilover-992-gt3.png" alt="" width="420" height="336" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2324,7 +2760,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="assets/img/porsche/fabspeed-supersport-x-pipe-992-turbo-s.png" alt="" width="420" height="336" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2340,7 +2776,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img pcard__img--contain" src="assets/img/porsche/manthey-mr-front-aero-splitter-992-gt3.png" alt="" width="420" height="248" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2400,7 +2836,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                 </p>
               </div>
               <ul class="apanel__grid">
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/suspension.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2416,7 +2852,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/exhaust.webp" alt="" width="1200" height="800" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2432,7 +2868,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2448,7 +2884,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/brakes.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2464,7 +2900,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/engine.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2480,7 +2916,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/tuning.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2496,7 +2932,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img pcard__img--contain" src="product-images/aero.webp" alt="" width="1200" height="710" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2556,7 +2992,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                 </p>
               </div>
               <ul class="apanel__grid">
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/suspension.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2572,7 +3008,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/exhaust.webp" alt="" width="1200" height="800" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2588,7 +3024,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2604,7 +3040,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/brakes.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2620,7 +3056,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/engine.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2636,7 +3072,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/tires.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2652,7 +3088,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/tuning.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2712,7 +3148,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                 </p>
               </div>
               <ul class="apanel__grid">
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/suspension.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2728,7 +3164,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/exhaust.webp" alt="" width="1200" height="800" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2744,7 +3180,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2760,7 +3196,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/brakes.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2776,7 +3212,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/engine.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2792,7 +3228,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/tires.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2808,7 +3244,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img pcard__img--contain" src="product-images/aero.webp" alt="" width="1200" height="710" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2868,7 +3304,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                 </p>
               </div>
               <ul class="apanel__grid">
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/suspension.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2884,7 +3320,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/exhaust.webp" alt="" width="1200" height="800" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2900,7 +3336,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2916,7 +3352,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/brakes.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2932,7 +3368,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/tuning.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2948,7 +3384,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/tires.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -2964,7 +3400,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img pcard__img--contain" src="product-images/aero.webp" alt="" width="1200" height="710" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3022,22 +3458,22 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
               </figure>
               <div class="apanel__col">
                 <ul class="apanel__models">
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Ferrari </span>SF90</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Ferrari </span>F8</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Ferrari </span>488</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Ferrari </span>812</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Ferrari </span>296 GTB</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Ferrari </span>Roma</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Ferrari </span>Portofino</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Ferrari </span>458</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Ferrari </span>SF90</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Ferrari </span>F8</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Ferrari </span>488</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Ferrari </span>812</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Ferrari </span>296 GTB</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Ferrari </span>Roma</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Ferrari </span>Portofino</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Ferrari </span>458</a></li>
                 </ul>
                 <p class="apanel__cta">
-                  <a class="btn-outline btn-outline--compact" href="vivid-pdp.html">Shop all Ferrari
+                  <a class="btn-outline btn-outline--compact" href="wheel-pdp.html">Shop all Ferrari
                     <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
                 </p>
               </div>
               <ul class="apanel__grid">
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/suspension.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3053,7 +3489,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/exhaust.webp" alt="" width="1200" height="800" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3069,7 +3505,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3085,7 +3521,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/brakes.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3101,7 +3537,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/engine.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3117,7 +3553,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/tires.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3133,7 +3569,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img pcard__img--contain" src="product-images/aero.webp" alt="" width="1200" height="710" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3149,7 +3585,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-                <li><a class="pcard-cta pcard-cta--red" href="vivid-pdp.html">
+                <li><a class="pcard-cta pcard-cta--red" href="wheel-pdp.html">
                   <span class="pcard-cta__eyebrow">12,000+ Ferrari parts</span>
                   <span class="pcard-cta__title">Shop all<br><span class="pcard-cta__marque">Ferrari</span></span>
                   <img src="assets/icons/arrow-right.svg" alt="" aria-hidden="true" width="13" height="13">
@@ -3178,22 +3614,22 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
               </figure>
               <div class="apanel__col">
                 <ul class="apanel__models">
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Lamborghini </span>Hurac&aacute;n</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Lamborghini </span>Aventador</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Lamborghini </span>Urus</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Lamborghini </span>Revuelto</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Lamborghini </span>Gallardo</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Lamborghini </span>Murci&eacute;lago</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Lamborghini </span>Diablo</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Lamborghini </span>Countach</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Lamborghini </span>Hurac&aacute;n</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Lamborghini </span>Aventador</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Lamborghini </span>Urus</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Lamborghini </span>Revuelto</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Lamborghini </span>Gallardo</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Lamborghini </span>Murci&eacute;lago</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Lamborghini </span>Diablo</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Lamborghini </span>Countach</a></li>
                 </ul>
                 <p class="apanel__cta">
-                  <a class="btn-outline btn-outline--compact" href="vivid-pdp.html">Shop all Lamborghini
+                  <a class="btn-outline btn-outline--compact" href="wheel-pdp.html">Shop all Lamborghini
                     <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
                 </p>
               </div>
               <ul class="apanel__grid">
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/suspension.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3209,7 +3645,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/exhaust.webp" alt="" width="1200" height="800" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3225,7 +3661,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3241,7 +3677,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/brakes.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3257,7 +3693,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/engine.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3273,7 +3709,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/tires.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3289,7 +3725,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img pcard__img--contain" src="product-images/aero.webp" alt="" width="1200" height="710" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3305,7 +3741,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-                <li><a class="pcard-cta pcard-cta--red" href="vivid-pdp.html">
+                <li><a class="pcard-cta pcard-cta--red" href="wheel-pdp.html">
                   <span class="pcard-cta__eyebrow">9,500+ Lamborghini parts</span>
                   <span class="pcard-cta__title pcard-cta__title--long">Shop all<br><span class="pcard-cta__marque">Lamborghini</span></span>
                   <img src="assets/icons/arrow-right.svg" alt="" aria-hidden="true" width="13" height="13">
@@ -3334,22 +3770,22 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
               </figure>
               <div class="apanel__col">
                 <ul class="apanel__models">
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">McLaren </span>570S</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">McLaren </span>720S</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">McLaren </span>765LT</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">McLaren </span>600LT</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">McLaren </span>675LT</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">McLaren </span>750S</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">McLaren </span>Artura</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">McLaren </span>GT</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">McLaren </span>570S</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">McLaren </span>720S</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">McLaren </span>765LT</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">McLaren </span>600LT</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">McLaren </span>675LT</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">McLaren </span>750S</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">McLaren </span>Artura</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">McLaren </span>GT</a></li>
                 </ul>
                 <p class="apanel__cta">
-                  <a class="btn-outline btn-outline--compact" href="vivid-pdp.html">Shop all McLaren
+                  <a class="btn-outline btn-outline--compact" href="wheel-pdp.html">Shop all McLaren
                     <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
                 </p>
               </div>
               <ul class="apanel__grid">
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/suspension.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3365,7 +3801,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/exhaust.webp" alt="" width="1200" height="800" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3381,7 +3817,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3397,7 +3833,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/brakes.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3413,7 +3849,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/engine.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3429,7 +3865,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/tires.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3445,7 +3881,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img pcard__img--contain" src="product-images/aero.webp" alt="" width="1200" height="710" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3461,7 +3897,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-                <li><a class="pcard-cta pcard-cta--red" href="vivid-pdp.html">
+                <li><a class="pcard-cta pcard-cta--red" href="wheel-pdp.html">
                   <span class="pcard-cta__eyebrow">7,800+ McLaren parts</span>
                   <span class="pcard-cta__title">Shop all<br><span class="pcard-cta__marque">McLaren</span></span>
                   <img src="assets/icons/arrow-right.svg" alt="" aria-hidden="true" width="13" height="13">
@@ -3490,22 +3926,22 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
               </figure>
               <div class="apanel__col">
                 <ul class="apanel__models">
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Aston Martin </span>Vantage</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Aston Martin </span>DB11</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Aston Martin </span>DBS</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Aston Martin </span>V12 Vantage</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Aston Martin </span>DB12</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Aston Martin </span>Vanquish</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Aston Martin </span>DBX</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Aston Martin </span>Rapide</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Aston Martin </span>Vantage</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Aston Martin </span>DB11</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Aston Martin </span>DBS</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Aston Martin </span>V12 Vantage</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Aston Martin </span>DB12</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Aston Martin </span>Vanquish</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Aston Martin </span>DBX</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Aston Martin </span>Rapide</a></li>
                 </ul>
                 <p class="apanel__cta">
-                  <a class="btn-outline btn-outline--compact" href="vivid-pdp.html">Shop all Aston Martin
+                  <a class="btn-outline btn-outline--compact" href="wheel-pdp.html">Shop all Aston Martin
                     <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
                 </p>
               </div>
               <ul class="apanel__grid">
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/suspension.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3521,7 +3957,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/exhaust.webp" alt="" width="1200" height="800" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3537,7 +3973,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3553,7 +3989,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/brakes.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3569,7 +4005,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/engine.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3585,7 +4021,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/tires.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3601,7 +4037,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img pcard__img--contain" src="product-images/aero.webp" alt="" width="1200" height="710" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3617,7 +4053,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-                <li><a class="pcard-cta pcard-cta--red" href="vivid-pdp.html">
+                <li><a class="pcard-cta pcard-cta--red" href="wheel-pdp.html">
                   <span class="pcard-cta__eyebrow">6,400+ Aston Martin parts</span>
                   <span class="pcard-cta__title pcard-cta__title--long">Shop all<br><span class="pcard-cta__marque">Aston Martin</span></span>
                   <img src="assets/icons/arrow-right.svg" alt="" aria-hidden="true" width="13" height="13">
@@ -3646,22 +4082,22 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
               </figure>
               <div class="apanel__col">
                 <ul class="apanel__models">
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Bugatti </span>Veyron</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Bugatti </span>Chiron</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Bugatti </span>Divo</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Bugatti </span>Centodieci</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Bugatti </span>Bolide</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Bugatti </span>Mistral</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Bugatti </span>Tourbillon</a></li>
-                <li><a class="mchip" href="vivid-pdp.html"><span class="vh">Bugatti </span>EB110</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Bugatti </span>Veyron</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Bugatti </span>Chiron</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Bugatti </span>Divo</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Bugatti </span>Centodieci</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Bugatti </span>Bolide</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Bugatti </span>Mistral</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Bugatti </span>Tourbillon</a></li>
+                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Bugatti </span>EB110</a></li>
                 </ul>
                 <p class="apanel__cta">
-                  <a class="btn-outline btn-outline--compact" href="vivid-pdp.html">Shop all Bugatti
+                  <a class="btn-outline btn-outline--compact" href="wheel-pdp.html">Shop all Bugatti
                     <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
                 </p>
               </div>
               <ul class="apanel__grid">
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/suspension.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3677,7 +4113,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/exhaust.webp" alt="" width="1200" height="800" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3693,7 +4129,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3709,7 +4145,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/brakes.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3725,7 +4161,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/engine.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3741,7 +4177,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/tires.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3757,7 +4193,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img pcard__img--contain" src="product-images/aero.webp" alt="" width="1200" height="710" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3773,7 +4209,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-                <li><a class="pcard-cta pcard-cta--red" href="vivid-pdp.html">
+                <li><a class="pcard-cta pcard-cta--red" href="wheel-pdp.html">
                   <span class="pcard-cta__eyebrow">1,200+ Bugatti parts</span>
                   <span class="pcard-cta__title">Shop all<br><span class="pcard-cta__marque">Bugatti</span></span>
                   <img src="assets/icons/arrow-right.svg" alt="" aria-hidden="true" width="13" height="13">
@@ -3783,7 +4219,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
           </div>
         </div>
           <div class="browse__cta">
-            <a class="btn-outline" href="vivid-pdp.html">Shop all exotics
+            <a class="btn-outline" href="wheel-pdp.html">Shop all exotics
               <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
           </div>
         </div>
@@ -3829,7 +4265,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                 </p>
               </div>
               <ul class="apanel__grid">
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/suspension.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3845,7 +4281,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/exhaust.webp" alt="" width="1200" height="800" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3861,7 +4297,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3877,7 +4313,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/brakes.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3893,7 +4329,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/engine.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3909,7 +4345,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/tires.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3925,7 +4361,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img pcard__img--contain" src="product-images/aero.webp" alt="" width="1200" height="710" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -3985,7 +4421,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                 </p>
               </div>
               <ul class="apanel__grid">
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/suspension.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4001,7 +4437,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/exhaust.webp" alt="" width="1200" height="800" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4017,7 +4453,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4033,7 +4469,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/brakes.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4049,7 +4485,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/engine.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4065,7 +4501,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/tires.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4081,7 +4517,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img pcard__img--contain" src="product-images/aero.webp" alt="" width="1200" height="710" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4141,7 +4577,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                 </p>
               </div>
               <ul class="apanel__grid">
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/suspension.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4157,7 +4593,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/exhaust.webp" alt="" width="1200" height="800" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4173,7 +4609,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4189,7 +4625,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/brakes.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4205,7 +4641,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/engine.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4221,7 +4657,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/tires.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4237,7 +4673,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img pcard__img--contain" src="product-images/aero.webp" alt="" width="1200" height="710" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4297,7 +4733,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                 </p>
               </div>
               <ul class="apanel__grid">
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/suspension.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4313,7 +4749,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/exhaust.webp" alt="" width="1200" height="800" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4329,7 +4765,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4345,7 +4781,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/brakes.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4361,7 +4797,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/engine.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4377,7 +4813,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/tires.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4393,7 +4829,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img pcard__img--contain" src="product-images/aero.webp" alt="" width="1200" height="710" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4453,7 +4889,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                 </p>
               </div>
               <ul class="apanel__grid">
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/suspension.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4469,7 +4905,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/exhaust.webp" alt="" width="1200" height="800" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4485,7 +4921,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4501,7 +4937,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/brakes.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4517,7 +4953,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/engine.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4533,7 +4969,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img" src="product-images/tires.webp" alt="" width="1200" height="1200" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4549,7 +4985,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
                   </span>
                 </span>
               </a></li>
-              <li><a class="pcard" href="vivid-pdp.html">
+              <li><a class="pcard" href="wheel-pdp.html">
                 <img class="pcard__img pcard__img--contain" src="product-images/aero.webp" alt="" width="1200" height="710" loading="lazy" decoding="async">
                 <span class="pcard__body">
                   <span>
@@ -4710,7 +5146,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
       <h2 class="vids__title" id="vids-title">Install. Dyno. Documentation.</h2>
       <p class="vids__sub">25 years of build knowledge on tap · <b>4.2M views this year</b></p>
       <a class="vids__cta" href="https://www.youtube.com/@VividRacing" rel="noopener">
-        <img src="assets/icons/youtube-logo-color.svg" alt="" aria-hidden="true" width="20" height="20">
+        <img src="assets/icons/youtube-f.svg" alt="" aria-hidden="true" width="19" height="14">
         Subscribe on YouTube</a>
       <ul class="vids__grid">
         <li><a class="vid" href="blog.html">
@@ -4744,6 +5180,42 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
           <span class="vid__body">
             <span class="vid__meta">October 21, 2025<span class="vid__dot" aria-hidden="true"></span>How-to</span>
             <span class="vid__h3">How to Measure Backspacing &amp; Offset</span>
+          </span>
+        </a></li>
+        <!-- 3 added 2026-08-21 — thumbnails reuse the same real product photography
+             already on the page (product-images/), same as the mega-menu feature
+             cards; assets/img/video/ only had the original 3 stills. -->
+        <li><a class="vid" href="blog.html">
+          <span class="vid__thumb">
+            <img src="product-images/suspension.webp" alt="" loading="lazy" width="1200" height="960" decoding="async">
+            <img class="vid__play" src="assets/icons/play.svg" alt="" aria-hidden="true" width="56" height="56">
+            <span class="vid__time">14:05</span>
+          </span>
+          <span class="vid__body">
+            <span class="vid__meta">September 12, 2025<span class="vid__dot" aria-hidden="true"></span>How-to</span>
+            <span class="vid__h3">Coilovers 101: What Actually Changes When You Lower Your Car</span>
+          </span>
+        </a></li>
+        <li><a class="vid" href="blog.html">
+          <span class="vid__thumb">
+            <img src="product-images/wheels.webp" alt="" loading="lazy" width="1200" height="960" decoding="async">
+            <img class="vid__play" src="assets/icons/play.svg" alt="" aria-hidden="true" width="56" height="56">
+            <span class="vid__time">11:28</span>
+          </span>
+          <span class="vid__body">
+            <span class="vid__meta">November 3, 2025<span class="vid__dot" aria-hidden="true"></span>Buyer&rsquo;s guide</span>
+            <span class="vid__h3">Wheel Fitment Explained: Bolt Pattern, Offset &amp; Sizing</span>
+          </span>
+        </a></li>
+        <li><a class="vid" href="blog.html">
+          <span class="vid__thumb">
+            <img src="product-images/tuning.webp" alt="" loading="lazy" width="1200" height="1200" decoding="async">
+            <img class="vid__play" src="assets/icons/play.svg" alt="" aria-hidden="true" width="56" height="56">
+            <span class="vid__time">16:52</span>
+          </span>
+          <span class="vid__body">
+            <span class="vid__meta">December 15, 2025<span class="vid__dot" aria-hidden="true"></span>Dyno test</span>
+            <span class="vid__h3">ECU Tuning 101: What a Stage 2 Flash Actually Does</span>
           </span>
         </a></li>
       </ul>
@@ -5167,6 +5639,30 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
       /* one at a time — five panels open at once buries the list */
       toggles.forEach(function (other) { if (other !== btn) set(other, false); });
       set(btn, willOpen);
+    });
+  });
+})();
+
+/* Category mega menus (Suspension, Brakes, Exhaust, Aero & Body, Engine &
+   Turbo) — CSS :hover/:focus-within already reveal each one, so this works
+   with no JS at all. This only keeps aria-expanded accurate for assistive
+   tech and lets Escape close the open one and return focus to its trigger. */
+(function () {
+  var items = [].slice.call(document.querySelectorAll('.subnav__item'));
+  items.forEach(function (item) {
+    var link = item.querySelector('.subnav__link');
+    var mega = item.querySelector('.mega');
+    if (!link || !mega) return;
+    function open() { link.setAttribute('aria-expanded', 'true'); }
+    function close() { link.setAttribute('aria-expanded', 'false'); }
+    item.addEventListener('mouseenter', open);
+    item.addEventListener('mouseleave', close);
+    item.addEventListener('focusin', open);
+    item.addEventListener('focusout', function (e) {
+      if (!item.contains(e.relatedTarget)) close();
+    });
+    item.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { close(); link.focus(); }
     });
   });
 })();

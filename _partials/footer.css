@@ -99,66 +99,32 @@
 @media (max-width:1180px){
   .foot__top{flex-direction:column;gap:32px}
   .foot__brand{flex:none}
-
-/* --- ≤1180 · search and utility labels shrink ----------------------------- */
+  .foot__cols{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+/* ---- mobile footer: node 154:3435 — centred brand block + accordions ---- */
 @media (max-width:900px){
-  :root{--gutter:16px}
+  .foot{padding-top:40px}
+  .foot__top{gap:24px;padding-bottom:24px}
+  .foot__brand{text-align:center}
+  .foot__logo{margin:0 auto}
+  .foot__contact{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;
+    text-align:left;padding-top:20px;margin-top:20px;
+    border-top:1px solid rgba(255,255,255,.15)}
+  .foot__label{margin:0}
+  .foot__form{max-width:none;margin-top:8px}
+  .foot__social{justify-content:center}
 
-  /* single centred column; the vehicle picker rises to sit under the H1 */
-  .hero__stage{min-height:0;display:block}
-  /* copy now spans the full width, so a left-to-right fade no longer covers it */
-  .hero__stage::before{
-    background:linear-gradient(180deg,rgba(0,0,0,.90) 0%,rgba(0,0,0,.80) 45%,
-               rgba(0,0,0,.74) 72%,rgba(0,0,0,.84) 100%)}
-  .hero__inner{flex-direction:column;align-items:stretch;gap:0;
-    padding:28px var(--gutter) 32px;text-align:center}
-  .hero__copy{display:flex;flex-direction:column}
-  .hero__title{order:1;margin:0;font-size:40px;line-height:44px;letter-spacing:-.8px}
-  .hero__lede{order:3;margin:22px auto 0;max-width:none}
-  /* Red text cannot clear 4.5:1 over the photo here: #e04a4a needs a backdrop
-     darker than rgb(28,28,28), and the flames run to near-white. Desktop's
-     left-fade guarantees it (4.94:1); mobile's scrim cannot. So the row gets a
-     solid ground, which also reads as one block with the stats bar below. */
-  .finance{order:4;justify-content:center;margin-top:16px;flex-direction:column;gap:10px;
-    background:var(--bg-inverse);padding:14px 12px}
-  .stats{order:5;max-width:none;margin-top:22px}
-  .eyebrow{order:2;align-self:center;margin-top:20px}
-
-  /* the card is a sibling of .hero__copy, so pull it between title and lede */
-  .hero__inner{display:flex}
-  .ymm{order:2;width:100%;max-width:none;margin-top:22px}
-
-  /* three equal cells with wrapping labels, as in the mobile frame — the
-     content-sized desktop cells are far too wide for 390px */
-  /* sits flush under the finance bar so the two read as one black block */
-  .stats{display:flex;width:100%;margin-top:0;border-top:0}
-  .stats__cell{flex:1 1 0;min-width:0;padding:10px 12px}
-  .stats__label{white-space:normal}
-  .stats__value{justify-content:flex-start}
-
-  .deal{letter-spacing:1px;padding:8px 16px}
+  .foot__cols{grid-template-columns:1fr;gap:0}
+  .foot__col{border-top:1px solid rgba(255,255,255,.15)}
+  .foot__sum{padding:16px 0;min-height:44px;cursor:pointer}
+  .foot__chev{display:block;width:11px;height:7px;flex:none;
+    background:url("assets/icons/chevron-down.svg") center/contain no-repeat;
+    filter:invert(1);transition:transform .18s ease}
+  .foot__col[open] .foot__chev{transform:rotate(180deg)}
+  .foot__list{margin:0 0 16px;gap:2px}
+  .foot__list a{min-height:36px}
+  .foot__family{padding:20px 0;gap:14px}
+  .foot__family-label{font-size:12px;line-height:18px}
+  .foot__family-logos{gap:24px}
+  .foot__family-logos img{height:18px}
 }
-
-
-/* --- ≤900 · mobile layout: centred brand + accordions -------------------- */
-@media (max-width:900px){
-  .hero__copy{display:contents}
-}
-
-/* 320px reflow (WCAG 1.4.10) — the masthead row is the binding constraint.
-   Scoped to ≤360px so it does not shrink targets on a normal 390px phone. */
-@media (max-width:360px){
-  .logo img{width:118px;height:24px}
-  .masthead__inner{gap:6px}
-  .util{padding:0 2px}
-  .util__tile,.util__glyph{width:34px;height:34px}
-  .util__tile svg{width:17px;height:17px}
-  .util__glyph svg{width:20px;height:20px}
-  .search,.search__submit{width:34px;height:34px}
-  .stats__cell{padding:8px}
-  .stats__label{font-size:11px;letter-spacing:.3px}
-  .hero__title{font-size:34px;line-height:38px}
-  .chat{padding:8px 10px;font-size:12px}
-}
-
-/* ===== MOBILE LEGIBILITY + TOUCH ========================================= */
