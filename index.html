@@ -78,7 +78,7 @@ button{font:inherit;color:inherit}
 }
 /* on dark surfaces a red ring can sit too close to the ground — double it */
 .brandbar :focus-visible,.ymm :focus-visible,.util--dark:focus-visible,
-.rbar :focus-visible{
+.rbar :focus-visible,.apanel__hero :focus-visible{
   outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 0 6px rgba(179,20,20,.9);
 }
 
@@ -887,15 +887,28 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
    the product grid hidden, the hero ran almost flush into it. */
 .apanel__body{display:flex;align-items:stretch;gap:32px;padding-bottom:24px}
 
-.apanel__hero{position:relative;flex:0 0 361px;height:480px;margin:0;
-  display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;
+/* Photo swapped for the flagship model's own submodel/trim list, 2026-08-23 —
+   images hidden (kept in the DOM, not deleted; see .apanel__hero img[hidden]
+   below) rather than removed, matching the file's existing hide-don't-delete
+   convention (.apanel__grid, .fam[hidden], .guides[hidden]). */
+.apanel__hero{position:relative;flex:0 0 361px;height:auto;min-height:260px;margin:0;
+  display:flex;flex-direction:column;gap:16px;
   padding:24px;border-radius:4px;overflow:hidden;background:var(--bg-inverse)}
-.apanel__hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-/* white on rgba(0,0,0,.6) is 5.7:1 even where the photo behind it is blown out */
-.apanel__cap{position:relative;z-index:1;background:rgba(0,0,0,.6);
-  border-left:2px solid var(--accent-red);padding:8px 12px 8px 14px;
-  font:400 11px/14px var(--font-ui);letter-spacing:1.54px;text-transform:uppercase;
-  color:var(--text-on-dark)}
+.apanel__hero img[hidden]{display:none}
+.apanel__cap{position:relative;z-index:1;background:none;border-left:2px solid var(--accent-red);
+  padding:0 0 0 12px;font:400 11px/14px var(--font-ui);letter-spacing:1.54px;
+  text-transform:uppercase;color:var(--text-on-dark)}
+/* the flagship's own trims — same chip pattern as .mchip, restyled for the dark
+   hero ground: translucent white fill (not --surface-sunken, which is a light
+   grey meant for white cards) so the panel still reads as one dark surface */
+.apanel__subs{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.apanel__sub{display:inline-flex;align-items:center;padding:8px 12px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);
+  border-radius:4px;font:600 13px/18px var(--font-ui);color:var(--text-on-dark);
+  transition:border-color .16s ease,background-color .16s ease}
+/* same red-edge-on-hover language as .mchip/.pcard/.acard/.cat */
+.apanel__sub:hover,.apanel__sub:focus-visible{
+  border-color:var(--action-primary);background:rgba(179,20,20,.18)}
 
 .apanel__grid{flex:1 1 auto;min-width:0;display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));gap:13px 12px;
@@ -942,10 +955,6 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 /* same red-edge-on-hover as .pcard/.acard/.cat, paired for keyboard */
 .mchip:hover,.mchip:focus-visible{border-color:var(--action-primary);background:#fff}
 .apanel__cta{margin:0;display:flex;justify-content:flex-end}
-/* the hero's 480px was cut to match two rows of product cards; nothing beside
-   it is that tall now, so it takes the chip column's height over a floor that
-   keeps the photo readable */
-.apanel__hero{height:auto;min-height:260px}
 
 .pcard{display:flex;flex-direction:column;height:100%;
   background:var(--bg-surface);border:1px solid var(--pcard-border);
@@ -1007,7 +1016,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
    fall under ~110px, so the hero moves above the grid instead. */
 @media (max-width:1279px){
   .apanel__body{flex-direction:column;gap:16px}
-  .apanel__hero{flex:none;width:100%;height:300px}
+  .apanel__hero{flex:none;width:100%;height:auto}
 }
 @media (max-width:900px){
   .apanel__head{flex-direction:column;align-items:flex-start;gap:16px}
@@ -1015,7 +1024,6 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 }
 @media (max-width:640px){
   .apanel__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .apanel__hero{height:240px}
 }
 
 
@@ -2743,8 +2751,17 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             </div>
             <div class="apanel__body">
               <figure class="apanel__hero">
-                <img src="assets/img/porsche/hero-911-gt3-rs-992.jpg" alt="A white Porsche 911 GT3 RS on a snow-lined mountain pass" width="1200" height="800" loading="lazy" decoding="async">
+                <img src="assets/img/porsche/hero-911-gt3-rs-992.jpg" alt="A white Porsche 911 GT3 RS on a snow-lined mountain pass" width="1200" height="800" loading="lazy" decoding="async" hidden>
                 <figcaption class="apanel__cap">911 GT3 RS &middot; 992</figcaption>
+                <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vivid-classics.html">Carrera</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Carrera S</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Carrera GTS</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Targa 4S</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Turbo S</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">GT3</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">GT3 RS</a></li>
+                </ul>
               </figure>
               <div class="apanel__col">
                 <ul class="apanel__models">
@@ -2899,8 +2916,15 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             </div>
             <div class="apanel__body">
               <figure class="apanel__hero">
-                <img src="assets/img/marques/hero-amg-gt-c192.jpg" style="object-position:50% 60%" alt="A matte blue Mercedes-AMG GT parked on grass at a car show" width="1200" height="563" loading="lazy" decoding="async">
+                <img src="assets/img/marques/hero-amg-gt-c192.jpg" style="object-position:50% 60%" alt="A matte blue Mercedes-AMG GT parked on grass at a car show" width="1200" height="563" loading="lazy" decoding="async" hidden>
                 <figcaption class="apanel__cap">AMG GT &middot; C192</figcaption>
+                <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vivid-classics.html">GT 43</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">GT 55</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">GT 63</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">GT 63 Pro</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">GT 63 S E Performance</a></li>
+                </ul>
               </figure>
               <div class="apanel__col">
                 <ul class="apanel__models">
@@ -3055,8 +3079,15 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             </div>
             <div class="apanel__body">
               <figure class="apanel__hero">
-                <img src="assets/img/marques/hero-m4-competition-g82.jpg" style="object-position:55% 60%" alt="A white BMW M4 Competition parked outside a dealership" width="1200" height="624" loading="lazy" decoding="async">
+                <img src="assets/img/marques/hero-m4-competition-g82.jpg" style="object-position:55% 60%" alt="A white BMW M4 Competition parked outside a dealership" width="1200" height="624" loading="lazy" decoding="async" hidden>
                 <figcaption class="apanel__cap">M4 Competition &middot; G82</figcaption>
+                <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vivid-classics.html">M4</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">M4 Competition</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">M4 Competition xDrive</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">M4 CS</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">M4 CSL</a></li>
+                </ul>
               </figure>
               <div class="apanel__col">
                 <ul class="apanel__models">
@@ -3211,8 +3242,13 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             </div>
             <div class="apanel__body">
               <figure class="apanel__hero">
-                <img src="assets/img/marques/hero-rs6-avant-c8.jpg" style="object-position:45% 60%" alt="A grey Audi RS 6 Avant at the roadside" width="1200" height="631" loading="lazy" decoding="async">
+                <img src="assets/img/marques/hero-rs6-avant-c8.jpg" style="object-position:45% 60%" alt="A grey Audi RS 6 Avant at the roadside" width="1200" height="631" loading="lazy" decoding="async" hidden>
                 <figcaption class="apanel__cap">RS 6 Avant &middot; C8</figcaption>
+                <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vivid-classics.html">RS 6 Avant</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">RS 6 Avant Performance</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">RS 6 Avant GT</a></li>
+                </ul>
               </figure>
               <div class="apanel__col">
                 <ul class="apanel__models">
@@ -3367,8 +3403,15 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             </div>
             <div class="apanel__body">
               <figure class="apanel__hero">
-                <img src="assets/img/marques/hero-atlas.jpg" style="object-position:50% 55%" alt="A blue Volkswagen Atlas parked by a lake" width="631" height="382" loading="lazy" decoding="async">
+                <img src="assets/img/marques/hero-atlas.jpg" style="object-position:50% 55%" alt="A blue Volkswagen Atlas parked by a lake" width="631" height="382" loading="lazy" decoding="async" hidden>
                 <figcaption class="apanel__cap">Atlas &middot; CA1</figcaption>
+                <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vivid-classics.html">SE</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">SE with Technology</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">SEL</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">SEL Premium</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">SEL Premium R-Line</a></li>
+                </ul>
               </figure>
               <div class="apanel__col">
                 <ul class="apanel__models">
@@ -3536,8 +3579,15 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             </div>
             <div class="apanel__body">
               <figure class="apanel__hero">
-                <img src="assets/img/exotic/ferrari-sf90.jpg" style="object-position:50% 55%" alt="A red Ferrari SF90 Stradale on a racetrack" width="1200" height="900" loading="lazy" decoding="async">
+                <img src="assets/img/exotic/ferrari-sf90.jpg" style="object-position:50% 55%" alt="A red Ferrari SF90 Stradale on a racetrack" width="1200" height="900" loading="lazy" decoding="async" hidden>
                 <figcaption class="apanel__cap">SF90 Stradale</figcaption>
+                <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vivid-classics.html">Stradale</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Spider</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Assetto Fiorano</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">XX Stradale</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">XX Spider</a></li>
+                </ul>
               </figure>
               <div class="apanel__col">
                 <ul class="apanel__models">
@@ -3692,8 +3742,13 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             </div>
             <div class="apanel__body">
               <figure class="apanel__hero">
-                <img src="assets/img/exotic/lamborghini-revuelto.jpg" style="object-position:50% 60%" alt="A black Lamborghini Revuelto parked against a slatted wall" width="1200" height="800" loading="lazy" decoding="async">
+                <img src="assets/img/exotic/lamborghini-revuelto.jpg" style="object-position:50% 60%" alt="A black Lamborghini Revuelto parked against a slatted wall" width="1200" height="800" loading="lazy" decoding="async" hidden>
                 <figcaption class="apanel__cap">Revuelto</figcaption>
+                <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vivid-classics.html">Revuelto</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Revuelto Roadster</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Opera Unica</a></li>
+                </ul>
               </figure>
               <div class="apanel__col">
                 <ul class="apanel__models">
@@ -3848,8 +3903,14 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             </div>
             <div class="apanel__body">
               <figure class="apanel__hero">
-                <img src="assets/img/exotic/mclaren-720s-spider.jpg" style="object-position:50% 55%" alt="A blue McLaren 720S Spider on a coastal road" width="1200" height="801" loading="lazy" decoding="async">
+                <img src="assets/img/exotic/mclaren-720s-spider.jpg" style="object-position:50% 55%" alt="A blue McLaren 720S Spider on a coastal road" width="1200" height="801" loading="lazy" decoding="async" hidden>
                 <figcaption class="apanel__cap">720S Spider</figcaption>
+                <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vivid-classics.html">720S</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">720S Spider</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Track Pack</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Le Mans</a></li>
+                </ul>
               </figure>
               <div class="apanel__col">
                 <ul class="apanel__models">
@@ -4004,8 +4065,14 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             </div>
             <div class="apanel__body">
               <figure class="apanel__hero">
-                <img src="assets/img/exotic/aston-martin-victor.jpg" style="object-position:50% 60%" alt="A dark green Aston Martin Victor on a gravel drive" width="1200" height="674" loading="lazy" decoding="async">
+                <img src="assets/img/exotic/aston-martin-victor.jpg" style="object-position:50% 60%" alt="A dark green Aston Martin Victor on a gravel drive" width="1200" height="674" loading="lazy" decoding="async" hidden>
                 <figcaption class="apanel__cap">Victor</figcaption>
+                <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vivid-classics.html">Victor</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Vulcan</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">One-77</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Valkyrie AMR Pro</a></li>
+                </ul>
               </figure>
               <div class="apanel__col">
                 <ul class="apanel__models">
@@ -4160,8 +4227,14 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             </div>
             <div class="apanel__body">
               <figure class="apanel__hero">
-                <img src="assets/img/exotic/bugatti-veyron.jpg" style="object-position:50% 55%" alt="A blue and black Bugatti Veyron on a tree-lined road" width="1200" height="889" loading="lazy" decoding="async">
+                <img src="assets/img/exotic/bugatti-veyron.jpg" style="object-position:50% 55%" alt="A blue and black Bugatti Veyron on a tree-lined road" width="1200" height="889" loading="lazy" decoding="async" hidden>
                 <figcaption class="apanel__cap">Veyron 16.4</figcaption>
+                <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vivid-classics.html">16.4</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Grand Sport</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Super Sport</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Grand Sport Vitesse</a></li>
+                </ul>
               </figure>
               <div class="apanel__col">
                 <ul class="apanel__models">
@@ -4328,8 +4401,15 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             </div>
             <div class="apanel__body">
               <figure class="apanel__hero">
-                <img src="assets/img/jdm/toyota-camry.jpg" style="object-position:55% 60%" alt="A white Toyota Camry TRD on a racetrack" width="1200" height="675" loading="lazy" decoding="async">
+                <img src="assets/img/jdm/toyota-camry.jpg" style="object-position:55% 60%" alt="A white Toyota Camry TRD on a racetrack" width="1200" height="675" loading="lazy" decoding="async" hidden>
                 <figcaption class="apanel__cap">Camry</figcaption>
+                <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vivid-classics.html">LE</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">SE</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">XLE</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">XSE</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">TRD</a></li>
+                </ul>
               </figure>
               <div class="apanel__col">
                 <ul class="apanel__models">
@@ -4484,8 +4564,15 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             </div>
             <div class="apanel__body">
               <figure class="apanel__hero">
-                <img src="assets/img/jdm/honda-civic-si.jpg" style="object-position:50% 60%" alt="A white Honda Civic Si on a tree-lined road" width="767" height="352" loading="lazy" decoding="async">
+                <img src="assets/img/jdm/honda-civic-si.jpg" style="object-position:50% 60%" alt="A white Honda Civic Si on a tree-lined road" width="767" height="352" loading="lazy" decoding="async" hidden>
                 <figcaption class="apanel__cap">Civic Si</figcaption>
+                <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vivid-classics.html">Sport</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Sport Touring</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Touring</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Si</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Type R</a></li>
+                </ul>
               </figure>
               <div class="apanel__col">
                 <ul class="apanel__models">
@@ -4640,8 +4727,15 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             </div>
             <div class="apanel__body">
               <figure class="apanel__hero">
-                <img src="assets/img/jdm/nissan-altima.jpg" style="object-position:50% 55%" alt="A white Nissan Altima parked on a suburban street" width="1000" height="550" loading="lazy" decoding="async">
+                <img src="assets/img/jdm/nissan-altima.jpg" style="object-position:50% 55%" alt="A white Nissan Altima parked on a suburban street" width="1000" height="550" loading="lazy" decoding="async" hidden>
                 <figcaption class="apanel__cap">Altima</figcaption>
+                <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vivid-classics.html">S</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">SV</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">SR</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">SL</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Platinum</a></li>
+                </ul>
               </figure>
               <div class="apanel__col">
                 <ul class="apanel__models">
@@ -4796,8 +4890,15 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             </div>
             <div class="apanel__body">
               <figure class="apanel__hero">
-                <img src="assets/img/jdm/mazda6.jpg" style="object-position:50% 60%" alt="A red Mazda6 parked beside a brick building" width="1200" height="548" loading="lazy" decoding="async">
+                <img src="assets/img/jdm/mazda6.jpg" style="object-position:50% 60%" alt="A red Mazda6 parked beside a brick building" width="1200" height="548" loading="lazy" decoding="async" hidden>
                 <figcaption class="apanel__cap">Mazda6</figcaption>
+                <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vivid-classics.html">Sport</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Touring</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Grand Touring</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Grand Touring Reserve</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">Signature</a></li>
+                </ul>
               </figure>
               <div class="apanel__col">
                 <ul class="apanel__models">
@@ -4952,8 +5053,15 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             </div>
             <div class="apanel__body">
               <figure class="apanel__hero">
-                <img src="assets/img/jdm/lexus-ls500.jpg" style="object-position:50% 50%" alt="A silver Lexus LS 500 on a dark studio floor" width="468" height="351" loading="lazy" decoding="async">
+                <img src="assets/img/jdm/lexus-ls500.jpg" style="object-position:50% 50%" alt="A silver Lexus LS 500 on a dark studio floor" width="468" height="351" loading="lazy" decoding="async" hidden>
                 <figcaption class="apanel__cap">LS 500</figcaption>
+                <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vivid-classics.html">500</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">500 F Sport</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">500h</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">500 AWD</a></li>
+                  <li><a class="apanel__sub" href="vivid-classics.html">500 Ultra Luxury</a></li>
+                </ul>
               </figure>
               <div class="apanel__col">
                 <ul class="apanel__models">
