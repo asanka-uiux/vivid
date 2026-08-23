@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Vivid · JND Flatten · Before / After</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --heritage-red: #B31414;
+    --avorio: #F4F1EA;
+    --circuit-black: #0a0a0a;
+    --paddock-grey: #3D3C3A;
+    --gt-silver: #A3ACB3;
+    --champ-white: #FFFFFF;
+    --line: #E2DCC8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--circuit-black); background: var(--avorio); line-height: 1.5;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 56px 48px 80px; }
+  header { margin-bottom: 48px; padding-bottom: 32px; border-bottom: 2px solid var(--heritage-red); }
+  .eyebrow {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--heritage-red); font-weight: 700; margin-bottom: 8px;
+  }
+  h1 {
+    font-weight: 900; font-size: 44px;
+    margin: 0 0 12px 0; letter-spacing: -0.025em;
+  }
+  .lede {
+    font-size: 16px; color: var(--paddock-grey); max-width: 740px; margin: 0;
+  }
+  .pair {
+    background: var(--champ-white);
+    border: 1px solid var(--line);
+    margin-bottom: 28px;
+    padding: 36px 48px;
+  }
+  .pair h2 {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--paddock-grey); font-weight: 700; margin: 0 0 24px 0;
+  }
+  .row {
+    background: var(--avorio);
+    padding: 56px 32px;
+    text-align: center;
+    border: 1px solid var(--line);
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .row.dark { background: var(--circuit-black); }
+  .row.utility { background: var(--champ-white); }
+  .row-label {
+    position: absolute; top: 12px; left: 16px;
+    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--paddock-grey); font-weight: 700;
+  }
+  .row.dark .row-label { color: var(--gt-silver); }
+  .row img, .row svg {
+    max-width: 80%; height: auto; vertical-align: middle;
+  }
+  .row.size-test { padding: 32px; display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; }
+  .row.size-test .sz {
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+  }
+  .row.size-test .sz svg { display: block; }
+  .row.size-test .sz-label {
+    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--paddock-grey); font-weight: 700;
+  }
+  .notes {
+    font-size: 13px; line-height: 1.6; color: var(--paddock-grey);
+    margin-top: 16px;
+  }
+  .notes strong {
+    display: block; font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--heritage-red);
+    font-weight: 700; margin-bottom: 6px;
+  }
+  .next-steps {
+    background: var(--circuit-black);
+    color: var(--avorio);
+    padding: 36px 48px; margin-top: 56px;
+    border-left: 4px solid var(--heritage-red);
+  }
+  .next-steps h3 {
+    font-weight: 800; font-size: 16px; letter-spacing: 0.04em;
+    margin: 0 0 12px 0; text-transform: uppercase;
+  }
+  .next-steps ol {
+    margin: 0; padding-left: 20px; color: var(--gt-silver);
+    font-size: 14px; line-height: 1.7;
+  }
+  .next-steps ol li strong { color: var(--avorio); }
+  .footer {
+    margin-top: 56px; padding-top: 32px;
+    border-top: 1px solid var(--line);
+    font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--paddock-grey);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="eyebrow">Vivid · Brand Architecture · JND Logo Flatten · v1.0</div>
+  <h1>Legacy / Flat. Same Silhouette.</h1>
+  <p class="lede">A true JND flatten built from the original Illustrator source. Same letterform shapes, same italic stance, same proportions — chrome gradient, bevel, drop shadow, and outer stroke removed. One ink. The inner outline detail is preserved as a subtle reference to the original construction.</p>
+</header>
+
+<div class="pair">
+  <h2>Legacy — Chrome Wordmark</h2>
+  <div class="row">
+    <span class="row-label">Original · 2007-era chrome</span>
+    <img src="Vivid-Racing-Logo.png" alt="Original chrome wordmark" style="max-width: 70%; max-height: 200px;">
+  </div>
+  <div class="notes">
+    <strong>What it says today</strong>
+    <p>Mid-2000s import-tuner aesthetic. Reads as cluttered next to the premium brand reference set the playbook commits to (Porsche, Patek, Loro Piana, Veilance). Chrome gradient, bevel, drop shadow, and outer silver stroke all date the mark visually.</p>
+  </div>
+</div>
+
+<div class="pair">
+  <h2>Flat — JND Master · Heritage Red on Light</h2>
+  <div class="row">
+    <span class="row-label">Master · Heritage Red #B31414 · Avorio Creme bg</span>
+    <img src="flat-system/vivid-master-red.svg" alt="Flat red master" style="max-width: 70%; max-height: 200px;">
+  </div>
+  <div class="notes">
+    <strong>What it says now</strong>
+    <p>Same wordmark. Same italic stance. Same letterform DNA. Stripped of all the period-specific decoration. Reads as restrained, contemporary, and consistent with every premium reference the playbook names. Direct buyers still recognize it — the silhouette is unchanged. Inner outline detail preserved for character continuity.</p>
+  </div>
+</div>
+
+<div class="pair">
+  <h2>Flat — JND Master · Avorio Creme on Dark</h2>
+  <div class="row dark">
+    <span class="row-label">Master · Avorio Creme #F4F1EA · Circuit Black bg</span>
+    <img src="flat-system/vivid-master-creme.svg" alt="Flat creme master on dark" style="max-width: 70%; max-height: 200px;">
+  </div>
+  <div class="notes">
+    <strong>Dark surface variant</strong>
+    <p>Same construction inverted for dark surfaces — apparel embroidery, paddock signage, web header on dark hero sections, social avatars on dark backgrounds. The inner outline detail flips to dark, maintaining the structural reference.</p>
+  </div>
+</div>
+
+<div class="pair">
+  <h2>Flat — JND Master · Single-Color Utility</h2>
+  <div class="row utility">
+    <span class="row-label">Single-ink · Black on white · Print, embroidery, foil</span>
+    <img src="flat-system/vivid-master-black.svg" alt="Flat black utility" style="max-width: 70%; max-height: 200px;">
+  </div>
+  <div class="notes">
+    <strong>Utility variant</strong>
+    <p>For single-ink applications: black on letterhead, foil stamps, single-color embroidery, fax-grade documents, anything that can't render two colors. Same silhouette, no inner detail.</p>
+  </div>
+</div>
+
+<div class="pair">
+  <h2>Size Test — Scales From Favicon to Hero</h2>
+  <div class="row size-test">
+    <div class="sz">
+      <img src="flat-system/vivid-master-red.svg" style="height: 16px;">
+      <div class="sz-label">16px · favicon</div>
+    </div>
+    <div class="sz">
+      <img src="flat-system/vivid-master-red.svg" style="height: 32px;">
+      <div class="sz-label">32px · UI mark</div>
+    </div>
+    <div class="sz">
+      <img src="flat-system/vivid-master-red.svg" style="height: 64px;">
+      <div class="sz-label">64px · header</div>
+    </div>
+    <div class="sz">
+      <img src="flat-system/vivid-master-red.svg" style="height: 128px;">
+      <div class="sz-label">128px · hero</div>
+    </div>
+  </div>
+  <div class="notes">
+    <strong>Legibility check</strong>
+    <p>Holds shape at every size. The inner outline detail simplifies visually at favicon size, but the silhouette remains the same recognizable mark.</p>
+  </div>
+</div>
+
+<div class="next-steps">
+  <h3>What still needs a designer</h3>
+  <ol>
+    <li><strong>Sub-brand variants.</strong> The letterforms in this wordmark are custom — not from any font you can buy. To produce <em>vividtrucks</em>, <em>vividclassics</em>, and <em>vividx</em> as authentic sub-brands, a designer needs to open the source <code>.ai</code> file and redraw the new suffix letters using the existing letterform DNA. This is a 1-2 hour job per variant. The source files are saved at <code>/logos/flat-system/vivid-source-outlines.svg</code> and the original <code>vivid logo full color.ai</code> on Drive.</li>
+    <li><strong>The inner outline detail.</strong> The current flatten preserves the inner outline that appeared as the chrome highlight. A designer should decide: keep it (more recognizable, two-color treatment) or remove it for a purely single-ink master. Both options are valid — depends on the application surface.</li>
+    <li><strong>Logo system documentation.</strong> Once the four sub-brand variants exist, the playbook&apos;s Brand Architecture section should include a Logo System slide with master + four sub-brands + usage rules (light/dark, minimum size, clear space, what not to do). I&apos;ll build that slide once the variants are in vector.</li>
+  </ol>
+</div>
+
+<div class="footer">
+  Vivid · Logo System v1.0 · JND Flatten Complete · Sub-brand Variants Pending Designer · 2026
+</div>
+
+</div>
+</body>
+</html>

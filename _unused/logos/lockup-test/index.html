@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>VR Lockup Font Test v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Bowlby+One&family=Faster+One&family=Black+Ops+One&family=Bungee&family=Anton&family=Saira+Stencil+One&family=Bowlby+One+SC&family=Squada+One&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: -apple-system, sans-serif;
+    background: #F4F1EA;
+    color: #0a0a0a;
+    margin: 0; padding: 40px 60px;
+  }
+  h2 {
+    font-family: -apple-system, sans-serif;
+    font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #B31414; font-weight: 700;
+    margin: 32px 0 16px;
+  }
+  .ref {
+    background: white;
+    padding: 24px 32px;
+    margin-bottom: 24px;
+    border: 1px solid #E2DCC8;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .ref img { height: 56px; }
+
+  .lockup {
+    background: white;
+    padding: 24px 32px;
+    margin-bottom: 8px;
+    border: 1px solid #E2DCC8;
+    display: flex; align-items: center; gap: 20px;
+  }
+  .lockup img { height: 56px; }
+  .lockup .qualifier {
+    font-size: 56px;
+    color: #B31414;
+    line-height: 1;
+    display: inline-block;
+    /* Two-layer outline via text-shadow: 8-direction creme stroke */
+    text-shadow:
+      -2px -2px 0 #F4F1EA,  0 -2px 0 #F4F1EA,  2px -2px 0 #F4F1EA,
+      -2px  0   0 #F4F1EA,                     2px  0   0 #F4F1EA,
+      -2px  2px 0 #F4F1EA,  0  2px 0 #F4F1EA,  2px  2px 0 #F4F1EA,
+      -3px -3px 0 #F4F1EA, -3px 3px 0 #F4F1EA, 3px -3px 0 #F4F1EA, 3px 3px 0 #F4F1EA;
+  }
+  /* Font variants */
+  .f-russo { font-family: 'Russo One', sans-serif; transform: skewX(-10deg); }
+  .f-bowlby { font-family: 'Bowlby One', sans-serif; transform: skewX(-10deg); }
+  .f-bowlbysc { font-family: 'Bowlby One SC', sans-serif; transform: skewX(-10deg); }
+  .f-squada { font-family: 'Squada One', sans-serif; transform: skewX(-10deg); }
+  .f-faster { font-family: 'Faster One', sans-serif; }
+  .f-bops { font-family: 'Black Ops One', sans-serif; transform: skewX(-10deg); }
+  .f-bungee { font-family: 'Bungee', sans-serif; transform: skewX(-10deg); }
+  .f-anton { font-family: 'Anton', sans-serif; transform: skewX(-10deg); font-weight: 400; }
+  .font-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: #999; width: 100px;
+  }
+</style>
+</head>
+<body>
+
+<h2>Reference: vividracing master wordmark</h2>
+<div class="ref">
+  <img src="../flat-system/vivid-master-red.svg" alt="vividracing">
+</div>
+
+<h2>Candidates: VR mark + 'trucks' qualifier (red on light)</h2>
+
+<div class="lockup"><span class="font-label">Russo One</span><img src="../flat-system/vivid-vr-red.svg"><span class="qualifier f-russo">trucks</span></div>
+<div class="lockup"><span class="font-label">Bowlby One</span><img src="../flat-system/vivid-vr-red.svg"><span class="qualifier f-bowlby">trucks</span></div>
+<div class="lockup"><span class="font-label">Bowlby SC</span><img src="../flat-system/vivid-vr-red.svg"><span class="qualifier f-bowlbysc">trucks</span></div>
+<div class="lockup"><span class="font-label">Squada One</span><img src="../flat-system/vivid-vr-red.svg"><span class="qualifier f-squada">trucks</span></div>
+<div class="lockup"><span class="font-label">Faster One</span><img src="../flat-system/vivid-vr-red.svg"><span class="qualifier f-faster">trucks</span></div>
+<div class="lockup"><span class="font-label">Black Ops</span><img src="../flat-system/vivid-vr-red.svg"><span class="qualifier f-bops">trucks</span></div>
+<div class="lockup"><span class="font-label">Bungee</span><img src="../flat-system/vivid-vr-red.svg"><span class="qualifier f-bungee">trucks</span></div>
+<div class="lockup"><span class="font-label">Anton</span><img src="../flat-system/vivid-vr-red.svg"><span class="qualifier f-anton">trucks</span></div>
+
+</body>
+</html>

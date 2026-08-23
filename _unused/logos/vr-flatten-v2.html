@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Vivid · VR Mark Flatten · v2 (Vector from Outline EPS)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --heritage-red: #B31414;
+    --avorio: #F4F1EA;
+    --circuit-black: #0a0a0a;
+    --paddock-grey: #3D3C3A;
+    --gt-silver: #A3ACB3;
+    --champ-white: #FFFFFF;
+    --line: #E2DCC8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--circuit-black); background: var(--avorio); line-height: 1.5;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 56px 48px 80px; }
+  header { margin-bottom: 48px; padding-bottom: 32px; border-bottom: 2px solid var(--heritage-red); }
+  .eyebrow {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--heritage-red); font-weight: 700; margin-bottom: 8px;
+  }
+  h1 { font-weight: 900; font-size: 44px; margin: 0 0 12px 0; letter-spacing: -0.025em; }
+  .lede { font-size: 16px; color: var(--paddock-grey); max-width: 740px; margin: 0; }
+  .pair {
+    background: var(--champ-white);
+    border: 1px solid var(--line);
+    margin-bottom: 28px;
+    padding: 36px 48px;
+  }
+  .pair h2 {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--paddock-grey); font-weight: 700; margin: 0 0 24px 0;
+  }
+  .row {
+    background: var(--avorio);
+    padding: 56px 32px;
+    text-align: center;
+    border: 1px solid var(--line);
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .row.dark { background: var(--circuit-black); }
+  .row-label {
+    position: absolute; top: 12px; left: 16px;
+    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--paddock-grey); font-weight: 700;
+  }
+  .row.dark .row-label { color: var(--gt-silver); }
+  .row img { max-width: 60%; height: auto; }
+  .system { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .system .item { background: var(--avorio); padding: 32px; border: 1px solid var(--line); text-align: center; }
+  .system .item.dark { background: var(--circuit-black); }
+  .system .item img { max-width: 70%; }
+  .system .label {
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--paddock-grey); font-weight: 700; margin-top: 16px;
+  }
+  .system .item.dark .label { color: var(--gt-silver); }
+  .size-test { display: flex; align-items: center; justify-content: center; gap: 56px; flex-wrap: wrap; padding: 40px; }
+  .size-test .sz { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .size-test .sz-label {
+    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--paddock-grey); font-weight: 700;
+  }
+  .compare-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0; border: 1px solid var(--line);
+  }
+  .compare-grid .cell {
+    padding: 56px 32px; text-align: center; position: relative;
+    background: var(--avorio);
+  }
+  .compare-grid .cell:nth-child(even) { background: var(--champ-white); }
+  .compare-grid .cell img { max-width: 75%; height: auto; }
+  .compare-grid .label {
+    position: absolute; top: 12px; left: 16px;
+    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--paddock-grey); font-weight: 700;
+  }
+  .notes { font-size: 13px; line-height: 1.6; color: var(--paddock-grey); margin-top: 16px; }
+  .notes strong {
+    display: block; font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--heritage-red);
+    font-weight: 700; margin-bottom: 6px;
+  }
+  .footer {
+    margin-top: 56px; padding-top: 32px;
+    border-top: 1px solid var(--line);
+    font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--paddock-grey);
+    text-align: center;
+  }
+  .change-log {
+    background: var(--circuit-black); color: var(--avorio);
+    padding: 36px 48px; margin-top: 32px;
+    border-left: 4px solid var(--heritage-red);
+  }
+  .change-log h3 {
+    font-weight: 800; font-size: 14px; letter-spacing: 0.04em;
+    margin: 0 0 12px 0; text-transform: uppercase;
+  }
+  .change-log ul { margin: 0; padding-left: 20px; color: var(--gt-silver); font-size: 13px; line-height: 1.7; }
+  .change-log ul li strong { color: var(--avorio); }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="eyebrow">Vivid · VR Mark · JND Flatten v2 · Vector Reconstruction</div>
+  <h1>The VR Mark. Same Silhouette. Properly Flattened.</h1>
+  <p class="lede">v2 fixes both pieces of feedback. Source moved from <code>VR_FullColor_logo.png</code> to <code>VRLogo_Outline.eps</code> — the actual vector source from Drive. Result: clean Bézier paths instead of raster artifacts. And the sub-brand pages now use the VR mark by itself, not a VR mark with typeset letters glued next to it.</p>
+</header>
+
+<div class="change-log">
+  <h3>What changed since v1</h3>
+  <ul>
+    <li><strong>Vector, not raster.</strong> v1 was traced from the PNG using morphological operations on pixels — left rough edges. v2 is the actual Illustrator outline from <code>VRLogo_Outline.eps</code>, converted EPS → PDF → silhouette mask → vectorized to a single clean Bézier path.</li>
+    <li><strong>No patched letters.</strong> v1 glued "TRUCKS"/"MUSCLE"/"POWERSPORTS" in Inter Black next to the VR mark — different letterform DNA, didn't read as one mark. v2 uses the VR mark by itself. Sub-brand identification lives in the family switcher tab and the page nav, not in the wordmark.</li>
+    <li><strong>Two-layer construction matches the master.</strong> Same approach as <code>vividracing</code> — solid Heritage Red silhouette with Avorio Creme inner highlight detail preserved from the original chrome construction.</li>
+  </ul>
+</div>
+
+<div class="pair" style="margin-top:32px;">
+  <h2>Side-by-side · Master Wordmark + VR Monogram</h2>
+  <div class="compare-grid">
+    <div class="cell">
+      <span class="label">Master · vividracing · Heritage Red</span>
+      <img src="flat-system/vivid-master-red.svg" alt="">
+    </div>
+    <div class="cell">
+      <span class="label">Monogram · VR · Heritage Red</span>
+      <img src="flat-system/vivid-vr-red.svg" alt="">
+    </div>
+  </div>
+  <div class="notes">
+    <strong>Family resemblance</strong>
+    <p>Same construction language: solid Heritage Red letterform with Avorio Creme inner-highlight reference to the original chrome detail. Same italic stance, same flatten discipline.</p>
+  </div>
+</div>
+
+<div class="pair">
+  <h2>The System · Red on Light · Creme on Dark · Single-Ink Utility</h2>
+  <div class="system">
+    <div class="item">
+      <img src="flat-system/vivid-vr-red.svg">
+      <div class="label">VR · Heritage Red on Avorio</div>
+    </div>
+    <div class="item dark">
+      <img src="flat-system/vivid-vr-creme.svg">
+      <div class="label">VR · Avorio on Circuit Black</div>
+    </div>
+    <div class="item">
+      <img src="flat-system/vivid-vr-black.svg">
+      <div class="label">VR · Single-Ink Black (Utility)</div>
+    </div>
+    <div class="item">
+      <img src="flat-system/vivid-vr-red-solid.svg">
+      <div class="label">VR · Solid Red (Favicon · Small)</div>
+    </div>
+  </div>
+</div>
+
+<div class="pair">
+  <h2>Size Test · From Favicon to Hero</h2>
+  <div class="row size-test">
+    <div class="sz"><img src="flat-system/vivid-vr-red-solid.svg" style="height:16px;"><div class="sz-label">16px</div></div>
+    <div class="sz"><img src="flat-system/vivid-vr-red.svg" style="height:32px;"><div class="sz-label">32px</div></div>
+    <div class="sz"><img src="flat-system/vivid-vr-red.svg" style="height:64px;"><div class="sz-label">64px</div></div>
+    <div class="sz"><img src="flat-system/vivid-vr-red.svg" style="height:128px;"><div class="sz-label">128px</div></div>
+    <div class="sz"><img src="flat-system/vivid-vr-red.svg" style="height:200px;"><div class="sz-label">200px</div></div>
+  </div>
+  <div class="notes">
+    <strong>Use the solid red variant under 24px</strong>
+    <p>Inner-detail creme stroke compresses to almost nothing at favicon size. The solid-red variant — without the inner highlight — reads cleaner at very small sizes. Above 32px, the two-layer variant is the default.</p>
+  </div>
+</div>
+
+<div class="pair">
+  <h2>Endorsed-House Application · Family Switcher + VR Monogram per Sub-Brand</h2>
+  <div style="background:var(--circuit-black); padding:24px; margin-bottom:16px;">
+    <div style="display:flex; gap:24px; align-items:center; justify-content:center;">
+      <div style="text-align:center; padding:8px 16px; border-radius:4px; background:rgba(179,20,20,0.15); border-bottom:2px solid var(--heritage-red);">
+        <div style="color:var(--avorio); font-size:10px; letter-spacing:0.18em; font-weight:700;">● VIVID RACING</div>
+      </div>
+      <div style="color:var(--gt-silver); font-size:10px; letter-spacing:0.18em; font-weight:700;">○ VR TRUCKS</div>
+      <div style="color:var(--gt-silver); font-size:10px; letter-spacing:0.18em; font-weight:700;">○ VR MUSCLE</div>
+      <div style="color:var(--gt-silver); font-size:10px; letter-spacing:0.18em; font-weight:700;">○ VR POWERSPORTS</div>
+    </div>
+  </div>
+  <div class="compare-grid">
+    <div class="cell"><span class="label">Racing master page</span><img src="flat-system/vivid-master-red.svg" style="max-width:90%;"></div>
+    <div class="cell"><span class="label">VR Trucks page</span><img src="flat-system/vivid-vr-red.svg" style="max-width:50%;"></div>
+    <div class="cell"><span class="label">VR Muscle page</span><img src="flat-system/vivid-vr-red.svg" style="max-width:50%;"></div>
+    <div class="cell"><span class="label">VR Powersports page</span><img src="flat-system/vivid-vr-red.svg" style="max-width:50%;"></div>
+  </div>
+  <div class="notes">
+    <strong>Why the VR mark stands alone on each sub-brand</strong>
+    <p>Same Gap Inc / Marriott pattern: the parent uses the full wordmark, each child uses a shared monogram. Sub-brand identification is communicated by the active state in the family switcher (top), the page's category nav, and the saved-vehicle context — not by gluing typeset letters onto the wordmark. The previous lockups (VR + "TRUCKS" in Inter Black) created two-letterform-DNA conflicts; this version doesn't.</p>
+  </div>
+</div>
+
+<div class="footer">
+  Vivid · VR Monogram · JND Flatten v2 · Vector Reconstruction Complete · 2026
+</div>
+
+</div>
+</body>
+</html>

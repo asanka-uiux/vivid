@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Vivid · Sub-Brand Lockups · v3 (VR Mark + Qualifier)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --heritage-red: #B31414;
+    --avorio: #F4F1EA;
+    --circuit-black: #0a0a0a;
+    --paddock-grey: #3D3C3A;
+    --gt-silver: #A3ACB3;
+    --champ-white: #FFFFFF;
+    --line: #E2DCC8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--circuit-black); background: var(--avorio); line-height: 1.5;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 56px 48px 80px; }
+  header { margin-bottom: 48px; padding-bottom: 32px; border-bottom: 2px solid var(--heritage-red); }
+  .eyebrow {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--heritage-red); font-weight: 700; margin-bottom: 8px;
+  }
+  h1 { font-weight: 900; font-size: 44px; margin: 0 0 12px 0; letter-spacing: -0.025em; }
+  .lede { font-size: 16px; color: var(--paddock-grey); max-width: 740px; margin: 0; }
+  .pair {
+    background: var(--champ-white);
+    border: 1px solid var(--line);
+    margin-bottom: 28px;
+    padding: 36px 48px;
+  }
+  .pair h2 {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--paddock-grey); font-weight: 700; margin: 0 0 24px 0;
+  }
+  .lockup-row {
+    background: var(--avorio);
+    padding: 40px 32px;
+    text-align: center;
+    border: 1px solid var(--line);
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .lockup-row.dark { background: var(--circuit-black); }
+  .lockup-row .label {
+    position: absolute; top: 12px; left: 16px;
+    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--paddock-grey); font-weight: 700;
+  }
+  .lockup-row.dark .label { color: var(--gt-silver); }
+  .lockup-row img { max-width: 80%; height: 80px; }
+  .lockup-row.master img { height: 100px; }
+  .notes {
+    font-size: 13px; line-height: 1.6; color: var(--paddock-grey);
+    margin-top: 20px;
+  }
+  .notes strong {
+    display: block; font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--heritage-red);
+    font-weight: 700; margin-bottom: 6px;
+  }
+  .footer {
+    margin-top: 56px; padding-top: 32px;
+    border-top: 1px solid var(--line);
+    font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--paddock-grey);
+    text-align: center;
+  }
+  .pair-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .pair-grid .lockup-row { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="eyebrow">Vivid · Sub-Brand Lockups · v3</div>
+  <h1>VR Mark + Racing-Style Qualifier.</h1>
+  <p class="lede">Each sub-brand pairs the JND-flat VR monogram with a lowercase italic qualifier ("trucks", "muscle", "powersports") rendered in a heavy display italic with the same two-layer treatment as the vividracing wordmark — red letterforms with creme outline. Same family DNA, distinct sub-brand identity.</p>
+</header>
+
+<div class="pair">
+  <h2>Reference — Vividracing Master Wordmark</h2>
+  <div class="lockup-row master">
+    <span class="label">vividracing · Heritage Red on Avorio</span>
+    <img src="flat-system/vivid-master-red.svg" alt="">
+  </div>
+  <div class="notes">
+    <strong>The treatment we're matching</strong>
+    <p>Custom italic letterforms, heavy weight, red fill, creme outline. Lowercase. This is the visual language each sub-brand qualifier needs to read like a sibling of.</p>
+  </div>
+</div>
+
+<div class="pair">
+  <h2>The Three Sub-Brand Lockups — Red on Light (Page Headers)</h2>
+  <div class="lockup-row">
+    <span class="label">VR · trucks</span>
+    <img src="flat-system/vr-trucks-red.png">
+  </div>
+  <div class="lockup-row">
+    <span class="label">VR · muscle</span>
+    <img src="flat-system/vr-muscle-red.png">
+  </div>
+  <div class="lockup-row">
+    <span class="label">VR · powersports</span>
+    <img src="flat-system/vr-powersports-red.png">
+  </div>
+  <div class="notes">
+    <strong>Construction</strong>
+    <p>VR mark stays as the JND-flat vector reconstruction (solid Heritage Red silhouette + creme inner-highlight). Qualifier text is heavy italic, lowercase, with text-as-paths baked in for crisp rendering at every size. Two-layer treatment matches the master: red fill, creme outline.</p>
+  </div>
+</div>
+
+<div class="pair">
+  <h2>Dark-Surface Variants — Creme on Black (Footers, Dark Sections)</h2>
+  <div class="lockup-row dark">
+    <span class="label">VR · trucks · dark</span>
+    <img src="flat-system/vr-trucks-creme.png">
+  </div>
+  <div class="lockup-row dark">
+    <span class="label">VR · muscle · dark</span>
+    <img src="flat-system/vr-muscle-creme.png">
+  </div>
+  <div class="lockup-row dark">
+    <span class="label">VR · powersports · dark</span>
+    <img src="flat-system/vr-powersports-creme.png">
+  </div>
+  <div class="notes">
+    <strong>Color inversion preserves construction</strong>
+    <p>Creme fill, red outline. Used in dark sections of the page — footer, dark heroes, apparel embroidery on dark fabric, social avatars on dark backgrounds.</p>
+  </div>
+</div>
+
+<div class="pair">
+  <h2>The Full Family · Master + Three Sub-Brands</h2>
+  <div class="pair-grid">
+    <div class="lockup-row master" style="grid-column: 1 / -1;">
+      <span class="label">vividracing · master</span>
+      <img src="flat-system/vivid-master-red.svg" style="height:80px;">
+    </div>
+    <div class="lockup-row">
+      <span class="label">VR · trucks</span>
+      <img src="flat-system/vr-trucks-red.png" style="height:64px;">
+    </div>
+    <div class="lockup-row">
+      <span class="label">VR · muscle</span>
+      <img src="flat-system/vr-muscle-red.png" style="height:64px;">
+    </div>
+    <div class="lockup-row" style="grid-column: 1 / -1;">
+      <span class="label">VR · powersports</span>
+      <img src="flat-system/vr-powersports-red.png" style="height:64px;">
+    </div>
+  </div>
+  <div class="notes">
+    <strong>Reads as a family</strong>
+    <p>The master keeps the full vividracing wordmark. Each sub-brand uses VR mark + qualifier where the qualifier text style mirrors the "racing" portion of the master — same italic stance, same red-on-creme treatment. The family relationship reads instantly.</p>
+  </div>
+</div>
+
+<div class="footer">
+  Vivid · Lockup System v3 · VR Mark + Qualifier · 2026
+</div>
+
+</div>
+</body>
+</html>
