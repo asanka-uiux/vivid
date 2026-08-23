@@ -178,7 +178,7 @@ button{font:inherit;color:inherit}
   font:600 12px/17px var(--font-ui);letter-spacing:1.2px;
   text-transform:uppercase;color:var(--action-primary);white-space:nowrap}
 .subnav__spacer{flex:1 1 auto}
-.subnav__divider{color:var(--border-default)}
+.subnav__divider{color:var(--text-muted)}
 .subnav__fin{display:flex;align-items:center;gap:12px;min-height:24px;white-space:nowrap;
   font:700 12px/17px var(--font-ui);letter-spacing:1.2px;text-transform:uppercase}
 .subnav__fin em{font-style:normal;color:var(--action-primary)}
@@ -338,14 +338,14 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 /* the Figma "Left Fade Overlay" layer exports empty — reproduced as a gradient */
 .hero__stage::before{content:"";position:absolute;inset:0;z-index:-1;
   background:linear-gradient(90deg,rgba(0,0,0,.90) 0%,rgba(0,0,0,.78) 32%,
-             rgba(0,0,0,.42) 56%,rgba(0,0,0,.10) 78%,rgba(0,0,0,.02) 100%)}
+             rgba(0,0,0,.42) 56%,rgba(0,0,0,.25) 78%,rgba(0,0,0,.25) 100%)}
 
 .hero__inner{display:flex;align-items:center;justify-content:space-between;
   width:100%;max-width:var(--shell);margin-inline:auto;padding:60px 32px}
 .hero__copy{flex:0 1 auto;min-width:0}
 
 .eyebrow{display:inline-flex;align-items:center;gap:10px;padding:7px 13px;
-  background:rgba(179,20,20,.2);border:1px solid var(--action-primary);
+  background:#9a2020;border:1px solid var(--action-primary);
   font:700 12px/14px var(--font-ui);letter-spacing:.88px;text-transform:uppercase;
   color:var(--text-on-dark)}
 .eyebrow::before{content:"";width:6px;height:6px;border-radius:3px;
@@ -533,10 +533,10 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
   .cats__grid{grid-template-columns:repeat(3,minmax(0,1fr));padding-top:20px}
   .cat__body{left:9px;right:9px;bottom:10px;gap:2px}
   .cat__name{font-size:12px;line-height:14px}
-  .cat__count{font-size:10px;line-height:12px;letter-spacing:.5px}
+  .cat__count{font-size:11px;line-height:12px;letter-spacing:.5px}
   .cat--deal .cat__name{font-size:15px;line-height:17px}
   .cat__watermark{font-size:70px}
-  .cat__badge{left:7px;top:7px;padding:3px 5px;font-size:9px;letter-spacing:.9px}
+  .cat__badge{left:7px;top:7px;padding:3px 5px;font-size:11px;letter-spacing:.9px}
 }
 /* the mobile frame keeps 3 columns at 390 — dropping to 2 here added ~700px */
 @media (max-width:340px){ .cats__grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
@@ -1249,7 +1249,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
   padding:18px 18px 20px}
 .guide__meta{font:700 12px/14px var(--font-ui);letter-spacing:1px;
   text-transform:uppercase;color:#d1d5db}
-.guide__meta em{font-style:normal;color:#fca5a5}
+.guide__meta em{font-style:normal;color:#d63a3a}
 .guide__h3{font:700 16px/26px var(--font-ui);color:#fff}
 .guide__more{display:inline-flex;align-items:center;min-height:24px;gap:6px;margin-top:auto;
   padding-top:10px;font:700 12px/14px var(--font-ui);letter-spacing:1.32px;
@@ -5553,7 +5553,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
           <label class="vh" for="foot-email">Email address</label>
           <input class="foot__input" id="foot-email" name="email" type="email"
                  autocomplete="email" required placeholder="your@email.com">
-          <button class="foot__go" type="submit">Go</button>
+          <button class="foot__go" type="submit" aria-label="Subscribe to deals and inspiration">Go</button>
         </form>
         <ul class="foot__social">
           <li><a href="https://www.youtube.com/@VividRacing" rel="noopener" aria-label="YouTube"><img src="assets/icons/youtube-f.svg" alt="" aria-hidden="true" width="18" height="18"></a></li>
