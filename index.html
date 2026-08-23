@@ -1817,6 +1817,89 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 </head>
 <body>
 
+<!-- ===== PREVIEW PASSWORD GATE — added 2026-08-23 ============================
+     This is a DETERRENT, not real security: the expected password is only
+     SHA-256-hashed (not left in plaintext) so it isn't grep-able in one
+     glance, but anyone who reads this script can still see the check and
+     bypass it (or just read the page's HTML directly — it's all still here,
+     underneath the overlay). Do not put anything genuinely sensitive behind
+     this; use real auth (Vercel Deployment Protection, Cloudflare Access,
+     etc.) for that.
+     To change the password: run in a terminal —
+       python3 -c "import hashlib;print(hashlib.sha256(b'NEW_PASSWORD').hexdigest())"
+     — and paste the result into EXPECTED_HASH below.
+     To remove the gate entirely: delete everything from this comment down to
+     the matching "END PREVIEW PASSWORD GATE" comment.
+     Requires HTTPS (crypto.subtle needs a secure context) — fine on the real
+     github.io URL, but won't run if the file is opened directly as file://. */-->
+<div id="site-gate" style="position:fixed;inset:0;z-index:999999;display:flex;
+  align-items:center;justify-content:center;background:#000;padding:24px">
+  <form id="site-gate-form" style="width:100%;max-width:320px;text-align:center">
+    <p style="margin:0 0 4px;font:900 22px/1.2 var(--font-display,'Nunito Sans',sans-serif);
+      letter-spacing:-.3px;text-transform:uppercase;color:#fff">Vivid Racing</p>
+    <p style="margin:0 0 20px;font:400 14px/20px var(--font-ui,'Inter',sans-serif);
+      color:rgba(255,255,255,.6)">This preview is password-protected.</p>
+    <label class="vh" for="site-gate-input">Password</label>
+    <input id="site-gate-input" type="password" autocomplete="off" required
+      placeholder="Password"
+      style="box-sizing:border-box;width:100%;padding:12px 14px;margin:0 0 10px;
+      border:1px solid rgba(255,255,255,.25);background:#141414;color:#fff;
+      font:400 15px/22px var(--font-ui,'Inter',sans-serif);border-radius:2px">
+    <button type="submit"
+      style="display:block;width:100%;padding:12px;border:0;border-radius:2px;
+      cursor:pointer;background:#b31414;color:#fff;
+      font:700 13px/17px var(--font-ui,'Inter',sans-serif);letter-spacing:1px;
+      text-transform:uppercase">Enter</button>
+    <p id="site-gate-error" hidden style="margin:12px 0 0;
+      font:600 13px/18px var(--font-ui,'Inter',sans-serif);color:#e04a4a">
+      Incorrect password — try again.</p>
+  </form>
+</div>
+<script>
+(function () {
+  var STORAGE_KEY = 'vr_preview_unlocked_v1';
+  var EXPECTED_HASH = '798c426b8f9affcea6ed4cda84717321da9ee683ac1c19ff4543c67bb2bb76a4';
+  var gate = document.getElementById('site-gate');
+
+  if (localStorage.getItem(STORAGE_KEY) === '1') { gate.remove(); return; }
+  if (!(window.crypto && window.crypto.subtle)) {
+    // no secure-context crypto available (e.g. plain file://) — fail open
+    // with a visible note rather than silently locking someone out for good.
+    gate.querySelector('#site-gate-error').hidden = false;
+    gate.querySelector('#site-gate-error').textContent =
+      'This gate needs HTTPS to check the password — open the live github.io URL.';
+  }
+
+  document.documentElement.style.overflow = 'hidden';
+  document.getElementById('site-gate-input').focus();
+
+  function sha256Hex(text) {
+    return window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(text))
+      .then(function (buf) {
+        return Array.prototype.map.call(new Uint8Array(buf), function (b) {
+          return b.toString(16).padStart(2, '0');
+        }).join('');
+      });
+  }
+
+  document.getElementById('site-gate-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var input = document.getElementById('site-gate-input');
+    sha256Hex(input.value).then(function (hash) {
+      if (hash === EXPECTED_HASH) {
+        localStorage.setItem(STORAGE_KEY, '1');
+        document.documentElement.style.overflow = '';
+        gate.remove();
+      } else {
+        document.getElementById('site-gate-error').hidden = false;
+        input.value = '';
+        input.focus();
+      }
+    });
+  });
+})();
+</script>
+<!-- ===== END PREVIEW PASSWORD GATE ========================================= -->
 
 <a class="skip" href="#main">Skip to main content</a>
 
