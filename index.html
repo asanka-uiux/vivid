@@ -78,7 +78,7 @@ button{font:inherit;color:inherit}
 }
 /* on dark surfaces a red ring can sit too close to the ground — double it */
 .brandbar :focus-visible,.ymm :focus-visible,.util--dark:focus-visible,
-.rbar :focus-visible,.apanel__hero :focus-visible{
+.rbar :focus-visible{
   outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 0 6px rgba(179,20,20,.9);
 }
 
@@ -449,6 +449,27 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .strip__sub{margin:3px 0 0;font:600 12px/14px var(--font-ui);letter-spacing:.8px;
   text-transform:uppercase;color:var(--text-muted)}
 .strip--promise .strip__sub{letter-spacing:.6px}
+
+/* Hover, 2026-08-24 — same red-fill-the-icon language on both strips, even
+   though .strip--trust's items are plain divs (no href) and .strip--promise's
+   are real links: the trust strip gets a hover purely as a delight touch,
+   the promise strip's also answers :focus-visible since it's keyboard-usable. */
+.strip__tile{transition:background-color .16s ease,transform .16s ease}
+.strip__tile img{transition:filter .16s ease}
+.strip--trust .strip__item:hover .strip__tile{
+  background:var(--action-primary);transform:translateY(-2px)}
+.strip--trust .strip__item:hover .strip__tile img{filter:brightness(0) invert(1)}
+.strip--promise .strip__item:hover .strip__tile,
+.strip--promise .strip__item:focus-visible .strip__tile{
+  background:var(--action-primary);transform:translateY(-2px)}
+.strip__item:hover .strip__title,.strip__item:focus-visible .strip__title{
+  color:var(--action-primary)}
+@media (prefers-reduced-motion:reduce){
+  .strip__tile{transition:background-color .16s ease}
+  .strip--trust .strip__item:hover .strip__tile,
+  .strip--promise .strip__item:hover .strip__tile,
+  .strip--promise .strip__item:focus-visible .strip__tile{transform:none}
+}
 
 /* ===== SHOP BY CATEGORY · node 1526:12379 ================================ */
 
@@ -887,28 +908,26 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
    the product grid hidden, the hero ran almost flush into it. */
 .apanel__body{display:flex;align-items:stretch;gap:32px;padding-bottom:24px}
 
-/* Photo swapped for the flagship model's own submodel/trim list, 2026-08-23 —
-   images hidden (kept in the DOM, not deleted; see .apanel__hero img[hidden]
-   below) rather than removed, matching the file's existing hide-don't-delete
-   convention (.apanel__grid, .fam[hidden], .guides[hidden]). */
-.apanel__hero{position:relative;flex:0 0 361px;height:auto;min-height:260px;margin:0;
-  display:flex;flex-direction:column;gap:16px;
-  padding:24px;border-radius:4px;overflow:hidden;background:var(--bg-inverse)}
-.apanel__hero img[hidden]{display:none}
-.apanel__cap{position:relative;z-index:1;background:none;border-left:2px solid var(--accent-red);
-  padding:0 0 0 12px;font:400 11px/14px var(--font-ui);letter-spacing:1.54px;
-  text-transform:uppercase;color:var(--text-on-dark)}
-/* the flagship's own trims — same chip pattern as .mchip, restyled for the dark
-   hero ground: translucent white fill (not --surface-sunken, which is a light
-   grey meant for white cards) so the panel still reads as one dark surface */
+/* Left photo column removed entirely, 2026-08-24 (it had already gone from
+   photo to a dark trim-chip box on 2026-08-23 — this drops that box too, not
+   just the image inside it). The old .apanel__hero figure (and its now-orphaned
+   image) is deleted rather than hidden, since nothing in it survives besides
+   the flagship label + trim chips, which now live in .apanel__flagship instead
+   — restyled for the white ground .apanel__col sits on now that it's full width. */
+.apanel__flagship{display:flex;flex-direction:column;gap:10px}
+.apanel__flagship-label{margin:0;font:700 11px/14px var(--font-ui);
+  letter-spacing:1.4px;text-transform:uppercase;color:var(--action-primary)}
+/* tinted red, not the neutral --surface-sunken .mchip uses below — these are
+   trims of ONE flagship car, not the brand's full model line, and the tint
+   keeps that distinction readable at a glance */
 .apanel__subs{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
 .apanel__sub{display:inline-flex;align-items:center;padding:8px 12px;
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);
-  border-radius:4px;font:600 13px/18px var(--font-ui);color:var(--text-on-dark);
+  background:rgba(179,20,20,.06);border:1px solid rgba(179,20,20,.22);
+  border-radius:4px;font:600 13px/18px var(--font-ui);color:var(--action-primary);
   transition:border-color .16s ease,background-color .16s ease}
 /* same red-edge-on-hover language as .mchip/.pcard/.acard/.cat */
 .apanel__sub:hover,.apanel__sub:focus-visible{
-  border-color:var(--action-primary);background:rgba(179,20,20,.18)}
+  border-color:var(--action-primary);background:rgba(179,20,20,.12)}
 
 .apanel__grid{flex:1 1 auto;min-width:0;display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));gap:13px 12px;
@@ -925,17 +944,13 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
    focus went. display:none removes them from the tab order and the a11y tree
    together. Delete the one declaration below to bring the cards back.
 
-   Chip labels are lifted from each brand's own .acard__head copy already on the
-   page (Porsche "911, 718, Cayenne, Macan and Taycan" → five chips), so nothing
-   here is invented product data. Counts run 2–5 per brand.
-   ========================================================================= */
+   Chip labels are each brand's full real-world model lineup (Porsche: 911, 718,
+   Cayman, Boxster, Macan, Cayenne, Panamera, Taycan). .acard__head itself moved
+   on 2026-08-24 to brand-philosophy taglines and no longer lists models, so
+   don't expect the two to match. Counts run 3–8 per brand. */
 .apanel__grid{display:none}
 
-/* space-between, so the CTA settles on the hero's bottom edge instead of
-   floating directly under the chips: chip counts vary 2–5, and left tight to
-   the chips the button dangled mid-panel on the one-row brands. */
-.apanel__col{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;
-  justify-content:space-between;gap:24px}
+.apanel__col{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:24px}
 /* auto-fill, not auto-fit: with 2–5 chips per brand, auto-fit would stretch
    Bugatti's two to half a row each. auto-fill holds the empty tracks, so a chip
    is the same size on every brand. */
@@ -1012,11 +1027,11 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
   .pcard:hover .pcard__img,.pcard:focus-visible .pcard__img{transform:none}
 }
 
-/* Side by side needs the full 1320px shell: below that the four card columns
-   fall under ~110px, so the hero moves above the grid instead. */
+/* .apanel__grid (the product cards) is display:none above, so this only
+   matters if it's ever brought back — stacks it under .apanel__col instead
+   of squeezing four card columns under ~110px. */
 @media (max-width:1279px){
   .apanel__body{flex-direction:column;gap:16px}
-  .apanel__hero{flex:none;width:100%;height:auto}
 }
 @media (max-width:900px){
   .apanel__head{flex-direction:column;align-items:flex-start;gap:16px}
@@ -2741,7 +2756,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             <img class="acard__thumb" src="assets/img/browse/porsche.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
             <span class="acard__body">
               <span class="acard__tag">Porsche</span>
-              <span class="acard__head">Coilovers, exhausts, wheels and big brake kits for every 911, 718, Cayenne, Macan and Taycan</span>
+              <span class="acard__head">Refined by repetition, never reinvention. Each generation sharpens one idea until nothing extra remains.</span>
             </span>
             <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
           </button>
@@ -2750,29 +2765,28 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
               <h3 class="apanel__title">Built for the cars from <em>Stuttgart.</em></h3>
             </div>
             <div class="apanel__body">
-              <figure class="apanel__hero">
-                <img src="assets/img/porsche/hero-911-gt3-rs-992.jpg" alt="A white Porsche 911 GT3 RS on a snow-lined mountain pass" width="1200" height="800" loading="lazy" decoding="async" hidden>
-                <figcaption class="apanel__cap">911 GT3 RS &middot; 992</figcaption>
-                <ul class="apanel__subs">
-                  <li><a class="apanel__sub" href="vivid-classics.html">Carrera</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Carrera S</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Carrera GTS</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Targa 4S</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Turbo S</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">GT3</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">GT3 RS</a></li>
-                </ul>
-              </figure>
               <div class="apanel__col">
+                <div class="apanel__flagship">
+                  <p class="apanel__flagship-label">911 GT3 RS &middot; 992</p>
+                  <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Porsche&model=911&trim=Carrera">Carrera</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Porsche&model=911&trim=Carrera%20S">Carrera S</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Porsche&model=911&trim=Carrera%20GTS">Carrera GTS</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Porsche&model=911&trim=Targa%204S">Targa 4S</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Porsche&model=911&trim=Turbo%20S">Turbo S</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Porsche&model=911&trim=GT3">GT3</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Porsche&model=911&trim=GT3%20RS">GT3 RS</a></li>
+                  </ul>
+                </div>
                 <ul class="apanel__models">
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Porsche </span>911</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Porsche </span>718</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Porsche </span>Cayman</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Porsche </span>Boxster</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Porsche </span>Macan</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Porsche </span>Cayenne</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Porsche </span>Panamera</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Porsche </span>Taycan</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Porsche&model=911"><span class="vh">Porsche </span>911</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Porsche&model=718"><span class="vh">Porsche </span>718</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Porsche&model=Cayman"><span class="vh">Porsche </span>Cayman</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Porsche&model=Boxster"><span class="vh">Porsche </span>Boxster</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Porsche&model=Macan"><span class="vh">Porsche </span>Macan</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Porsche&model=Cayenne"><span class="vh">Porsche </span>Cayenne</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Porsche&model=Panamera"><span class="vh">Porsche </span>Panamera</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Porsche&model=Taycan"><span class="vh">Porsche </span>Taycan</a></li>
                 </ul>
                 <p class="apanel__cta">
                   <a class="btn-outline btn-outline--compact" href="vivid-classics.html">Shop all Porsche
@@ -2906,7 +2920,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             <img class="acard__thumb" src="assets/img/browse/mercedes.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
             <span class="acard__body">
               <span class="acard__tag">Mercedes-Benz</span>
-              <span class="acard__head">AMG-spec suspension, exhausts, brakes and aero for the C63, E63, GT and G-Class</span>
+              <span class="acard__head">Composure at any speed, then a V8 note that reminds you restraint was always a choice.</span>
             </span>
             <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
           </button>
@@ -2915,27 +2929,26 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
               <h3 class="apanel__title">Built for the cars from <em>Affalterbach.</em></h3>
             </div>
             <div class="apanel__body">
-              <figure class="apanel__hero">
-                <img src="assets/img/marques/hero-amg-gt-c192.jpg" style="object-position:50% 60%" alt="A matte blue Mercedes-AMG GT parked on grass at a car show" width="1200" height="563" loading="lazy" decoding="async" hidden>
-                <figcaption class="apanel__cap">AMG GT &middot; C192</figcaption>
-                <ul class="apanel__subs">
-                  <li><a class="apanel__sub" href="vivid-classics.html">GT 43</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">GT 55</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">GT 63</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">GT 63 Pro</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">GT 63 S E Performance</a></li>
-                </ul>
-              </figure>
               <div class="apanel__col">
+                <div class="apanel__flagship">
+                  <p class="apanel__flagship-label">AMG GT &middot; C192</p>
+                  <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Mercedes-Benz&model=GT&trim=GT%2043">GT 43</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Mercedes-Benz&model=GT&trim=GT%2055">GT 55</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Mercedes-Benz&model=GT&trim=GT%2063">GT 63</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Mercedes-Benz&model=GT&trim=GT%2063%20Pro">GT 63 Pro</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Mercedes-Benz&model=GT&trim=GT%2063%20S%20E%20Performance">GT 63 S E Performance</a></li>
+                  </ul>
+                </div>
                 <ul class="apanel__models">
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Mercedes-Benz </span>C63</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Mercedes-Benz </span>E63</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Mercedes-Benz </span>GT</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Mercedes-Benz </span>G-Class</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Mercedes-Benz </span>A45</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Mercedes-Benz </span>CLA45</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Mercedes-Benz </span>GLE</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Mercedes-Benz </span>S-Class</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Mercedes-Benz&model=C63"><span class="vh">Mercedes-Benz </span>C63</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Mercedes-Benz&model=E63"><span class="vh">Mercedes-Benz </span>E63</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Mercedes-Benz&model=GT"><span class="vh">Mercedes-Benz </span>GT</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Mercedes-Benz&model=G-Class"><span class="vh">Mercedes-Benz </span>G-Class</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Mercedes-Benz&model=A45"><span class="vh">Mercedes-Benz </span>A45</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Mercedes-Benz&model=CLA45"><span class="vh">Mercedes-Benz </span>CLA45</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Mercedes-Benz&model=GLE"><span class="vh">Mercedes-Benz </span>GLE</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Mercedes-Benz&model=S-Class"><span class="vh">Mercedes-Benz </span>S-Class</a></li>
                 </ul>
                 <p class="apanel__cta">
                   <a class="btn-outline btn-outline--compact" href="vivid-classics.html">Shop all Mercedes-Benz
@@ -3069,7 +3082,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             <img class="acard__thumb" src="assets/img/browse/bmw.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
             <span class="acard__body">
               <span class="acard__tag">BMW</span>
-              <span class="acard__head">M-platform coilovers, titanium exhausts, forged wheels and turbo upgrades for the M2, M3 and M4</span>
+              <span class="acard__head">Chassis balance is the whole argument. Everything else exists to serve the driver holding the wheel.</span>
             </span>
             <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
           </button>
@@ -3078,27 +3091,26 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
               <h3 class="apanel__title">Built for the cars from <em>Munich.</em></h3>
             </div>
             <div class="apanel__body">
-              <figure class="apanel__hero">
-                <img src="assets/img/marques/hero-m4-competition-g82.jpg" style="object-position:55% 60%" alt="A white BMW M4 Competition parked outside a dealership" width="1200" height="624" loading="lazy" decoding="async" hidden>
-                <figcaption class="apanel__cap">M4 Competition &middot; G82</figcaption>
-                <ul class="apanel__subs">
-                  <li><a class="apanel__sub" href="vivid-classics.html">M4</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">M4 Competition</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">M4 Competition xDrive</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">M4 CS</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">M4 CSL</a></li>
-                </ul>
-              </figure>
               <div class="apanel__col">
+                <div class="apanel__flagship">
+                  <p class="apanel__flagship-label">M4 Competition &middot; G82</p>
+                  <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=BMW&model=M4&trim=M4">M4</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=BMW&model=M4&trim=M4%20Competition">M4 Competition</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=BMW&model=M4&trim=M4%20Competition%20xDrive">M4 Competition xDrive</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=BMW&model=M4&trim=M4%20CS">M4 CS</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=BMW&model=M4&trim=M4%20CSL">M4 CSL</a></li>
+                  </ul>
+                </div>
                 <ul class="apanel__models">
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">BMW </span>M2</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">BMW </span>M3</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">BMW </span>M4</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">BMW </span>M5</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">BMW </span>M8</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">BMW </span>X3 M</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">BMW </span>X5 M</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">BMW </span>Z4</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=BMW&model=M2"><span class="vh">BMW </span>M2</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=BMW&model=M3"><span class="vh">BMW </span>M3</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=BMW&model=M4"><span class="vh">BMW </span>M4</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=BMW&model=M5"><span class="vh">BMW </span>M5</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=BMW&model=M8"><span class="vh">BMW </span>M8</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=BMW&model=X3%20M"><span class="vh">BMW </span>X3 M</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=BMW&model=X5%20M"><span class="vh">BMW </span>X5 M</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=BMW&model=Z4"><span class="vh">BMW </span>Z4</a></li>
                 </ul>
                 <p class="apanel__cta">
                   <a class="btn-outline btn-outline--compact" href="vivid-classics.html">Shop all BMW
@@ -3232,7 +3244,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             <img class="acard__thumb" src="assets/img/browse/audi.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
             <span class="acard__body">
               <span class="acard__tag">Audi</span>
-              <span class="acard__head">Quattro-ready coilovers, exhausts, forged wheels and turbo kits for the RS 3, RS 6 and TT RS</span>
+              <span class="acard__head">Quattro grip and quiet machining. Speed delivered with engineering confidence rather than theater.</span>
             </span>
             <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
           </button>
@@ -3241,25 +3253,24 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
               <h3 class="apanel__title">Built for the cars from <em>Ingolstadt.</em></h3>
             </div>
             <div class="apanel__body">
-              <figure class="apanel__hero">
-                <img src="assets/img/marques/hero-rs6-avant-c8.jpg" style="object-position:45% 60%" alt="A grey Audi RS 6 Avant at the roadside" width="1200" height="631" loading="lazy" decoding="async" hidden>
-                <figcaption class="apanel__cap">RS 6 Avant &middot; C8</figcaption>
-                <ul class="apanel__subs">
-                  <li><a class="apanel__sub" href="vivid-classics.html">RS 6 Avant</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">RS 6 Avant Performance</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">RS 6 Avant GT</a></li>
-                </ul>
-              </figure>
               <div class="apanel__col">
+                <div class="apanel__flagship">
+                  <p class="apanel__flagship-label">RS 6 Avant &middot; C8</p>
+                  <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Audi&model=RS%206&trim=RS%206%20Avant">RS 6 Avant</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Audi&model=RS%206&trim=RS%206%20Avant%20Performance">RS 6 Avant Performance</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Audi&model=RS%206&trim=RS%206%20Avant%20GT">RS 6 Avant GT</a></li>
+                  </ul>
+                </div>
                 <ul class="apanel__models">
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Audi </span>RS 3</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Audi </span>RS 6</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Audi </span>TT RS</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Audi </span>RS 5</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Audi </span>RS 7</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Audi </span>RS Q8</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Audi </span>R8</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Audi </span>S4</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Audi&model=RS%203"><span class="vh">Audi </span>RS 3</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Audi&model=RS%206"><span class="vh">Audi </span>RS 6</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Audi&model=TT%20RS"><span class="vh">Audi </span>TT RS</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Audi&model=RS%205"><span class="vh">Audi </span>RS 5</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Audi&model=RS%207"><span class="vh">Audi </span>RS 7</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Audi&model=RS%20Q8"><span class="vh">Audi </span>RS Q8</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Audi&model=R8"><span class="vh">Audi </span>R8</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Audi&model=S4"><span class="vh">Audi </span>S4</a></li>
                 </ul>
                 <p class="apanel__cta">
                   <a class="btn-outline btn-outline--compact" href="vivid-classics.html">Shop all Audi
@@ -3393,7 +3404,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             <img class="acard__thumb" src="assets/img/browse/volkswagen.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
             <span class="acard__body">
               <span class="acard__tag">Volkswagen</span>
-              <span class="acard__head">Golf R and GTI coilovers, exhausts, wheels, brake kits and Stage 2 tunes for the EA888</span>
+              <span class="acard__head">Proof that honest engineering scales. Modest badge, serious hardware, enthusiasts who understood early.</span>
             </span>
             <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
           </button>
@@ -3402,27 +3413,26 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
               <h3 class="apanel__title">Built for the cars from <em>Wolfsburg.</em></h3>
             </div>
             <div class="apanel__body">
-              <figure class="apanel__hero">
-                <img src="assets/img/marques/hero-atlas.jpg" style="object-position:50% 55%" alt="A blue Volkswagen Atlas parked by a lake" width="631" height="382" loading="lazy" decoding="async" hidden>
-                <figcaption class="apanel__cap">Atlas &middot; CA1</figcaption>
-                <ul class="apanel__subs">
-                  <li><a class="apanel__sub" href="vivid-classics.html">SE</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">SE with Technology</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">SEL</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">SEL Premium</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">SEL Premium R-Line</a></li>
-                </ul>
-              </figure>
               <div class="apanel__col">
+                <div class="apanel__flagship">
+                  <p class="apanel__flagship-label">Atlas &middot; CA1</p>
+                  <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Volkswagen&model=Atlas&trim=SE">SE</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Volkswagen&model=Atlas&trim=SE%20with%20Technology">SE with Technology</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Volkswagen&model=Atlas&trim=SEL">SEL</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Volkswagen&model=Atlas&trim=SEL%20Premium">SEL Premium</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Volkswagen&model=Atlas&trim=SEL%20Premium%20R-Line">SEL Premium R-Line</a></li>
+                  </ul>
+                </div>
                 <ul class="apanel__models">
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Volkswagen </span>Golf R</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Volkswagen </span>GTI</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Volkswagen </span>Jetta GLI</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Volkswagen </span>Arteon</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Volkswagen </span>Passat</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Volkswagen </span>Tiguan</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Volkswagen </span>Atlas</a></li>
-                <li><a class="mchip" href="vivid-classics.html"><span class="vh">Volkswagen </span>Beetle</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Volkswagen&model=Golf%20R"><span class="vh">Volkswagen </span>Golf R</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Volkswagen&model=GTI"><span class="vh">Volkswagen </span>GTI</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Volkswagen&model=Jetta%20GLI"><span class="vh">Volkswagen </span>Jetta GLI</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Volkswagen&model=Arteon"><span class="vh">Volkswagen </span>Arteon</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Volkswagen&model=Passat"><span class="vh">Volkswagen </span>Passat</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Volkswagen&model=Tiguan"><span class="vh">Volkswagen </span>Tiguan</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Volkswagen&model=Atlas"><span class="vh">Volkswagen </span>Atlas</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Volkswagen&model=Beetle"><span class="vh">Volkswagen </span>Beetle</a></li>
                 </ul>
                 <p class="apanel__cta">
                   <a class="btn-outline btn-outline--compact" href="vivid-classics.html">Shop all Volkswagen
@@ -3569,7 +3579,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             <img class="acard__thumb" src="assets/img/exotic/ferrari-sf90.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
             <span class="acard__body">
               <span class="acard__tag">Ferrari</span>
-              <span class="acard__head">Direct-fit coilovers, valved exhausts, forged wheels and CCM-R brakes for the SF90, F8, 488 and 812</span>
+              <span class="acard__head">Racing heritage worn honestly. Every road car carries a debt to competition and pays it in sound.</span>
             </span>
             <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
           </button>
@@ -3578,27 +3588,26 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
               <h3 class="apanel__title">Maranello&rsquo;s finest, <em>made faster.</em></h3>
             </div>
             <div class="apanel__body">
-              <figure class="apanel__hero">
-                <img src="assets/img/exotic/ferrari-sf90.jpg" style="object-position:50% 55%" alt="A red Ferrari SF90 Stradale on a racetrack" width="1200" height="900" loading="lazy" decoding="async" hidden>
-                <figcaption class="apanel__cap">SF90 Stradale</figcaption>
-                <ul class="apanel__subs">
-                  <li><a class="apanel__sub" href="vivid-classics.html">Stradale</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Spider</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Assetto Fiorano</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">XX Stradale</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">XX Spider</a></li>
-                </ul>
-              </figure>
               <div class="apanel__col">
+                <div class="apanel__flagship">
+                  <p class="apanel__flagship-label">SF90 Stradale</p>
+                  <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Ferrari&model=SF90&trim=Stradale">Stradale</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Ferrari&model=SF90&trim=Spider">Spider</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Ferrari&model=SF90&trim=Assetto%20Fiorano">Assetto Fiorano</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Ferrari&model=SF90&trim=XX%20Stradale">XX Stradale</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Ferrari&model=SF90&trim=XX%20Spider">XX Spider</a></li>
+                  </ul>
+                </div>
                 <ul class="apanel__models">
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Ferrari </span>SF90</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Ferrari </span>F8</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Ferrari </span>488</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Ferrari </span>812</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Ferrari </span>296 GTB</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Ferrari </span>Roma</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Ferrari </span>Portofino</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Ferrari </span>458</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Ferrari&model=SF90"><span class="vh">Ferrari </span>SF90</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Ferrari&model=F8"><span class="vh">Ferrari </span>F8</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Ferrari&model=488"><span class="vh">Ferrari </span>488</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Ferrari&model=812"><span class="vh">Ferrari </span>812</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Ferrari&model=296%20GTB"><span class="vh">Ferrari </span>296 GTB</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Ferrari&model=Roma"><span class="vh">Ferrari </span>Roma</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Ferrari&model=Portofino"><span class="vh">Ferrari </span>Portofino</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Ferrari&model=458"><span class="vh">Ferrari </span>458</a></li>
                 </ul>
                 <p class="apanel__cta">
                   <a class="btn-outline btn-outline--compact" href="wheel-pdp.html">Shop all Ferrari
@@ -3732,7 +3741,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             <img class="acard__thumb" src="assets/img/exotic/lamborghini-revuelto.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
             <span class="acard__body">
               <span class="acard__tag">Lamborghini</span>
-              <span class="acard__head">Hurac&aacute;n, Aventador and Urus coilovers, titanium exhausts, forged wheels and race headers</span>
+              <span class="acard__head">Theater with real substance underneath. Loud by design, engineered far more seriously than it looks.</span>
             </span>
             <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
           </button>
@@ -3741,25 +3750,24 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
               <h3 class="apanel__title">Sant&rsquo;Agata&rsquo;s finest, <em>made faster.</em></h3>
             </div>
             <div class="apanel__body">
-              <figure class="apanel__hero">
-                <img src="assets/img/exotic/lamborghini-revuelto.jpg" style="object-position:50% 60%" alt="A black Lamborghini Revuelto parked against a slatted wall" width="1200" height="800" loading="lazy" decoding="async" hidden>
-                <figcaption class="apanel__cap">Revuelto</figcaption>
-                <ul class="apanel__subs">
-                  <li><a class="apanel__sub" href="vivid-classics.html">Revuelto</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Revuelto Roadster</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Opera Unica</a></li>
-                </ul>
-              </figure>
               <div class="apanel__col">
+                <div class="apanel__flagship">
+                  <p class="apanel__flagship-label">Revuelto</p>
+                  <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Lamborghini&model=Revuelto&trim=Revuelto">Revuelto</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Lamborghini&model=Revuelto&trim=Revuelto%20Roadster">Revuelto Roadster</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Lamborghini&model=Revuelto&trim=Opera%20Unica">Opera Unica</a></li>
+                  </ul>
+                </div>
                 <ul class="apanel__models">
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Lamborghini </span>Hurac&aacute;n</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Lamborghini </span>Aventador</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Lamborghini </span>Urus</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Lamborghini </span>Revuelto</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Lamborghini </span>Gallardo</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Lamborghini </span>Murci&eacute;lago</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Lamborghini </span>Diablo</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Lamborghini </span>Countach</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Lamborghini&model=Hurac%26aacute%3Bn"><span class="vh">Lamborghini </span>Hurac&aacute;n</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Lamborghini&model=Aventador"><span class="vh">Lamborghini </span>Aventador</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Lamborghini&model=Urus"><span class="vh">Lamborghini </span>Urus</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Lamborghini&model=Revuelto"><span class="vh">Lamborghini </span>Revuelto</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Lamborghini&model=Gallardo"><span class="vh">Lamborghini </span>Gallardo</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Lamborghini&model=Murci%26eacute%3Blago"><span class="vh">Lamborghini </span>Murci&eacute;lago</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Lamborghini&model=Diablo"><span class="vh">Lamborghini </span>Diablo</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Lamborghini&model=Countach"><span class="vh">Lamborghini </span>Countach</a></li>
                 </ul>
                 <p class="apanel__cta">
                   <a class="btn-outline btn-outline--compact" href="wheel-pdp.html">Shop all Lamborghini
@@ -3893,7 +3901,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             <img class="acard__thumb" src="assets/img/exotic/mclaren-720s-spider.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
             <span class="acard__body">
               <span class="acard__tag">McLaren</span>
-              <span class="acard__head">570S, 720S and 765LT coilovers, slip-on exhausts, forged wheels and carbon-ceramic discs</span>
+              <span class="acard__head">Carbon tubs and aerodynamic honesty. Formula discipline translated into cars that reward real skill.</span>
             </span>
             <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
           </button>
@@ -3902,26 +3910,25 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
               <h3 class="apanel__title">Woking&rsquo;s finest, <em>made faster.</em></h3>
             </div>
             <div class="apanel__body">
-              <figure class="apanel__hero">
-                <img src="assets/img/exotic/mclaren-720s-spider.jpg" style="object-position:50% 55%" alt="A blue McLaren 720S Spider on a coastal road" width="1200" height="801" loading="lazy" decoding="async" hidden>
-                <figcaption class="apanel__cap">720S Spider</figcaption>
-                <ul class="apanel__subs">
-                  <li><a class="apanel__sub" href="vivid-classics.html">720S</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">720S Spider</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Track Pack</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Le Mans</a></li>
-                </ul>
-              </figure>
               <div class="apanel__col">
+                <div class="apanel__flagship">
+                  <p class="apanel__flagship-label">720S Spider</p>
+                  <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=McLaren&model=720S&trim=720S">720S</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=McLaren&model=720S&trim=720S%20Spider">720S Spider</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=McLaren&model=720S&trim=Track%20Pack">Track Pack</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=McLaren&model=720S&trim=Le%20Mans">Le Mans</a></li>
+                  </ul>
+                </div>
                 <ul class="apanel__models">
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">McLaren </span>570S</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">McLaren </span>720S</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">McLaren </span>765LT</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">McLaren </span>600LT</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">McLaren </span>675LT</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">McLaren </span>750S</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">McLaren </span>Artura</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">McLaren </span>GT</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=McLaren&model=570S"><span class="vh">McLaren </span>570S</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=McLaren&model=720S"><span class="vh">McLaren </span>720S</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=McLaren&model=765LT"><span class="vh">McLaren </span>765LT</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=McLaren&model=600LT"><span class="vh">McLaren </span>600LT</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=McLaren&model=675LT"><span class="vh">McLaren </span>675LT</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=McLaren&model=750S"><span class="vh">McLaren </span>750S</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=McLaren&model=Artura"><span class="vh">McLaren </span>Artura</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=McLaren&model=GT"><span class="vh">McLaren </span>GT</a></li>
                 </ul>
                 <p class="apanel__cta">
                   <a class="btn-outline btn-outline--compact" href="wheel-pdp.html">Shop all McLaren
@@ -4055,7 +4062,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             <img class="acard__thumb" src="assets/img/exotic/aston-martin-victor.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
             <span class="acard__body">
               <span class="acard__tag">Aston Martin</span>
-              <span class="acard__head">Vantage, DB11 and DBS coilovers, valved exhausts, FlowForm wheels and big brake kits</span>
+              <span class="acard__head">Grand touring done with taste. Beauty first, then a V12 to prove the beauty was earned.</span>
             </span>
             <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
           </button>
@@ -4064,26 +4071,25 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
               <h3 class="apanel__title">Gaydon&rsquo;s finest, <em>made faster.</em></h3>
             </div>
             <div class="apanel__body">
-              <figure class="apanel__hero">
-                <img src="assets/img/exotic/aston-martin-victor.jpg" style="object-position:50% 60%" alt="A dark green Aston Martin Victor on a gravel drive" width="1200" height="674" loading="lazy" decoding="async" hidden>
-                <figcaption class="apanel__cap">Victor</figcaption>
-                <ul class="apanel__subs">
-                  <li><a class="apanel__sub" href="vivid-classics.html">Victor</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Vulcan</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">One-77</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Valkyrie AMR Pro</a></li>
-                </ul>
-              </figure>
               <div class="apanel__col">
+                <div class="apanel__flagship">
+                  <p class="apanel__flagship-label">Victor</p>
+                  <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Aston%20Martin&model=Victor">Victor</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Aston%20Martin&model=Vulcan">Vulcan</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Aston%20Martin&model=One-77">One-77</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Aston%20Martin&model=Valkyrie%20AMR%20Pro">Valkyrie AMR Pro</a></li>
+                  </ul>
+                </div>
                 <ul class="apanel__models">
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Aston Martin </span>Vantage</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Aston Martin </span>DB11</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Aston Martin </span>DBS</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Aston Martin </span>V12 Vantage</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Aston Martin </span>DB12</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Aston Martin </span>Vanquish</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Aston Martin </span>DBX</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Aston Martin </span>Rapide</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Aston%20Martin&model=Vantage"><span class="vh">Aston Martin </span>Vantage</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Aston%20Martin&model=DB11"><span class="vh">Aston Martin </span>DB11</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Aston%20Martin&model=DBS"><span class="vh">Aston Martin </span>DBS</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Aston%20Martin&model=V12%20Vantage"><span class="vh">Aston Martin </span>V12 Vantage</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Aston%20Martin&model=DB12"><span class="vh">Aston Martin </span>DB12</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Aston%20Martin&model=Vanquish"><span class="vh">Aston Martin </span>Vanquish</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Aston%20Martin&model=DBX"><span class="vh">Aston Martin </span>DBX</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Aston%20Martin&model=Rapide"><span class="vh">Aston Martin </span>Rapide</a></li>
                 </ul>
                 <p class="apanel__cta">
                   <a class="btn-outline btn-outline--compact" href="wheel-pdp.html">Shop all Aston Martin
@@ -4217,7 +4223,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             <img class="acard__thumb" src="assets/img/exotic/bugatti-veyron.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
             <span class="acard__body">
               <span class="acard__tag">Bugatti</span>
-              <span class="acard__head">Veyron and Chiron track coilovers, titanium exhausts, forged wheels and carbon-ceramic brakes</span>
+              <span class="acard__head">Engineering at the limit of the possible. Fewer compromises than any car has a right to make.</span>
             </span>
             <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
           </button>
@@ -4226,26 +4232,25 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
               <h3 class="apanel__title">Molsheim&rsquo;s finest, <em>made faster.</em></h3>
             </div>
             <div class="apanel__body">
-              <figure class="apanel__hero">
-                <img src="assets/img/exotic/bugatti-veyron.jpg" style="object-position:50% 55%" alt="A blue and black Bugatti Veyron on a tree-lined road" width="1200" height="889" loading="lazy" decoding="async" hidden>
-                <figcaption class="apanel__cap">Veyron 16.4</figcaption>
-                <ul class="apanel__subs">
-                  <li><a class="apanel__sub" href="vivid-classics.html">16.4</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Grand Sport</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Super Sport</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Grand Sport Vitesse</a></li>
-                </ul>
-              </figure>
               <div class="apanel__col">
+                <div class="apanel__flagship">
+                  <p class="apanel__flagship-label">Veyron 16.4</p>
+                  <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Bugatti&model=Veyron&trim=16.4">16.4</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Bugatti&model=Veyron&trim=Grand%20Sport">Grand Sport</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Bugatti&model=Veyron&trim=Super%20Sport">Super Sport</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Bugatti&model=Veyron&trim=Grand%20Sport%20Vitesse">Grand Sport Vitesse</a></li>
+                  </ul>
+                </div>
                 <ul class="apanel__models">
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Bugatti </span>Veyron</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Bugatti </span>Chiron</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Bugatti </span>Divo</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Bugatti </span>Centodieci</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Bugatti </span>Bolide</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Bugatti </span>Mistral</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Bugatti </span>Tourbillon</a></li>
-                <li><a class="mchip" href="wheel-pdp.html"><span class="vh">Bugatti </span>EB110</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Bugatti&model=Veyron"><span class="vh">Bugatti </span>Veyron</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Bugatti&model=Chiron"><span class="vh">Bugatti </span>Chiron</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Bugatti&model=Divo"><span class="vh">Bugatti </span>Divo</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Bugatti&model=Centodieci"><span class="vh">Bugatti </span>Centodieci</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Bugatti&model=Bolide"><span class="vh">Bugatti </span>Bolide</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Bugatti&model=Mistral"><span class="vh">Bugatti </span>Mistral</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Bugatti&model=Tourbillon"><span class="vh">Bugatti </span>Tourbillon</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Bugatti&model=EB110"><span class="vh">Bugatti </span>EB110</a></li>
                 </ul>
                 <p class="apanel__cta">
                   <a class="btn-outline btn-outline--compact" href="wheel-pdp.html">Shop all Bugatti
@@ -4391,7 +4396,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             <img class="acard__thumb" src="assets/img/jdm/toyota-camry.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
             <span class="acard__body">
               <span class="acard__tag">Toyota</span>
-              <span class="acard__head">GR Corolla, GR86, Supra and 4Runner coilovers, exhausts, forged wheels and big brake kits</span>
+              <span class="acard__head">Built to be driven for a lifetime. Reliability is the platform, and the tuning world took it from there.</span>
             </span>
             <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
           </button>
@@ -4400,27 +4405,26 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
               <h3 class="apanel__title">Toyota City&rsquo;s finest, <em>made faster.</em></h3>
             </div>
             <div class="apanel__body">
-              <figure class="apanel__hero">
-                <img src="assets/img/jdm/toyota-camry.jpg" style="object-position:55% 60%" alt="A white Toyota Camry TRD on a racetrack" width="1200" height="675" loading="lazy" decoding="async" hidden>
-                <figcaption class="apanel__cap">Camry</figcaption>
-                <ul class="apanel__subs">
-                  <li><a class="apanel__sub" href="vivid-classics.html">LE</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">SE</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">XLE</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">XSE</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">TRD</a></li>
-                </ul>
-              </figure>
               <div class="apanel__col">
+                <div class="apanel__flagship">
+                  <p class="apanel__flagship-label">Camry</p>
+                  <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Toyota&model=Camry&trim=LE">LE</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Toyota&model=Camry&trim=SE">SE</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Toyota&model=Camry&trim=XLE">XLE</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Toyota&model=Camry&trim=XSE">XSE</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Toyota&model=Camry&trim=TRD">TRD</a></li>
+                  </ul>
+                </div>
                 <ul class="apanel__models">
-                <li><a class="mchip" href="vividx.html"><span class="vh">Toyota </span>GR Corolla</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Toyota </span>GR86</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Toyota </span>Supra</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Toyota </span>4Runner</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Toyota </span>GR Yaris</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Toyota </span>Tacoma</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Toyota </span>Tundra</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Toyota </span>Camry</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Toyota&model=GR%20Corolla"><span class="vh">Toyota </span>GR Corolla</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Toyota&model=GR86"><span class="vh">Toyota </span>GR86</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Toyota&model=Supra"><span class="vh">Toyota </span>Supra</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Toyota&model=4Runner"><span class="vh">Toyota </span>4Runner</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Toyota&model=GR%20Yaris"><span class="vh">Toyota </span>GR Yaris</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Toyota&model=Tacoma"><span class="vh">Toyota </span>Tacoma</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Toyota&model=Tundra"><span class="vh">Toyota </span>Tundra</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Toyota&model=Camry"><span class="vh">Toyota </span>Camry</a></li>
                 </ul>
                 <p class="apanel__cta">
                   <a class="btn-outline btn-outline--compact" href="vividx.html">Shop all Toyota
@@ -4554,7 +4558,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             <img class="acard__thumb" src="assets/img/jdm/honda-civic-si.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
             <span class="acard__body">
               <span class="acard__tag">Honda</span>
-              <span class="acard__head">Civic Type R, Integra and S2000 coilovers, headers, forged wheels and track brake kits</span>
+              <span class="acard__head">Small displacement, high revs, real discipline. A following earned one honest engine at a time.</span>
             </span>
             <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
           </button>
@@ -4563,27 +4567,26 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
               <h3 class="apanel__title">Tokyo&rsquo;s finest, <em>made faster.</em></h3>
             </div>
             <div class="apanel__body">
-              <figure class="apanel__hero">
-                <img src="assets/img/jdm/honda-civic-si.jpg" style="object-position:50% 60%" alt="A white Honda Civic Si on a tree-lined road" width="767" height="352" loading="lazy" decoding="async" hidden>
-                <figcaption class="apanel__cap">Civic Si</figcaption>
-                <ul class="apanel__subs">
-                  <li><a class="apanel__sub" href="vivid-classics.html">Sport</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Sport Touring</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Touring</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Si</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Type R</a></li>
-                </ul>
-              </figure>
               <div class="apanel__col">
+                <div class="apanel__flagship">
+                  <p class="apanel__flagship-label">Civic Si</p>
+                  <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Honda&model=Civic&trim=Sport">Sport</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Honda&model=Civic&trim=Sport%20Touring">Sport Touring</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Honda&model=Civic&trim=Touring">Touring</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Honda&model=Civic&trim=Si">Si</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Honda&model=Civic&trim=Type%20R">Type R</a></li>
+                  </ul>
+                </div>
                 <ul class="apanel__models">
-                <li><a class="mchip" href="vividx.html"><span class="vh">Honda </span>Civic Type R</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Honda </span>Integra</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Honda </span>S2000</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Honda </span>Civic Si</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Honda </span>NSX</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Honda </span>Accord</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Honda </span>Prelude</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Honda </span>CR-V</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Honda&model=Civic%20Type%20R"><span class="vh">Honda </span>Civic Type R</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Honda&model=Integra"><span class="vh">Honda </span>Integra</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Honda&model=S2000"><span class="vh">Honda </span>S2000</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Honda&model=Civic%20Si"><span class="vh">Honda </span>Civic Si</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Honda&model=NSX"><span class="vh">Honda </span>NSX</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Honda&model=Accord"><span class="vh">Honda </span>Accord</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Honda&model=Prelude"><span class="vh">Honda </span>Prelude</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Honda&model=CR-V"><span class="vh">Honda </span>CR-V</a></li>
                 </ul>
                 <p class="apanel__cta">
                   <a class="btn-outline btn-outline--compact" href="vividx.html">Shop all Honda
@@ -4717,7 +4720,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             <img class="acard__thumb" src="assets/img/jdm/nissan-altima.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
             <span class="acard__body">
               <span class="acard__tag">Nissan</span>
-              <span class="acard__head">GT-R, 370Z and Silvia coilovers, titanium exhausts, forged wheels and turbo upgrades</span>
+              <span class="acard__head">Turbo culture built on straight six legends and a GTR that still humbles far more expensive metal.</span>
             </span>
             <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
           </button>
@@ -4726,27 +4729,26 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
               <h3 class="apanel__title">Yokohama&rsquo;s finest, <em>made faster.</em></h3>
             </div>
             <div class="apanel__body">
-              <figure class="apanel__hero">
-                <img src="assets/img/jdm/nissan-altima.jpg" style="object-position:50% 55%" alt="A white Nissan Altima parked on a suburban street" width="1000" height="550" loading="lazy" decoding="async" hidden>
-                <figcaption class="apanel__cap">Altima</figcaption>
-                <ul class="apanel__subs">
-                  <li><a class="apanel__sub" href="vivid-classics.html">S</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">SV</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">SR</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">SL</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Platinum</a></li>
-                </ul>
-              </figure>
               <div class="apanel__col">
+                <div class="apanel__flagship">
+                  <p class="apanel__flagship-label">Altima</p>
+                  <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Nissan&model=Altima&trim=S">S</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Nissan&model=Altima&trim=SV">SV</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Nissan&model=Altima&trim=SR">SR</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Nissan&model=Altima&trim=SL">SL</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Nissan&model=Altima&trim=Platinum">Platinum</a></li>
+                  </ul>
+                </div>
                 <ul class="apanel__models">
-                <li><a class="mchip" href="vividx.html"><span class="vh">Nissan </span>GT-R</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Nissan </span>370Z</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Nissan </span>Silvia</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Nissan </span>Z</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Nissan </span>350Z</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Nissan </span>Skyline</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Nissan </span>Sentra</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Nissan </span>Titan</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Nissan&model=GT-R"><span class="vh">Nissan </span>GT-R</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Nissan&model=370Z"><span class="vh">Nissan </span>370Z</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Nissan&model=Silvia"><span class="vh">Nissan </span>Silvia</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Nissan&model=Z"><span class="vh">Nissan </span>Z</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Nissan&model=350Z"><span class="vh">Nissan </span>350Z</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Nissan&model=Skyline"><span class="vh">Nissan </span>Skyline</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Nissan&model=Sentra"><span class="vh">Nissan </span>Sentra</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Nissan&model=Titan"><span class="vh">Nissan </span>Titan</a></li>
                 </ul>
                 <p class="apanel__cta">
                   <a class="btn-outline btn-outline--compact" href="vividx.html">Shop all Nissan
@@ -4880,7 +4882,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             <img class="acard__thumb" src="assets/img/jdm/mazda6.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
             <span class="acard__body">
               <span class="acard__tag">Mazda</span>
-              <span class="acard__head">MX-5, RX-7 and Mazda3 coilovers, headers, lightweight wheels and rotary rebuild parts</span>
+              <span class="acard__head">Lightness as a philosophy. Fewer pounds, better steering, and a rotary legacy nobody else dared.</span>
             </span>
             <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
           </button>
@@ -4889,27 +4891,26 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
               <h3 class="apanel__title">Hiroshima&rsquo;s finest, <em>made faster.</em></h3>
             </div>
             <div class="apanel__body">
-              <figure class="apanel__hero">
-                <img src="assets/img/jdm/mazda6.jpg" style="object-position:50% 60%" alt="A red Mazda6 parked beside a brick building" width="1200" height="548" loading="lazy" decoding="async" hidden>
-                <figcaption class="apanel__cap">Mazda6</figcaption>
-                <ul class="apanel__subs">
-                  <li><a class="apanel__sub" href="vivid-classics.html">Sport</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Touring</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Grand Touring</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Grand Touring Reserve</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">Signature</a></li>
-                </ul>
-              </figure>
               <div class="apanel__col">
+                <div class="apanel__flagship">
+                  <p class="apanel__flagship-label">Mazda6</p>
+                  <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Mazda&model=Mazda6&trim=Sport">Sport</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Mazda&model=Mazda6&trim=Touring">Touring</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Mazda&model=Mazda6&trim=Grand%20Touring">Grand Touring</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Mazda&model=Mazda6&trim=Grand%20Touring%20Reserve">Grand Touring Reserve</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Mazda&model=Mazda6&trim=Signature">Signature</a></li>
+                  </ul>
+                </div>
                 <ul class="apanel__models">
-                <li><a class="mchip" href="vividx.html"><span class="vh">Mazda </span>MX-5</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Mazda </span>RX-7</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Mazda </span>Mazda3</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Mazda </span>RX-8</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Mazda </span>Mazda6</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Mazda </span>CX-5</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Mazda </span>CX-9</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Mazda </span>Mazdaspeed3</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Mazda&model=MX-5"><span class="vh">Mazda </span>MX-5</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Mazda&model=RX-7"><span class="vh">Mazda </span>RX-7</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Mazda&model=Mazda3"><span class="vh">Mazda </span>Mazda3</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Mazda&model=RX-8"><span class="vh">Mazda </span>RX-8</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Mazda&model=Mazda6"><span class="vh">Mazda </span>Mazda6</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Mazda&model=CX-5"><span class="vh">Mazda </span>CX-5</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Mazda&model=CX-9"><span class="vh">Mazda </span>CX-9</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Mazda&model=Mazdaspeed3"><span class="vh">Mazda </span>Mazdaspeed3</a></li>
                 </ul>
                 <p class="apanel__cta">
                   <a class="btn-outline btn-outline--compact" href="vividx.html">Shop all Mazda
@@ -5043,7 +5044,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
             <img class="acard__thumb" src="assets/img/jdm/lexus-ls500.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
             <span class="acard__body">
               <span class="acard__tag">Lexus</span>
-              <span class="acard__head">IS F, RC F and LC 500 coilovers, valved exhausts, forged wheels and carbon-ceramic brakes</span>
+              <span class="acard__head">Silence engineered on purpose, then a naturally aspirated V8 for anyone who assumed that was all.</span>
             </span>
             <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
           </button>
@@ -5052,27 +5053,26 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
               <h3 class="apanel__title">Nagoya&rsquo;s finest, <em>made faster.</em></h3>
             </div>
             <div class="apanel__body">
-              <figure class="apanel__hero">
-                <img src="assets/img/jdm/lexus-ls500.jpg" style="object-position:50% 50%" alt="A silver Lexus LS 500 on a dark studio floor" width="468" height="351" loading="lazy" decoding="async" hidden>
-                <figcaption class="apanel__cap">LS 500</figcaption>
-                <ul class="apanel__subs">
-                  <li><a class="apanel__sub" href="vivid-classics.html">500</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">500 F Sport</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">500h</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">500 AWD</a></li>
-                  <li><a class="apanel__sub" href="vivid-classics.html">500 Ultra Luxury</a></li>
-                </ul>
-              </figure>
               <div class="apanel__col">
+                <div class="apanel__flagship">
+                  <p class="apanel__flagship-label">LS 500</p>
+                  <ul class="apanel__subs">
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Lexus&model=LS&trim=500">500</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Lexus&model=LS&trim=500%20F%20Sport">500 F Sport</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Lexus&model=LS&trim=500h">500h</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Lexus&model=LS&trim=500%20AWD">500 AWD</a></li>
+                  <li><a class="apanel__sub" href="vehicle-picker.html?make=Lexus&model=LS&trim=500%20Ultra%20Luxury">500 Ultra Luxury</a></li>
+                  </ul>
+                </div>
                 <ul class="apanel__models">
-                <li><a class="mchip" href="vividx.html"><span class="vh">Lexus </span>IS F</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Lexus </span>RC F</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Lexus </span>LC 500</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Lexus </span>GS F</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Lexus </span>LFA</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Lexus </span>IS 350</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Lexus </span>RX</a></li>
-                <li><a class="mchip" href="vividx.html"><span class="vh">Lexus </span>LS</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Lexus&model=IS%20F"><span class="vh">Lexus </span>IS F</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Lexus&model=RC%20F"><span class="vh">Lexus </span>RC F</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Lexus&model=LC%20500"><span class="vh">Lexus </span>LC 500</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Lexus&model=GS%20F"><span class="vh">Lexus </span>GS F</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Lexus&model=LFA"><span class="vh">Lexus </span>LFA</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Lexus&model=IS%20350"><span class="vh">Lexus </span>IS 350</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Lexus&model=RX"><span class="vh">Lexus </span>RX</a></li>
+                <li><a class="mchip" href="vehicle-picker.html?make=Lexus&model=LS"><span class="vh">Lexus </span>LS</a></li>
                 </ul>
                 <p class="apanel__cta">
                   <a class="btn-outline btn-outline--compact" href="vividx.html">Shop all Lexus
