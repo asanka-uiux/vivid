@@ -76,9 +76,11 @@ button{font:inherit;color:inherit}
 :where(a,button,input,select,summary,[tabindex]):focus-visible{
   outline:3px solid var(--accent-red);outline-offset:2px;
 }
-/* on dark surfaces a red ring can sit too close to the ground — double it */
+/* on dark surfaces a red ring can sit too close to the ground — double it.
+   .promo included: .promo--event's own red radial glow would swallow a plain
+   red ring right where it needs to be seen. */
 .brandbar :focus-visible,.ymm :focus-visible,.util--dark:focus-visible,
-.rbar :focus-visible{
+.rbar :focus-visible,.promo:focus-visible{
   outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 0 6px rgba(179,20,20,.9);
 }
 
@@ -596,11 +598,22 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
   background:linear-gradient(180deg,rgba(10,10,10,0) 0%,rgba(10,10,10,.35) 45%,
              rgba(10,10,10,.92) 100%)}
 .promo__bar{position:absolute;left:0;top:0;z-index:2;width:56px;height:3px;
-  background:var(--action-primary)}
+  background:var(--action-primary);transition:width .2s ease}
 .promo__go{position:absolute;right:22px;top:22px;z-index:2;display:grid;place-items:center;
   width:36px;height:36px;background:var(--bg-inverse);
-  border:1px solid rgba(255,255,255,.4)}
-.promo__go img{width:21px;height:21px}
+  border:1px solid rgba(255,255,255,.4);
+  transition:background-color .16s ease,border-color .16s ease}
+.promo__go img{width:21px;height:21px;transition:transform .16s ease}
+/* reveal/nudge, never lift — same language as .pcard-cta/.mega__cta: the bar
+   runs the tile's full width and the arrow fills red + steps forward */
+.promo:hover .promo__bar,.promo:focus-visible .promo__bar{width:100%}
+.promo:hover .promo__go,.promo:focus-visible .promo__go{
+  background:var(--action-primary);border-color:var(--action-primary)}
+.promo:hover .promo__go img,.promo:focus-visible .promo__go img{transform:translateX(3px)}
+@media (prefers-reduced-motion:reduce){
+  .promo__bar,.promo__go img{transition:none}
+  .promo:hover .promo__go img,.promo:focus-visible .promo__go img{transform:none}
+}
 .promo__body{position:absolute;left:18px;right:18px;bottom:16px;z-index:2;
   display:flex;flex-direction:column;align-items:flex-start;gap:6px}
 .promo__kicker{padding:4px 6px;background:var(--bg-inverse);border-left:2px solid #fff;
