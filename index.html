@@ -1241,10 +1241,11 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .vids__grid::-webkit-scrollbar{display:none}
 .vids__grid > li{flex:0 0 380px;scroll-snap-align:start}
 
-/* Carousel arrows — .vids only (the News section below reuses .vids__grid's
-   own styling but not this wrapper, so it stays arrow-free). Prev starts
-   [hidden]; script.js's scroll listener reveals it once .vids__grid has
-   scrolled away from its start, and hides it again back at the start. */
+/* Carousel arrows — 2026-08-25: the Blog section below now wraps its own
+   .vids__grid in a second .vids__carousel, so these rules aren't .vids-only
+   any more. Prev starts [hidden]; the scroll listener below reveals it once
+   a .vids__grid has scrolled away from its start, and hides it again back
+   at the start (and hides next at the opposite end). */
 .vids__carousel{position:relative;margin-top:28px}
 .vids__carousel .vids__grid{margin-top:0}
 .vids__arrow{position:absolute;top:calc(50% - 20px);z-index:2;
@@ -5540,7 +5541,8 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
       <p class="vids__eyebrow">Editorial</p>
       <h2 class="news__title" id="news-title">Blog</h2>
       <p class="vids__sub">Build references, brand stories, and tech articles · <b>Since 2001</b></p>
-      <ul class="vids__grid">
+      <div class="vids__carousel">
+      <ul class="vids__grid" id="blog-track">
         <li><a class="vid" href="blog.html">
           <span class="vid__thumb">
             <img src="assets/img/news/wheel-sizing.jpg" alt="" loading="lazy" width="820" height="545" decoding="async">
@@ -5632,6 +5634,15 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
           </span>
         </a></li>
       </ul>
+      <button type="button" class="vids__arrow vids__arrow--prev" aria-label="Scroll blog posts left"
+        aria-controls="blog-track" hidden>
+        <img src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="14" height="14">
+      </button>
+      <button type="button" class="vids__arrow vids__arrow--next" aria-label="Scroll blog posts right"
+        aria-controls="blog-track">
+        <img src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="14" height="14">
+      </button>
+      </div>
       <div class="vids__rule" style="padding-top:24px" aria-hidden="true"><span></span><span></span></div>
     </div>
   </section>
@@ -5978,31 +5989,35 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
   });
 })();
 
-/* Video carousel arrows — right-only at the start; scrolling right reveals
-   the left arrow, and reaching the end hides the right one. */
+/* Carousel arrows — Videos and Blog both use .vids__carousel; right-only at
+   the start, scrolling right reveals the left arrow, reaching the end hides
+   the right one. One listener set per .vids__carousel found, not one hardcoded
+   #id, since there are two of these on the page now. */
 (function () {
-  var track = document.getElementById('vids-track');
-  var carousel = track && track.closest('.vids__carousel');
-  if (!track || !carousel) return;
-  var prev = carousel.querySelector('.vids__arrow--prev');
-  var next = carousel.querySelector('.vids__arrow--next');
-
-  function update() {
-    var max = track.scrollWidth - track.clientWidth;
-    prev.hidden = track.scrollLeft <= 4;
-    next.hidden = track.scrollLeft >= max - 4;
-  }
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function scrollByCard(dir) {
-    var card = track.querySelector('li');
-    var amount = card ? card.getBoundingClientRect().width + 18 : track.clientWidth * 0.9;
-    track.scrollBy({ left: dir * amount, behavior: reduceMotion ? 'auto' : 'smooth' });
-  }
-  prev.addEventListener('click', function () { scrollByCard(-1); });
-  next.addEventListener('click', function () { scrollByCard(1); });
-  track.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', update);
-  update();
+  var carousels = [].slice.call(document.querySelectorAll('.vids__carousel'));
+  carousels.forEach(function (carousel) {
+    var track = carousel.querySelector('.vids__grid');
+    var prev = carousel.querySelector('.vids__arrow--prev');
+    var next = carousel.querySelector('.vids__arrow--next');
+    if (!track || !prev || !next) return;
+
+    function update() {
+      var max = track.scrollWidth - track.clientWidth;
+      prev.hidden = track.scrollLeft <= 4;
+      next.hidden = track.scrollLeft >= max - 4;
+    }
+    function scrollByCard(dir) {
+      var card = track.querySelector('li');
+      var amount = card ? card.getBoundingClientRect().width + 18 : track.clientWidth * 0.9;
+      track.scrollBy({ left: dir * amount, behavior: reduceMotion ? 'auto' : 'smooth' });
+    }
+    prev.addEventListener('click', function () { scrollByCard(-1); });
+    next.addEventListener('click', function () { scrollByCard(1); });
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  });
 })();
 </script>
 </body>
