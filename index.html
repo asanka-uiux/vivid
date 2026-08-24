@@ -1052,7 +1052,12 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
   margin:24px 0 0;padding:0;list-style:none}
 .brands__row li{flex:1 1 146px;display:grid;place-items:center;height:92px;padding:0 12px}
 .brands__row a{display:grid;place-items:center;width:100%;height:100%;min-height:24px}
-.brands__row img{max-height:44px;width:auto;max-width:100%;object-fit:contain}
+.brands__row img{max-height:44px;width:auto;max-width:100%;object-fit:contain;
+  transition:transform .18s ease}
+.brands__row a:hover img,.brands__row a:focus-visible img{transform:scale(1.12)}
+@media (prefers-reduced-motion:reduce){
+  .brands__row a:hover img,.brands__row a:focus-visible img{transform:none}
+}
 
 @media (max-width:900px){
   .brands{padding:32px 0}
@@ -1171,15 +1176,27 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 
 /* ===== VIDEO BLOCK · node 251:5815 ======================================= */
 
-.vids{background:var(--bg-surface);border-bottom:1px solid var(--border-default);
+/* Dark ground, 2026-08-24 — matches the Figma reference (node 251:5815) and
+   reuses .guides's exact dark palette (#0a0a0a/#2a2a2a) rather than inventing
+   a second one. .vids__rule/.vids__eyebrow/.vids__sub are shared with the News
+   section below, which stays on the light --bg-surface — so their dark colors
+   are scoped under .vids rather than changed at the base. Figma's own literal
+   #b31414 on this ground is ~3:1 (fails 1.4.3 at 12px bold); using this file's
+   existing --accent-red-on-dark instead, same fix already applied to the hero
+   eyebrow and .guide__meta em. */
+.vids{background:#0a0a0a;border-bottom:1px solid #2a2a2a;
   padding:80px 0 81px;text-align:center}
+.vids .vids__rule span{background:#fff}
+.vids .vids__rule span:last-child{background:#4b4b4b}
+.vids .vids__eyebrow{color:var(--accent-red-on-dark)}
+.vids .vids__sub{color:#d1d5db}
 .vids__rule{display:flex;justify-content:center;gap:8px}
 .vids__rule span{width:24px;height:3px;background:var(--bg-inverse)}
 .vids__rule span:last-child{background:#d1d5db}
 .vids__eyebrow{margin:16px 0 0;font:700 12px/14px var(--font-ui);letter-spacing:.88px;
   text-transform:uppercase;color:var(--action-primary)}
 .vids__title{margin:6px 0 0;font-family:var(--font-display);font-weight:800;font-size:40px;
-  line-height:44px;letter-spacing:-.8px;text-transform:uppercase;color:var(--ink);
+  line-height:44px;letter-spacing:-.8px;text-transform:uppercase;color:#fff;
   font-variation-settings:"YTLC" 500,"wdth" 100}
 /* Figma hardcodes #a3acb3 here (2.31:1) — using the corrected muted token */
 .vids__sub{margin:8px 0 0;font:400 14px/21px var(--font-ui);color:var(--text-muted)}
@@ -1223,6 +1240,31 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
   margin:28px 0 0;padding:0;list-style:none;text-align:left}
 .vids__grid::-webkit-scrollbar{display:none}
 .vids__grid > li{flex:0 0 380px;scroll-snap-align:start}
+
+/* Carousel arrows — .vids only (the News section below reuses .vids__grid's
+   own styling but not this wrapper, so it stays arrow-free). Prev starts
+   [hidden]; script.js's scroll listener reveals it once .vids__grid has
+   scrolled away from its start, and hides it again back at the start. */
+.vids__carousel{position:relative;margin-top:28px}
+.vids__carousel .vids__grid{margin-top:0}
+.vids__arrow{position:absolute;top:calc(50% - 20px);z-index:2;
+  width:40px;height:40px;display:grid;place-items:center;padding:0;
+  background:#fff;border:1px solid var(--hairline);border-radius:50%;
+  box-shadow:0 4px 12px rgba(0,0,0,.14);cursor:pointer;
+  transition:border-color .16s ease,background-color .16s ease}
+.vids__arrow[hidden]{display:none}
+.vids__arrow img{width:14px;height:14px}
+/* chevron-right-dark.svg's own artwork points left despite the filename (see
+   .acard__go's identical fix) — prev needs no rotation, next needs 180deg */
+.vids__arrow--prev{left:-20px}
+.vids__arrow--next{right:-20px}
+.vids__arrow--next img{transform:rotate(180deg)}
+.vids__arrow:hover,.vids__arrow:focus-visible{border-color:var(--action-primary);background:var(--surface-sunken)}
+@media (max-width:900px){
+  /* the ≤900px carousel block further down bleeds .vids__grid to the screen
+     edges — arrows would float over content instead of the row's real edge */
+  .vids__arrow{display:none}
+}
 .vid{display:block;background:var(--bg-surface)}
 .vid__thumb{position:relative;display:block;aspect-ratio:406.66/228.73;overflow:hidden;
   background:linear-gradient(151deg,#1c1c20 0%,#0d0d10 60%,#050507 100%)}
@@ -1239,6 +1281,12 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .vid__dot{width:3px;height:3px;border-radius:1.5px;background:#d1d5db}
 .vid__h3{display:block;margin-top:6px;font:700 18px/27px var(--font-ui);
   color:var(--text-primary)}
+/* .vid is shared with the News section's light cards below — these three
+   scoped to .vids only, matching the Figma reference's dark card ground */
+.vids .vid{background:#121212}
+.vids .vid__meta{color:#9ca3af}
+.vids .vid__dot{background:#4b4b4b}
+.vids .vid__h3{color:#fff}
 
 @media (max-width:1024px){ .vids__grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
 @media (max-width:900px){
@@ -1696,6 +1744,8 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
   .dashes span:first-child{background:var(--bg-inverse)}
   .guides .dashes span{background:rgba(255,255,255,.28)}
   .guides .dashes span:first-child{background:#fff}
+  .vids .dashes span{background:rgba(255,255,255,.28)}
+  .vids .dashes span:first-child{background:#fff}
 }
 @media (min-width:901px){ .dashes{display:none} }
 
@@ -5334,12 +5384,13 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
     <div class="shell">
       <div class="vids__rule" aria-hidden="true"><span></span><span></span></div>
       <p class="vids__eyebrow">Perfect your build</p>
-      <h2 class="vids__title" id="vids-title">Install. Dyno. Documentation.</h2>
+      <h2 class="vids__title" id="vids-title">Videos</h2>
       <p class="vids__sub">25 years of build knowledge on tap · <b>4.2M views this year</b></p>
       <a class="vids__cta" href="https://www.youtube.com/@VividRacing" rel="noopener">
         <img src="assets/icons/youtube-f.svg" alt="" aria-hidden="true" width="19" height="14">
         Subscribe on YouTube</a>
-      <ul class="vids__grid">
+      <div class="vids__carousel">
+      <ul class="vids__grid" id="vids-track">
         <li><a class="vid" href="blog.html">
           <span class="vid__thumb">
             <img src="assets/img/video/porsche-exhausts.jpg" alt="" loading="lazy" width="820" height="547" decoding="async">
@@ -5410,6 +5461,15 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
           </span>
         </a></li>
       </ul>
+      <button type="button" class="vids__arrow vids__arrow--prev" aria-label="Scroll videos left"
+        aria-controls="vids-track" hidden>
+        <img src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="14" height="14">
+      </button>
+      <button type="button" class="vids__arrow vids__arrow--next" aria-label="Scroll videos right"
+        aria-controls="vids-track">
+        <img src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="14" height="14">
+      </button>
+      </div>
       <div class="dashes" aria-hidden="true"><span></span><span></span></div>
     </div>
   </section>
@@ -5478,7 +5538,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
   <section class="news" aria-labelledby="news-title">
     <div class="shell">
       <p class="vids__eyebrow">Editorial</p>
-      <h2 class="news__title" id="news-title">News</h2>
+      <h2 class="news__title" id="news-title">Blog</h2>
       <p class="vids__sub">Build references, brand stories, and tech articles · <b>Since 2001</b></p>
       <ul class="vids__grid">
         <li><a class="vid" href="blog.html">
@@ -5509,6 +5569,66 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
           <span class="vid__body">
             <span class="vid__meta">By Ryan Surprise<span class="vid__dot" aria-hidden="true"></span>April 17, 2026</span>
             <span class="vid__h3">Why Rotational Mass Kills Car Performance (And How to Fix It)</span>
+          </span>
+        </a></li>
+        <li><a class="vid" href="blog.html">
+          <span class="vid__thumb">
+            <img src="assets/img/guides/992-coilovers.jpg" alt="" loading="lazy" width="620" height="496" decoding="async">
+            <span class="vid__badge">Suspension</span>
+          </span>
+          <span class="vid__body">
+            <span class="vid__meta">By Ryan Surprise<span class="vid__dot" aria-hidden="true"></span>April 14, 2026</span>
+            <span class="vid__h3">Coilover Break-In: Why Your Ride Feels Harsh for the First 500 Miles</span>
+          </span>
+        </a></li>
+        <li><a class="vid" href="blog.html">
+          <span class="vid__thumb">
+            <img src="assets/img/guides/ecu-tuning.jpg" alt="" loading="lazy" width="620" height="620" decoding="async">
+            <span class="vid__badge">ECU tuning</span>
+          </span>
+          <span class="vid__body">
+            <span class="vid__meta">By Ryan Surprise<span class="vid__dot" aria-hidden="true"></span>April 10, 2026</span>
+            <span class="vid__h3">Stage 1 vs Stage 2 Tunes: What Actually Changes Under the Hood</span>
+          </span>
+        </a></li>
+        <li><a class="vid" href="blog.html">
+          <span class="vid__thumb">
+            <img src="assets/img/guides/m3-brakes.jpg" alt="" loading="lazy" width="620" height="496" decoding="async">
+            <span class="vid__badge">Brakes</span>
+          </span>
+          <span class="vid__body">
+            <span class="vid__meta">By Ryan Surprise<span class="vid__dot" aria-hidden="true"></span>April 7, 2026</span>
+            <span class="vid__h3">Brake Pad Compounds Explained: Street, Track, and Everything Between</span>
+          </span>
+        </a></li>
+        <li><a class="vid" href="blog.html">
+          <span class="vid__thumb">
+            <img src="assets/img/guides/rs6-exhaust.jpg" alt="" loading="lazy" width="620" height="413" decoding="async">
+            <span class="vid__badge">Exhaust</span>
+          </span>
+          <span class="vid__body">
+            <span class="vid__meta">By Ryan Surprise<span class="vid__dot" aria-hidden="true"></span>April 3, 2026</span>
+            <span class="vid__h3">How Valved Exhausts Work (And Why Quiet Mode Isn&rsquo;t Cheating)</span>
+          </span>
+        </a></li>
+        <li><a class="vid" href="blog.html">
+          <span class="vid__thumb">
+            <img src="assets/img/builds/c63-w205.jpg" alt="" loading="lazy" width="700" height="1050" decoding="async">
+            <span class="vid__badge">Maintenance</span>
+          </span>
+          <span class="vid__body">
+            <span class="vid__meta">By Ryan Surprise<span class="vid__dot" aria-hidden="true"></span>March 30, 2026</span>
+            <span class="vid__h3">AMG Air Suspension: Repair It or Convert to Coilovers?</span>
+          </span>
+        </a></li>
+        <li><a class="vid" href="blog.html">
+          <span class="vid__thumb">
+            <img src="assets/img/builds/supra-a90.jpg" alt="" loading="lazy" width="683" height="1024" decoding="async">
+            <span class="vid__badge">Buyer&rsquo;s guide</span>
+          </span>
+          <span class="vid__body">
+            <span class="vid__meta">By Ryan Surprise<span class="vid__dot" aria-hidden="true"></span>March 26, 2026</span>
+            <span class="vid__h3">A90 Supra Turbo Upgrades: What Each Stage Really Costs</span>
           </span>
         </a></li>
       </ul>
@@ -5856,6 +5976,33 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
       if (e.key === 'Escape') { close(); link.focus(); }
     });
   });
+})();
+
+/* Video carousel arrows — right-only at the start; scrolling right reveals
+   the left arrow, and reaching the end hides the right one. */
+(function () {
+  var track = document.getElementById('vids-track');
+  var carousel = track && track.closest('.vids__carousel');
+  if (!track || !carousel) return;
+  var prev = carousel.querySelector('.vids__arrow--prev');
+  var next = carousel.querySelector('.vids__arrow--next');
+
+  function update() {
+    var max = track.scrollWidth - track.clientWidth;
+    prev.hidden = track.scrollLeft <= 4;
+    next.hidden = track.scrollLeft >= max - 4;
+  }
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function scrollByCard(dir) {
+    var card = track.querySelector('li');
+    var amount = card ? card.getBoundingClientRect().width + 18 : track.clientWidth * 0.9;
+    track.scrollBy({ left: dir * amount, behavior: reduceMotion ? 'auto' : 'smooth' });
+  }
+  prev.addEventListener('click', function () { scrollByCard(-1); });
+  next.addEventListener('click', function () { scrollByCard(1); });
+  track.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
 })();
 </script>
 </body>
