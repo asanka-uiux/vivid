@@ -697,42 +697,20 @@
   <section class="browse" aria-labelledby="browse-title">
     <!-- heading · node 251:3167 — was a section of its own (.headband) -->
     <div class="shell browse__band">
-      <p class="browse__eyebrow">200+ brand partners · 1M+ parts</p>
-      <h2 class="browse__title" id="browse-title">Authorized parts by established brands</h2>
+      <p class="browse__eyebrow">Truck platforms · Ford, Ram, Toyota, Jeep, Chevrolet</p>
+      <h2 class="browse__title" id="browse-title">Parts for every truck make & model</h2>
     </div>
     <div class="shell browse__grid">
       <!-- The three family tiles select which marque list shows. They were links to
            other pages; as a mutually-exclusive selector they are a tablist. -->
-      <div class="browse__side" role="tablist" aria-orientation="vertical" aria-label="Vehicle family">
-        <button type="button" class="vtile" role="tab" id="tab-euro" aria-controls="fam-euro"
+      <div class="browse__side" role="tablist" aria-orientation="vertical" aria-label="Truck platforms">
+        <button type="button" class="vtile" role="tab" id="tab-trucks" aria-controls="fam-trucks"
                 aria-selected="true" tabindex="0">
           <img src="assets/img/browse/euro.jpg" alt="" loading="lazy" width="300" height="180" decoding="async">
           <span class="vtile__cap">
             <span>
-              <span class="vtile__name">Euro Vehicles</span>
-              <span class="vtile__sub">Coastal drives</span>
-            </span>
-            <img class="vtile__go" src="assets/icons/arrow-right.svg" alt="" aria-hidden="true" width="14" height="14">
-          </span>
-        </button>
-        <button type="button" class="vtile" role="tab" id="tab-exotic" aria-controls="fam-exotic"
-                aria-selected="false" tabindex="-1">
-          <img src="assets/img/browse/exotic.jpg" alt="" loading="lazy" width="300" height="180" decoding="async">
-          <span class="vtile__cap">
-            <span>
-              <span class="vtile__name">Exotic Vehicles</span>
-              <span class="vtile__sub">Old town charm</span>
-            </span>
-            <img class="vtile__go" src="assets/icons/arrow-right.svg" alt="" aria-hidden="true" width="14" height="14">
-          </span>
-        </button>
-        <button type="button" class="vtile" role="tab" id="tab-jdm" aria-controls="fam-jdm"
-                aria-selected="false" tabindex="-1">
-          <img src="assets/img/browse/jdm.jpg" alt="" loading="lazy" width="300" height="180" decoding="async">
-          <span class="vtile__cap">
-            <span>
-              <span class="vtile__name">JDM Vehicles</span>
-              <span class="vtile__sub">Island escapes</span>
+              <span class="vtile__name">All Trucks</span>
+              <span class="vtile__sub">On-road & off-road</span>
             </span>
             <img class="vtile__go" src="assets/icons/arrow-right.svg" alt="" aria-hidden="true" width="14" height="14">
           </span>
@@ -742,24 +720,24 @@
         <!-- One tabpanel per vehicle family. Inside each, every marque card is a
              disclosure that opens its own panel (Figma 1383:8579 for Euro,
              1617:39532-40852 for Exotic) directly beneath the card. -->
-        <div class="fam" id="fam-euro" role="tabpanel" aria-labelledby="tab-euro" tabindex="0">
+        <div class="fam" id="fam-trucks" role="tabpanel" aria-labelledby="tab-trucks" tabindex="0">
         <div class="afeat">
           <button type="button" class="acard acard--toggle" aria-expanded="false" aria-controls="porsche-panel">
             <img class="acard__thumb" src="assets/img/browse/porsche.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
             <span class="acard__body">
-              <span class="acard__tag">Porsche</span>
-              <span class="acard__head">Refined by repetition, never reinvention. Each generation sharpens one idea until nothing extra remains.</span>
+              <span class="acard__tag">Ford</span>
+              <span class="acard__head">Built tough for American roads. Every generation engineered for capability and performance.</span>
             </span>
             <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
           </button>
           <div class="apanel" id="porsche-panel" hidden>
             <div class="apanel__head">
-              <h3 class="apanel__title">Built for the cars from <em>Stuttgart.</em></h3>
+              <h3 class="apanel__title">Built for <em>Ford</em> trucks.</h3>
             </div>
             <div class="apanel__body">
               <div class="apanel__col">
                 <div class="apanel__flagship">
-                  <p class="apanel__flagship-label">911 GT3 RS &middot; 992</p>
+                  <p class="apanel__flagship-label">F-150 Raptor &middot; 2024</p>
                   <ul class="apanel__subs">
                   <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=911&trim=Carrera">Carrera</a></li>
                   <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=911&trim=Carrera%20S">Carrera S</a></li>
@@ -771,17 +749,17 @@
                   </ul>
                 </div>
                 <ul class="apanel__models">
-                <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=911"><span class="vh">Porsche </span>911</a></li>
-                <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=718"><span class="vh">Porsche </span>718</a></li>
-                <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Cayman"><span class="vh">Porsche </span>Cayman</a></li>
-                <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Boxster"><span class="vh">Porsche </span>Boxster</a></li>
-                <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Macan"><span class="vh">Porsche </span>Macan</a></li>
-                <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Cayenne"><span class="vh">Porsche </span>Cayenne</a></li>
+                <li><a class="mchip" href="waiting-to-build/ford-f150.html"><span class="vh">Ford </span>F-150</a></li>
+                <li><a class="mchip" href="waiting-to-build/ford-bronco.html"><span class="vh">Ford </span>Bronco</a></li>
+                <li><a class="mchip" href="waiting-to-build/ford-ranger.html"><span class="vh">Ford </span>Ranger</a></li>
+                <li><a class="mchip" href="waiting-to-build/ford-maverick.html"><span class="vh">Ford </span>Maverick</a></li>
+                <li><a class="mchip" href="waiting-to-build/ford-f250.html"><span class="vh">Ford </span>F-250</a></li>
+                <li><a class="mchip" href="waiting-to-build/ford-f350.html"><span class="vh">Ford </span>F-350</a></li>
                 <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Panamera"><span class="vh">Porsche </span>Panamera</a></li>
                 <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Taycan"><span class="vh">Porsche </span>Taycan</a></li>
                 </ul>
                 <p class="apanel__cta">
-                  <a class="btn-outline btn-outline--compact" href="waiting-to-build/vivid-classics.html">Shop all Porsche
+                  <a class="btn-outline btn-outline--compact" href="waiting-to-build/ford-trucks.html">Shop all Ford
                     <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
                 </p>
               </div>
