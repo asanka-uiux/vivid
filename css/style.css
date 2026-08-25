@@ -1,7 +1,12 @@
 /* ==========================================================================
-   Vivid Racing — homepage
+   Vivid Racing — homepage (page-specific)
    Desktop: Figma node 1258:60537 (1440 wide)   Mobile layout: node 673:2358 (390)
    Desktop content throughout; mobile frame used for layout/stacking only.
+
+   Everything the header/footer/YMM card need lives in css/shared.css, loaded
+   before this file — this file is only the sections unique to this page
+   (hero body, feature strips, category grid, promos, automaker browse,
+   brand roster, experts, builds, videos, guides, reviews, email capture).
 
    Mobile-first, 2026-08-25 — every rule below states its narrowest (mobile)
    values as the unqueried base; @media (min-width: ...) blocks layer on
@@ -13,400 +18,11 @@
    explicitly restores the correct desktop value rather than leaving it unset.
    ========================================================================== */
 
-:root{
-  /* colour tokens, as bound in Figma */
-  --action-primary:#b31414;
-  --bg-premium:#021f43;
-  --bg-inverse:#000;
-  --bg-surface:#fff;
-  --border-default:#a3acb3;      /* decorative rules only — never text */
-  /* Added 2026-08-19. The .browse section had grown a family of one-off greys
-     doing two jobs between them — #e5e7eb and #e5e5eb for card hairlines,
-     #f9fafb and #f7f8fa for sunken fills, plus #eef0f2 for a divider. Two
-     points of grey apart is invisible; what showed was the absence of a system.
-     One token each, both lighter than --border-default (which is a rules-only
-     mid grey and too heavy to draw a card with). */
-  --hairline:#e5e7eb;            /* card + chip borders on light ground */
-  --surface-sunken:#f9fafb;      /* section ground and chip fill */
-  --text-primary:#000;
-  /* Figma has --text-muted at #a3acb3, which is 2.31:1 on white and fails
-     WCAG 1.4.3. Darkened to the lightest passing neutral: 4.54:1. */
-  --text-muted:#6f7780;
-  --text-on-dark:#fff;
-  --accent-red:#e10600;
-  /* #e10600 and #b31414 both fail as text on black (4.23:1 / 3.03:1).
-     This is the red to use for text on dark surfaces: 5.25:1 on #000. */
-  --accent-red-on-dark:#e04a4a;
-  --ink:#0a0a0a;
-  --field-ink:#1e1e1e;
-
-  --shell:1320px;      /* centred content box */
-  --gutter:16px;        /* inner padding of that box — 28px from tablet up */
-
-  --font-ui:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --font-display:'Nunito Sans','Inter',system-ui,sans-serif;
-  --font-form:'Saira','Inter',system-ui,sans-serif;
-}
-@media (min-width:901px){
-  :root{ --gutter:28px }
-}
-
-*,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{
-  margin:0;
-  background:var(--bg-surface);
-  color:var(--text-primary);
-  font:400 15px/22px var(--font-ui);
-}
-img,svg{display:block;max-width:100%}
-a{color:inherit;text-decoration:none}
-button{font:inherit;color:inherit}
-
-.shell{width:100%;max-width:var(--shell);margin-inline:auto;padding-inline:var(--gutter)}
-
-/* screen-reader-only, still focusable */
-.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
-    clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
-
-.skip{position:absolute;left:0;top:-60px;z-index:100;background:var(--action-primary);
-      color:#fff;padding:12px 20px;font:700 13px/1 var(--font-ui);letter-spacing:.08em;
-      text-transform:uppercase;transition:top .15s}
-.skip:focus{top:0}
-
-:where(a,button,input,select,summary,[tabindex]):focus-visible{
-  outline:3px solid var(--accent-red);outline-offset:2px;
-}
-/* on dark surfaces a red ring can sit too close to the ground — double it.
-   .promo included: .promo--event's own red radial glow would swallow a plain
-   red ring right where it needs to be seen. */
-.brandbar :focus-visible,.ymm :focus-visible,.util--dark:focus-visible,
+/* dark-surface focus ring, as described in shared.css — these two are the
+   page-specific components that also sit on a dark ground */
 .rbar :focus-visible,.promo:focus-visible{
   outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 0 6px rgba(179,20,20,.9);
 }
-
-/* ============================== HEADER ================================== */
-
-/* row 1 — Vivid family brand switcher */
-.brandbar{background:var(--bg-inverse);border-bottom:1px solid rgba(255,255,255,.06)}
-/* horizontal scroll on mobile — the brand list doesn't fit ~360px wide;
-   scrollbar hidden the same way the card carousels further down do */
-.brandbar__list{display:flex;list-style:none;margin:0;padding:0;min-height:34px;
-  overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
-.brandbar__list::-webkit-scrollbar{display:none}
-@media (min-width:1025px){
-  .brandbar__list{overflow-x:visible;scrollbar-width:auto;-ms-overflow-style:auto}
-}
-/* min-height:44px keeps the tab a real touch target on mobile (2.5.8); desktop's
-   own padding (11/18/13) already clears 44px so the explicit floor isn't needed */
-.brandbar__link{display:flex;align-items:center;gap:8px;padding:15px 16px;
-  border-bottom:2px solid transparent;
-  font:700 12px/14px var(--font-ui);letter-spacing:1.47px;text-transform:uppercase;
-  color:var(--text-on-dark);white-space:nowrap;
-  transition:background-color .16s ease,border-color .16s ease;min-height:44px}
-@media (min-width:901px){
-  .brandbar__link{padding:11px 18px 13px;min-height:0}
-}
-.brandbar__dot{width:6px;height:6px;border-radius:3px;background:var(--bg-surface);
-  opacity:.55;flex:none;transition:opacity .16s ease}
-.brandbar__link[aria-current="page"]{background:rgba(179,20,20,.08);
-  border-bottom-color:var(--action-primary)}
-.brandbar__link[aria-current="page"] .brandbar__dot{background:var(--action-primary);opacity:1}
-/* :not([aria-current="page"]) so hovering the already-active tab doesn't
-   fight its own red underline/background above */
-.brandbar__link:not([aria-current="page"]):hover,
-.brandbar__link:not([aria-current="page"]):focus-visible{
-  background:rgba(255,255,255,.06);border-bottom-color:rgba(255,255,255,.35)}
-.brandbar__link:not([aria-current="page"]):hover .brandbar__dot,
-.brandbar__link:not([aria-current="page"]):focus-visible .brandbar__dot{opacity:1}
-
-/* row 2 — logo · search · utilities */
-.masthead{background:var(--bg-surface);border-bottom:1px solid var(--border-default)}
-.masthead__inner{display:flex;align-items:center;gap:6px;height:52px}
-@media (min-width:361px){ .masthead__inner{gap:12px} }
-@media (min-width:1025px){ .masthead__inner{gap:24px;height:80px} }
-
-/* mobile: logo is a 44px touch target with its own centering; desktop: a
-   plain inline link sized entirely by its image (natural inline flow) */
-.logo{flex:none;display:flex;align-items:center;min-height:44px}
-@media (min-width:901px){ .logo{min-height:0;display:inline} }
-.logo img{width:118px;height:24px}
-@media (min-width:361px){ .logo img{width:150px;height:31px} }
-@media (min-width:1025px){ .logo img{width:183px;height:38px} }
-
-/* mobile/tablet: search collapses to a 44px icon-only tile, pushed to the end
-   of the reordered row (order:2, margin-left:auto); desktop: the full
-   462px-flex search field back in its natural first position */
-.search{flex:0 1 462px;display:flex;align-items:stretch;height:44px;
-  border:0;background:var(--bg-surface);padding:0;
-  transition:background-color 150ms,border-color 150ms,color 150ms;
-  max-width:none;width:44px;margin-left:auto;order:2}
-@media (min-width:1025px){
-  .search{height:56px;border:2px solid var(--ink);padding:2px;
-    max-width:340px;width:auto;order:0;margin-left:0}
-}
-@media (min-width:1181px){ .search{max-width:none} }
-.search__field{flex:1 1 auto;min-width:0;border:0;padding:0 20px;
-  font:400 15px/22px var(--font-ui);color:var(--text-primary);background:transparent;
-  display:none}
-@media (min-width:1025px){ .search__field{display:inline-block} }
-.search__field::placeholder{color:var(--text-muted)}
-.search__field:focus{outline:0}
-.search:focus-within{outline:3px solid var(--accent-red);outline-offset:2px}
-.search__submit{flex:none;display:flex;align-items:center;gap:10px;padding:0;
-  border:0;background:transparent;color:var(--text-on-dark);cursor:pointer;
-  font:700 12px/17px var(--font-ui);letter-spacing:1.44px;text-transform:uppercase;
-  width:44px;height:44px;justify-content:center}
-@media (min-width:1025px){
-  .search__submit{padding:0 26px;background:var(--bg-inverse);
-    width:auto;height:auto;justify-content:normal}
-}
-.search__submit svg{width:18px;height:18px;fill:var(--text-primary);flex:none}
-@media (min-width:1025px){ .search__submit svg{fill:currentColor} }
-/* "Search" label is icon-only until desktop restores the visible word */
-.search__submit .search__submit-text{position:absolute;width:1px;height:1px;margin:-1px;
-  padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
-@media (min-width:1025px){
-  .search__submit .search__submit-text{position:static;width:auto;height:auto;margin:0;
-    padding:0;overflow:visible;clip:auto;clip-path:none;white-space:normal;border:0}
-}
-
-/* De-noised 2026-08-20 — layout/content unchanged, only spacing + sizing:
-   1. Dividers were full-height (54px), edge to edge, on .utils AND on every
-      .util — 4 hard vertical rules stacked right next to 4 dense two-line
-      items read as a grid. Same divider, now a short centred tick (24px) via
-      ::after instead of a border, so it separates without drawing a cage.
-   2. .util padding went from an asymmetric 18/19px to an even, slightly
-      larger 22px — more air around each item before its neighbour's divider.
-   3. The two icon TREATMENTS (red/dark 38px filled tiles vs. 28px plain line
-      glyphs) alternate heavy-light-light-heavy across the row, which is what
-      actually reads as "busy" at a glance. Narrowing the size gap between
-      them (38→36, 28→30) softens that zig-zag without restyling either
-      treatment — still two tiles + two glyphs, just closer in visual weight. */
-.utils{flex:none;margin-left:auto;display:flex;align-items:stretch;height:auto;
-  order:3;border-left:0}
-@media (min-width:1025px){ .utils{height:54px;order:0;border-left:0} }
-.util{position:relative;display:flex;align-items:center;gap:12px;padding:0 2px;
-  transition:background-color 150ms,border-color 150ms,color 150ms;border-right:0}
-@media (min-width:901px){ .util{padding:0 6px} }
-@media (min-width:1025px){ .util{padding:10px 22px;border-right:0} }
-/* the badge's own padding/radius grew (10px 8px, 24px), so its right edge now
-   sits past the tile and a few px into "CART" at the default 12px gap — a
-   wider gap just on this item clears it instead of shrinking the badge back */
-.util--cart{gap:20px}
-.util::after{content:"";position:absolute;right:0;top:50%;width:1px;height:24px;
-  transform:translateY(-50%);background:var(--border-default)}
-.utils > :last-child::after{content:none}
-.util__tile{flex:none;display:grid;place-items:center;width:44px;height:44px}
-@media (min-width:901px){ .util__tile{width:34px;height:34px} }
-@media (min-width:1025px){ .util__tile{width:36px;height:36px} }
-.util__tile--red{background:transparent}
-@media (min-width:1025px){ .util__tile--red{background:var(--action-primary)} }
-.util__tile--dark{background:transparent;position:relative}
-@media (min-width:1025px){ .util__tile--dark{background:var(--bg-inverse)} }
-.util__tile svg{width:17px;height:17px;fill:var(--text-primary)}
-@media (min-width:1025px){ .util__tile svg{fill:#fff} }
-.util__glyph{flex:none;display:grid;place-items:center;width:44px;height:44px}
-@media (min-width:901px){ .util__glyph{width:34px;height:34px} }
-@media (min-width:1025px){ .util__glyph{width:30px;height:30px} }
-.util__glyph svg{width:20px;height:20px;fill:var(--text-primary)}
-@media (min-width:361px){ .util__glyph svg{width:23px;height:23px} }
-.util__label{display:block;font:600 10px/14px var(--font-ui);letter-spacing:.72px;
-  text-transform:uppercase;color:var(--text-muted);font-size:11px}
-@media (min-width:1181px){ .util__label{font-size:10px} }
-.util__value{display:block;font:700 14px/21px var(--font-ui);letter-spacing:-.065px;
-  color:var(--text-primary);font-size:11px}
-@media (min-width:1181px){ .util__value{font-size:14px} }
-.util__value--phone{font-weight:800;letter-spacing:-.14px}
-/* value's own text is icon-only on mobile too (phone number/wishlist count) —
-   same visually-hidden-until-desktop pattern as the search label above */
-.util__text{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
-  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
-@media (min-width:1025px){
-  .util__text{position:static;width:auto;height:auto;margin:0;padding:0;
-    overflow:visible;clip:auto;clip-path:none;white-space:normal;border:0}
-}
-/* phone number and wishlist count are hidden below the point they'd otherwise
-   crowd the row; both carry the .util class too, so this only needs to state
-   the exception in each direction */
-.util--phone,.util--wish{display:none}
-@media (min-width:1025px){ .util--phone,.util--wish{display:flex} }
-.util__badge{position:absolute;top:-4px;left:auto;right:-6px;min-width:16px;height:16px;
-  display:flex;align-items:center;justify-content:center;padding:3px 5px;
-  border:2px solid #fff;border-radius:24px;background:var(--action-primary);
-  font:700 12px/14px var(--font-ui);color:#fff;font-size:11px;line-height:11px}
-@media (min-width:1025px){
-  .util__badge{top:-6px;left:24px;right:auto;min-width:18px;height:18px;
-    padding:10px 8px;font-size:12px;line-height:14px}
-}
-
-/* row 3 — category nav + promos. Desktop-only: replaced below 1024px by
-   .mobrow's own hamburger/search/utility row (see MOBILE HEADER section). */
-/* position:relative so the mega menu (.mega) — nested inside a .subnav__item
-   several levels down — can anchor to THIS element's full-viewport-wide box
-   with position:absolute;left:0;right:0, rather than the width of whatever
-   li/ul happens to be its literal DOM parent. */
-.subnav{position:relative;background:var(--bg-surface);border-bottom:1px solid var(--border-default);
-  display:none}
-@media (min-width:1025px){ .subnav{display:block} }
-.subnav__inner{display:flex;align-items:center;gap:20px;height:50px}
-.subnav__list{display:flex;align-items:center;gap:20px;list-style:none;margin:0;padding:0}
-.subnav__link{display:flex;align-items:center;gap:6px;padding:15px 0;
-  font:600 14px/21px var(--font-ui);color:var(--text-primary);white-space:nowrap;
-  transition:background-color 150ms,border-color 150ms,color 150ms;min-height:44px}
-@media (min-width:901px){ .subnav__link{min-height:0} }
-.subnav__link svg{width:12px;height:12px;stroke:#6b7280;fill:none;
-  stroke-linecap:round;stroke-linejoin:round}
-/* min-height keeps these standalone links at the 24px target minimum (2.5.8) */
-.subnav__promo{display:flex;align-items:center;min-height:24px;
-  font:600 12px/17px var(--font-ui);letter-spacing:1.2px;
-  text-transform:uppercase;color:var(--action-primary);white-space:nowrap}
-.subnav__spacer{flex:1 1 auto}
-.subnav__divider{color:var(--text-muted)}
-.subnav__fin{display:flex;align-items:center;gap:12px;min-height:24px;white-space:nowrap;
-  font:700 12px/17px var(--font-ui);letter-spacing:1.2px;text-transform:uppercase}
-.subnav__fin em{font-style:normal;color:var(--action-primary)}
-.subnav__finlogos{display:flex;align-items:center;gap:8px;height:22px;padding-left:13px;
-  border-left:1px solid var(--border-default)}
-.subnav__finlogos img{height:16px;width:auto;opacity:.85}
-/* Affirm / Katapult optical lockup, 2026-08-19 — measured off the pixels, not
-   set by eye. Equal box heights do NOT give equal letter sizes here: affirm.png
-   is 100% ink with its swoosh reaching far above the letters, so its x-height is
-   only 41.8% of its canvas, while the supplied Katapult art carried 49px of
-   transparent padding and sat at 27.7%. At the shared height:16px the Katapult
-   wordmark rendered about two thirds the size of Affirm's.
-   Fixed in the asset: katapult.webp is re-cropped to its ink and re-padded so
-   its x-height is 42.5% of canvas — matching Affirm to within 1%, so both now
-   size correctly off one shared height and every other page picks it up too.
-   What the asset cannot fix is the baseline: Katapult has a 'p' descender and
-   Affirm effectively has none (1px), so their baselines sit at 83.6% and 98.6%
-   of canvas. Centred at 16px that leaves Katapult's baseline 2.4px high — hence
-   the nudge, which is the one thing left doing optical work in CSS. */
-.subnav__finlogos img[alt="Katapult"]{transform:translateY(2px)}
-/* was 3px, tuned for the old (broken/distorted) 20px height. Now that
-   .finance__chip img is 16px too — same height as this pair above — the
-   correct nudge is the same 2px. */
-.finance__chip img[alt="Katapult"]{transform:translateY(2px)}
-
-/* ===== SUSPENSION MEGA MENU · Figma VWl8YFYeeS1d3nGfsliTtI, node 305:1754 ===
-   Desktop-only (.subnav's own display:none below 1025px covers this — the
-   mega menu never opens on mobile since there's no hover, and the trigger
-   itself doesn't render).
-   Full viewport width, not just full .shell width — .mega is positioned off
-   .subnav (see the position:relative note on that rule above), which itself
-   already spans edge-to-edge, so left:0;right:0 here reaches the browser
-   window, not just the 1320px content column. The content INSIDE still uses
-   .shell so its three columns line up under the same gutter as the rest of
-   the page.
-   Reveal is opacity/visibility/transform, not display — display can't
-   transition, and this project's own convention (.mchip, .cat__arrow, …) is
-   reveal-and-nudge, never a hard cut. visibility:hidden doubles as the a11y
-   guard: it drops the panel's links out of tab order and the a11y tree on its
-   own, so no separate aria-hidden bookkeeping is needed on the panel itself —
-   aria-expanded on the trigger link (kept in sync by the script at the bottom
-   of the page) is the single source of truth for assistive tech. */
-/* .subnav__item deliberately does NOT get position:relative — that would make
-   the <li> itself (only ~90px wide) the nearest positioned ancestor for .mega
-   below, instead of .subnav, and the panel would anchor to the link's own
-   width rather than the full nav. .subnav is already position:relative
-   (above), and CSS walks past this non-positioned li straight to it. */
-.mega{position:absolute;top:100%;left:0;right:0;z-index:20;
-  background:var(--bg-surface);border-bottom:3px solid var(--action-primary);
-  box-shadow:0 26px 50px -18px rgba(10,10,10,.22);
-  opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-6px);
-  transition:opacity .16s ease,transform .16s ease,visibility .16s}
-.subnav__item:hover .mega,.subnav__item:focus-within .mega{
-  opacity:1;visibility:visible;pointer-events:auto;transform:none}
-@media (prefers-reduced-motion:reduce){.mega{transition:opacity .01ms;transform:none}}
-
-.mega__inner{display:flex;flex-wrap:wrap;gap:72px;padding:36px 0}
-.mega__cols{flex:1 1 480px;min-width:0;display:flex;gap:56px}
-.mega__col{flex:1 1 0;min-width:0}
-/* the extra 24px (on top of the 32px column gap) is the divider's own
-   breathing room, same rhythm as the 24px used everywhere else on this page */
-.mega__col--brands{flex-basis:0%;padding-left:24px;border-left:1px solid var(--hairline)}
-.mega__label{display:flex;align-items:center;gap:6px;margin:0 0 14px;
-  padding-bottom:9px;border-bottom:1px solid var(--hairline);
-  font:600 13px/16px var(--font-ui);letter-spacing:.7px;text-transform:uppercase;
-  color:var(--text-muted)}
-.mega__label img{flex:none}
-.mega__list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px}
-.mega__list a{display:block;font:500 14px/17px var(--font-ui);color:var(--ink);
-  transition:color .16s ease}
-.mega__list a:hover,.mega__list a:focus-visible{color:var(--action-primary);
-  text-decoration:underline}
-.mega__list--bold a{font-weight:700}
-.mega__cta{display:inline-flex;align-items:center;gap:5px;margin-top:16px;
-  font:700 11px/14px var(--font-ui);letter-spacing:1.2px;text-transform:uppercase;
-  color:var(--action-primary)}
-.mega__cta img{transition:transform .18s ease}
-.mega__cta:hover img,.mega__cta:focus-visible img{transform:translateX(3px)}
-
-/* feature — a placeholder product/promo tile, per the mockup: a flat dark
-   panel standing in for a real photo, not a broken-image state. */
-.mega__feature{flex:0 0 296px;display:block;border:1px solid var(--hairline);
-  border-radius:4px;overflow:hidden;transition:border-color .16s ease}
-.mega__feature:hover,.mega__feature:focus-visible{border-color:var(--action-primary)}
-/* was a flat placeholder box (background:var(--bg-inverse), no img) — now
-   holds a real photo. background stays as the letterbox colour behind
-   object-fit:cover on any photo whose aspect doesn't exactly match 296x150. */
-.mega__feature-img{display:block;position:relative;height:150px;overflow:hidden;
-  background:var(--bg-inverse)}
-.mega__feature-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.mega__feature-img::before{content:"";position:absolute;left:0;top:0;z-index:1;
-  width:118px;height:3px;background:var(--action-primary)}
-.mega__feature-body{display:flex;flex-direction:column;gap:5px;padding:15px 16px 16px}
-.mega__feature-eyebrow{font:700 11px/14px var(--font-ui);letter-spacing:1.4px;
-  text-transform:uppercase;color:var(--action-primary)}
-.mega__feature-title{font:800 17px/22px var(--font-ui);color:var(--ink)}
-.mega__feature-body .mega__cta{margin-top:2px}
-
-@media (prefers-reduced-motion:reduce){
-  .mega__cta img,.mega__feature{transition:none}
-  .mega__cta:hover img,.mega__cta:focus-visible img{transform:none}
-}
-
-/* ============================== INTERACTION STATES ======================== */
-
-/* Hover: search field and submit */
-.search:hover{border-color:var(--action-primary)}
-.search__field:hover{outline:0}
-.search__submit:hover{background:rgba(0,0,0,.9)}
-
-/* Hover: utility buttons */
-.util:hover{background:rgba(0,0,0,.04)}
-.util:active{background:rgba(0,0,0,.08)}
-
-/* Hover: subnav category links */
-.subnav__link:hover{border-bottom:2px solid var(--action-primary);padding-bottom:13px}
-.subnav__link:active{color:var(--action-primary)}
-
-/* Hover: chat and burger buttons */
-.chat:hover{background:rgba(255,255,255,.12)}
-.chat:active{background:rgba(255,255,255,.18)}
-.burger:hover{background:rgba(255,255,255,.08)}
-.burger:active{background:rgba(255,255,255,.12)}
-
-/* Disabled states — opacity only (avoids contrast issues across backgrounds) */
-button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
-
-/* Transitions for hover polish */
-.search,.util,.subnav__link,.chat,.burger,button{transition:background-color 150ms,border-color 150ms,color 150ms}
-
-/* mobile-only header row — .subnav's own min-width:1025px switch-on is its
-   desktop-side counterpart, so the two never show at once */
-.mobrow{display:block;background:var(--bg-inverse)}
-@media (min-width:1025px){ .mobrow{display:none} }
-.mobrow__inner{display:flex;align-items:center;justify-content:space-between;height:50px}
-.chat{display:flex;align-items:center;gap:8px;padding:8px 10px;background:#1f1f1f;
-  color:#fff;font:700 13px/1 var(--font-ui);border:0;cursor:pointer;
-  font-size:12px;min-height:44px}
-@media (min-width:361px){ .chat{padding:8px 14px;font-size:13px} }
-@media (min-width:901px){ .chat{min-height:0} }
-.chat svg{width:16px;height:16px;fill:#fff}
-.burger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;
-  height:44px;padding:0 8px;background:transparent;border:0;cursor:pointer}
-.burger span{display:block;height:3px;background:#fff}
 
 /* =============================== HERO =================================== */
 
@@ -416,7 +32,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 /* NB: block, not flex — in a flex container the <b> becomes its own flex item
    and the whitespace around it is dropped ("use code:VIVID15at checkout"). */
 .deal{margin:0;min-height:36px;padding:8px 16px;background:var(--bg-premium);
-  text-align:center;font:600 12px/17px var(--font-ui);letter-spacing:1px;color:#fff}
+  text-align:center;font:600 10px/14px var(--font-ui);letter-spacing:1.5px;color:#fff}
 @media (min-width:901px){ .deal{padding:9px 20px;letter-spacing:1.5px} }
 .deal b{font-weight:900}
 
@@ -456,7 +72,9 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .hero__copy{flex:0 1 auto;min-width:0;display:contents;flex-direction:column}
 @media (min-width:901px){ .hero__copy{flex-direction:row;display:block} }
 
-.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:7px 13px;
+/* Figma's mobile hero (node 673:2358) has no eyebrow at all — title runs
+   straight into the YMM card. It's a desktop-only addition. */
+.eyebrow{display:none;align-items:center;gap:10px;padding:7px 13px;
   background:#9a2020;border:1px solid var(--action-primary);
   font:700 12px/14px var(--font-ui);letter-spacing:.88px;text-transform:uppercase;
   color:var(--text-on-dark);order:2;align-self:center;margin-top:20px}
@@ -465,14 +83,14 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
    margin there — `revert` restores exactly that instead of hardcoding 12px,
    which would silently drift if the eyebrow's font-size ever changes.
    Faithfully reproduced, not "fixed". */
-@media (min-width:901px){ .eyebrow{order:0;align-self:auto;margin-top:revert} }
+@media (min-width:901px){ .eyebrow{display:inline-flex;order:0;align-self:auto;margin-top:revert} }
 .eyebrow::before{content:"";width:6px;height:6px;border-radius:3px;
   background:var(--action-primary);opacity:.41;flex:none}
 
 .hero__title{margin:0;font-family:var(--font-display);font-weight:900;
   font-size:34px;line-height:38px;letter-spacing:-.8px;text-transform:uppercase;
   color:#fff;font-variation-settings:"YTLC" 500,"wdth" 100;order:1}
-@media (min-width:361px){ .hero__title{font-size:40px;line-height:44px} }
+@media (min-width:361px){ .hero__title{font-size:48px;line-height:48px} }
 @media (min-width:901px){
   .hero__title{margin:14px 0 0;font-size:64px;line-height:64px;letter-spacing:-1.3px;order:0}
 }
@@ -535,37 +153,6 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
   font-variation-settings:"YTLC" 500,"wdth" 100}
 .stats__suffix{font:800 18px/27px var(--font-ui);color:var(--accent-red-on-dark)}
 
-/* Shop by vehicle card */
-/* Trimmed for the 75vh hero above — 6 selects stacked in one card add up
-   fast, so this is spacing/sizing only (same 6 fields, same button, same
-   type), squeezed enough that the card's natural height clears typical
-   desktop/laptop viewports without .hero__stage ever needing to clip it. */
-.ymm{flex:none;width:100%;padding:1px;background:rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.18);box-shadow:0 4px 30px rgba(0,0,0,.25);
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  display:flex;flex-direction:column;gap:8px;order:2;max-width:none;margin-top:22px}
-@media (min-width:901px){ .ymm{width:450px;order:0;margin-top:0;max-width:none} }
-.ymm__title{margin:0;padding:10px 16px;background:var(--bg-inverse);
-  border-bottom:2px solid rgba(155,27,27,.65);text-align:center;
-  font-family:var(--font-form);font-weight:600;font-size:16px;line-height:24px;
-  text-transform:uppercase;color:#fff;font-variation-settings:"wdth" 100}
-.ymm__fields{display:flex;flex-direction:column;gap:12px;padding:14px 18px 8px}
-.ymm__select{width:100%;appearance:none;-webkit-appearance:none;
-  padding:10px 40px 10px 14px;background-color:rgba(255,255,255,.92);
-  background-image:url("../assets/icons/chevron-down.svg");
-  background-repeat:no-repeat;background-position:right 15px center;
-  background-size:11px 7px;
-  border:1px solid rgba(255,255,255,.25);border-radius:4px;
-  font-family:var(--font-form);font-weight:600;font-size:16px;line-height:24px;
-  text-transform:uppercase;color:var(--field-ink);
-  font-variation-settings:"wdth" 100;cursor:pointer;min-height:48px}
-@media (min-width:901px){ .ymm__select{min-height:0} }
-.ymm__cta{padding:8px 18px 12px}
-.ymm__button{display:block;width:100%;padding:12px;background:var(--action-primary);
-  border:0;border-radius:4px;cursor:pointer;text-align:center;
-  font-family:var(--font-form);font-weight:600;font-size:16px;line-height:24px;
-  text-transform:uppercase;color:#fff;font-variation-settings:"wdth" 100;min-height:48px}
-@media (min-width:901px){ .ymm__button{min-height:0} }
 
 /* ===== FEATURE STRIPS (nodes 1533:13029 trust · 251:5437 promise) ======== */
 
@@ -629,10 +216,10 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .cats{background:var(--bg-surface);padding-top:40px}
 @media (min-width:901px){ .cats{padding-top:60px} }
 .cats__head{padding-bottom:21px}
-.cats__eyebrow{margin:0;font:700 12px/14px var(--font-ui);letter-spacing:.88px;
+.cats__eyebrow{margin:0;font:700 11px/15px var(--font-ui);letter-spacing:.88px;
   text-transform:uppercase;color:var(--action-primary)}
 .cats__title{margin:6px 0 0;font-family:var(--font-display);font-weight:800;
-  font-size:28px;line-height:32px;letter-spacing:-.5px;text-transform:uppercase;
+  font-size:30px;line-height:34px;letter-spacing:-.5px;text-transform:uppercase;
   color:var(--ink);font-variation-settings:"YTLC" 500,"wdth" 100}
 @media (min-width:901px){ .cats__title{font-size:40px;line-height:44px;letter-spacing:-.8px} }
 .cats__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;
@@ -725,15 +312,18 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
   border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
 .sale__photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   object-position:center 45%}
-.sale__inner{position:relative;display:flex;align-items:center;min-height:220px;
-  width:100%;max-width:var(--shell);margin-inline:auto;padding:32px var(--gutter)}
+.sale__inner{position:relative;display:flex;align-items:center;justify-content:center;
+  min-height:400px;width:100%;max-width:var(--shell);margin-inline:auto;
+  padding:32px var(--gutter)}
 @media (min-width:901px){
-  .sale__inner{min-height:400px;padding:48px 32px}
+  .sale__inner{justify-content:flex-start;padding:48px 32px}
 }
 .sale__title{margin:0;font-family:var(--font-display);font-weight:800;
-  font-size:clamp(38px,8.4vw,120px);line-height:1.06;letter-spacing:-2px;
-  text-transform:uppercase;color:#fff;font-variation-settings:"YTLC" 500,"wdth" 100;
+  font-size:clamp(72px,8.4vw,120px);line-height:1.06;letter-spacing:-2px;
+  text-transform:uppercase;color:#fff;text-align:center;
+  font-variation-settings:"YTLC" 500,"wdth" 100;
   text-shadow:0 4px 4px rgba(0,0,0,.25),4px 4px 12px rgba(0,0,0,.5)}
+@media (min-width:901px){ .sale__title{text-align:left} }
 .sale__title em{font-style:normal;color:var(--action-primary);
   text-decoration:underline;text-underline-position:from-font}
 
@@ -741,25 +331,16 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 
 .promos{background:var(--bg-surface);padding:40px 0}
 @media (min-width:901px){ .promos{padding:60px 0} }
-/* mobile: horizontal scroll carousel, one card peeking at the edge; tablet+:
-   a real grid (2-col, then 4-col from 1181px up) */
-.promos__row{display:flex;grid-template-columns:none;gap:12px;margin:0;
-  padding:0 var(--gutter);list-style:none;flex-direction:row;flex-wrap:nowrap;
-  overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling:touch;margin-inline:calc(var(--gutter) * -1);
-  scrollbar-width:none}
-@media (min-width:901px){
-  .promos__row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));padding:0;
-    flex-direction:row;flex-wrap:nowrap;overflow-x:visible;overscroll-behavior-x:auto;
-    scroll-snap-type:none;-webkit-overflow-scrolling:auto;margin-inline:0;scrollbar-width:auto}
-}
-.promos__row > li{flex:0 0 84%;max-width:340px;scroll-snap-align:start}
-@media (min-width:901px){
-  .promos__row > li{flex:0 1 auto;max-width:none;scroll-snap-align:none}
-}
+/* mobile: fixed 2x2 grid, all four tiles visible at once (no carousel — Figma's
+   mobile frame shows a static grid here, unlike the guides/videos carousels
+   elsewhere on the page); tablet+ widens to 4-col from 1181px up */
+.promos__row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;
+  margin:0;padding:0 var(--gutter);list-style:none}
+@media (min-width:901px){ .promos__row{gap:12px;padding:0} }
 @media (min-width:1181px){ .promos__row{grid-template-columns:repeat(4,minmax(0,1fr))} }
-.promo{position:relative;display:block;aspect-ratio:305/190.625;overflow:hidden;
+.promo{position:relative;display:block;aspect-ratio:151/155;overflow:hidden;
   background:var(--bg-inverse)}
+@media (min-width:901px){ .promo{aspect-ratio:305/190.625} }
 /* bottom scrim so the copy stays legible over each tile's gradient */
 .promo::before{content:"";position:absolute;inset:0;
   background:linear-gradient(180deg,rgba(10,10,10,0) 0%,rgba(10,10,10,.35) 45%,
@@ -784,11 +365,11 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .promo__body{position:absolute;left:18px;right:18px;bottom:16px;z-index:2;
   display:flex;flex-direction:column;align-items:flex-start;gap:6px}
 .promo__kicker{padding:4px 6px;background:var(--bg-inverse);border-left:2px solid #fff;
-  font:700 12px/14px var(--font-ui);letter-spacing:1px;text-transform:uppercase;color:#fff}
-.promo__title{margin:0;font-family:var(--font-display);font-weight:900;font-size:24px;
-  line-height:28px;letter-spacing:-.3px;text-transform:uppercase;color:#fff;
+  font:700 10px/13px var(--font-ui);letter-spacing:1px;text-transform:uppercase;color:#fff}
+.promo__title{margin:0;font-family:var(--font-display);font-weight:900;font-size:20px;
+  line-height:25px;letter-spacing:-.2px;text-transform:uppercase;color:#fff;
   font-variation-settings:"YTLC" 500,"wdth" 100}
-@media (min-width:901px){ .promo__title{font-size:30px;line-height:34px} }
+@media (min-width:901px){ .promo__title{font-size:30px;line-height:34px;letter-spacing:-.3px} }
 .promo__sub{margin:2px 0 0;font:400 12px/17px var(--font-ui);color:var(--text-on-dark)}
 
 /* each tile's own ground, per Figma */
@@ -797,11 +378,14 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
   linear-gradient(148deg,#0a0a0a 0%,#1a1a1f 100%)}
 .promo--event::before{background:linear-gradient(180deg,rgba(10,10,10,0) 0%,
   rgba(225,6,0,.18) 50%,rgba(10,10,10,.92) 100%)}
+.promo--event .promo__kicker{border-left-color:var(--action-primary)}
 .promo--ship{background:linear-gradient(148deg,#1a1a1f 0%,#0a0a0a 100%)}
+.promo--ship .promo__kicker{border-left-color:#16a34a;color:#4ade80}
 .promo--new{background:linear-gradient(148deg,#2a2a2d 0%,#0a0a0a 60%)}
 .promo--top{background:
   radial-gradient(60% 90% at 50% 85%,rgba(245,158,11,.25),transparent 62%),
   linear-gradient(148deg,#1a1a1f 0%,#0a0a0a 100%)}
+.promo--top .promo__kicker{border-left-color:#f59e0b;color:#f59e0b}
 
 /* ===== BROWSE BY FAMILY / AUTOMAKER · node 1746:11122 ==================== */
 /* The centred heading is node 251:3167. It used to sit in a <section> of its own
@@ -857,27 +441,28 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .browse__main{flex:1 1 auto;min-width:0;display:flex;flex-direction:column}
 .fam{display:flex;flex-direction:column;gap:16px}
 .fam[hidden]{display:none}
-/* narrow phones let the acard row wrap (icon+text+chevron won't fit one
-   line under ~640px); tablet up keeps it a single row */
-.acard{display:flex;align-items:center;justify-content:space-between;gap:24px;
+/* Figma mobile (node I1573:33884;1566:32503, "article-card-4") runs thumb+text+
+   chevron as one compact row even at 390px — a 116×81 thumbnail, not the
+   full-width stacked image this used to fall back to below 641px. */
+.acard{display:flex;align-items:center;justify-content:space-between;gap:12px;
   background:var(--bg-surface);border:1px solid var(--hairline);padding:12px;
-  transition:border-color .16s ease,box-shadow .18s ease;border-radius:4px;flex-wrap:wrap}
-@media (min-width:641px){ .acard{padding:12px 24px 12px 12px;flex-wrap:nowrap} }
-.acard__thumb{flex:none;width:100%;height:170px;border-radius:4px;object-fit:cover}
+  transition:border-color .16s ease,box-shadow .18s ease;border-radius:4px;flex-wrap:nowrap}
+@media (min-width:641px){ .acard{gap:24px;padding:12px 24px 12px 12px} }
+.acard__thumb{flex:none;width:116px;height:81px;border-radius:4px;object-fit:cover}
 @media (min-width:641px){ .acard__thumb{width:208px;height:126px} }
 .acard__body{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;
   align-items:flex-start;gap:12px}
-.acard__tag{padding:6px 12px;background:var(--action-primary);
-  font-family:var(--font-display);font-weight:900;font-size:19px;line-height:1.15;
+.acard__tag{padding:4px 8px;background:var(--action-primary);
+  font-family:var(--font-display);font-weight:900;font-size:12px;line-height:16px;
   letter-spacing:1px;text-transform:uppercase;color:var(--text-on-dark);
   font-variation-settings:"YTLC" 500,"wdth" 100}
-@media (min-width:641px){ .acard__tag{font-size:24px} }
-.acard__head{margin:0;font:500 16px/20px var(--font-ui);color:var(--ink)}
-/* the toggle chevron is dropped below ~640px — with the row wrapping there's
-   no single trailing edge left for it to sit against */
+@media (min-width:641px){ .acard__tag{font-size:24px;padding:6px 12px;line-height:1.15} }
+.acard__head{margin:0;font:500 13px/15px var(--font-ui);color:var(--ink)}
+@media (min-width:641px){ .acard__head{font-size:16px;line-height:20px} }
+/* chevron is visible at every width per Figma — it used to drop below ~640px
+   from the old wrap fallback, which no longer applies */
 .acard__go{flex:none;width:12px;height:24px;transform:rotate(180deg);
-  transition:margin-right .18s ease,filter .16s ease;display:none}
-@media (min-width:641px){ .acard__go{display:block} }
+  transition:margin-right .18s ease,filter .16s ease;display:block}
 
 .browse__cta{display:flex;justify-content:center;padding-top:4px}
 /* Quieting the family-level CTA, 2026-08-19. Once the per-brand "Shop all X"
@@ -1211,9 +796,9 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .brands{background:var(--bg-surface);border-bottom:1px solid var(--border-default);
   padding:32px 0}
 @media (min-width:901px){ .brands{padding:48px 0 49px} }
-.brands__title{margin:0;text-align:center;font:600 24px/1.3 var(--font-ui);
-  letter-spacing:.5px;text-transform:uppercase;color:var(--text-muted);font-size:15px}
-@media (min-width:901px){ .brands__title{letter-spacing:.88px;font-size:24px} }
+.brands__title{margin:0;text-align:center;font:700 11px/14px var(--font-ui);
+  letter-spacing:.88px;text-transform:uppercase;color:var(--text-muted)}
+@media (min-width:901px){ .brands__title{font:600 24px/1.3 var(--font-ui);letter-spacing:.88px} }
 .brands__row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
   margin:24px 0 0;padding:0;list-style:none}
 .brands__row li{flex:1 1 100px;display:grid;place-items:center;height:64px;padding:0 12px}
@@ -1230,22 +815,23 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 
 /* ===== THE EXPERTS · node 251:5664 ======================================= */
 
-.experts{background:var(--bg-surface);border-top:1px solid #c90500;
-  border-bottom:1px solid #c90500;padding:32px var(--gutter)}
+.experts{background:var(--bg-surface);border-top:1px solid var(--action-primary);
+  border-bottom:1px solid var(--action-primary);padding:24px var(--gutter)}
 @media (min-width:1181px){ .experts{padding:36px 48px 36px 90px} }
-.experts__eyebrow{margin:0 0 12px;font:700 12px/14px var(--font-ui);letter-spacing:.88px;
-  text-transform:uppercase;color:#c90500}
-.experts__row{display:flex;align-items:center;justify-content:space-between;gap:24px;
+.experts__eyebrow{margin:0 0 12px;font:700 11px/15px var(--font-ui);letter-spacing:.88px;
+  text-transform:uppercase;color:var(--action-primary)}
+.experts__row{display:flex;align-items:center;justify-content:space-between;gap:40px;
   flex-wrap:wrap}
 @media (min-width:1181px){ .experts__row{gap:32px;flex-wrap:nowrap} }
 .experts__copy{flex:1 1 100%}
 @media (min-width:1181px){ .experts__copy{flex:0 1 560px} }
-.experts__title{margin:0;font-family:var(--font-display);font-weight:800;font-size:26px;
-  line-height:30px;letter-spacing:-.4px;text-transform:uppercase;color:var(--ink);
+.experts__title{margin:0;font-family:var(--font-display);font-weight:800;font-size:36px;
+  line-height:40px;letter-spacing:-.5px;text-transform:none;color:var(--ink);
   font-variation-settings:"YTLC" 500,"wdth" 100}
-@media (min-width:901px){ .experts__title{font-size:40px;line-height:44px;letter-spacing:-.8px} }
-.experts__title em{font-style:normal;color:#c90500}
-.experts__lede{margin:8px 0 0;max-width:490px;font:400 15px/22px var(--font-ui);
+@media (min-width:901px){ .experts__title{font-size:40px;line-height:44px;letter-spacing:-.8px;
+  text-transform:uppercase} }
+.experts__title em{font-style:normal;color:var(--action-primary)}
+.experts__lede{margin:8px 0 0;max-width:490px;font:400 16px/25px var(--font-ui);
   color:var(--text-primary)}
 .experts__faces{flex:none;display:flex}
 .experts__faces img{width:88px;height:88px;border-radius:44px;object-fit:cover;
@@ -1253,15 +839,24 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .experts__faces img + img{margin-left:-18px}
 .experts__contact{flex:1 1 320px;display:flex;flex-direction:column;gap:16px}
 @media (min-width:1181px){ .experts__contact{flex:0 1 429px} }
-.experts__hours{display:flex;justify-content:space-between;gap:12px;flex-direction:column}
-@media (min-width:901px){ .experts__hours{gap:24px;flex-direction:row} }
-.experts__label{margin:0;font:600 14px/21px var(--font-ui);text-transform:uppercase;
-  color:#6b6b6b}
-.experts__value{margin:0;font:400 14px/21px var(--font-ui);color:#6b6b6b}
+.experts__hours{display:flex;justify-content:space-between;gap:20px}
+@media (min-width:901px){ .experts__hours{gap:24px} }
+/* mobile base sizes are the Figma mobile spec (contact-block labels shrink to
+   fit the now-2-column row at 390px); 901px+ restores this section's existing
+   desktop numbers unchanged — desktop has room for the larger phone number
+   this codebase already shipped, and that wasn't in scope to second-guess. */
+.experts__label{margin:0;font:800 11px/15px var(--font-ui);text-transform:uppercase;
+  color:var(--text-primary)}
+@media (min-width:901px){ .experts__label{font:600 14px/21px var(--font-ui);color:#6b6b6b} }
+.experts__value{margin:0;font:400 12px/17px var(--font-ui);color:#4b5563}
+@media (min-width:901px){ .experts__value{font-size:14px;line-height:21px;color:#6b6b6b} }
 .experts__phone a{display:inline-flex;align-items:center;min-height:24px}
-.experts__phone{margin:8px 0 0;font-family:var(--font-display);font-weight:800;
-  font-size:22px;line-height:28px;color:#1e1e1e;
-  font-variation-settings:"YTLC" 500,"wdth" 100}
+.experts__phone{margin:8px 0 0;font:700 14px/21px var(--font-ui);color:var(--text-primary)}
+@media (min-width:901px){
+  .experts__phone{font-family:var(--font-display);font-weight:800;
+    font-size:22px;line-height:28px;color:#1e1e1e;
+    font-variation-settings:"YTLC" 500,"wdth" 100}
+}
 .experts__chat{display:flex;align-items:center;justify-content:center;gap:8px;
   padding:11px 26px;background:#c90500;border:2px solid #c90500;
   font:600 16px/26px var(--font-ui);text-transform:uppercase;color:var(--text-on-dark);
@@ -1348,6 +943,12 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .vids{background:#0a0a0a;border-bottom:1px solid #2a2a2a;
   padding:36px 0;text-align:center}
 @media (min-width:901px){ .vids{padding:80px 0 81px} }
+/* Figma's mobile frame puts the Subscribe CTA after the carousel + dots, not
+   before it — .shell's children are plain document flow, so a mobile-only
+   flex reorder moves the CTA without touching markup order (which stays
+   correct for the desktop reading order this restores at 901px+). */
+.vids .shell{display:flex;flex-direction:column}
+@media (min-width:901px){ .vids .shell{display:block} }
 .vids .vids__rule span{background:#fff}
 .vids .vids__rule span:last-child{background:#4b4b4b}
 .vids .vids__eyebrow{color:var(--accent-red-on-dark)}
@@ -1384,9 +985,9 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .vids__cta{display:inline-flex;align-items:center;gap:9px;margin-top:14px;
   padding:11px 18px;border-radius:4px;background:var(--action-primary);
   font:700 12px/14px var(--font-ui);letter-spacing:1.32px;text-transform:uppercase;
-  color:var(--text-on-dark);
+  color:var(--text-on-dark);order:1;
   transition:background-color .16s ease,box-shadow .2s ease;min-height:44px}
-@media (min-width:901px){ .vids__cta{min-height:0} }
+@media (min-width:901px){ .vids__cta{min-height:0;order:0} }
 .vids__cta img{width:19px;height:14px;flex:none}
 .vids__cta:hover,.vids__cta:focus-visible{
   background:#8f1010;box-shadow:0 6px 16px rgba(179,20,20,.35)}
@@ -1467,7 +1068,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
   text-align:center}
 @media (min-width:901px){ .guides{padding:81px 0 80px} }
 .guides__eyebrow{margin:0;font:700 12px/14px var(--font-ui);letter-spacing:.88px;
-  text-transform:uppercase;color:#fca5a5}
+  text-transform:uppercase;color:#fff}
 .guides__title{margin:6px 0 0;font-family:var(--font-display);font-weight:800;
   font-size:26px;line-height:30px;letter-spacing:-.4px;text-transform:uppercase;
   color:#fff;font-variation-settings:"YTLC" 500,"wdth" 100}
@@ -1507,7 +1108,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .guide__h3{font:700 16px/26px var(--font-ui);color:#fff}
 .guide__more{display:inline-flex;align-items:center;min-height:44px;gap:6px;margin-top:auto;
   padding-top:10px;font:700 12px/14px var(--font-ui);letter-spacing:1.32px;
-  text-transform:uppercase;color:#fca5a5}
+  text-transform:uppercase;color:#fff}
 @media (min-width:901px){ .guide__more{min-height:24px} }
 .guide__more img{width:12px;height:12px}
 
@@ -1517,12 +1118,38 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .news{background:var(--bg-surface);border-bottom:1px solid var(--border-default);
   padding:36px 0;text-align:center}
 @media (min-width:901px){ .news{padding:80px 0 81px} }
-.news__title{margin:6px 0 0;font-family:var(--font-display);font-weight:800;font-size:40px;
-  line-height:44px;letter-spacing:-.8px;text-transform:uppercase;color:var(--text-primary);
+/* Figma's mobile News heading is a plain mixed-case "News" at 30/34 — the
+   40/44/uppercase treatment is desktop-only (restored below 901px+). */
+.news__title{margin:6px 0 0;font-family:var(--font-display);font-weight:800;font-size:30px;
+  line-height:34px;letter-spacing:-.5px;color:var(--text-primary);
   font-variation-settings:"YTLC" 500,"wdth" 100}
+@media (min-width:901px){
+  .news__title{font-size:40px;line-height:44px;letter-spacing:-.8px;text-transform:uppercase}
+}
 .vid__badge{position:absolute;left:12px;top:12px;padding:4px 9px;
   background:var(--bg-surface);font:700 12px/14px var(--font-ui);letter-spacing:.8px;
   text-transform:uppercase;color:var(--text-primary)}
+/* News reuses the Videos card (.vid) but Figma gives it its own mobile
+   treatment: red category badge (not white), sentence-case byline (not
+   uppercase), a smaller headline, and a squarer thumbnail — all scoped to
+   .news so the Videos section's dark-card styling above is untouched.
+   Desktop values (the pre-existing shared .vid defaults) are restored
+   explicitly at 901px+ since this design has no desktop News reference. */
+.news .vid__thumb{aspect-ratio:262/202}
+@media (min-width:901px){ .news .vid__thumb{aspect-ratio:406.66/228.73} }
+.news .vid__badge{background:var(--action-primary);color:var(--text-on-dark);
+  font-size:11px;letter-spacing:.88px}
+@media (min-width:901px){
+  .news .vid__badge{background:var(--bg-surface);color:var(--text-primary);
+    font-size:12px;letter-spacing:.8px}
+}
+.news .vid__meta{text-transform:none;letter-spacing:normal;font-size:11px;
+  color:var(--text-muted)}
+@media (min-width:901px){
+  .news .vid__meta{text-transform:uppercase;letter-spacing:.4px;font-size:12px}
+}
+.news .vid__h3{font-size:16px;line-height:26px}
+@media (min-width:901px){ .news .vid__h3{font-size:18px;line-height:27px} }
 
 /* ===== REVIEWS BANNER · node 251:6048 ====================================
    Redesigned 2026-08-19: was a rating figure + one fabricated testimonial
@@ -1750,137 +1377,10 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
   width:100%;min-height:48px}
 @media (min-width:521px){ .drop__submit{width:auto} }
 @media (min-width:901px){ .drop__submit{min-height:0} }
-.drop__fine{margin:12px 0 0;font:400 12px/14px var(--font-ui);letter-spacing:.6px;
-  color:var(--text-muted)}
+.drop__fine{margin:12px 0 0;font:500 10px/13px var(--font-ui);letter-spacing:.6px;
+  text-transform:uppercase;color:var(--text-muted)}
+@media (min-width:901px){ .drop__fine{font:400 12px/14px var(--font-ui);text-transform:none} }
 
-
-/* ===== FOOTER · node 251:6217 ============================================ */
-
-.foot{background:var(--bg-inverse);padding:40px 0 0;color:var(--text-on-dark)}
-@media (min-width:901px){ .foot{padding-top:64px} }
-.foot__top{display:flex;gap:24px;padding-bottom:24px;
-  border-bottom:1px solid rgba(255,255,255,.15);flex-direction:column}
-@media (min-width:901px){ .foot__top{gap:32px} }
-@media (min-width:1181px){ .foot__top{gap:40px;flex-direction:row} }
-.foot__brand{flex:none;text-align:center}
-@media (min-width:901px){ .foot__brand{text-align:left} }
-@media (min-width:1181px){ .foot__brand{flex:0 0 300px} }
-.foot__logo{width:183px;height:38px;margin:0 auto}
-@media (min-width:901px){ .foot__logo{margin:0} }
-/* #b31414 is 3.03:1 on black — the on-dark red token instead (5.25:1) */
-.foot__h{margin:0;font:800 12px/14px var(--font-ui);letter-spacing:1.4px;
-  text-transform:uppercase;color:var(--text-on-dark)}
-.foot__label{margin:0;font:700 12px/14px var(--font-ui);letter-spacing:1.44px;
-  text-transform:uppercase;color:var(--accent-red-on-dark)}
-@media (min-width:901px){ .foot__label{margin:24px 0 0} }
-.foot__phone a{display:inline-flex;align-items:center;min-height:24px}
-.foot__phone{margin:4px 0 0;font:800 18px/27px var(--font-ui);color:var(--text-on-dark)}
-.foot__small{margin:4px 0 0;font:400 12px/17px var(--font-ui);color:var(--text-on-dark)}
-.foot__form{display:flex;gap:8px;margin-top:8px;max-width:none}
-@media (min-width:901px){ .foot__form{max-width:300px} }
-.foot__input{flex:1 1 auto;min-width:0;padding:10px 12px;background:#141414;
-  border:1px solid rgba(255,255,255,.25);font:400 12px/17px var(--font-ui);color:#fff}
-.foot__input::placeholder{color:rgba(255,255,255,.55)}
-.foot__go{flex:none;padding:10px 16px;border:0;cursor:pointer;
-  background:var(--action-primary);font:800 12px/14px var(--font-ui);
-  letter-spacing:1.76px;text-transform:uppercase;color:var(--text-on-dark);min-height:48px}
-@media (min-width:901px){ .foot__go{min-height:0} }
-.foot__social{display:flex;gap:14px;margin:24px 0 0;padding:0;list-style:none;
-  justify-content:center}
-@media (min-width:901px){ .foot__social{justify-content:normal} }
-.foot__social a{display:grid;place-items:center;width:44px;height:44px;
-  border:1px solid rgba(255,255,255,.25);
-  transition:background-color .18s ease,border-color .18s ease}
-@media (min-width:901px){ .foot__social a{width:36px;height:36px} }
-.foot__social img{width:18px;height:18px}
-/* brand-colour hover, keyed off each link's existing aria-label — no markup
-   change needed. Icon fill stays white (its original colour) and reads fine
-   on every one of these, so only the button itself animates. Instagram/TikTok
-   don't have one flat brand colour, so those two use their real multi-colour
-   marks as a gradient instead of picking a single arbitrary hex. */
-.foot__social a[aria-label="YouTube"]:hover,
-.foot__social a[aria-label="YouTube"]:focus-visible{background:#f00;border-color:#f00}
-.foot__social a[aria-label="Facebook"]:hover,
-.foot__social a[aria-label="Facebook"]:focus-visible{background:#1877f2;border-color:#1877f2}
-.foot__social a[aria-label="Instagram"]:hover,
-.foot__social a[aria-label="Instagram"]:focus-visible{
-  background:linear-gradient(45deg,#405de6,#5b51d8 25%,#833ab4 50%,#c13584 75%,#fd1d1d 100%);
-  border-color:transparent}
-.foot__social a[aria-label="TikTok"]:hover,
-.foot__social a[aria-label="TikTok"]:focus-visible{
-  background:linear-gradient(135deg,#25f4ee 0%,#000 50%,#fe2c55 100%);
-  border-color:transparent}
-
-.foot__contact{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;
-  text-align:left;padding-top:20px;margin-top:20px;
-  border-top:1px solid rgba(255,255,255,.15)}
-@media (min-width:901px){
-  .foot__contact{text-align:left;border-top:0;display:block;padding-top:0;margin-top:0}
-}
-
-.foot__cols{flex:1 1 auto;display:grid;grid-template-columns:1fr;gap:0}
-@media (min-width:901px){ .foot__cols{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px} }
-@media (min-width:1181px){ .foot__cols{grid-template-columns:repeat(5,minmax(0,1fr))} }
-.foot__col{border-top:1px solid rgba(255,255,255,.15)}
-@media (min-width:901px){ .foot__col{border-top:0} }
-/* columns are <details> so the mobile frame's accordions work with no JS;
-   they ship open, so desktop is unaffected and JS-off mobile stays readable */
-.foot__sum{display:flex;align-items:center;justify-content:space-between;gap:8px;
-  min-height:44px;list-style:none;cursor:pointer;
-  font:800 12px/14px var(--font-ui);letter-spacing:1.4px;text-transform:uppercase;
-  color:var(--text-on-dark);padding:16px 0}
-@media (min-width:901px){ .foot__sum{min-height:24px;cursor:default;padding:0} }
-.foot__sum::-webkit-details-marker{display:none}
-.foot__chev{display:block;width:11px;height:7px;flex:none;
-  background:url("../assets/icons/chevron-down.svg") center/contain no-repeat;
-  filter:invert(1);transition:transform .18s ease}
-@media (min-width:901px){
-  .foot__chev{display:none;width:auto;height:auto;flex:0 1 auto;filter:none}
-}
-.foot__col[open] .foot__chev{transform:rotate(180deg)}
-@media (min-width:901px){ .foot__col[open] .foot__chev{transform:none} }
-.foot__list{margin:0 0 16px;padding:0;list-style:none;display:flex;flex-direction:column;
-  gap:2px}
-@media (min-width:901px){ .foot__list{margin:12px 0 0;gap:8px} }
-/* min-height keeps every link at the 24px target minimum (WCAG 2.5.8) */
-.foot__list a{display:inline-flex;align-items:center;min-height:36px;
-  font:400 12px/17px var(--font-ui);color:var(--text-on-dark)}
-@media (min-width:901px){ .foot__list a{min-height:24px} }
-.foot__list a:hover{text-decoration:underline}
-
-/* Lives inside .foot__cols now (a 6-col grid) — without a span it lands as an
-   unspanned 7th item in a single 1-of-6 track, which is why it was squeezing
-   the logo row into a narrow column and forcing it to wrap vertically like
-   the link lists beside it. grid-column spans it across all 6 tracks so it
-   renders as its own full-width horizontal row instead. */
-.foot__cols > .foot__family{grid-column:1/-1}
-.foot__family{padding:20px 0;margin-top:8px;display:flex;flex-direction:column;
-  align-items:flex-start;gap:14px;border-top:1px solid rgba(255,255,255,.15)}
-@media (min-width:901px){ .foot__family{padding:24px 0;gap:16px} }
-.foot__family-label{margin:0;font:700 14px/20px var(--font-ui);text-transform:uppercase;
-  text-align:left;color:var(--text-on-dark);font-size:12px;line-height:18px}
-@media (min-width:901px){ .foot__family-label{font-size:14px;line-height:20px} }
-/* reference: CO-Updates node 1927:141461 — a muted partner-logo strip under a
-   "family of brands" heading. These five are ViViD's OWN sub-brands though
-   (same set as the .brandbar switcher up top), so unlike that reference they
-   keep full colour rather than a greyscale knockout — knocking out a brand's
-   own logo under its own name would read as broken, not restrained. Opacity
-   is the one thing borrowed from the reference, to keep the row quieter than
-   the nav above it without dulling the mark itself. */
-.foot__family-logos{display:flex;flex-wrap:wrap;justify-content:flex-start;
-  align-items:center;gap:24px;margin:0;padding:0;list-style:none}
-@media (min-width:901px){ .foot__family-logos{gap:36px} }
-.foot__family-logos img{height:18px;width:auto;display:block}
-@media (min-width:901px){ .foot__family-logos img{height:22px} }
-.foot__family-logos a{display:flex;align-items:center;opacity:.82;
-  transition:opacity .16s ease}
-.foot__family-logos a:hover,.foot__family-logos a:focus-visible{opacity:1}
-.foot__legal{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;
-  padding:20px 0 28px;font:400 12px/17px var(--font-ui);color:var(--text-on-dark)}
-.foot__legal a{display:inline-flex;align-items:center;min-height:44px;padding-inline:2px}
-@media (min-width:901px){ .foot__legal a{min-height:24px;padding-inline:0} }
-.foot__legal a:hover{text-decoration:underline}
-.foot__legal span{opacity:.4}
 
 /* pagination dashes — mobile-carousel indicator, hidden once the grids
    above switch off the horizontal-scroll layout */
@@ -1893,7 +1393,3 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .vids .dashes span{background:rgba(255,255,255,.28)}
 .vids .dashes span:first-child{background:#fff}
 
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
-    transition-duration:.01ms!important;scroll-behavior:auto!important}
-}
