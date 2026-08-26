@@ -114,12 +114,12 @@ button{font:inherit;color:inherit}
 @media (min-width:901px){ .brandbar__list > li{margin-right:0} }
 .brandbar__link{display:flex;align-items:center;gap:6px;padding:9px 6px 11px;
   border-bottom:2px solid transparent;
-  font:700 10px/13px var(--font-ui);letter-spacing:.6px;text-transform:uppercase;
+  font:500 10px/13px var(--font-ui);letter-spacing:.6px;text-transform:uppercase;
   color:var(--text-on-dark);white-space:nowrap;
   transition:background-color .16s ease,border-color .16s ease;min-height:44px}
 @media (min-width:901px){
   .brandbar__link{gap:8px;padding:11px 18px 13px;
-    font-size:12px;line-height:14px;letter-spacing:1.47px;min-height:0}
+    font-size:12px;line-height:14px;letter-spacing:1.47px;min-height:0;font-weight:500}
 }
 .brandbar__dot{width:6px;height:6px;border-radius:3px;background:var(--bg-surface);
   opacity:.55;flex:none;transition:opacity .16s ease}
@@ -176,7 +176,7 @@ button{font:inherit;color:inherit}
 .search:focus-within{outline:3px solid var(--accent-red);outline-offset:2px}
 .search__submit{flex:none;display:flex;align-items:center;gap:10px;padding:0;
   border:0;background:transparent;color:var(--text-on-dark);cursor:pointer;
-  font:700 12px/17px var(--font-ui);letter-spacing:1.44px;text-transform:uppercase;
+  font:500 12px/17px var(--font-ui);letter-spacing:1.44px;text-transform:uppercase;
   width:44px;height:44px;justify-content:center}
 @media (min-width:1025px){
   .search__submit{padding:0 26px;background:var(--bg-inverse);
@@ -234,15 +234,15 @@ button{font:inherit;color:inherit}
 .util__glyph{flex:none;display:grid;place-items:center;width:44px;height:44px}
 @media (min-width:901px){ .util__glyph{width:34px;height:34px} }
 @media (min-width:1025px){ .util__glyph{width:30px;height:30px} }
-.util__glyph svg{width:20px;height:20px;fill:var(--text-primary)}
-@media (min-width:361px){ .util__glyph svg{width:23px;height:23px} }
-.util__label{display:block;font:600 10px/14px var(--font-ui);letter-spacing:.72px;
+.util__glyph svg{width:17px;height:17px;fill:var(--text-primary)}
+.util__label{display:block;font:500 10px/14px var(--font-ui);letter-spacing:.72px;
   text-transform:uppercase;color:var(--text-muted);font-size:11px}
-@media (min-width:1181px){ .util__label{font-size:10px} }
-.util__value{display:block;font:700 14px/21px var(--font-ui);letter-spacing:-.065px;
+@media (min-width:1181px){ .util__label{font-size:10px;font-weight:500} }
+.util__value{display:block;font:500 14px/21px var(--font-ui);letter-spacing:-.065px;
   color:var(--text-primary);font-size:11px}
-@media (min-width:1181px){ .util__value{font-size:14px} }
-.util__value--phone{font-weight:800;letter-spacing:-.14px}
+@media (min-width:1181px){ .util__value{font-size:14px;font-weight:700} }
+.util__value--phone{font-weight:500;letter-spacing:-.14px}
+@media (min-width:1181px){ .util__value--phone{font-weight:800} }
 /* value's own text is icon-only on mobile too (phone number/wishlist count) —
    same visually-hidden-until-desktop pattern as the search label above */
 .util__text{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
@@ -259,10 +259,10 @@ button{font:inherit;color:inherit}
 .util__badge{position:absolute;top:-4px;left:auto;right:-6px;min-width:16px;height:16px;
   display:flex;align-items:center;justify-content:center;padding:3px 5px;
   border:2px solid #fff;border-radius:24px;background:var(--action-primary);
-  font:700 12px/14px var(--font-ui);color:#fff;font-size:11px;line-height:11px}
+  font:500 12px/14px var(--font-ui);color:#fff;font-size:11px;line-height:11px}
 @media (min-width:1025px){
   .util__badge{top:-6px;left:24px;right:auto;min-width:18px;height:18px;
-    padding:10px 8px;font-size:12px;line-height:14px}
+    padding:10px 8px;font-size:12px;line-height:14px;font-weight:500}
 }
 
 /* row 3 — category nav + promos. Desktop-only: replaced below 1024px by
@@ -284,12 +284,12 @@ button{font:inherit;color:inherit}
   stroke-linecap:round;stroke-linejoin:round}
 /* min-height keeps these standalone links at the 24px target minimum (2.5.8) */
 .subnav__promo{display:flex;align-items:center;min-height:24px;
-  font:600 12px/17px var(--font-ui);letter-spacing:1.2px;
+  font:500 12px/17px var(--font-ui);letter-spacing:1.2px;
   text-transform:uppercase;color:var(--action-primary);white-space:nowrap}
 .subnav__spacer{flex:1 1 auto}
 .subnav__divider{color:var(--text-muted)}
 .subnav__fin{display:flex;align-items:center;gap:12px;min-height:24px;white-space:nowrap;
-  font:700 12px/17px var(--font-ui);letter-spacing:1.2px;text-transform:uppercase}
+  font:500 12px/17px var(--font-ui);letter-spacing:1.2px;text-transform:uppercase}
 .subnav__fin em{font-style:normal;color:var(--action-primary)}
 .subnav__finlogos{display:flex;align-items:center;gap:8px;height:22px;padding-left:13px;
   border-left:1px solid var(--border-default)}
@@ -362,7 +362,7 @@ button{font:inherit;color:inherit}
   text-decoration:underline}
 .mega__list--bold a{font-weight:700}
 .mega__cta{display:inline-flex;align-items:center;gap:5px;margin-top:16px;
-  font:700 11px/14px var(--font-ui);letter-spacing:1.2px;text-transform:uppercase;
+  font:500 11px/14px var(--font-ui);letter-spacing:1.2px;text-transform:uppercase;
   color:var(--action-primary)}
 .mega__cta img{transition:transform .18s ease}
 .mega__cta:hover img,.mega__cta:focus-visible img{transform:translateX(3px)}
@@ -381,7 +381,7 @@ button{font:inherit;color:inherit}
 .mega__feature-img::before{content:"";position:absolute;left:0;top:0;z-index:1;
   width:118px;height:3px;background:var(--action-primary)}
 .mega__feature-body{display:flex;flex-direction:column;gap:5px;padding:15px 16px 16px}
-.mega__feature-eyebrow{font:700 11px/14px var(--font-ui);letter-spacing:1.4px;
+.mega__feature-eyebrow{font:500 11px/14px var(--font-ui);letter-spacing:1.4px;
   text-transform:uppercase;color:var(--action-primary)}
 .mega__feature-title{font:800 17px/22px var(--font-ui);color:var(--ink)}
 .mega__feature-body .mega__cta{margin-top:2px}
@@ -425,9 +425,9 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 @media (min-width:1025px){ .mobrow{display:none} }
 .mobrow__inner{display:flex;align-items:center;justify-content:space-between;height:50px}
 .chat{display:flex;align-items:center;gap:8px;padding:8px 10px;background:#1f1f1f;
-  color:#fff;font:700 13px/1 var(--font-ui);border:0;cursor:pointer;
-  font-size:12px;min-height:44px}
-@media (min-width:361px){ .chat{padding:8px 14px;font-size:13px} }
+  color:#fff;font:500 13px/1 var(--font-ui);border:0;cursor:pointer;
+  font-size:12px;min-height:40px}
+@media (min-width:361px){ .chat{padding:8px 14px;font-size:12px;font-weight:500} }
 @media (min-width:901px){ .chat{min-height:0} }
 .chat svg{width:16px;height:16px;fill:#fff}
 .burger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;
@@ -449,7 +449,8 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
   border-bottom:2px solid rgba(155,27,27,.65);text-align:center;
   font-family:var(--font-form);font-weight:600;font-size:16px;line-height:24px;
   text-transform:uppercase;color:#fff;font-variation-settings:"wdth" 100}
-.ymm__fields{display:flex;flex-direction:column;gap:12px;padding:14px 18px 8px}
+.ymm__fields{display:flex;flex-direction:column;gap:8px;padding:12px 8px 12px}
+@media (min-width:901px){ .ymm__fields{gap:12px;padding:14px 18px 8px} }
 .ymm__select{width:100%;appearance:none;-webkit-appearance:none;
   padding:10px 40px 10px 14px;background-color:rgba(255,255,255,.92);
   background-image:url("../assets/icons/chevron-down.svg");
@@ -480,22 +481,25 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 @media (min-width:1181px){ .foot__brand{flex:0 0 300px} }
 .foot__logo{width:183px;height:38px;margin:0 auto}
 @media (min-width:901px){ .foot__logo{margin:0} }
+.foot__tagline{margin:16px auto 0;max-width:300px;
+  font:500 12px/17px var(--font-ui);color:rgba(255,255,255,.7)}
+@media (min-width:901px){ .foot__tagline{margin:16px 0 0;max-width:280px} }
 /* #b31414 is 3.03:1 on black — the on-dark red token instead (5.25:1) */
-.foot__h{margin:0;font:800 12px/14px var(--font-ui);letter-spacing:1.4px;
+.foot__h{margin:0;font:500 12px/14px var(--font-ui);letter-spacing:1.4px;
   text-transform:uppercase;color:var(--text-on-dark)}
-.foot__label{margin:0;font:700 12px/14px var(--font-ui);letter-spacing:1.44px;
+.foot__label{margin:0;font:500 12px/14px var(--font-ui);letter-spacing:1.44px;
   text-transform:uppercase;color:var(--accent-red-on-dark)}
 @media (min-width:901px){ .foot__label{margin:24px 0 0} }
 .foot__phone a{display:inline-flex;align-items:center;min-height:24px}
 .foot__phone{margin:4px 0 0;font:800 18px/27px var(--font-ui);color:var(--text-on-dark)}
-.foot__small{margin:4px 0 0;font:400 12px/17px var(--font-ui);color:var(--text-on-dark)}
+.foot__small{margin:4px 0 0;font:500 12px/17px var(--font-ui);color:var(--text-on-dark)}
 .foot__form{display:flex;gap:8px;margin-top:8px;max-width:none}
 @media (min-width:901px){ .foot__form{max-width:300px} }
 .foot__input{flex:1 1 auto;min-width:0;padding:10px 12px;background:#141414;
-  border:1px solid rgba(255,255,255,.25);font:400 12px/17px var(--font-ui);color:#fff}
+  border:1px solid rgba(255,255,255,.25);font:500 12px/17px var(--font-ui);color:#fff}
 .foot__input::placeholder{color:rgba(255,255,255,.55)}
 .foot__go{flex:none;padding:10px 16px;border:0;cursor:pointer;
-  background:var(--action-primary);font:800 12px/14px var(--font-ui);
+  background:var(--action-primary);font:500 12px/14px var(--font-ui);
   letter-spacing:1.76px;text-transform:uppercase;color:var(--text-on-dark);min-height:48px}
 @media (min-width:901px){ .foot__go{min-height:0} }
 .foot__social{display:flex;gap:14px;margin:24px 0 0;padding:0;list-style:none;
@@ -533,14 +537,14 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 
 .foot__cols{flex:1 1 auto;display:grid;grid-template-columns:1fr;gap:0}
 @media (min-width:901px){ .foot__cols{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px} }
-@media (min-width:1181px){ .foot__cols{grid-template-columns:repeat(5,minmax(0,1fr))} }
+@media (min-width:1181px){ .foot__cols{grid-template-columns:repeat(6,minmax(0,1fr))} }
 .foot__col{border-top:1px solid rgba(255,255,255,.15)}
 @media (min-width:901px){ .foot__col{border-top:0} }
 /* columns are <details> so the mobile frame's accordions work with no JS;
    they ship open, so desktop is unaffected and JS-off mobile stays readable */
 .foot__sum{display:flex;align-items:center;justify-content:space-between;gap:8px;
   min-height:44px;list-style:none;cursor:pointer;
-  font:800 12px/14px var(--font-ui);letter-spacing:1.4px;text-transform:uppercase;
+  font:500 12px/14px var(--font-ui);letter-spacing:1.4px;text-transform:uppercase;
   color:var(--text-on-dark);padding:16px 0}
 @media (min-width:901px){ .foot__sum{min-height:24px;cursor:default;padding:0} }
 .foot__sum::-webkit-details-marker{display:none}
@@ -557,7 +561,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 @media (min-width:901px){ .foot__list{margin:12px 0 0;gap:8px} }
 /* min-height keeps every link at the 24px target minimum (WCAG 2.5.8) */
 .foot__list a{display:inline-flex;align-items:center;min-height:36px;
-  font:400 12px/17px var(--font-ui);color:var(--text-on-dark)}
+  font:500 12px/17px var(--font-ui);color:var(--text-on-dark)}
 @media (min-width:901px){ .foot__list a{min-height:24px} }
 .foot__list a:hover{text-decoration:underline}
 
@@ -570,9 +574,9 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .foot__family{padding:20px 0;margin-top:8px;display:flex;flex-direction:column;
   align-items:flex-start;gap:14px;border-top:1px solid rgba(255,255,255,.15)}
 @media (min-width:901px){ .foot__family{padding:24px 0;gap:16px} }
-.foot__family-label{margin:0;font:700 14px/20px var(--font-ui);text-transform:uppercase;
+.foot__family-label{margin:0;font:500 14px/20px var(--font-ui);text-transform:uppercase;
   text-align:left;color:var(--text-on-dark);font-size:12px;line-height:18px}
-@media (min-width:901px){ .foot__family-label{font-size:14px;line-height:20px} }
+@media (min-width:901px){ .foot__family-label{font-size:14px;line-height:20px;font-weight:700} }
 /* reference: CO-Updates node 1927:141461 — a muted partner-logo strip under a
    "family of brands" heading. These five are ViViD's OWN sub-brands though
    (same set as the .brandbar switcher up top), so unlike that reference they
@@ -589,7 +593,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
   transition:opacity .16s ease}
 .foot__family-logos a:hover,.foot__family-logos a:focus-visible{opacity:1}
 .foot__legal{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;
-  padding:20px 0 28px;font:400 12px/17px var(--font-ui);color:var(--text-on-dark)}
+  padding:20px 0 28px;font:500 12px/17px var(--font-ui);color:var(--text-on-dark)}
 .foot__legal a{display:inline-flex;align-items:center;min-height:44px;padding-inline:2px}
 @media (min-width:901px){ .foot__legal a{min-height:24px;padding-inline:0} }
 .foot__legal a:hover{text-decoration:underline}
