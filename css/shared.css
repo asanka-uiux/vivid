@@ -184,6 +184,16 @@ button{font:inherit;color:inherit}
 }
 .search__submit svg{width:18px;height:18px;fill:var(--text-primary);flex:none}
 @media (min-width:1025px){ .search__submit svg{fill:currentColor} }
+/* Mobile-only icon swap (search/account/cart), reference: test.vividwheels.com
+   mobile header. Two <svg> per icon rather than swapping path data at a
+   breakpoint — same element, different artwork, is invisible to CSS. Desktop
+   keeps the original glyphs untouched. */
+.icon-mobile{display:block}
+.icon-desktop{display:none}
+@media (min-width:1025px){ .icon-mobile{display:none} .icon-desktop{display:block} }
+/* the reference search icon is stroke-drawn, not filled — override the
+   generic .search__submit svg{fill:...} rule for this variant only */
+.search__submit .icon-mobile{fill:none;stroke:var(--text-primary)}
 /* "Search" label is icon-only until desktop restores the visible word */
 .search__submit .search__submit-text{position:absolute;width:1px;height:1px;margin:-1px;
   padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}

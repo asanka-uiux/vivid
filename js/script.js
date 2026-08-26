@@ -57,6 +57,29 @@
   });
 })();
 
+/* Mobile family accordion (.famtoggle) — below 1025px this replaces the desktop
+   sidebar tab row; each bar shows/hides the same .fam panel the sidebar tile
+   controls, one open at a time. Deliberately its own listener set rather than
+   folded into the [role="tab"] group above: that group's arrow-key cycling would
+   otherwise reach an off-screen .famtoggle (or off-screen .vtile, on mobile) and
+   flip aria-selected/hidden on a panel with no visible trigger update. */
+(function () {
+  var toggles = [].slice.call(document.querySelectorAll('.famtoggle'));
+  function set(btn, open) {
+    var panel = document.getElementById(btn.getAttribute('aria-controls'));
+    if (!panel) return;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    panel.hidden = !open;
+  }
+  toggles.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var willOpen = btn.getAttribute('aria-expanded') !== 'true';
+      toggles.forEach(function (other) { if (other !== btn) set(other, false); });
+      set(btn, willOpen);
+    });
+  });
+})();
+
 /* Category mega menus (Suspension, Brakes, Exhaust, Aero & Body, Engine &
    Turbo) — CSS :hover/:focus-within already reveal each one, so this works
    with no JS at all. This only keeps aria-expanded accurate for assistive
