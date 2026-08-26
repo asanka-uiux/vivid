@@ -882,9 +882,11 @@
 @media (min-width:901px){ .experts__title{font-size:40px;line-height:44px;letter-spacing:-.8px;
   text-transform:uppercase} }
 .experts__title em{font-style:normal;color:var(--action-primary)}
-.experts__lede{margin:8px 0 0;max-width:490px;font:400 16px/25px var(--font-ui);
+.experts__lede{margin:8px 0 0;max-width:490px;font:400 14px/20px var(--font-ui);
   color:var(--text-primary)}
-.experts__faces{flex:none;display:flex}
+@media (min-width:901px){ .experts__lede{font:400 16px/25px var(--font-ui)} }
+.experts__faces{flex:none;display:flex;margin-inline:auto}
+@media (min-width:1181px){ .experts__faces{margin-inline:0} }
 .experts__faces img{width:88px;height:88px;border-radius:44px;object-fit:cover;
   border:3px solid rgba(255,255,255,.3);box-shadow:0 0 0 1px rgba(0,0,0,.08)}
 .experts__faces img + img{margin-left:-18px}
