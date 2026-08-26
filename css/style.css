@@ -165,8 +165,12 @@
    section on the page — flush to the viewport edge below 1320px.
    Mobile collapses both strips to the same reduced block padding; tablet up
    restores each strip's own rhythm (trust stays tight, promise opens up). */
+.strip--trust{display:none}
+@media (min-width:901px){ .strip--trust{display:block} }
 .strip--trust .strip__row{padding-block:24px 26px}
 @media (min-width:901px){ .strip--trust .strip__row{padding-block:24px 25px} }
+.strip--promise{display:none}
+@media (min-width:901px){ .strip--promise{display:block} }
 .strip--promise .strip__row{padding-block:24px 26px}
 @media (min-width:901px){ .strip--promise .strip__row{padding-block:48px 49px} }
 .strip__row{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;
@@ -216,7 +220,7 @@
 
 .cats{background:var(--bg-surface);padding-top:40px}
 @media (min-width:901px){ .cats{padding-top:60px} }
-.cats__head{padding-bottom:21px}
+@media (min-width:901px){ .cats__head{padding-bottom:21px} }
 .cats__eyebrow{margin:0;font:500 11px/15px var(--font-ui);letter-spacing:.88px;
   text-transform:uppercase;color:var(--action-primary)}
 .cats__title{margin:6px 0 0;font-family:var(--font-display);font-weight:800;
