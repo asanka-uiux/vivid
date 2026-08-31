@@ -4627,10 +4627,21 @@
   .stag__axle { margin-top: 12px; }
   .stag__axle-label { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel); margin-bottom: 6px; }
   .stag__axle-icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 800; font-size: 11px; background: var(--ink); color: var(--paper); }
-  .stag__select { width: 100%; padding: 10px 32px 10px 12px; border: 1px solid var(--rule); font-family: var(--ui); font-size: 13px; color: var(--ink); background: var(--paper);
-    appearance: none; -webkit-appearance: none; -moz-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath d='M2 3L4 5L6 3' stroke='%235F6975' stroke-width='1.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat; background-position: right 12px center; background-size: 10px; }
+  .sizesel { position: relative; }
+  .sizesel__trigger { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 14px; border: 1px solid var(--rule); background: var(--paper); font-family: var(--ui); font-size: 13px; font-weight: 600; color: var(--ink); cursor: pointer; text-align: left; transition: border-color .15s, box-shadow .15s; }
+  .sizesel__trigger:hover { border-color: var(--ink); }
+  .sizesel__trigger[aria-expanded="true"] { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(225,6,0,.08); }
+  .sizesel__trigger:focus-visible { outline: 2px solid var(--heat); outline-offset: 2px; }
+  .sizesel__value-wrap { display: flex; align-items: baseline; gap: 8px; min-width: 0; overflow: hidden; }
+  .sizesel__value { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sizesel__badge { flex-shrink: 0; font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel); }
+  .sizesel__chev { flex-shrink: 0; color: var(--steel); transition: transform .15s; }
+  .sizesel__trigger[aria-expanded="true"] .sizesel__chev { transform: rotate(180deg); }
+  .sizesel__list { position: absolute; z-index: 20; top: calc(100% + 6px); left: 0; right: 0; max-height: 280px; overflow-y: auto; margin: 0; padding: 6px; list-style: none; background: var(--paper); border: 1px solid var(--line); box-shadow: 0 16px 32px rgba(0,0,0,.14); }
+  .sizesel__opt { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 11px; font-family: var(--ui); font-size: 13px; color: var(--ink); cursor: pointer; border-left: 3px solid transparent; }
+  .sizesel__opt:hover, .sizesel__opt:focus-visible { background: var(--bone); outline: none; }
+  .sizesel__opt--active { border-left-color: var(--heat); background: rgba(225,6,0,.04); font-weight: 700; }
+  .sizesel__opt-tag { flex-shrink: 0; font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel); }
   .stag__sum { display: flex; justify-content: space-between; align-items: baseline; margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--rule); }
   .stag__sum-label { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel); }
   .stag__sum-price { font-family: var(--display); font-size: 22px; font-weight: 900; color: var(--ink); }
@@ -5415,16 +5426,34 @@ html, body{ overflow-x:clip; }
             <div class="stag__body">
               <div class="stag__axle">
                 <div class="stag__axle-label"><span class="stag__axle-icon">F</span> Front Wheels (2)</div>
-                <select class="stag__select" id="stagF" aria-label="Front wheel size" onchange="stagPrice()">
-                  <option value="390" selected>20x10 &nbsp;|&nbsp; -25mm Offset &nbsp;|&nbsp; $390/ea</option>
-                </select>
+                <div class="sizesel" id="stagF" data-value="390" data-onchange="stagPrice" onfocusout="sizeSelFocusOut(event,this)">
+                  <button type="button" class="sizesel__trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Front wheel size" onclick="sizeSelToggle(this)">
+                    <span class="sizesel__value-wrap">
+                      <span class="sizesel__value">20x10 &nbsp;|&nbsp; -25mm Offset</span>
+                      <span class="sizesel__badge">$390/ea</span>
+                    </span>
+                    <svg class="sizesel__chev" width="10" height="6" viewBox="0 0 8 8" fill="none" aria-hidden="true"><path d="M2 3L4 5L6 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <ul class="sizesel__list" role="listbox" aria-label="Front wheel size options" hidden>
+                    <li class="sizesel__opt sizesel__opt--active" role="option" aria-selected="true" tabindex="0" data-value="390" data-label="20x10 &nbsp;|&nbsp; -25mm Offset" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>20x10 &nbsp;|&nbsp; -25mm Offset</span><span class="sizesel__opt-tag">$390/ea</span></li>
+                  </ul>
+                </div>
               </div>
               <div class="stag__axle">
                 <div class="stag__axle-label"><span class="stag__axle-icon" style="background:var(--heat);">R</span> Rear Wheels (2)</div>
-                <select class="stag__select" id="stagR" aria-label="Rear wheel size" onchange="stagPrice()">
-                  <option value="390" selected>20x10 &nbsp;|&nbsp; -25mm Offset &nbsp;|&nbsp; $390/ea</option>
-                  <option value="0">22x12 &nbsp;|&nbsp; -51mm Offset &nbsp;|&nbsp; Call for pricing</option>
-                </select>
+                <div class="sizesel" id="stagR" data-value="390" data-onchange="stagPrice" onfocusout="sizeSelFocusOut(event,this)">
+                  <button type="button" class="sizesel__trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Rear wheel size" onclick="sizeSelToggle(this)">
+                    <span class="sizesel__value-wrap">
+                      <span class="sizesel__value">20x10 &nbsp;|&nbsp; -25mm Offset</span>
+                      <span class="sizesel__badge">$390/ea</span>
+                    </span>
+                    <svg class="sizesel__chev" width="10" height="6" viewBox="0 0 8 8" fill="none" aria-hidden="true"><path d="M2 3L4 5L6 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                  <ul class="sizesel__list" role="listbox" aria-label="Rear wheel size options" hidden>
+                    <li class="sizesel__opt sizesel__opt--active" role="option" aria-selected="true" tabindex="0" data-value="390" data-label="20x10 &nbsp;|&nbsp; -25mm Offset" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>20x10 &nbsp;|&nbsp; -25mm Offset</span><span class="sizesel__opt-tag">$390/ea</span></li>
+                    <li class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="0" data-label="22x12 &nbsp;|&nbsp; -51mm Offset" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>22x12 &nbsp;|&nbsp; -51mm Offset</span><span class="sizesel__opt-tag">Call for pricing</span></li>
+                  </ul>
+                </div>
               </div>
               <div class="stag__sum">
                 <span class="stag__sum-label">Staggered set of 4:</span>
@@ -5700,12 +5729,67 @@ html, body{ overflow-x:clip; }
   function qty(d){ q=Math.max(1,Math.min(8,q+d)); document.getElementById('qtyVal').textContent=q; }
   function toggleStag(){ var b=document.getElementById('stagBox'); b.classList.toggle('stag--on'); document.querySelector('.stag__head').setAttribute('aria-expanded', b.classList.contains('stag--on')); }
   function stagPrice(){
-    var f=+document.getElementById('stagF').value, r=+document.getElementById('stagR').value;
+    var f=+document.getElementById('stagF').dataset.value, r=+document.getElementById('stagR').dataset.value;
     var t=document.getElementById('stagTotal');
     /* rear "22x12 -51" option value is 0 — its price isn't confirmed, so show
        "Call for pricing" instead of a total that implies the rear pair is free */
     t.textContent = r ? '$'+(2*f+2*r).toLocaleString() : 'Call for pricing';
   }
+  function sizeSelCloseAll(except){
+    document.querySelectorAll('.sizesel__list').forEach(function(list){
+      if (list === except) return;
+      list.hidden = true;
+      var trigger = list.parentElement.querySelector('.sizesel__trigger');
+      trigger.setAttribute('aria-expanded', 'false');
+    });
+  }
+  function sizeSelToggle(trigger){
+    var wrap = trigger.closest('.sizesel');
+    var list = wrap.querySelector('.sizesel__list');
+    var willOpen = list.hidden;
+    sizeSelCloseAll(willOpen ? list : null);
+    list.hidden = !willOpen;
+    trigger.setAttribute('aria-expanded', String(willOpen));
+    if (willOpen) {
+      var active = list.querySelector('[aria-selected="true"]') || list.querySelector('[role="option"]');
+      active.focus();
+    }
+  }
+  function sizeSelFocusOut(e, wrap){
+    if (!wrap.contains(e.relatedTarget)) sizeSelCloseAll();
+  }
+  function sizeSelOptKey(e, el){
+    var opts = Array.prototype.slice.call(el.closest('.sizesel__list').querySelectorAll('[role="option"]'));
+    var i = opts.indexOf(el);
+    if (e.key === 'ArrowDown') { e.preventDefault(); (opts[i+1]||opts[0]).focus(); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); (opts[i-1]||opts[opts.length-1]).focus(); }
+    else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sizePick(el); }
+  }
+  function sizePick(el){
+    var list = el.closest('.sizesel__list');
+    var wrap = el.closest('.sizesel');
+    var trigger = wrap.querySelector('.sizesel__trigger');
+    list.querySelectorAll('[role="option"]').forEach(function(o){
+      o.setAttribute('aria-selected', 'false'); o.classList.remove('sizesel__opt--active'); o.tabIndex = -1;
+    });
+    el.setAttribute('aria-selected', 'true'); el.classList.add('sizesel__opt--active'); el.tabIndex = 0;
+    wrap.dataset.value = el.dataset.value;
+    trigger.querySelector('.sizesel__value').textContent = el.dataset.label;
+    var tag = el.querySelector('.sizesel__opt-tag');
+    var badge = trigger.querySelector('.sizesel__badge');
+    if (badge) badge.textContent = tag ? tag.textContent : '';
+    sizeSelCloseAll();
+    trigger.focus();
+    if (wrap.dataset.onchange) window[wrap.dataset.onchange]();
+  }
+  document.addEventListener('keydown', function(e){
+    if (e.key !== 'Escape') return;
+    var openList = document.querySelector('.sizesel__list:not([hidden])');
+    if (!openList) return;
+    var trigger = openList.parentElement.querySelector('.sizesel__trigger');
+    sizeSelCloseAll();
+    trigger.focus();
+  });
   var optTotal=0, optCount=0;
   function optToggle(el,price){
     var on=el.classList.toggle('on'); el.setAttribute('aria-pressed', on);
