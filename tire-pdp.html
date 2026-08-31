@@ -4565,15 +4565,26 @@
   .stag__axle { margin-top: 12px; }
   .stag__axle-label { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel); margin-bottom: 6px; }
   .stag__axle-icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 800; font-size: 11px; background: var(--ink); color: var(--paper); }
-  .stag__select { width: 100%; padding: 10px 32px 10px 12px; border: 1px solid var(--rule); font-family: var(--ui); font-size: 13px; color: var(--ink); background: var(--paper);
-    appearance: none; -webkit-appearance: none; -moz-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath d='M2 3L4 5L6 3' stroke='%235F6975' stroke-width='1.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat; background-position: right 12px center; background-size: 10px; }
   .stag__sum { display: flex; justify-content: space-between; align-items: baseline; margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--rule); }
   .bp__size-picker { margin-bottom: 16px; }
   .bp__size-label { display: block; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel); margin-bottom: 6px; }
   .bp__size-note { font-family: var(--ui); font-size: 12px; color: var(--steel); margin: 8px 0 0; }
   .bp__size-note a { color: var(--heat); font-weight: 600; text-decoration: none; }
+  .sizesel { position: relative; }
+  .sizesel__trigger { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 14px; border: 1px solid var(--rule); background: var(--paper); font-family: var(--ui); font-size: 13px; font-weight: 600; color: var(--ink); cursor: pointer; text-align: left; transition: border-color .15s, box-shadow .15s; }
+  .sizesel__trigger:hover { border-color: var(--ink); }
+  .sizesel__trigger[aria-expanded="true"] { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(225,6,0,.08); }
+  .sizesel__trigger:focus-visible { outline: 2px solid var(--heat); outline-offset: 2px; }
+  .sizesel__value-wrap { display: flex; align-items: baseline; gap: 8px; min-width: 0; overflow: hidden; }
+  .sizesel__value { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sizesel__badge { flex-shrink: 0; font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); }
+  .sizesel__chev { flex-shrink: 0; color: var(--steel); transition: transform .15s; }
+  .sizesel__trigger[aria-expanded="true"] .sizesel__chev { transform: rotate(180deg); }
+  .sizesel__list { position: absolute; z-index: 20; top: calc(100% + 6px); left: 0; right: 0; max-height: 280px; overflow-y: auto; margin: 0; padding: 6px; list-style: none; background: var(--paper); border: 1px solid var(--line); box-shadow: 0 16px 32px rgba(0,0,0,.14); }
+  .sizesel__opt { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 11px; font-family: var(--ui); font-size: 13px; color: var(--ink); cursor: pointer; border-left: 3px solid transparent; }
+  .sizesel__opt:hover, .sizesel__opt:focus-visible { background: var(--bone); outline: none; }
+  .sizesel__opt--active { border-left-color: var(--heat); background: rgba(225,6,0,.04); font-weight: 700; }
+  .sizesel__opt-tag { flex-shrink: 0; font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); }
   .stag__sum-label { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel); }
   .stag__sum-price { font-family: var(--display); font-size: 22px; font-weight: 900; color: var(--ink); }
 
@@ -5308,17 +5319,26 @@ html, body{ overflow-x:clip; }
         </div>
 
         <div class="bp__size-picker">
-          <label class="bp__size-label" for="otherSize">Other Tire Size</label>
-          <select class="stag__select" id="otherSize" onchange="pickSize(this)">
-            <option value="current" selected>225/40ZR18XL &mdash; this size, in stock</option>
-            <option value="215/45R17">215/45R17</option>
-            <option value="215/35R18">215/35R18</option>
-            <option value="235/40R18">235/40R18</option>
-            <option value="245/40R18">245/40R18</option>
-            <option value="255/35R18">255/35R18</option>
-            <option value="245/40R19">245/40R19</option>
-            <option value="245/35R20">245/35R20</option>
-          </select>
+          <span class="bp__size-label" id="otherSizeLabel">Other Tire Size</span>
+          <div class="sizesel" id="otherSizeWrap" onfocusout="sizeSelFocusOut(event)">
+            <button type="button" class="sizesel__trigger" id="otherSizeTrigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="otherSizeList" aria-labelledby="otherSizeLabel otherSizeTrigger" onclick="sizeSelToggle()">
+              <span class="sizesel__value-wrap">
+                <span class="sizesel__value" id="otherSizeValue">225/40ZR18XL</span>
+                <span class="sizesel__badge" id="otherSizeBadge">In Stock</span>
+              </span>
+              <svg class="sizesel__chev" width="10" height="6" viewBox="0 0 8 8" fill="none" aria-hidden="true"><path d="M2 3L4 5L6 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <ul class="sizesel__list" id="otherSizeList" role="listbox" aria-labelledby="otherSizeLabel" hidden>
+              <li class="sizesel__opt sizesel__opt--active" role="option" aria-selected="true" tabindex="0" data-value="current" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>225/40ZR18XL</span><span class="sizesel__opt-tag">In Stock</span></li>
+              <li class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="215/45R17" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>215/45R17</span></li>
+              <li class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="215/35R18" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>215/35R18</span></li>
+              <li class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="235/40R18" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>235/40R18</span></li>
+              <li class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="245/40R18" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>245/40R18</span></li>
+              <li class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="255/35R18" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>255/35R18</span></li>
+              <li class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="245/40R19" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>245/40R19</span></li>
+              <li class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="245/35R20" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>245/35R20</span></li>
+            </ul>
+          </div>
           <p class="bp__size-note" id="sizeNote" style="display:none;">Call <a href="tel:+14809663040">480-966-3040</a> for pricing &amp; availability on this size.</p>
         </div>
 
@@ -5622,7 +5642,45 @@ html, body{ overflow-x:clip; }
   }
   var q=4;
   function qty(d){ q=Math.max(1,Math.min(8,q+d)); document.getElementById('qtyVal').textContent=q; }
-  function pickSize(el){ document.getElementById('sizeNote').style.display = el.value==='current' ? 'none' : 'block'; }
+  function sizeSelToggle(force){
+    var trigger = document.getElementById('otherSizeTrigger');
+    var list = document.getElementById('otherSizeList');
+    var open = typeof force === 'boolean' ? force : list.hidden;
+    list.hidden = !open;
+    trigger.setAttribute('aria-expanded', String(open));
+    if (open) {
+      document.addEventListener('keydown', sizeSelEscape);
+      var active = list.querySelector('[aria-selected="true"]') || list.querySelector('[role="option"]');
+      active.focus();
+    } else {
+      document.removeEventListener('keydown', sizeSelEscape);
+    }
+  }
+  function sizeSelEscape(e){
+    if (e.key === 'Escape') { sizeSelToggle(false); document.getElementById('otherSizeTrigger').focus(); }
+  }
+  function sizeSelFocusOut(e){
+    if (!document.getElementById('otherSizeWrap').contains(e.relatedTarget)) sizeSelToggle(false);
+  }
+  function sizeSelOptKey(e, el){
+    var opts = Array.prototype.slice.call(document.querySelectorAll('#otherSizeList [role="option"]'));
+    var i = opts.indexOf(el);
+    if (e.key === 'ArrowDown') { e.preventDefault(); (opts[i+1]||opts[0]).focus(); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); (opts[i-1]||opts[opts.length-1]).focus(); }
+    else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sizePick(el); }
+  }
+  function sizePick(el){
+    document.querySelectorAll('#otherSizeList [role="option"]').forEach(function(o){
+      o.setAttribute('aria-selected', 'false'); o.classList.remove('sizesel__opt--active'); o.tabIndex = -1;
+    });
+    el.setAttribute('aria-selected', 'true'); el.classList.add('sizesel__opt--active'); el.tabIndex = 0;
+    var isCurrent = el.dataset.value === 'current';
+    document.getElementById('otherSizeValue').textContent = isCurrent ? '225/40ZR18XL' : el.dataset.value;
+    document.getElementById('otherSizeBadge').style.display = isCurrent ? '' : 'none';
+    document.getElementById('sizeNote').style.display = isCurrent ? 'none' : 'block';
+    sizeSelToggle(false);
+    document.getElementById('otherSizeTrigger').focus();
+  }
 
   function toggleStag(){ var b=document.getElementById('stagBox'); b.classList.toggle('stag--on'); document.querySelector('.stag__head').setAttribute('aria-expanded', b.classList.contains('stag--on')); }
   function stagPrice(){
