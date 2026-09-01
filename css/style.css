@@ -155,6 +155,37 @@
 .stats__suffix{font:800 18px/27px var(--font-ui);color:var(--accent-red-on-dark)}
 
 
+/* ===== BRAND TICKER (below hero) ========================================= */
+
+.ticker{background:var(--bg-surface);border-bottom:1px solid var(--border-default);
+  padding:18px 0}
+@media (min-width:901px){ .ticker{padding:26px 0} }
+
+.hp-ticker{display:flex;overflow:hidden;gap:40px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.hp-ticker__set{display:flex;align-items:center;flex-shrink:0;gap:40px;
+  animation:hp-ticker-scroll var(--ticker-duration,60s) linear infinite}
+@keyframes hp-ticker-scroll{ to{ transform:translateX(calc(-100% - 40px)); } }
+.hp-ticker:hover .hp-ticker__set,.hp-ticker:focus-within .hp-ticker__set{
+  animation-play-state:paused}
+.hp-ticker__item{flex:none;display:grid;place-items:center}
+.hp-ticker__logo{max-height:30px;width:auto;max-width:120px;object-fit:contain;
+  opacity:.7;transition:transform .18s ease}
+@media (min-width:901px){ .hp-ticker__logo{max-height:44px;max-width:160px} }
+.hp-ticker__item:hover .hp-ticker__logo,.hp-ticker__item:focus-visible .hp-ticker__logo{
+  transform:scale(1.12)}
+@media (prefers-reduced-motion:reduce){
+  .hp-ticker{overflow-x:auto;-webkit-mask-image:none;mask-image:none;
+    scrollbar-width:none;-ms-overflow-style:none}
+  .hp-ticker::-webkit-scrollbar{display:none}
+  .hp-ticker__set{animation:none}
+  .hp-ticker__set[aria-hidden]{display:none}
+  .hp-ticker__item:hover .hp-ticker__logo,.hp-ticker__item:focus-visible .hp-ticker__logo{
+    transform:none}
+}
+
+
 /* ===== FEATURE STRIPS (nodes 1533:13029 trust · 251:5437 promise) ======== */
 
 .strip{background:var(--bg-surface);border-bottom:1px solid var(--border-default)}
@@ -166,11 +197,9 @@
    Mobile collapses both strips to the same reduced block padding; tablet up
    restores each strip's own rhythm (trust stays tight, promise opens up). */
 .strip--trust{display:none}
-@media (min-width:901px){ .strip--trust{display:block} }
 .strip--trust .strip__row{padding-block:24px 26px}
 @media (min-width:901px){ .strip--trust .strip__row{padding-block:24px 25px} }
 .strip--promise{display:none}
-@media (min-width:901px){ .strip--promise{display:block} }
 .strip--promise .strip__row{padding-block:24px 26px}
 @media (min-width:901px){ .strip--promise .strip__row{padding-block:48px 49px} }
 .strip__row{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;
@@ -219,9 +248,9 @@
 /* ===== SHOP BY CATEGORY · node 1526:12379 ================================ */
 
 .cats{background:var(--bg-surface);padding-top:40px}
-@media (min-width:901px){ .cats{padding-top:60px} }
+@media (min-width:901px){ .cats{padding-top:60px;padding-bottom:60px} }
 @media (min-width:901px){ .cats__head{padding-bottom:21px} }
-.cats__eyebrow{margin:0;font:500 11px/15px var(--font-ui);letter-spacing:.88px;
+.cats__eyebrow{margin:0;font:500 16px/15px var(--font-ui);letter-spacing:.88px;
   text-transform:uppercase;color:var(--action-primary)}
 .cats__title{margin:6px 0 0;font-family:var(--font-display);font-weight:800;
   font-size:30px;line-height:34px;letter-spacing:-.5px;text-transform:uppercase;
@@ -400,9 +429,8 @@
 
 .browse{background:var(--surface-sunken);padding:40px 0 16px}
 @media (min-width:901px){ .browse{padding:60px 0 24px} }
-.browse__band{text-align:center;padding-bottom:24px;
-  border-bottom:1px solid var(--border-default)}
-.browse__eyebrow{margin:0;font:500 12px/14px var(--font-ui);letter-spacing:.88px;
+.browse__band{text-align:center;padding-bottom:24px}
+.browse__eyebrow{margin:0;font:500 16px/14px var(--font-ui);letter-spacing:.88px;
   text-transform:uppercase;color:var(--action-primary)}
 .browse__title{margin:12px 0 0;font-family:var(--font-display);font-weight:800;
   font-size:26px;line-height:30px;letter-spacing:-.4px;text-transform:uppercase;
@@ -431,7 +459,8 @@
 @media (min-width:1025px){ .browse__side{display:flex} }
 
 .vtile{position:relative;display:block;width:100%;height:187px;padding:0;border:0;
-  border-radius:4px;overflow:hidden;background:none;text-align:left;cursor:pointer;font:inherit}
+  border-radius:4px;overflow:hidden;background:none;text-align:left;cursor:pointer;font:inherit;
+  box-shadow:0 1px 2px rgba(10,10,10,.05),0 6px 18px rgba(10,10,10,.08)}
 /* direct child only — a descendant selector here also caught the caption arrow
    and beat .vtile__go on specificity */
 .vtile > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -869,7 +898,7 @@
 .experts{background:var(--bg-surface);border-top:1px solid var(--action-primary);
   border-bottom:1px solid var(--action-primary);padding:24px var(--gutter)}
 @media (min-width:1181px){ .experts{padding:36px 48px 36px 90px} }
-.experts__eyebrow{margin:0 0 12px;font:500 11px/15px var(--font-ui);letter-spacing:.88px;
+.experts__eyebrow{margin:0 0 12px;font:500 16px/15px var(--font-ui);letter-spacing:.88px;
   text-transform:uppercase;color:var(--action-primary)}
 .experts__row{display:flex;align-items:center;justify-content:space-between;gap:40px;
   flex-wrap:wrap}
@@ -898,13 +927,18 @@
    fit the now-2-column row at 390px); 901px+ restores this section's existing
    desktop numbers unchanged — desktop has room for the larger phone number
    this codebase already shipped, and that wasn't in scope to second-guess. */
-.experts__label{margin:0;font:500 11px/15px var(--font-ui);text-transform:uppercase;
-  color:var(--text-primary)}
+/* highlighted red on mobile to match .experts__eyebrow's own label treatment
+   two lines up (same size/tracking, same token) — desktop keeps its existing
+   muted grey via its own fully self-contained override below */
+.experts__label{margin:0;font:700 11px/15px var(--font-ui);text-transform:uppercase;
+  color:var(--action-primary)}
 @media (min-width:901px){ .experts__label{font:600 14px/21px var(--font-ui);color:#6b6b6b} }
 .experts__value{margin:0;font:500 12px/17px var(--font-ui);color:#4b5563}
 @media (min-width:901px){ .experts__value{font-size:14px;line-height:21px;color:#6b6b6b;font-weight:400} }
 .experts__phone a{display:inline-flex;align-items:center;min-height:24px}
-.experts__phone{margin:8px 0 0;font:700 14px/21px var(--font-ui);color:var(--text-primary)}
+/* sized up to match .foot__phone's own "prominent phone number" treatment
+   elsewhere on this page — desktop keeps its existing, larger override below */
+.experts__phone{margin:8px 0 0;font:800 18px/27px var(--font-ui);color:var(--text-primary)}
 @media (min-width:901px){
   .experts__phone{font-family:var(--font-display);font-weight:800;
     font-size:22px;line-height:28px;color:#1e1e1e;
@@ -922,24 +956,40 @@
 
 .builds{background:var(--bg-surface);padding:36px 0}
 @media (min-width:901px){ .builds{padding:60px 0} }
-.builds__head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;
-  padding-bottom:21px;border-bottom:1px solid var(--border-default)}
-.builds__eyebrow{margin:0;font:500 12px/14px var(--font-ui);letter-spacing:.88px;
+.builds__head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+@media (min-width:901px){
+  .builds__head{padding-bottom:21px}
+}
+.builds__eyebrow{margin:0;font:500 16px/14px var(--font-ui);letter-spacing:.88px;
   text-transform:uppercase;color:var(--action-primary)}
 .builds__title{margin:6px 0 0;font-family:var(--font-display);font-weight:800;
   font-size:28px;line-height:32px;letter-spacing:-.5px;text-transform:uppercase;
   color:var(--ink);font-variation-settings:"YTLC" 500,"wdth" 100}
 @media (min-width:901px){ .builds__title{font-size:40px;line-height:44px;letter-spacing:-.8px} }
 .link-ul{display:inline-flex;align-items:center;min-height:44px;gap:6px;padding-bottom:6px;
-  border-bottom:2px solid var(--ink);font:500 12px/14px var(--font-ui);
-  letter-spacing:1.32px;text-transform:uppercase;color:var(--text-primary)}
+  border:1px solid transparent;border-bottom:2px solid var(--ink);font:500 12px/14px var(--font-ui);
+  letter-spacing:1.32px;text-transform:uppercase;color:var(--text-primary);
+  transition:color .16s ease,border-color .16s ease}
 @media (min-width:901px){ .link-ul{min-height:24px} }
-.link-ul img{width:12px;height:12px}
+.link-ul img{width:12px;height:12px;transition:transform .18s ease}
+.link-ul:hover,.link-ul:focus-visible{color:var(--action-primary);border-color:var(--action-primary)}
+.link-ul:hover img,.link-ul:focus-visible img{transform:translateX(3px)}
+@media (prefers-reduced-motion:reduce){
+  .link-ul,.link-ul img{transition:none}
+  .link-ul:hover img,.link-ul:focus-visible img{transform:none}
+}
+/* scroll-padding-inline-start, not just the padding-left above: with
+   scroll-snap-type set, the browser's initial scroll position snaps the
+   first card flush to the scrollport edge and skips right past leading
+   padding — the "left margin" only reserves the space, scroll-padding is
+   what actually keeps it visible at rest. Same on .vids__grid/.guides__grid/
+   .revs__grid below. */
 .builds__grid{display:flex;grid-template-columns:none;grid-auto-rows:1fr;gap:12px;
   margin:20px 0 0;padding:0 var(--gutter);list-style:none;flex-direction:row;
   flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;
   scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
-  margin-inline:calc(var(--gutter) * -1);scrollbar-width:none}
+  margin-inline:calc(var(--gutter) * -1);scrollbar-width:none;
+  scroll-padding-inline-start:var(--gutter)}
 @media (min-width:901px){
   .builds__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;
     margin-top:28px;padding:0;flex-direction:row;flex-wrap:nowrap;overflow-x:visible;
@@ -947,7 +997,7 @@
     margin-inline:0;scrollbar-width:auto}
 }
 @media (min-width:1025px){ .builds__grid{grid-template-columns:repeat(4,minmax(0,1fr))} }
-.builds__grid > li{flex:0 0 84%;max-width:340px;scroll-snap-align:start}
+.builds__grid > li{flex:0 0 65%;max-width:260px;scroll-snap-align:start}
 @media (min-width:901px){
   .builds__grid > li{flex:0 1 auto;max-width:none;scroll-snap-align:none}
 }
@@ -1001,24 +1051,24 @@
    flex reorder moves the CTA without touching markup order (which stays
    correct for the desktop reading order this restores at 901px+). */
 .vids .shell{display:flex;flex-direction:column}
-@media (min-width:901px){ .vids .shell{display:block} }
-.vids .vids__rule span{background:#fff}
-.vids .vids__rule span:last-child{background:#4b4b4b}
+@media (min-width:901px){
+  .vids .shell{display:grid;grid-template-columns:1fr auto;column-gap:24px;align-items:center}
+  .vids__eyebrow,.vids__title,.vids__sub{grid-column:1;text-align:left}
+  .vids__cta{grid-column:2;grid-row:1/4;align-self:center;margin-top:0}
+  .vids__carousel{grid-column:1/-1}
+}
 .vids .vids__eyebrow{color:var(--accent-red-on-dark)}
 .vids .vids__sub{color:#d1d5db}
-.vids__rule{display:flex;justify-content:center;gap:8px}
-.vids__rule span{width:24px;height:3px;background:var(--bg-inverse)}
-.vids__rule span:last-child{background:#d1d5db}
-.vids__eyebrow{margin:16px 0 0;font:500 12px/14px var(--font-ui);letter-spacing:.88px;
+.vids__eyebrow{margin:16px 0 0;font:500 16px/14px var(--font-ui);letter-spacing:.88px;
   text-transform:uppercase;color:var(--action-primary)}
 .vids__title{margin:6px 0 0;font-family:var(--font-display);font-weight:800;font-size:26px;
   line-height:30px;letter-spacing:-.4px;text-transform:uppercase;color:#fff;
   font-variation-settings:"YTLC" 500,"wdth" 100}
 @media (min-width:901px){ .vids__title{font-size:40px;line-height:44px;letter-spacing:-.8px} }
 /* Figma hardcodes #a3acb3 here (2.31:1) — using the corrected muted token */
-.vids__sub{margin:8px 0 0;font:400 14px/21px var(--font-ui);color:var(--text-muted);
+.vids__sub{margin:8px 0 0;font:500 12px/21px var(--font-ui);color:var(--text-muted);
   max-width:34em;margin-inline:auto}
-@media (min-width:901px){ .vids__sub{max-width:none;margin-inline:0} }
+@media (min-width:901px){ .vids__sub{max-width:none;margin-inline:0;font-size:14px;font-weight:400} }
 .vids__sub b{font-weight:700}
 /* Updated 2026-08-21 — was a flat black pill with the full-colour YouTube
    logo riding on it, which read like a generic "dark button," not a YouTube
@@ -1035,7 +1085,7 @@
    .pcard). Hover/focus darkens the fill and lifts it with a shadow instead of
    just swapping to a near-black — shadow, not translate, per this page's own
    "reveal/nudge, never lift" convention. */
-.vids__cta{display:inline-flex;align-items:center;gap:9px;margin-top:14px;
+.vids__cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;margin-top:14px;
   padding:11px 18px;border-radius:4px;background:var(--action-primary);
   font:500 12px/14px var(--font-ui);letter-spacing:1.32px;text-transform:uppercase;
   color:var(--text-on-dark);order:1;
@@ -1057,13 +1107,13 @@
   scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
   scrollbar-width:none;flex-direction:row;overscroll-behavior-x:contain;
   margin:28px 0 0;padding:0 var(--gutter);list-style:none;text-align:left;
-  margin-inline:calc(var(--gutter) * -1)}
+  margin-inline:calc(var(--gutter) * -1);scroll-padding-inline-start:var(--gutter)}
 @media (min-width:901px){
   .vids__grid{gap:18px;scroll-snap-type:x proximity;padding:0;flex-direction:row;
     overscroll-behavior-x:auto;margin-inline:0}
 }
 .vids__grid::-webkit-scrollbar{display:none}
-.vids__grid > li{flex:0 0 84%;scroll-snap-align:start;max-width:340px}
+.vids__grid > li{flex:0 0 65%;scroll-snap-align:start;max-width:260px}
 @media (min-width:901px){ .vids__grid > li{flex:0 0 380px;max-width:none} }
 
 /* Carousel arrows — 2026-08-25: the Blog section below now wraps its own
@@ -1120,7 +1170,7 @@
 .guides{background:#0a0a0a;border-top:1px solid #2a2a2a;padding:40px 0;
   text-align:center}
 @media (min-width:901px){ .guides{padding:81px 0 80px} }
-.guides__eyebrow{margin:0;font:500 12px/14px var(--font-ui);letter-spacing:.88px;
+.guides__eyebrow{margin:0;font:500 16px/14px var(--font-ui);letter-spacing:.88px;
   text-transform:uppercase;color:#fff}
 .guides__title{margin:6px 0 0;font-family:var(--font-display);font-weight:800;
   font-size:26px;line-height:30px;letter-spacing:-.4px;text-transform:uppercase;
@@ -1133,7 +1183,8 @@
   padding:0 var(--gutter);list-style:none;text-align:left;flex-direction:row;
   flex-wrap:nowrap;overflow-x:auto;overscroll-behavior-x:contain;
   scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
-  margin-inline:calc(var(--gutter) * -1);scrollbar-width:none}
+  margin-inline:calc(var(--gutter) * -1);scrollbar-width:none;
+  scroll-padding-inline-start:var(--gutter)}
 @media (min-width:901px){
   .guides__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;
     padding:0;flex-direction:row;flex-wrap:nowrap;overflow-x:visible;overscroll-behavior-x:auto;
@@ -1170,7 +1221,10 @@
 
 .news{background:var(--bg-surface);border-bottom:1px solid var(--border-default);
   padding:36px 0;text-align:center}
-@media (min-width:901px){ .news{padding:80px 0 81px} }
+@media (min-width:901px){
+  .news{padding:80px 0 81px}
+  .news__title{text-align:left}
+}
 /* Figma's mobile News heading is a plain mixed-case "News" at 30/34 — the
    40/44/uppercase treatment is desktop-only (restored below 901px+). */
 .news__title{margin:6px 0 0;font-family:var(--font-display);font-weight:800;font-size:30px;
@@ -1328,7 +1382,7 @@
   padding:0 var(--gutter);list-style:none;flex-direction:row;flex-wrap:nowrap;
   overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;
   -webkit-overflow-scrolling:touch;margin-inline:calc(var(--gutter) * -1);
-  scrollbar-width:none}
+  scrollbar-width:none;scroll-padding-inline-start:var(--gutter)}
 @media (min-width:901px){
   .revs__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;
     padding:0;flex-direction:row;flex-wrap:nowrap;overflow-x:visible;overscroll-behavior-x:auto;
@@ -1401,7 +1455,7 @@
 @media (min-width:1025px){ .drop__row{gap:48px;flex-direction:row} }
 .drop__copy{flex:0 0 auto;min-width:0;width:100%;padding-top:0}
 @media (min-width:1025px){ .drop__copy{flex:1 1 604px;width:auto;padding-top:0} }
-.drop__eyebrow{margin:0;font:500 12px/14px var(--font-ui);letter-spacing:.88px;
+.drop__eyebrow{margin:0;font:500 16px/14px var(--font-ui);letter-spacing:.88px;
   text-transform:uppercase;color:var(--action-primary)}
 /* the heading sits on a red bar that bleeds off the left edge (Figma left:-59) */
 /* The bar bleeds off the left edge (Figma left:-59). A ::before at z-index:-1
@@ -1439,10 +1493,13 @@
    above switch off the horizontal-scroll layout */
 .dashes{display:flex;justify-content:center;gap:6px;margin-top:14px}
 @media (min-width:901px){ .dashes{display:none} }
-.dashes span{width:26px;height:3px;background:#d1d5db}
-.dashes span:first-child{background:var(--bg-inverse)}
+/* .is-active, not :first-child — js/script.js moves it between the two spans
+   to track which half of the carousel is scrolled into view. Was a static
+   :first-child, so it never actually reflected scroll position. */
+.dashes span{width:26px;height:3px;background:#d1d5db;transition:background-color .16s ease}
+.dashes span.is-active{background:var(--bg-inverse)}
 .guides .dashes span{background:rgba(255,255,255,.28)}
-.guides .dashes span:first-child{background:#fff}
+.guides .dashes span.is-active{background:#fff}
 .vids .dashes span{background:rgba(255,255,255,.28)}
-.vids .dashes span:first-child{background:#fff}
+.vids .dashes span.is-active{background:#fff}
 

@@ -56,7 +56,7 @@ with no existing token, copied as-is.
 
 | Breakpoint | What flips |
 |---|---|
-| **768px** | Stats strip stars grow (14→16px, desktop only affects size, not layout). Body switches column→row (`.v2-footer__body{flex-direction:row}`), brand block becomes a fixed-width left rail (300px, gets a right border) instead of the mobile centered stack. Link grid switches from an accordion list to `flex-direction:row` — columns fan out **3 across**, and `.v2-footer__col-toggle` becomes non-interactive (`pointer-events:none`), its chevron hides, and `.v2-footer__col-links` is forced open (`max-height:none!important`). Family-logo row becomes a 3-column grid. Contact info's two columns (Customer Service / Headquarters) go side-by-side. |
+| **768px** | Stats strip stars grow (14→16px, desktop only affects size, not layout). Body switches column→row (`.v2-footer__body{flex-direction:row}`), brand block becomes a fixed-width left rail (300px, gets a right border) instead of the mobile centered stack. Link grid switches from an accordion list to `flex-direction:row` — columns fan out **3 across**, and `.v2-footer__col-toggle` becomes non-interactive (`pointer-events:none`), its chevron hides, and `.v2-footer__col-links` is forced open (`max-height:none!important`). Family-logo row becomes a 3-column grid. (Contact info's gap is a flat 70px at every breakpoint — no change here, see §5.2.) |
 | **1024px** | Stats strip switches from horizontal-scroll to `justify-content:space-between` (everything fits, no scroll needed) — stat numbers/labels/finance text all pick up `clamp()` fluid sizing instead of a fixed px value. Brand rail widens 300→320px. Link columns go from 3-across to **6 across** (all columns on one row). Family-logo grid goes from 3 to 5 columns. |
 
 Only two breakpoints total — much simpler than the header's four-tier ramp.
@@ -159,7 +159,7 @@ are **plain text pills, not the providers' real logos** — deliberate, see
 .v2-footer__logo img{display:block;width:100%;height:auto}
 .v2-footer__desc{color:rgba(255,255,255,.5);margin:0;text-align:center;font-family:var(--font-ui);font-size:12px;font-weight:400;line-height:1.5}
 .v2-footer__contact{display:flex;flex-direction:column;gap:15px;padding-bottom:6px;border-bottom:1px solid #6b6b6b}
-.v2-footer__contact-top{display:flex;flex-direction:column;gap:8px}
+.v2-footer__contact-top{display:flex;flex-direction:row;gap:70px}
 .v2-footer__contact-col{display:flex;flex-direction:column;gap:3.5px;flex:1}
 .v2-footer__contact-col>.v2-footer__contact-phone{margin-top:6px}
 .v2-footer__contact-link{font-family:var(--font-ui);font-size:13px;font-weight:600;color:rgba(255,255,255,.8);text-decoration:underline;text-underline-offset:2px;width:fit-content;transition:color .2s ease}
@@ -183,7 +183,6 @@ are **plain text pills, not the providers' real logos** — deliberate, see
   .v2-footer__logo{align-self:auto}
   .v2-footer__desc{text-align:left}
   .v2-footer__socials{justify-content:flex-start}
-  .v2-footer__contact-top{flex-direction:row;gap:20px}
 }
 @media screen and (min-width:1024px){
   .v2-footer__brand{width:320px}
@@ -193,8 +192,12 @@ are **plain text pills, not the providers' real logos** — deliberate, see
 Mobile: everything in the brand block is **center-aligned** (logo, desc,
 socials) in a single narrow column. Desktop: it becomes a **left-aligned
 fixed-width rail** (300px → 320px at 1024px) with a right border separating
-it from the link columns, and the two contact columns (Customer Service /
-Headquarters) go side by side instead of stacked.
+it from the link columns. The two contact columns (Customer Service /
+Headquarters) are **always side by side, at every breakpoint**, with a flat
+70px gap between them at every width too — no responsive variation. They
+used to stack on mobile;
+changed to row-always by explicit request since a narrow column read as two
+disconnected blocks rather than one contact section.
 
 Contact block only has **two** columns (Customer Service, Headquarters) —
 the reference site has a third ("Customer Sales") that this port

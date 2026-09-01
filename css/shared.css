@@ -114,15 +114,19 @@ button{font:inherit;color:inherit}
 @media (min-width:901px){ .brandbar__list > li{margin-right:0} }
 .brandbar__link{display:flex;align-items:center;gap:6px;padding:9px 6px 11px;
   border-bottom:2px solid transparent;
-  font:500 10px/13px var(--font-ui);letter-spacing:.6px;text-transform:uppercase;
+  font:700 10px/13px var(--font-ui);letter-spacing:.6px;text-transform:uppercase;
   color:var(--text-on-dark);white-space:nowrap;
   transition:background-color .16s ease,border-color .16s ease;min-height:44px}
 @media (min-width:901px){
   .brandbar__link{gap:8px;padding:11px 18px 13px;
     font-size:12px;line-height:14px;letter-spacing:1.47px;min-height:0;font-weight:500}
 }
+/* Figma's mobile brand-switcher (node 688:12548) draws these dots fully
+   opaque, not dimmed — desktop has no matching reference yet, so the .55
+   dimming is kept there via the 901px override below rather than guessed at. */
 .brandbar__dot{width:6px;height:6px;border-radius:3px;background:var(--bg-surface);
-  opacity:.55;flex:none;transition:opacity .16s ease}
+  opacity:1;flex:none;transition:opacity .16s ease}
+@media (min-width:901px){ .brandbar__dot{opacity:.55} }
 /* Figma's mobile header drops the current-brand chip entirely (you're already
    on that site — a switcher doesn't need to list itself), which is also what
    lets the remaining four fit ~390px without the overflow-x scroll below
@@ -145,7 +149,7 @@ button{font:inherit;color:inherit}
 .masthead{background:var(--bg-surface);border-bottom:1px solid var(--border-default)}
 .masthead__inner{display:flex;align-items:center;gap:6px;height:52px}
 @media (min-width:361px){ .masthead__inner{gap:12px} }
-@media (min-width:1025px){ .masthead__inner{gap:24px;height:80px} }
+@media (min-width:1025px){ .masthead__inner{gap:24px;height:80px;max-width:1600px} }
 
 /* mobile: logo is a 44px touch target with its own centering; desktop: a
    plain inline link sized entirely by its image (natural inline flow) */
@@ -158,13 +162,20 @@ button{font:inherit;color:inherit}
 /* mobile/tablet: search collapses to a 44px icon-only tile, pushed to the end
    of the reordered row (order:2, margin-left:auto); desktop: the full
    462px-flex search field back in its natural first position */
-.search{flex:0 1 462px;display:flex;align-items:stretch;height:44px;
+/* flex-basis:44px, not the old 462px shrunk down — flex-basis wins over the
+   width property below whenever it isn't auto, so the mobile icon-only box
+   was never actually landing at a clean 44px; it sat wherever flex-shrink's
+   math put it (measured ~65px). Now nested inside .utils (below) as its
+   first child, so it needs no margin-left/order of its own on mobile — the
+   one margin-left:auto that pushes the whole group right lives on
+   .util--phone now, and normal DOM flow puts search first within .utils. */
+.search{flex:0 1 44px;display:flex;align-items:stretch;height:44px;
   border:0;background:var(--bg-surface);padding:0;
   transition:background-color 150ms,border-color 150ms,color 150ms;
-  max-width:none;width:44px;margin-left:auto;order:2}
+  max-width:none;width:44px;margin-right:8px}
 @media (min-width:1025px){
-  .search{height:56px;border:2px solid var(--ink);padding:2px;
-    max-width:340px;width:auto;order:0;margin-left:0}
+  .search{flex:0 1 600px;height:56px;border:2px solid var(--ink);padding:2px;
+    max-width:340px;width:auto;order:0;margin-right:0;min-width:0}
 }
 @media (min-width:1181px){ .search{max-width:none} }
 .search__field{flex:1 1 auto;min-width:0;border:0;padding:0 20px;
@@ -182,7 +193,8 @@ button{font:inherit;color:inherit}
   .search__submit{padding:0 26px;background:var(--bg-inverse);
     width:auto;height:auto;justify-content:normal}
 }
-.search__submit svg{width:18px;height:18px;fill:var(--text-primary);flex:none}
+.search__submit svg{width:24px;height:24px;fill:var(--text-primary);flex:none}
+@media (min-width:901px){ .search__submit svg{width:18px;height:18px} }
 @media (min-width:1025px){ .search__submit svg{fill:currentColor} }
 /* Mobile-only icon swap (search/account/cart), reference: test.vividwheels.com
    mobile header. Two <svg> per icon rather than swapping path data at a
@@ -216,11 +228,19 @@ button{font:inherit;color:inherit}
       treatment — still two tiles + two glyphs, just closer in visual weight. */
 .utils{flex:none;margin-left:auto;display:flex;align-items:stretch;height:auto;
   order:3;border-left:0}
-@media (min-width:1025px){ .utils{height:54px;order:0;border-left:0} }
+/* display:contents on desktop — .search (now .utils' first child, so it groups
+   tightly with the icons on mobile) needs to keep sitting next to the logo on
+   desktop instead, matching the layout before this nesting. Flattening .utils
+   here lets each child re-join .masthead__inner's own flex order by plain DOM
+   position, same as when .search was a direct sibling. .utils' own box-level
+   properties (margin-left, height, border) are inert once it has no box, so
+   the margin that pushes the icon cluster right moves to .util--phone below —
+   the first of .utils' children that's meant to be part of that push. */
+@media (min-width:1025px){ .utils{display:contents} }
 .util{position:relative;display:flex;align-items:center;gap:12px;padding:0 2px;
   transition:background-color 150ms,border-color 150ms,color 150ms;border-right:0}
 @media (min-width:901px){ .util{padding:0 6px} }
-@media (min-width:1025px){ .util{padding:10px 22px;border-right:0} }
+@media (min-width:1025px){ .util{padding:10px 22px;border-right:0;flex-shrink:0} }
 /* the badge's own padding/radius grew (10px 8px, 24px), so its right edge now
    sits past the tile and a few px into "CART" at the default 12px gap — a
    wider gap just on this item clears it instead of shrinking the badge back */
@@ -239,12 +259,14 @@ button{font:inherit;color:inherit}
 @media (min-width:1025px){ .util__tile--red{background:var(--action-primary)} }
 .util__tile--dark{background:transparent;position:relative}
 @media (min-width:1025px){ .util__tile--dark{background:var(--bg-inverse)} }
-.util__tile svg{width:17px;height:17px;fill:var(--text-primary)}
+.util__tile svg{width:24px;height:23px;fill:var(--text-primary)}
+@media (min-width:901px){ .util__tile svg{width:17px;height:17px} }
 @media (min-width:1025px){ .util__tile svg{fill:#fff} }
 .util__glyph{flex:none;display:grid;place-items:center;width:44px;height:44px}
 @media (min-width:901px){ .util__glyph{width:34px;height:34px} }
 @media (min-width:1025px){ .util__glyph{width:30px;height:30px} }
-.util__glyph svg{width:17px;height:17px;fill:var(--text-primary)}
+.util__glyph svg{width:24px;height:23px;fill:var(--text-primary)}
+@media (min-width:901px){ .util__glyph svg{width:17px;height:17px} }
 .util__label{display:block;font:500 10px/14px var(--font-ui);letter-spacing:.72px;
   text-transform:uppercase;color:var(--text-muted);font-size:11px}
 @media (min-width:1181px){ .util__label{font-size:10px;font-weight:500} }
@@ -259,13 +281,16 @@ button{font:inherit;color:inherit}
   clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
 @media (min-width:1025px){
   .util__text{position:static;width:auto;height:auto;margin:0;padding:0;
-    overflow:visible;clip:auto;clip-path:none;white-space:normal;border:0}
+    overflow:visible;clip:auto;clip-path:none;white-space:nowrap;border:0}
 }
 /* phone number and wishlist count are hidden below the point they'd otherwise
    crowd the row; both carry the .util class too, so this only needs to state
    the exception in each direction */
 .util--phone,.util--wish{display:none}
-@media (min-width:1025px){ .util--phone,.util--wish{display:flex} }
+/* .utils' own margin-left:auto (above) is inert on desktop once it's
+   display:contents — this is the child that actually needs to carry the
+   "push the icon cluster right, away from search" job there. */
+@media (min-width:1025px){ .util--phone,.util--wish{display:flex} .util--phone{margin-left:auto} }
 .util__badge{position:absolute;top:-4px;left:auto;right:-6px;min-width:16px;height:16px;
   display:flex;align-items:center;justify-content:center;padding:3px 5px;
   border:2px solid #fff;border-radius:24px;background:var(--action-primary);
@@ -649,7 +674,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .v2-footer__logo img{display:block;width:100%;height:auto}
 .v2-footer__desc{color:rgba(255,255,255,.5);margin:0;text-align:center;font-family:var(--font-ui);font-size:12px;font-weight:400;line-height:1.5}
 .v2-footer__contact{display:flex;flex-direction:column;gap:15px;padding-bottom:6px;border-bottom:1px solid #6b6b6b}
-.v2-footer__contact-top{display:flex;flex-direction:column;gap:8px}
+.v2-footer__contact-top{display:flex;flex-direction:row;gap:70px}
 .v2-footer__contact-col{display:flex;flex-direction:column;gap:3.5px;flex:1}
 .v2-footer__contact-col>.v2-footer__contact-phone{margin-top:6px}
 .v2-footer__contact-link{font-family:var(--font-ui);font-size:13px;font-weight:600;color:rgba(255,255,255,.8);text-decoration:underline;text-underline-offset:2px;width:fit-content;transition:color .2s ease}
@@ -709,7 +734,6 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
   .v2-footer__col-links a{padding:1px 0 6px;line-height:1.5;max-width:fit-content}
   .v2-footer__family{padding:12px 0;margin-top:16px}
   .v2-footer__family-logos{display:grid;grid-template-columns:repeat(3,1fr);align-items:center;justify-items:center;gap:24px}
-  .v2-footer__contact-top{flex-direction:row;gap:20px}
 }
 @media screen and (min-width:1024px){
   .v2-footer__stats{overflow-x:visible}
