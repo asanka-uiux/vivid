@@ -4,11 +4,12 @@
 <meta charset="utf-8" />
 <meta name="theme-color" content="#0b0d10">
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Arkon Off-Road Caesar 20x10 -25 · Black Milled — VR Trucks</title>
-<meta name="description" content="Arkon Off-Road Caesar 20x10 -25 in Gloss Black Milled — directional off-road wheel with guaranteed fitment for your Ford Super Duty. Financing and mounting available.">
+<title>About Vivid Racing — Since 2001</title>
+<meta name="description" content="About Vivid Racing at Vivid Racing — parts, fitment help and expert advice.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Nunito+Sans:wght@800;900&family=Saira:wght@600&display=swap" rel="stylesheet">
 <style>
   :root {
     --paper: #FFFFFF;
@@ -27,52 +28,13 @@
     --display: 'Inter Tight', -apple-system, sans-serif;
     --ui: 'Inter', -apple-system, sans-serif;
     --mono: 'JetBrains Mono', 'SF Mono', monospace;
-
-    /* Shared-header/footer tokens (INSTRUCTIONS.md prerequisites) — new names,
-       kept alongside the page's own --ui/--display/--mono rather than merged,
-       since the page's ~5800 lines of existing CSS already depend on those.
-       --ink already exists above at the same value (#0a0a0a), so it is not
-       redeclared here. */
-    --action-primary:#b31414;
-    --bg-inverse:#000;
-    --bg-surface:#fff;
-    --border-default:#a3acb3;      /* decorative rules only — never text */
-    --hairline:#e5e7eb;
-    --surface-sunken:#f9fafb;
-    --text-primary:#000;
-    --text-muted:#6f7780;          /* darkened from Figma's #a3acb3 — WCAG 4.5:1 */
-    --text-on-dark:#fff;
-    --accent-red:#e10600;
-    --accent-red-on-dark:#e04a4a;  /* 5.25:1 on black — #e10600/#b31414 both fail */
-    --field-ink:#1e1e1e;
-    --shell:1320px;
-    --gutter:28px;
-    --font-ui:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
-    --font-display:'Nunito Sans','Inter',system-ui,sans-serif;
-    --font-form:'Saira','Inter',system-ui,sans-serif;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { background: var(--paper); color: var(--ink); font-family: var(--ui); -webkit-font-smoothing: antialiased; }
   body { font-size: 15px; line-height: 1.5; }
   a { color: inherit; text-decoration: none; }
   img { max-width: 100%; display: block; }
-  svg { display: block; max-width: 100%; }
   button { font: inherit; cursor: pointer; }
-
-  /* ===== HEADER/FOOTER PREREQUISITES (INSTRUCTIONS.md §Files) ===== */
-  .shell{width:100%;max-width:var(--shell);margin-inline:auto;padding-inline:var(--gutter)}
-  .vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
-      clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
-  .skip{position:absolute;left:0;top:-60px;z-index:100;background:var(--action-primary);
-        color:#fff;padding:12px 20px;font:700 13px/1 var(--font-ui);letter-spacing:.08em;
-        text-transform:uppercase;transition:top .15s}
-  .skip:focus{top:0}
-  :where(a,button,input,select,summary,[tabindex]):focus-visible{
-    outline:3px solid var(--accent-red);outline-offset:2px;
-  }
-  .brandbar :focus-visible,.util--dark:focus-visible{
-    outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 0 6px rgba(179,20,20,.9);
-  }
 
   .wrap { max-width: 1320px; margin: 0 auto; padding: 0 32px; }
 
@@ -87,6 +49,15 @@
   .eyebrow--heat { color: var(--heat); }
   .eyebrow--steel { color: var(--steel); }
   .heat { color: var(--heat); }
+
+  /* ==========================================================================
+     HEADER — no longer duplicated here. Per header.md, css/shared.css (linked
+     at the bottom of <head>) is the single source of truth for the header
+     (brandbar/masthead/subnav/mobrow) across all 7 pages that carry it,
+     including this one. The old .superheader / .header / .nav (row) blocks
+     and their markup are removed. Edit index.html + css/shared.css to change
+     the header, then update header.md — never re-add header rules in this file.
+     ========================================================================== */
 
   /* ===== TRUST BAR ===== */
   .trustbar {
@@ -116,169 +87,6 @@
     vertical-align: middle;
   }
   .logo-flat--header { height: 38px; }
-
-  /* ==========================================================================
-     VIVID HEADER — pasted from _partials/header.css sections 2+3 verbatim.
-     Section 1 (prerequisites) is NOT re-pasted here; the page already has its
-     own :root, and the header-specific tokens/utility classes it needs were
-     merged into that root block above instead (INSTRUCTIONS.md step 4: "paste
-     section 1 only if the page has no :root block yet").
-     Do not edit this to change the header. Edit index.html, then re-cut.
-     ========================================================================== */
-
-  /* ============================== HEADER ================================== */
-
-  /* row 1 — Vivid family brand switcher */
-  .brandbar{background:var(--bg-inverse);border-bottom:1px solid rgba(255,255,255,.06)}
-  .brandbar__list{display:flex;list-style:none;margin:0;padding:0;min-height:34px}
-  .brandbar__link{display:flex;align-items:center;gap:8px;padding:11px 18px 13px;
-    border-bottom:2px solid transparent;
-    font:700 12px/14px var(--font-ui);letter-spacing:1.47px;text-transform:uppercase;
-    color:var(--text-on-dark);white-space:nowrap}
-  .brandbar__dot{width:6px;height:6px;border-radius:3px;background:var(--bg-surface);
-    opacity:.55;flex:none}
-  .brandbar__link[aria-current="page"]{background:rgba(179,20,20,.08);
-    border-bottom-color:var(--action-primary)}
-  .brandbar__link[aria-current="page"] .brandbar__dot{background:var(--action-primary);opacity:1}
-
-  /* row 2 — logo · search · utilities */
-  .masthead{background:var(--bg-surface);border-bottom:1px solid var(--border-default)}
-  .masthead__inner{display:flex;align-items:center;gap:24px;height:80px}
-  .logo{flex:none}
-  .logo img{width:183px;height:38px}
-
-  .search{flex:0 1 462px;display:flex;align-items:stretch;height:56px;
-    border:2px solid var(--ink);background:var(--bg-surface);padding:2px}
-  .search__field{flex:1 1 auto;min-width:0;border:0;padding:0 20px;
-    font:400 15px/22px var(--font-ui);color:var(--text-primary);background:transparent}
-  .search__field::placeholder{color:var(--text-muted)}
-  .search__field:focus{outline:0}
-  .search:focus-within{outline:3px solid var(--accent-red);outline-offset:2px}
-  .search__submit{flex:none;display:flex;align-items:center;gap:10px;padding:0 26px;
-    border:0;background:var(--bg-inverse);color:var(--text-on-dark);cursor:pointer;
-    font:700 12px/17px var(--font-ui);letter-spacing:1.44px;text-transform:uppercase}
-  .search__submit svg{width:18px;height:18px;fill:currentColor;flex:none}
-
-  .utils{flex:none;margin-left:auto;display:flex;align-items:stretch;height:54px;
-    border-left:1px solid var(--border-default)}
-  .util{display:flex;align-items:center;gap:12px;padding:8px 19px 8px 18px;
-    border-right:1px solid var(--border-default)}
-  .utils > :last-child{border-right:0}
-  .util__tile{flex:none;display:grid;place-items:center;width:38px;height:38px}
-  .util__tile--red{background:var(--action-primary)}
-  .util__tile--dark{background:var(--bg-inverse);position:relative}
-  .util__tile svg{width:18px;height:18px;fill:#fff}
-  .util__glyph{flex:none;display:grid;place-items:center;width:28px;height:28px}
-  .util__glyph svg{width:22px;height:22px;fill:var(--text-primary)}
-  .util__label{display:block;font:700 12px/14px var(--font-ui);letter-spacing:.72px;
-    text-transform:uppercase;color:var(--text-muted)}
-  .util__value{display:block;font:700 14px/21px var(--font-ui);letter-spacing:-.065px;
-    color:var(--text-primary)}
-  .util__value--phone{font-weight:800;letter-spacing:-.14px}
-  .util__badge{position:absolute;top:-6px;left:24px;min-width:18px;height:18px;
-    display:flex;align-items:center;justify-content:center;padding:4px 7px;
-    border:2px solid #fff;border-radius:9px;background:var(--action-primary);
-    font:700 12px/14px var(--font-ui);color:#fff}
-
-  /* row 3 — category nav + promos */
-  .subnav{background:var(--bg-surface);border-bottom:1px solid var(--border-default)}
-  .subnav__inner{display:flex;align-items:center;gap:20px;height:50px}
-  .subnav__list{display:flex;align-items:center;gap:20px;list-style:none;margin:0;padding:0}
-  .subnav__link{display:flex;align-items:center;gap:6px;padding:15px 0;
-    font:600 14px/21px var(--font-ui);color:var(--text-primary);white-space:nowrap}
-  .subnav__link svg{width:8px;height:8px;stroke:#6b7280;fill:none;
-    stroke-linecap:round;stroke-linejoin:round}
-  .subnav__promo{display:flex;align-items:center;min-height:24px;
-    font:700 12px/17px var(--font-ui);letter-spacing:1.2px;
-    text-transform:uppercase;color:var(--action-primary);white-space:nowrap}
-  .subnav__spacer{flex:1 1 auto}
-  .subnav__fin{display:flex;align-items:center;gap:12px;min-height:24px;white-space:nowrap;
-    font:700 12px/17px var(--font-ui);letter-spacing:1.2px;text-transform:uppercase}
-  .subnav__fin em{font-style:normal;color:var(--action-primary)}
-  .subnav__finlogos{display:flex;align-items:center;gap:8px;height:22px;padding-left:13px;
-    border-left:1px solid var(--border-default)}
-  .subnav__finlogos img{height:16px;width:auto;opacity:.85}
-  .subnav__finlogos img[alt="Katapult"]{transform:translateY(2px)}
-
-  /* ============================== INTERACTION STATES ======================== */
-  .search:hover{border-color:var(--action-primary)}
-  .search__field:hover{outline:0}
-  .search__submit:hover{background:rgba(0,0,0,.9)}
-  .util:hover{background:rgba(0,0,0,.04)}
-  .util:active{background:rgba(0,0,0,.08)}
-  .subnav__link:hover{border-bottom:2px solid var(--action-primary);padding-bottom:13px}
-  .subnav__link:active{color:var(--action-primary)}
-  .chat:hover{background:rgba(255,255,255,.12)}
-  .chat:active{background:rgba(255,255,255,.18)}
-  .burger:hover{background:rgba(255,255,255,.08)}
-  .burger:active{background:rgba(255,255,255,.12)}
-  .search,.util,.subnav__link,.chat,.burger{transition:background-color 150ms,border-color 150ms,color 150ms}
-
-  /* mobile-only header row */
-  .mobrow{display:none;background:var(--bg-inverse)}
-  .mobrow__inner{display:flex;align-items:center;justify-content:space-between;height:50px}
-  .chat{display:flex;align-items:center;gap:8px;padding:8px 14px;background:#1f1f1f;
-    color:#fff;font:700 13px/1 var(--font-ui);border:0;cursor:pointer}
-  .chat svg{width:16px;height:16px;fill:#fff}
-  .burger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;
-    height:44px;padding:0 8px;background:transparent;border:0;cursor:pointer}
-  .burger span{display:block;height:3px;background:#fff}
-
-  /* ==========================================================================
-     RESPONSIVE — header-only rules, in the exact order INSTRUCTIONS.md ships
-     them (order is the cascade at equal specificity — see "Known quirks").
-     ========================================================================== */
-  @media (max-width:1180px){
-    .search{max-width:340px}
-    .util__label,.util__value{font-size:11px}
-  }
-  @media (max-width:1024px){
-    .brandbar__list{overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
-    .brandbar__list::-webkit-scrollbar{display:none}
-    .masthead__inner{height:52px;gap:12px}
-    .logo img{width:150px;height:31px}
-    .search{max-width:none;width:44px;height:44px;border:0;padding:0;margin-left:auto;
-      order:2}
-    .search__field{display:none}
-    .search__submit{width:44px;height:44px;padding:0;background:transparent;
-      justify-content:center}
-    .search__submit svg{fill:var(--text-primary)}
-    .search__submit .search__submit-text,.util__text{
-      position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
-      clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
-    .utils{order:3;height:auto;border-left:0}
-    .util{position:relative;padding:0 6px;border-right:0}
-    .util--phone,.util--wish{display:none}
-    .util__tile,.util__glyph{width:34px;height:34px}
-    .util__tile--red,.util__tile--dark{background:transparent}
-    .util__tile svg{fill:var(--text-primary)}
-    .util__badge{left:auto;right:-6px;top:-4px;min-width:16px;height:16px;padding:3px 5px;
-      font-size:11px;line-height:11px}
-    .subnav{display:none}
-    .mobrow{display:block}
-  }
-  @media (max-width:900px){
-    :root{--gutter:16px}
-  }
-  @media (max-width:360px){
-    .logo img{width:118px;height:24px}
-    .masthead__inner{gap:6px}
-    .util{padding:0 2px}
-    .util__tile,.util__glyph{width:34px;height:34px}
-    .util__tile svg{width:17px;height:17px}
-    .util__glyph svg{width:20px;height:20px}
-    .search,.search__submit{width:34px;height:34px}
-    .chat{padding:8px 10px;font-size:12px}
-  }
-  @media (max-width:900px){
-    .brandbar__link{padding:15px 16px;min-height:44px}
-    .search,.search__submit{width:44px;height:44px}
-    .logo{display:flex;align-items:center;min-height:44px}
-    .util{padding:0 2px}
-    .util__tile,.util__glyph{width:44px;height:44px}
-    .chat{min-height:44px}
-    .subnav__link{min-height:44px}
-  }
 
   /* ===== VEHICLE PICKER ===== */
   .vp {
@@ -369,7 +177,7 @@
   .hero__bg {
     position: absolute;
     inset: 0;
-    background-image: url('https://images.unsplash.com/photo-1640020601421-560fbfbbdae8?fm=jpg&q=80&w=2400&auto=format&fit=crop');
+    background-image: url('https://images.unsplash.com/photo-1626966368420-fa2079743ad2?fm=jpg&q=85&w=2400&auto=format&fit=crop');
     background-size: cover;
     background-position: center 40%;
     background-repeat: no-repeat;
@@ -1689,7 +1497,7 @@
   .make-tile__logo { width: 100%; max-width: 180px; height: 50px; object-fit: contain; object-position: center; opacity: 0.85; transition: opacity 0.2s, transform 0.2s; }
   .make-tile:hover .make-tile__logo { opacity: 1; transform: scale(1.06); }
 
-  .makes-strip__row { display: grid; grid-template-columns: repeat(6, 1fr); }
+  .makes-strip__row { display: grid; grid-template-columns: repeat(7, 1fr); }
   .make-tile { display: flex; align-items: center; justify-content: center; min-height: 100px; padding: 18px 12px; }
 
   /* ===== REWARDS / LOYALTY 4-TILE ROW ===== */
@@ -1761,53 +1569,57 @@
   }
 
   /* ===== TRUST STRIP — convention 3-icon row (APR / Dinan / UroTuning pattern) ===== */
-  .trust-strip {
-    background: var(--paper);
-    border-bottom: 1px solid var(--line);
-    padding: 24px 0;
+  /* ============================================================
+     THE VR STANDARD — value prop + VR family band
+     ============================================================ */
+  .vrstd { background: var(--bone); color: var(--ink); border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+  .vrstd::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--heat) 0%, var(--heat) 42%, rgba(225,6,0,0.12) 100%); }
+  .vrstd__watermark { position: absolute; right: -18px; bottom: -30px; font-family: var(--display); font-style: italic; font-weight: 900; font-size: 148px; line-height: 1; letter-spacing: -0.05em; color: rgba(10,10,10,0.045); user-select: none; pointer-events: none; white-space: nowrap; }
+  .vrstd__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; padding: 30px 0 24px; }
+  .vrstd__eyebrow { font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--heat-deep); }
+  .vrstd__title { font-family: var(--display); font-size: clamp(20px, 2.4vw, 27px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.12; color: var(--ink); margin-top: 8px; }
+  .vrstd__title em { font-style: italic; color: var(--heat); }
+  .vrstd__meta { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--steel); text-align: right; line-height: 1.9; flex-shrink: 0; }
+  .vrstd__meta strong { color: var(--ink); }
+  .vrstd__meta .heat { color: var(--heat-deep); }
+  .vrstd__grid { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--rule); }
+  .vrstd__cell { padding: 22px 22px 26px; border-right: 1px solid var(--rule); }
+  .vrstd__cell:last-child { border-right: 0; }
+  .vrstd__num { font-family: var(--display); font-style: italic; font-weight: 900; font-size: 31px; letter-spacing: -0.03em; line-height: 1; color: var(--heat); }
+  .vrstd__num sup { font-size: 14px; font-style: normal; letter-spacing: 0.02em; }
+  .vrstd__label { font-family: var(--display); font-weight: 800; font-size: 14.5px; letter-spacing: -0.01em; color: var(--ink); margin-top: 12px; line-height: 1.2; }
+  .vrstd__sub { font-family: var(--mono); font-size: 9.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--steel); margin-top: 7px; line-height: 1.65; }
+  .vrstd__family { display: flex; align-items: center; gap: 26px; border-top: 1px solid var(--rule); padding: 15px 0 17px; }
+  .vrstd__family-label { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--steel); white-space: nowrap; }
+  .vrstd__family-row { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .vrstd__brand { font-family: var(--display); font-weight: 800; font-size: 12.5px; letter-spacing: 0.05em; color: var(--steel); text-decoration: none; transition: color 0.15s; white-space: nowrap; }
+  .vrstd__brand:hover { color: var(--ink); }
+  .vrstd__brand--current { color: var(--heat-deep); position: relative; padding-bottom: 4px; }
+  .vrstd__brand--current::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: var(--heat-deep); }
+  .vrstd__brand--current:hover { color: var(--heat-deep); }
+  .vrstd__family-note { margin-left: auto; font-family: var(--mono); font-size: 9.5px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--steel); white-space: nowrap; }
+  @media (max-width: 1280px) { .vrstd__family-note { display: none; } }
+  @media (max-width: 1180px) {
+    .vrstd__grid { grid-template-columns: repeat(3, 1fr); }
+    .vrstd__cell { border-bottom: 1px solid var(--rule); }
+    .vrstd__cell:nth-child(3n) { border-right: 0; }
+    .vrstd__cell:nth-child(n+4) { border-bottom: 0; }
   }
-  .trust-strip__inner {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
+  @media (max-width: 720px) {
+    .vrstd__head { flex-direction: column; align-items: flex-start; gap: 10px; padding: 26px 0 20px; }
+    .vrstd__meta { text-align: left; }
+    .vrstd__grid { grid-template-columns: repeat(2, 1fr); }
+    .vrstd__cell { border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 18px 16px 20px; }
+    .vrstd__cell:nth-child(3n) { border-right: 1px solid var(--rule); }
+    .vrstd__cell:nth-child(2n) { border-right: 0; }
+    .vrstd__cell:nth-child(n+4) { border-bottom: 1px solid var(--rule); }
+    .vrstd__cell:last-child { grid-column: 1 / -1; border-right: 0; border-bottom: 0; }
+    .vrstd__num { font-size: 26px; }
+    .vrstd__family { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .vrstd__watermark { font-size: 88px; bottom: 44px; }
   }
-  .trust-item {
-    padding: 4px 28px;
-    border-right: 1px solid var(--line);
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .trust-item:last-child { border-right: 0; }
-  .trust-item__icon {
-    width: 44px; height: 44px;
-    display: grid; place-items: center;
-    flex-shrink: 0;
-    color: var(--heat);
-    border: 2px solid var(--heat);
-    border-radius: 50%;
-  }
-  .trust-item__icon svg { width: 22px; height: 22px; stroke-width: 1.8; }
-  .trust-item__text { display: flex; flex-direction: column; gap: 3px; }
-  .trust-item__title {
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: 15px;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-    line-height: 1.1;
-  }
-  .trust-item__sub {
-    font-family: var(--mono);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--steel);
-  }
-  @media (max-width: 1080px) {
-    .trust-strip__inner { grid-template-columns: 1fr; gap: 12px; }
-    .trust-item { border-right: 0; padding: 8px 24px; }
+  @media (pointer: coarse) {
+    .vrstd__brand { padding: 8px 0; display: inline-block; }
   }
 
   /* Hot Deals light variant (Featured Products grid — APR/Dinan convention) */
@@ -4238,104 +4050,10 @@
   .email__legal { margin-top: 12px; font-family: var(--mono); font-size: 10px; color: var(--steel); letter-spacing: 0.06em; }
 
   /* ==========================================================================
-     VIVID FOOTER — pasted from _partials/footer.css, with the ≤900 responsive
-     block AUTHORED HERE rather than copied. The shared partial's ≤900 block
-     is corrupted (it contains unrelated hero/stats/deal CSS from a different
-     page, nested inside an unclosed ≤1180 media query) — see the build report
-     for wheel-pdp.html. This reproduces the DOCUMENTED behaviour from
-     INSTRUCTIONS.md's footer breakpoint table instead of the broken partial.
+     FOOTER — no longer duplicated here either. The old .footer block and its
+     markup are removed in favor of css/shared.css's .foot rules (see the
+     HEADER note above — same source-of-truth reasoning applies to the footer).
      ========================================================================== */
-
-  /* ===== FOOTER · node 251:6217 ============================================ */
-  .foot{background:var(--bg-inverse);padding:64px 0 0;color:var(--text-on-dark)}
-  .foot__top{display:flex;gap:40px;padding-bottom:24px;
-    border-bottom:1px solid rgba(255,255,255,.15)}
-  .foot__brand{flex:0 0 300px}
-  .foot__logo{width:183px;height:38px}
-  .foot__h{margin:0;font:800 12px/14px var(--font-ui);letter-spacing:1.4px;
-    text-transform:uppercase;color:var(--text-on-dark)}
-  .foot__label{margin:24px 0 0;font:700 12px/14px var(--font-ui);letter-spacing:1.44px;
-    text-transform:uppercase;color:var(--accent-red-on-dark)}
-  .foot__phone a{display:inline-flex;align-items:center;min-height:24px}
-  .foot__phone{margin:4px 0 0;font:800 18px/27px var(--font-ui);color:var(--text-on-dark)}
-  .foot__small{margin:4px 0 0;font:400 12px/17px var(--font-ui);color:var(--text-on-dark)}
-  .foot__form{display:flex;gap:8px;margin-top:8px;max-width:300px}
-  .foot__input{flex:1 1 auto;min-width:0;padding:10px 12px;background:#141414;
-    border:1px solid rgba(255,255,255,.25);font:400 12px/17px var(--font-ui);color:#fff}
-  .foot__input::placeholder{color:rgba(255,255,255,.55)}
-  .foot__go{flex:none;padding:10px 16px;border:0;cursor:pointer;
-    background:var(--action-primary);font:800 12px/14px var(--font-ui);
-    letter-spacing:1.76px;text-transform:uppercase;color:var(--text-on-dark)}
-  .foot__social{display:flex;gap:14px;margin:24px 0 0;padding:0;list-style:none}
-  .foot__social a{display:grid;place-items:center;width:36px;height:36px;
-    border:1px solid rgba(255,255,255,.25);
-    transition:background-color .18s ease,border-color .18s ease}
-  .foot__social img{width:18px;height:18px}
-  .foot__social a[aria-label="YouTube"]:hover,
-  .foot__social a[aria-label="YouTube"]:focus-visible{background:#f00;border-color:#f00}
-  .foot__social a[aria-label="Facebook"]:hover,
-  .foot__social a[aria-label="Facebook"]:focus-visible{background:#1877f2;border-color:#1877f2}
-  .foot__social a[aria-label="Instagram"]:hover,
-  .foot__social a[aria-label="Instagram"]:focus-visible{
-    background:linear-gradient(45deg,#405de6,#5b51d8 25%,#833ab4 50%,#c13584 75%,#fd1d1d 100%);
-    border-color:transparent}
-  .foot__social a[aria-label="TikTok"]:hover,
-  .foot__social a[aria-label="TikTok"]:focus-visible{
-    background:linear-gradient(135deg,#25f4ee 0%,#000 50%,#fe2c55 100%);
-    border-color:transparent}
-
-  .foot__cols{flex:1 1 auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px}
-  .foot__sum{display:flex;align-items:center;justify-content:space-between;gap:8px;
-    min-height:24px;list-style:none;cursor:default;
-    font:800 12px/14px var(--font-ui);letter-spacing:1.4px;text-transform:uppercase;
-    color:var(--text-on-dark)}
-  .foot__sum::-webkit-details-marker{display:none}
-  .foot__chev{display:none}
-  .foot__list{margin:12px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;
-    gap:8px}
-  .foot__list a{display:inline-flex;align-items:center;min-height:24px;
-    font:400 12px/17px var(--font-ui);color:var(--text-on-dark)}
-  .foot__list a:hover{text-decoration:underline}
-
-  .foot__cols > .foot__family{grid-column:1/-1}
-  .foot__family{padding:24px 0;margin-top:8px;display:flex;flex-direction:column;
-    align-items:flex-start;gap:16px;border-top:1px solid rgba(255,255,255,.15)}
-  .foot__family-label{margin:0;font:700 14px/20px var(--font-ui);text-transform:uppercase;
-    text-align:left;color:var(--text-on-dark)}
-  .foot__family-logos{display:flex;flex-wrap:wrap;justify-content:flex-start;
-    align-items:center;gap:36px;margin:0;padding:0;list-style:none}
-  .foot__family-logos img{height:22px;width:auto;display:block}
-  .foot__family-logos a{display:flex;align-items:center;opacity:.82;
-    transition:opacity .16s ease}
-  .foot__family-logos a:hover,.foot__family-logos a:focus-visible{opacity:1}
-  .foot__legal{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;
-    padding:20px 0 28px;font:400 12px/17px var(--font-ui);color:var(--text-on-dark)}
-  .foot__legal a{display:inline-flex;align-items:center;min-height:24px}
-  .foot__legal a:hover{text-decoration:underline}
-  .foot__legal span{opacity:.4}
-
-  /* --- ≤1180 · brand block stacks above the columns ------------------------ */
-  @media (max-width:1180px){
-    .foot__top{flex-direction:column;gap:32px}
-    .foot__brand{flex:none}
-  }
-
-  /* --- ≤900 · mobile layout: centred brand + single-column accordions ----- */
-  @media (max-width:900px){
-    .foot__brand{display:flex;flex-direction:column;align-items:center;text-align:center}
-    .foot__form{margin-inline:auto}
-    .foot__social{justify-content:center}
-    .foot__cols{grid-template-columns:1fr}
-    .foot__col{border-bottom:1px solid rgba(255,255,255,.15);padding:16px 0}
-    .foot__sum{cursor:pointer}
-    .foot__chev{display:block;width:8px;height:8px;border-right:2px solid #fff;
-      border-bottom:2px solid #fff;transform:rotate(45deg);transition:transform .15s}
-    details[open] > .foot__sum .foot__chev{transform:rotate(-135deg)}
-    .foot__family{align-items:center;text-align:center}
-    .foot__family-logos{justify-content:center}
-    .foot__social a{width:44px;height:44px}
-    .foot__legal{flex-direction:column;gap:6px}
-  }
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 1180px) {
@@ -4453,7 +4171,7 @@
   .promises__bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
   .promises__bg::before {
     content: ""; position: absolute; inset: 0;
-    background-image: url('https://images.unsplash.com/photo-1640020601421-560fbfbbdae8?fm=jpg&q=80&w=2400&auto=format&fit=crop');
+    background-image: url('https://images.unsplash.com/photo-1626966368420-fa2079743ad2?fm=jpg&q=80&w=2400&auto=format&fit=crop');
     background-size: cover; background-position: right center;
     opacity: 0.42; filter: grayscale(0.2) contrast(1.1) saturate(1.1);
   }
@@ -4501,9 +4219,17 @@
   .proof-stat__num { font-family: var(--display); font-weight: 900; font-size: 30px; line-height: 1; color: var(--paper); letter-spacing: -0.02em; }
   .proof-stat__num .heat { color: var(--heat); }
   .proof-stat__lbl { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.55); font-weight: 600; }
+
+  /* Video block (right side) */
   .proof-block__right { display: flex; flex-direction: column; gap: 12px; }
   .proof-video { position: relative; aspect-ratio: 16/9; background: #0c0c0c; overflow: hidden; border: 1px solid rgba(255,255,255,0.10); flex: 1; cursor: pointer; }
-  .proof-video::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 40%, rgba(225,6,0,0.18) 0%, transparent 55%), repeating-linear-gradient(135deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 16px), linear-gradient(180deg, #131313 0%, #0a0a0a 100%); }
+  .proof-video::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 40%, rgba(225,6,0,0.18) 0%, transparent 55%),
+      repeating-linear-gradient(135deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 16px),
+      linear-gradient(180deg, #131313 0%, #0a0a0a 100%);
+  }
   .proof-video__play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 84px; height: 84px; border-radius: 50%; background: rgba(225,6,0,0.95); border: 0; display: grid; place-items: center; cursor: pointer; box-shadow: 0 0 0 10px rgba(225,6,0,0.12), 0 0 36px rgba(225,6,0,0.55); transition: transform 0.18s ease; z-index: 2; }
   .proof-video:hover .proof-video__play { transform: translate(-50%, -50%) scale(1.06); }
   .proof-video__play svg { width: 30px; height: 30px; color: var(--paper); margin-left: 4px; }
@@ -4515,6 +4241,7 @@
   .proof-video__title { color: var(--paper); }
   .proof-video__cta { color: var(--heat); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
   .proof-video__cta:hover { color: var(--paper); }
+
   @media (max-width: 980px) {
     .proof-block { grid-template-columns: 1fr; gap: 32px; }
     .proof-block__caps { grid-template-columns: 1fr; }
@@ -4735,226 +4462,9 @@
 
   /* knowledge stays 4-col at all widths per spec */
 
-  /* ===== PDP ===== */
-  .crumbs { background: var(--paper); }
-  .crumbs__inner { display: flex; align-items: center; gap: 8px; padding: 4px 0; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--steel); }
-  .crumbs__inner a { color: var(--steel); text-decoration: none; }
-  .crumbs__inner a:hover { color: var(--heat); }
-  .crumbs__inner .sep { color: var(--rule); }
-  .crumbs__inner .cur { color: var(--ink); font-weight: 600; }
-
-  .pdp { background: var(--paper); padding: 12px 0 56px; }
-  .pdp__grid { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,0.95fr); gap: 56px; align-items: start; }
-
-  /* gallery */
-  .pg__main { position: relative; background: var(--bone); overflow: hidden; }
-  .pg__main img { display: block; width: 100%; aspect-ratio: 1/1; object-fit: cover; }
-  .pg__tag { position: absolute; top: 14px; left: 14px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; background: var(--ink); color: var(--paper); padding: 6px 10px; }
-  .pg__nav { position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font-size: 22px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .15s; }
-  .pg__nav:hover { background: var(--ink); color: var(--paper); }
-  .pg__nav--prev { left: 14px; } .pg__nav--next { right: 14px; }
-  .pg__row { display: flex; align-items: center; gap: 12px; margin-top: 12px; border: 1px solid var(--line); padding: 10px 14px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .pg__row-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--steel); white-space: nowrap; }
-  .pg__swatch { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--line); cursor: pointer; }
-  .pg__swatch--active { border-color: var(--heat); box-shadow: 0 0 0 2px rgba(225,6,0,0.15); }
-  .pg__row-val { margin-left: auto; font-family: var(--ui); font-size: 12.5px; color: var(--steel); }
-  .pg__thumb { width: 56px; height: 56px; object-fit: cover; border: 1px solid var(--line); cursor: pointer; flex-shrink: 0; }
-  .pg__thumb:hover { border-color: var(--heat); }
-
-  .pdp-block { margin-top: 36px; border-top: 3px solid var(--ink); padding-top: 22px; }
-  .pdp-block__num { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; color: var(--heat); display: block; margin-bottom: 8px; }
-  .pdp-block__title { font-family: var(--display); font-size: 26px; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); margin: 0 0 14px; }
-  .pdp-block__title .heat { color: var(--heat); }
-  .pdp-about p { font-family: var(--ui); font-size: 14.5px; line-height: 1.75; color: #444; margin: 0 0 14px; }
-  .pdp-about ul { margin: 0 0 14px; padding-left: 18px; }
-  .pdp-about li { font-family: var(--ui); font-size: 14px; line-height: 1.8; color: #444; }
-  .spec-table { width: 100%; table-layout: fixed; border-collapse: collapse; }
-  .spec-table th, .spec-table td { padding: 10px 12px; font-size: 13px; border-bottom: 1px solid var(--line); overflow-wrap: break-word; text-align: left; }
-  .spec-table th { font-family: var(--mono); font-size: 11px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: var(--steel); width: 42%; }
-  .spec-table td { font-family: var(--ui); font-weight: 600; color: var(--ink); }
-  .spec-table tr:nth-child(odd) { background: var(--bone); }
-
-  /* buy panel */
-  .bp { border: 1px solid var(--line); padding: 26px; position: sticky; top: 24px; }
-  .bp__title { font-family: var(--display); font-size: 30px; font-weight: 900; letter-spacing: -0.02em; line-height: 1.05; color: var(--ink); margin: 0 0 6px; }
-  .bp__sku-row { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; margin-bottom: 14px; }
-  .bp__sku { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; color: var(--steel); }
-  .bp__meta { display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--line); padding: 10px 14px; margin-bottom: 12px; }
-  .bp__stock { display: flex; align-items: center; gap: 8px; font-family: var(--display); font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--green); }
-  .bp__stock-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
-  /* #F59E0B (--gold) is 2.15:1 on white and fails WCAG 1.4.3 for this visible
-     text — #B45309 (already used for the review-summary stars on this same
-     page) clears 4.5:1. Scoped to .bp__stars only; --gold itself is used
-     sitewide and out of scope for this page's retrofit. */
-  .bp__stars { display: flex; align-items: center; gap: 2px; font-size: 13px; color: #B45309; }
-  .bp__stars-count { font-family: var(--ui); font-size: 12px; color: var(--signal); margin-left: 6px; font-weight: 600; }
-  .bp__fit { border: 1px solid rgba(22,163,74,.35); background: rgba(22,163,74,.06); padding: 12px 14px; margin-bottom: 14px; }
-  .bp__fit-line { display: flex; align-items: center; gap: 9px; font-family: var(--ui); font-size: 12.5px; color: var(--ink); }
-  .bp__fit-line strong.veh { color: var(--signal); }
-  .bp__fit-link { margin-left: 28px; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--heat); text-decoration: none; font-weight: 600; }
-
-  .ptoggle { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: var(--bone); border: 1px solid var(--line); padding: 4px; margin-bottom: 14px; }
-  .ptoggle__btn { padding: 10px 12px; font-family: var(--display); font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; background: transparent; color: var(--steel); border: 0; cursor: pointer; transition: all .15s; }
-  .ptoggle__btn--active { background: var(--paper); color: var(--ink); box-shadow: 0 2px 6px rgba(0,0,0,.18), inset 0 -2px 0 var(--heat); }
-
-  .bp__price-row { display: flex; align-items: baseline; gap: 10px; }
-  .bp__price { font-family: var(--display); font-size: 46px; font-weight: 900; letter-spacing: -0.03em; color: var(--ink); }
-  .bp__price-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel); }
-  .bp__price-set { font-family: var(--display); font-size: 22px; font-weight: 800; color: var(--graphite); }
-  .bp__fin-link { font-family: var(--ui); font-size: 13px; color: #444; margin: 4px 0 12px; }
-  .bp__fin-link a { color: var(--heat); font-weight: 600; text-decoration: none; }
-
-  .stag { border: 1px solid var(--line); margin-bottom: 12px; }
-  .stag__head { display: flex; align-items: center; gap: 12px; padding: 12px 14px; cursor: pointer; }
-  .stag__check { width: 20px; height: 20px; border: 2px solid var(--rule); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all .15s; }
-  .stag--on .stag__check { background: var(--heat); border-color: var(--heat); }
-  .stag__check svg { opacity: 0; } .stag--on .stag__check svg { opacity: 1; }
-  .stag__label { font-family: var(--display); font-size: 13.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.03em; color: var(--ink); }
-  .stag__sub { font-family: var(--ui); font-size: 11.5px; color: var(--steel); }
-  .stag__badge { margin-left: auto; font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; background: rgba(225,6,0,0.08); color: var(--heat); border: 1px solid rgba(225,6,0,0.3); padding: 4px 8px; }
-  .stag__body { display: none; padding: 4px 14px 14px; border-top: 1px solid var(--line); }
-  .stag--on .stag__body { display: block; }
-  .stag__axle { margin-top: 12px; }
-  .stag__axle-label { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel); margin-bottom: 6px; }
-  .stag__axle-icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 800; font-size: 11px; background: var(--ink); color: var(--paper); }
-  .stag__select { width: 100%; padding: 10px 12px; border: 1px solid var(--rule); font-family: var(--ui); font-size: 13px; color: var(--ink); background: var(--paper); }
-  .stag__sum { display: flex; justify-content: space-between; align-items: baseline; margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--rule); }
-  .stag__sum-label { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel); }
-  .stag__sum-price { font-family: var(--display); font-size: 22px; font-weight: 900; color: var(--ink); }
-
-  .bp__buy-row { display: flex; gap: 12px; margin-bottom: 8px; }
-  .qty { display: flex; align-items: center; border: 1px solid var(--ink); }
-  .qty button { width: 42px; height: 50px; border: 0; background: var(--paper); font-size: 20px; cursor: pointer; color: var(--ink); }
-  .qty button:hover { background: var(--bone); }
-  .qty span { width: 40px; text-align: center; font-family: var(--display); font-size: 17px; font-weight: 800; }
-  .bp__cta { flex: 1; border: 0; cursor: pointer; font-family: var(--display); font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; padding: 14px 20px; transition: all .15s; }
-  .bp__cta--heat { background: var(--heat); color: var(--paper); }
-  .bp__cta--heat:hover { background: var(--heat-deep); }
-  .bp__cta--ink { background: var(--paper); color: var(--ink); border: 1px solid var(--ink); width: 100%; }
-  .bp__cta--ink:hover { background: var(--bone); }
-
-  .fin { display: none; } .fin.on { display: block; }
-  .buy.off { display: none; }
-  .fin__display { background: var(--bone); border: 1px solid var(--line); border-left: 3px solid var(--heat); padding: 16px 20px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-  .fin__display-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--steel); margin-bottom: 2px; }
-  .fin__amount { font-family: var(--display); font-size: 40px; font-weight: 900; letter-spacing: -0.03em; color: var(--ink); line-height: 1; }
-  .fin__period { font-family: var(--mono); font-size: 12px; color: var(--steel); }
-  .fin__total { font-family: var(--ui); font-size: 13px; color: var(--steel); text-align: right; line-height: 1.4; }
-  .fin__total strong { display: block; margin-top: 2px; font-family: var(--display); font-size: 30px; font-weight: 900; letter-spacing: -0.02em; color: var(--ink); line-height: 1.1; }
-  .fin__apr { display: inline-block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); border: 1px solid rgba(22,163,74,.4); padding: 3px 8px; margin-top: 8px; }
-  .fin__terms { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin-bottom: 14px; }
-  .fin__term { border: 1px solid var(--line); padding: 10px 6px; text-align: center; cursor: pointer; transition: all .15s; }
-  .fin__term--active { border-color: var(--heat); background: rgba(225,6,0,.05); }
-  .fin__term-months { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; color: var(--steel); text-transform: uppercase; }
-  .fin__term-amount { display: block; font-family: var(--display); font-size: 15px; font-weight: 800; color: var(--ink); margin-top: 3px; }
-  .fin__providers { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
-  .fin__provider { border: 1px solid var(--line); padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; }
-  .fin__provider--active { border-color: var(--ink); background: var(--bone); }
-  .fin__provider img { height: 18px; width: auto; }
-  /* Katapult sits 2.4px high against Affirm at this size: it has a 'p'
-     descender and Affirm effectively has none, so their baselines fall at
-     83.6% and 98.6% of canvas. Letter sizes already match — katapult.webp
-     is padded so its x-height is the same share of canvas as affirm.png's
-     (42.5% vs 41.8%), which is why one shared height now works. */
-  .fin__provider img[alt="Katapult"] { transform: translateY(3px); }
-  .fin__provider-badge { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel); }
-  .fin__trust { font-family: var(--ui); font-size: 11.5px; color: var(--steel); text-align: center; margin-top: 10px; }
-
-  .bp__delivery { display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--line); padding: 12px 14px; margin-top: 14px; }
-  .bp__delivery-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--steel); }
-  .bp__delivery-date { font-family: var(--display); font-size: 15px; font-weight: 800; color: var(--ink); }
-  .bp__delivery a { font-family: var(--ui); font-size: 12px; color: var(--heat); font-weight: 600; text-decoration: none; }
-
-  .opt { border: 1px solid var(--line); margin-top: 14px; }
-  .opt__head { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; cursor: pointer; }
-  .opt__title { font-family: var(--display); font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink); display: flex; align-items: center; gap: 8px; }
-  .opt__count { font-family: var(--mono); font-size: 10px; background: var(--heat); color: var(--paper); padding: 2px 7px; border-radius: 10px; }
-  .opt__arrow { font-size: 20px; color: var(--steel); transition: transform .2s; }
-  .opt.open .opt__arrow { transform: rotate(90deg); }
-  .opt__body { display: none; border-top: 1px solid var(--line); }
-  .opt.open .opt__body { display: block; }
-  .opt__item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid var(--line); cursor: pointer; }
-  .opt__item:last-of-type { border-bottom: 0; }
-  .opt__radio { width: 18px; height: 18px; border: 2px solid var(--rule); border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-  .opt__radio-dot { width: 8px; height: 8px; border-radius: 50%; background: transparent; }
-  .opt__item.on .opt__radio { border-color: var(--heat); }
-  .opt__item.on .opt__radio-dot { background: var(--heat); }
-  .opt__img { width: 44px; height: 44px; object-fit: cover; border: 1px solid var(--line); }
-  .opt__name { font-family: var(--display); font-size: 13px; font-weight: 700; color: var(--ink); }
-  .opt__desc { font-family: var(--ui); font-size: 11.5px; color: var(--steel); }
-  .opt__price { margin-left: auto; text-align: right; font-family: var(--display); font-size: 13.5px; font-weight: 800; color: var(--ink); white-space: nowrap; }
-  .opt__price small { display: block; font-family: var(--ui); font-size: 10.5px; font-weight: 400; color: var(--steel); }
-  .opt__subtotal { display: none; justify-content: space-between; padding: 11px 14px; background: var(--bone); font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
-  .opt__subtotal strong { font-family: var(--display); font-size: 15px; }
-
-  .bp__expert { display: flex; justify-content: space-between; align-items: center; gap: 14px; border: 1px solid var(--line); background: var(--bone); padding: 14px; margin-top: 14px; }
-  .bp__expert img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; }
-  .bp__expert-title { font-family: var(--display); font-size: 14px; font-weight: 800; color: var(--ink); }
-  .bp__expert-sub { font-family: var(--ui); font-size: 12px; color: var(--steel); }
-  .bp__expert-btn { display: block; width: 100%; border: 1px solid var(--ink); background: var(--paper); font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 14px; cursor: pointer; margin-top: 6px; white-space: nowrap; }
-  .bp__expert-btn:hover { background: var(--ink); color: var(--paper); }
-
-  .sizes { background: var(--bone); padding: 48px 0; border-top: 1px solid var(--line); }
-  .sizes__group { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--steel); margin: 22px 0 10px; }
-  .sizes__grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 10px; }
-  .size-card { display: flex; justify-content: space-between; align-items: baseline; background: var(--paper); border: 1px solid var(--line); padding: 13px 15px; text-decoration: none; transition: all .15s; }
-  .size-card:hover { border-color: var(--ink); }
-  .size-card--active { border-left: 3px solid var(--heat); background: rgba(225,6,0,.04); }
-  .size-card__name { font-family: var(--display); font-size: 14px; font-weight: 800; color: var(--ink); }
-  .size-card__price { font-family: var(--mono); font-size: 12px; color: var(--steel); }
-
-  .rev-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 56px; padding: 48px 0; }
-  .rev-summary { display: flex; gap: 30px; padding-bottom: 24px; border-bottom: 1px solid var(--line); margin-bottom: 8px; }
-  .rev-big { font-family: var(--display); font-size: 56px; font-weight: 900; line-height: 1; color: var(--ink); }
-  .rev-bars { flex: 1; display: flex; flex-direction: column; gap: 6px; }
-  .rev-bar { display: flex; align-items: center; gap: 8px; font-family: var(--ui); font-size: 12px; color: var(--steel); }
-  .rev-bar__track { flex: 1; height: 8px; background: var(--bone-2); overflow: hidden; }
-  .rev-bar__fill { height: 100%; background: var(--gold); }
-  .review { padding: 20px 0 20px 20px; border-bottom: 1px solid var(--line); }
-  .review > p { margin: 0; padding-left: 50px; line-height: 1.55; }
-  .review__head { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
-  .review__avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--ink); color: var(--paper); display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 800; font-size: 13px; }
-  .review__name { font-family: var(--display); font-size: 14px; font-weight: 800; color: var(--ink); }
-  .review__meta { font-family: var(--ui); font-size: 11.5px; color: var(--steel); }
-  .review__chassis { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--heat); }
-  .review p { font-family: var(--ui); font-size: 14px; line-height: 1.75; color: #444; margin: 0; }
-  .policy { border: 1px solid var(--line); padding: 22px; }
-  .policy__item { display: flex; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--line); }
-  .policy__item:last-child { border-bottom: 0; }
-  .policy__icon { color: var(--heat); flex-shrink: 0; }
-  .policy__title { font-family: var(--display); font-size: 13.5px; font-weight: 800; color: var(--ink); }
-  .policy__desc { font-family: var(--ui); font-size: 12.5px; line-height: 1.6; color: var(--steel); }
-
-  .builds { background: var(--bone); padding: 48px 0; border-top: 1px solid var(--line); }
-  .builds__grid { display: grid; grid-template-columns: repeat(6,1fr); gap: 10px; margin-top: 20px; }
-  .build-tile { position: relative; overflow: hidden; }
-  .build-tile img { display: block; width: 100%; aspect-ratio: 0.85; object-fit: cover; transition: transform .3s; }
-  .build-tile:hover img { transform: scale(1.04); }
-  .build-tile__label { position: absolute; left: 0; right: 0; bottom: 0; padding: 18px 10px 8px; background: linear-gradient(transparent, rgba(0,0,0,.75)); color: var(--paper); font-family: var(--display); font-size: 11px; font-weight: 800; letter-spacing: 0.02em; text-transform: uppercase; }
-  .build-tile__label small { display: block; font-family: var(--mono); font-size: 9px; color: rgba(255,255,255,.65); }
-
-  @media (max-width: 1080px) {
-    .pdp__grid { grid-template-columns: minmax(0,1fr); gap: 36px; }
-    .bp { position: static; }
-    .sizes__grid { grid-template-columns: repeat(3,1fr); }
-    .rev-grid { grid-template-columns: 1fr; gap: 32px; }
-    .builds__grid { grid-template-columns: repeat(3,1fr); }
-  }
-  @media (max-width: 700px) {
-    .sizes__grid { grid-template-columns: repeat(2,1fr); }
-    .builds__grid { grid-template-columns: repeat(2,1fr); }
-    .bp { padding: 18px; }
-    .bp__price { font-size: 38px; }
-    .bp__expert { flex-direction: column; align-items: stretch; }
-    .bp__expert > div:last-child { margin-top: 4px; }
-  }
-
-
   /* ============================================================
      Accessibility & handoff additions (WCAG 2.1 AA) — added 2026-07
      ============================================================ */
-  .skip-link { position: absolute; left: -9999px; top: 0; z-index: 10000; background: var(--ink); color: #FFFFFF; padding: 14px 22px; font: 600 14px/1 var(--ui); text-decoration: none; }
-  .skip-link:focus { left: 0; }
   a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--signal); outline-offset: 2px; }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
@@ -4976,7 +4486,73 @@ html, body{ overflow-x:clip; }
   .wrap{ max-width:100%; }
 }
 </style>
-  <link rel="stylesheet" href="../assets/vr-content.css">
+<link rel="canonical" href="https://www.vividracing.com/about">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vivid Racing">
+<meta property="og:title" content="About Vivid Racing — Since 2001">
+<meta property="og:description" content="About Vivid Racing — parts, fitment help and expert advice.">
+<meta property="og:url" content="https://www.vividracing.com/about">
+<meta property="og:image" content="https://www.vividracing.com/real-photos/workshop.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "AutoPartsStore", "name": "Vivid Racing", "telephone": "+1-480-966-3040", "address": {"@type": "PostalAddress", "addressLocality": "Gilbert", "addressRegion": "AZ", "addressCountry": "US"}, "url": "https://www.vividracing.com", "parentOrganization": {"@type": "Organization", "name": "Enthusiast Enterprises"}}</script>
+  <link rel="stylesheet" href="assets/vr-content.css">
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/style.css">
+<style>
+  /* ===== HERO — center the eyebrow/headline/paragraph block within the
+     photo, both vertically and horizontally. ===== */
+  .vc__hero { align-items: center; }
+  .vc__hero__inner { text-align: center; }
+  .vc__hero__inner h1,
+  .vc__hero__inner p { margin-inline: auto; }
+  /* .vc__hero .vc__updated is a <p>, so vr-content.css's ".vc__hero p" rule
+     (specificity 0,1,1) was beating the intended ".vc__updated" font-size
+     (0,1,0), rendering it at the paragraph's ~16-19px clamp instead of its
+     own 12px — that's what was forcing this line to wrap. Restoring the
+     12px here (specificity 0,2,0, so it wins outright) fixes both. */
+  .vc__hero .vc__updated {
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  /* ===== CTA — "Part of a family of brands" band: single centered column
+     (overrides vr-content.css's desktop text-left/buttons-right grid),
+     square-cornered buttons, wider so they read as more substantial. The
+     button row is a flex row (not the default inline wrap) so the two
+     buttons always stay side by side, sharing the row equally and
+     shrinking together — rather than min-width forcing a wrap on mobile. */
+  .vc__cta {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+  .vc__cta > p:last-child {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    max-width: 440px;
+  }
+  .vc__cta .vc__btn {
+    border-radius: 2px;
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  /* ===== MOBILE — lift the stats bar into the hero's first screen =====
+     Page-specific override, loaded after assets/vr-content.css so it wins
+     the cascade at equal specificity without !important. Shrinks the hero
+     so the stats bar's top edge overlaps up into it, landing the stats
+     inside the first ~100vh on a phone instead of requiring a scroll. */
+  @media (max-width: 899px) {
+    .vc__hero { min-height: min(46vh, 380px); }
+    .vc__stats {
+      position: relative;
+      z-index: 2;
+      margin-top: -64px;
+      box-shadow: 0 -10px 24px rgba(10,10,10,.16);
+    }
+  }
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to main content</a>
@@ -4986,9 +4562,9 @@ html, body{ overflow-x:clip; }
   <nav class="brandbar" aria-label="Vivid family of brands">
     <div class="shell">
       <ul class="brandbar__list">
-        <li><a class="brandbar__link" href="../index.html"><span class="brandbar__dot" aria-hidden="true"></span>Vivid Racing</a></li>
-        <li><a class="brandbar__link" href="../vivid-trucks.html"><span class="brandbar__dot" aria-hidden="true"></span>VR Trucks</a></li>
-        <li><a class="brandbar__link" href="vrxover.html"><span class="brandbar__dot" aria-hidden="true"></span>VR Crossover</a></li>
+        <li><a class="brandbar__link" href="index.html"><span class="brandbar__dot" aria-hidden="true"></span>Vivid Racing</a></li>
+        <li><a class="brandbar__link" href="vivid-trucks.html"><span class="brandbar__dot" aria-hidden="true"></span>VR Trucks</a></li>
+        <li><a class="brandbar__link" href="vivid-crossover.html"><span class="brandbar__dot" aria-hidden="true"></span>VR Crossover</a></li>
         <li><a class="brandbar__link" href="vivid-classics.html"><span class="brandbar__dot" aria-hidden="true"></span>VR Muscle</a></li>
         <li><a class="brandbar__link" href="vividx.html"><span class="brandbar__dot" aria-hidden="true"></span>VR Powersports</a></li>
       </ul>
@@ -4998,21 +4574,22 @@ html, body{ overflow-x:clip; }
   <!-- row 2 · logo · search · utilities -->
   <div class="masthead">
     <div class="shell masthead__inner">
-      <a class="logo" href="../index.html">
-        <img src="../logos/flat-system/vivid-master-red.svg" alt="Vivid Racing — home" width="183" height="38">
+      <a class="logo" href="index.html">
+        <img src="assets/img/logos/vivid-master-red.svg" alt="Vivid Racing — home" width="183" height="38">
       </a>
 
-      <form class="search" role="search" action="#" method="get">
-        <label class="vh" for="q">Search parts</label>
-        <input class="search__field" id="q" name="q" type="search"
-               placeholder="Search 1,000,000+ parts — try '992 GT3 exhaust' or 'KW coilovers'">
-        <button class="search__submit" type="submit">
-          <svg viewBox="0 0 15 15" aria-hidden="true" focusable="false"><path d="M5.25 0C2.35939 0 0 2.35939 0 5.25C0 8.14061 2.35939 10.5 5.25 10.5C6.561 10.5 7.75876 10.011 8.68066 9.21094L9 9.53027V10.5L13.5 15L15 13.5L10.5 9H9.53027L9.21094 8.68066C10.011 7.75876 10.5 6.561 10.5 5.25C10.5 2.35939 8.14061 0 5.25 0ZM5.25 1.5C7.32995 1.5 9 3.17005 9 5.25C9 7.32995 7.32995 9 5.25 9C3.17005 9 1.5 7.32995 1.5 5.25C1.5 3.17005 3.17005 1.5 5.25 1.5Z"/></svg>
-          <span class="search__submit-text">Search</span>
-        </button>
-      </form>
-
       <div class="utils">
+        <form class="search" role="search" action="#" method="get">
+          <label class="vh" for="q">Search parts</label>
+          <input class="search__field" id="q" name="q" type="search"
+                 placeholder="Search 1,000,000+ parts — try '992 GT3 exhaust' or 'KW coilovers'">
+          <button class="search__submit" type="submit">
+            <svg class="icon-desktop" viewBox="0 0 15 15" aria-hidden="true" focusable="false"><path d="M5.25 0C2.35939 0 0 2.35939 0 5.25C0 8.14061 2.35939 10.5 5.25 10.5C6.561 10.5 7.75876 10.011 8.68066 9.21094L9 9.53027V10.5L13.5 15L15 13.5L10.5 9H9.53027L9.21094 8.68066C10.011 7.75876 10.5 6.561 10.5 5.25C10.5 2.35939 8.14061 0 5.25 0ZM5.25 1.5C7.32995 1.5 9 3.17005 9 5.25C9 7.32995 7.32995 9 5.25 9C3.17005 9 1.5 7.32995 1.5 5.25C1.5 3.17005 3.17005 1.5 5.25 1.5Z"/></svg>
+            <svg class="icon-mobile" viewBox="0 0 30 30" aria-hidden="true" focusable="false" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M21.25 21.25L26.25 26.25M3.75 13.75C3.75 16.4022 4.80357 18.9457 6.67893 20.8211C8.5543 22.6964 11.0978 23.75 13.75 23.75C16.4022 23.75 18.9457 22.6964 20.8211 20.8211C22.6964 18.9457 23.75 16.4022 23.75 13.75C23.75 11.0978 22.6964 8.5543 20.8211 6.67893C18.9457 4.80357 16.4022 3.75 13.75 3.75C11.0978 3.75 8.5543 4.80357 6.67893 6.67893C4.80357 8.5543 3.75 11.0978 3.75 13.75Z"/></svg>
+            <span class="search__submit-text">Search</span>
+          </button>
+        </form>
+
         <a class="util util--phone" href="tel:+14809663040">
           <span class="util__tile util__tile--red" aria-hidden="true">
             <svg viewBox="0 0 15 15" focusable="false"><path d="M14.1858 10.4067C13.6608 10.3942 13 10.3633 12.5825 10.29C12.1308 10.21 11.5875 10.055 11.205 9.93583C10.905 9.8425 10.5783 9.925 10.3558 10.1467L8.50833 11.9833C7.23167 11.3108 6.20917 10.5275 5.34333 9.65667C4.4725 8.79083 3.68917 7.76833 3.01667 6.49167L4.85333 4.64333C5.075 4.42083 5.1575 4.09417 5.06417 3.79417C4.94583 3.4125 4.79 2.86917 4.71083 2.4175C4.63667 2 4.60667 1.33917 4.59333 0.814167C4.5825 0.36 4.2125 0 3.75833 0H0.833333C0.468333 0 0 0.273333 0 0.833333C0 4.61583 1.53333 8.22833 4.13833 10.8617C6.77167 13.4667 10.3842 15 14.1667 15C14.7267 15 15 14.5317 15 14.1667V11.2417C15 10.7875 14.64 10.4175 14.1858 10.4067Z"/></svg>
@@ -5023,9 +4600,10 @@ html, body{ overflow-x:clip; }
           </span>
         </a>
 
-        <a class="util" href="signin.html">
+        <a class="util" href="waiting-to-build/signin.html">
           <span class="util__glyph" aria-hidden="true">
-            <svg viewBox="0 0 18.3333 18.3333" focusable="false"><path d="M9.16667 0C6.92868 0 5.09259 1.83609 5.09259 4.07407C5.09259 6.31206 6.92868 8.14815 9.16667 8.14815C11.4047 8.14815 13.2407 6.31206 13.2407 4.07407C13.2407 1.83609 11.4047 0 9.16667 0ZM9.16667 2.03704C10.3038 2.03704 11.2037 2.93699 11.2037 4.07407C11.2037 5.21116 10.3038 6.11111 9.16667 6.11111C8.02958 6.11111 7.12963 5.21116 7.12963 4.07407C7.12963 2.93699 8.02958 2.03704 9.16667 2.03704ZM9.16667 11.2037C7.3894 11.2037 5.28322 11.6211 3.51309 12.3197C2.62803 12.669 1.82793 13.0839 1.18761 13.6167C0.547286 14.1495 0 14.8697 0 15.787V18.3333H18.3333V15.787C18.3333 14.8697 17.786 14.1495 17.1457 13.6167C16.5054 13.0839 15.7053 12.669 14.8202 12.3197C13.0501 11.6211 10.9439 11.2037 9.16667 11.2037ZM9.16667 13.2407C10.6069 13.2407 12.5747 13.6217 14.0743 14.2135C14.824 14.5094 15.458 14.8622 15.8427 15.1823C16.2275 15.5024 16.2963 15.7204 16.2963 15.787V16.2963H2.03704V15.787C2.03704 15.7204 2.10588 15.5024 2.4906 15.1823C2.87532 14.8622 3.50929 14.5094 4.25908 14.2135C5.75865 13.6217 7.72643 13.2407 9.16667 13.2407Z"/></svg>
+            <svg class="icon-desktop" viewBox="0 0 18.3333 18.3333" focusable="false"><path d="M9.16667 0C6.92868 0 5.09259 1.83609 5.09259 4.07407C5.09259 6.31206 6.92868 8.14815 9.16667 8.14815C11.4047 8.14815 13.2407 6.31206 13.2407 4.07407C13.2407 1.83609 11.4047 0 9.16667 0ZM9.16667 2.03704C10.3038 2.03704 11.2037 2.93699 11.2037 4.07407C11.2037 5.21116 10.3038 6.11111 9.16667 6.11111C8.02958 6.11111 7.12963 5.21116 7.12963 4.07407C7.12963 2.93699 8.02958 2.03704 9.16667 2.03704ZM9.16667 11.2037C7.3894 11.2037 5.28322 11.6211 3.51309 12.3197C2.62803 12.669 1.82793 13.0839 1.18761 13.6167C0.547286 14.1495 0 14.8697 0 15.787V18.3333H18.3333V15.787C18.3333 14.8697 17.786 14.1495 17.1457 13.6167C16.5054 13.0839 15.7053 12.669 14.8202 12.3197C13.0501 11.6211 10.9439 11.2037 9.16667 11.2037ZM9.16667 13.2407C10.6069 13.2407 12.5747 13.6217 14.0743 14.2135C14.824 14.5094 15.458 14.8622 15.8427 15.1823C16.2275 15.5024 16.2963 15.7204 16.2963 15.787V16.2963H2.03704V15.787C2.03704 15.7204 2.10588 15.5024 2.4906 15.1823C2.87532 14.8622 3.50929 14.5094 4.25908 14.2135C5.75865 13.6217 7.72643 13.2407 9.16667 13.2407Z"/></svg>
+            <svg class="icon-mobile" viewBox="0 0 25 25" focusable="false"><path d="M12.5 0C9.4482 0 6.94444 2.50376 6.94444 5.55556C6.94444 8.60735 9.4482 11.1111 12.5 11.1111C15.5518 11.1111 18.0556 8.60735 18.0556 5.55556C18.0556 2.50376 15.5518 0 12.5 0ZM12.5 2.77778C14.0506 2.77778 15.2778 4.00498 15.2778 5.55556C15.2778 7.10613 14.0506 8.33333 12.5 8.33333C10.9494 8.33333 9.72222 7.10613 9.72222 5.55556C9.72222 4.00498 10.9494 2.77778 12.5 2.77778ZM12.5 15.2778C10.0765 15.2778 7.20439 15.8469 4.79058 16.7996C3.58368 17.2759 2.49263 17.8417 1.61947 18.5683C0.746299 19.2948 0 20.2769 0 21.5278V25H25V21.5278C25 20.2769 24.2537 19.2948 23.3805 18.5683C22.5074 17.8417 21.4163 17.2759 20.2094 16.7996C17.7956 15.8469 14.9235 15.2778 12.5 15.2778ZM12.5 18.0556C14.464 18.0556 17.1473 18.575 19.1922 19.3821C20.2146 19.7856 21.0791 20.2666 21.6037 20.7031C22.1283 21.1396 22.2222 21.437 22.2222 21.5278V22.2222H2.77778V21.5278C2.77778 21.437 2.87165 21.1396 3.39627 20.7031C3.92089 20.2666 4.7854 19.7856 5.80783 19.3821C7.8527 18.575 10.536 18.0556 12.5 18.0556Z"/></svg>
           </span>
           <span class="util__text">
             <span class="util__label">Account</span>
@@ -5033,7 +4611,7 @@ html, body{ overflow-x:clip; }
           </span>
         </a>
 
-        <a class="util util--wish" href="wishlist.html">
+        <a class="util util--wish" href="waiting-to-build/wishlist.html">
           <span class="util__glyph" aria-hidden="true">
             <svg viewBox="0 0 18.3333 16.8208" focusable="false"><path d="M13.2917 0C10.6379 0 9.16667 1.91583 9.16667 1.91583C9.16667 1.91583 7.69542 0 5.04167 0C2.25683 0 0 2.25683 0 5.04167C0 8.86508 4.50267 12.5702 5.75758 13.7408C7.20317 15.0883 9.16667 16.8208 9.16667 16.8208C9.16667 16.8208 11.1302 15.0883 12.5758 13.7408C13.8307 12.5702 18.3333 8.86508 18.3333 5.04167C18.3333 2.25683 16.0765 0 13.2917 0ZM11.7434 12.0175C11.5812 12.1642 11.44 12.2916 11.3254 12.3988C10.637 13.0405 9.823 13.7766 9.16667 14.3651C8.51033 13.7766 7.69542 13.0396 7.00792 12.3988C6.89242 12.2916 6.75125 12.1633 6.58992 12.0175C5.28825 10.8414 1.83333 7.71742 1.83333 5.04167C1.83333 3.2725 3.2725 1.83333 5.04167 1.83333C6.71642 1.83333 7.68717 3.00208 7.71283 3.03233L9.16667 4.58333L10.6205 3.03233C10.6297 3.02042 11.6169 1.83333 13.2917 1.83333C15.0608 1.83333 16.5 3.2725 16.5 5.04167C16.5 7.71742 13.0451 10.8414 11.7434 12.0175Z"/></svg>
           </span>
@@ -5043,9 +4621,10 @@ html, body{ overflow-x:clip; }
           </span>
         </a>
 
-        <a class="util" href="cart.html" aria-label="Cart — 2 items, $11,310">
+        <a class="util util--cart" href="waiting-to-build/cart.html" aria-label="Cart — 2 items, $11,310">
           <span class="util__tile util__tile--dark" aria-hidden="true">
-            <svg viewBox="0 0 14.9939 15" focusable="false"><path d="M2.55712 0L0 0.013181L0.00732279 1.51289L1.55975 1.50557L4.03046 7.43263L3.13269 8.86936C2.83275 9.34927 2.81723 9.95547 3.09168 10.4496C3.36613 10.9438 3.88687 11.2507 4.45226 11.2507H13.4944V9.75103H4.45226L4.40393 9.66315L5.28559 8.25132H10.8861C11.4312 8.25132 11.9329 7.9549 12.1968 7.4795L14.8989 2.61716C15.0287 2.38471 15.0251 2.10116 14.8902 1.8717C14.7552 1.643 14.5083 1.50264 14.2428 1.50264H3.18395L2.55712 0ZM3.80785 3.00234H12.9687L10.8861 6.75161H5.37053L3.80785 3.00234ZM4.49619 12.0006C4.09845 12.0006 3.71699 12.1586 3.43574 12.4398C3.15449 12.7211 2.99649 13.1025 2.99649 13.5003C2.99649 13.898 3.15449 14.2795 3.43574 14.5607C3.71699 14.842 4.09845 15 4.49619 15C4.89394 15 5.2754 14.842 5.55664 14.5607C5.83789 14.2795 5.9959 13.898 5.9959 13.5003C5.9959 13.1025 5.83789 12.7211 5.55664 12.4398C5.2754 12.1586 4.89394 12.0006 4.49619 12.0006ZM11.9947 12.0006C11.597 12.0006 11.2155 12.1586 10.9343 12.4398C10.653 12.7211 10.495 13.1025 10.495 13.5003C10.495 13.898 10.653 14.2795 10.9343 14.5607C11.2155 14.842 11.597 15 11.9947 15C12.3925 15 12.7739 14.842 13.0552 14.5607C13.3364 14.2795 13.4944 13.898 13.4944 13.5003C13.4944 13.1025 13.3364 12.7211 13.0552 12.4398C12.7739 12.1586 12.3925 12.0006 11.9947 12.0006Z"/></svg>
+            <svg class="icon-desktop" viewBox="0 0 14.9939 15" focusable="false"><path d="M2.55712 0L0 0.013181L0.00732279 1.51289L1.55975 1.50557L4.03046 7.43263L3.13269 8.86936C2.83275 9.34927 2.81723 9.95547 3.09168 10.4496C3.36613 10.9438 3.88687 11.2507 4.45226 11.2507H13.4944V9.75103H4.45226L4.40393 9.66315L5.28559 8.25132H10.8861C11.4312 8.25132 11.9329 7.9549 12.1968 7.4795L14.8989 2.61716C15.0287 2.38471 15.0251 2.10116 14.8902 1.8717C14.7552 1.643 14.5083 1.50264 14.2428 1.50264H3.18395L2.55712 0ZM3.80785 3.00234H12.9687L10.8861 6.75161H5.37053L3.80785 3.00234ZM4.49619 12.0006C4.09845 12.0006 3.71699 12.1586 3.43574 12.4398C3.15449 12.7211 2.99649 13.1025 2.99649 13.5003C2.99649 13.898 3.15449 14.2795 3.43574 14.5607C3.71699 14.842 4.09845 15 4.49619 15C4.89394 15 5.2754 14.842 5.55664 14.5607C5.83789 14.2795 5.9959 13.898 5.9959 13.5003C5.9959 13.1025 5.83789 12.7211 5.55664 12.4398C5.2754 12.1586 4.89394 12.0006 4.49619 12.0006ZM11.9947 12.0006C11.597 12.0006 11.2155 12.1586 10.9343 12.4398C10.653 12.7211 10.495 13.1025 10.495 13.5003C10.495 13.898 10.653 14.2795 10.9343 14.5607C11.2155 14.842 11.597 15 11.9947 15C12.3925 15 12.7739 14.842 13.0552 14.5607C13.3364 14.2795 13.4944 13.898 13.4944 13.5003C13.4944 13.1025 13.3364 12.7211 13.0552 12.4398C12.7739 12.1586 12.3925 12.0006 11.9947 12.0006Z"/></svg>
+            <svg class="icon-mobile" viewBox="0 0 25 25" focusable="false"><path d="M4.26186 0L0 0.0219684L0.0122046 2.52148L2.59959 2.50928L6.71744 12.3877L5.22115 14.7823C4.72125 15.5821 4.69539 16.5924 5.1528 17.416C5.61021 18.2396 6.47811 18.7512 7.42043 18.7512H22.4907V16.2517H7.42043L7.33987 16.1053L8.80931 13.7522H18.1434C19.052 13.7522 19.8881 13.2582 20.3281 12.4658L24.8316 4.36194C25.0478 3.97452 25.0419 3.50193 24.8169 3.11951C24.592 2.73833 24.1805 2.50439 23.738 2.50439H5.30658L4.26186 0ZM6.34642 5.00391H21.6144L18.1434 11.2527H8.95089L6.34642 5.00391ZM7.49365 20.001C6.83074 20.001 6.19498 20.2643 5.72623 20.7331C5.25748 21.2018 4.99414 21.8376 4.99414 22.5005C4.99414 23.1634 5.25748 23.7992 5.72623 24.2679C6.19498 24.7367 6.83074 25 7.49365 25C8.15657 25 8.79233 24.7367 9.26107 24.2679C9.72982 23.7992 9.99317 23.1634 9.99317 22.5005C9.99317 21.8376 9.72982 21.2018 9.26107 20.7331C8.79233 20.2643 8.15657 20.001 7.49365 20.001ZM19.9912 20.001C19.3283 20.001 18.6925 20.2643 18.2238 20.7331C17.755 21.2018 17.4917 21.8376 17.4917 22.5005C17.4917 23.1634 17.755 23.7992 18.2238 24.2679C18.6925 24.7367 19.3283 25 19.9912 25C20.6541 25 21.2899 24.7367 21.7586 24.2679C22.2274 23.7992 22.4907 23.1634 22.4907 22.5005C22.4907 21.8376 22.2274 21.2018 21.7586 20.7331C21.2899 20.2643 20.6541 20.001 19.9912 20.001Z"/></svg>
             <span class="util__badge">2</span>
           </span>
           <span class="util__text">
@@ -5061,21 +4640,348 @@ html, body{ overflow-x:clip; }
   <nav class="subnav" aria-label="Product categories">
     <div class="shell subnav__inner">
       <ul class="subnav__list">
-        <li><a class="subnav__link" href="suspension.html">Suspension <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a></li>
-        <li><a class="subnav__link" href="wheels-cat.html">Wheels &amp; Tires <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a></li>
-        <li><a class="subnav__link" href="brakes.html">Brakes <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a></li>
-        <li><a class="subnav__link" href="exhaust.html">Exhaust <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a></li>
-        <li><a class="subnav__link" href="aero-body.html">Aero &amp; Body <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a></li>
-        <li><a class="subnav__link" href="engine-turbo.html">Engine &amp; Turbo <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a></li>
+        <li class="subnav__item">
+          <a class="subnav__link" href="waiting-to-build/suspension.html" aria-haspopup="true" aria-expanded="false" aria-controls="mega-suspension">Suspension <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a>
+          <!-- Figma VWl8YFYeeS1d3nGfsliTtI, node 305:1754 "VR / Mega Menu — Suspension".
+               JetBrains Mono in the source is NOT used here — per
+               vivid_font_use_instructions.md §6 it's retired site-wide and every
+               small uppercase label maps to Inter uppercase instead. #e10600 is
+               swapped for --action-primary on the CTA/eyebrow TEXT, matching this
+               file's own documented precedent (.btn-outline) that the literal
+               Figma red fails 1.4.3 at small text sizes; the icon glyph keeps its
+               real #E10600 fill since icons only need the 3:1 non-text minimum,
+               which pure red on white clears easily.
+               Reveal is CSS-only (:hover/:focus-within on .subnav__item) — works
+               with no JS. The aria-expanded sync + Escape-to-close is the one bit
+               that needs the script at the bottom of the page. -->
+          <div class="mega" id="mega-suspension">
+            <div class="shell mega__inner">
+              <div class="mega__cols">
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/suspension-red.svg" alt="" aria-hidden="true" width="16" height="16">Shop Suspension</p>
+                  <ul class="mega__list">
+                    <li><a href="waiting-to-build/coilover-specs.html">Coilovers</a></li>
+                    <li><a href="waiting-to-build/suspension.html">Lowering Springs</a></li>
+                    <li><a href="waiting-to-build/suspension.html">Air Suspension</a></li>
+                    <li><a href="waiting-to-build/suspension.html">Shocks &amp; Struts</a></li>
+                    <li><a href="waiting-to-build/suspension.html">Sport Springs</a></li>
+                  </ul>
+                </div>
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/check-red.svg" alt="" aria-hidden="true" width="14" height="14">Handling</p>
+                  <ul class="mega__list">
+                    <li><a href="waiting-to-build/suspension.html">Sway Bars</a></li>
+                    <li><a href="waiting-to-build/suspension.html">Control Arms</a></li>
+                    <li><a href="waiting-to-build/suspension.html">Bushings &amp; Mounts</a></li>
+                    <li><a href="waiting-to-build/suspension.html">Strut Braces</a></li>
+                    <li><a href="waiting-to-build/suspension.html">Camber &amp; Alignment</a></li>
+                  </ul>
+                  <a class="mega__cta" href="waiting-to-build/suspension.html">Shop all suspension
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></a>
+                </div>
+                <div class="mega__col mega__col--brands">
+                  <p class="mega__label"><img src="assets/icons/star.svg" alt="" aria-hidden="true" width="14" height="14">Top Brands</p>
+                  <ul class="mega__list mega__list--bold">
+                    <li><a href="waiting-to-build/suspension.html">KW Suspensions</a></li>
+                    <li><a href="waiting-to-build/suspension.html">&Ouml;hlins</a></li>
+                    <li><a href="waiting-to-build/suspension.html">Bilstein</a></li>
+                    <li><a href="waiting-to-build/suspension.html">H&amp;R</a></li>
+                    <li><a href="waiting-to-build/suspension.html">Eibach</a></li>
+                    <li><a href="waiting-to-build/suspension.html">Fox Factory</a></li>
+                  </ul>
+                </div>
+              </div>
+              <!-- feature card — placeholder product/promo tile, per the mockup -->
+              <a class="mega__feature" href="waiting-to-build/deal-machine.html">
+                <span class="mega__feature-img"><img src="assets/img/product/suspension.webp" alt="" loading="lazy" decoding="async"></span>
+                <span class="mega__feature-body">
+                  <span class="mega__feature-eyebrow">Spring Event</span>
+                  <span class="mega__feature-title">Up to 25% off KW coilovers</span>
+                  <span class="mega__cta">Shop the event
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="subnav__item">
+          <a class="subnav__link" href="waiting-to-build/wheels-cat.html" aria-haspopup="true" aria-expanded="false" aria-controls="mega-wheels-tires">Wheels &amp; Tires <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a>
+          <!-- Figma VWl8YFYeeS1d3nGfsliTtI, node 328:1740 "VR / Mega Menu — Wheels & Tires".
+               icon/wheel and icon/tire are 22- and 19-path illustrations (not the
+               single-path style used by every other category icon) — flattened
+               PNGs at 4x rather than an SVG, since Figma's SVG export for these two
+               kept pulling in the whole mega-menu frame instead of just the icon
+               (same failure mode hit once already on the suspension icon; there the
+               fix was picking the right svgAssets entry, but here the pieces genuinely
+               aren't pre-combined, so a raster export was the reliable option). -->
+          <div class="mega" id="mega-wheels-tires">
+            <div class="shell mega__inner">
+              <div class="mega__cols">
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/wheel-red.png" alt="" aria-hidden="true" width="16" height="16">Wheels</p>
+                  <ul class="mega__list">
+                    <li><a href="waiting-to-build/wheels-cat.html">Forged Wheels</a></li>
+                    <li><a href="waiting-to-build/wheels-cat.html">Flow-Formed Wheels</a></li>
+                    <li><a href="waiting-to-build/wheels-cat.html">Cast Wheels</a></li>
+                    <li><a href="waiting-to-build/wheels-cat.html">Wheel &amp; Tire Packages</a></li>
+                    <li><a href="waiting-to-build/wheels-cat.html">Track Wheels</a></li>
+                  </ul>
+                </div>
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/tire-red.png" alt="" aria-hidden="true" width="16" height="16">Tires &amp; Fitment</p>
+                  <ul class="mega__list">
+                    <li><a href="waiting-to-build/wheels-cat.html">Performance Tires</a></li>
+                    <li><a href="waiting-to-build/wheels-cat.html">Wheel Spacers</a></li>
+                    <li><a href="waiting-to-build/wheels-cat.html">Lug Nuts &amp; Bolts</a></li>
+                    <li><a href="waiting-to-build/wheels-cat.html">TPMS Sensors</a></li>
+                    <li><a href="waiting-to-build/wheels-cat.html">Hub Rings</a></li>
+                  </ul>
+                  <a class="mega__cta" href="waiting-to-build/wheels-cat.html">Shop all wheels &amp; tires
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></a>
+                </div>
+                <div class="mega__col mega__col--brands">
+                  <p class="mega__label"><img src="assets/icons/star.svg" alt="" aria-hidden="true" width="14" height="14">Top Brands</p>
+                  <ul class="mega__list mega__list--bold">
+                    <li><a href="waiting-to-build/wheels-cat.html">BBS</a></li>
+                    <li><a href="waiting-to-build/wheels-cat.html">HRE Wheels</a></li>
+                    <li><a href="waiting-to-build/wheels-cat.html">Vossen</a></li>
+                    <li><a href="waiting-to-build/wheels-cat.html">Michelin</a></li>
+                    <li><a href="waiting-to-build/wheels-cat.html">Pirelli</a></li>
+                    <li><a href="waiting-to-build/wheels-cat.html">fifteen52</a></li>
+                  </ul>
+                </div>
+              </div>
+              <a class="mega__feature" href="waiting-to-build/wheels-cat.html">
+                <span class="mega__feature-img"><img src="assets/img/product/wheels.webp" alt="" loading="lazy" decoding="async"></span>
+                <span class="mega__feature-body">
+                  <span class="mega__feature-eyebrow">New Arrivals</span>
+                  <span class="mega__feature-title">Forged wheels for your platform</span>
+                  <span class="mega__cta">Shop wheels
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="subnav__item">
+          <a class="subnav__link" href="waiting-to-build/brakes.html" aria-haspopup="true" aria-expanded="false" aria-controls="mega-brakes">Brakes <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a>
+          <!-- Figma VWl8YFYeeS1d3nGfsliTtI, node 328:1775 "VR / Mega Menu — Brakes" -->
+          <div class="mega" id="mega-brakes">
+            <div class="shell mega__inner">
+              <div class="mega__cols">
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/brakes-red.svg" alt="" aria-hidden="true" width="14" height="14">Brake Kits</p>
+                  <ul class="mega__list">
+                    <li><a href="waiting-to-build/brakes.html">Big Brake Kits</a></li>
+                    <li><a href="waiting-to-build/brakes.html">Two-Piece Rotors</a></li>
+                    <li><a href="waiting-to-build/brakes.html">Performance Rotors</a></li>
+                    <li><a href="waiting-to-build/brakes.html">Caliper Upgrades</a></li>
+                    <li><a href="waiting-to-build/brakes.html">Kits by Vehicle</a></li>
+                  </ul>
+                </div>
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/check-red.svg" alt="" aria-hidden="true" width="14" height="14">Pads, Lines &amp; Fluid</p>
+                  <ul class="mega__list">
+                    <li><a href="waiting-to-build/brakes.html">Brake Pads</a></li>
+                    <li><a href="waiting-to-build/brakes.html">Stainless Brake Lines</a></li>
+                    <li><a href="waiting-to-build/brakes.html">Brake Fluid</a></li>
+                    <li><a href="waiting-to-build/brakes.html">Cooling Ducts</a></li>
+                    <li><a href="waiting-to-build/brakes.html">Hardware</a></li>
+                  </ul>
+                  <a class="mega__cta" href="waiting-to-build/brakes.html">Shop all brakes
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></a>
+                </div>
+                <div class="mega__col mega__col--brands">
+                  <p class="mega__label"><img src="assets/icons/star.svg" alt="" aria-hidden="true" width="14" height="14">Top Brands</p>
+                  <ul class="mega__list mega__list--bold">
+                    <li><a href="waiting-to-build/brakes.html">Brembo</a></li>
+                    <li><a href="waiting-to-build/brakes.html">StopTech</a></li>
+                    <li><a href="waiting-to-build/brakes.html">AP Racing</a></li>
+                    <li><a href="waiting-to-build/brakes.html">Girodisc</a></li>
+                    <li><a href="waiting-to-build/brakes.html">EBC Brakes</a></li>
+                    <li><a href="waiting-to-build/brakes.html">Ferodo</a></li>
+                  </ul>
+                </div>
+              </div>
+              <a class="mega__feature" href="waiting-to-build/brakes.html">
+                <span class="mega__feature-img"><img src="assets/img/product/brakes.webp" alt="" loading="lazy" decoding="async"></span>
+                <span class="mega__feature-body">
+                  <span class="mega__feature-eyebrow">Track-Ready</span>
+                  <span class="mega__feature-title">Stopping power that holds up</span>
+                  <span class="mega__cta">Shop brakes
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="subnav__item">
+          <a class="subnav__link" href="waiting-to-build/exhaust.html" aria-haspopup="true" aria-expanded="false" aria-controls="mega-exhaust">Exhaust <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a>
+          <!-- Figma VWl8YFYeeS1d3nGfsliTtI, node 328:1810 "VR / Mega Menu — Exhaust" -->
+          <div class="mega" id="mega-exhaust">
+            <div class="shell mega__inner">
+              <div class="mega__cols">
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/exhaust-red.svg" alt="" aria-hidden="true" width="14" height="14">Exhaust Systems</p>
+                  <ul class="mega__list">
+                    <li><a href="waiting-to-build/exhaust.html">Cat-Back Systems</a></li>
+                    <li><a href="waiting-to-build/exhaust.html">Axle-Back Systems</a></li>
+                    <li><a href="waiting-to-build/exhaust.html">Valved Systems</a></li>
+                    <li><a href="waiting-to-build/exhaust.html">Full Systems</a></li>
+                    <li><a href="waiting-to-build/exhaust.html">Mufflers</a></li>
+                  </ul>
+                </div>
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/check-red.svg" alt="" aria-hidden="true" width="14" height="14">Headers &amp; Tips</p>
+                  <ul class="mega__list">
+                    <li><a href="waiting-to-build/exhaust.html">Downpipes</a></li>
+                    <li><a href="waiting-to-build/exhaust.html">Headers</a></li>
+                    <li><a href="waiting-to-build/exhaust.html">Exhaust Tips</a></li>
+                    <li><a href="waiting-to-build/exhaust.html">Resonators</a></li>
+                    <li><a href="waiting-to-build/exhaust.html">Hardware &amp; Gaskets</a></li>
+                  </ul>
+                  <a class="mega__cta" href="waiting-to-build/exhaust.html">Shop all exhaust
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></a>
+                </div>
+                <div class="mega__col mega__col--brands">
+                  <p class="mega__label"><img src="assets/icons/star.svg" alt="" aria-hidden="true" width="14" height="14">Top Brands</p>
+                  <ul class="mega__list mega__list--bold">
+                    <li><a href="waiting-to-build/exhaust.html">Akrapovi&#269;</a></li>
+                    <li><a href="waiting-to-build/exhaust.html">Fabspeed</a></li>
+                    <li><a href="waiting-to-build/exhaust.html">Armytrix</a></li>
+                    <li><a href="waiting-to-build/exhaust.html">Borla</a></li>
+                    <li><a href="waiting-to-build/exhaust.html">Milltek</a></li>
+                    <li><a href="waiting-to-build/exhaust.html">Tomei</a></li>
+                  </ul>
+                </div>
+              </div>
+              <a class="mega__feature" href="waiting-to-build/exhaust.html">
+                <span class="mega__feature-img"><img src="assets/img/product/exhaust.webp" alt="" loading="lazy" decoding="async"></span>
+                <span class="mega__feature-body">
+                  <span class="mega__feature-eyebrow">Sound + Power</span>
+                  <span class="mega__feature-title">Titanium systems in stock</span>
+                  <span class="mega__cta">Shop exhaust
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="subnav__item">
+          <a class="subnav__link" href="waiting-to-build/aero-body.html" aria-haspopup="true" aria-expanded="false" aria-controls="mega-aero-body">Aero &amp; Body <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a>
+          <!-- Figma VWl8YFYeeS1d3nGfsliTtI, node 328:1845 "VR / Mega Menu — Aero & Body" -->
+          <div class="mega" id="mega-aero-body">
+            <div class="shell mega__inner">
+              <div class="mega__cols">
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/aero-red.svg" alt="" aria-hidden="true" width="14" height="14">Aerodynamics</p>
+                  <ul class="mega__list">
+                    <li><a href="waiting-to-build/aero-body.html">Front Splitters</a></li>
+                    <li><a href="waiting-to-build/aero-body.html">Rear Wings</a></li>
+                    <li><a href="waiting-to-build/aero-body.html">Diffusers</a></li>
+                    <li><a href="waiting-to-build/aero-body.html">Canards</a></li>
+                    <li><a href="waiting-to-build/aero-body.html">Side Skirts</a></li>
+                  </ul>
+                </div>
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/check-red.svg" alt="" aria-hidden="true" width="14" height="14">Body &amp; Carbon</p>
+                  <ul class="mega__list">
+                    <li><a href="waiting-to-build/aero-body.html">Carbon Fiber</a></li>
+                    <li><a href="waiting-to-build/aero-body.html">Hoods</a></li>
+                    <li><a href="waiting-to-build/aero-body.html">Fenders</a></li>
+                    <li><a href="waiting-to-build/aero-body.html">Mirror Caps</a></li>
+                    <li><a href="waiting-to-build/aero-body.html">Full Body Kits</a></li>
+                  </ul>
+                  <a class="mega__cta" href="waiting-to-build/aero-body.html">Shop all aero &amp; body
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></a>
+                </div>
+                <div class="mega__col mega__col--brands">
+                  <p class="mega__label"><img src="assets/icons/star.svg" alt="" aria-hidden="true" width="14" height="14">Top Brands</p>
+                  <ul class="mega__list mega__list--bold">
+                    <li><a href="waiting-to-build/aero-body.html">Manthey Racing</a></li>
+                    <li><a href="waiting-to-build/aero-body.html">Vorsteiner</a></li>
+                    <li><a href="waiting-to-build/aero-body.html">Seibon</a></li>
+                    <li><a href="waiting-to-build/aero-body.html">APR Performance</a></li>
+                    <li><a href="waiting-to-build/aero-body.html">Verus Engineering</a></li>
+                    <li><a href="waiting-to-build/aero-body.html">TechArt</a></li>
+                  </ul>
+                </div>
+              </div>
+              <a class="mega__feature" href="waiting-to-build/aero-body.html">
+                <span class="mega__feature-img"><img src="assets/img/product/aero.webp" alt="" loading="lazy" decoding="async"></span>
+                <span class="mega__feature-body">
+                  <span class="mega__feature-eyebrow">Downforce</span>
+                  <span class="mega__feature-title">Track aero, street-legal looks</span>
+                  <span class="mega__cta">Shop aero
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="subnav__item">
+          <a class="subnav__link" href="waiting-to-build/engine-turbo.html" aria-haspopup="true" aria-expanded="false" aria-controls="mega-engine-turbo">Engine &amp; Turbo <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a>
+          <!-- Figma VWl8YFYeeS1d3nGfsliTtI, node 328:1880 "VR / Mega Menu — Engine & Turbo" -->
+          <div class="mega" id="mega-engine-turbo">
+            <div class="shell mega__inner">
+              <div class="mega__cols">
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/engine-red.svg" alt="" aria-hidden="true" width="14" height="14">Power</p>
+                  <ul class="mega__list">
+                    <li><a href="waiting-to-build/engine-turbo.html">Turbo Kits</a></li>
+                    <li><a href="waiting-to-build/engine-turbo.html">Superchargers</a></li>
+                    <li><a href="waiting-to-build/engine-turbo.html">Turbo Upgrades</a></li>
+                    <li><a href="waiting-to-build/engine-turbo.html">Intercoolers</a></li>
+                    <li><a href="waiting-to-build/engine-turbo.html">Charge Pipes</a></li>
+                  </ul>
+                </div>
+                <div class="mega__col">
+                  <p class="mega__label"><img src="assets/icons/check-red.svg" alt="" aria-hidden="true" width="14" height="14">Air, Fuel &amp; Tune</p>
+                  <ul class="mega__list">
+                    <li><a href="waiting-to-build/engine-turbo.html">Cold Air Intakes</a></li>
+                    <li><a href="waiting-to-build/engine-turbo.html">ECU Tuning</a></li>
+                    <li><a href="waiting-to-build/engine-turbo.html">Fuel Systems</a></li>
+                    <li><a href="waiting-to-build/engine-turbo.html">Downpipes</a></li>
+                    <li><a href="waiting-to-build/engine-turbo.html">Catch Cans</a></li>
+                  </ul>
+                  <a class="mega__cta" href="waiting-to-build/engine-turbo.html">Shop all engine &amp; turbo
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></a>
+                </div>
+                <div class="mega__col mega__col--brands">
+                  <p class="mega__label"><img src="assets/icons/star.svg" alt="" aria-hidden="true" width="14" height="14">Top Brands</p>
+                  <ul class="mega__list mega__list--bold">
+                    <li><a href="waiting-to-build/engine-turbo.html">ProCharger</a></li>
+                    <li><a href="waiting-to-build/engine-turbo.html">Eventuri</a></li>
+                    <li><a href="waiting-to-build/engine-turbo.html">Dinan</a></li>
+                    <li><a href="waiting-to-build/engine-turbo.html">HKS</a></li>
+                    <li><a href="waiting-to-build/engine-turbo.html">Garrett</a></li>
+                    <li><a href="waiting-to-build/engine-turbo.html">Cobb Tuning</a></li>
+                  </ul>
+                </div>
+              </div>
+              <a class="mega__feature" href="waiting-to-build/engine-turbo.html">
+                <span class="mega__feature-img"><img src="assets/img/product/engine.webp" alt="" loading="lazy" decoding="async"></span>
+                <span class="mega__feature-body">
+                  <span class="mega__feature-eyebrow">Make Power</span>
+                  <span class="mega__feature-title">Stage kits for your platform</span>
+                  <span class="mega__cta">Shop engine
+                    <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="10" height="10"></span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </li>
       </ul>
-      <a class="subnav__promo" href="deal-machine.html">Spring Event — 25% Off</a>
+      <!-- spacer moved here (was between promo and fin) so it pushes BOTH
+           Spring Event and 0% APR right, as one group, instead of just fin.
+           Affirm/Katapult logos removed per request — .subnav__finlogos and
+           its CSS are now unused by this markup (left in place in case
+           another instance still references them; nothing currently does). -->
       <span class="subnav__spacer"></span>
-      <a class="subnav__fin" href="financing.html">
+      <a class="subnav__promo" href="waiting-to-build/deal-machine.html">Spring Event — 25% Off</a>
+      <span class="subnav__divider" aria-hidden="true">|</span>
+      <a class="subnav__fin" href="waiting-to-build/financing.html">
         <em>0% APR</em> <span>/ Pre-qualify in 60s</span>
-        <span class="subnav__finlogos">
-          <img src="../logos/affirm.png" alt="Affirm" width="356" height="141" loading="lazy" decoding="async">
-          <img src="../logos/katapult.webp" alt="Katapult" width="477" height="146" loading="lazy" decoding="async">
-        </span>
       </a>
     </div>
   </nav>
@@ -5097,584 +5003,381 @@ html, body{ overflow-x:clip; }
   </div>
 </header>
 
-<main id="main">
-
-<!-- ===== BREADCRUMBS ===== -->
-<div class="crumbs">
-  <div class="wrap">
-    <div class="crumbs__inner">
-      <a href="../vivid-trucks.html">VR Trucks</a><span class="sep">/</span>
-      <a href="wheels-cat.html">Truck Wheels</a><span class="sep">/</span>
-      <a href="wheels-cat.html">Arkon Off-Road</a><span class="sep">/</span>
-      <span class="cur">Caesar 20x10 -25</span>
+<main id="main" class="vc">
+  <header class="vc__hero">
+    <img src="real-photos/truck-offroad.jpg" alt="Black trophy truck on huge off-road tires kicking up a dust plume across the Nevada desert with a helicopter filming overhead" width="1600" height="1000" fetchpriority="high">
+    <div class="vc__hero__scrim" aria-hidden="true"></div>
+    <div class="vc__hero__inner">
+      <p class="vc__eyebrow">Vivid Racing &middot; About</p>
+      <h1>Twenty-five years of go-fast parts.</h1>
+      <p>Founded in 2001 with $500 and a $1,500 loan. Now a two-million-part catalog, five house brands, and an Arizona facility with the dyno, the fabrication shop and the phones under one roof.</p>
+      <p class="vc__updated">Ported from vividracing.com &middot; August 2026</p>
     </div>
-  </div>
-</div>
-
-<!-- ===== PDP ===== -->
-<section class="pdp">
-  <div class="wrap">
-    <div class="pdp__grid">
-
-      <!-- LEFT: gallery + about + specs -->
-      <div>
-        <div class="pg__main">
-          <span class="pg__tag">ARKON OFF-ROAD &middot; CAESAR</span>
-          <img id="pgMain" src="../product-images/wheels.webp" alt="Arkon Off-Road Caesar 20x10 Gloss Black Milled"  fetchpriority="high" decoding="async"/>
-          <button class="pg__nav pg__nav--prev" onclick="pgStep(-1)" aria-label="Previous image">&#8249;</button>
-          <button class="pg__nav pg__nav--next" onclick="pgStep(1)" aria-label="Next image">&#8250;</button>
-        </div>
-        <div class="pg__row">
-          <span class="pg__row-label">Finish</span>
-          <span class="pg__swatch pg__swatch--active" style="background: linear-gradient(135deg,#2b2b2b,#0a0a0a);" title="Gloss Black Milled" role="button" tabindex="0" aria-label="Finish: Gloss Black Milled" aria-pressed="true" onclick="pickFinish(this,'Gloss Black Milled')"></span>
-          <span class="pg__row-val" id="finishVal">Gloss Black Milled</span>
-          <span style="font-family:var(--ui); font-size:11px; color:var(--steel);">&mdash; only finish currently offered for this SKU</span>
-        </div>
-        <div class="pg__row">
-          <span class="pg__row-label">On Trucks</span>
-          <img class="pg__thumb" role="button" tabindex="0" src="https://images.unsplash.com/photo-1714859817907-210d1c922eea?fm=jpg&q=80&w=800&auto=format&fit=crop" onclick="pgSet(this.src)" alt="View on-truck photo 1" aria-label="View on-truck photo 1"  loading="lazy" decoding="async"/>
-          <img class="pg__thumb" role="button" tabindex="0" src="https://images.unsplash.com/photo-1601252300554-4ad551483bd2?fm=jpg&q=80&w=800&auto=format&fit=crop" onclick="pgSet(this.src)" alt="View on-truck photo 2" aria-label="View on-truck photo 2"  loading="lazy" decoding="async"/>
-          <img class="pg__thumb" role="button" tabindex="0" src="https://images.unsplash.com/photo-1552745998-234af3caf5b6?fm=jpg&q=80&w=800&auto=format&fit=crop" onclick="pgSet(this.src)" alt="View on-truck photo 3" aria-label="View on-truck photo 3"  loading="lazy" decoding="async"/>
-          <img class="pg__thumb" role="button" tabindex="0" src="https://images.unsplash.com/photo-1598110579456-122e6342daee?fm=jpg&q=80&w=800&auto=format&fit=crop" onclick="pgSet(this.src)" alt="View on-truck photo 4" aria-label="View on-truck photo 4"  loading="lazy" decoding="async"/>
-          <img class="pg__thumb" role="button" tabindex="0" src="https://images.unsplash.com/photo-1758219944815-6e0594323981?fm=jpg&q=80&w=800&auto=format&fit=crop" onclick="pgSet(this.src)" alt="View on-truck photo 5" aria-label="View on-truck photo 5"  loading="lazy" decoding="async"/>
-        </div>
-
-        <div class="pdp-block pdp-about">
-          <span class="pdp-block__num">OVERVIEW</span>
-          <h2 class="pdp-block__title">About this <span class="heat">wheel.</span></h2>
-          <p>The Arkon Off-Road Caesar is a one-piece cast alloy 8-lug built for Super Duty platforms that need a directional off-road look without giving up daily-driver manners. The directional design and concave face are engineered to sweep correctly on each side of the truck, and the exposed lug hardware at the hub center gives it the exposed-bolt look off-road wheels are known for &mdash; a machined center cap ships in the box to cover it when you want the cleaner look instead.</p>
-          <p>The gloss black finish with milled spoke edges is a two-step process &mdash; the milled faces stay raw metal under clear rather than a painted-on highlight, so they don&rsquo;t chip the way a tipped edge does. At 20x10 with -25mm of offset you get a meaningful stance bump that still clears factory calipers and keeps the load rating where an HD truck needs it: 3,600 lbs per wheel.</p>
-          <p><strong>Best for:</strong></p>
-          <ul>
-            <li>Ford F-250 / F-350 Super Duty owners (8x170 &mdash; this wheel&rsquo;s primary confirmed fitment)</li>
-            <li>Drivers who want a directional, concave off-road look on a Super Duty build</li>
-            <li>Owners who want the exposed-hardware look with the option to cap it later</li>
-            <li>Front/rear staggered setups &mdash; see Staggered Setup below</li>
-          </ul>
-        </div>
-
-        <div class="pdp-block">
-          <span class="pdp-block__num">SPECIFICATIONS</span>
-          <h2 class="pdp-block__title">Wheel <span class="heat">specs.</span></h2>
-          <table class="spec-table">
-<caption class="vc__vh">Wheel specifications</caption>
-<tbody>
-            <tr><th scope="row">SKU</th><td>K14120101745</td></tr>
-            <tr><th scope="row">Brand</th><td>Arkon Off-Road</td></tr>
-            <tr><th scope="row">Model</th><td>Caesar</td></tr>
-            <tr><th scope="row">Diameter</th><td>20&Prime;</td></tr>
-            <tr><th scope="row">Width</th><td>10&Prime;</td></tr>
-            <tr><th scope="row">Bolt Pattern</th><td>8x170 <span style="font-weight:400; color:var(--steel); font-size:12px;">(also offered in 6x135, 8x180, 8x6.5)</span></td></tr>
-            <tr><th scope="row">Offset</th><td>-25mm</td></tr>
-            <tr><th scope="row">Backspacing</th><td>4.52&Prime;</td></tr>
-            <tr><th scope="row">Hub Bore</th><td>125.50mm</td></tr>
-            <tr><th scope="row">Finish</th><td>Gloss Black, Milled Spoke Edges</td></tr>
-            <tr><th scope="row">Construction</th><td>One-Piece Cast Alloy</td></tr>
-            <tr><th scope="row">Load Rating</th><td>3,600 lbs</td></tr>
-            <tr><th scope="row">Weight</th><td>38.40 lbs</td></tr>
-            <tr><th scope="row">Cap Included</th><td>Yes &mdash; machined center cap</td></tr>
-            <tr><th scope="row">Lug Nuts Included</th><td>No</td></tr>
-            <tr><th scope="row">TPMS Compatible</th><td>Yes</td></tr>
-          </tbody>
-</table>
-        </div>
+  </header>
+  <div class="vc__body">
+    <div class="vc__wrap">
+      <div class="vc__stats" role="group" aria-label="Vivid Racing by the numbers">
+        <div class="vc__stat"><b>2001</b><span>Founded in Tempe, AZ</span></div>
+        <div class="vc__stat"><b>2M+</b><span>Parts in the catalog</span></div>
+        <div class="vc__stat"><b>4.7&#9733;</b><span>58,811 verified reviews</span></div>
+        <div class="vc__stat"><b>15,000</b><span>Sq ft &middot; Gilbert, AZ</span></div>
       </div>
 
-      <!-- RIGHT: buy panel -->
-      <div class="bp">
-        <h1 class="bp__title">Arkon Off-Road Caesar 20x10 -25</h1>
-        <div class="bp__sku-row">
-          <span class="bp__sku">SKU: K14120101745</span>
-          <span class="bp__sku" style="margin-left:auto;">20x10 &middot; 8x170 &middot; -25mm</span>
+      <div class="vc__quote">
+        <p>&ldquo;To fuel the passion of enthusiast vehicle owners.&rdquo;</p>
+        <cite>The mission</cite>
+      </div>
+
+      <section class="vc__band">
+        <div class="vc__band-media">
+          <img src="real-photos/workshop.jpg" alt="Dimly lit car repair workshop with a dark-red classic American car under an open hood and an engine on a hoist" width="1200" height="900" loading="lazy">
         </div>
-
-        <div class="bp__meta">
-          <div class="bp__stock"><span class="bp__stock-dot"></span> In Stock &middot; Tempe, AZ</div>
-          <div class="bp__stars">&#9733;&#9733;&#9733;&#9733;&#9733;<span class="bp__stars-count">(61 reviews)</span></div>
+        <div class="vc__band-copy">
+          <p class="vc__kicker">The story</p>
+          <h2>From a Tempe garage unit to two million parts.</h2>
+          <p>Fresh out of Arizona State, Rob and Dan started VividRacing.com in a 1,500 sq ft unit selling Subaru performance parts. Project cars, magazine features, road rallies and SEMA builds made the name; the catalog did the rest.</p>
+          <p>Today it spans performance cars, trucks, Jeeps, UTVs and motorcycles, plus five house brands: <strong>VR Forged, VR Performance, VR Aero, VR Tuned</strong> and <strong>Agency Power</strong>.</p>
         </div>
+      </section>
 
-        <div class="bp__fit">
-          <div class="bp__fit-line">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="#16A34A"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-            <span><strong>Fits your</strong> <strong class="veh">2023 Ford F-250 Super Duty</strong></span>
-            <span style="margin-left:auto; font-family:var(--mono); font-size:10.5px; color:var(--steel);">8x170</span>
-          </div>
-          <a href="fitment-promise.html" class="bp__fit-link">Change Vehicle &rsaquo;</a>
+      <section class="vc__band vc__band--flip">
+        <div class="vc__band-media">
+          <img src="real-photos/night-car.jpg" alt="Rear view of a dark Porsche 911 with glowing red taillights on a rain-soaked city street at dusk" width="1200" height="900" loading="lazy">
         </div>
-
-        <div class="ptoggle">
-          <button class="ptoggle__btn ptoggle__btn--active" id="tgBuy" onclick="setMode('buy')">Buy Outright</button>
-          <button class="ptoggle__btn" id="tgFin" onclick="setMode('fin')">Finance It</button>
+        <div class="vc__band-copy">
+          <p class="vc__kicker">The proof</p>
+          <h2>Customers keep the receipts.</h2>
+          <p>A 4.7-star average across 58,811 verified reviews, collected by Shopper Approved and Google &mdash; earned one fitment call at a time.</p>
+          <p><a href='waiting-to-build/reviews.html'>Read the reviews</a> or <a href='waiting-to-build/gallery.html'>see the builds</a>.</p>
         </div>
+      </section>
 
-        <!-- BUY MODE -->
-        <div class="buy" id="buyMode">
-          <div class="bp__price-row">
-            <span class="bp__price">$390</span>
-            <span class="bp__price-label">each</span>
-            <span class="bp__price-label">/</span>
-            <span class="bp__price-set">$1,560</span>
-            <span class="bp__price-label">set of 4</span>
-          </div>
-          <div class="bp__fin-link">Or as low as <strong>$65/mo</strong> &mdash; <a href="javascript:void(0)" onclick="setMode('fin')">see financing options &rsaquo;</a></div>
+      <section style="padding:clamp(30px,6vw,64px) 0 0" aria-labelledby="tl-h">
+        <p class="vc__kicker">The record</p>
+        <h2 id="tl-h" style="font-family:var(--display);font-weight:800;letter-spacing:-.015em;font-size:clamp(1.5rem,3.6vw,2.25rem);line-height:1.12;margin:0 0 8px">Twenty-five years, year by year.</h2>
+        <p style="color:var(--graphite);max-width:64ch;margin:0 0 6px;line-height:1.7">Every
+          entry below is from the company's own history.</p>
+        <ol class="vc__timeline">
+        <li>
+          <span class="vc__tl-year">2025</span>
+          <div class="vc__tl-body"><h3>Joins Enthusiast Enterprises</h3><p>Vivid Racing joins EEI, cementing its position in automotive aftermarket e-commerce.</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2024</span>
+          <div class="vc__tl-body"><h3>New platform</h3><p>A new version of vividracing.com launches in May; 23 years in.</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2022</span>
+          <div class="vc__tl-body"><h3>VR Forged &middot; $100M goal</h3><p>VR Forged wheels launch to a strong reception; a CRO joins to drive toward the $100M sales goal. 21 years of business.</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2021</span>
+          <div class="vc__tl-body"><h3>Twenty years</h3><p>Two decades in, built on the same customer base that started it.</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2020</span>
+          <div class="vc__tl-body"><h3>Record year</h3><p>Pandemic year ends in sales records; customer service team expands, a CFO joins, warehouse reconfigured.</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2018</span>
+          <div class="vc__tl-body"><h3>New website &middot; Prior Design</h3><p>Faster storefront ships; Vivid becomes exclusive distributor for Prior Design. Sales pass eight figures.</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2017</span>
+          <div class="vc__tl-body"><h3>Automation &middot; ArmyTrix</h3><p>Big investment in vendor-data automation; exclusive North American distributor for ArmyTrix. Second straight SEMA Top Dealer award with Mackin Industries.</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2016</span>
+          <div class="vc__tl-body"><h3>Fifteen years &middot; UTV</h3><p>SEMA Top Dealer award; expansion into the fast-growing Polaris / Can-Am UTV market.</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2015</span>
+          <div class="vc__tl-body"><h3>Eight figures</h3><p>Annual sales pass eight digits while much of the industry is still recovering.</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2014</span>
+          <div class="vc__tl-body"><h3>VR Tuned launches</h3><p>After years of selling other people's tuning, VRTuned.com launches: flash tuning, plug-and-play boxes, TCU tuning and throttle controllers.</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2013</span>
+          <div class="vc__tl-body"><h3>HorsepowerFreaks acquired</h3><p>A competitor catalog site is acquired and folded into the Vivid infrastructure; Project SRT Viper debuts at SEMA.</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2012</span>
+          <div class="vc__tl-body"><h3>CNC in-house</h3><p>A CNC machine shop is integrated into the facility for Agency Power production; Targa Newfoundland road rally in the Project 997.2 Turbo S.</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2011</span>
+          <div class="vc__tl-body"><h3>Status Racing</h3><p>Rob and Dan acquire the FIA-certified seat maker (sold on to PRP Seats in 2016).</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2010</span>
+          <div class="vc__tl-body"><h3>206 mph</h3><p>The Project 997 Turbo runs 206.2 mph at the Texas Mile on a stock engine; two SEMA feature cars.</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2008</span>
+          <div class="vc__tl-body"><h3>The Gilbert building</h3><p>A custom-built 15,000 sq ft facility in Gilbert, Arizona: in-ground Mustang Dyno, lifts, Agency Power fabrication and the call center under one roof.</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2005</span>
+          <div class="vc__tl-body"><h3>Chandler &middot; first dyno</h3><p>10,000 sq ft building in Chandler; a Mustang AWD dyno - one of two in the state - starts the tuning program. Pepsi/DUB/Mazda RX-8 project builds.</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2004</span>
+          <div class="vc__tl-body"><h3>Agency Power founded</h3><p>In-house manufacturing begins under its own brand; the catalog-database business starts: if it works for Subaru and Evo, why not every car?</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2003</span>
+          <div class="vc__tl-body"><h3>First magazine feature</h3><p>Super Street features the Project WRX - the first of nearly a hundred; Gumball 3000 from San Francisco to Miami.</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2002</span>
+          <div class="vc__tl-body"><h3>First SEMA</h3><p>Project Subaru WRX I - full JDM build on Volk wheels - puts Vivid Racing on the map.</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2001</span>
+          <div class="vc__tl-body"><h3>Founded</h3><p>Fresh out of Arizona State, Rob and Dan start VividRacing.com from a 1,500 sq ft unit in Tempe with $500 cash and a $1,500 loan, selling Subaru performance parts.</p></div>
+        </li>
+      </ol>
+      </section>
 
-          <div class="stag" id="stagBox">
-            <div class="stag__head" role="button" tabindex="0" aria-expanded="false" aria-controls="stagBox" onclick="toggleStag()">
-              <div class="stag__check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-              <div>
-                <span class="stag__label">Staggered Setup</span><br/>
-                <span class="stag__sub">Different sizes front &amp; rear</span>
-              </div>
-              <span class="stag__badge">Directional Design</span>
-            </div>
-            <div class="stag__body">
-              <div class="stag__axle">
-                <div class="stag__axle-label"><span class="stag__axle-icon">F</span> Front Wheels (2)</div>
-                <select class="stag__select" id="stagF" aria-label="Front wheel size" onchange="stagPrice()">
-                  <option value="390" selected>20x10 &nbsp;|&nbsp; -25mm Offset &nbsp;|&nbsp; $390/ea</option>
-                </select>
-              </div>
-              <div class="stag__axle">
-                <div class="stag__axle-label"><span class="stag__axle-icon" style="background:var(--heat);">R</span> Rear Wheels (2)</div>
-                <select class="stag__select" id="stagR" aria-label="Rear wheel size" onchange="stagPrice()">
-                  <option value="390" selected>20x10 &nbsp;|&nbsp; -25mm Offset &nbsp;|&nbsp; $390/ea</option>
-                  <option value="0">22x12 &nbsp;|&nbsp; -51mm Offset &nbsp;|&nbsp; Call for pricing</option>
-                </select>
-              </div>
-              <div class="stag__sum">
-                <span class="stag__sum-label">Staggered set of 4:</span>
-                <span class="stag__sum-price" id="stagTotal">$1,560</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="bp__buy-row">
-            <div class="qty">
-              <button onclick="qty(-1)">&#8722;</button><span id="qtyVal">4</span><button onclick="qty(1)">+</button>
-            </div>
-            <button class="bp__cta bp__cta--heat">Add Tires &rarr;</button>
-          </div>
-          <button class="bp__cta bp__cta--ink">Buy Wheels Only</button>
+      <div class="vc__cta" style="margin-top:var(--section)">
+        <div>
+          <h2>Part of a family of brands</h2>
+          <p>Custom Offsets, Only Tires, Function Powersports, MAPerformance and Anovia
+            Wheels &mdash; each with its own lane, all enthusiast-run.</p>
         </div>
-
-        <!-- FINANCE MODE -->
-        <div class="fin" id="finMode">
-          <div class="fin__display" id="finDisplayA">
-            <div>
-              <div class="fin__display-label">Set of 4 &mdash; as low as</div>
-              <span class="fin__amount" id="finAmt">$65</span><span class="fin__period">/mo</span>
-            </div>
-            <div class="fin__total">Total: <strong>$1,560.00</strong><span class="fin__apr">0% APR Available</span></div>
-          </div>
-          <div class="fin__display" id="finDisplayK" style="display:none;">
-            <div>
-              <div class="fin__display-label">Set of 4 &mdash; get started with</div>
-              <span class="fin__amount">$1</span> <span class="fin__period">down</span>
-            </div>
-          </div>
-          <div class="fin__terms" id="finTerms">
-            <div class="fin__term" role="button" tabindex="0" aria-pressed="false" onclick="finTerm(this,260)"><span class="fin__term-months">6 mo</span><span class="fin__term-amount">$260/mo</span></div>
-            <div class="fin__term" role="button" tabindex="0" aria-pressed="false" onclick="finTerm(this,130)"><span class="fin__term-months">12 mo</span><span class="fin__term-amount">$130/mo</span></div>
-            <div class="fin__term fin__term--active" role="button" tabindex="0" aria-pressed="true" onclick="finTerm(this,65)"><span class="fin__term-months">24 mo</span><span class="fin__term-amount">$65/mo</span></div>
-            <div class="fin__term" role="button" tabindex="0" aria-pressed="false" onclick="finTerm(this,43)"><span class="fin__term-months">36 mo</span><span class="fin__term-amount">$43/mo</span></div>
-          </div>
-          <div class="fin__providers">
-            <div class="fin__provider fin__provider--active" id="provA" role="button" tabindex="0" aria-pressed="true" onclick="provider('A')">
-              <img src="../logos/affirm.png" alt="Affirm"  loading="lazy" decoding="async"/>
-              <span class="fin__provider-badge">0% APR Available</span>
-            </div>
-            <div class="fin__provider" id="provK" role="button" tabindex="0" aria-pressed="false" onclick="provider('K')">
-              <img src="../logos/katapult.webp" alt="Katapult"  loading="lazy" decoding="async"/>
-              <span class="fin__provider-badge">Lease-to-Own</span>
-            </div>
-          </div>
-          <button class="bp__cta bp__cta--heat" id="finCta" style="width:100%;">Pre-Qualify Now &mdash; No Credit Impact</button>
-          <div class="fin__trust" id="finTrust">No hard credit check &middot; Instant decision &middot; Won&rsquo;t affect your score</div>
-        </div>
-
-        <div class="bp__delivery">
-          <div>
-            <div class="bp__delivery-label">Estimated Delivery</div>
-            <div class="bp__delivery-date">Arrives Aug 24 &ndash; 26</div>
-          </div>
-          <div style="text-align:right;">
-            <div class="bp__delivery-label">Shipping to 85281</div>
-            <a href="#">Change ZIP</a>
-          </div>
-        </div>
-
-        <div class="opt" id="optBox">
-          <div class="opt__head" role="button" tabindex="0" aria-expanded="false" aria-controls="optBox" onclick="var b=document.getElementById('optBox');b.classList.toggle('open');this.setAttribute('aria-expanded',b.classList.contains('open'))">
-            <span class="opt__title">Wheel Options &amp; Accessories <span class="opt__count" id="optCount" style="display:none;">0</span></span>
-            <span class="opt__arrow">&#8250;</span>
-          </div>
-          <div class="opt__body">
-            <div class="opt__item" role="button" tabindex="0" aria-pressed="false" onclick="optToggle(this, 89.95)">
-              <div class="opt__radio"><div class="opt__radio-dot"></div></div>
-              <img class="opt__img" src="../product-images/wheels.webp" alt=""  loading="lazy" decoding="async"/>
-              <div>
-                <div class="opt__name">Machined VR Floating Caps</div>
-                <div class="opt__desc">Stay-level logo cap &middot; Set of 4</div>
-              </div>
-              <div class="opt__price">+$89.95<small>$22.49/ea</small></div>
-            </div>
-            <div class="opt__item" role="button" tabindex="0" aria-pressed="false" onclick="optToggle(this, 64.95)">
-              <div class="opt__radio"><div class="opt__radio-dot"></div></div>
-              <img class="opt__img" src="https://cdn.vividracing.com/file/vr/3231/2021/GorillaAutomotive-K6TS-14150BGR-main.webp" alt=""  loading="lazy" decoding="async"/>
-              <div>
-                <div class="opt__name">Gorilla Spline Lug Kit</div>
-                <div class="opt__desc">Black &middot; 14x1.5 &middot; 24-pack with key</div>
-              </div>
-              <div class="opt__price">+$64.95<small>Includes key</small></div>
-            </div>
-            <div class="opt__item" role="button" tabindex="0" aria-pressed="false" onclick="optToggle(this, 119.96)">
-              <div class="opt__radio"><div class="opt__radio-dot"></div></div>
-              <img class="opt__img" src="https://cdn.vividracing.com/file/vr/3241/2024/BIM-22-3.jpg" alt=""  loading="lazy" decoding="async"/>
-              <div>
-                <div class="opt__name">TPMS Sensor Kit</div>
-                <div class="opt__desc">Pre-programmed for your F-250 &middot; Set of 4</div>
-              </div>
-              <div class="opt__price">+$119.96<small>$29.99/ea</small></div>
-            </div>
-            <div class="opt__item" role="button" tabindex="0" aria-pressed="false" onclick="optToggle(this, 39.95)">
-              <div class="opt__radio"><div class="opt__radio-dot"></div></div>
-              <img class="opt__img" src="https://cdn.vividracing.com/file/vr23/2445/1/McG_68020_1.webp" alt=""  loading="lazy" decoding="async"/>
-              <div>
-                <div class="opt__name">McGard Wheel Lock Set</div>
-                <div class="opt__desc">Anti-theft &middot; 4 locks + 1 key</div>
-              </div>
-              <div class="opt__price">+$39.95<small>4 locks + key</small></div>
-            </div>
-            <div class="opt__subtotal" id="optSub"><span>Accessories total:</span><strong id="optSubVal">$0.00</strong></div>
-          </div>
-        </div>
-
-        <div class="bp__expert">
-          <div style="display:flex; align-items:center; gap:14px;">
-            <img src="https://images.unsplash.com/photo-1614531341773-3bff8b7cb3fc?fm=jpg&q=80&w=240&auto=format&fit=crop" alt="Sam Reyes"  loading="lazy" decoding="async"/>
-            <div>
-              <div class="bp__expert-title">Questions about fitment?</div>
-              <div class="bp__expert-sub">Talk to Sam Reyes &mdash; Off-Road Wheel Specialist</div>
-            </div>
-          </div>
-          <div>
-            <button class="bp__expert-btn">Chat with us</button>
-            <button class="bp__expert-btn">Call 480-966-3040</button>
-          </div>
-        </div>
+        <p><a class="vc__btn vc__btn--ghost" href="waiting-to-build/careers.html">Work here</a>
+           <a class="vc__btn" href="waiting-to-build/contact.html">Talk to us</a></p>
       </div>
     </div>
   </div>
-</section>
 
-<!-- ===== SIZES ===== -->
-<section class="sizes">
-  <div class="wrap">
-    <span class="pdp-block__num">FITMENTS</span>
-    <h2 class="pdp-block__title">Additional sizes &amp; <span class="heat">offsets.</span></h2>
-    <div class="sizes__group">20&Prime; Diameter</div>
-    <div class="sizes__grid">
-      <a href="wheel-pdp.html" class="size-card size-card--active"><span class="size-card__name">20x10 -25</span><span class="size-card__price">$390</span></a>
-    </div>
-    <div class="sizes__group">22&Prime; Diameter <span style="font-weight:400; color:var(--steel); font-size:12px; text-transform:none; letter-spacing:0;">(staggered rear)</span></div>
-    <div class="sizes__grid">
-      <a href="tel:+14809663040" class="size-card"><span class="size-card__name">22x12 -51</span><span class="size-card__price">Call for pricing</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== REVIEWS + POLICIES ===== -->
-<section style="background:var(--paper); border-top:3px solid var(--ink);">
-  <div class="wrap">
-    <div class="rev-grid">
-      <div>
-        <span class="pdp-block__num">VERIFIED OWNERS</span>
-        <h2 class="pdp-block__title">Product <span class="heat">reviews.</span></h2>
-        <div class="rev-summary">
-          <div style="text-align:center;">
-            <div class="rev-big">4.9</div>
-            <div style="color:#B45309; font-size:14px; margin:4px 0;" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <div style="font-family:var(--ui); font-size:12px; color:var(--signal); font-weight:600;">(61 reviews)</div>
-          </div>
-          <div class="rev-bars">
-            <div class="rev-bar"><span>5</span><div class="rev-bar__track"><div class="rev-bar__fill" style="width:82%"></div></div><span>50</span></div>
-            <div class="rev-bar"><span>4</span><div class="rev-bar__track"><div class="rev-bar__fill" style="width:13%"></div></div><span>8</span></div>
-            <div class="rev-bar"><span>3</span><div class="rev-bar__track"><div class="rev-bar__fill" style="width:3%"></div></div><span>2</span></div>
-            <div class="rev-bar"><span>2</span><div class="rev-bar__track"><div class="rev-bar__fill" style="width:2%"></div></div><span>1</span></div>
-            <div class="rev-bar"><span>1</span><div class="rev-bar__track"><div class="rev-bar__fill" style="width:0%"></div></div><span>0</span></div>
-          </div>
-        </div>
-        <div class="review">
-          <div class="review__head">
-            <div class="review__avatar">CH</div>
-            <div>
-              <div class="review__name">Cole H. <span class="review__meta">&middot; May 28, 2026</span></div>
-              <div class="review__chassis">2023 F-250 PLATINUM &middot; VERIFIED OWNER</div>
-            </div>
-          </div>
-          <p>Ran these with 35&Prime; Toyo R/Ts on a 2.5&Prime; level. The gloss black with the milled spokes against a white Super Duty is unreal in person, and they cleared my calipers with room to spare. VR had them at my door in three days from Tempe.</p>
-        </div>
-        <div class="review">
-          <div class="review__head">
-            <div class="review__avatar">WT</div>
-            <div>
-              <div class="review__name">Wyatt T. <span class="review__meta">&middot; Apr 19, 2026</span></div>
-              <div class="review__chassis">2022 RAM 2500 CUMMINS &middot; VERIFIED OWNER</div>
-            </div>
-          </div>
-          <p>Tow a 14k fifth wheel and didn&rsquo;t want to give up load rating for looks. These are rated 3,600 per corner, which is plenty for my rig. Sam on their wheel desk double-checked backspacing against my long-arm kit before I ordered.</p>
-        </div>
-        <div class="review">
-          <div class="review__head">
-            <div class="review__avatar">MS</div>
-            <div>
-              <div class="review__name">Mateo S. <span class="review__meta">&middot; Mar 7, 2026</span></div>
-              <div class="review__chassis">2023 F-350 TREMOR &middot; VERIFIED OWNER</div>
-            </div>
-          </div>
-          <p>Second set of Arkon wheels for me. The milled edges on the Caesar have held up through a full winter of mag-chloride roads with zero peeling. Only wish the exposed lug look came standard without swapping the cap &mdash; otherwise perfect.</p>
-        </div>
+  <!-- ============ EMAIL CAPTURE · node 251:6199 ============ -->
+  <section class="drop" aria-labelledby="drop-title">
+    <div class="shell drop__row">
+      <div class="drop__copy">
+        <p class="drop__eyebrow">Drop in</p>
+        <h2 class="drop__title" id="drop-title">First on new parts</h2>
+        <p class="drop__note">New arrivals, build references, and early access. Emails come roughly twice a month. Unsubscribe anytime.</p>
       </div>
-      <div>
-        <span class="pdp-block__num">THE FINE PRINT</span>
-        <h2 class="pdp-block__title">Order details &amp; <span class="heat">policies.</span></h2>
-        <div class="policy">
-          <div class="policy__item">
-            <svg class="policy__icon" viewBox="0 0 640 512" width="20" height="16" fill="currentColor"><path d="M368.6 96l76.8 96H288V96h80.6zM224 80V192H64V96c0-8.8 7.2-16 16-16h144zm256 232a56 56 0 1 1 0 112 56 56 0 1 1 0-112zM160 312a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"/></svg>
-            <div><div class="policy__title">Free shipping &mdash; this order qualifies</div><div class="policy__desc">Free over $499 in the continental US. Wheels ship boxed-in-foam from Tempe, AZ.</div></div>
-          </div>
-          <div class="policy__item">
-            <svg class="policy__icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2L4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3z"/></svg>
-            <div><div class="policy__title">60-day fitment guarantee</div><div class="policy__desc">If it doesn&rsquo;t fit the vehicle on your order, we exchange or refund &mdash; including return freight.</div></div>
-          </div>
-          <div class="policy__item">
-            <svg class="policy__icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
-            <div><div class="policy__title">Price match promise</div><div class="policy__desc">Find a verified lower price on the same SKU and we&rsquo;ll beat it.</div></div>
-          </div>
-          <div class="policy__item">
-            <svg class="policy__icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 5V1L7 6l5 5V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z"/></svg>
-            <div><div class="policy__title">Easy returns</div><div class="policy__desc">60 days, unmounted and in original packaging. Mounted wheels covered by the fitment guarantee only.</div></div>
-          </div>
-          <div class="policy__item">
-            <svg class="policy__icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24z"/></svg>
-            <div><div class="policy__title">Mount, balance &amp; install in Tempe</div><div class="policy__desc">Hunter Road Force Elite on every set. Book a bay when you check out.</div></div>
-          </div>
+      <form class="drop__form" action="#" method="post">
+        <div class="drop__fields">
+          <label class="vh" for="news-email">Email address</label>
+          <input class="drop__input" id="news-email" name="email" type="email"
+                 autocomplete="email" required placeholder="your@email.com">
+          <button class="drop__submit" type="submit">Subscribe</button>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== BUILDS ===== -->
-<section class="builds">
-  <div class="wrap">
-    <span class="pdp-block__num">RUNNING THIS WHEEL</span>
-    <h2 class="pdp-block__title">Real trucks on the <span class="heat">Caesar.</span></h2>
-    <div class="builds__grid">
-      <a href="../vivid-trucks.html" class="build-tile"><img src="https://images.unsplash.com/photo-1714859817907-210d1c922eea?fm=jpg&q=80&w=800&auto=format&fit=crop" alt="" loading="lazy" decoding="async"/><span class="build-tile__label">F-250 Tremor &middot; 6.7L<small>Cole H. &middot; TX</small></span></a>
-      <a href="../vivid-trucks.html" class="build-tile"><img src="https://images.unsplash.com/photo-1598110579456-122e6342daee?fm=jpg&q=80&w=800&auto=format&fit=crop" alt="" loading="lazy" decoding="async"/><span class="build-tile__label">Lifted Ram 2500<small>Wyatt T.</small></span></a>
-      <a href="../vivid-trucks.html" class="build-tile"><img src="https://images.unsplash.com/photo-1552745998-234af3caf5b6?fm=jpg&q=80&w=800&auto=format&fit=crop" alt="" loading="lazy" decoding="async"/><span class="build-tile__label">Ram 1500 on 35s<small>Mateo S.</small></span></a>
-      <a href="../vivid-trucks.html" class="build-tile"><img src="https://images.unsplash.com/photo-1601252300554-4ad551483bd2?fm=jpg&q=80&w=800&auto=format&fit=crop" alt="" loading="lazy" decoding="async"/><span class="build-tile__label">Silverado Trail Boss<small>Brandon K.</small></span></a>
-      <a href="../vivid-trucks.html" class="build-tile"><img src="https://images.unsplash.com/photo-1758219944815-6e0594323981?fm=jpg&q=80&w=800&auto=format&fit=crop" alt="" loading="lazy" decoding="async"/><span class="build-tile__label">F-350 on 37s<small>Sawyer M.</small></span></a>
-      <a href="../vivid-trucks.html" class="build-tile"><img src="https://images.unsplash.com/photo-1779366768771-4b58a50332d6?fm=jpg&q=80&w=800&auto=format&fit=crop" alt="" loading="lazy" decoding="async"/><span class="build-tile__label">C10 Street Truck<small>Buck R.</small></span></a>
-    </div>
-    <p style="font-family:var(--ui); font-size:13px; color:var(--steel); margin-top:16px;">Running this wheel? <a href="../vivid-trucks.html" style="color:var(--heat); font-weight:600;">Submit your build</a> &mdash; featured owners get a $250 shop credit.</p>
-  </div>
-</section>
-
-<script>
-  var PG=['product-images/wheels.webp','https://images.unsplash.com/photo-1714859817907-210d1c922eea?fm=jpg&q=80&w=800&auto=format&fit=crop','https://images.unsplash.com/photo-1601252300554-4ad551483bd2?fm=jpg&q=80&w=800&auto=format&fit=crop','https://images.unsplash.com/photo-1552745998-234af3caf5b6?fm=jpg&q=80&w=800&auto=format&fit=crop','https://images.unsplash.com/photo-1598110579456-122e6342daee?fm=jpg&q=80&w=800&auto=format&fit=crop','https://images.unsplash.com/photo-1758219944815-6e0594323981?fm=jpg&q=80&w=800&auto=format&fit=crop'];
-  var pgIdx=0;
-  function pgStep(d){ pgIdx=(pgIdx+d+PG.length)%PG.length; document.getElementById('pgMain').src=PG[pgIdx]; }
-  function pgSet(s){ document.getElementById('pgMain').src=s; pgIdx=Math.max(0,PG.indexOf(s.replace(location.origin+'/',''))); }
-  function pickFinish(el,name){ document.querySelectorAll('.pg__swatch').forEach(function(s){s.classList.remove('pg__swatch--active'); s.setAttribute('aria-pressed','false')}); el.classList.add('pg__swatch--active'); el.setAttribute('aria-pressed','true'); document.getElementById('finishVal').textContent=name; }
-  function setMode(m){
-    var buy=document.getElementById('buyMode'), fin=document.getElementById('finMode');
-    document.getElementById('tgBuy').classList.toggle('ptoggle__btn--active', m==='buy');
-    document.getElementById('tgFin').classList.toggle('ptoggle__btn--active', m==='fin');
-    buy.classList.toggle('off', m!=='buy'); fin.classList.toggle('on', m==='fin');
-  }
-  var q=4;
-  function qty(d){ q=Math.max(1,Math.min(8,q+d)); document.getElementById('qtyVal').textContent=q; }
-  function toggleStag(){ var b=document.getElementById('stagBox'); b.classList.toggle('stag--on'); document.querySelector('.stag__head').setAttribute('aria-expanded', b.classList.contains('stag--on')); }
-  function stagPrice(){
-    var f=+document.getElementById('stagF').value, r=+document.getElementById('stagR').value;
-    var t=document.getElementById('stagTotal');
-    /* rear "22x12 -51" option value is 0 — its price isn't confirmed, so show
-       "Call for pricing" instead of a total that implies the rear pair is free */
-    t.textContent = r ? '$'+(2*f+2*r).toLocaleString() : 'Call for pricing';
-  }
-  var optTotal=0, optCount=0;
-  function optToggle(el,price){
-    var on=el.classList.toggle('on'); el.setAttribute('aria-pressed', on);
-    optTotal+=on?price:-price; optCount+=on?1:-1;
-    var c=document.getElementById('optCount'); c.textContent=optCount; c.style.display=optCount?'inline-block':'none';
-    var s=document.getElementById('optSub'); s.style.display=optTotal>0?'flex':'none';
-    document.getElementById('optSubVal').textContent='$'+optTotal.toFixed(2);
-  }
-  function finTerm(el,amt){
-    document.querySelectorAll('.fin__term').forEach(function(t){t.classList.remove('fin__term--active')});
-    el.classList.add('fin__term--active'); document.querySelectorAll('.fin__term').forEach(function(t){t.setAttribute('aria-pressed','false')}); el.setAttribute('aria-pressed','true');
-    document.getElementById('finAmt').textContent='$'+amt;
-  }
-  function provider(p){
-    document.getElementById('provA').classList.toggle('fin__provider--active', p==='A');
-    document.getElementById('provK').classList.toggle('fin__provider--active', p==='K'); document.getElementById('provA').setAttribute('aria-pressed', p==='A'); document.getElementById('provK').setAttribute('aria-pressed', p==='K');
-    document.getElementById('finDisplayA').style.display = p==='A' ? '' : 'none';
-    document.getElementById('finDisplayK').style.display = p==='K' ? '' : 'none';
-    document.getElementById('finTerms').style.display = p==='A' ? '' : 'none';
-    document.getElementById('finCta').textContent = p==='A' ? 'Pre-Qualify Now — No Credit Impact' : 'Pre-Qualify Now';
-    document.getElementById('finTrust').textContent = p==='A' ? "No hard credit check · Instant decision · Won't affect your score" : 'Subject to credit approval. Rates may vary.';
-  }
-</script>
-
-<section class="email">
-  <div class="wrap email__inner">
-    <div>
-      <span class="eyebrow eyebrow--heat">DROP IN</span>
-      <h2 class="email__title" style="margin-top: 10px;">First on new parts. <span class="heat">First on deals.</span></h2>
-      <p class="email__lede">New arrivals, build references, and event-only deals. Roughly twice a month. Unsubscribe anytime.</p>
-    </div>
-    <div>
-      <form class="email__form" onsubmit="return false;">
-        <input type="email" aria-label="Email address" class="email__input" placeholder="your@email.com" />
-        <button type="submit" class="email__submit">Subscribe</button>
+        <p class="drop__fine">Unsubscribe anytime / never shared</p>
       </form>
-      <p class="email__legal">UNSUBSCRIBE ANYTIME / NEVER SHARED</p>
     </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
+  </section>
 </main>
 
-<footer class="foot">
-  <div class="shell">
-    <div class="foot__top">
-      <div class="foot__brand">
-        <img class="foot__logo" src="../logos/flat-system/vivid-master-creme.svg" alt="Vivid Racing" width="183" height="38">
-        <div class="foot__contact">
-          <div>
-            <p class="foot__label">Customer service</p>
-            <p class="foot__small">Mon&ndash;Fri: 8am&ndash;6pm MST<br>Sat: 9am&ndash;4pm MST</p>
-          </div>
-          <div>
-            <p class="foot__label">Headquarters</p>
-            <p class="foot__small">7510 E. Main St<br>Mesa, AZ 85207</p>
-          </div>
-          <p class="foot__phone"><a href="tel:+14809663040">480-966-3040</a></p>
-        </div>
-        <p class="foot__label">Deals &amp; build inspiration</p>
-        <form class="foot__form" action="#" method="post">
-          <label class="vh" for="foot-email">Email address</label>
-          <input class="foot__input" id="foot-email" name="email" type="email"
-                 autocomplete="email" required placeholder="your@email.com">
-          <button class="foot__go" type="submit">Go</button>
-        </form>
-        <ul class="foot__social">
-          <li><a href="https://www.youtube.com/@VividRacing" rel="noopener" aria-label="YouTube"><img src="../assets/icons/youtube-f.svg" alt="" aria-hidden="true" width="18" height="18"></a></li>
-          <li><a href="https://www.instagram.com/vividracing" rel="noopener" aria-label="Instagram"><img src="../assets/icons/instagram.svg" alt="" aria-hidden="true" width="18" height="18"></a></li>
-          <li><a href="https://www.facebook.com/vividracing" rel="noopener" aria-label="Facebook"><img src="../assets/icons/facebook.svg" alt="" aria-hidden="true" width="18" height="18"></a></li>
-          <li><a href="https://www.tiktok.com/@vividracing" rel="noopener" aria-label="TikTok"><img src="../assets/icons/tiktok.svg" alt="" aria-hidden="true" width="18" height="18"></a></li>
-        </ul>
-      </div>
-      <div class="foot__cols">
-        <details class="foot__col" open>
-          <summary class="foot__sum">Shop<span class="foot__chev" aria-hidden="true"></span></summary>
-          <ul class="foot__list">
-            <li><a href="vehicle-picker.html">Shop by Vehicle</a></li>
-            <li><a href="suspension.html">Suspension</a></li>
-            <li><a href="wheels-cat.html">Wheels &amp; Tires</a></li>
-            <li><a href="brakes.html">Brakes</a></li>
-            <li><a href="exhaust.html">Exhaust</a></li>
-            <li><a href="aero-body.html">Aero &amp; Body</a></li>
-            <li><a href="engine-turbo.html">Engine &amp; Turbo</a></li>
-            <li><a href="deal-machine.html">In Stock + Free Ship</a></li>
-          </ul>
-        </details>
-        <details class="foot__col" open>
-          <summary class="foot__sum">Tools<span class="foot__chev" aria-hidden="true"></span></summary>
-          <ul class="foot__list">
-            <li><a href="vehicle-picker.html">Vehicle Picker</a></li>
-            <li><a href="build-builder.html">Build Builder</a></li>
-            <li><a href="coilover-specs.html">Coilover Specs</a></li>
-            <li><a href="wheel-fitment.html">Wheel Fitment</a></li>
-            <li><a href="tire-calculator.html">Tire Calculator</a></li>
-            <li><a href="buyers-guides.html">Buyer&rsquo;s Guides</a></li>
-          </ul>
-        </details>
-        <details class="foot__col" open>
-          <summary class="foot__sum">Company<span class="foot__chev" aria-hidden="true"></span></summary>
-          <ul class="foot__list">
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="ambassador.html">The Pit Crew</a></li>
-            <li><a href="vivid-wholesale.html">Wholesale</a></li>
-            <li><a href="careers.html">Careers</a></li>
-            <li><a href="gallery.html">Builds Gallery</a></li>
-            <li><a href="blog.html">Videos + News</a></li>
-            <li><a href="reviews.html">Reviews</a></li>
-          </ul>
-        </details>
-        <details class="foot__col" open>
-          <summary class="foot__sum">Your account<span class="foot__chev" aria-hidden="true"></span></summary>
-          <ul class="foot__list">
-            <li><a href="signin.html">Sign In</a></li>
-            <li><a href="cart.html">View Cart</a></li>
-            <li><a href="track.html">Track Order</a></li>
-            <li><a href="garage.html">My Garage</a></li>
-            <li><a href="wishlist.html">Wishlist</a></li>
-            <li><a href="rewards.html">Vivid Rewards</a></li>
-            <li><a href="financing.html">Financing</a></li>
-          </ul>
-        </details>
-        <details class="foot__col" open>
-          <summary class="foot__sum">Support<span class="foot__chev" aria-hidden="true"></span></summary>
-          <ul class="foot__list">
-            <li><a href="contact.html">Contact Us</a></li>
-            <li><a href="help.html">FAQs / Policies</a></li>
-            <li><a href="shipping.html">Shipping</a></li>
-            <li><a href="returns.html">Returns</a></li>
-            <li><a href="fitment-promise.html">Fitment Promise</a></li>
-            <li><a href="sitemap.html">Site Map</a></li>
-          </ul>
-        </details>
+<!-- ===== V2 FOOTER — see footer.md for the full reference (structure, CSS,
+     propagation rules). Content is byte-identical to index.html's footer
+     except this page isn't one of the 5 family pages, so none of the
+     .v2-footer__family-logos carry aria-current. ===== -->
+<footer id="v2-footer">
 
-        <div class="foot__family">
-          <p class="foot__family-label">Part of the Vivid Racing family of brands</p>
-          <ul class="foot__family-logos">
-            <li><a href="../index.html"><img src="../logos/flat-system/vivid-master-creme.svg" alt="Vivid Racing" width="106" height="22"></a></li>
-            <li><a href="../vivid-trucks.html"><img src="../logos/flat-system/vr-trucks-creme.png" alt="VR Trucks" width="97" height="22" loading="lazy" decoding="async"></a></li>
-            <li><a href="vrxover.html"><img src="../logos/flat-system/vr-crossover-creme.png" alt="VR Crossover" width="116" height="22" loading="lazy" decoding="async"></a></li>
-            <li><a href="vivid-classics.html"><img src="../logos/flat-system/vr-muscle-creme.png" alt="VR Muscle" width="96" height="22" loading="lazy" decoding="async"></a></li>
-            <li><a href="vividx.html"><img src="../logos/flat-system/vr-powersports-creme.png" alt="VR Powersports" width="122" height="22" loading="lazy" decoding="async"></a></li>
-          </ul>
+  <div class="v2-footer__stats">
+    <div class="v2-footer__stats-inner">
+      <div class="v2-footer__stat">
+        <span class="v2-footer__stat-num">14,000+</span>
+        <span class="v2-footer__stat-label">Verified Buyers</span>
+      </div>
+      <div class="v2-footer__stat v2-footer__stat--financing">
+        <div class="v2-footer__finance">
+          <div class="v2-footer__finance-text">
+            <span class="v2-footer__finance-sub">As low as</span>
+            <span class="v2-footer__finance-price"><strong>0%</strong> APR</span>
+          </div>
+          <span class="v2-footer__finance-badge">Affirm</span>
+        </div>
+        <div class="v2-footer__finance">
+          <div class="v2-footer__finance-text">
+            <span class="v2-footer__finance-sub">As low as</span>
+            <span class="v2-footer__finance-price"><strong>$1</strong> Down</span>
+          </div>
+          <span class="v2-footer__finance-badge">Katapult</span>
         </div>
       </div>
-    </div>
-
-    <div class="foot__legal">
-      <span>&copy; Copyright 2026 Vivid Distribution LLC</span>
-      <span aria-hidden="true">|</span>
-      <a href="terms.html">Terms &amp; Conditions</a>
-      <span aria-hidden="true">|</span>
-      <a href="privacy.html">Privacy Policy</a>
-      <span aria-hidden="true">|</span>
-      <a href="accessibility.html">Accessibility</a>
+      <div class="v2-footer__stat">
+        <span class="v2-footer__stat-num"></span>
+        <div class="v2-footer__stat-right">
+          <div class="v2-footer__stars" aria-label="4.9 out of 5 stars">
+            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+          </div>
+          <span class="v2-footer__stat-label">4.9 &middot; 14,000 Reviews</span>
+        </div>
+      </div>
+      <div class="v2-footer__stat">
+        <span class="v2-footer__stat-num">Free Shipping</span>
+        <span class="v2-footer__stat-label">On Orders $499+</span>
+      </div>
+      <div class="v2-footer__stat">
+        <span class="v2-footer__stat-num">&lt;1.4%</span>
+        <span class="v2-footer__stat-label">Return Rate</span>
+      </div>
     </div>
   </div>
+
+  <div class="v2-footer__body">
+    <div class="v2-footer__brand">
+      <a href="index.html" class="v2-footer__logo" aria-label="Vivid Racing">
+        <img src="assets/img/logos/vivid-master-creme.svg" alt="Vivid Racing" width="183" height="38">
+      </a>
+      <p class="v2-footer__desc">25 years of authorized performance parts for Porsche, BMW M, Audi RS, AMG, GT-R, Supra, Corvette, and the cars you actually drive.</p>
+      <div class="v2-footer__contact">
+        <div class="v2-footer__contact-top">
+          <div class="v2-footer__contact-col">
+            <span class="v2-footer__contact-label">Customer Service</span>
+            <span class="v2-footer__contact-hours">Mon&ndash;Fri: 8am&ndash;6pm MST<br>Sat: 9am&ndash;4pm MST</span>
+            <a class="v2-footer__contact-phone" href="tel:+14809663040">480-966-3040</a>
+          </div>
+          <div class="v2-footer__contact-col">
+            <span class="v2-footer__contact-label">Headquarters</span>
+            <address class="v2-footer__contact-address">7510 E. Main St<br>Mesa, AZ 85207</address>
+          </div>
+        </div>
+      </div>
+      <ul class="v2-footer__socials">
+        <li><a href="https://www.youtube.com/@VividRacing" class="v2-footer__social" rel="noopener" aria-label="YouTube"><img src="assets/icons/youtube-f.svg" alt="" aria-hidden="true"></a></li>
+        <li><a href="https://www.instagram.com/vividracing" class="v2-footer__social" rel="noopener" aria-label="Instagram"><img src="assets/icons/instagram.svg" alt="" aria-hidden="true"></a></li>
+        <li><a href="https://www.facebook.com/vividracing" class="v2-footer__social" rel="noopener" aria-label="Facebook"><img src="assets/icons/facebook.svg" alt="" aria-hidden="true"></a></li>
+        <li><a href="https://www.tiktok.com/@vividracing" class="v2-footer__social" rel="noopener" aria-label="TikTok"><img src="assets/icons/tiktok.svg" alt="" aria-hidden="true"></a></li>
+      </ul>
+    </div>
+
+    <div class="v2-footer__right">
+      <div class="v2-footer__link-grid">
+        <div class="v2-footer__link-col">
+          <button class="v2-footer__col-toggle" type="button" aria-expanded="false">
+            <span>Shop</span>
+            <svg class="v2-footer__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <ul class="v2-footer__col-links">
+            <li><a href="waiting-to-build/vehicle-picker.html">Shop by Vehicle</a></li>
+            <li><a href="waiting-to-build/suspension.html">Suspension</a></li>
+            <li><a href="waiting-to-build/wheels-cat.html">Wheels &amp; Tires</a></li>
+            <li><a href="waiting-to-build/brakes.html">Brakes</a></li>
+            <li><a href="waiting-to-build/exhaust.html">Exhaust</a></li>
+            <li><a href="waiting-to-build/aero-body.html">Aero &amp; Body</a></li>
+            <li><a href="waiting-to-build/engine-turbo.html">Engine &amp; Turbo</a></li>
+            <li><a href="waiting-to-build/deal-machine.html">In Stock + Free Ship</a></li>
+          </ul>
+        </div>
+        <div class="v2-footer__link-col">
+          <button class="v2-footer__col-toggle" type="button" aria-expanded="false">
+            <span>Platforms</span>
+            <svg class="v2-footer__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <ul class="v2-footer__col-links">
+            <li><a href="waiting-to-build/vivid-classics.html">Porsche</a></li>
+            <li><a href="waiting-to-build/vivid-classics.html">BMW M</a></li>
+            <li><a href="waiting-to-build/vivid-classics.html">Audi RS</a></li>
+            <li><a href="waiting-to-build/vivid-classics.html">Mercedes-AMG</a></li>
+            <li><a href="waiting-to-build/vividx.html">Nissan / GT-R</a></li>
+            <li><a href="waiting-to-build/vividx.html">Toyota / Supra</a></li>
+            <li><a href="waiting-to-build/vivid-classics.html">Corvette</a></li>
+            <li><a href="waiting-to-build/vehicle-picker.html">All Platforms</a></li>
+          </ul>
+        </div>
+        <div class="v2-footer__link-col">
+          <button class="v2-footer__col-toggle" type="button" aria-expanded="false">
+            <span>Tools</span>
+            <svg class="v2-footer__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <ul class="v2-footer__col-links">
+            <li><a href="waiting-to-build/vehicle-picker.html">Vehicle Picker</a></li>
+            <li><a href="waiting-to-build/build-builder.html">Build Builder</a></li>
+            <li><a href="waiting-to-build/coilover-specs.html">Coilover Specs</a></li>
+            <li><a href="waiting-to-build/wheel-fitment.html">Wheel Fitment</a></li>
+            <li><a href="waiting-to-build/tire-calculator.html">Tire Calculator</a></li>
+            <li><a href="waiting-to-build/buyers-guides.html">Buyer&rsquo;s Guides</a></li>
+          </ul>
+        </div>
+        <div class="v2-footer__link-col">
+          <button class="v2-footer__col-toggle" type="button" aria-expanded="false">
+            <span>Company</span>
+            <svg class="v2-footer__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <ul class="v2-footer__col-links">
+            <li><a href="waiting-to-build/about.html">About Us</a></li>
+            <li><a href="waiting-to-build/ambassador.html">The Pit Crew</a></li>
+            <li><a href="waiting-to-build/vivid-wholesale.html">Wholesale</a></li>
+            <li><a href="waiting-to-build/careers.html">Careers</a></li>
+            <li><a href="waiting-to-build/gallery.html">Builds Gallery</a></li>
+            <li><a href="waiting-to-build/blog.html">Videos + News</a></li>
+            <li><a href="waiting-to-build/reviews.html">Reviews</a></li>
+          </ul>
+        </div>
+        <div class="v2-footer__link-col">
+          <button class="v2-footer__col-toggle" type="button" aria-expanded="false">
+            <span>Your Account</span>
+            <svg class="v2-footer__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <ul class="v2-footer__col-links">
+            <li><a href="waiting-to-build/signin.html">Sign In</a></li>
+            <li><a href="waiting-to-build/cart.html">View Cart</a></li>
+            <li><a href="waiting-to-build/track.html">Track Order</a></li>
+            <li><a href="waiting-to-build/garage.html">My Garage</a></li>
+            <li><a href="waiting-to-build/wishlist.html">Wishlist</a></li>
+            <li><a href="waiting-to-build/rewards.html">Vivid Rewards</a></li>
+            <li><a href="waiting-to-build/financing.html">Financing</a></li>
+          </ul>
+        </div>
+        <div class="v2-footer__link-col">
+          <button class="v2-footer__col-toggle" type="button" aria-expanded="false">
+            <span>Support</span>
+            <svg class="v2-footer__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <ul class="v2-footer__col-links">
+            <li><a href="waiting-to-build/contact.html">Contact Us</a></li>
+            <li><a href="waiting-to-build/help.html">FAQs / Policies</a></li>
+            <li><a href="waiting-to-build/shipping.html">Shipping</a></li>
+            <li><a href="waiting-to-build/returns.html">Returns</a></li>
+            <li><a href="waiting-to-build/fitment-promise.html">Fitment Promise</a></li>
+            <li><a href="waiting-to-build/sitemap.html">Site Map</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="v2-footer__family">
+        <p class="v2-footer__family-label">Part of the Vivid Racing family of brands</p>
+        <!-- Same 5 brands + hrefs as the .brandbar switcher up top (node 251:3115) —
+             these are ViViD's own sub-brands, not third-party partners, so the
+             logos keep their real style rather than the greyscale/knockout
+             treatment the reference site uses for its (genuinely third-party)
+             partner-brand row. -->
+        <div class="v2-footer__family-logos">
+          <a href="index.html" class="v2-footer__family-logo"><img src="assets/img/logos/vivid-master-creme.svg" alt="Vivid Racing" width="106" height="22"></a>
+          <a href="vivid-trucks.html" class="v2-footer__family-logo"><img src="assets/img/logos/vr-trucks-creme.png" alt="VR Trucks" width="97" height="22" loading="lazy" decoding="async"></a>
+          <a href="vivid-crossover.html" class="v2-footer__family-logo"><img src="assets/img/logos/vr-crossover-creme.png" alt="VR Crossover" width="116" height="22" loading="lazy" decoding="async"></a>
+          <a href="vivid-classics.html" class="v2-footer__family-logo"><img src="assets/img/logos/vr-muscle-creme.png" alt="VR Muscle" width="96" height="22" loading="lazy" decoding="async"></a>
+          <a href="vividx.html" class="v2-footer__family-logo"><img src="assets/img/logos/vr-powersports-creme.png" alt="VR Powersports" width="122" height="22" loading="lazy" decoding="async"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="v2-footer__bottom">
+    <p>
+      <span class="v2-footer__bottom-copy">&copy; Copyright 2026 Vivid Distribution LLC</span>
+      <span aria-hidden="true">|</span>
+      <a href="waiting-to-build/terms.html">Terms &amp; Conditions</a>
+      <span aria-hidden="true">|</span>
+      <a href="waiting-to-build/privacy.html">Privacy Policy</a>
+      <span aria-hidden="true">|</span>
+      <a href="waiting-to-build/accessibility.html">Accessibility</a>
+      <span aria-hidden="true">|</span>
+      <a href="waiting-to-build/privacy.html">Do Not Sell My Info</a>
+    </p>
+  </div>
+
 </footer>
 
-<script>
-/* Footer columns are <details open> so they work without JS. On phones the
-   mobile frame shows them collapsed, so close them there and keep it in sync. */
-(function () {
-  var mq = window.matchMedia('(max-width: 900px)');
-  var cols = document.querySelectorAll('.foot__col');
-  function sync() { for (var i = 0; i < cols.length; i++) cols[i].open = !mq.matches; }
-  sync();
-  mq.addEventListener ? mq.addEventListener('change', sync) : mq.addListener(sync);
-})();
-</script>
+<script src="js/script.js"></script>
 
 <script>
   /* Keyboard support for non-native interactive elements (WCAG 2.1.1) */

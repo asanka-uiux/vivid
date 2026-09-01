@@ -5728,45 +5728,89 @@ html, body{ overflow-x:clip; }
 <!-- FOOTER -->
 </main>
 
-<footer class="foot">
-  <div class="shell">
-    <div class="foot__top">
-      <div class="foot__brand">
-        <img class="foot__logo" src="assets/img/logos/vivid-master-creme.svg" alt="Vivid Racing" width="183" height="38">
-        <p class="foot__tagline">25 years of authorized performance parts for Porsche, BMW M, Audi RS, AMG, GT-R, Supra, Corvette, and the cars you actually drive.</p>
-        <div class="foot__contact">
-          <div>
-            <p class="foot__label">Customer service</p>
-            <p class="foot__small">Mon&ndash;Fri: 8am&ndash;6pm MST<br>Sat: 9am&ndash;4pm MST</p>
-          </div>
-          <div>
-            <p class="foot__label">Contact sales</p>
-            <p class="foot__small">Mon&ndash;Fri: 8am&ndash;6pm MST<br>Sat: 9am&ndash;4pm MST</p>
-          </div>
-          <div>
-            <p class="foot__label">Headquarters</p>
-            <p class="foot__small">7510 E. Main St<br>Mesa, AZ 85207</p>
-          </div>
-          <p class="foot__phone"><a href="tel:+14809663040">480-966-3040</a></p>
-        </div>
-        <p class="foot__label">Deals &amp; build inspiration</p>
-        <form class="foot__form" action="#" method="post">
-          <label class="vh" for="foot-email">Email address</label>
-          <input class="foot__input" id="foot-email" name="email" type="email"
-                 autocomplete="email" required placeholder="your@email.com">
-          <button class="foot__go" type="submit" aria-label="Subscribe to deals and inspiration">Go</button>
-        </form>
-        <ul class="foot__social">
-          <li><a href="https://www.youtube.com/@VividRacing" rel="noopener" aria-label="YouTube"><img src="assets/icons/youtube-f.svg" alt="" aria-hidden="true" width="18" height="18"></a></li>
-          <li><a href="https://www.instagram.com/vividracing" rel="noopener" aria-label="Instagram"><img src="assets/icons/instagram.svg" alt="" aria-hidden="true" width="18" height="18"></a></li>
-          <li><a href="https://www.facebook.com/vividracing" rel="noopener" aria-label="Facebook"><img src="assets/icons/facebook.svg" alt="" aria-hidden="true" width="18" height="18"></a></li>
-          <li><a href="https://www.tiktok.com/@vividracing" rel="noopener" aria-label="TikTok"><img src="assets/icons/tiktok.svg" alt="" aria-hidden="true" width="18" height="18"></a></li>
-        </ul>
+<!-- ===== V2 FOOTER — see footer.md for the full reference (structure, CSS,
+     propagation rules). Content is byte-identical to index.html's footer
+     except this page isn't one of the 5 family pages, so none of the
+     .v2-footer__family-logos carry aria-current. ===== -->
+<footer id="v2-footer">
+
+  <div class="v2-footer__stats">
+    <div class="v2-footer__stats-inner">
+      <div class="v2-footer__stat">
+        <span class="v2-footer__stat-num">14,000+</span>
+        <span class="v2-footer__stat-label">Verified Buyers</span>
       </div>
-      <div class="foot__cols">
-        <details class="foot__col" open>
-          <summary class="foot__sum">Shop<span class="foot__chev" aria-hidden="true"></span></summary>
-          <ul class="foot__list">
+      <div class="v2-footer__stat v2-footer__stat--financing">
+        <div class="v2-footer__finance">
+          <div class="v2-footer__finance-text">
+            <span class="v2-footer__finance-sub">As low as</span>
+            <span class="v2-footer__finance-price"><strong>0%</strong> APR</span>
+          </div>
+          <span class="v2-footer__finance-badge">Affirm</span>
+        </div>
+        <div class="v2-footer__finance">
+          <div class="v2-footer__finance-text">
+            <span class="v2-footer__finance-sub">As low as</span>
+            <span class="v2-footer__finance-price"><strong>$1</strong> Down</span>
+          </div>
+          <span class="v2-footer__finance-badge">Katapult</span>
+        </div>
+      </div>
+      <div class="v2-footer__stat">
+        <span class="v2-footer__stat-num"></span>
+        <div class="v2-footer__stat-right">
+          <div class="v2-footer__stars" aria-label="4.9 out of 5 stars">
+            <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+          </div>
+          <span class="v2-footer__stat-label">4.9 &middot; 14,000 Reviews</span>
+        </div>
+      </div>
+      <div class="v2-footer__stat">
+        <span class="v2-footer__stat-num">Free Shipping</span>
+        <span class="v2-footer__stat-label">On Orders $499+</span>
+      </div>
+      <div class="v2-footer__stat">
+        <span class="v2-footer__stat-num">&lt;1.4%</span>
+        <span class="v2-footer__stat-label">Return Rate</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="v2-footer__body">
+    <div class="v2-footer__brand">
+      <a href="index.html" class="v2-footer__logo" aria-label="Vivid Racing">
+        <img src="assets/img/logos/vivid-master-creme.svg" alt="Vivid Racing" width="183" height="38">
+      </a>
+      <p class="v2-footer__desc">25 years of authorized performance parts for Porsche, BMW M, Audi RS, AMG, GT-R, Supra, Corvette, and the cars you actually drive.</p>
+      <div class="v2-footer__contact">
+        <div class="v2-footer__contact-top">
+          <div class="v2-footer__contact-col">
+            <span class="v2-footer__contact-label">Customer Service</span>
+            <span class="v2-footer__contact-hours">Mon&ndash;Fri: 8am&ndash;6pm MST<br>Sat: 9am&ndash;4pm MST</span>
+            <a class="v2-footer__contact-phone" href="tel:+14809663040">480-966-3040</a>
+          </div>
+          <div class="v2-footer__contact-col">
+            <span class="v2-footer__contact-label">Headquarters</span>
+            <address class="v2-footer__contact-address">7510 E. Main St<br>Mesa, AZ 85207</address>
+          </div>
+        </div>
+      </div>
+      <ul class="v2-footer__socials">
+        <li><a href="https://www.youtube.com/@VividRacing" class="v2-footer__social" rel="noopener" aria-label="YouTube"><img src="assets/icons/youtube-f.svg" alt="" aria-hidden="true"></a></li>
+        <li><a href="https://www.instagram.com/vividracing" class="v2-footer__social" rel="noopener" aria-label="Instagram"><img src="assets/icons/instagram.svg" alt="" aria-hidden="true"></a></li>
+        <li><a href="https://www.facebook.com/vividracing" class="v2-footer__social" rel="noopener" aria-label="Facebook"><img src="assets/icons/facebook.svg" alt="" aria-hidden="true"></a></li>
+        <li><a href="https://www.tiktok.com/@vividracing" class="v2-footer__social" rel="noopener" aria-label="TikTok"><img src="assets/icons/tiktok.svg" alt="" aria-hidden="true"></a></li>
+      </ul>
+    </div>
+
+    <div class="v2-footer__right">
+      <div class="v2-footer__link-grid">
+        <div class="v2-footer__link-col">
+          <button class="v2-footer__col-toggle" type="button" aria-expanded="false">
+            <span>Shop</span>
+            <svg class="v2-footer__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <ul class="v2-footer__col-links">
             <li><a href="waiting-to-build/vehicle-picker.html">Shop by Vehicle</a></li>
             <li><a href="waiting-to-build/suspension.html">Suspension</a></li>
             <li><a href="waiting-to-build/wheels-cat.html">Wheels &amp; Tires</a></li>
@@ -5776,10 +5820,13 @@ html, body{ overflow-x:clip; }
             <li><a href="waiting-to-build/engine-turbo.html">Engine &amp; Turbo</a></li>
             <li><a href="waiting-to-build/deal-machine.html">In Stock + Free Ship</a></li>
           </ul>
-        </details>
-        <details class="foot__col" open>
-          <summary class="foot__sum">Platforms<span class="foot__chev" aria-hidden="true"></span></summary>
-          <ul class="foot__list">
+        </div>
+        <div class="v2-footer__link-col">
+          <button class="v2-footer__col-toggle" type="button" aria-expanded="false">
+            <span>Platforms</span>
+            <svg class="v2-footer__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <ul class="v2-footer__col-links">
             <li><a href="waiting-to-build/vivid-classics.html">Porsche</a></li>
             <li><a href="waiting-to-build/vivid-classics.html">BMW M</a></li>
             <li><a href="waiting-to-build/vivid-classics.html">Audi RS</a></li>
@@ -5789,10 +5836,13 @@ html, body{ overflow-x:clip; }
             <li><a href="waiting-to-build/vivid-classics.html">Corvette</a></li>
             <li><a href="waiting-to-build/vehicle-picker.html">All Platforms</a></li>
           </ul>
-        </details>
-        <details class="foot__col" open>
-          <summary class="foot__sum">Tools<span class="foot__chev" aria-hidden="true"></span></summary>
-          <ul class="foot__list">
+        </div>
+        <div class="v2-footer__link-col">
+          <button class="v2-footer__col-toggle" type="button" aria-expanded="false">
+            <span>Tools</span>
+            <svg class="v2-footer__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <ul class="v2-footer__col-links">
             <li><a href="waiting-to-build/vehicle-picker.html">Vehicle Picker</a></li>
             <li><a href="waiting-to-build/build-builder.html">Build Builder</a></li>
             <li><a href="waiting-to-build/coilover-specs.html">Coilover Specs</a></li>
@@ -5800,10 +5850,13 @@ html, body{ overflow-x:clip; }
             <li><a href="waiting-to-build/tire-calculator.html">Tire Calculator</a></li>
             <li><a href="waiting-to-build/buyers-guides.html">Buyer&rsquo;s Guides</a></li>
           </ul>
-        </details>
-        <details class="foot__col" open>
-          <summary class="foot__sum">Company<span class="foot__chev" aria-hidden="true"></span></summary>
-          <ul class="foot__list">
+        </div>
+        <div class="v2-footer__link-col">
+          <button class="v2-footer__col-toggle" type="button" aria-expanded="false">
+            <span>Company</span>
+            <svg class="v2-footer__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <ul class="v2-footer__col-links">
             <li><a href="waiting-to-build/about.html">About Us</a></li>
             <li><a href="waiting-to-build/ambassador.html">The Pit Crew</a></li>
             <li><a href="waiting-to-build/vivid-wholesale.html">Wholesale</a></li>
@@ -5812,10 +5865,13 @@ html, body{ overflow-x:clip; }
             <li><a href="waiting-to-build/blog.html">Videos + News</a></li>
             <li><a href="waiting-to-build/reviews.html">Reviews</a></li>
           </ul>
-        </details>
-        <details class="foot__col" open>
-          <summary class="foot__sum">Your account<span class="foot__chev" aria-hidden="true"></span></summary>
-          <ul class="foot__list">
+        </div>
+        <div class="v2-footer__link-col">
+          <button class="v2-footer__col-toggle" type="button" aria-expanded="false">
+            <span>Your Account</span>
+            <svg class="v2-footer__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <ul class="v2-footer__col-links">
             <li><a href="waiting-to-build/signin.html">Sign In</a></li>
             <li><a href="waiting-to-build/cart.html">View Cart</a></li>
             <li><a href="waiting-to-build/track.html">Track Order</a></li>
@@ -5824,10 +5880,13 @@ html, body{ overflow-x:clip; }
             <li><a href="waiting-to-build/rewards.html">Vivid Rewards</a></li>
             <li><a href="waiting-to-build/financing.html">Financing</a></li>
           </ul>
-        </details>
-        <details class="foot__col" open>
-          <summary class="foot__sum">Support<span class="foot__chev" aria-hidden="true"></span></summary>
-          <ul class="foot__list">
+        </div>
+        <div class="v2-footer__link-col">
+          <button class="v2-footer__col-toggle" type="button" aria-expanded="false">
+            <span>Support</span>
+            <svg class="v2-footer__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <ul class="v2-footer__col-links">
             <li><a href="waiting-to-build/contact.html">Contact Us</a></li>
             <li><a href="waiting-to-build/help.html">FAQs / Policies</a></li>
             <li><a href="waiting-to-build/shipping.html">Shipping</a></li>
@@ -5835,28 +5894,30 @@ html, body{ overflow-x:clip; }
             <li><a href="waiting-to-build/fitment-promise.html">Fitment Promise</a></li>
             <li><a href="waiting-to-build/sitemap.html">Site Map</a></li>
           </ul>
-        </details>
+        </div>
+      </div>
 
-        <div class="foot__family">
-      <p class="foot__family-label">Part of the Vivid Racing family of brands</p>
-      <!-- Same 5 brands + hrefs as the .brandbar switcher up top (node 251:3115) —
-           these are ViViD's own sub-brands, not third-party partners, so the
-           logos keep their real style rather than the greyscale/knockout
-           treatment a partner-logo strip would use. -->
-      <ul class="foot__family-logos">
-        <li><a href="index.html"><img src="assets/img/logos/vivid-master-creme.svg" alt="Vivid Racing" width="106" height="22"></a></li>
-        <li><a href="vivid-trucks.html"><img src="assets/img/logos/vr-trucks-creme.png" alt="VR Trucks" width="97" height="22" loading="lazy" decoding="async"></a></li>
-        <li><a href="vivid-crossover.html"><img src="assets/img/logos/vr-crossover-creme.png" alt="VR Crossover" width="116" height="22" loading="lazy" decoding="async"></a></li>
-        <li><a href="vivid-classics.html"><img src="assets/img/logos/vr-muscle-creme.png" alt="VR Muscle" width="96" height="22" loading="lazy" decoding="async"></a></li>
-        <li><a href="vividx.html"><img src="assets/img/logos/vr-powersports-creme.png" alt="VR Powersports" width="122" height="22" loading="lazy" decoding="async"></a></li>
-      </ul>
-    </div>
-
+      <div class="v2-footer__family">
+        <p class="v2-footer__family-label">Part of the Vivid Racing family of brands</p>
+        <!-- Same 5 brands + hrefs as the .brandbar switcher up top (node 251:3115) —
+             these are ViViD's own sub-brands, not third-party partners, so the
+             logos keep their real style rather than the greyscale/knockout
+             treatment the reference site uses for its (genuinely third-party)
+             partner-brand row. -->
+        <div class="v2-footer__family-logos">
+          <a href="index.html" class="v2-footer__family-logo"><img src="assets/img/logos/vivid-master-creme.svg" alt="Vivid Racing" width="106" height="22"></a>
+          <a href="vivid-trucks.html" class="v2-footer__family-logo"><img src="assets/img/logos/vr-trucks-creme.png" alt="VR Trucks" width="97" height="22" loading="lazy" decoding="async"></a>
+          <a href="vivid-crossover.html" class="v2-footer__family-logo"><img src="assets/img/logos/vr-crossover-creme.png" alt="VR Crossover" width="116" height="22" loading="lazy" decoding="async"></a>
+          <a href="vivid-classics.html" class="v2-footer__family-logo"><img src="assets/img/logos/vr-muscle-creme.png" alt="VR Muscle" width="96" height="22" loading="lazy" decoding="async"></a>
+          <a href="vividx.html" class="v2-footer__family-logo"><img src="assets/img/logos/vr-powersports-creme.png" alt="VR Powersports" width="122" height="22" loading="lazy" decoding="async"></a>
+        </div>
       </div>
     </div>
-    
-    <div class="foot__legal">
-      <span>&copy; Copyright 2026 Vivid Distribution LLC</span>
+  </div>
+
+  <div class="v2-footer__bottom">
+    <p>
+      <span class="v2-footer__bottom-copy">&copy; Copyright 2026 Vivid Distribution LLC</span>
       <span aria-hidden="true">|</span>
       <a href="waiting-to-build/terms.html">Terms &amp; Conditions</a>
       <span aria-hidden="true">|</span>
@@ -5865,8 +5926,9 @@ html, body{ overflow-x:clip; }
       <a href="waiting-to-build/accessibility.html">Accessibility</a>
       <span aria-hidden="true">|</span>
       <a href="waiting-to-build/privacy.html">Do Not Sell My Info</a>
-    </div>
+    </p>
   </div>
+
 </footer>
 
 <script src="js/script.js"></script>

@@ -610,6 +610,125 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .foot__legal span{opacity:.4}
 
 
+/* ==========================================================================
+   V2 FOOTER — redesign ported from the vividwheels.com footer style
+   (test.vividwheels.com, id="v2-footer"). Purely additive: the old .foot*
+   rules above are untouched and still serve every other page. Currently
+   only index.html's <footer> uses this — id/class names carry no risk of
+   colliding with .foot* since neither namespace shares a class. Accent
+   colour substituted with this project's own --action-primary red in place
+   of the reference's unrelated teal (#296583) to stay consistent with the
+   rest of this site's brand colour. See index.html's footer for the markup
+   this pairs with; propagate to the other 7 pages by copying that markup
+   wherever this stylesheet is already linked. */
+
+#v2-footer{background:#333;font-family:var(--font-ui)}
+#v2-footer a:focus-visible,#v2-footer button:focus-visible{outline:2px solid var(--action-primary);outline-offset:2px;border-radius:2px}
+
+.v2-footer__stats{background:#f7f7f7;border-top:1px solid #e0e0e0;border-bottom:1px solid #e0e0e0;padding:17px var(--gutter);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.v2-footer__stats::-webkit-scrollbar{display:none}
+.v2-footer__stats-inner{display:flex;align-items:center;gap:12px;min-width:max-content;max-width:var(--shell);margin:0 auto}
+.v2-footer__stat{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.v2-footer__stat:not(:last-child){border-right:1px solid #e0e0e0;padding-right:12px}
+.v2-footer__stat-num{font-family:var(--font-ui);font-size:24px;font-weight:600;color:var(--action-primary);letter-spacing:-.208px;line-height:.87;white-space:nowrap}
+.v2-footer__stat-right{display:flex;flex-direction:column;gap:2px}
+.v2-footer__stat-label{color:#6b6b6b;font-family:var(--font-ui);font-size:14px;font-weight:400;line-height:normal;letter-spacing:.14px;text-transform:uppercase}
+.v2-footer__stars{display:flex;gap:3px;line-height:1}
+.v2-footer__stars span{color:var(--action-primary);font-size:14px;line-height:1;font-weight:600}
+.v2-footer__stat--financing{gap:16px}
+.v2-footer__finance{display:flex;align-items:center;gap:3px}
+.v2-footer__finance-text{display:flex;flex-direction:column}
+.v2-footer__finance-sub{font-family:var(--font-ui);font-size:13px;font-weight:400;line-height:18px;color:#6b6b6b;text-transform:uppercase}
+.v2-footer__finance-price{font-family:var(--font-ui);font-size:13px;font-weight:400;line-height:1.2;color:#6b6b6b;text-transform:uppercase;white-space:nowrap}
+.v2-footer__finance-price strong{font-size:24px;font-weight:600;color:var(--action-primary);margin-right:2px}
+.v2-footer__finance-badge{display:inline-flex;align-items:center;padding:4px 9px;background:rgba(255,255,255,.85);border:.5px solid rgba(0,0,0,.1);border-radius:4px;font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.02em;color:#333}
+
+.v2-footer__body{display:flex;flex-direction:column;padding:24px var(--gutter);gap:16px;max-width:var(--shell);margin:0 auto;width:100%;box-sizing:border-box}
+.v2-footer__brand{display:flex;flex-direction:column;gap:10px}
+.v2-footer__logo{display:block;width:180px;line-height:0;align-self:center}
+.v2-footer__logo img{display:block;width:100%;height:auto}
+.v2-footer__desc{color:rgba(255,255,255,.5);margin:0;text-align:center;font-family:var(--font-ui);font-size:12px;font-weight:400;line-height:1.5}
+.v2-footer__contact{display:flex;flex-direction:column;gap:15px;padding-bottom:6px;border-bottom:1px solid #6b6b6b}
+.v2-footer__contact-top{display:flex;flex-direction:column;gap:8px}
+.v2-footer__contact-col{display:flex;flex-direction:column;gap:3.5px;flex:1}
+.v2-footer__contact-col>.v2-footer__contact-phone{margin-top:6px}
+.v2-footer__contact-link{font-family:var(--font-ui);font-size:13px;font-weight:600;color:rgba(255,255,255,.8);text-decoration:underline;text-underline-offset:2px;width:fit-content;transition:color .2s ease}
+.v2-footer__contact-link:hover{color:rgba(255,255,255,.75)}
+.v2-footer__contact-label{color:rgba(255,255,255,.5);font-family:var(--font-ui);font-size:12px;font-weight:600;letter-spacing:1.248px;text-transform:uppercase;margin-bottom:2px}
+.v2-footer__contact-phone{transition:color .2s ease;width:fit-content;white-space:nowrap;color:rgba(255,255,255,.8);font-family:var(--font-ui);font-size:16px;font-weight:600}
+.v2-footer__contact-phone:hover{color:rgba(255,255,255,.75)}
+.v2-footer__contact-hours,.v2-footer__contact-address{color:rgba(255,255,255,.5);font-family:var(--font-ui);font-size:12px;font-weight:400;line-height:16px}
+.v2-footer__contact-address{font-style:normal}
+
+.v2-footer__socials{display:flex;gap:8px;justify-content:center;list-style:none;padding:0;margin:0}
+.v2-footer__social{display:flex;width:30px;height:30px;justify-content:center;align-items:center;border:1px solid rgba(255,255,255,.5);transition:border-color .2s ease}
+.v2-footer__social:hover{border-color:rgba(255,255,255,.9)}
+.v2-footer__social img{width:15px;height:15px;display:block;opacity:.7;transition:opacity .2s ease}
+.v2-footer__social:hover img{opacity:1}
+
+.v2-footer__right{display:flex;flex-direction:column}
+.v2-footer__link-grid{display:grid;gap:0}
+.v2-footer__link-col{border-bottom:1px solid rgba(255,255,255,.08)}
+.v2-footer__col-toggle{display:flex;justify-content:space-between;align-items:center;width:100%;background:0 0;border:none;padding:14px 0;cursor:pointer;text-align:left;color:#fff;font-family:var(--font-ui);font-size:14px;font-weight:600;line-height:20px;letter-spacing:1.382px;text-transform:uppercase}
+.v2-footer__link-col:first-child .v2-footer__col-toggle{font-size:16px;letter-spacing:.16px}
+.v2-footer__col-toggle>span{border-bottom:2px solid var(--action-primary);padding-bottom:3px}
+.v2-footer__chevron{flex-shrink:0;stroke:rgba(255,255,255,.5);transition:transform .25s ease}
+.v2-footer__link-col--open .v2-footer__chevron{transform:rotate(180deg)}
+.v2-footer__col-links{list-style:none;margin:0;padding:0;max-height:0;overflow:hidden;transition:max-height .3s ease}
+.v2-footer__link-col--open .v2-footer__col-links{max-height:320px}
+.v2-footer__col-links li{padding:1px 0}
+.v2-footer__col-links a{display:block;padding:5px 0 13px;font-family:var(--font-ui);font-size:13px;color:rgba(255,255,255,.5);line-height:1.5;transition:color .2s ease}
+.v2-footer__col-links a:hover{color:rgba(255,255,255,.9)}
+
+.v2-footer__family{display:flex;flex-direction:column;gap:8px;padding:20px 0 4px;border-top:1px solid rgba(255,255,255,.08);margin-top:8px}
+.v2-footer__family-label{color:#fff;font-family:var(--font-ui);font-size:14px;font-weight:400;letter-spacing:1.32px;text-transform:uppercase;margin:0}
+.v2-footer__family-logos{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:20px}
+.v2-footer__family-logo{display:flex;align-items:center;line-height:0}
+.v2-footer__family-logo img{height:20px;width:auto}
+
+.v2-footer__bottom{padding:20px var(--gutter);border-top:1px solid rgba(255,255,255,.08)}
+.v2-footer__bottom p{font-size:14px;font-weight:400;color:rgba(255,255,255,.6);line-height:1.2;margin:0 auto;text-align:center;max-width:var(--shell)}
+.v2-footer__bottom a{color:rgba(255,255,255,.55);transition:color .2s ease;white-space:nowrap}
+.v2-footer__bottom a:hover{color:rgba(255,255,255,.9)}
+.v2-footer__bottom span{margin:0 4px}
+
+@media screen and (min-width:768px){
+  .v2-footer__stars span{font-size:16px}
+  .v2-footer__body{flex-direction:row;align-items:stretch}
+  .v2-footer__brand{width:300px;min-width:260px;flex-shrink:0;padding-right:24px;border-right:1px solid rgba(255,255,255,.08)}
+  .v2-footer__logo{align-self:auto}
+  .v2-footer__desc{text-align:left}
+  .v2-footer__socials{justify-content:flex-start}
+  .v2-footer__right{flex:1;min-width:0;padding-left:8px}
+  .v2-footer__link-grid{display:flex;flex-direction:row;flex-wrap:wrap;gap:6px;align-items:flex-start}
+  .v2-footer__link-col{border-bottom:none;flex:0 0 calc((100% - 12px)/3);min-width:0}
+  .v2-footer__col-toggle{padding:5px 0;margin-bottom:5px;pointer-events:none;cursor:default;border-bottom:2px solid var(--action-primary);max-width:fit-content}
+  .v2-footer__col-toggle>span{border-bottom:none;padding-bottom:0}
+  .v2-footer__chevron{display:none}
+  .v2-footer__col-links{max-height:none!important;overflow:visible}
+  .v2-footer__col-links a{padding:1px 0 6px;line-height:1.5;max-width:fit-content}
+  .v2-footer__family{padding:12px 0;margin-top:16px}
+  .v2-footer__family-logos{display:grid;grid-template-columns:repeat(3,1fr);align-items:center;justify-items:center;gap:24px}
+  .v2-footer__contact-top{flex-direction:row;gap:20px}
+}
+@media screen and (min-width:1024px){
+  .v2-footer__stats{overflow-x:visible}
+  .v2-footer__stats-inner{min-width:0;justify-content:space-between;gap:clamp(6px,1.27vw,12px)}
+  .v2-footer__stat:not(:last-child){border-right:none;padding-right:0}
+  .v2-footer__stat-num{font-size:clamp(15px, 1.65vw, 24px)}
+  .v2-footer__stat-label{font-size:clamp(10px, .95vw, 14px)}
+  .v2-footer__stat--financing{gap:clamp(8px,1vw,16px)}
+  .v2-footer__finance-price,.v2-footer__finance-sub{font-size:clamp(9px, .88vw, 13px)}
+  .v2-footer__finance-price strong{font-size:clamp(15px, 1.65vw, 24px)}
+  .v2-footer__brand{width:320px}
+  .v2-footer__link-col{flex:0 0 calc((100% - 30px)/6)}
+  .v2-footer__family{gap:16px}
+  .v2-footer__family-logos{grid-template-columns:repeat(5,1fr);row-gap:clamp(20px,2.5vw,48px)}
+  .v2-footer__family-logo{justify-content:center;max-width:100%}
+  .v2-footer__family-logo img{height:clamp(20px,2vw,24px);max-width:100%;object-fit:contain}
+}
+
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
     transition-duration:.01ms!important;scroll-behavior:auto!important}

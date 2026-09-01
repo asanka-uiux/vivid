@@ -8,6 +8,21 @@
   mq.addEventListener ? mq.addEventListener('change', sync) : mq.addListener(sync);
 })();
 
+/* V2 footer link-group accordions (mobile only — the ≥768px breakpoint in
+   shared.css switches .v2-footer__col-toggle to pointer-events:none and
+   shows every column open, so this toggle has no effect there). Independent
+   per column, not exclusive — matches the reference site's behavior. */
+(function () {
+  var toggles = document.querySelectorAll('.v2-footer__col-toggle');
+  for (var i = 0; i < toggles.length; i++) {
+    toggles[i].addEventListener('click', function () {
+      var col = this.closest('.v2-footer__link-col');
+      var open = col.classList.toggle('v2-footer__link-col--open');
+      this.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+})();
+
 /* Vehicle-family tabs — the left rail selects which marque list is shown. */
 (function () {
   var tabs = [].slice.call(document.querySelectorAll('[role="tab"]'));
@@ -77,6 +92,29 @@
       toggles.forEach(function (other) { if (other !== btn) set(other, false); });
       set(btn, willOpen);
     });
+  });
+})();
+
+/* Scroll-progress dashes (.dashes, mobile-only carousels: builds, vids,
+   guides, news/blog, revs) — two spans standing in for a scrollbar. Moves
+   .is-active to the second span once the track is scrolled past halfway,
+   back to the first once scrolled near the start. */
+(function () {
+  var groups = [].slice.call(document.querySelectorAll('.dashes'));
+  groups.forEach(function (dashes) {
+    var track = dashes.parentElement.querySelector(
+      '.builds__grid, .vids__grid, .guides__grid, .revs__grid');
+    var first = dashes.children[0], second = dashes.children[1];
+    if (!track || !first || !second) return;
+    function update() {
+      var max = track.scrollWidth - track.clientWidth;
+      var pastHalf = max > 4 && track.scrollLeft > max / 2;
+      first.classList.toggle('is-active', !pastHalf);
+      second.classList.toggle('is-active', pastHalf);
+    }
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
   });
 })();
 
