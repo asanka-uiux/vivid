@@ -29,13 +29,6 @@
 .hero{position:relative;background:var(--bg-surface);
   border-bottom:1px solid var(--border-default)}
 
-/* NB: block, not flex — in a flex container the <b> becomes its own flex item
-   and the whitespace around it is dropped ("use code:VIVID15at checkout"). */
-.deal{margin:0;min-height:36px;padding:8px 16px;background:var(--bg-premium);
-  text-align:center;font:500 10px/14px var(--font-ui);letter-spacing:1.5px;color:#fff}
-@media (min-width:901px){ .deal{padding:9px 20px;letter-spacing:1.5px} }
-.deal b{font-weight:500}
-
 /* min-height is a floor for very short windows; height:75vh only applies from
    tablet up — mobile lets the stage grow to its natural (auto) content height
    instead, since a 75vh box on a short mobile viewport would clip the YMM card.
@@ -89,7 +82,7 @@
 
 .hero__title{margin:0;font-family:var(--font-display);font-weight:900;
   font-size:34px;line-height:38px;letter-spacing:-.8px;text-transform:uppercase;
-  color:#000;font-variation-settings:"YTLC" 500,"wdth" 100;order:1}
+  color:var(--text-on-dark);font-variation-settings:"YTLC" 500,"wdth" 100;order:1}
 @media (min-width:361px){ .hero__title{font-size:52px;line-height:48px;font-weight:600} }
 @media (min-width:901px){
   .hero__title{margin:14px 0 0;font-size:64px;line-height:64px;letter-spacing:-1.3px;order:0;
@@ -97,7 +90,7 @@
 }
 
 .hero__lede{margin:22px auto 0;max-width:34em;
-  font:14px/22px var(--font-ui);color:#000;order:3;margin-inline:auto}
+  font:14px/22px var(--font-ui);color:var(--text-on-dark);order:3;margin-inline:auto}
 @media (min-width:901px){
   .hero__lede{margin:14px 0 0;max-width:550px;order:0;margin-inline:0}
 }
@@ -110,7 +103,7 @@
     flex-direction:row;background:none;padding:0}
 }
 .finance__text{font:500 12px/14px var(--font-ui);letter-spacing:.66px;
-  text-transform:uppercase;color:#000}
+  text-transform:uppercase;color:var(--text-on-dark)}
 .finance__text b{color:#fff;font-weight:500}
 .finance__text em{font-style:normal;color:var(--accent-red-on-dark)}
 .finance__logos{display:flex;align-items:center;gap:12px}
@@ -900,9 +893,9 @@
 @media (min-width:1181px){ .experts{padding:36px 48px 36px 90px} }
 .experts__eyebrow{margin:0 0 12px;font:500 16px/15px var(--font-ui);letter-spacing:.88px;
   text-transform:uppercase;color:var(--action-primary)}
-.experts__row{display:flex;align-items:center;justify-content:space-between;gap:40px;
+.experts__row{display:flex;align-items:center;justify-content:center;gap:40px;
   flex-wrap:wrap}
-@media (min-width:1181px){ .experts__row{gap:32px;flex-wrap:nowrap} }
+@media (min-width:1181px){ .experts__row{gap:60px;flex-wrap:nowrap} }
 .experts__copy{flex:1 1 100%}
 @media (min-width:1181px){ .experts__copy{flex:0 1 560px} }
 .experts__title{margin:0;font-family:var(--font-display);font-weight:800;font-size:36px;
