@@ -11,8 +11,18 @@ real browser, not guessed) and adapted to this project's own tokens/brand —
 see §10 for exactly what was changed from the reference and why.
 
 Last verified against: `css/shared.css` (`#v2-footer` block, incl. the
-`.v2-footer__body` desktop padding fix) + `index.html` lines 4083–4284 +
-`js/script.js` lines 11–24, 2026-09-01.
+`.v2-footer__body` desktop padding fix) + `index.html` lines 4068–4260 +
+`js/script.js` lines 11–24, 2026-09-02.
+
+**2026-09-02 update:** per the Sept 2 2026 client meeting notes, the
+"Verified buyers" and "Return rate" stat tiles were removed from
+`.v2-footer__stats-inner` on all 5 homepage variations (`index.html`,
+`vivid-trucks.html`, `vivid-crossover.html`, `vivid-classics.html`,
+`vividx.html`). The strip is now **3 stat items**, not 5 — see §5.1 and the
+canonical-values table in §8. No CSS changed (the same flex/space-between
+rules just render fewer children); only markup was removed, plus the
+now-dead `.stats` hero component elsewhere on the page (unrelated to this
+footer, noted here only because it was the same pass).
 
 ---
 
@@ -20,7 +30,7 @@ Last verified against: `css/shared.css` (`#v2-footer` block, incl. the
 
 | File | Role |
 |---|---|
-| `index.html` | Canonical footer markup, lines 4083–4284 (opening comment through `</footer>`). |
+| `index.html` | Canonical footer markup, lines 4068–4260 (opening comment through `</footer>`). |
 | `css/shared.css` | **All** v2-footer CSS (`#v2-footer` through the end of its two media queries). Loaded by every page in the project — the CSS is already live everywhere. |
 | `js/script.js` | Lines 11–24 — the mobile accordion toggle for the link columns (§9). Already linked by all 8 pages. |
 | `css/style.css` | Not involved. No footer rules live here. |
@@ -71,7 +81,7 @@ tier).
 ```html
 <footer id="v2-footer">
 
-  <div class="v2-footer__stats"> … 5 stat items … </div>
+  <div class="v2-footer__stats"> … 3 stat items … </div>
 
   <div class="v2-footer__body">
     <div class="v2-footer__brand"> … logo, desc, contact, socials … </div>
@@ -137,12 +147,16 @@ already applied per-section.
 }
 ```
 
-5 stat items, always in this order: **verified-buyer count → financing combo
-(Affirm + Katapult, two `.v2-footer__finance` blocks inside one
-`.v2-footer__stat--financing`) → star rating → free shipping → return
-rate.** Mobile: horizontal-scroll strip (`overflow-x:auto`, scrollbar
-hidden), each stat keeps its natural width and a vertical divider except the
-last. Desktop (1024px+): scroll disabled, stats spread edge-to-edge with
+**3 stat items** (down from 5 — see the 2026-09-02 note above), always in
+this order: **financing combo (Affirm + Katapult, two `.v2-footer__finance`
+blocks inside one `.v2-footer__stat--financing`) → star rating → free
+shipping.** The verified-buyer count and return-rate tiles that used to
+bookend this row were removed per client request; nothing replaced them, so
+the row is simply shorter now and the remaining 3 items get more of the
+`justify-content:space-between` room on desktop than they used to. Mobile:
+horizontal-scroll strip (`overflow-x:auto`, scrollbar hidden), each stat
+keeps its natural width and a vertical divider except the last. Desktop
+(1024px+): scroll disabled, stats spread edge-to-edge with
 `justify-content:space-between`, dividers removed, and every size becomes a
 `clamp()` so it scales smoothly with viewport width instead of jumping at a
 single breakpoint.
@@ -387,12 +401,13 @@ page is created off `_page-template.html` and needs the footer added:
 | Phone | `tel:+14809663040` → `480-966-3040` |
 | Headquarters | `7510 E. Main St, Mesa, AZ 85207` |
 | Hours | `Mon–Fri: 8am–6pm MST` / `Sat: 9am–4pm MST` |
-| Verified buyers stat | `14,000+` |
 | Reviews stat | `4.9 · 14,000 Reviews` (5 stars) |
 | Shipping stat | `Free Shipping` / `On Orders $499+` |
-| Return-rate stat | `<1.4%` / `Return Rate` |
 | Financing | `0%` APR (Affirm) · `$1` Down (Katapult) |
 | Copyright | `© Copyright 2026 Vivid Distribution LLC` |
+
+*Removed 2026-09-02, no longer part of the footer:* ~~Verified buyers stat
+(`14,000+`)~~, ~~Return-rate stat (`<1.4%` / `Return Rate`)~~.
 
 **Optional cleanup, not required for the footer to work:** `wheel-pdp.html`
 has its own locally-pasted `.foot`-prefixed CSS block (see the comment
@@ -475,13 +490,15 @@ back to match the source and break something:
   content.
 - **Trust-strip numbers are grounded in content already on the page**, not
   copied from the reference's own (vividwheels.com-specific) numbers.
-  `14,000+ Verified Buyers` and `4.9 · 14,000 Reviews` come from
-  `.rbar__facts`/`.promo__sub` elsewhere in `index.html`; `Free Shipping /
-  On Orders $499+` matches the `.strip__title`/`.strip__sub` claim used
-  elsewhere; `<1.4%` return rate is the other half of the same
-  `.rbar__facts` line the buyer count came from. None of these were
+  `4.9 · 14,000 Reviews` comes from `.rbar__facts`/`.promo__sub` elsewhere in
+  `index.html`; `Free Shipping / On Orders $499+` matches the
+  `.strip__title`/`.strip__sub` claim used elsewhere. None of these were
   invented — if any of those source numbers change elsewhere on the page,
-  update the footer stat to match.
+  update the footer stat to match. (`14,000+ Verified Buyers` and `<1.4%`
+  return rate used to live here too, grounded the same way in the other half
+  of that `.rbar__facts` line — both were removed 2026-09-02 per client
+  request, see the note at the top of this file. `.rbar__facts` itself was
+  left alone; only the footer's copy of those numbers was cut.)
 - **No footer-embedded newsletter signup.** Reference's CSS has
   `.v2-footer__signup` rules (Klaviyo-widget styling) but the actual
   captured markup didn't render one — and this page already has a dedicated
