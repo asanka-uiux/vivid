@@ -10,8 +10,9 @@ Style ported from the live footer at `test.vividwheels.com` (fetched via a
 real browser, not guessed) and adapted to this project's own tokens/brand —
 see §10 for exactly what was changed from the reference and why.
 
-Last verified against: `css/shared.css` lines 634–756 + `index.html` lines
-4083–4284 + `js/script.js` lines 11–24, 2026-09-01.
+Last verified against: `css/shared.css` (`#v2-footer` block, incl. the
+`.v2-footer__body` desktop padding fix) + `index.html` lines 4083–4284 +
+`js/script.js` lines 11–24, 2026-09-01.
 
 ---
 
@@ -19,8 +20,8 @@ Last verified against: `css/shared.css` lines 634–756 + `index.html` lines
 
 | File | Role |
 |---|---|
-| `index.html` | Canonical footer markup, lines 4083–4284 (opening comment through `</footer>`). **Currently the only page using this footer.** |
-| `css/shared.css` | **All** v2-footer CSS, lines 634–756 (`#v2-footer` through the end of its two media queries). Loaded by all 8 pages (`index.html`, the 4 family pages, both PDP pages, `about.html`) — the CSS is already live everywhere, only the markup needs to be copied over per page. Purely additive: the old `.foot`/`.foot__*` rules earlier in the same file are untouched and still render on the 7 pages that haven't been migrated yet. |
+| `index.html` | Canonical footer markup, lines 4083–4284 (opening comment through `</footer>`). |
+| `css/shared.css` | **All** v2-footer CSS (`#v2-footer` through the end of its two media queries). Loaded by every page in the project — the CSS is already live everywhere. |
 | `js/script.js` | Lines 11–24 — the mobile accordion toggle for the link columns (§9). Already linked by all 8 pages. |
 | `css/style.css` | Not involved. No footer rules live here. |
 
@@ -178,7 +179,7 @@ are **plain text pills, not the providers' real logos** — deliberate, see
 ```
 ```css
 @media screen and (min-width:768px){
-  .v2-footer__body{flex-direction:row;align-items:stretch}
+  .v2-footer__body{flex-direction:row;align-items:stretch;padding:24px 0}
   .v2-footer__brand{width:300px;min-width:260px;flex-shrink:0;padding-right:24px;border-right:1px solid rgba(255,255,255,.08)}
   .v2-footer__logo{align-self:auto}
   .v2-footer__desc{text-align:left}
@@ -192,7 +193,17 @@ are **plain text pills, not the providers' real logos** — deliberate, see
 Mobile: everything in the brand block is **center-aligned** (logo, desc,
 socials) in a single narrow column. Desktop: it becomes a **left-aligned
 fixed-width rail** (300px → 320px at 1024px) with a right border separating
-it from the link columns. The two contact columns (Customer Service /
+it from the link columns.
+
+**`.v2-footer__body` drops its side gutter at 768px+** (`padding:24px 0`,
+overriding the mobile base's `padding:24px var(--gutter)`) — deliberately
+edge-to-edge, out of alignment with `.v2-footer__stats` and `.v2-footer__bottom`
+above/below it, which keep the gutter at every width. Confirmed intentional
+2026-09-01 despite the visual seam this creates against the stats strip and
+legal bar. Don't "fix" this back to match the gutter on a future pass without
+checking first.
+
+The two contact columns (Customer Service /
 Headquarters) are **always side by side, at every breakpoint**, with a flat
 70px gap between them at every width too — no responsive variation. They
 used to stack on mobile;
@@ -342,12 +353,18 @@ no extra rule needed.
 
 ## 8. What changes per page (propagation guide)
 
-**Current state:** only `index.html` has this footer. The other 7 pages
-(`wheel-pdp.html`, `tire-pdp.html`, `about.html`, `vivid-trucks.html`,
-`vivid-crossover.html`, `vivid-classics.html`, `vividx.html`) still have the
-old `<footer class="foot">…</footer>`. All 8 pages already link
-`css/shared.css` and `js/script.js` — **the CSS and JS are already live
-everywhere.** Propagating to another page is a pure markup swap:
+**Current state (2026-09-01):** every live page has been migrated —
+`index.html`, `about.html`, `faq.html`, `tire-pdp.html`, `tire-store.html`,
+`vivid-classics.html`, `vivid-crossover.html`, `vivid-trucks.html`,
+`vividx.html`, `wheel-pdp.html`, `wheel-store.html`. Only
+`_page-template.html` (a template, not a live page) still has the old
+`<footer class="foot">…</footer>` — leave it as-is, it's the starting point
+for any future new page, not something to migrate. All migrated pages
+already link `css/shared.css` and `js/script.js` — **the CSS and JS are
+already live everywhere,** including any future rule changes like the
+`.v2-footer__body` padding fix above; nothing needs re-copying per page for a
+CSS-only change. The steps below still apply verbatim any time a **new**
+page is created off `_page-template.html` and needs the footer added:
 
 1. Copy the full block from `index.html` lines 4083–4284 (opening comment
    through `</footer>`), verbatim.
@@ -360,7 +377,7 @@ everywhere.** Propagating to another page is a pure markup swap:
 
 | Thing | Rule |
 |---|---|
-| `aria-current="page"` in `.v2-footer__family-logos` | Move it to the `<a>` matching the current page (mirrors the header's `.brandbar` rule exactly — see `header.md` §8). On `index.html` it's the "Vivid Racing" logo; on `vivid-trucks.html` it's "VR Trucks"; etc. **On the two PDP pages and `about.html`** (not one of the 5 family pages) — omit `aria-current` from all 5 logos entirely, don't guess a nearest match. |
+| `aria-current="page"` in `.v2-footer__family-logos` | Move it to the `<a>` matching the current page (mirrors the header's `.brandbar` rule exactly — see `header.md` §8). On `index.html` it's the "Vivid Racing" logo; on `vivid-trucks.html` it's "VR Trucks"; etc. — applies on the 5 family pages only (`index.html`, `vivid-trucks.html`, `vivid-crossover.html`, `vivid-classics.html`, `vividx.html`). **On every other page** (`about.html`, `faq.html`, `tire-pdp.html`, `tire-store.html`, `wheel-pdp.html`, `wheel-store.html`) — omit `aria-current` from all 5 logos entirely, don't guess a nearest match. |
 | Top `.v2-footer__logo` (brand-block wordmark, top-left) | **Always** `href="index.html"`, **never** carries `aria-current`, on every page including `index.html` itself. This is deliberately *not* page-relative like the header logo — it's a fixed "go to the master ViViD Racing home" link, separate from the family-switcher row below it which *is* page-relative. Don't make this self-link like the header logo; that was a real bug caught and fixed once already (see §10). |
 
 **Canonical values that must never drift page to page** (copy exactly):

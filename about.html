@@ -4514,6 +4514,12 @@ html, body{ overflow-x:clip; }
     font-size: 0.75rem;
     white-space: nowrap;
   }
+  .vc__hero .vc__eyebrow {
+    color: #FFC9C2 !important;
+  }
+  .vc .vc__hero .vc__eyebrow {
+    color: #FFC9C2 !important;
+  }
 
   /* ===== CTA — "Part of a family of brands" band: single centered column
      (overrides vr-content.css's desktop text-left/buttons-right grid),
@@ -4541,19 +4547,236 @@ html, body{ overflow-x:clip; }
   /* ===== STATS — lighten the label weight under each number ===== */
   .vc__stat span { font-weight: 600; }
 
-  /* ===== MOBILE — lift the stats bar into the hero's first screen =====
+  /* ===== MOBILE — lift the stats band into the hero's first screen =====
      Page-specific override, loaded after assets/vr-content.css so it wins
      the cascade at equal specificity without !important. Shrinks the hero
-     so the stats bar's top edge overlaps up into it, landing the stats
-     inside the first ~100vh on a phone instead of requiring a scroll. */
+     so the stats band's top edge overlaps up into it, landing the stats
+     inside the first ~100vh on a phone instead of requiring a scroll. The
+     overlap now targets .ab__stats-band (the full-bleed black wrapper), not
+     .vc__stats itself, since the band is what actually needs to rise into
+     the hero — a plain margin on the inner grid wouldn't move the band. */
   @media (max-width: 899px) {
-    .vc__hero { min-height: min(46vh, 380px); }
-    .vc__stats {
-      position: relative;
-      z-index: 2;
-      margin-top: -64px;
-      box-shadow: 0 -10px 24px rgba(10,10,10,.16);
-    }
+    /* Taller than the original 46vh/380px — the hero now also carries the
+       CTA button row, and the old height left its bottom edge (and the
+       lift-up band below) overlapping/clipping the buttons. */
+    .vc__hero { min-height: min(60vh, 484px); }
+    .ab__stats-band { position: relative; z-index: 2; margin-top: -64px; }
+  }
+
+  @media (min-width: 900px) {
+    .vc__quote { padding: 36px 0; }
+  }
+
+  /* ==========================================================================
+     ABOUT PAGE REDESIGN — bold black/white alternating sections, a red glow
+     accent, and real interaction (count-up stats, a hover photo strip, an
+     expandable timeline). Inspired by customwheeloffset.com/about's
+     structural energy — high-contrast dark bands + interactive elements —
+     built in Vivid's own established red/type system rather than importing
+     Custom Offsets' literal brand (unlike faq.html, which the user asked to
+     re-theme directly). All new markup uses .ab__ prefixed classes so none
+     of this collides with the shared .vc__ component classes.
+     ========================================================================== */
+
+  /* --- hero: dual CTA row, and a ghost-button variant readable on the dark
+     photo (the CTA section's .vc__btn--ghost uses --ink text/--rule border,
+     both far too low-contrast over a photo) --- */
+  .ab__hero-cta { display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap; justify-content: center; }
+  /* vr-content.css's base .vc__btn ships border-radius:10px — override so the
+     hero buttons match the sharp-corner convention used across the page. */
+  .ab__hero-cta .vc__btn { border-radius: 2px; }
+  @media (max-width: 899px) {
+    /* Tighter than the desktop 22px — frees a few px of hero content
+       height so the CTA row clears the lift-up stats band below it. */
+    .ab__hero-cta { margin-top: 12px; }
+  }
+  /* Only .vc__btn--ghost-dark (the hero's ghost button, on a dark photo
+     background) needs white text — a plain .vc__btn--ghost (e.g. the "Work
+     here" button in the light-background "family of brands" CTA) must keep
+     vr-content.css's own default (--ink dark text) or it becomes unreadable
+     on that light background. Don't broaden this selector back to plain
+     .vc__btn--ghost — that exact bug shipped once already. */
+  .vc a.vc__btn--ghost-dark {
+    background: transparent;
+    color: #fff;
+    border-color: rgba(255,255,255,.7);
+  }
+  .vc a.vc__btn--ghost-dark:hover { background: rgba(255,255,255,.12); border-color: #fff; color: #fff; }
+
+  /* --- full-bleed black stats band --- */
+  /* .vc__body's own padding-top would otherwise leave a white gap between
+     the hero and this band — zero it here so the black band sits flush
+     against the hero for a direct, bold transition (its own padding below
+     supplies the breathing room instead). Bottom padding is untouched. */
+  .vc__body { padding-top: 0; }
+  .ab__stats-band { background: var(--ink); padding: 28px 0; }
+  .ab__stats-band .vc__stats { margin: 0; background: rgba(255,255,255,.1); border-block-color: rgba(255,255,255,.14); }
+  .ab__stats-band .vc__stat { background: transparent; }
+  .ab__stats-band .vc__stat b { color: #fff; text-shadow: 0 0 32px rgba(225,6,0,.4); }
+  .ab__stats-band .vc__stat span { color: rgba(255,255,255,.62); }
+
+  /* --- photo strip: horizontal scroll-snap row of the platforms Vivid
+     builds for, with a hover/focus zoom for a light interactive touch --- */
+  .ab__strip { padding: clamp(40px,6vw,72px) 0; background: var(--bone); }
+  .ab__strip-inner { max-width: calc(1120px + (var(--gutter) * 2)); margin: 0 auto; padding-inline: var(--gutter); }
+  .ab__strip-head { margin-bottom: 20px; max-width: 60ch; }
+  .ab__strip-head h2 { font-family: var(--display); font-weight: 800; letter-spacing: -.015em;
+    font-size: clamp(1.5rem,3.6vw,2.25rem); line-height: 1.12; margin: 0 0 8px; color: var(--ink); }
+  .ab__strip-head p { color: var(--graphite); line-height: 1.7; margin: 0; }
+  .ab__strip-track {
+    display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x proximity;
+    padding: 4px 4px 12px; margin: 0 -4px; -webkit-overflow-scrolling: touch;
+  }
+  .ab__strip-item {
+    flex: 0 0 auto; width: clamp(210px,26vw,290px); aspect-ratio: 4/5;
+    position: relative; border-radius: var(--radius); overflow: hidden;
+    scroll-snap-align: start; background: var(--ink);
+  }
+  .ab__strip-item img { width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform .35s ease; }
+  .ab__strip-item:hover img, .ab__strip-item:focus-visible img { transform: scale(1.07); }
+  .ab__strip-item span {
+    position: absolute; inset: auto 0 0 0; padding: 16px 16px 14px;
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,.78) 70%);
+    color: #fff; font-family: var(--display); font-weight: 800; font-size: .9375rem;
+    letter-spacing: -.01em;
+  }
+
+  /* --- timeline band: full-bleed black, with an expand/collapse toggle so
+     the full 25-entry history isn't dumped on the page at once --- */
+  .ab__tl-band { background: var(--ink); padding: clamp(40px,6vw,72px) 0; }
+  .ab__tl-band .vc__kicker { color: #FFC9C2; } /* --heat fails 4.5:1 on --ink at this size; verified light tint from the hero eyebrow */
+  .ab__tl-band h2 { color: #fff !important; }
+  .ab__tl-band > .vc__wrap > p { color: rgba(255,255,255,.62) !important; }
+  .ab__tl-band .vc__timeline::before {
+    background: linear-gradient(180deg, var(--heat), rgba(255,255,255,.3) 55%, rgba(255,255,255,.1));
+  }
+  .ab__tl-band .vc__timeline li::before { background: var(--ink); box-shadow: 0 0 0 3px var(--ink); }
+  .ab__tl-band .vc__tl-body h3 { color: #fff; }
+  .ab__tl-band .vc__tl-body p { color: rgba(255,255,255,.62); }
+  .ab__tl-extra[hidden] { display: none; }
+  .ab__tl-toggle {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: fit-content; margin: clamp(20px,4vw,32px) auto 0;
+    padding: 12px 22px; background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.5);
+    border-radius: 2px; font-family: var(--ui); font-size: .9375rem; font-weight: 700; cursor: pointer;
+  }
+  .ab__tl-toggle:hover { background: rgba(255,255,255,.1); border-color: #fff; }
+  .ab__tl-toggle svg { width: 14px; height: 14px; transition: transform .2s ease; }
+  .ab__tl-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+
+  /* --- "the growth" — a then/now facility-size comparison, echoing the
+     THEN-vs-NOW device from the CO reference page, built from Vivid's own
+     real numbers (1,500 sq ft Tempe unit → 15,000 sq ft Gilbert facility,
+     both already stated elsewhere on this page). --- */
+  /* Figma: CO Updates file gXYI9AIFAimHbTJc8A9J2c, node 433:18333
+     "Section / Our Story". Colors are the file's literal values (#1e1e1e,
+     #b50202, #9a9a9a) EXCEPT where red text sits directly on the #1e1e1e
+     background — co-conventions.md documents both Boss Reds failing there
+     (2-3:1); substituted #E86A6A (5.32:1), the same on-dark tint already
+     used by this page's own hero eyebrow. No fabricated "2001 garage" /
+     "Gilbert facility" photos or video embed — this project doesn't have
+     real ones, and passing off stock imagery as company history would be
+     dishonest; kept the THEN/NOW comparison text-only instead. */
+  .ab__story { background: #1e1e1e; padding: clamp(40px,6vw,72px) 0; }
+  .ab__story-inner { max-width: calc(1120px + (var(--gutter) * 2)); margin: 0 auto; padding-inline: var(--gutter); }
+  .ab__story-eyebrow { margin: 0; font-family: var(--ui); font-size: .875rem; letter-spacing: .04em;
+    text-transform: uppercase; color: #E86A6A; }
+  .ab__story h2 { margin: 8px 0 0; font-family: var(--display); font-weight: 800; letter-spacing: -.01em;
+    text-transform: uppercase; font-size: clamp(1.75rem,4.2vw,2.625rem); line-height: 1.15; color: #fff; max-width: 20ch; }
+  .ab__story-compare { display: flex; align-items: center; justify-content: center;
+    gap: 0; margin-top: clamp(32px,5vw,48px); }
+  .ab__story-cell { display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start; gap: 8px;
+    flex: 1 1 0; max-width: none; height: 350px; position: relative; overflow: hidden;
+    min-height: clamp(200px,28vw,280px); padding: 20px; box-sizing: border-box;
+    background-size: cover; background-position: center; border-radius: 2px; }
+  .ab__story-cell:last-child { align-items: flex-end; text-align: right; }
+  /* Figma photo cards (node 433:18333) — dark gradient scrim keeps the
+     Then/Now stat legible over whatever the photo's brightest region is. */
+  .ab__story-cell::before { content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(10,10,10,.4) 0%, rgba(10,10,10,.72) 50%, rgba(10,10,10,.94) 100%); }
+  .ab__story-cell > * { position: relative; z-index: 1; }
+  .ab__story-cell--then { background-image: url('assets/img/about/story-then.jpg'); }
+  .ab__story-cell--now { background-image: url('assets/img/about/story-now.jpg'); }
+  .ab__story-then, .ab__story-now { font-family: var(--display); font-weight: 700; font-size: clamp(1.25rem,2.6vw,1.875rem);
+    text-transform: uppercase; letter-spacing: -.01em; }
+  .ab__story-then { color: #6b6b6b; }
+  .ab__story-now { color: #E86A6A; }
+  .ab__story-badge { display: inline-block; padding: 4px 12px; border: 1px solid #3a3a3a;
+    font-family: var(--ui); font-size: .75rem; font-weight: 600; letter-spacing: .04em;
+    text-transform: uppercase; color: #9a9a9a; border-radius: 2px; }
+  .ab__story-cell b { font-family: var(--display); font-weight: 900; font-size: clamp(2rem,5vw,3.25rem);
+    letter-spacing: -.02em; line-height: 1; color: #fff; font-variant-numeric: tabular-nums; }
+  .ab__story-unit { font-size: .8125rem; font-weight: 700; color: #9a9a9a; text-transform: uppercase; letter-spacing: .05em; }
+  /* z-index so the circle overlaps both photo cards' edges, not just the
+     one before it in DOM order — without this the second card (painted
+     after the divider) covered the circle on its side of the seam. */
+  .ab__story-divider { flex: none; width: 4px; align-self: stretch; background: #b50202; position: relative; min-height: 100px; z-index: 2; }
+  /* vr-content.css's ".vc svg{max-width:100%}" reset (equal specificity,
+     but max-width isn't overridden by width — it caps it) was clamping
+     this to 100% of its 4px-wide positioned ancestor. Neutralize it here. */
+  .ab__story-divider svg { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    width: 32px; height: 32px; max-width: none; padding: 8px; box-sizing: content-box; border-radius: 50%; background: #b50202; color: #fff; }
+  .ab__story-body { display: grid; gap: clamp(28px,5vw,56px); margin-top: clamp(40px,6vw,64px); }
+  .ab__story-copy { display: flex; flex-direction: column; gap: 16px; }
+  .ab__story-copy p { margin: 0; font-size: 1rem; line-height: 1.6; color: #9a9a9a; max-width: 62ch; }
+  .ab__story-stats { list-style: none; margin: 0; padding-top: 8px; border-top: 1px solid #3a3a3a; }
+  .ab__story-stats li { display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+    padding: 16px 0; border-bottom: 1px solid #3a3a3a; }
+  .ab__story-stats b { font-family: var(--display); font-weight: 800; font-size: clamp(1.25rem,2.6vw,1.75rem);
+    color: #E86A6A; white-space: nowrap; }
+  .ab__story-stats span { font-family: var(--ui); font-size: .8125rem; font-weight: 600; letter-spacing: .04em;
+    text-transform: uppercase; color: #9a9a9a; text-align: right; }
+  @media (min-width: 800px) { .ab__story-body { grid-template-columns: minmax(0,1.4fr) minmax(0,1fr); align-items: start; } }
+  @media (max-width: 640px) {
+    .ab__story-compare { flex-direction: column; align-items: stretch; }
+    .ab__story-cell, .ab__story-cell:last-child { align-items: flex-start; text-align: left; min-height: 220px; }
+    .ab__story-divider { width: 100%; height: 4px; min-height: 0; }
+    /* Divider runs horizontal on mobile (Then stacked above Now) — point the
+       arrow down instead of right to match the stacking direction. */
+    .ab__story-divider svg { transform: translate(-50%,-50%) rotate(90deg); }
+  }
+
+  /* Figma: same file, node 62:11848 "Section / Information Philosophy".
+     Colors are literal Figma values — all safe as-is since this section
+     sits on light backgrounds (#f7f7f7 / white cards), where both Boss
+     Reds pass comfortably (co-conventions.md: 8+:1 on white). */
+  .ab__info { background: #f7f7f7; padding: clamp(40px,6vw,72px) 0; }
+  .ab__info-inner { max-width: calc(1120px + (var(--gutter) * 2)); margin: 0 auto; padding-inline: var(--gutter); text-align: center; }
+  .ab__info-eyebrow { margin: 0; font-family: var(--ui); font-size: .875rem; letter-spacing: .04em;
+    text-transform: uppercase; color: #790000; }
+  .ab__info h2 { margin: 8px auto 0; max-width: 22ch; font-family: var(--display); font-weight: 800;
+    text-transform: uppercase; letter-spacing: -.01em; font-size: clamp(1.75rem,4vw,2.25rem); line-height: 1.15; color: #111; }
+  .ab__info-lead { margin: 14px auto 0; max-width: 56ch; color: #6b6b6b; font-size: 1.125rem; line-height: 1.6; }
+  .ab__info-grid { list-style: none; margin: clamp(28px,5vw,44px) 0 0; padding: 0 0 10px;
+    display: flex; gap: 13px; background: transparent; text-align: left;
+    overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; -ms-overflow-style: none; }
+  .ab__info-grid::-webkit-scrollbar { display: none; }
+  .ab__info-grid li { flex: 0 0 280px; scroll-snap-align: start; background: #fff; display: flex; flex-direction: column; overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,.08), 0 8px 24px rgba(0,0,0,.06); border-radius: 2px; }
+  .ab__info-grid-body { padding: 24px 28px 20px; display: flex; flex-direction: column; gap: 10px; flex: 1 1 auto; }
+  .ab__info-icon { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px;
+    background: #1e1e1e; flex: none; border-radius: 2px; }
+  .ab__info-icon img { width: 22px; height: 22px; filter: invert(1); }
+  .ab__info-grid b { font-family: var(--ui); font-weight: 700; font-size: 1.5rem; color: #790000; margin-top: 4px; }
+  .ab__info-sub { font-family: var(--ui); font-size: .8125rem; font-weight: 600; letter-spacing: .04em;
+    text-transform: uppercase; color: #6b6b6b; }
+  .ab__info-grid h3 { margin: 2px 0 0; font-family: var(--display); font-weight: 700; font-size: 1rem;
+    letter-spacing: -.005em; text-transform: uppercase; color: #111; }
+  .ab__info-grid p { margin: 0; font-size: .8125rem; line-height: 1.55; color: #6b6b6b; }
+  .ab__info-grid a { margin-top: auto; display: block; padding: 14px 28px; border-top: 1px solid #f0f0f0;
+    font-family: var(--ui); font-size: .75rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+    color: #790000; text-decoration: none; }
+  .ab__info-grid a:hover { color: var(--heat-deep); text-decoration: underline; }
+  @media (min-width: 640px) {
+    .ab__story-cell, .ab__story-badge, .ab__info-grid li, .ab__info-icon,
+    .ab__hero-cta .vc__btn, .vc__cta .vc__btn { border-radius: 4px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ab__strip-item img { transition: none; }
+    .ab__tl-toggle svg { transition: none; }
   }
 </style>
 </head>
@@ -4708,7 +4931,7 @@ html, body{ overflow-x:clip; }
           </div>
         </li>
         <li class="subnav__item">
-          <a class="subnav__link" href="waiting-to-build/wheels-cat.html" aria-haspopup="true" aria-expanded="false" aria-controls="mega-wheels-tires">Wheels &amp; Tires <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a>
+          <a class="subnav__link" href="wheel-store.html" aria-haspopup="true" aria-expanded="false" aria-controls="mega-wheels-tires">Wheels &amp; Tires <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a>
           <!-- Figma VWl8YFYeeS1d3nGfsliTtI, node 328:1740 "VR / Mega Menu — Wheels & Tires".
                icon/wheel and icon/tire are 22- and 19-path illustrations (not the
                single-path style used by every other category icon) — flattened
@@ -4733,7 +4956,7 @@ html, body{ overflow-x:clip; }
                 <div class="mega__col">
                   <p class="mega__label"><img src="assets/icons/tire-red.png" alt="" aria-hidden="true" width="16" height="16">Tires &amp; Fitment</p>
                   <ul class="mega__list">
-                    <li><a href="waiting-to-build/wheels-cat.html">Performance Tires</a></li>
+                    <li><a href="tire-store.html">Performance Tires</a></li>
                     <li><a href="waiting-to-build/wheels-cat.html">Wheel Spacers</a></li>
                     <li><a href="waiting-to-build/wheels-cat.html">Lug Nuts &amp; Bolts</a></li>
                     <li><a href="waiting-to-build/wheels-cat.html">TPMS Sensors</a></li>
@@ -5011,21 +5234,29 @@ html, body{ overflow-x:clip; }
     <img src="real-photos/night-car.jpg" alt="Rear view of a dark Porsche 911 with glowing red taillights on a rain-soaked city street at dusk" width="1920" height="837" fetchpriority="high">
     <div class="vc__hero__scrim" aria-hidden="true"></div>
     <div class="vc__hero__inner">
-      <p class="vc__eyebrow">Vivid Racing &middot; About</p>
+      <p class="vc__eyebrow" style="color: #FFC9C2">Vivid Racing &middot; About</p>
       <h1>Twenty-five years of go-fast parts.</h1>
       <p>Founded in 2001 with $500 and a $1,500 loan. Now a two-million-part catalog, five house brands, and an Arizona facility with the dyno, the fabrication shop and the phones under one roof.</p>
       <p class="vc__updated">Ported from vividracing.com &middot; August 2026</p>
+      <div class="ab__hero-cta">
+        <a class="vc__btn" href="#ab-timeline">See the timeline</a>
+        <a class="vc__btn vc__btn--ghost vc__btn--ghost-dark" style="color: #fff" href="waiting-to-build/contact.html">Talk to us</a>
+      </div>
     </div>
   </header>
   <div class="vc__body">
-    <div class="vc__wrap">
-      <div class="vc__stats" role="group" aria-label="Vivid Racing by the numbers">
-        <div class="vc__stat"><b>2001</b><span>Founded in Tempe, AZ</span></div>
-        <div class="vc__stat"><b>2M+</b><span>Parts in the catalog</span></div>
-        <div class="vc__stat"><b>4.7&#9733;</b><span>58,811 verified reviews</span></div>
-        <div class="vc__stat"><b>15,000</b><span>Sq ft &middot; Gilbert, AZ</span></div>
+    <section class="ab__stats-band">
+      <div class="vc__wrap">
+        <div class="vc__stats" role="group" aria-label="Vivid Racing by the numbers">
+          <div class="vc__stat"><b data-count-to="2001">0</b><span>Founded in Tempe, AZ</span></div>
+          <div class="vc__stat"><b data-count-to="2" data-count-suffix="M+">0</b><span>Parts in the catalog</span></div>
+          <div class="vc__stat"><b data-count-to="4.7" data-count-decimals="1" data-count-suffix="&#9733;">0&#9733;</b><span>58,811 verified reviews</span></div>
+          <div class="vc__stat"><b data-count-to="15000" data-count-format="comma">0</b><span>Sq ft &middot; Gilbert, AZ</span></div>
+        </div>
       </div>
+    </section>
 
+    <div class="vc__wrap">
       <div class="vc__quote">
         <p>&ldquo;To fuel the passion of enthusiast vehicle owners.&rdquo;</p>
         <cite>The mission</cite>
@@ -5055,7 +5286,139 @@ html, body{ overflow-x:clip; }
         </div>
       </section>
 
-      <section style="padding:clamp(30px,6vw,64px) 0 0" aria-labelledby="tl-h">
+    </div>
+
+    <section class="ab__story" aria-labelledby="story2-h">
+      <div class="ab__story-inner">
+        <p class="ab__story-eyebrow">We started this</p>
+        <h2 id="story2-h">From a garage unit to the Gilbert build.</h2>
+
+        <div class="ab__story-compare" role="group" aria-label="Then and now, by square footage">
+          <div class="ab__story-cell ab__story-cell--then">
+            <span class="ab__story-then">Then</span>
+            <span class="ab__story-badge">2001 &middot; Tempe, AZ</span>
+            <b>1,500</b>
+            <span class="ab__story-unit">sq ft</span>
+          </div>
+          <div class="ab__story-divider" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" focusable="false"><path d="M4 12h15m0 0l-6-6m6 6l-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="ab__story-cell ab__story-cell--now">
+            <span class="ab__story-now">Now</span>
+            <span class="ab__story-badge">Today &middot; Gilbert, AZ</span>
+            <b>15,000</b>
+            <span class="ab__story-unit">sq ft</span>
+          </div>
+        </div>
+
+        <div class="ab__story-body">
+          <div class="ab__story-copy">
+            <p>Fresh out of Arizona State, Rob and Dan started VividRacing.com in a 1,500 sq ft unit in Tempe with $500 cash and a $1,500 loan. They weren&rsquo;t trying to build a company &mdash; they were building a resource that actually helped enthusiasts get the right parts the first time.</p>
+            <p>Project cars, magazine features, road rallies and SEMA builds made the name; the catalog did the rest. Today it spans performance cars, trucks, Jeeps, UTVs and motorcycles across five house brands.</p>
+            <p>The operation now runs out of a custom-built facility in Gilbert, Arizona &mdash; in-ground dyno, the fabrication shop, and the phones, all under one roof. The garage mentality never left.</p>
+          </div>
+          <ul class="ab__story-stats">
+            <li><span>Founded</span><b>2001</b></li>
+            <li><span>Gilbert, AZ</span><b>15,000 sq ft</b></li>
+            <li><span>Parts in the catalog</span><b>2M+</b></li>
+            <li><span>Verified reviews</span><b>4.7&#9733;</b></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="ab__info" aria-labelledby="info-h">
+      <div class="ab__info-inner">
+        <p class="ab__info-eyebrow">Information so you can decide</p>
+        <h2 id="info-h">You make smarter choices when you know more.</h2>
+        <p class="ab__info-lead">We&rsquo;re not here to just sell parts &mdash; we&rsquo;re here to help you pick the right ones.</p>
+
+        <ul class="ab__info-grid">
+          <li>
+            <div class="ab__info-grid-body">
+              <span class="ab__info-icon"><img src="assets/icons/fitment.svg" alt="" width="22" height="22"></span>
+              <b>Verified</b>
+              <span class="ab__info-sub">Every order, checked</span>
+              <h3>Fitment Promise</h3>
+              <p>Modified ride? A tech confirms fit by phone before you buy &mdash; wrong-fit is on us.</p>
+            </div>
+            <a class="ab__info-link" href="waiting-to-build/fitment-promise.html">How fitment works &rarr;</a>
+          </li>
+          <li>
+            <div class="ab__info-grid-body">
+              <span class="ab__info-icon"><img src="assets/icons/co-phone.svg" alt="" width="22" height="22"></span>
+              <b>Mon&ndash;Sat</b>
+              <span class="ab__info-sub">Real experts available</span>
+              <h3>Expert Advice</h3>
+              <p>Real techs on the phone &mdash; no scripts, no upsell, just straight answers on offset and fitment.</p>
+            </div>
+            <a class="ab__info-link" href="tel:+14809663040">Call our experts &rarr;</a>
+          </li>
+          <li>
+            <div class="ab__info-grid-body">
+              <span class="ab__info-icon"><img src="assets/icons/car-build.svg" alt="" width="22" height="22"></span>
+              <b>Nearly 100</b>
+              <span class="ab__info-sub">Magazine features</span>
+              <h3>Project Car Builds</h3>
+              <p>SEMA builds and magazine features since the first Project WRX made the map in 2003.</p>
+            </div>
+            <a class="ab__info-link" href="waiting-to-build/gallery.html">See the builds &rarr;</a>
+          </li>
+          <li>
+            <div class="ab__info-grid-body">
+              <span class="ab__info-icon"><img src="assets/icons/brands.svg" alt="" width="22" height="22"></span>
+              <b>Five</b>
+              <span class="ab__info-sub">House brands</span>
+              <h3>Built In-House</h3>
+              <p>VR Forged, VR Performance, VR Aero, VR Tuned and Agency Power &mdash; all under one roof.</p>
+            </div>
+            <a class="ab__info-link" href="#family">Meet the brands &rarr;</a>
+          </li>
+          <li>
+            <div class="ab__info-grid-body">
+              <span class="ab__info-icon"><img src="assets/icons/wrench.svg" alt="" width="22" height="22"></span>
+              <b>Instant</b>
+              <span class="ab__info-sub">Fitment results</span>
+              <h3>Wheel Fitment Tool</h3>
+              <p>Punch in your specs. The tool checks backspacing, offset and lift combinations instantly.</p>
+            </div>
+            <a class="ab__info-link" href="waiting-to-build/wheel-fitment.html">Try the tool &rarr;</a>
+          </li>
+          <li>
+            <div class="ab__info-grid-body">
+              <span class="ab__info-icon"><img src="assets/icons/dollar.svg" alt="" width="22" height="22"></span>
+              <b>0% APR</b>
+              <span class="ab__info-sub">Pre-qualify in 60s</span>
+              <h3>Transparent Financing</h3>
+              <p>Affirm and Katapult financing, shown up front &mdash; no surprise fees at checkout.</p>
+            </div>
+            <a class="ab__info-link" href="waiting-to-build/financing.html">See financing &rarr;</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="ab__strip" aria-labelledby="ab-strip-h">
+      <div class="ab__strip-inner">
+        <div class="ab__strip-head">
+          <p class="vc__kicker">The platforms</p>
+          <h2 id="ab-strip-h">Built for these, and everything else.</h2>
+          <p>Porsche, BMW M, Audi RS, AMG, GT-R, Corvette &mdash; if it takes a coilover or a wheel, the catalog covers it. Scroll for a few of the platforms that come through the shop.</p>
+        </div>
+        <div class="ab__strip-track" role="group" aria-label="Platforms Vivid Racing builds for">
+          <div class="ab__strip-item"><img src="real-photos/porsche-gt3.jpg" alt="Red Porsche 911 GT3, rear three-quarter view" width="1920" height="1097" loading="lazy"><span>Porsche</span></div>
+          <div class="ab__strip-item"><img src="real-photos/bmw-m4.jpg" alt="White BMW M4 coupe, front three-quarter view" width="1920" height="1055" loading="lazy"><span>BMW M</span></div>
+          <div class="ab__strip-item"><img src="real-photos/audi-rs.jpg" alt="Gray Audi RS6 Avant wagon, front three-quarter view" width="1920" height="1005" loading="lazy"><span>Audi RS</span></div>
+          <div class="ab__strip-item"><img src="real-photos/amg-gt.jpg" alt="Matte blue Mercedes-AMG GT coupe, front three-quarter view" width="1920" height="1005" loading="lazy"><span>Mercedes-AMG</span></div>
+          <div class="ab__strip-item"><img src="real-photos/nissan-gtr.jpg" alt="White Nissan GT-R in motion, front three-quarter view" width="1920" height="1005" loading="lazy"><span>Nissan GT-R</span></div>
+          <div class="ab__strip-item"><img src="real-photos/corvette.jpg" alt="Red Chevrolet Corvette, front three-quarter view" width="1920" height="1001" loading="lazy"><span>Corvette</span></div>
+          <div class="ab__strip-item"><img src="real-photos/lamborghini.jpg" alt="Blue Lamborghini Huracan, front three-quarter view" width="1920" height="1005" loading="lazy"><span>Lamborghini</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ab__tl-band" aria-labelledby="tl-h">
+      <div class="vc__wrap">
         <p class="vc__kicker">The record</p>
         <h2 id="tl-h" style="font-family:var(--display);font-weight:800;letter-spacing:-.015em;font-size:clamp(1.5rem,3.6vw,2.25rem);line-height:1.12;margin:0 0 8px">Twenty-five years, year by year.</h2>
         <p style="color:var(--graphite);max-width:64ch;margin:0 0 6px;line-height:1.7">Every
@@ -5085,66 +5448,72 @@ html, body{ overflow-x:clip; }
           <span class="vc__tl-year">2018</span>
           <div class="vc__tl-body"><h3>New website &middot; Prior Design</h3><p>Faster storefront ships; Vivid becomes exclusive distributor for Prior Design. Sales pass eight figures.</p></div>
         </li>
-        <li>
+        <li class="ab__tl-extra" hidden>
           <span class="vc__tl-year">2017</span>
           <div class="vc__tl-body"><h3>Automation &middot; ArmyTrix</h3><p>Big investment in vendor-data automation; exclusive North American distributor for ArmyTrix. Second straight SEMA Top Dealer award with Mackin Industries.</p></div>
         </li>
-        <li>
+        <li class="ab__tl-extra" hidden>
           <span class="vc__tl-year">2016</span>
           <div class="vc__tl-body"><h3>Fifteen years &middot; UTV</h3><p>SEMA Top Dealer award; expansion into the fast-growing Polaris / Can-Am UTV market.</p></div>
         </li>
-        <li>
+        <li class="ab__tl-extra" hidden>
           <span class="vc__tl-year">2015</span>
           <div class="vc__tl-body"><h3>Eight figures</h3><p>Annual sales pass eight digits while much of the industry is still recovering.</p></div>
         </li>
-        <li>
+        <li class="ab__tl-extra" hidden>
           <span class="vc__tl-year">2014</span>
           <div class="vc__tl-body"><h3>VR Tuned launches</h3><p>After years of selling other people's tuning, VRTuned.com launches: flash tuning, plug-and-play boxes, TCU tuning and throttle controllers.</p></div>
         </li>
-        <li>
+        <li class="ab__tl-extra" hidden>
           <span class="vc__tl-year">2013</span>
           <div class="vc__tl-body"><h3>HorsepowerFreaks acquired</h3><p>A competitor catalog site is acquired and folded into the Vivid infrastructure; Project SRT Viper debuts at SEMA.</p></div>
         </li>
-        <li>
+        <li class="ab__tl-extra" hidden>
           <span class="vc__tl-year">2012</span>
           <div class="vc__tl-body"><h3>CNC in-house</h3><p>A CNC machine shop is integrated into the facility for Agency Power production; Targa Newfoundland road rally in the Project 997.2 Turbo S.</p></div>
         </li>
-        <li>
+        <li class="ab__tl-extra" hidden>
           <span class="vc__tl-year">2011</span>
           <div class="vc__tl-body"><h3>Status Racing</h3><p>Rob and Dan acquire the FIA-certified seat maker (sold on to PRP Seats in 2016).</p></div>
         </li>
-        <li>
+        <li class="ab__tl-extra" hidden>
           <span class="vc__tl-year">2010</span>
           <div class="vc__tl-body"><h3>206 mph</h3><p>The Project 997 Turbo runs 206.2 mph at the Texas Mile on a stock engine; two SEMA feature cars.</p></div>
         </li>
-        <li>
+        <li class="ab__tl-extra" hidden>
           <span class="vc__tl-year">2008</span>
           <div class="vc__tl-body"><h3>The Gilbert building</h3><p>A custom-built 15,000 sq ft facility in Gilbert, Arizona: in-ground Mustang Dyno, lifts, Agency Power fabrication and the call center under one roof.</p></div>
         </li>
-        <li>
+        <li class="ab__tl-extra" hidden>
           <span class="vc__tl-year">2005</span>
           <div class="vc__tl-body"><h3>Chandler &middot; first dyno</h3><p>10,000 sq ft building in Chandler; a Mustang AWD dyno - one of two in the state - starts the tuning program. Pepsi/DUB/Mazda RX-8 project builds.</p></div>
         </li>
-        <li>
+        <li class="ab__tl-extra" hidden>
           <span class="vc__tl-year">2004</span>
           <div class="vc__tl-body"><h3>Agency Power founded</h3><p>In-house manufacturing begins under its own brand; the catalog-database business starts: if it works for Subaru and Evo, why not every car?</p></div>
         </li>
-        <li>
+        <li class="ab__tl-extra" hidden>
           <span class="vc__tl-year">2003</span>
           <div class="vc__tl-body"><h3>First magazine feature</h3><p>Super Street features the Project WRX - the first of nearly a hundred; Gumball 3000 from San Francisco to Miami.</p></div>
         </li>
-        <li>
+        <li class="ab__tl-extra" hidden>
           <span class="vc__tl-year">2002</span>
           <div class="vc__tl-body"><h3>First SEMA</h3><p>Project Subaru WRX I - full JDM build on Volk wheels - puts Vivid Racing on the map.</p></div>
         </li>
-        <li>
+        <li class="ab__tl-extra" hidden>
           <span class="vc__tl-year">2001</span>
           <div class="vc__tl-body"><h3>Founded</h3><p>Fresh out of Arizona State, Rob and Dan start VividRacing.com from a 1,500 sq ft unit in Tempe with $500 cash and a $1,500 loan, selling Subaru performance parts.</p></div>
         </li>
       </ol>
-      </section>
+      <button class="ab__tl-toggle" type="button" aria-expanded="false">
+        <span>View the full 25-year timeline</span>
+        <svg viewBox="0 0 12 8" aria-hidden="true" focusable="false"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      </div>
+    </section>
 
-      <div class="vc__cta" style="margin-top:var(--section)">
+    <div class="vc__wrap">
+      <div class="vc__cta" id="family" style="margin-top:var(--section);scroll-margin-top:96px">
         <div>
           <h2>Part of a family of brands</h2>
           <p>Custom Offsets, Only Tires, Function Powersports, MAPerformance and Anovia
@@ -5262,7 +5631,8 @@ html, body{ overflow-x:clip; }
           <ul class="v2-footer__col-links">
             <li><a href="waiting-to-build/vehicle-picker.html">Shop by Vehicle</a></li>
             <li><a href="waiting-to-build/suspension.html">Suspension</a></li>
-            <li><a href="waiting-to-build/wheels-cat.html">Wheels &amp; Tires</a></li>
+            <li><a href="wheel-store.html">Wheels</a></li>
+            <li><a href="tire-store.html">Tires</a></li>
             <li><a href="waiting-to-build/brakes.html">Brakes</a></li>
             <li><a href="waiting-to-build/exhaust.html">Exhaust</a></li>
             <li><a href="waiting-to-build/aero-body.html">Aero &amp; Body</a></li>
@@ -5306,7 +5676,7 @@ html, body{ overflow-x:clip; }
             <svg class="v2-footer__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           </button>
           <ul class="v2-footer__col-links">
-            <li><a href="waiting-to-build/about.html">About Us</a></li>
+            <li><a href="about.html">About Us</a></li>
             <li><a href="waiting-to-build/ambassador.html">The Pit Crew</a></li>
             <li><a href="waiting-to-build/vivid-wholesale.html">Wholesale</a></li>
             <li><a href="waiting-to-build/careers.html">Careers</a></li>
@@ -5337,7 +5707,7 @@ html, body{ overflow-x:clip; }
           </button>
           <ul class="v2-footer__col-links">
             <li><a href="waiting-to-build/contact.html">Contact Us</a></li>
-            <li><a href="waiting-to-build/help.html">FAQs / Policies</a></li>
+            <li><a href="faq.html">FAQs / Policies</a></li>
             <li><a href="waiting-to-build/shipping.html">Shipping</a></li>
             <li><a href="waiting-to-build/returns.html">Returns</a></li>
             <li><a href="waiting-to-build/fitment-promise.html">Fitment Promise</a></li>
@@ -5396,6 +5766,71 @@ document.addEventListener('click', function (e) {
   var a = e.target.closest && e.target.closest('a[href="#"]');
   if (a) { e.preventDefault(); }
 });
+</script>
+
+<script>
+/* ===== Stat count-up — runs once, the first time .ab__stats-band scrolls
+   into view. Respects prefers-reduced-motion by jumping straight to the
+   final value instead of animating. ===== */
+(function () {
+  var band = document.querySelector('.ab__stats-band');
+  if (!band) return;
+  var nums = band.querySelectorAll('[data-count-to]');
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function format(el, value) {
+    var decimals = parseInt(el.getAttribute('data-count-decimals') || '0', 10);
+    var suffix = el.getAttribute('data-count-suffix') || '';
+    var comma = el.getAttribute('data-count-format') === 'comma';
+    var text = comma ? Math.round(value).toLocaleString('en-US') : value.toFixed(decimals);
+    return text + suffix;
+  }
+
+  function run() {
+    nums.forEach(function (el) {
+      var to = parseFloat(el.getAttribute('data-count-to'));
+      if (reduced) { el.textContent = format(el, to); return; }
+      var start = null;
+      var duration = 1200;
+      function tick(now) {
+        if (start === null) start = now;
+        var progress = Math.min(1, (now - start) / duration);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = format(el, to * eased);
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    var seen = false;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && !seen) { seen = true; run(); io.disconnect(); }
+      });
+    }, { threshold: 0.4 });
+    io.observe(band);
+  } else {
+    run();
+  }
+})();
+
+/* ===== Timeline expand/collapse — 6 recent milestones show by default,
+   the remaining 19 (2001–2017) stay behind this toggle. ===== */
+(function () {
+  var toggle = document.querySelector('.ab__tl-toggle');
+  var extras = document.querySelectorAll('.ab__tl-extra');
+  if (!toggle || !extras.length) return;
+  var labelMore = toggle.querySelector('span').textContent;
+  var labelLess = 'Show fewer milestones';
+  toggle.addEventListener('click', function () {
+    var open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', open ? 'false' : 'true');
+    extras.forEach(function (li) { li.hidden = open; });
+    toggle.querySelector('span').textContent = open ? labelMore : labelLess;
+  });
+})();
 </script>
 </body>
 </html>
