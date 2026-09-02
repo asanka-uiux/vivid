@@ -124,29 +124,6 @@
    future padding/width tweak from silently re-squeezing either logo. */
 .finance__chip img{flex:none;max-height:16px;width:auto;object-fit:contain}
 
-/* cells are sized by their labels, as in Figma (136 / 157 / 135 = 430 total) */
-.stats{display:flex;margin:16px 0 0;background:var(--bg-inverse);
-  border:1px solid rgba(255,255,255,.15);padding:1px;order:5;max-width:none;
-  margin-top:0;width:100%;border-top:0}
-@media (min-width:901px){
-  .stats{display:inline-flex;order:0;width:auto;max-width:none;
-    border-top:1px solid rgba(255,255,255,.15);margin-top:16px}
-}
-.stats__cell{flex:1 1 0;padding:8px;border-right:1px solid rgba(255,255,255,.15);min-width:0}
-@media (min-width:361px){ .stats__cell{padding:10px 12px} }
-@media (min-width:901px){ .stats__cell{flex:0 0 auto;padding:8px 18px;min-width:0} }
-.stats__cell:last-child{border-right:0}
-.stats__label{display:block;font:500 12px/14px var(--font-ui);letter-spacing:.4px;
-  text-transform:uppercase;color:var(--text-on-dark);white-space:normal;font-size:12px}
-@media (min-width:901px){ .stats__label{letter-spacing:.8px;white-space:nowrap;font-size:12px;font-weight:500} }
-/* dd carries a 40px margin-inline-start by default — reset it */
-.stats__value{display:flex;align-items:baseline;gap:4px;margin:4px 0 0;justify-content:flex-start}
-@media (min-width:901px){ .stats__value{justify-content:normal} }
-.stats__num{font-family:var(--font-display);font-weight:800;font-size:22px;
-  line-height:28px;letter-spacing:-.2px;color:var(--text-on-dark);
-  font-variation-settings:"YTLC" 500,"wdth" 100}
-.stats__suffix{font:800 18px/27px var(--font-ui);color:var(--accent-red-on-dark)}
-
 
 /* ===== BRAND TICKER (below hero) ========================================= */
 
