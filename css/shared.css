@@ -666,7 +666,8 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .v2-footer__finance-sub{font-family:var(--font-ui);font-size:13px;font-weight:400;line-height:18px;color:#6b6b6b;text-transform:uppercase}
 .v2-footer__finance-price{font-family:var(--font-ui);font-size:13px;font-weight:400;line-height:1.2;color:#6b6b6b;text-transform:uppercase;white-space:nowrap}
 .v2-footer__finance-price strong{font-size:24px;font-weight:600;color:var(--action-primary);margin-right:2px}
-.v2-footer__finance-badge{display:inline-flex;align-items:center;padding:4px 9px;background:rgba(255,255,255,.85);border:.5px solid rgba(0,0,0,.1);border-radius:4px;font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.02em;color:#333}
+.v2-footer__finance-badge{display:inline-flex;align-items:center;padding:4px 9px;background:rgba(255,255,255,.85);border:.5px solid rgba(0,0,0,.1);border-radius:4px}
+.v2-footer__finance-badge img{display:block;height:14px;width:auto;object-fit:contain}
 
 .v2-footer__body{display:flex;flex-direction:column;padding:24px var(--gutter);gap:16px;max-width:var(--shell);margin:0 auto;width:100%;box-sizing:border-box}
 .v2-footer__brand{display:flex;flex-direction:column;gap:10px}

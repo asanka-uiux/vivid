@@ -162,8 +162,11 @@ keeps its natural width and a vertical divider except the last. Desktop
 single breakpoint.
 
 The financing badges (`.v2-footer__finance-badge` — "Affirm" / "Katapult")
-are **plain text pills, not the providers' real logos** — deliberate, see
-§10.
+are the providers' **real logo images** (`assets/img/logos/affirm.png` /
+`assets/img/logos/katapult.webp`, the same files already used in the hero's
+`.finance__chip` and on the product-card `.wcard__fin-brand` — see §10 for
+why this now differs from the original text-pill decision).
+`.v2-footer__finance-badge img{height:14px;width:auto;object-fit:contain}`.
 
 ### 5.2 Brand block (logo, description, contact, socials)
 
@@ -476,13 +479,16 @@ back to match the source and break something:
   equivalent anywhere else on this site, and introducing an unrelated accent
   color just in the footer would clash with the red used everywhere else
   (logo, CTAs, underlines throughout every page).
-- **Financing badges are text, not logos.** Reference embeds Affirm's and
-  Katapult's actual SVG wordmarks. This port uses plain text pills
-  (`.v2-footer__finance-badge`) instead — copying a third-party company's
-  brand artwork into an unrelated prototype site is best avoided, and this
-  project already refers to both providers as plain text elsewhere on the
-  page (e.g. the "0% APR · Affirm + Katapult" strip higher up on
-  `index.html`).
+- **Financing badges are real logos (reversed 2026-09-02).** Originally
+  built as plain text pills (`.v2-footer__finance-badge`) to avoid copying a
+  third-party company's brand artwork into a prototype. By the time this
+  changed, the project had already legitimately licensed/sourced both real
+  marks (`assets/img/logos/affirm.png`, `assets/img/logos/katapult.webp`)
+  and was using them elsewhere on the page (hero `.finance__chip`,
+  product-card `.wcard__fin-brand`) — client asked for the footer to match,
+  so the badges now hold `<img>` tags pointing at those same files instead
+  of text. Same reasoning that justified the original text-only choice no
+  longer applied once the real assets were already in use site-wide.
 - **No third "Customer Sales" contact column.** Reference has Customer
   Service + Customer Sales + Headquarters (three columns). This port keeps
   only Customer Service + Headquarters — ViViD only has one real published
