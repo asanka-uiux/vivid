@@ -1289,8 +1289,13 @@
    min-height = the two-line stack (20 name + 2 gap + 18 rating). SEMA has no
    rating line, so without it that body was one line tall and centred, dropping
    "Top 5 Reseller" below the "Google"/"Trustpilot" baseline. Reserving the
-   full height puts every name on one line and every logo on one centre. */
-.rbar__source-body{display:flex;flex-direction:column;gap:2px;min-height:44px}
+   full height puts every name on one line and every logo on one centre.
+   justify-content then centres the content inside that reserved height: for
+   Google/Trustpilot the two lines already fill 44px exactly so it changes
+   nothing, but SEMA's single line was pinned to the top by the default
+   flex-start, leaving "Top 5 Reseller" sitting 11px above its own badge. */
+.rbar__source-body{display:flex;flex-direction:column;justify-content:center;
+  gap:2px;min-height:44px}
 .rbar__source-name{font:700 18px/22px var(--font-ui);color:var(--text-on-dark)}
 .rbar__source-rating{display:flex;align-items:center;gap:5px;
   font:400 16px/20px var(--font-ui);color:rgba(255,255,255,.7)}
