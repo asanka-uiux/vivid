@@ -4549,7 +4549,7 @@
     .promos__grid, .cats, .grid-4, .vehicles, .kits, .reviews, .gallery { grid-template-columns: 1fr; }
     .trustbar { gap: 12px; padding: 9px 24px; flex-wrap: wrap; }
     .trustbar__sep { display: none; }
-    .header__inner, .nav__inner, .wrap { padding-left: 24px; padding-right: 24px; }
+    .header__inner, .nav__inner, .wrap { padding-left: 16px; padding-right: 16px; }
     .header__inner { grid-template-columns: auto 1fr; }
     .header__search { display: none; }
     .header__right { border-left: 0; }
@@ -5177,7 +5177,41 @@
     .wgrid { grid-template-columns: minmax(0,1fr); }
     .cat-head__title { font-size: 30px; }
     .sortbar { flex-wrap: wrap; gap: 10px; }
+    .expert-card { display: none; }
   }
+  /* --- Mobile store header, laid out after CO Updates node 750:100905.
+     LAYOUT ONLY: ViViD type, colour and copy are unchanged; none of the CO
+     branding in that frame (logo, financing bar, Live Chat) is carried over.
+
+     The Figma stacks the top as vehicle card -> delivery estimate -> fitment
+     picker. This page's DOM order is vehicle -> fitment -> delivery, and
+     .cat-head__panel is already a single-column grid at this width, so
+     `order` reorders it without moving any markup — every id, onclick and
+     aria hook stays byte-identical. .veh-card--empty carries .veh-card too,
+     so it inherits the same slot; #ymmModal is position:fixed and out of
+     flow, so its order is irrelevant.
+
+     The vehicle card was 333px of a 528px header: the four trust chips each
+     took a full line (the Figma fits three on one) and the 24px uppercase
+     title ran to two lines. Chips go to two columns rather than a nowrap
+     scroller so no trust signal ends up hidden off-screen. --- */
+  @media (max-width: 700px) {
+    .cat-head__panel > .veh-card { order: 1; }
+    .cat-delivery                { order: 2; }
+    .cat-head__fitment           { order: 3; }
+
+    .veh-card { padding: 14px 16px; gap: 12px; }
+    .veh-card__name-row { gap: 8px; }
+    .veh-card__name { font-size: 18px; letter-spacing: .5px; }
+    .veh-card__sub { font-size: 12px; margin: 2px 0 10px; }
+    .veh-card__chips { display: grid; grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 8px 10px; }
+    /* the longer labels wrap to two lines in a half-width column, so the
+       tick aligns to the first line rather than floating at the centre */
+    .veh-card__chip { font-size: 11px; align-items: flex-start; line-height: 1.35; }
+    .veh-card__chip svg { margin-top: 2px; }
+  }
+
 
 
   /* ============================================================
@@ -5744,7 +5778,7 @@ html, body{ overflow-x:clip; }
         </div>
       </div>
 
-      <div>
+      <div class="cat-head__fitment">
         <div class="tier-label">Select Your Tire Fitment</div>
         <div class="tiers">
           <button class="tier tier--green tier--active" onclick="tierIdx(0)" aria-pressed="true">
