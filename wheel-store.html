@@ -5200,16 +5200,53 @@
     .cat-delivery                { order: 2; }
     .cat-head__fitment           { order: 3; }
 
-    .veh-card { padding: 14px 16px; gap: 12px; }
-    .veh-card__name-row { gap: 8px; }
+    /* Vehicle card after node 171:11983 ("Change vehicle", 358x111): 8px/12px
+       padding, an 8px gap between the text block and the chip row, the
+       "Change Vehicle" link tucked straight under the title with no gap, and
+       the chips on ONE row spread with space-between.
+       Three deliberate deviations from the frame, all so ViViD's own content
+       survives it:
+       - Frame sets the title 22px/30px whitespace-nowrap. Its "2018 Ford
+         F-150" fits; ViViD's demo "2023 BMW M4 Competition" is half again as
+         long and would either wrap to two lines or overflow, so the title
+         stays at 18px and is allowed to wrap.
+       - Frame's sub-paragraph is one line. ViViD's appends #vehSpec (bolt
+         pattern, hub bore, stance), so .veh-card__spec is hidden here and the
+         line reads "Showing wheels that fit your M4". #vehSpec keeps its id
+         and selectVehicle() still writes to it.
+       - Frame has three chips. ViViD has four; the technical one repeats the
+         bolt pattern the sub-paragraph already gives, so it drops out at this
+         width and the remaining three match the frame's set. Desktop keeps
+         all four. */
+    .veh-card { padding: 8px 12px; gap: 8px; }
+    .veh-card__name-row { flex-direction: column; align-items: flex-start; gap: 0; }
     .veh-card__name { font-size: 18px; letter-spacing: .5px; }
-    .veh-card__sub { font-size: 12px; margin: 2px 0 10px; }
-    .veh-card__chips { display: grid; grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 8px 10px; }
-    /* the longer labels wrap to two lines in a half-width column, so the
-       tick aligns to the first line rather than floating at the centre */
-    .veh-card__chip { font-size: 11px; align-items: flex-start; line-height: 1.35; }
-    .veh-card__chip svg { margin-top: 2px; }
+    .veh-card__change { font-size: 12px; }
+    .veh-card__sub { font-size: 14px; line-height: 20px; margin: 0; }
+    .veh-card__spec { display: none; }
+    /* In the frame the chip row is a sibling of the icon+text row, so it spans
+       the full card width. Here it is nested inside the text column, which
+       costs it the icon's 30px + 14px gap -- at 390px that left 290px for a
+       row needing 321px, so the last chip was clipped by the page's
+       overflow-x:clip. Re-parenting it in markup would change desktop too, so
+       instead the confirmed card becomes a grid on mobile only and the text
+       wrapper goes display:contents, letting the chip row claim both columns.
+       Scoped to #vehCardConfirmed so #vehCardEmpty keeps its own flex layout.
+       flex-wrap stays on as the safety net: one row at 390px like the frame,
+       degrading to two rows on narrower phones rather than clipping. */
+    /* row-gap 0: the frame stacks title / Change Vehicle / sub-paragraph with
+       no gaps, relying on their line-heights. The 8px before the chip row is
+       applied on the chip row itself instead. */
+    #vehCardConfirmed { display: grid; grid-template-columns: 30px minmax(0,1fr);
+      column-gap: 14px; row-gap: 0; align-items: start; }
+    #vehCardConfirmed > .veh-card__check { grid-area: 1 / 1; }
+    #vehCardConfirmed > div { display: contents; }
+    .veh-card__name-row, .veh-card__sub { grid-column: 2; }
+    .veh-card__chips { grid-column: 1 / -1; margin-top: 8px; display: flex;
+      flex-wrap: wrap; justify-content: space-between; align-items: center;
+      gap: 6px 8px; }
+    .veh-card__chip { font-size: 12px; line-height: 18px; white-space: nowrap; }
+    .veh-card__chip--tech { display: none; }
   }
 
 
@@ -5701,12 +5738,12 @@ html, body{ overflow-x:clip; }
             <span class="veh-card__name" id="vehName">2023 BMW M4 Competition</span>
             <button type="button" class="veh-card__change" onclick="showVehiclePrompt()">Change Vehicle &rsaquo;</button>
           </div>
-          <p class="veh-card__sub">Showing wheels that fit <strong id="vehShort">your M4</strong> &mdash; <span id="vehSpec">5x112 bolt pattern, 66.6mm hub bore, factory or lowered.</span></p>
+          <p class="veh-card__sub">Showing wheels that fit <strong id="vehShort">your M4</strong> <span class="veh-card__spec">&mdash; <span id="vehSpec">5x112 bolt pattern, 66.6mm hub bore, factory or lowered.</span></span></p>
           <div class="veh-card__chips">
             <span class="veh-card__chip"><svg viewBox="0 0 24 24" width="14" height="14" fill="#16A34A"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Verified fit</span>
-            <span class="veh-card__chip"><svg viewBox="0 0 24 24" width="14" height="14" fill="#16A34A"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> No rubbing (Guaranteed tier)</span>
-            <span class="veh-card__chip"><svg viewBox="0 0 24 24" width="14" height="14" fill="#16A34A"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Bolt pattern + offset confirmed</span>
-            <span class="veh-card__chip"><svg viewBox="0 0 24 24" width="14" height="14" fill="#16A34A"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> 89% of buyers pick Guaranteed</span>
+            <span class="veh-card__chip"><svg viewBox="0 0 24 24" width="14" height="14" fill="#16A34A"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> No rubbing</span>
+            <span class="veh-card__chip veh-card__chip--tech"><svg viewBox="0 0 24 24" width="14" height="14" fill="#16A34A"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Bolt pattern + offset confirmed</span>
+            <span class="veh-card__chip"><svg viewBox="0 0 24 24" width="14" height="14" fill="#16A34A"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> 89% pick Guaranteed</span>
           </div>
         </div>
       </div>
@@ -6499,7 +6536,7 @@ html, body{ overflow-x:clip; }
   function showVehiclePrompt(){
     document.getElementById('vehCardConfirmed').style.display = 'none';
     var empty = document.getElementById('vehCardEmpty');
-    empty.style.display = 'flex';
+    empty.style.display = '';
     empty.scrollIntoView({behavior:'smooth', block:'center'});
   }
   function selectVehicle(name, shortName, spec){
@@ -6509,7 +6546,9 @@ html, body{ overflow-x:clip; }
     document.getElementById('vfbVehName').textContent = name;
     document.getElementById('vehCardEmpty').style.display = 'none';
     var confirmed = document.getElementById('vehCardConfirmed');
-    confirmed.style.display = 'flex';
+    /* '' not 'flex': the stylesheet picks the mode (grid on mobile, flex on
+       desktop). Hardcoding 'flex' here overrode the mobile grid layout. */
+    confirmed.style.display = '';
     confirmed.scrollIntoView({behavior:'smooth', block:'center'});
   }
   function tierIdx(i) {
