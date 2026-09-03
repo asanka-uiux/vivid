@@ -11,8 +11,26 @@ real browser, not guessed) and adapted to this project's own tokens/brand —
 see §10 for exactly what was changed from the reference and why.
 
 Last verified against: `css/shared.css` (`#v2-footer` block, incl. the
-`.v2-footer__body` desktop padding fix) + `index.html` lines 4068–4260 +
-`js/script.js` lines 11–24, 2026-09-02.
+`.v2-footer__body` desktop padding fix) + `index.html` lines 4065–4255 +
+`js/script.js` lines 11–24, 2026-09-03.
+
+**2026-09-03 full resync:** ran every `.v2-footer*`/`#v2-footer` rule in
+`css/shared.css` against every code block in this file and corrected what
+had drifted out of sync (some from small intentional tweaks, some
+pre-existing from before this doc's last full pass):
+- `.v2-footer__finance-text` is `flex-direction:row` (single line —
+  "As low as 0% APR [Affirm]"), not the old stacked `column`.
+- `.v2-footer__finance-badge` no longer carries text-badge font styling
+  (`font-family`/`font-size`/`font-weight`/`letter-spacing`/`color`) — it
+  only holds an `<img>` now (see the 09-02 real-logos note in §5.1/§10), so
+  those declarations were dead weight in the doc.
+- `.v2-footer__brand` gap is `16px`, not `10px`.
+- `.v2-footer__desc`, `.v2-footer__contact-label`, and
+  `.v2-footer__contact-hours`/`.v2-footer__contact-address` are all
+  `rgba(255,255,255,.7)`, not `.5` — a contrast bump that predates this
+  resync but was never reflected here.
+- Confirmed the `.v2-footer__stat-right` removal (see the 09-03 stats-row
+  note below) left no other stragglers.
 
 **2026-09-02 update:** per the Sept 2 2026 client meeting notes, the
 "Verified buyers" and "Return rate" stat tiles were removed from
@@ -30,7 +48,7 @@ footer, noted here only because it was the same pass).
 
 | File | Role |
 |---|---|
-| `index.html` | Canonical footer markup, lines 4068–4260 (opening comment through `</footer>`). |
+| `index.html` | Canonical footer markup, lines 4065–4255 (opening comment through `</footer>`). |
 | `css/shared.css` | **All** v2-footer CSS (`#v2-footer` through the end of its two media queries). Loaded by every page in the project — the CSS is already live everywhere. |
 | `js/script.js` | Lines 11–24 — the mobile accordion toggle for the link columns (§9). Already linked by all 8 pages. |
 | `css/style.css` | Not involved. No footer rules live here. |
@@ -124,11 +142,12 @@ already applied per-section.
 .v2-footer__stars span{color:var(--action-primary);font-size:14px;line-height:1;font-weight:600}
 .v2-footer__stat--financing{gap:16px}
 .v2-footer__finance{display:flex;align-items:center;gap:3px}
-.v2-footer__finance-text{display:flex;flex-direction:column}
+.v2-footer__finance-text{display:flex;flex-direction:row;align-items:baseline;gap:4px;white-space:nowrap}
 .v2-footer__finance-sub{font-family:var(--font-ui);font-size:13px;font-weight:400;line-height:18px;color:#6b6b6b;text-transform:uppercase}
 .v2-footer__finance-price{font-family:var(--font-ui);font-size:13px;font-weight:400;line-height:1.2;color:#6b6b6b;text-transform:uppercase;white-space:nowrap}
 .v2-footer__finance-price strong{font-size:24px;font-weight:600;color:var(--action-primary);margin-right:2px}
-.v2-footer__finance-badge{display:inline-flex;align-items:center;padding:4px 9px;background:rgba(255,255,255,.85);border:.5px solid rgba(0,0,0,.1);border-radius:4px;font-family:var(--font-ui);font-size:11px;font-weight:700;letter-spacing:.02em;color:#333}
+.v2-footer__finance-badge{display:inline-flex;align-items:center;padding:4px 9px;background:rgba(255,255,255,.85);border:.5px solid rgba(0,0,0,.1);border-radius:4px}
+.v2-footer__finance-badge img{display:block;height:14px;width:auto;object-fit:contain}
 ```
 ```css
 @media screen and (min-width:768px){
@@ -184,20 +203,20 @@ why this now differs from the original text-pill decision).
 
 ```css
 .v2-footer__body{display:flex;flex-direction:column;padding:24px var(--gutter);gap:16px;max-width:var(--shell);margin:0 auto;width:100%;box-sizing:border-box}
-.v2-footer__brand{display:flex;flex-direction:column;gap:10px}
+.v2-footer__brand{display:flex;flex-direction:column;gap:16px}
 .v2-footer__logo{display:block;width:180px;line-height:0;align-self:center}
 .v2-footer__logo img{display:block;width:100%;height:auto}
-.v2-footer__desc{color:rgba(255,255,255,.5);margin:0;text-align:center;font-family:var(--font-ui);font-size:12px;font-weight:400;line-height:1.5}
+.v2-footer__desc{color:rgba(255,255,255,.7);margin:0;text-align:center;font-family:var(--font-ui);font-size:12px;font-weight:400;line-height:1.5}
 .v2-footer__contact{display:flex;flex-direction:column;gap:15px;padding-bottom:6px;border-bottom:1px solid #6b6b6b}
 .v2-footer__contact-top{display:flex;flex-direction:row;gap:70px}
 .v2-footer__contact-col{display:flex;flex-direction:column;gap:3.5px;flex:1}
 .v2-footer__contact-col>.v2-footer__contact-phone{margin-top:6px}
 .v2-footer__contact-link{font-family:var(--font-ui);font-size:13px;font-weight:600;color:rgba(255,255,255,.8);text-decoration:underline;text-underline-offset:2px;width:fit-content;transition:color .2s ease}
 .v2-footer__contact-link:hover{color:rgba(255,255,255,.75)}
-.v2-footer__contact-label{color:rgba(255,255,255,.5);font-family:var(--font-ui);font-size:12px;font-weight:600;letter-spacing:1.248px;text-transform:uppercase;margin-bottom:2px}
+.v2-footer__contact-label{color:rgba(255,255,255,.7);font-family:var(--font-ui);font-size:12px;font-weight:600;letter-spacing:1.248px;text-transform:uppercase;margin-bottom:2px}
 .v2-footer__contact-phone{transition:color .2s ease;width:fit-content;white-space:nowrap;color:rgba(255,255,255,.8);font-family:var(--font-ui);font-size:16px;font-weight:600}
 .v2-footer__contact-phone:hover{color:rgba(255,255,255,.75)}
-.v2-footer__contact-hours,.v2-footer__contact-address{color:rgba(255,255,255,.5);font-family:var(--font-ui);font-size:12px;font-weight:400;line-height:16px}
+.v2-footer__contact-hours,.v2-footer__contact-address{color:rgba(255,255,255,.7);font-family:var(--font-ui);font-size:12px;font-weight:400;line-height:16px}
 .v2-footer__contact-address{font-style:normal}
 
 .v2-footer__socials{display:flex;gap:8px;justify-content:center;list-style:none;padding:0;margin:0}
@@ -395,7 +414,7 @@ already live everywhere,** including any future rule changes like the
 CSS-only change. The steps below still apply verbatim any time a **new**
 page is created off `_page-template.html` and needs the footer added:
 
-1. Copy the full block from `index.html` lines 4083–4284 (opening comment
+1. Copy the full block from `index.html` lines 4065–4255 (opening comment
    through `</footer>`), verbatim.
 2. On the target page, delete its existing `<footer class="foot">…</footer>`
    and paste the copied block in its place.
