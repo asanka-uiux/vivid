@@ -4520,6 +4520,24 @@ html, body{ overflow-x:clip; }
   .vc .vc__hero .vc__eyebrow {
     color: #FFC9C2 !important;
   }
+  main.vc header.vc__hero p.vc__eyebrow {
+    color: #FFC9C2 !important;
+  }
+  .ab__hero-cta .vc__btn--ghost-dark {
+    color: #fff !important;
+    background: rgba(225,6,0,0.9) !important;
+  }
+  .ab__hero-cta a.vc__btn.vc__btn--ghost.vc__btn--ghost-dark {
+    color: #fff !important;
+  }
+  .vc__cta .vc__btn--ghost {
+    color: var(--ink) !important;
+    background: transparent !important;
+  }
+  .vc a.vc__btn--ghost {
+    color: var(--ink) !important;
+    background: transparent !important;
+  }
 
   /* ===== CTA — "Part of a family of brands" band: single centered column
      (overrides vr-content.css's desktop text-left/buttons-right grid),
@@ -4597,11 +4615,11 @@ html, body{ overflow-x:clip; }
      on that light background. Don't broaden this selector back to plain
      .vc__btn--ghost — that exact bug shipped once already. */
   .vc a.vc__btn--ghost-dark {
-    background: transparent;
-    color: #fff;
-    border-color: rgba(255,255,255,.7);
+    background: transparent !important;
+    color: #fff !important;
+    border-color: rgba(255,255,255,.7) !important;
   }
-  .vc a.vc__btn--ghost-dark:hover { background: rgba(255,255,255,.12); border-color: #fff; color: #fff; }
+  .vc a.vc__btn--ghost-dark:hover { background: rgba(255,255,255,.12) !important; border-color: #fff !important; color: #fff !important; }
 
   /* --- full-bleed black stats band --- */
   /* .vc__body's own padding-top would otherwise leave a white gap between
@@ -5245,13 +5263,13 @@ html, body{ overflow-x:clip; }
     <img src="real-photos/night-car.jpg" alt="Rear view of a dark Porsche 911 with glowing red taillights on a rain-soaked city street at dusk" width="1920" height="837" fetchpriority="high">
     <div class="vc__hero__scrim" aria-hidden="true"></div>
     <div class="vc__hero__inner">
-      <p class="vc__eyebrow" style="color: #FFC9C2">Vivid Racing &middot; About</p>
+      <p style="font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #FFC9C2; margin: 0 0 10px;">Vivid Racing &middot; About</p>
       <h1>Twenty-five years of go-fast parts.</h1>
       <p>Founded in 2001 with $500 and a $1,500 loan. Now a two-million-part catalog, five house brands, and an Arizona facility with the dyno, the fabrication shop and the phones under one roof.</p>
       <p class="vc__updated">Ported from vividracing.com &middot; August 2026</p>
       <div class="ab__hero-cta">
         <a class="vc__btn" href="#ab-timeline">See the timeline</a>
-        <a class="vc__btn vc__btn--ghost vc__btn--ghost-dark" style="color: #fff" href="waiting-to-build/contact.html">Talk to us</a>
+        <a class="vc__btn vc__btn--ghost-dark" style="background: rgba(225,6,0,0.9); color: #fff; border: 1.5px solid rgba(255,255,255,.7); border-radius: 2px; display: inline-flex; align-items: center; justify-content: center; font-weight: 600; padding: 12px 24px;" href="waiting-to-build/contact.html">Talk to us</a>
       </div>
     </div>
   </header>
@@ -5530,7 +5548,7 @@ html, body{ overflow-x:clip; }
           <p>Custom Offsets, Only Tires, Function Powersports, MAPerformance and Anovia
             Wheels &mdash; each with its own lane, all enthusiast-run.</p>
         </div>
-        <p><a class="vc__btn vc__btn--ghost" href="waiting-to-build/careers.html">Work here</a>
+        <p><a class="vc__btn--ghost" style="display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 12px 22px; background: transparent; color: var(--ink); border: 1.5px solid var(--rule); border-radius: 2px; font-family: var(--ui); font-size: 0.9375rem; font-weight: 700; text-decoration: none;" href="waiting-to-build/careers.html">Work here</a>
            <a class="vc__btn" href="waiting-to-build/contact.html">Talk to us</a></p>
       </div>
     </div>
