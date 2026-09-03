@@ -464,9 +464,11 @@
   <section class="hero" aria-labelledby="hero-title">
 
     <div class="hero__stage">
-      <img class="hero__photo" src="assets/img/hero-gtr.jpg" alt="" width="1440" height="610"
-           srcset="assets/img/hero-gtr-780.jpg 780w, assets/img/hero-gtr.jpg 1440w"
-           sizes="100vw" fetchpriority="high" decoding="async">
+      <picture>
+        <source media="(max-width: 900px)" srcset="assets/img/hero-trucks-mobile.webp">
+        <img class="hero__photo" src="assets/img/hero-trucks.webp" alt="" width="1920" height="800"
+             fetchpriority="high" decoding="async">
+      </picture>
 
       <div class="hero__inner">
         <div class="hero__copy">
