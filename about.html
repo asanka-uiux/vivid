@@ -4584,7 +4584,7 @@ html, body{ overflow-x:clip; }
   .ab__hero-cta { display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap; justify-content: center; }
   /* vr-content.css's base .vc__btn ships border-radius:10px — override so the
      hero buttons match the sharp-corner convention used across the page. */
-  .ab__hero-cta .vc__btn { border-radius: 2px; }
+  .ab__hero-cta .vc__btn { border-radius: 2px; min-width: 168px; text-align: center; justify-content: center; }
   @media (max-width: 899px) {
     /* Tighter than the desktop 22px — frees a few px of hero content
        height so the CTA row clears the lift-up stats band below it. */
@@ -4772,6 +4772,7 @@ html, body{ overflow-x:clip; }
   @media (min-width: 640px) {
     .ab__story-cell, .ab__story-badge, .ab__info-grid li, .ab__info-icon,
     .ab__hero-cta .vc__btn, .vc__cta .vc__btn { border-radius: 4px; }
+    .ab__strip-head { max-width: 64ch; }
     /* Tablet/desktop: fixed two-row grid, not a scroll carousel — the
        overflow-x/scroll-snap/flex-basis above is mobile-only, single-row. */
     .ab__info-grid {
