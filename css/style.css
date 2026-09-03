@@ -1016,15 +1016,10 @@
 .vids{background:#0a0a0a;border-bottom:1px solid #2a2a2a;
   padding:36px 0;text-align:center}
 @media (min-width:901px){ .vids{padding:80px 0 81px} }
-/* Figma's mobile frame puts the Subscribe CTA after the carousel + dots, not
-   before it — .shell's children are plain document flow, so a mobile-only
-   flex reorder moves the CTA without touching markup order (which stays
-   correct for the desktop reading order this restores at 901px+). */
 .vids .shell{display:flex;flex-direction:column}
 @media (min-width:901px){
-  .vids .shell{display:grid;grid-template-columns:1fr auto;column-gap:24px;align-items:center}
+  .vids .shell{display:grid;grid-template-columns:1fr;align-items:center}
   .vids__eyebrow,.vids__title,.vids__sub{grid-column:1;text-align:left}
-  .vids__cta{grid-column:2;grid-row:1/4;align-self:center;margin-top:0}
   .vids__carousel{grid-column:1/-1}
 }
 .vids .vids__eyebrow{color:var(--accent-red-on-dark)}
@@ -1040,31 +1035,6 @@
   max-width:34em;margin-inline:auto}
 @media (min-width:901px){ .vids__sub{max-width:none;margin-inline:0;font-size:14px;font-weight:400} }
 .vids__sub b{font-weight:700}
-/* Updated 2026-08-21 — was a flat black pill with the full-colour YouTube
-   logo riding on it, which read like a generic "dark button," not a YouTube
-   subscribe action, and didn't match this page's own red-accent CTA language
-   (.btn-outline, .mega__cta, etc. all key off --action-primary).
-   Now: --action-primary fill (white text on #b31414 is 6.94:1, comfortably
-   over 1.4.3's 4.5:1 — literal YouTube #FF0000 only clears ~4.0:1 with white
-   at this weight/size, so it's the wrong red to use here even though it's
-   the "real" one) + the white monochrome mark
-   (assets/icons/youtube-f.svg, already used in the footer social row) instead
-   of the multicolour logo, since a solid icon-on-brand-colour pairing is what
-   actually signals "platform action" rather than "here's a logo". Radius
-   bumped 2→4px to match this page's other elevated CTAs (.mega__feature,
-   .pcard). Hover/focus darkens the fill and lifts it with a shadow instead of
-   just swapping to a near-black — shadow, not translate, per this page's own
-   "reveal/nudge, never lift" convention. */
-.vids__cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;margin-top:14px;
-  padding:11px 18px;border-radius:4px;background:var(--action-primary);
-  font:500 12px/14px var(--font-ui);letter-spacing:1.32px;text-transform:uppercase;
-  color:var(--text-on-dark);order:1;
-  transition:background-color .16s ease,box-shadow .2s ease;min-height:44px}
-@media (min-width:901px){ .vids__cta{min-height:0;order:0} }
-.vids__cta img{width:19px;height:14px;flex:none}
-.vids__cta:hover,.vids__cta:focus-visible{
-  background:#8f1010;box-shadow:0 6px 16px rgba(179,20,20,.35)}
-@media (prefers-reduced-motion:reduce){.vids__cta{transition:none}}
 
 /* Horizontal scroll, all widths — was a 3-col grid (wrapping to 2 rows once
    the 6th card was added). This project already has this exact pattern for
