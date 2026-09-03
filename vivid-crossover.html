@@ -682,7 +682,12 @@
   <!-- ============ BROWSE BY FAMILY / AUTOMAKER · node 1746:11122 ============ -->
   <!-- NB: in Figma the Porsche card carries the Volkswagen headline. Reproduced
        as designed — flagged for copy review. -->
-  <section class="browse" aria-labelledby="browse-title">
+  <!-- Hidden 2026-09-03, not deleted: unmodified clone of index.html's Euro/
+       Exotic/JDM sports-car accordion (Porsche, Ferrari, Lexus...), never
+       themed to this page's actual Crossover identity. Superseded by .jump
+       ("Jump straight to your model") below. Remove the hidden attribute to
+       restore. -->
+  <section class="browse" aria-labelledby="browse-title" hidden>
     <!-- heading · node 251:3167 — was a section of its own (.headband) -->
     <div class="shell browse__band">
       <p class="browse__eyebrow">200+ brand partners · 1M+ parts</p>
@@ -3187,6 +3192,90 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+  <!-- ============ QUICK JUMP · vehicle model index =========================
+       Single family (no Euro/Exotic/JDM split — this page only has one
+       niche). Same .jump/.jump__* components and CSS as index.html/
+       vivid-trucks.html/vivid-classics.html/vividx.html; nothing new to
+       style here, just markup. ==== -->
+  <section class="jump" aria-labelledby="jump-title">
+    <div class="shell jump__band-intro">
+      <p class="jump__eyebrow">Know your crossover?</p>
+      <h2 class="jump__title" id="jump-title">Jump straight to your model</h2>
+    </div>
+    <div class="shell jump__families">
+      <article class="jump__family">
+        <div class="jump__intro">
+          <p class="jump__family-eyebrow">Core Crossover Platforms</p>
+          <h3 class="jump__family-title">We know your <em>chassis code</em>.</h3>
+          <div class="jump__intro-row">
+            <p class="jump__family-lede">A base Cayenne and a Turbo GT share a shell, not a spec sheet &mdash; we track every trim so what you order actually bolts on.</p>
+            <a class="jump__all" href="waiting-to-build/vehicle-picker.html">All Crossover Vehicles
+              <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+          </div>
+        </div>
+        <div class="jump__split">
+        <ul class="jump__rows">
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/porsche.svg" alt="Porsche" width="459" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="Porsche models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Cayenne">Cayenne</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Cayenne%20Coupe">Cayenne Coupe</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Macan">Macan</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Macan%20GTS">Macan GTS</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Cayenne%20Turbo%20GT">Cayenne Turbo GT</a></li>
+            </ul>
+          </li>
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/bmw.svg" alt="BMW" width="48" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="BMW models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=BMW&model=X3">X3</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=BMW&model=X5">X5</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=BMW&model=X6">X6</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=BMW&model=X7">X7</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=BMW&model=XM">XM</a></li>
+            </ul>
+          </li>
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/mercedes-benz.svg" alt="Mercedes-Benz" width="190" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="Mercedes-Benz models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mercedes-Benz&model=GLC">GLC</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mercedes-Benz&model=GLE">GLE</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mercedes-Benz&model=GLS">GLS</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mercedes-Benz&model=GLA">GLA</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mercedes-Benz&model=EQE%20SUV">EQE SUV</a></li>
+            </ul>
+          </li>
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/audi.svg" alt="Audi" width="136" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="Audi models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Audi&model=Q5">Q5</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Audi&model=Q7">Q7</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Audi&model=Q8">Q8</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Audi&model=RS%20Q8">RS Q8</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Audi&model=Q4%20e-tron">Q4 e-tron</a></li>
+            </ul>
+          </li>
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/land-rover.svg" alt="Land Rover" width="92" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="Land Rover models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Land%20Rover&model=Range%20Rover">Range Rover</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Land%20Rover&model=Range%20Rover%20Sport">Range Rover Sport</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Land%20Rover&model=Defender">Defender</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Land%20Rover&model=Discovery">Discovery</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Land%20Rover&model=Evoque">Evoque</a></li>
+            </ul>
+          </li>
+        </ul>
+        <figure class="jump__photo">
+          <img src="real-photos/porsche-cayenne.jpg" alt="" loading="lazy" width="1920" height="1003" decoding="async">
+          <figcaption>Porsche Cayenne</figcaption>
+        </figure>
+        <a class="btn-outline jump__all-btn" href="waiting-to-build/vehicle-picker.html">All Crossover Vehicles
+          <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+        </div>
+      </article>
     </div>
   </section>
   <!-- ============ BRAND ROSTER · node 251:6176 ============ -->
