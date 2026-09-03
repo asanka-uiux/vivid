@@ -3195,10 +3195,15 @@
     </div>
   </section>
   <!-- ============ QUICK JUMP · vehicle model index =========================
-       Single family (no Euro/Exotic/JDM split — this page only has one
-       niche). Same .jump/.jump__* components and CSS as index.html/
+       Four families — Euro / JDM-APAC / Luxury / American SUV — per the
+       user's own 2026-07-22 Top-5-by-region reference list, not an invented
+       roster. Same .jump/.jump__* components and CSS as index.html/
        vivid-trucks.html/vivid-classics.html/vividx.html; nothing new to
-       style here, just markup. ==== -->
+       style here, just markup. Each family repeats the "We know your
+       chassis code." headline verbatim (same motif as every other Jump
+       section), so each <h3> carries a visually-hidden family prefix —
+       otherwise four identical headings on one page are indistinguishable
+       to a screen-reader user navigating by heading. ==== -->
   <section class="jump" aria-labelledby="jump-title">
     <div class="shell jump__band-intro">
       <p class="jump__eyebrow">Know your crossover?</p>
@@ -3207,11 +3212,11 @@
     <div class="shell jump__families">
       <article class="jump__family">
         <div class="jump__intro">
-          <p class="jump__family-eyebrow">Core Crossover Platforms</p>
-          <h3 class="jump__family-title">We know your <em>chassis code</em>.</h3>
+          <p class="jump__family-eyebrow">Core Euro SUV Platforms</p>
+          <h3 class="jump__family-title"><span class="vh">Euro SUV: </span>We know your <em>chassis code</em>.</h3>
           <div class="jump__intro-row">
             <p class="jump__family-lede">A base Cayenne and a Turbo GT share a shell, not a spec sheet &mdash; we track every trim so what you order actually bolts on.</p>
-            <a class="jump__all" href="waiting-to-build/vehicle-picker.html">All Crossover Vehicles
+            <a class="jump__all" href="waiting-to-build/vehicle-picker.html">All Euro SUV Vehicles
               <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
           </div>
         </div>
@@ -3238,6 +3243,13 @@
             </ul>
           </li>
           <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/ineos.svg" alt="INEOS" width="160" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="INEOS models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=INEOS&model=Grenadier">Grenadier</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=INEOS&model=Grenadier%20Quartermaster">Grenadier Quartermaster</a></li>
+            </ul>
+          </li>
+          <li class="jump__row">
             <span class="jump__brand"><img src="assets/img/makes/mercedes-benz.svg" alt="Mercedes-Benz" width="190" height="48" loading="lazy" decoding="async"></span>
             <ul class="jump__models" role="list" aria-label="Mercedes-Benz models">
               <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mercedes-Benz&model=GLC">GLC</a></li>
@@ -3245,16 +3257,6 @@
               <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mercedes-Benz&model=GLS">GLS</a></li>
               <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mercedes-Benz&model=GLA">GLA</a></li>
               <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mercedes-Benz&model=EQE%20SUV">EQE SUV</a></li>
-            </ul>
-          </li>
-          <li class="jump__row">
-            <span class="jump__brand"><img src="assets/img/makes/audi.svg" alt="Audi" width="136" height="48" loading="lazy" decoding="async"></span>
-            <ul class="jump__models" role="list" aria-label="Audi models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Audi&model=Q5">Q5</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Audi&model=Q7">Q7</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Audi&model=Q8">Q8</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Audi&model=RS%20Q8">RS Q8</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Audi&model=Q4%20e-tron">Q4 e-tron</a></li>
             </ul>
           </li>
           <li class="jump__row">
@@ -3272,7 +3274,201 @@
           <img src="real-photos/porsche-cayenne.jpg" alt="" loading="lazy" width="1920" height="1003" decoding="async">
           <figcaption>Porsche Cayenne</figcaption>
         </figure>
-        <a class="btn-outline jump__all-btn" href="waiting-to-build/vehicle-picker.html">All Crossover Vehicles
+        <a class="btn-outline jump__all-btn" href="waiting-to-build/vehicle-picker.html">All Euro SUV Vehicles
+          <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+        </div>
+      </article>
+      <article class="jump__family">
+        <div class="jump__intro">
+          <p class="jump__family-eyebrow">Core JDM/APAC SUV Platforms</p>
+          <h3 class="jump__family-title"><span class="vh">JDM/APAC SUV: </span>We know your <em>chassis code</em>.</h3>
+          <div class="jump__intro-row">
+            <p class="jump__family-lede">A Land Cruiser and a RAV4 share a badge, not a platform &mdash; we track every generation so what you order actually fits.</p>
+            <a class="jump__all" href="waiting-to-build/vehicle-picker.html">All JDM/APAC SUV Vehicles
+              <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+          </div>
+        </div>
+        <div class="jump__split">
+        <ul class="jump__rows">
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/toyota.svg" alt="Toyota" width="272" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="Toyota models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=RAV4">RAV4</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=Highlander">Highlander</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=4Runner">4Runner</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=Land%20Cruiser">Land Cruiser</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=Sequoia">Sequoia</a></li>
+            </ul>
+          </li>
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/honda.svg" alt="Honda" width="60" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="Honda models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Honda&model=CR-V">CR-V</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Honda&model=Pilot">Pilot</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Honda&model=Passport">Passport</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Honda&model=HR-V">HR-V</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Honda&model=ZR-V">ZR-V</a></li>
+            </ul>
+          </li>
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/mazda.svg" alt="Mazda" width="199" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="Mazda models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mazda&model=CX-5">CX-5</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mazda&model=CX-50">CX-50</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mazda&model=CX-70">CX-70</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mazda&model=CX-90">CX-90</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mazda&model=CX-30">CX-30</a></li>
+            </ul>
+          </li>
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/lexus.svg" alt="Lexus" width="220" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="Lexus models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lexus&model=RX">RX</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lexus&model=GX">GX</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lexus&model=LX">LX</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lexus&model=NX">NX</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lexus&model=TX">TX</a></li>
+            </ul>
+          </li>
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/genesis.svg" alt="Genesis" width="300" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="Genesis models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Genesis&model=GV60">GV60</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Genesis&model=GV70">GV70</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Genesis&model=GV80">GV80</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Genesis&model=GV70%20Electrified">GV70 Electrified</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Genesis&model=GV80%20Coupe">GV80 Coupe</a></li>
+            </ul>
+          </li>
+        </ul>
+        <figure class="jump__photo">
+          <img src="real-photos/genesis-gv80.jpg" alt="" loading="lazy" width="1920" height="1440" decoding="async">
+          <figcaption>Genesis GV80</figcaption>
+        </figure>
+        <a class="btn-outline jump__all-btn" href="waiting-to-build/vehicle-picker.html">All JDM/APAC SUV Vehicles
+          <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+        </div>
+      </article>
+      <article class="jump__family">
+        <div class="jump__intro">
+          <p class="jump__family-eyebrow">Core Luxury SUV Platforms</p>
+          <h3 class="jump__family-title"><span class="vh">Luxury SUV: </span>We know your <em>chassis code</em>.</h3>
+          <div class="jump__intro-row">
+            <p class="jump__family-lede">A Urus and a Purosangue share a category, not a chassis &mdash; we track every trim so what you order actually bolts on.</p>
+            <a class="jump__all" href="waiting-to-build/vehicle-picker.html">All Luxury SUV Vehicles
+              <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+          </div>
+        </div>
+        <div class="jump__split">
+        <ul class="jump__rows">
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/ferrari.svg" alt="Ferrari" width="218" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="Ferrari models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ferrari&model=Purosangue">Purosangue</a></li>
+            </ul>
+          </li>
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/lamborghini.svg" alt="Lamborghini" width="195" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="Lamborghini models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lamborghini&model=Urus">Urus</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lamborghini&model=Urus%20S">Urus S</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lamborghini&model=Urus%20Performante">Urus Performante</a></li>
+            </ul>
+          </li>
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/rolls-royce.svg" alt="Rolls-Royce" width="38" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="Rolls-Royce models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Rolls-Royce&model=Cullinan">Cullinan</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Rolls-Royce&model=Cullinan%20Black%20Badge">Cullinan Black Badge</a></li>
+            </ul>
+          </li>
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/aston-martin.svg" alt="Aston Martin" width="455" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="Aston Martin models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Aston%20Martin&model=DBX">DBX</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Aston%20Martin&model=DBX707">DBX707</a></li>
+            </ul>
+          </li>
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/bentley.svg" alt="Bentley" width="300" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="Bentley models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Bentley&model=Bentayga">Bentayga</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Bentley&model=Bentayga%20EWB">Bentayga EWB</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Bentley&model=Bentayga%20S">Bentayga S</a></li>
+            </ul>
+          </li>
+        </ul>
+        <figure class="jump__photo">
+          <img src="real-photos/lamborghini-urus.jpg" alt="" loading="lazy" width="1920" height="1439" decoding="async">
+          <figcaption>Lamborghini Urus</figcaption>
+        </figure>
+        <a class="btn-outline jump__all-btn" href="waiting-to-build/vehicle-picker.html">All Luxury SUV Vehicles
+          <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+        </div>
+      </article>
+      <article class="jump__family">
+        <div class="jump__intro">
+          <p class="jump__family-eyebrow">Core American SUV Platforms</p>
+          <h3 class="jump__family-title"><span class="vh">American SUV: </span>We know your <em>chassis code</em>.</h3>
+          <div class="jump__intro-row">
+            <p class="jump__family-lede">A Tahoe and a Yukon share a platform, not a name &mdash; we track every trim and wheelbase so what you order actually bolts on.</p>
+            <a class="jump__all" href="waiting-to-build/vehicle-picker.html">All American SUV Vehicles
+              <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+          </div>
+        </div>
+        <div class="jump__split">
+        <ul class="jump__rows">
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/chevrolet.png" alt="Chevrolet" width="103" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="Chevrolet models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Chevrolet&model=Tahoe">Tahoe</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Chevrolet&model=Suburban">Suburban</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Chevrolet&model=Blazer">Blazer</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Chevrolet&model=Trailblazer">Trailblazer</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Chevrolet&model=Traverse">Traverse</a></li>
+            </ul>
+          </li>
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/gmc.svg" alt="GMC" width="137" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="GMC models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=GMC&model=Yukon">Yukon</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=GMC&model=Yukon%20XL">Yukon XL</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=GMC&model=Acadia">Acadia</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=GMC&model=Terrain">Terrain</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=GMC&model=Hummer%20EV%20SUV">Hummer EV SUV</a></li>
+            </ul>
+          </li>
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/ford.svg" alt="Ford" width="133" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="Ford models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Explorer">Explorer</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Expedition">Expedition</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Edge">Edge</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Bronco%20Sport">Bronco Sport</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Escape">Escape</a></li>
+            </ul>
+          </li>
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/lincoln.svg" alt="Lincoln" width="127" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="Lincoln models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lincoln&model=Navigator">Navigator</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lincoln&model=Aviator">Aviator</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lincoln&model=Nautilus">Nautilus</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lincoln&model=Corsair">Corsair</a></li>
+            </ul>
+          </li>
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/rivian.svg" alt="Rivian" width="230" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="Rivian models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Rivian&model=R1S">R1S</a></li>
+            </ul>
+          </li>
+        </ul>
+        <figure class="jump__photo">
+          <img src="real-photos/chevrolet-tahoe.jpg" alt="" loading="lazy" width="1920" height="1065" decoding="async">
+          <figcaption>Chevrolet Tahoe</figcaption>
+        </figure>
+        <a class="btn-outline jump__all-btn" href="waiting-to-build/vehicle-picker.html">All American SUV Vehicles
           <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
         </div>
       </article>
