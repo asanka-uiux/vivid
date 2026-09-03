@@ -119,7 +119,6 @@ already applied per-section.
 .v2-footer__stat{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .v2-footer__stat:not(:last-child){border-right:1px solid #e0e0e0;padding-right:12px}
 .v2-footer__stat-num{font-family:var(--font-ui);font-size:24px;font-weight:600;color:var(--action-primary);letter-spacing:-.208px;line-height:.87;white-space:nowrap}
-.v2-footer__stat-right{display:flex;flex-direction:column;gap:2px}
 .v2-footer__stat-label{color:#6b6b6b;font-family:var(--font-ui);font-size:14px;font-weight:400;line-height:normal;letter-spacing:.14px;text-transform:uppercase}
 .v2-footer__stars{display:flex;gap:3px;line-height:1}
 .v2-footer__stars span{color:var(--action-primary);font-size:14px;line-height:1;font-weight:600}
@@ -153,7 +152,20 @@ blocks inside one `.v2-footer__stat--financing`) → star rating → free
 shipping.** The verified-buyer count and return-rate tiles that used to
 bookend this row were removed per client request; nothing replaced them, so
 the row is simply shorter now and the remaining 3 items get more of the
-`justify-content:space-between` room on desktop than they used to. Mobile:
+`justify-content:space-between` room on desktop than they used to.
+
+**2026-09-03:** the star-rating stat was rebuilt to match the other two's
+flat structure. It used to be `.v2-footer__stat-num` (empty) +
+`.v2-footer__stat-right` (a column wrapper stacking the stars above a
+`4.9 · 14,000 Reviews` label) — two lines, and "4.9" wasn't visually
+distinct. Now it's three direct children of `.v2-footer__stat`, same as
+Free Shipping's `stat-num` + `stat-label` pair: `stat-num` holds `4.9`
+(same 24px bold red as every other stat-num), then `.v2-footer__stars`,
+then `stat-label` holds just `14,000 Reviews`. `.v2-footer__stat`'s own
+`display:flex;align-items:center;gap:8px` lays all three out in one row —
+no wrapper div needed. `.v2-footer__stat-right` is gone from the CSS
+entirely (verified unused after this change, across all 11 pages that
+carry this footer, not just the 5 homepage variations). Mobile:
 horizontal-scroll strip (`overflow-x:auto`, scrollbar hidden), each stat
 keeps its natural width and a vertical divider except the last. Desktop
 (1024px+): scroll disabled, stats spread edge-to-edge with
