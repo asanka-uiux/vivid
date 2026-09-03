@@ -1527,14 +1527,19 @@
 @media (min-width:641px){
   .jump__row{flex-direction:row;align-items:center;gap:20px;padding:18px 24px}
 }
-/* Logo, not a red wordmark — the row now leads with the mark a shopper
-   already recognizes rather than another block of brand-red type. Every
-   brand's SVG has its own native aspect ratio (BMW's roundel is square,
-   Porsche's script is 9:1 wide), so the box is fixed and the mark sits
-   inside it at object-fit:contain — same box, same size, whatever the shape. */
-.jump__brand{flex:none;display:flex;align-items:center;height:32px}
-@media (min-width:641px){ .jump__brand{width:168px;height:40px} }
-.jump__brand img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+/* Brand wordmark, set in the display face rather than the manufacturer's own
+   logo. Per the 2026-09-03 trademark review: the model name alone identifies
+   the fitment, so reproducing an OEM logo is more of the mark than is
+   reasonably necessary. Width is fixed at every breakpoint so each row's
+   model chips start on the same column; the two size tiers below let the
+   longest names fit that same width without wrapping. */
+.jump__brand{flex:none;display:flex;align-items:center;width:168px;height:32px;
+  font-family:var(--font-display);font-weight:800;font-size:17px;line-height:1.1;
+  letter-spacing:.02em;text-transform:uppercase;color:var(--text-primary);
+  white-space:nowrap}
+@media (min-width:641px){ .jump__brand{height:40px} }
+.jump__brand--long{font-size:15px}   /* Land Rover, Volkswagen, Lamborghini, Rolls-Royce */
+.jump__brand--xlong{font-size:13px}  /* Aston Martin, Mercedes-Benz */
 
 /* role="list" in the markup restores the semantics this flex layout would
    otherwise drop in Safari/VoiceOver — same reason .apanel__models below
