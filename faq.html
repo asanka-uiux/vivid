@@ -4684,7 +4684,7 @@
 
   /* --- content wrap ---------------------------------------------------------- */
   .faq-content { padding: 48px var(--pad-x) 8px; background: #fff; }
-  .faq-content__inner { max-width: 1440px; margin: 0 auto; display: grid; gap: 40px; }
+  .faq-content__inner { max-width: 1440px; margin: 0 auto; display: grid; gap: 40px; position: relative; }
   .faq-main { min-width: 0; }
   @media (min-width: 1000px) {
     /* Named areas pin main/sidebar/cta to their original desktop positions
@@ -4695,10 +4695,19 @@
     .faq-content__inner {
       grid-template-columns: minmax(0,1fr) 300px;
       grid-template-areas: "main sidebar" "cta cta";
-      align-items: start;
+      /* No align-items:start here — a "start"-aligned sidebar box only as
+         tall as its own content breaks position:sticky's boundary
+         calculation (it needs a box spanning the full "main" row height to
+         know where to stop), which let the sidebar stick past the row 1/2
+         boundary and overlap .faq-cta. Default stretch fixes that; visually
+         identical for .faq-main since it's already the tallest item. */
     }
     .faq-main { grid-area: main; }
-    .faq-sidebar { grid-area: sidebar; position: sticky; top: 24px; }
+    /* position is driven by JS below, not CSS sticky — a grid item's sticky
+       containing block is the WHOLE grid container (both rows), not its own
+       grid area, so CSS alone let this stick past row 1 into the cta row.
+       Static fallback here in case JS hasn't run yet. */
+    .faq-sidebar { grid-area: sidebar; position: static; align-self: start; }
     .faq-cta { grid-area: cta; }
   }
 
@@ -5784,6 +5793,70 @@ document.addEventListener('click', function (e) {
       filterBySearch(this.value);
     }
   });
+})();
+</script>
+
+<script>
+/* Desktop-only: bound the sidebar's sticky range to .faq-main's height so it
+   can't overlap .faq-cta below it. Plain CSS position:sticky can't do this —
+   a grid item's sticky containing block is the whole grid container (both
+   the "main sidebar" row AND the "cta" row), not just its own grid area, so
+   the sidebar kept sticking straight through the cta row. This manually
+   switches between static / fixed-at-top-24 / parked-above-cta based on
+   scroll position instead. No-ops entirely below 1000px — mobile is
+   untouched. */
+(function () {
+  var mq = window.matchMedia('(min-width: 1000px)');
+  var sidebar = document.querySelector('.faq-sidebar');
+  var main = document.querySelector('.faq-main');
+  var container = document.querySelector('.faq-content__inner');
+  if (!sidebar || !main || !container) return;
+
+  var STICK_TOP = 24;
+  var ticking = false;
+
+  function reset() {
+    sidebar.style.position = '';
+    sidebar.style.top = '';
+    sidebar.style.left = '';
+    sidebar.style.width = '';
+  }
+
+  function update() {
+    ticking = false;
+    if (!mq.matches) { reset(); return; }
+
+    var mainRect = main.getBoundingClientRect();
+    var containerRect = container.getBoundingClientRect();
+    var sidebarWidth = sidebar.offsetWidth || sidebar.getBoundingClientRect().width;
+    var lowestAllowedTop = mainRect.bottom - sidebar.offsetHeight;
+
+    if (mainRect.top >= STICK_TOP) {
+      reset();
+    } else if (lowestAllowedTop > STICK_TOP) {
+      sidebar.style.position = 'fixed';
+      sidebar.style.top = STICK_TOP + 'px';
+      sidebar.style.left = mainRect.right + 40 + 'px';
+      sidebar.style.width = sidebarWidth + 'px';
+    } else {
+      sidebar.style.position = 'absolute';
+      sidebar.style.left = '';
+      sidebar.style.width = '';
+      sidebar.style.top = (mainRect.bottom - containerRect.top - sidebar.offsetHeight) + 'px';
+    }
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  mq.addEventListener ? mq.addEventListener('change', update) : mq.addListener(update);
+  update();
 })();
 </script>
 </body>
