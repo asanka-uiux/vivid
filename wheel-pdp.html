@@ -4781,6 +4781,19 @@
     .bp__expert { flex-direction: column; align-items: stretch; }
     .bp__expert > div:last-child { margin-top: 4px; }
     .pdp-about p, .pdp-about li, .review p, .policy__desc, .opt__desc { font-size: 12px; }
+    /* --- staggered toggle head: 2-col grid on mobile so the "Directional
+       Design" badge drops onto its own line under the text instead of
+       fighting it for the same row. The old flex row had no min-width:0 on
+       the (then unclassed) text div, so at ~360px the badge was pushed past
+       the box's right border; minmax(0,1fr) lets that column actually
+       shrink. Badge/sub sizes nudged up — both were under 11px, which the
+       a11y pass flags as hard to read (WCAG 1.4.4). --- */
+    .stag__head { display: grid; grid-template-columns: 20px minmax(0, 1fr);
+      align-items: center; column-gap: 12px; row-gap: 8px; padding: 10px 12px; }
+    .stag__check { grid-row: 1; }
+    .stag__text { grid-column: 2; min-width: 0; }
+    .stag__badge { grid-column: 2; justify-self: start; margin-left: 0; font-size: 11px; }
+    .stag__sub { font-size: 12px; }
   }
 
 
@@ -5417,7 +5430,7 @@ html, body{ overflow-x:clip; }
           <div class="stag" id="stagBox">
             <div class="stag__head" role="button" tabindex="0" aria-expanded="false" aria-controls="stagBox" onclick="toggleStag()">
               <div class="stag__check"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></div>
-              <div>
+              <div class="stag__text">
                 <span class="stag__label">Staggered Setup</span><br/>
                 <span class="stag__sub">Different sizes front &amp; rear</span>
               </div>
@@ -5432,7 +5445,7 @@ html, body{ overflow-x:clip; }
                       <span class="sizesel__value">20x10 &nbsp;|&nbsp; -25mm Offset</span>
                       <span class="sizesel__badge">$390/ea</span>
                     </span>
-                    <svg class="sizesel__chev" width="10" height="6" viewBox="0 0 8 8" fill="none" aria-hidden="true"><path d="M2 3L4 5L6 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <svg class="sizesel__chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
                   </button>
                   <ul class="sizesel__list" role="listbox" aria-label="Front wheel size options" hidden>
                     <li class="sizesel__opt sizesel__opt--active" role="option" aria-selected="true" tabindex="0" data-value="390" data-label="20x10 &nbsp;|&nbsp; -25mm Offset" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>20x10 &nbsp;|&nbsp; -25mm Offset</span><span class="sizesel__opt-tag">$390/ea</span></li>
@@ -5447,7 +5460,7 @@ html, body{ overflow-x:clip; }
                       <span class="sizesel__value">20x10 &nbsp;|&nbsp; -25mm Offset</span>
                       <span class="sizesel__badge">$390/ea</span>
                     </span>
-                    <svg class="sizesel__chev" width="10" height="6" viewBox="0 0 8 8" fill="none" aria-hidden="true"><path d="M2 3L4 5L6 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <svg class="sizesel__chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
                   </button>
                   <ul class="sizesel__list" role="listbox" aria-label="Rear wheel size options" hidden>
                     <li class="sizesel__opt sizesel__opt--active" role="option" aria-selected="true" tabindex="0" data-value="390" data-label="20x10 &nbsp;|&nbsp; -25mm Offset" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>20x10 &nbsp;|&nbsp; -25mm Offset</span><span class="sizesel__opt-tag">$390/ea</span></li>
