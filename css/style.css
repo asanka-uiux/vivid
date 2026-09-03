@@ -1303,6 +1303,19 @@
 .rbar__cta .btn-white{width:300px;max-width:100%}
 @media (min-width:901px){ .rbar__cta .btn-white{width:auto;max-width:none} }
 
+/* Mobile: centre the whole bar. .rbar__cta was already centred while the
+   score and the source list stayed left-packed, so the button read as
+   misaligned against everything above it. Centring .rbar__sources also
+   fixes the wrap: with three items and only ~358px, Google + Trustpilot
+   take the first line and SEMA the second, and left-packed that left a
+   ragged gap beside SEMA. A max-width query rather than a change to the
+   base rules, so none of it can leak into the 901px+ row layout. */
+@media (max-width:900px){
+  .rbar__row{align-items:center;justify-content:center}
+  .rbar__score{align-items:center;text-align:center}
+  .rbar__sources{justify-content:center}
+}
+
 
 /* ===== REVIEWS · node 251:6088 =========================================
    Redesigned 2026-08-19: was three photo-led cards; now sourced from Google,
