@@ -1443,3 +1443,135 @@
 .vids .dashes span{background:rgba(255,255,255,.28)}
 .vids .dashes span.is-active{background:#fff}
 
+/* ===== QUICK JUMP · vehicle-family model index ============================
+   .browse is a rich accordion built for browsing (one brand open at a time,
+   full product grids underneath). This is the opposite tool for the opposite
+   shopper: someone who already knows their car and wants the fastest link to
+   it, so every brand + model across all three families stays on the page at
+   once — nothing here is a disclosure. Heading band + eyebrow reuse the
+   .browse__title/.browse__eyebrow type scale so the two sections read as one
+   family despite the different job. */
+.jump{background:var(--bg-surface);padding:40px 0 56px}
+@media (min-width:901px){ .jump{padding:60px 0 72px} }
+.jump__band-intro{text-align:center;padding-bottom:24px}
+.jump__eyebrow{margin:0;font:500 16px/14px var(--font-ui);letter-spacing:.88px;
+  text-transform:uppercase;color:var(--action-primary)}
+.jump__title{margin:12px 0 0;font-family:var(--font-display);font-weight:800;
+  font-size:26px;line-height:30px;letter-spacing:-.4px;text-transform:uppercase;
+  color:var(--ink);font-variation-settings:"YTLC" 500,"wdth" 100}
+@media (min-width:901px){
+  .jump__title{font-size:40px;line-height:44px;letter-spacing:-.8px}
+}
+
+.jump__families{display:flex;flex-direction:column;gap:40px;padding-top:8px}
+@media (min-width:901px){ .jump__families{gap:56px} }
+
+/* ===== per-family intro: eyebrow + headline + lede, title off the photo ===
+   2026-09-03. Each family used to carry its name as text overlaid on a photo
+   banner (.jump__band, now gone). Moved to plain top-of-block text instead —
+   readable at any crop, and free to sit beside the photo rather than on it.
+   Eyebrow/title/lede reuse .experts__eyebrow/__title/__lede's exact type
+   scale so this reads as the same voice as the rest of the page. */
+.jump__intro{padding-bottom:20px}
+.jump__family-eyebrow{margin:0;font:500 16px/15px var(--font-ui);letter-spacing:.88px;
+  text-transform:uppercase;color:var(--action-primary)}
+.jump__family-title{margin:10px 0 0;font-family:var(--font-display);font-weight:800;
+  font-size:24px;line-height:1.15;letter-spacing:-.4px;text-transform:uppercase;
+  color:var(--ink);font-variation-settings:"YTLC" 500,"wdth" 100}
+@media (min-width:901px){ .jump__family-title{font-size:36px;letter-spacing:-.6px} }
+.jump__family-title em{font-style:normal;color:var(--action-primary)}
+.jump__intro-row{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+@media (min-width:901px){
+  .jump__intro-row{flex-direction:row;align-items:flex-end;justify-content:space-between;gap:24px}
+}
+.jump__family-lede{margin:0;max-width:800px;font:400 14px/20px var(--font-ui);
+  color:var(--text-primary)}
+@media (min-width:901px){ .jump__family-lede{font:400 16px/24px var(--font-ui)} }
+/* Underline, not a button — this is a secondary way out of the section
+   (straight to the family's full catalog), not competing with the model
+   chips below for attention. Desktop only: below 901px this link is hidden
+   in favor of .jump__all-btn, a second instance of the same link parked
+   under the photo (see .jump__split) — mobile gets the loud full-width
+   button instead, same reasoning .browse__cta already documents for its own
+   mobile/desktop CTA split above. */
+.jump__all{flex:none;display:inline-flex;align-items:center;gap:8px;
+  padding-bottom:3px;border-bottom:2px solid var(--action-primary);
+  font:700 12px/1 var(--font-ui);letter-spacing:1.2px;text-transform:uppercase;
+  color:var(--ink);white-space:nowrap;transition:color .16s ease}
+.jump__all img{width:11px;height:11px;transition:transform .18s ease}
+.jump__all:hover,.jump__all:focus-visible{color:var(--action-primary)}
+.jump__all:hover img,.jump__all:focus-visible img{transform:translateX(3px)}
+@media (max-width:900px){ .jump__all{display:none} }
+@media (prefers-reduced-motion:reduce){ .jump__all img{transition:none} }
+
+/* Same link, mobile-only placement: parked under the photo instead of
+   beside the lede, and given the full .btn-outline treatment (already the
+   family-level "Shop all X" component above) rather than the desktop
+   version's quiet underline. */
+.jump__all-btn{width:100%;margin-top:16px}
+@media (min-width:901px){ .jump__all-btn{display:none} }
+
+/* ===== split: model list left, hero photo right =========================
+   align-items:stretch (the flex default) is doing the work here: neither
+   child has a natural height on its own — the photo's <img> is
+   position:absolute so the <figure> carries none — so both stretch to
+   whichever is taller, almost always the row list. */
+.jump__split{display:flex;flex-direction:column;gap:16px}
+@media (min-width:901px){ .jump__split{flex-direction:row;gap:24px} }
+
+.jump__rows{margin:0;padding:0;list-style:none;background:#fff;flex:1 1 auto;min-width:0;
+  border:1px solid var(--hairline);border-radius:4px}
+.jump__row{display:flex;flex-direction:column;gap:12px;padding:16px 20px;
+  border-bottom:1px solid var(--hairline)}
+.jump__row:last-child{border-bottom:0}
+@media (min-width:641px){
+  .jump__row{flex-direction:row;align-items:center;gap:20px;padding:18px 24px}
+}
+/* Logo, not a red wordmark — the row now leads with the mark a shopper
+   already recognizes rather than another block of brand-red type. Every
+   brand's SVG has its own native aspect ratio (BMW's roundel is square,
+   Porsche's script is 9:1 wide), so the box is fixed and the mark sits
+   inside it at object-fit:contain — same box, same size, whatever the shape. */
+.jump__brand{flex:none;display:flex;align-items:center;height:32px}
+@media (min-width:641px){ .jump__brand{width:168px;height:40px} }
+.jump__brand img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+
+/* role="list" in the markup restores the semantics this flex layout would
+   otherwise drop in Safari/VoiceOver — same reason .apanel__models below
+   would need it if it weren't already display:grid there. */
+/* Mobile: a single-line horizontal scroller instead of wrapping to 2-3
+   lines — same overflow-x/hidden-scrollbar convention as .browse__side
+   above uses for the family-tile row, so this reads as an established
+   pattern rather than a new one. Nothing is hidden; every model is still
+   here, just reachable by swipe instead of by scrolling the page further.
+   641px+ (where .jump__row already goes row-layout) reverts to wrapping —
+   the row has room for it there. */
+.jump__models{display:flex;flex-wrap:nowrap;gap:8px;margin:0;padding:0;list-style:none;
+  overflow-x:auto;scrollbar-width:none}
+.jump__models::-webkit-scrollbar{display:none}
+.jump__models li{flex:none}
+@media (min-width:641px){ .jump__models{flex-wrap:wrap;overflow-x:visible} }
+/* Quieted 2026-09-03: a filled red chip per model, times 15 brands, read as
+   the loudest thing on the page. Same neutral fill/border/hover language as
+   .mchip above — #0a0a0a on --surface-sunken is 19.6:1, so dropping the red
+   fill costs nothing on contrast, only volume. */
+.jump__chip{display:inline-flex;align-items:center;justify-content:center;
+  min-height:44px;padding:10px 16px;background:var(--surface-sunken);
+  border:1px solid var(--hairline);border-radius:4px;
+  font:600 14px/18px var(--font-ui);color:var(--ink);
+  transition:border-color .16s ease,background-color .16s ease}
+.jump__chip:hover,.jump__chip:focus-visible{border-color:var(--action-primary);background:#fff}
+@media (prefers-reduced-motion:reduce){ .jump__chip{transition:none} }
+
+.jump__photo{position:relative;flex:none;margin:0;height:220px;
+  border-radius:4px;overflow:hidden;background:var(--surface-sunken)}
+@media (min-width:901px){ .jump__photo{flex:0 0 380px;height:auto} }
+.jump__photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* .85 alpha near-black holds >10:1 for white text against this caption pill
+   even over a blown-out-white patch of photo underneath — same reasoning as
+   the old .jump__band scrim it replaces. */
+.jump__photo figcaption{position:absolute;left:12px;bottom:12px;z-index:1;
+  padding:8px 12px;background:rgba(10,10,10,.85);border-radius:2px;
+  font:600 12px/1 var(--font-ui);letter-spacing:.4px;text-transform:uppercase;
+  color:#fff}
+
