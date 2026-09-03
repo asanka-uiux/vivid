@@ -5247,6 +5247,63 @@
       gap: 6px 8px; }
     .veh-card__chip { font-size: 12px; line-height: 18px; white-space: nowrap; }
     .veh-card__chip--tech { display: none; }
+
+    /* --- Mobile product card: horizontal, per the reference screenshots.
+       Square image on the left, details stacked on the right, and the
+       qty / price / View Details row spanning the full width underneath.
+
+       .wcard__body goes display:contents so its children become grid items
+       of the card itself -- that is what lets the buy row escape the details
+       column and span both. Safe to place by explicit row because all 40
+       cards across the two store pages share the same child structure
+       (1 imglink, brand-row, name, spec, stars, 2 fin-rows, buyrow, cta,
+       perks -- verified). column-gap is 0 so the buy row's top rule runs
+       unbroken across both columns; the details column pays for its own
+       gutter with padding instead. Desktop is untouched. --- */
+    .wcard { display: grid; grid-template-columns: 44% minmax(0,1fr);
+      grid-template-rows: repeat(7, auto) auto; }
+
+    .wcard__imglink { grid-column: 1; grid-row: 1 / 8; align-self: stretch; }
+    .wcard__img { height: 100%; border-bottom: 0; border-right: 1px solid var(--line); }
+    .wcard__img img { height: 100%; aspect-ratio: auto; padding: 10px; }
+    .wcard__body { display: contents; }
+
+    .wcard__brand-row, .wcard__name, .wcard__spec, .wcard__stars,
+    .wcard__perks, .wcard__fin-row { grid-column: 2; padding-left: 12px;
+      padding-right: 12px; }
+    .wcard__brand-row { grid-row: 1; padding-top: 10px; }
+    .wcard__name  { grid-row: 2; }
+    .wcard__spec  { grid-row: 3; }
+    .wcard__stars { grid-row: 4; }
+    .wcard__perks { grid-row: 5; margin-top: 4px; }
+    /* the two .wcard__fin-row siblings auto-place into rows 6 and 7.
+       In the narrow details column the row needed ~222px against 199px, so
+       "STARTING AT" was breaking after "STARTING" and orphaning "AT" onto a
+       third line. Nowrap keeps the label whole, and the label/logo shrink
+       just enough to hold one line from 390px up; below that the brand logo
+       wraps cleanly to a second line instead of the text fracturing. */
+    .wcard__fin-row { flex-wrap: wrap; row-gap: 0; letter-spacing: 0; }
+    .wcard__fin-row > span:first-child { white-space: nowrap; }
+    .wcard__fin-row strong { font-size: 11.5px; }
+    .wcard__fin-brand img { height: 11px; }
+
+    /* the reference fits two perk lines beside a near-square image; ViViD has
+       three, so they tighten up here to keep the card from towering over it */
+    .wcard__perk { font-size: 11px; line-height: 1.3; }
+
+    .wcard__buyrow { grid-column: 1; grid-row: 8; justify-content: flex-start;
+      gap: 10px; margin-top: 0; padding: 10px 0 10px 12px; }
+    /* was-price on its own line above, then price and "ea" inline beneath it,
+       as in the reference -- flex-basis 100% on the strikethrough breaks the
+       line without needing a wrapper element around the price + unit */
+    .wcard__price-row { flex-wrap: wrap; align-items: baseline; gap: 0 5px; }
+    .wcard__was { flex: 0 0 100%; }
+    .wcard__cta { grid-column: 2; grid-row: 8; align-self: center;
+      margin: 10px 12px 10px 0; position: relative; }
+    /* continues .wcard__buyrow's top rule across the second column: the button
+       sits 10px below the row's top edge, so -10px lands exactly on it */
+    .wcard__cta::before { content: ""; position: absolute; top: -10px; left: 0;
+      right: -12px; height: 1px; background: var(--line); }
   }
 
 
