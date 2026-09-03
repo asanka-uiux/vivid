@@ -669,7 +669,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .v2-footer__finance-badge img{display:block;height:14px;width:auto;object-fit:contain}
 
 .v2-footer__body{display:flex;flex-direction:column;padding:24px var(--gutter);gap:16px;max-width:var(--shell);margin:0 auto;width:100%;box-sizing:border-box}
-.v2-footer__brand{display:flex;flex-direction:column;gap:10px}
+.v2-footer__brand{display:flex;flex-direction:column;gap:16px}
 .v2-footer__logo{display:block;width:180px;line-height:0;align-self:center}
 .v2-footer__logo img{display:block;width:100%;height:auto}
 .v2-footer__desc{color:rgba(255,255,255,.7);margin:0;text-align:center;font-family:var(--font-ui);font-size:12px;font-weight:400;line-height:1.5}

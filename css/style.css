@@ -1018,7 +1018,7 @@
 @media (min-width:901px){ .vids{padding:80px 0 81px} }
 .vids .shell{display:flex;flex-direction:column}
 @media (min-width:901px){
-  .vids .shell{display:grid;grid-template-columns:1fr;align-items:center}
+  .vids .shell{display:grid;grid-template-columns:minmax(0,1fr);align-items:center}
   .vids__eyebrow,.vids__title,.vids__sub{grid-column:1;text-align:left}
   .vids__carousel{grid-column:1/-1}
 }
