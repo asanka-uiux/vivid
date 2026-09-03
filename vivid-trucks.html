@@ -682,7 +682,14 @@
   <!-- ============ BROWSE BY FAMILY / AUTOMAKER · node 1746:11122 ============ -->
   <!-- NB: in Figma the Porsche card carries the Volkswagen headline. Reproduced
        as designed — flagged for copy review. -->
-  <section class="browse" aria-labelledby="browse-title">
+  <!-- Hidden 2026-09-03, not deleted: superseded by .jump ("Jump straight to
+       your model") below, which does the same job — brand → model → link —
+       without the accordion clicks. Also: this accordion's own tabs (Ford/
+       Ram/Toyota/Jeep/Chevrolet) never matched its content (4 of its "fam"
+       panels still carried old sports-car brand cards from the template this
+       page was cloned from), so hiding it fixes that mismatch rather than
+       leaving it live. Remove the hidden attribute to restore. -->
+  <section class="browse" aria-labelledby="browse-title" hidden>
     <!-- heading · node 251:3167 — was a section of its own (.headband) -->
     <div class="shell browse__band">
       <p class="browse__eyebrow">Truck platforms · Ford, Ram, Toyota, Jeep, Chevrolet</p>
@@ -3367,6 +3374,90 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+  <!-- ============ QUICK JUMP · vehicle model index =========================
+       Single family (no Euro/Exotic/JDM split — this page only has one
+       niche). Same .jump/.jump__* components and CSS as index.html/
+       vivid-classics.html/vividx.html/vivid-crossover.html; nothing new to
+       style here, just markup. ==== -->
+  <section class="jump" aria-labelledby="jump-title">
+    <div class="shell jump__band-intro">
+      <p class="jump__eyebrow">Know your truck?</p>
+      <h2 class="jump__title" id="jump-title">Jump straight to your model</h2>
+    </div>
+    <div class="shell jump__families">
+      <article class="jump__family">
+        <div class="jump__intro">
+          <p class="jump__family-eyebrow">Core Truck Platforms</p>
+          <h3 class="jump__family-title">We know your <em>chassis code</em>.</h3>
+          <div class="jump__intro-row">
+            <p class="jump__family-lede">A Raptor and a Lightning share a badge, not a drivetrain &mdash; we track every cab and bed configuration so what you order actually bolts on.</p>
+            <a class="jump__all" href="waiting-to-build/vehicle-picker.html">All Truck Vehicles
+              <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+          </div>
+        </div>
+        <div class="jump__split">
+        <ul class="jump__rows">
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/ford.svg" alt="Ford" width="133" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="Ford models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=F-150">F-150</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Raptor">Raptor</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Bronco">Bronco</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Ranger">Ranger</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Super%20Duty">Super Duty</a></li>
+            </ul>
+          </li>
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/ram.webp" alt="Ram" width="173" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="Ram models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ram&model=1500">1500</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ram&model=TRX">TRX</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ram&model=2500">2500</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ram&model=3500">3500</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ram&model=Rebel">Rebel</a></li>
+            </ul>
+          </li>
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/toyota.svg" alt="Toyota" width="272" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="Toyota models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=Tacoma">Tacoma</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=Tundra">Tundra</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=4Runner">4Runner</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=Sequoia">Sequoia</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=Land%20Cruiser">Land Cruiser</a></li>
+            </ul>
+          </li>
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/jeep.svg" alt="Jeep" width="119" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="Jeep models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Jeep&model=Wrangler">Wrangler</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Jeep&model=Gladiator">Gladiator</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Jeep&model=Grand%20Cherokee">Grand Cherokee</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Jeep&model=Cherokee">Cherokee</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Jeep&model=Wagoneer">Wagoneer</a></li>
+            </ul>
+          </li>
+          <li class="jump__row">
+            <span class="jump__brand"><img src="assets/img/makes/chevrolet.png" alt="Chevrolet" width="103" height="48" loading="lazy" decoding="async"></span>
+            <ul class="jump__models" role="list" aria-label="Chevrolet models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Chevrolet&model=Silverado">Silverado</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Chevrolet&model=Colorado">Colorado</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Chevrolet&model=Tahoe">Tahoe</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Chevrolet&model=Suburban">Suburban</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Chevrolet&model=ZR2">ZR2</a></li>
+            </ul>
+          </li>
+        </ul>
+        <figure class="jump__photo">
+          <img src="real-photos/ford-raptor.jpg" alt="" loading="lazy" width="1920" height="1360" decoding="async">
+          <figcaption>Ford Raptor</figcaption>
+        </figure>
+        <a class="btn-outline jump__all-btn" href="waiting-to-build/vehicle-picker.html">All Truck Vehicles
+          <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+        </div>
+      </article>
     </div>
   </section>
   <!-- ============ BRAND ROSTER · node 251:6176 ============ -->
