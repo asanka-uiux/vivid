@@ -4628,6 +4628,81 @@
   @media (prefers-reduced-motion: reduce) {
     .co-faq__icon::after { transition: none; }
   }
+
+  /* --- NEW FAQ LAYOUT: Header, Categories, CTA -------------------------------- */
+  .faq-header { background: #fff; padding: 40px 24px; border-bottom: 1px solid #e5e5e5; }
+  .faq-header__inner { max-width: 1168px; margin: 0 auto; }
+  .faq-header__top { display: flex; justify-content: space-between; align-items: center; gap: 40px; margin-bottom: 12px; }
+  .faq-header__top h1 { font-family: var(--font-head); font-size: clamp(28px, 5vw, 40px); font-weight: 700; letter-spacing: -0.02em; color: var(--ink); margin: 0; }
+  .faq-header__search { display: flex; gap: 8px; min-width: 280px; }
+  .faq-header__search-input { flex: 1; padding: 10px 14px; border: 1px solid #d0d0d0; border-radius: 4px; font-size: 14px; font-family: var(--ui); }
+  .faq-header__search-input::placeholder { color: #999; }
+  .faq-header__search-btn { padding: 10px 20px; background: var(--red); color: #fff; border: none; border-radius: 4px; font-weight: 600; font-size: 13px; cursor: pointer; font-family: var(--ui); }
+  .faq-header__search-btn:hover { background: var(--red-hot); }
+  .faq-header__subtitle { margin: 0; color: #666; font-size: 14px; line-height: 1.5; }
+  .faq-header__subtitle a { color: var(--red); font-weight: 600; text-decoration: none; }
+  .faq-header__subtitle a:hover { text-decoration: underline; }
+
+  @media (max-width: 768px) {
+    .faq-header { padding: 28px 16px; }
+    .faq-header__top { flex-direction: column; align-items: stretch; gap: 20px; margin-bottom: 16px; }
+    .faq-header__search { min-width: auto; }
+  }
+
+  /* Category Filter Buttons */
+  .faq-categories { background: #f9f9f9; padding: 20px 24px; border-bottom: 1px solid #e5e5e5; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .faq-categories__inner { max-width: 1168px; margin: 0 auto; display: flex; gap: 12px; }
+  .faq-category-btn { padding: 10px 16px; background: #fff; border: 1px solid #d0d0d0; border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--ink); cursor: pointer; font-family: var(--ui); white-space: nowrap; transition: all 0.2s ease; }
+  .faq-category-btn:hover { border-color: var(--red); color: var(--red); }
+  .faq-category-btn.active { background: var(--red); color: #fff; border-color: var(--red); }
+
+  /* FAQ Content Layout */
+  .faq-content { padding: 40px 24px; background: #fff; }
+  .faq-content__inner { max-width: 1168px; margin: 0 auto; }
+
+  /* FAQ Section Groups */
+  .faq-group { margin-bottom: 40px; }
+  .faq-group__header { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: var(--red); color: #fff; border-radius: 2px; margin-bottom: 0; cursor: default; }
+  .faq-group__title { margin: 0; font-family: var(--ui); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+  .faq-group__count { margin-left: auto; font-size: 12px; opacity: 0.9; }
+
+  .faq-list { list-style: none; padding: 0; margin: 0; border-left: 3px solid var(--red); }
+  .faq-item { border-bottom: 1px solid #e5e5e5; }
+  .faq-item:last-child { border-bottom: none; }
+
+  .faq-item__summary { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: #fff; border: none; width: 100%; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--red); font-family: var(--ui); text-align: left; text-transform: uppercase; letter-spacing: 0.04em; transition: background 0.15s ease; }
+  .faq-item:not([open]) .faq-item__summary:hover { background: #f9f9f9; }
+  .faq-item[open] .faq-item__summary { background: #fafafa; }
+
+  .faq-item__toggle { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; background: var(--red); color: #fff; border-radius: 2px; font-size: 12px; font-weight: bold; flex-shrink: 0; }
+  .faq-item[open] .faq-item__toggle::after { content: '−'; }
+  .faq-item:not([open]) .faq-item__toggle::after { content: '+'; }
+
+  .faq-item__answer { padding: 16px; background: #fafafa; font-size: 14px; line-height: 1.6; color: var(--graphite); }
+  .faq-item__answer p { margin: 0; }
+  .faq-item__answer a { color: var(--red); font-weight: 600; text-decoration: none; }
+  .faq-item__answer a:hover { text-decoration: underline; }
+
+  /* CTA Section */
+  .faq-cta { background: var(--charcoal); color: #fff; padding: 60px 24px; }
+  .faq-cta__inner { max-width: 800px; margin: 0 auto; text-align: center; }
+  .faq-cta h2 { font-family: var(--font-head); font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 12px; }
+  .faq-cta > div:nth-child(2) { font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.8); margin-bottom: 32px; }
+  .faq-cta__buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .faq-cta__btn { padding: 12px 28px; border-radius: 2px; font-family: var(--ui); font-size: 14px; font-weight: 600; text-decoration: none; transition: all 0.2s ease; }
+  .faq-cta__btn--primary { background: var(--red); color: #fff; }
+  .faq-cta__btn--primary:hover { background: var(--red-hot); }
+  .faq-cta__btn--secondary { background: transparent; color: #fff; border: 2px solid #fff; }
+  .faq-cta__btn--secondary:hover { border-color: var(--red); color: var(--red); }
+
+  @media (max-width: 768px) {
+    .faq-content { padding: 28px 16px; }
+    .faq-group { margin-bottom: 28px; }
+    .faq-cta { padding: 40px 16px; }
+    .faq-cta h2 { font-size: 24px; }
+    .faq-cta__buttons { flex-direction: column; }
+    .faq-cta__btn { width: 100%; }
+  }
 </style>
 </head>
 <body>
@@ -5080,114 +5155,142 @@
 </header>
 
 <main id="main">
-  <header class="co-faq__hero">
-    <img src="real-photos/bmw-m4.jpg" alt="Front three-quarter view of a white BMW M4 coupe with black wheels parked outside a dealership" width="1920" height="1080" fetchpriority="high">
-    <div class="co-faq__hero-scrim" aria-hidden="true"></div>
-    <div class="co-faq__hero-inner">
-      <p class="co-faq__eyebrow">Vivid Racing &middot; FAQ</p>
-      <h1>FAQs &amp; Policies</h1>
-      <p class="co-faq__lead">The questions the phones actually get, answered from the current policies. Anything not covered here, call &mdash; there is a tech in the building.</p>
-      <p class="co-faq__updated">Answers reflect the live shipping and returns policies &middot; August 2026</p>
-    </div>
-  </header>
-
-  <div class="co-faq">
-    <div class="co-faq__wrap">
-      <div class="co-faq__warn">
-        <p><b>Replies are slower than usual.</b> Vivid Racing is transitioning to a new
-          system and the live site notes longer response times. Phone is fastest:
-          <a href="tel:+14809663040">480-966-3040</a>, Mon&ndash;Fri 8&ndash;5 MST.</p>
-      </div>
-
-      <div class="co-faq__layout">
-        <div class="co-faq__main">
-
-          <section class="co-faq__group">
-            <h2 class="co-faq__group-title">Orders &amp; Shipping<span class="co-faq__count">3</span></h2>
-            <div class="co-faq__list">
-              <details class="co-faq__item" open>
-                <summary>How long until my order ships?<span class="co-faq__icon" aria-hidden="true"></span></summary>
-                <div class="co-faq__answer"><p>Processing takes up to 48 hours and many items ship the same day. Custom, made-to-order and special-order parts take longer &mdash; the product page states the window before you order. <a href="waiting-to-build/shipping.html">Shipping policy</a>.</p></div>
-              </details>
-              <details class="co-faq__item">
-                <summary>Do you ship internationally?<span class="co-faq__icon" aria-hidden="true"></span></summary>
-                <div class="co-faq__answer"><p>Yes. Duties, taxes and customs charges are the buyer's responsibility and are not included in the price at checkout. <a href="waiting-to-build/shipping.html">Shipping policy</a>.</p></div>
-              </details>
-              <details class="co-faq__item">
-                <summary>Where is my tracking number?<span class="co-faq__icon" aria-hidden="true"></span></summary>
-                <div class="co-faq__answer"><p>It is emailed when the carrier collects and goes live at the first scan, which can lag the email by a few hours. <a href="waiting-to-build/track.html">Track an order</a>.</p></div>
-              </details>
-            </div>
-          </section>
-
-          <section class="co-faq__group">
-            <h2 class="co-faq__group-title">Returns &amp; Fitment<span class="co-faq__count">4</span></h2>
-            <div class="co-faq__list">
-              <details class="co-faq__item">
-                <summary>Can I return a part?<span class="co-faq__icon" aria-hidden="true"></span></summary>
-                <div class="co-faq__answer"><p>Within <b>30 days</b>, unused and in original packaging, with an RMA number issued first. Non-defective returns carry a <b>25% restocking fee</b>, which is waived if you take store credit instead. Refunds process within 7 business days of us receiving the part. <a href="waiting-to-build/returns.html">Returns policy</a>.</p></div>
-              </details>
-              <details class="co-faq__item">
-                <summary>What can I not return?<span class="co-faq__icon" aria-hidden="true"></span></summary>
-                <div class="co-faq__answer"><p>Built wheel and tire packages, electrical parts, and custom or made-to-order items. Anything installed, mounted or modified is also non-returnable.</p></div>
-              </details>
-              <details class="co-faq__item">
-                <summary>My order arrived damaged. What now?<span class="co-faq__icon" aria-hidden="true"></span></summary>
-                <div class="co-faq__answer"><p>Report it to the carrier immediately and tell us within <b>48 hours</b>. Keep all packaging and photograph the damage before unpacking further. <a href="https://www.vividracing.com/shipping-damage-claim-form-i-112938.html">Damage claim form</a>.</p></div>
-              </details>
-              <details class="co-faq__item">
-                <summary>Will this part fit my car?<span class="co-faq__icon" aria-hidden="true"></span></summary>
-                <div class="co-faq__answer"><p>Filtering by year, make, model and trim uses factory application data. It cannot account for a lift, aftermarket brakes, spacers or a prior owner's changes &mdash; on a modified vehicle, call and a tech will confirm before you buy. <a href="waiting-to-build/fitment-promise.html">How fitment works</a>.</p></div>
-              </details>
-            </div>
-          </section>
-
-          <section class="co-faq__group">
-            <h2 class="co-faq__group-title">Payment &amp; Discounts<span class="co-faq__count">3</span></h2>
-            <div class="co-faq__list">
-              <details class="co-faq__item">
-                <summary>How do I pay over time?<span class="co-faq__icon" aria-hidden="true"></span></summary>
-                <div class="co-faq__answer"><p>Affirm for fixed monthly installments (10&ndash;30% APR, 3/6/12-month terms), Katapult for lease-to-own up to $3,500 with a 90-day early-purchase discount. Note that an order paid with Affirm <b>cannot be refunded after 60 days</b>. <a href="waiting-to-build/financing.html">Financing</a>.</p></div>
-              </details>
-              <details class="co-faq__item">
-                <summary>Do you offer trade pricing?<span class="co-faq__icon" aria-hidden="true"></span></summary>
-                <div class="co-faq__answer"><p>Yes &mdash; shops, builders and dealers should apply to the wholesale program rather than buying at retail. <a href="waiting-to-build/vivid-wholesale.html">Wholesale</a>.</p></div>
-              </details>
-              <details class="co-faq__item">
-                <summary>Is there a military discount?<span class="co-faq__icon" aria-hidden="true"></span></summary>
-                <div class="co-faq__answer"><p>Yes. Eligibility and how to apply it are on the live site under <a href="https://www.vividracing.com/military.php">military discounts</a>.</p></div>
-              </details>
-            </div>
-          </section>
-
+  <!-- FAQ Header with Search -->
+  <div class="faq-header">
+    <div class="faq-header__inner">
+      <div class="faq-header__top">
+        <h1>Frequently Asked Questions</h1>
+        <div class="faq-header__search">
+          <input type="text" class="faq-header__search-input" placeholder="Search questions..." aria-label="Search FAQ">
+          <button class="faq-header__search-btn">Search</button>
         </div>
+      </div>
+      <p class="faq-header__subtitle">Can't find an answer? <a href="tel:+14809663040">Call us at 480-966-3040</a> — Mon–Fri 8am–6pm MST.</p>
+    </div>
+  </div>
 
-        <aside class="co-faq__rail" aria-labelledby="hc-h">
-          <div class="co-faq__panel">
-            <h2 id="hc-h">Still stuck?</h2>
-            <div class="co-faq__panel-body">
-              <a class="co-faq__btn" href="tel:+14809663040">Call 480-966-3040</a>
-              <a class="co-faq__btn co-faq__btn--ghost" href="waiting-to-build/contact.html">All contact options</a>
-              <p class="co-faq__fine">Also (866) 448-4843 &middot; Mon&ndash;Fri 8&ndash;5 MST</p>
-            </div>
-          </div>
-          <div class="co-faq__panel">
-            <h2>Jump to a policy</h2>
-            <div class="co-faq__panel-body">
-              <ul class="co-faq__linklist">
-                <li><a href="waiting-to-build/shipping.html">Shipping &amp; delivery</a></li>
-                <li><a href="waiting-to-build/returns.html">Returns &amp; refunds</a></li>
-                <li><a href="waiting-to-build/fitment-promise.html">Fitment</a></li>
-                <li><a href="waiting-to-build/financing.html">Financing</a></li>
-                <li><a href="waiting-to-build/military.html">Military Discounts</a></li>
-                <li><a href="waiting-to-build/track.html">Track an order</a></li>
-                <li><a href="waiting-to-build/accessibility.html">Accessibility</a></li>
-                <li><a href="waiting-to-build/privacy.html">Privacy</a></li>
-                <li><a href="waiting-to-build/terms.html">Terms</a></li>
-              </ul>
-            </div>
-          </div>
-        </aside>
+  <!-- Category Filter -->
+  <div class="faq-categories">
+    <div class="faq-categories__inner">
+      <button class="faq-category-btn active" data-category="all">All Topics</button>
+      <button class="faq-category-btn" data-category="orders">Orders & Shipping</button>
+      <button class="faq-category-btn" data-category="fitment">Fitment & Sizing</button>
+      <button class="faq-category-btn" data-category="returns">Returns & Warranty</button>
+      <button class="faq-category-btn" data-category="payment">Payment & Financing</button>
+    </div>
+  </div>
+
+  <!-- FAQ Content -->
+  <div class="faq-content">
+    <div class="faq-content__inner">
+
+      <section class="faq-group" data-category="orders">
+        <div class="faq-group__header">
+          <h2 class="faq-group__title">Orders & Shipping</h2>
+          <span class="faq-group__count">3 questions</span>
+        </div>
+        <ul class="faq-list">
+          <li class="faq-item">
+            <details>
+              <summary class="faq-item__summary">How long until my order ships?<span class="faq-item__toggle" aria-hidden="true"></span></summary>
+              <div class="faq-item__answer"><p>Processing takes up to 48 hours and many items ship the same day. Custom, made-to-order and special-order parts take longer — the product page states the window before you order. <a href="waiting-to-build/shipping.html">Shipping policy</a>.</p></div>
+            </details>
+          </li>
+          <li class="faq-item">
+            <details>
+              <summary class="faq-item__summary">Do you ship internationally?<span class="faq-item__toggle" aria-hidden="true"></span></summary>
+              <div class="faq-item__answer"><p>Yes. Duties, taxes and customs charges are the buyer's responsibility and are not included in the price at checkout. <a href="waiting-to-build/shipping.html">Shipping policy</a>.</p></div>
+            </details>
+          </li>
+          <li class="faq-item">
+            <details>
+              <summary class="faq-item__summary">Where is my tracking number?<span class="faq-item__toggle" aria-hidden="true"></span></summary>
+              <div class="faq-item__answer"><p>It is emailed when the carrier collects and goes live at the first scan, which can lag the email by a few hours. <a href="waiting-to-build/track.html">Track an order</a>.</p></div>
+            </details>
+          </li>
+        </ul>
+      </section>
+
+      <section class="faq-group" data-category="fitment">
+        <div class="faq-group__header">
+          <h2 class="faq-group__title">Fitment & Sizing</h2>
+          <span class="faq-group__count">1 question</span>
+        </div>
+        <ul class="faq-list">
+          <li class="faq-item">
+            <details>
+              <summary class="faq-item__summary">Will this part fit my car?<span class="faq-item__toggle" aria-hidden="true"></span></summary>
+              <div class="faq-item__answer"><p>Filtering by year, make, model and trim uses factory application data. It cannot account for a lift, aftermarket brakes, spacers or a prior owner's changes — on a modified vehicle, call and a tech will confirm before you buy. <a href="waiting-to-build/fitment-promise.html">How fitment works</a>.</p></div>
+            </details>
+          </li>
+        </ul>
+      </section>
+
+      <section class="faq-group" data-category="returns">
+        <div class="faq-group__header">
+          <h2 class="faq-group__title">Returns & Warranty</h2>
+          <span class="faq-group__count">3 questions</span>
+        </div>
+        <ul class="faq-list">
+          <li class="faq-item">
+            <details>
+              <summary class="faq-item__summary">Can I return a part?<span class="faq-item__toggle" aria-hidden="true"></span></summary>
+              <div class="faq-item__answer"><p>Within <b>30 days</b>, unused and in original packaging, with an RMA number issued first. Non-defective returns carry a <b>25% restocking fee</b>, which is waived if you take store credit instead. Refunds process within 7 business days of us receiving the part. <a href="waiting-to-build/returns.html">Returns policy</a>.</p></div>
+            </details>
+          </li>
+          <li class="faq-item">
+            <details>
+              <summary class="faq-item__summary">What can I not return?<span class="faq-item__toggle" aria-hidden="true"></span></summary>
+              <div class="faq-item__answer"><p>Built wheel and tire packages, electrical parts, and custom or made-to-order items. Anything installed, mounted or modified is also non-returnable.</p></div>
+            </details>
+          </li>
+          <li class="faq-item">
+            <details>
+              <summary class="faq-item__summary">My order arrived damaged. What now?<span class="faq-item__toggle" aria-hidden="true"></span></summary>
+              <div class="faq-item__answer"><p>Report it to the carrier immediately and tell us within <b>48 hours</b>. Keep all packaging and photograph the damage before unpacking further. <a href="https://www.vividracing.com/shipping-damage-claim-form-i-112938.html">Damage claim form</a>.</p></div>
+            </details>
+          </li>
+        </ul>
+      </section>
+
+      <section class="faq-group" data-category="payment">
+        <div class="faq-group__header">
+          <h2 class="faq-group__title">Payment & Financing</h2>
+          <span class="faq-group__count">3 questions</span>
+        </div>
+        <ul class="faq-list">
+          <li class="faq-item">
+            <details>
+              <summary class="faq-item__summary">How do I pay over time?<span class="faq-item__toggle" aria-hidden="true"></span></summary>
+              <div class="faq-item__answer"><p>Affirm for fixed monthly installments (10–30% APR, 3/6/12-month terms), Katapult for lease-to-own up to $3,500 with a 90-day early-purchase discount. Note that an order paid with Affirm <b>cannot be refunded after 60 days</b>. <a href="waiting-to-build/financing.html">Financing</a>.</p></div>
+            </details>
+          </li>
+          <li class="faq-item">
+            <details>
+              <summary class="faq-item__summary">Do you offer trade pricing?<span class="faq-item__toggle" aria-hidden="true"></span></summary>
+              <div class="faq-item__answer"><p>Yes — shops, builders and dealers should apply to the wholesale program rather than buying at retail. <a href="waiting-to-build/vivid-wholesale.html">Wholesale</a>.</p></div>
+            </details>
+          </li>
+          <li class="faq-item">
+            <details>
+              <summary class="faq-item__summary">Is there a military discount?<span class="faq-item__toggle" aria-hidden="true"></span></summary>
+              <div class="faq-item__answer"><p>Yes. Eligibility and how to apply it are on the live site under <a href="https://www.vividracing.com/military.php">military discounts</a>.</p></div>
+            </details>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Still Have Questions Section -->
+  <div class="faq-cta">
+    <div class="faq-cta__inner">
+      <h2>Still have questions?</h2>
+      <p>We're here to help. Reach out anytime.</p>
+      <div class="faq-cta__buttons">
+        <a href="tel:+14809663040" class="faq-cta__btn faq-cta__btn--primary">Call us at 480-966-3040</a>
+        <a href="waiting-to-build/contact.html" class="faq-cta__btn faq-cta__btn--secondary">Send a message</a>
       </div>
     </div>
   </div>
@@ -5397,6 +5500,71 @@ document.addEventListener('click', function (e) {
   var a = e.target.closest && e.target.closest('a[href="#"]');
   if (a) { e.preventDefault(); }
 });
+</script>
+
+<script>
+/* FAQ filtering and search */
+(function () {
+  var categoryBtns = document.querySelectorAll('.faq-category-btn');
+  var faqGroups = document.querySelectorAll('.faq-group');
+  var searchInput = document.querySelector('.faq-header__search-input');
+  var searchBtn = document.querySelector('.faq-header__search-btn');
+  var currentCategory = 'all';
+
+  function filterByCategory(category) {
+    currentCategory = category;
+    faqGroups.forEach(function (group) {
+      var groupCategory = group.getAttribute('data-category');
+      var matches = category === 'all' || groupCategory === category;
+      group.style.display = matches ? '' : 'none';
+    });
+    categoryBtns.forEach(function (btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-category') === category);
+    });
+  }
+
+  function filterBySearch(query) {
+    var q = query.toLowerCase();
+    faqGroups.forEach(function (group) {
+      if (currentCategory !== 'all' && group.getAttribute('data-category') !== currentCategory) {
+        group.style.display = 'none';
+        return;
+      }
+      var items = group.querySelectorAll('.faq-item');
+      var anyVisible = false;
+      items.forEach(function (item) {
+        var text = item.textContent.toLowerCase();
+        var matches = q === '' || text.indexOf(q) !== -1;
+        item.style.display = matches ? '' : 'none';
+        if (matches) anyVisible = true;
+      });
+      group.style.display = anyVisible ? '' : 'none';
+    });
+  }
+
+  categoryBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var category = btn.getAttribute('data-category');
+      filterByCategory(category);
+      if (!searchInput.value) return;
+      filterBySearch(searchInput.value);
+    });
+  });
+
+  searchInput.addEventListener('input', function () {
+    filterBySearch(this.value);
+  });
+
+  searchBtn.addEventListener('click', function () {
+    filterBySearch(searchInput.value);
+  });
+
+  searchInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+      filterBySearch(this.value);
+    }
+  });
+})();
 </script>
 </body>
 </html>
