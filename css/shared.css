@@ -112,6 +112,25 @@ button{font:inherit;color:inherit}
 .brandbar__list > li{margin-right:-7px}
 .brandbar__list > li:last-child{margin-right:0}
 @media (min-width:901px){ .brandbar__list > li{margin-right:0} }
+/* Five items in a row sized for four, 2026-09-04. The packing above is correct
+   — four labels measure 391px against a 390px edge-to-edge bar, i.e. the ~6.5px
+   of slack this file already documents. The problem is that a fifth item ships
+   in the markup: five measure 498px, so the row clipped from about 500px down,
+   losing 108px of "VR Powersports" at 390px. This is the "current-page chip"
+   case the overflow-x fallback above anticipates, so drop one item below 560px
+   (560px is where all five verifiably fit).
+   Which item to drop is not the same answer on every page:
+     · The five family pages each carry aria-current on their own item, so that
+       chip goes — it links to the page you are already on.
+     · Everywhere else (about, faq, the stores, the PDPs) there is no current
+       chip, so the parent-brand item goes instead. Safe there specifically
+       because those pages' masthead logo is itself a link to index.html; the
+       four sub-brand pages point their logo at their own page, which is why
+       they must keep the "Vivid Racing" item as the only route home. */
+@media (max-width:559px){
+  .brandbar__list > li:has([aria-current="page"]){display:none}
+  .brandbar__list:not(:has([aria-current="page"])) > li:first-child{display:none}
+}
 .brandbar__link{display:flex;align-items:center;gap:6px;padding:9px 6px 11px;
   border-bottom:2px solid transparent;
   font:700 10px/13px var(--font-ui);letter-spacing:.6px;text-transform:uppercase;
@@ -120,6 +139,20 @@ button{font:inherit;color:inherit}
 @media (min-width:901px){
   .brandbar__link{gap:8px;padding:11px 18px 13px;
     font-size:12px;line-height:14px;letter-spacing:1.47px;min-height:0;font-weight:500}
+}
+/* 6px → 4px of horizontal link padding below 560px, buying back 16px across
+   the four items. Needed because the surviving four are not the same width on
+   every page: the sub-brand pages keep "Vivid Racing" (wider than the chip it
+   replaces) and measured 403px against a 390px bar — a visible 13px clip —
+   where pages showing the four VR items measured 391px. At 4px both fit.
+   Has to sit after the .brandbar__link rule above, not with the item-hiding
+   media block higher up: that rule sets `padding` as a shorthand at the same
+   specificity, so from earlier in the file a padding-inline override loses on
+   source order and silently does nothing.
+   Touch targets are unaffected — the 44px min-height stays, and label text
+   puts every item 85px+ wide regardless. */
+@media (max-width:559px){
+  .brandbar__link{padding-inline:4px}
 }
 /* Figma's mobile brand-switcher (node 688:12548) draws these dots fully
    opaque, not dimmed — desktop has no matching reference yet, so the .55

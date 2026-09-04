@@ -4759,24 +4759,8 @@ html, body{ overflow-x:clip; }
      headings. The codebase already relies on :has() (vr-content.css:825). */
   .abn__why-body p:last-child:has(a) { margin-top: auto; padding-top: 12px; }
 
-  /* --- brandbar: drop "Vivid Racing" on small screens --------------------
-     The row carries five items but only has room for four. Measured content
-     width is 498px against the viewport (the bar runs edge-to-edge below
-     901px), so it clips from about 500px down — 108px of "VR Powersports" is
-     cut off at 390px. shared.css says as much in its own comments: the mobile
-     bar was drawn for "four links [that] only fit exactly at that width", with
-     the packing margins "verified ... into 390px with ~6.5px to spare" for
-     four, and overflow-x kept only as a fallback "if the current-page chip
-     ever reappears". So five is the anomaly, not the sizing.
-     Hiding the parent-brand item is safe for navigation: the masthead logo
-     immediately below is a link to index.html labelled "Vivid Racing — home",
-     so the destination stays one tap away.
-     Cut at 559px because 560px is where all five verifiably fit.
-     Page-local — the brandbar lives in css/shared.css and is chrome on every
-     page, so this doesn't touch the other six. */
-  @media (max-width: 559px) {
-    .brandbar__list > li:first-child { display: none; }
-  }
+  /* The brandbar's five-items-in-a-four-item-row fix moved to css/shared.css
+     on 2026-09-04 so all pages get it, not just this one. */
 
   /* --- breadcrumb ---------------------------------------------------------
      Same visual spec as the .crumbs bar on the store and PDP pages, which
