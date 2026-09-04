@@ -4803,6 +4803,16 @@ html, body{ overflow-x:clip; }
   .abn__cta-inner p { margin: 0; font-size: 1.0313rem; line-height: 1.65;
     color: rgba(255,255,255,.78); max-width: 54ch; }
   .abn__cta-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  /* Mobile only: stack both buttons full width. Side by side they were 197px
+     and 170px against a 358px container, so they already wrapped to two lines
+     — but hugging their content, which left a ragged right edge under a
+     full-width headline. Stretched, they read as a deliberate stack.
+     Held to max-width:599px: from 600px the container still has room for them
+     side by side, and full width there would mean a 640px-wide button. */
+  @media (max-width: 599px) {
+    .abn__cta-actions { flex-direction: column; align-items: stretch; }
+    .abn__cta-actions > * { width: 100%; }
+  }
   .abn__cta-actions .vc__btn { min-height: 52px; padding: 0 26px;
     justify-content: center; }
   /* White outline variant for the dark bar — .vc__btn--ghost is scoped to
