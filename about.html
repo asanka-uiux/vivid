@@ -4772,6 +4772,25 @@ html, body{ overflow-x:clip; }
   .crumbs__inner .cur { color: var(--ink); font-weight: 600; }
   .abn__gal-foot { margin: clamp(24px, 4vw, 36px) 0 0; display: flex; justify-content: center; }
 
+  /* Customer builds: horizontal scroller on mobile only.
+     Below 600px the shared .vc__gal is a single-column stack, so six build
+     cards became a very long scroll. This is the same swipe treatment
+     .revs__grid and the homepage carousels already use: cards at 84% width so
+     the next one peeks in as the affordance, snap points, hidden scrollbar, and
+     a negative inline margin cancelling .vc__wrap's gutter so the track bleeds
+     to the screen edge while the first card still starts on the gutter.
+     Scoped to max-width:599px on purpose — that's where the shared sheet turns
+     the grid on, so 600px up (2-up) and 1200px up (3-up) are left untouched. */
+  @media (max-width: 599px) {
+    .vc__gal { display: flex; flex-direction: row; flex-wrap: nowrap; gap: 12px;
+      overflow-x: auto; overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+      padding-inline: var(--gutter); margin-inline: calc(var(--gutter) * -1);
+      scroll-padding-inline-start: var(--gutter); scrollbar-width: none; }
+    .vc__gal::-webkit-scrollbar { display: none; }
+    .vc__gal > li { flex: 0 0 84%; max-width: 340px; scroll-snap-align: start; }
+  }
+
   /* --- closing CTA bar ---------------------------------------------------- */
   .abn__cta-bar { position: relative; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
     background: var(--ink); border-top: 4px solid var(--heat); }
