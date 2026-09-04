@@ -4771,7 +4771,12 @@ html, body{ overflow-x:clip; }
     text-transform: uppercase; color: var(--steel); }
   .crumbs__inner a { color: var(--steel); text-decoration: none; }
   .crumbs__inner a:hover { color: var(--heat); text-decoration: underline; }
-  .crumbs__inner .sep { color: var(--rule); }
+  /* --rule (#D1D5DB) is 1.47:1 on white. The slash is aria-hidden and carries
+     no information, so 1.4.3 doesn't strictly apply to it — but a low-vision
+     sighted reader still parses "Home / About" by it, so it's raised to
+     --steel, which clears 4.5:1. The store and PDP pages still use --rule
+     here; this is the compliant value if that's ever unified. */
+  .crumbs__inner .sep { color: var(--steel); }
   .crumbs__inner .cur { color: var(--ink); font-weight: 600; }
   .abn__gal-foot { margin: clamp(24px, 4vw, 36px) 0 0; display: flex; justify-content: center; }
 

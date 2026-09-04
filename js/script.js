@@ -21,6 +21,32 @@
       this.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
   }
+
+  /* aria-expanded has to be dropped above the breakpoint (WCAG 4.1.2).
+     The markup ships aria-expanded="false" and only the click handler above
+     ever changes it — but at ≥768px the CSS makes these pointer-events:none
+     and shows every column open, so the attribute stayed "false" while the
+     links it describes were visible and tabbable. A screen reader announced
+     each column as "collapsed" on desktop with its contents on screen.
+     Above the breakpoint the element isn't a disclosure at all, so the state
+     is removed rather than set to "true"; below it, it's restored from the
+     column's actual open class. Same media-query-sync shape as the .foot__col
+     block above. */
+  var mqFoot = window.matchMedia('(min-width: 768px)');
+  function syncFootToggles() {
+    for (var i = 0; i < toggles.length; i++) {
+      var col = toggles[i].closest('.v2-footer__link-col');
+      if (mqFoot.matches) {
+        toggles[i].removeAttribute('aria-expanded');
+      } else {
+        toggles[i].setAttribute('aria-expanded',
+          col && col.classList.contains('v2-footer__link-col--open') ? 'true' : 'false');
+      }
+    }
+  }
+  syncFootToggles();
+  mqFoot.addEventListener ? mqFoot.addEventListener('change', syncFootToggles)
+                          : mqFoot.addListener(syncFootToggles);
 })();
 
 /* Vehicle-family tabs — the left rail selects which marque list is shown. */
