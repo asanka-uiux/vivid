@@ -4499,316 +4499,313 @@ html, body{ overflow-x:clip; }
   <link rel="stylesheet" href="css/shared.css">
   <link rel="stylesheet" href="css/style.css">
 <style>
-  /* ===== HERO — centre the eyebrow/headline/paragraph block within the
+  /* ===== HERO — center the eyebrow/headline/paragraph block within the
      photo, both vertically and horizontally. ===== */
   .vc__hero { align-items: center; }
   .vc__hero__inner { text-align: center; }
   .vc__hero__inner h1,
   .vc__hero__inner p { margin-inline: auto; }
-  /* Headline floor raised from vr-content.css's 2rem to 3rem. Only the clamp
-     minimum changes, and the minimum only binds below roughly 750px (above
-     that 6.4vw already exceeds 48px), so this is a mobile-only change by
-     construction. Kept page-local rather than edited in the shared sheet,
-     which .vc__hero also serves on about.html, faq.html and the
-     waiting-to-build pages. */
-  .vc__hero h1 { font-size: clamp(3rem, 6.4vw, 3.75rem); }
-  /* The hero's "Vivid Racing · About" eyebrow was removed on 2026-09-04 — it
-     duplicated the breadcrumb now sitting above the hero, and centring it over
-     the photo was what read as a misplaced breadcrumb. Its type/colour rule
-     went with it. If an eyebrow ever comes back here, don't reach for the
-     shared .vc__eyebrow: its base colour is --heat red at 3.99:1 on this
-     hero's --ink ground, and being a <p> it also loses the font-size to
-     vr-content.css's ".vc__hero p" (0,1,1). */
-
-  @media (max-width: 899px) {
-    .vc__hero { min-height: min(60vh, 484px); }
+  /* .vc__hero .vc__updated is a <p>, so vr-content.css's ".vc__hero p" rule
+     (specificity 0,1,1) was beating the intended ".vc__updated" font-size
+     (0,1,0), rendering it at the paragraph's ~16-19px clamp instead of its
+     own 12px — that's what was forcing this line to wrap. Restoring the
+     12px here (specificity 0,2,0, so it wins outright) fixes both. */
+  .vc__hero .vc__updated {
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+  .vc__hero .vc__eyebrow {
+    color: #FFC9C2 !important;
+  }
+  .vc .vc__hero .vc__eyebrow {
+    color: #FFC9C2 !important;
+  }
+  main.vc header.vc__hero p.vc__eyebrow {
+    color: #FFC9C2 !important;
+  }
+  .ab__hero-cta .vc__btn--ghost-dark {
+    color: #fff !important;
+    background: rgba(225,6,0,0.9) !important;
+  }
+  .ab__hero-cta a.vc__btn.vc__btn--ghost.vc__btn--ghost-dark {
+    color: #fff !important;
+  }
+  .vc__cta .vc__btn--ghost {
+    color: var(--ink) !important;
+    background: transparent !important;
+  }
+  .vc a.vc__btn--ghost {
+    color: var(--ink) !important;
+    background: transparent !important;
   }
 
-  /* .vc__body's padding-top would leave a gap between the hero and the first
-     band; the band supplies its own vertical rhythm instead. */
-  .vc__body { padding-top: 0; }
+  /* ===== CTA — "Part of a family of brands" band: single centered column
+     (overrides vr-content.css's desktop text-left/buttons-right grid),
+     square-cornered buttons, wider so they read as more substantial. The
+     button row is a flex row (not the default inline wrap) so the two
+     buttons always stay side by side, sharing the row equally and
+     shrinking together — rather than min-width forcing a wrap on mobile. */
+  .vc__cta {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+  .vc__cta > p:last-child {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    max-width: 440px;
+  }
+  .vc__cta .vc__btn {
+    border-radius: 2px;
+    flex: 1 1 0;
+    min-width: 0;
+  }
 
-  /* ~300 lines of page-local CSS were removed here on 2026-09-03 along with
-     the markup they styled: .ab__stats-band, .ab__strip, .ab__tl-band /
-     .ab__tl-toggle, .ab__story, .ab__info, .ab__hero-cta, and the .vc__cta /
-     .vc__quote / .vc__stat / .vc__btn--ghost-dark overrides those blocks
-     needed. Every one of those selectors matched nothing after the rebuild.
-     The shared definitions all still live in assets/vr-content.css, so
-     nothing else on the site was affected. */
+  /* ===== STATS — lighten the label weight under each number ===== */
+  .vc__stat span { font-weight: 600; }
+
+  /* ===== MOBILE — lift the stats band into the hero's first screen =====
+     Page-specific override, loaded after assets/vr-content.css so it wins
+     the cascade at equal specificity without !important. Shrinks the hero
+     so the stats band's top edge overlaps up into it, landing the stats
+     inside the first ~100vh on a phone instead of requiring a scroll. The
+     overlap now targets .ab__stats-band (the full-bleed black wrapper), not
+     .vc__stats itself, since the band is what actually needs to rise into
+     the hero — a plain margin on the inner grid wouldn't move the band. */
+  @media (max-width: 899px) {
+    /* Taller than the original 46vh/380px — the hero now also carries the
+       CTA button row, and the old height left its bottom edge (and the
+       lift-up band below) overlapping/clipping the buttons. */
+    .vc__hero { min-height: min(60vh, 484px); }
+    .ab__stats-band { position: relative; z-index: 2; margin-top: -64px; }
+  }
+
+  @media (min-width: 900px) {
+    .vc__quote { padding: 36px 0; }
+  }
 
   /* ==========================================================================
-     ABOUT — 2026-09-03 stakeholder rebuild (.abn__*)
-     New layout: Position → Why we exist → full-bleed band → Partner brands →
-     Chassis ownership → Why us → reviews → gallery → CTA bar.
-     Cut per the brief: the 25-year timeline, the stats band, the mission
-     quote, the family-of-brands block, and every catalog-size claim.
-     Components reuse the shared .vc__* library in assets/vr-content.css
-     (bands, cards, reviews, gallery) — the rules below only cover the four
-     things that library has no equivalent for.
+     ABOUT PAGE REDESIGN — bold black/white alternating sections, a red glow
+     accent, and real interaction (count-up stats, a hover photo strip, an
+     expandable timeline). Inspired by customwheeloffset.com/about's
+     structural energy — high-contrast dark bands + interactive elements —
+     built in Vivid's own established red/type system rather than importing
+     Custom Offsets' literal brand (unlike faq.html, which the user asked to
+     re-theme directly). All new markup uses .ab__ prefixed classes so none
+     of this collides with the shared .vc__ component classes.
      ========================================================================== */
 
-  /* --- full-bleed statement band ------------------------------------------
-     Breaks out of .vc__body's centred column to the viewport edge with margin
-     math rather than width:100vw, so it can't introduce a horizontal
-     scrollbar (same approach faq.html's .faq-cta uses). */
-  .abn__bleed { position: relative; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
-    min-height: clamp(320px, 46vw, 520px); display: grid; place-items: center;
-    overflow: hidden; background: var(--ink); }
-  .abn__bleed > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  /* Centre-weighted scrim, re-tuned when the copy moved from the bottom of the
-     band to the middle: a bottom-weighted ramp put its darkest stop where there
-     is no longer any text and its lightest where the headline now sits.
-     Measured against the worst case of a blown-out white pixel under the text,
-     the middle stop composites to 7.8:1 — clear for both the 26-48px headline
-     and the 16.5px lede. The .50 end stops fall to ~3.6:1, which is why they
-     are end stops: no text reaches the band's top or bottom edge. */
-  .abn__bleed::after { content: ""; position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(15,18,22,.50) 0%, rgba(15,18,22,.74) 50%, rgba(15,18,22,.50) 100%); }
-  .abn__bleed-inner { position: relative; z-index: 1; width: 100%;
-    max-width: calc(1120px + (var(--gutter) * 2)); margin: 0 auto;
-    padding: clamp(28px, 5vw, 64px) var(--gutter); text-align: center; }
-  /* margin-inline:auto so the measures stay centred rather than hugging the
-     left edge of a centred block. */
-  .abn__bleed h2 { font-family: var(--display); font-weight: 800; letter-spacing: -.02em;
-    font-size: clamp(1.625rem, 4.6vw, 3rem); line-height: 1.08; color: #fff;
-    margin: 0 auto; max-width: 26ch; text-wrap: balance; }
-  .abn__bleed p { margin: 14px auto 0; max-width: 56ch; font-size: 1.0313rem; line-height: 1.65;
-    color: rgba(255,255,255,.82); }
-
-  /* --- partner brands: copy left, logo mosaic right ----------------------- */
-  .abn__brands { padding: clamp(36px, 7vw, 84px) 0; border-top: 1px solid var(--line); }
-  .abn__brands-split { display: grid; gap: clamp(28px, 4vw, 40px); }
-  @media (min-width: 900px) {
-    /* 1.05fr / 1fr rather than an even split: the copy column needs ~54ch to
-       stay readable, and the mosaic reads fine slightly narrower. align-items
-       start so the grid sits at the top of the row instead of stretching its
-       cells to match the copy height. */
-    .abn__brands-split { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-      gap: clamp(32px, 4vw, 56px); align-items: start; }
+  /* --- hero: dual CTA row, and a ghost-button variant readable on the dark
+     photo (the CTA section's .vc__btn--ghost uses --ink text/--rule border,
+     both far too low-contrast over a photo) --- */
+  .ab__hero-cta { display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap; justify-content: center; }
+  /* vr-content.css's base .vc__btn ships border-radius:10px — override so the
+     hero buttons match the sharp-corner convention used across the page. */
+  .ab__hero-cta .vc__btn { border-radius: 2px; min-width: 168px; text-align: center; justify-content: center; }
+  @media (max-width: 899px) {
+    /* Tighter than the desktop 22px — frees a few px of hero content
+       height so the CTA row clears the lift-up stats band below it. */
+    .ab__hero-cta { margin-top: 12px; }
   }
-  /* Measure lives on the paragraphs, not the container — capping the whole
-     block also caps the headline and pushed it to three ragged lines. Both
-     measures are tighter than the full-width version was, since the copy now
-     occupies about half the content column. */
-  /* No max-width on the h2: at this size the headline needs three lines in a
-     half-width column either way, and an artificial cap was fighting
-     text-wrap:balance into a long/short/medium rag. Uncapped, balance spreads
-     it evenly across the column. */
-  .abn__brands-lede h2 { font-family: var(--display); font-weight: 800; letter-spacing: -.015em;
-    font-size: clamp(1.5rem, 3.6vw, 2.25rem); line-height: 1.12; margin: 0 0 14px;
-    color: var(--ink); text-wrap: balance; }
-  .abn__brands-lede p { font-size: 1.0313rem; line-height: 1.7; color: var(--graphite);
-    margin: 0 0 14px; max-width: 54ch; }
-  .abn__brands-lede p:last-child { margin-bottom: 0; }
+  /* Only .vc__btn--ghost-dark (the hero's ghost button, on a dark photo
+     background) needs white text — a plain .vc__btn--ghost (e.g. the "Work
+     here" button in the light-background "family of brands" CTA) must keep
+     vr-content.css's own default (--ink dark text) or it becomes unreadable
+     on that light background. Don't broaden this selector back to plain
+     .vc__btn--ghost — that exact bug shipped once already. */
+  .vc a.vc__btn--ghost-dark {
+    background: transparent !important;
+    color: #fff !important;
+    border-color: rgba(255,255,255,.7) !important;
+  }
+  .vc a.vc__btn--ghost-dark:hover { background: rgba(255,255,255,.12) !important; border-color: #fff !important; color: #fff !important; }
 
-  /* Exclusive-distribution callout, in the copy column. Tinted brand red with a
-     solid red left edge rather than the neutral --bone it started on: this is
-     the one hard differentiator in the section, so it should not read as the
-     same weight as a generic aside. Same tint-plus-edge language the codebase
-     already uses for .apanel__sub and .size-card--active. The tint composites
-     to about #FDF2F2, so --graphite body copy still sits above 12:1. */
-  .abn__excl { margin-top: 20px; padding: 15px 17px;
-    background: rgba(225,6,0,.05);
-    border: 1px solid rgba(225,6,0,.20);
-    border-left: 3px solid var(--heat);
-    border-radius: var(--radius); max-width: 54ch; }
-  .abn__excl b { display: block; font-family: var(--display); font-weight: 800;
-    font-size: .9375rem; color: var(--ink); margin-bottom: 6px; }
-  .abn__excl span { font-size: .875rem; line-height: 1.55; color: var(--graphite); }
+  /* --- full-bleed black stats band --- */
+  /* .vc__body's own padding-top would otherwise leave a white gap between
+     the hero and this band — zero it here so the black band sits flush
+     against the hero for a direct, bold transition (its own padding below
+     supplies the breathing room instead). Bottom padding is untouched. */
+  .vc__body { padding-top: 0; }
+  .ab__stats-band { background: var(--ink); padding: 28px 0; }
+  .ab__stats-band .vc__stats { margin: 0; background: rgba(255,255,255,.1); border-block-color: rgba(255,255,255,.14); }
+  .ab__stats-band .vc__stat { background: transparent; }
+  .ab__stats-band .vc__stat b { color: #fff; text-shadow: 0 0 32px rgba(225,6,0,.4); }
+  .ab__stats-band .vc__stat span { color: rgba(255,255,255,.62); }
 
-  /* --- button radius: 2px on mobile, 4px from 900px up --------------------
-     900px is this page's desktop breakpoint (the bands and the brands split
-     both turn at it). Overrides vr-content.css's base .vc__btn, which ships a
-     10px radius. Scoped to this page's own buttons on purpose — the header,
-     footer and email-capture buttons are chrome shared byte-for-byte with six
-     other pages, so restyling them here alone would make this page the odd
-     one out. Say the word if that should be a sitewide change instead. */
-  .vc__btn, .abn__cta-ghost { border-radius: 2px; }
-  @media (min-width: 900px) {
-    .vc__btn, .abn__cta-ghost { border-radius: 4px; }
+  /* --- photo strip: horizontal scroll-snap row of the platforms Vivid
+     builds for, with a hover/focus zoom for a light interactive touch --- */
+  .ab__strip { padding: clamp(40px,6vw,72px) 0; background: var(--bone); }
+  .ab__strip-inner { max-width: calc(1120px + (var(--gutter) * 2)); margin: 0 auto; padding-inline: var(--gutter); }
+  .ab__strip-head { margin-bottom: 20px; max-width: 60ch; }
+  .ab__strip-head h2 { font-family: var(--display); font-weight: 800; letter-spacing: -.015em;
+    font-size: clamp(1.5rem,3.6vw,2.25rem); line-height: 1.12; margin: 0 0 8px; color: var(--ink); }
+  .ab__strip-head p { color: var(--graphite); line-height: 1.7; margin: 0; }
+  .ab__strip-track {
+    display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x proximity;
+    padding: 4px 4px 12px; margin: 0 -4px; -webkit-overflow-scrolling: touch;
+  }
+  .ab__strip-item {
+    flex: 0 0 auto; width: clamp(210px,26vw,290px); aspect-ratio: 4/5;
+    position: relative; border-radius: var(--radius); overflow: hidden;
+    scroll-snap-align: start; background: var(--ink);
+  }
+  .ab__strip-item img { width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform .35s ease; }
+  .ab__strip-item:hover img, .ab__strip-item:focus-visible img { transform: scale(1.07); }
+  .ab__strip-item span {
+    position: absolute; inset: auto 0 0 0; padding: 16px 16px 14px;
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,.78) 70%);
+    color: #fff; font-family: var(--display); font-weight: 800; font-size: .9375rem;
+    letter-spacing: -.01em;
   }
 
-  /* 8 logos, so 2 columns divides cleanly with no dead cells. Four across only
-     while the section is stacked full-width between 600 and 899px — back to two
-     once the mosaic is confined to the right rail, where four would squeeze
-     each logo into ~130px. */
-  .abn__mosaic { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1px; background: var(--line); border: 1px solid var(--line);
-    border-radius: var(--radius); overflow: hidden; margin: 0; padding: 0; list-style: none; }
-  @media (min-width: 600px) and (max-width: 899px) {
-    .abn__mosaic { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  /* --- timeline band: full-bleed black, with an expand/collapse toggle so
+     the full 25-entry history isn't dumped on the page at once --- */
+  .ab__tl-band { background: var(--ink); padding: clamp(40px,6vw,72px) 0; }
+  .ab__tl-band .vc__kicker { color: #FFC9C2; } /* --heat fails 4.5:1 on --ink at this size; verified light tint from the hero eyebrow */
+  .ab__tl-band h2 { color: #fff !important; }
+  .ab__tl-band > .vc__wrap > p { color: rgba(255,255,255,.62) !important; }
+  .ab__tl-band .vc__timeline::before {
+    background: linear-gradient(180deg, var(--heat), rgba(255,255,255,.3) 55%, rgba(255,255,255,.1));
   }
-  .abn__mosaic li { background: var(--paper); display: flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 12px; text-align: center;
-    min-height: clamp(116px, 15vw, 148px); padding: 22px 20px; }
-  /* Per-asset height caps, because a single cap cannot work here. These eight
-     files carry very different amounts of baked-in padding — measured as the
-     fraction of canvas height the actual mark occupies:
-         kw 1.00   fabspeed 0.91   bbs 0.58   ohlins 0.45
-         brembo 0.34   manthey 0.29   hre 0.26   akrapovic 0.26
-     So at one shared cap the box heights match but the visible marks don't:
-     KW rendered a 56px mark while HRE rendered ~14px inside the same 56px box.
-     Each cap below is 24px (the target mark height) divided by that fraction,
-     which lands seven of the eight on a 24px mark. Manthey is the exception —
-     its mark is 12:1, so 24px tall would need 310px of width and the cell only
-     offers ~225px; it width-caps at roughly 18px instead.
-     The real fix is trimming the padding out of the source files, but those are
-     shared with .brands__row on index.html and the four sub-brand homepages, so
-     that's a separate call rather than a side effect of this page. */
-  .abn__mosaic img { max-width: 90%; max-height: 56px; width: auto; height: auto; object-fit: contain; }
-  /* KW runs taller than the 24px target on purpose: its mark is 1.7:1 where the
-     rest are 4:1 or wider, so at equal height it carries far less horizontal
-     presence. Optical weight, not measured height, is what needs to match. */
-  .abn__m-kw       img { max-height: 34px; }
-  .abn__m-fabspeed img { max-height: 26px; }
-  .abn__m-bbs      img { max-height: 42px; }
-  .abn__m-ohlins   img { max-height: 53px; }
-  .abn__m-brembo   img { max-height: 70px; }
-  .abn__m-manthey  img { max-height: 84px; }
-  .abn__m-hre      img { max-height: 92px; }
-  .abn__m-akrapovic img { max-height: 93px; }
-  /* Category under each mark. The copy column already pairs these brands with
-     what they're for ("KW and Öhlins for suspension, Brembo for brakes…"), so
-     labelling the cells turns the mosaic from eight floating marks into
-     something that carries the same information at a glance, and gives the
-     taller cells a reason to be tall. */
-  .abn__mosaic-cat { font-family: var(--mono); font-size: .625rem; font-weight: 700;
-    letter-spacing: .1em; text-transform: uppercase; color: var(--steel); }
+  .ab__tl-band .vc__timeline li::before { background: var(--ink); box-shadow: 0 0 0 3px var(--ink); }
+  .ab__tl-band .vc__tl-body h3 { color: #fff; }
+  .ab__tl-band .vc__tl-body p { color: rgba(255,255,255,.62); }
+  .ab__tl-extra[hidden] { display: none; }
+  .ab__tl-toggle {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: fit-content; margin: clamp(20px,4vw,32px) auto 0;
+    padding: 12px 22px; background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.5);
+    border-radius: 2px; font-family: var(--ui); font-size: .9375rem; font-weight: 700; cursor: pointer;
+  }
+  .ab__tl-toggle:hover { background: rgba(255,255,255,.1); border-color: #fff; }
+  .ab__tl-toggle svg { width: 14px; height: 14px; transition: transform .2s ease; }
+  .ab__tl-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
 
-  /* --- chassis ownership: the three-car garage, dark ---------------------
-     Dark section, and full-bleed with it: constrained to the content column a
-     dark block reads as a stray dark box with white margins either side, so it
-     breaks out to the viewport edge the same way .abn__bleed and .abn__cta-bar
-     do (margin math, not width:100vw, so it can't create a scrollbar) and
-     .abn__garage-inner re-constrains the content.
-     Contrast on --ink (#0a0a0a): white 19.8:1, the #FFC9C2 tint 13.6:1, body
-     copy at 72% white 10.2:1. The kicker and the card's "kind" label both use
-     the tint rather than --heat, which is only 3.99:1 here — the same trap the
-     hero eyebrow hit. */
-  .abn__garage { margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
-    padding: clamp(44px, 8vw, 92px) 0; background: var(--ink); }
-  .abn__garage-inner { width: 100%; max-width: calc(1120px + (var(--gutter) * 2));
-    margin-inline: auto; padding-inline: var(--gutter); }
-  .abn__garage-head { max-width: 62ch; margin-bottom: clamp(24px, 4vw, 40px); }
-  .abn__garage .vc__kicker { color: #FFC9C2; }
-  .abn__garage-head h2 { font-family: var(--display); font-weight: 800; letter-spacing: -.015em;
-    font-size: clamp(1.5rem, 3.6vw, 2.25rem); line-height: 1.12; margin: 0 0 14px;
-    color: #fff; text-wrap: balance; }
-  .abn__garage-head p { font-size: 1.0313rem; line-height: 1.7;
-    color: rgba(255,255,255,.72); margin: 0; }
-  .abn__garage-grid { display: grid; gap: var(--stack); margin: 0; padding: 0; list-style: none; }
-  @media (min-width: 780px) { .abn__garage-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-  /* Cards lift off the ground with a 5% white wash rather than a second flat
-     colour, so they stay tied to --ink whatever it's set to. */
-  .abn__gcard { position: relative; display: flex; flex-direction: column;
-    background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.14);
-    border-radius: var(--radius); overflow: hidden; transition: border-color .16s ease; }
-  /* Hover was --ink, which is invisible against a dark card. */
-  .abn__gcard:hover, .abn__gcard:focus-within { border-color: rgba(255,255,255,.55); }
-  .abn__gcard img { display: block; width: 100%; height: auto; aspect-ratio: 16/10;
-    object-fit: cover; background: #1b1e23; }
-  .abn__gcard-body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
-  .abn__gcard-kind { font-family: var(--mono); font-size: .6875rem; font-weight: 700;
-    letter-spacing: .1em; text-transform: uppercase; color: #FFC9C2; }
-  .abn__gcard h3 { font-family: var(--display); font-weight: 800; font-size: 1.0625rem;
-    line-height: 1.3; margin: 0; color: #fff; }
-  /* .abn__gcard-link is a real class, not decoration: vr-content.css styles
-     prose links as ".vc :is(p,li,…) a:not([class])" in --heat red with an
-     underline, and these titles sit inside a list item, so they were caught
-     by it. That rule is (0,2,2) and beat ".abn__gcard h3 a" at (0,1,2) — which
-     is why the titles rendered red rather than the white set on the h3, at
-     about 3.9:1 on this ground and underlined like body copy. Giving the anchor
-     a class opts it out of the rule by design, since :not([class]) is exactly
-     how that rule scopes itself to unclassed prose links. Raising specificity
-     instead would have left the next component link to hit the same trap. */
-  .abn__gcard h3 .abn__gcard-link { color: inherit; text-decoration: none; }
-  .abn__gcard h3 .abn__gcard-link::after { content: ""; position: absolute; inset: 0; }
-  .abn__gcard h3 .abn__gcard-link:hover { text-decoration: underline; }
-  .abn__gcard p { margin: 0; font-size: .9375rem; line-height: 1.6;
-    color: rgba(255,255,255,.72); }
-  /* The global focus ring is red, which is too close to this ground — the
-     shared chrome already solves this for .brandbar/.ymm the same way. */
-  .abn__garage a:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+  /* --- "the growth" — a then/now facility-size comparison, echoing the
+     THEN-vs-NOW device from the CO reference page, built from Vivid's own
+     real numbers (1,500 sq ft Tempe unit → 15,000 sq ft Gilbert facility,
+     both already stated elsewhere on this page). --- */
+  /* Figma: CO Updates file gXYI9AIFAimHbTJc8A9J2c, node 433:18333
+     "Section / Our Story". Colors are the file's literal values (#1e1e1e,
+     #b50202, #9a9a9a) EXCEPT where red text sits directly on the #1e1e1e
+     background — co-conventions.md documents both Boss Reds failing there
+     (2-3:1); substituted #E86A6A (5.32:1), the same on-dark tint already
+     used by this page's own hero eyebrow. No fabricated "2001 garage" /
+     "Gilbert facility" photos or video embed — this project doesn't have
+     real ones, and passing off stock imagery as company history would be
+     dishonest; kept the THEN/NOW comparison text-only instead. */
+  .ab__story { background: #1e1e1e; padding: clamp(40px,6vw,72px) 0; }
+  .ab__story-inner { max-width: calc(1120px + (var(--gutter) * 2)); margin: 0 auto; padding-inline: var(--gutter); }
+  .ab__story-eyebrow { margin: 0; font-family: var(--ui); font-size: .875rem; letter-spacing: .04em;
+    text-transform: uppercase; color: #E86A6A; }
+  .ab__story h2 { margin: 8px 0 0; font-family: var(--display); font-weight: 800; letter-spacing: -.01em;
+    text-transform: uppercase; font-size: clamp(1.75rem,4.2vw,2.625rem); line-height: 1.15; color: #fff; max-width: 20ch; }
+  .ab__story-compare { display: flex; align-items: center; justify-content: center;
+    gap: 0; margin-top: clamp(32px,5vw,48px); }
+  .ab__story-cell { display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start; gap: 8px;
+    flex: 1 1 0; max-width: none; height: 350px; position: relative; overflow: hidden;
+    min-height: clamp(200px,28vw,280px); padding: 20px; box-sizing: border-box;
+    background-size: cover; background-position: center; border-radius: 2px; }
+  .ab__story-cell:last-child { align-items: flex-end; text-align: right; }
+  /* Figma photo cards (node 433:18333) — dark gradient scrim keeps the
+     Then/Now stat legible over whatever the photo's brightest region is. */
+  .ab__story-cell::before { content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(10,10,10,.4) 0%, rgba(10,10,10,.72) 50%, rgba(10,10,10,.94) 100%); }
+  .ab__story-cell > * { position: relative; z-index: 1; }
+  .ab__story-cell--then { background-image: url('assets/img/about/story-then.jpg'); }
+  .ab__story-cell--now { background-image: url('assets/img/about/story-now.jpg'); }
+  .ab__story-then, .ab__story-now { font-family: var(--display); font-weight: 700; font-size: clamp(1.25rem,2.6vw,1.875rem);
+    text-transform: uppercase; letter-spacing: -.01em; }
+  .ab__story-then { color: #6b6b6b; }
+  .ab__story-now { color: #E86A6A; }
+  .ab__story-badge { display: inline-block; padding: 4px 12px; border: 1px solid #3a3a3a;
+    font-family: var(--ui); font-size: .75rem; font-weight: 600; letter-spacing: .04em;
+    text-transform: uppercase; color: #9a9a9a; border-radius: 2px; }
+  .ab__story-cell b { font-family: var(--display); font-weight: 900; font-size: clamp(2rem,5vw,3.25rem);
+    letter-spacing: -.02em; line-height: 1; color: #fff; font-variant-numeric: tabular-nums; }
+  .ab__story-unit { font-size: .8125rem; font-weight: 700; color: #9a9a9a; text-transform: uppercase; letter-spacing: .05em; }
+  /* z-index so the circle overlaps both photo cards' edges, not just the
+     one before it in DOM order — without this the second card (painted
+     after the divider) covered the circle on its side of the seam. */
+  .ab__story-divider { flex: none; width: 4px; align-self: stretch; background: #b50202; position: relative; min-height: 100px; z-index: 2; }
+  /* vr-content.css's ".vc svg{max-width:100%}" reset (equal specificity,
+     but max-width isn't overridden by width — it caps it) was clamping
+     this to 100% of its 4px-wide positioned ancestor. Neutralize it here. */
+  .ab__story-divider svg { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    width: 32px; height: 32px; max-width: none; padding: 8px; box-sizing: content-box; border-radius: 50%; background: #b50202; color: #fff; }
+  .ab__story-body { display: grid; gap: clamp(28px,5vw,56px); margin-top: clamp(40px,6vw,64px); }
+  .ab__story-copy { display: flex; flex-direction: column; gap: 16px; }
+  .ab__story-copy p { margin: 0; font-size: 1rem; line-height: 1.6; color: #9a9a9a; max-width: 62ch; }
+  .ab__story-stats { list-style: none; margin: 0; padding-top: 8px; border-top: 1px solid #3a3a3a; }
+  .ab__story-stats li { display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+    padding: 16px 0; border-bottom: 1px solid #3a3a3a; }
+  .ab__story-stats b { font-family: var(--display); font-weight: 800; font-size: clamp(1.25rem,2.6vw,1.75rem);
+    color: #E86A6A; white-space: nowrap; }
+  .ab__story-stats span { font-family: var(--ui); font-size: .8125rem; font-weight: 600; letter-spacing: .04em;
+    text-transform: uppercase; color: #9a9a9a; text-align: right; }
+  @media (min-width: 800px) { .ab__story-body { grid-template-columns: minmax(0,1.4fr) minmax(0,1fr); align-items: start; } }
+  @media (max-width: 640px) {
+    .ab__story-compare { flex-direction: column; align-items: stretch; }
+    .ab__story-cell, .ab__story-cell:last-child { align-items: flex-start; text-align: left; min-height: 220px; }
+    .ab__story-divider { width: 100%; height: 4px; min-height: 0; }
+    /* Divider runs horizontal on mobile (Then stacked above Now) — point the
+       arrow down instead of right to match the stacking direction. */
+    .ab__story-divider svg { transform: translate(-50%,-50%) rotate(90deg); }
+  }
 
-  /* --- why us / reviews / gallery section wrappers ------------------------ */
-  .abn__sec { padding: clamp(36px, 7vw, 84px) 0; border-top: 1px solid var(--line); }
-  .abn__sec-head { max-width: 62ch; margin-bottom: clamp(24px, 4vw, 40px); }
-  .abn__sec-head h2 { font-family: var(--display); font-weight: 800; letter-spacing: -.015em;
-    font-size: clamp(1.5rem, 3.6vw, 2.25rem); line-height: 1.12; margin: 0 0 14px;
-    color: var(--ink); text-wrap: balance; }
-  .abn__sec-head p { font-size: 1.0313rem; line-height: 1.7; color: var(--graphite); margin: 0; }
-  /* row of 4 on wide screens, 2x2 in between, stacked on phones — the brief
-     allows either 2x2 or a row of 4, so this does both by width */
-  @media (min-width: 1080px) { .abn__why-cards { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-  /* Zeroing the shared .vc__card padding so the photo can reach the card edge;
-     the padding moves to .abn__why-body instead. Same image-over-body shape as
-     .abn__gcard above, so the two card rows on this page match. */
-  .abn__why-cards .vc__card { display: flex; flex-direction: column; gap: 0;
-    padding: 0; overflow: hidden; }
-  .abn__why-cards .vc__card > img { display: block; width: 100%; height: auto;
-    aspect-ratio: 16/9; object-fit: cover; background: var(--bone); }
-  .abn__why-body { display: flex; flex-direction: column; gap: 8px; padding: 18px 20px 20px; flex: 1; }
-  .abn__why-cards .vc__card b { font-family: var(--mono); font-size: .6875rem; font-weight: 700;
-    letter-spacing: .1em; text-transform: uppercase; color: var(--heat); }
-  /* .vc__card p carries a 14px bottom margin from the shared library; with the
-     body now a flex column with its own gap, that doubled the spacing. */
-  .abn__why-body p { margin: 0; }
-  /* :has(a) so this only bottom-anchors a trailing CTA link (card 1). Applied
-     to every :last-child paragraph it also pushed the body copy of the three
-     cards that have no link down to the card floor, leaving a gap under their
-     headings. The codebase already relies on :has() (vr-content.css:825). */
-  .abn__why-body p:last-child:has(a) { margin-top: auto; padding-top: 12px; }
-
-  /* --- breadcrumb ---------------------------------------------------------
-     Same visual spec as the .crumbs bar on the store and PDP pages, which
-     define it inline per-page rather than in a shared sheet. */
-  .crumbs { background: var(--paper); border-bottom: 1px solid var(--line); }
-  .crumbs__inner { display: flex; align-items: center; gap: 8px; padding: 12px 0;
-    font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em;
-    text-transform: uppercase; color: var(--steel); }
-  .crumbs__inner a { color: var(--steel); text-decoration: none; }
-  .crumbs__inner a:hover { color: var(--heat); text-decoration: underline; }
-  .crumbs__inner .sep { color: var(--rule); }
-  .crumbs__inner .cur { color: var(--ink); font-weight: 600; }
-  .abn__gal-foot { margin: clamp(24px, 4vw, 36px) 0 0; display: flex; justify-content: center; }
-
-  /* --- closing CTA bar ---------------------------------------------------- */
-  .abn__cta-bar { position: relative; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
-    background: var(--ink); border-top: 4px solid var(--heat); }
-  .abn__cta-inner { width: 100%; max-width: calc(1120px + (var(--gutter) * 2)); margin: 0 auto;
-    padding: clamp(32px, 6vw, 64px) var(--gutter); display: grid; gap: 24px; align-items: center; }
-  @media (min-width: 860px) { .abn__cta-inner { grid-template-columns: minmax(0, 1fr) auto; gap: 40px; } }
-  .abn__cta-inner h2 { font-family: var(--display); font-weight: 800; letter-spacing: -.02em;
-    font-size: clamp(1.5rem, 3.8vw, 2.375rem); line-height: 1.1; margin: 0 0 10px;
-    color: #fff; text-wrap: balance; }
-  .abn__cta-inner p { margin: 0; font-size: 1.0313rem; line-height: 1.65;
-    color: rgba(255,255,255,.78); max-width: 54ch; }
-  .abn__cta-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-  .abn__cta-actions .vc__btn { min-height: 52px; padding: 0 26px;
-    justify-content: center; }
-  /* White outline variant for the dark bar — .vc__btn--ghost is scoped to
-     light grounds and its --ink label would vanish here. */
-  .abn__cta-ghost { display: inline-flex; align-items: center; justify-content: center;
-    min-height: 52px; padding: 0 26px; border: 1.5px solid rgba(255,255,255,.7);
-    background: transparent; color: #fff;
-    font-family: var(--ui); font-size: .9375rem; font-weight: 700; text-decoration: none;
-    transition: background-color .16s ease, border-color .16s ease; }
-  .abn__cta-ghost:hover, .abn__cta-ghost:focus-visible { background: rgba(255,255,255,.12);
-    border-color: #fff; color: #fff; }
-
-  /* --- unsourced-content marker -------------------------------------------
-     Deliberately loud. Three blocks in this rebuild have no source facts
-     behind them yet (the three review quotes, the lead-time commitment, and
-     the per-build part lists) — see about-facts.md §"Content gaps". This
-     makes them impossible to ship by accident, the same way the
-     co-august-build placeholders self-label. */
-  .abn__ph { display: inline-block; margin: 0 0 8px; padding: 3px 8px;
-    background: #FFF3CD; border: 1px dashed #A9803B; border-radius: 3px;
-    font-family: var(--mono); font-size: .6875rem; font-weight: 700;
-    letter-spacing: .06em; text-transform: uppercase; color: #6B4E12; }
+  /* Figma: same file, node 62:11848 "Section / Information Philosophy".
+     Colors are literal Figma values — all safe as-is since this section
+     sits on light backgrounds (#f7f7f7 / white cards), where both Boss
+     Reds pass comfortably (co-conventions.md: 8+:1 on white). */
+  .ab__info { background: #f7f7f7; padding: clamp(40px,6vw,72px) 0; }
+  .ab__info-inner { max-width: calc(1120px + (var(--gutter) * 2)); margin: 0 auto; padding-inline: var(--gutter); text-align: center; }
+  .ab__info-eyebrow { margin: 0; font-family: var(--ui); font-size: .875rem; letter-spacing: .04em;
+    text-transform: uppercase; color: #790000; }
+  .ab__info h2 { margin: 8px auto 0; max-width: 22ch; font-family: var(--display); font-weight: 800;
+    text-transform: uppercase; letter-spacing: -.01em; font-size: clamp(1.75rem,4vw,2.25rem); line-height: 1.15; color: #111; }
+  .ab__info-lead { margin: 14px auto 0; max-width: 56ch; color: #6b6b6b; font-size: 1.125rem; line-height: 1.6; }
+  .ab__info-grid { list-style: none; margin: clamp(28px,5vw,44px) 0 0; padding: 0 0 10px;
+    display: flex; gap: 13px; background: transparent; text-align: left;
+    overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; -ms-overflow-style: none; }
+  .ab__info-grid::-webkit-scrollbar { display: none; }
+  .ab__info-grid li { flex: 0 0 280px; scroll-snap-align: start; background: #fff; display: flex; flex-direction: column; overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,.08), 0 8px 24px rgba(0,0,0,.06); border-radius: 2px; }
+  .ab__info-grid-body { padding: 24px 28px 20px; display: flex; flex-direction: column; gap: 10px; flex: 1 1 auto; }
+  .ab__info-icon { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px;
+    background: #1e1e1e; flex: none; border-radius: 2px; }
+  .ab__info-icon img { width: 22px; height: 22px; filter: invert(1); }
+  .ab__info-grid b { font-family: var(--ui); font-weight: 700; font-size: 1.5rem; color: #790000; margin-top: 4px; }
+  .ab__info-sub { font-family: var(--ui); font-size: .8125rem; font-weight: 600; letter-spacing: .04em;
+    text-transform: uppercase; color: #6b6b6b; }
+  .ab__info-grid h3 { margin: 2px 0 0; font-family: var(--display); font-weight: 700; font-size: 1rem;
+    letter-spacing: -.005em; text-transform: uppercase; color: #111; }
+  .ab__info-grid p { margin: 0; font-size: .8125rem; line-height: 1.55; color: #6b6b6b; }
+  .ab__info-grid a { margin-top: auto; display: block; padding: 14px 28px; border-top: 1px solid #f0f0f0;
+    font-family: var(--ui); font-size: .75rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+    color: #790000; text-decoration: none; }
+  .ab__info-grid a:hover { color: var(--heat-deep); text-decoration: underline; }
+  @media (min-width: 640px) {
+    .ab__story-cell, .ab__story-badge, .ab__info-grid li, .ab__info-icon,
+    .ab__hero-cta .vc__btn, .vc__cta .vc__btn { border-radius: 4px; }
+    .ab__strip-head { max-width: 64ch; }
+    /* Tablet/desktop: fixed two-row grid, not a scroll carousel — the
+       overflow-x/scroll-snap/flex-basis above is mobile-only, single-row. */
+    .ab__info-grid {
+      display: grid; grid-template-columns: repeat(2, minmax(0,1fr));
+      overflow-x: visible; scroll-snap-type: none; padding-bottom: 0;
+    }
+    .ab__info-grid li { flex: initial; }
+  }
+  @media (min-width: 980px) {
+    .ab__info-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  }
 
   @media (prefers-reduced-motion: reduce) {
-    .abn__gcard, .abn__cta-ghost { transition: none; }
+    .ab__strip-item img { transition: none; }
+    .ab__tl-toggle svg { transition: none; }
   }
 </style>
 </head>
@@ -5262,429 +5259,299 @@ html, body{ overflow-x:clip; }
 </header>
 
 <main id="main" class="vc">
-
-  <!-- ============ 1 · POSITION ==============================================
-       Brief: "current hero image with a quiet bolded statement stating a
-       problem that we're about to solve. copy will address the pain points of
-       this position." Hero photo unchanged. The old H1 ("Twenty-five years of
-       go-fast parts."), the stats-band CTA pair and the "Talk to us" button
-       are all gone — company age and the talk-to-us CTA are both explicitly
-       out per the brief (the CTA "comes in later"). ==================== -->
-  <!-- Breadcrumb, matching the .crumbs component the store and PDP pages use
-       (first thing inside the main element, above the page content). It replaces the
-       "Vivid Racing · About" eyebrow that used to sit centred in the middle of
-       the hero: that text was a breadcrumb in everything but position, and
-       centring it over the photo was what read as misplaced. Wrapper is
-       .vc__wrap rather than the store pages' .wrap, which isn't in any
-       stylesheet this page loads — .vc__wrap also lines the crumb up with the
-       page's own 1120px content column. -->
-  <nav class="crumbs" aria-label="Breadcrumb">
-    <div class="vc__wrap">
-      <div class="crumbs__inner">
-        <a href="index.html">Home</a><span class="sep" aria-hidden="true">/</span>
-        <span class="cur" aria-current="page">About</span>
-      </div>
-    </div>
-  </nav>
-
   <header class="vc__hero">
-    <img src="real-photos/night-car.jpg" alt="" width="1920" height="837" fetchpriority="high">
+    <img src="real-photos/night-car.jpg" alt="Rear view of a dark Porsche 911 with glowing red taillights on a rain-soaked city street at dusk" width="1920" height="837" fetchpriority="high">
     <div class="vc__hero__scrim" aria-hidden="true"></div>
     <div class="vc__hero__inner">
-      <h1>Nobody orders the wrong parts on purpose.</h1>
-      <p>They order them because the listing said it fit. The bolt pattern matched, the
-        offset looked close enough, and nothing flagged the quarter-inch that puts a tire
-        into a fender liner at full lock. Then the freight arrives, the wheel doesn&rsquo;t
-        clear, and the return shipping is yours. That is the problem this company exists
-        to take off your hands.</p>
+      <p style="font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #FFC9C2; margin: 0 0 10px;">Vivid Racing &middot; About</p>
+      <h1>Twenty-five years of go-fast parts.</h1>
+      <p>Founded in 2001 with $500 and a $1,500 loan. Now a two-million-part catalog, five house brands, and an Arizona facility with the dyno, the fabrication shop and the phones under one roof.</p>
+      <p class="vc__updated">Ported from vividracing.com &middot; August 2026</p>
+      <div class="ab__hero-cta">
+        <a class="vc__btn" href="#ab-timeline">See the timeline</a>
+        <a class="vc__btn vc__btn--ghost-dark" style="background: rgba(225,6,0,0.9); color: #fff; border: 1.5px solid rgba(255,255,255,.7); border-radius: 2px; display: inline-flex; align-items: center; justify-content: center; font-weight: 600; padding: 12px 24px;" href="waiting-to-build/contact.html">Talk to us</a>
+      </div>
     </div>
   </header>
-
   <div class="vc__body">
+    <section class="ab__stats-band">
+      <div class="vc__wrap">
+        <div class="vc__stats" role="group" aria-label="Vivid Racing by the numbers">
+          <div class="vc__stat"><b data-count-to="2001">0</b><span>Founded in Tempe, AZ</span></div>
+          <div class="vc__stat"><b data-count-to="2" data-count-suffix="M+">0</b><span>Parts in the catalog</span></div>
+          <div class="vc__stat"><b data-count-to="4.7" data-count-decimals="1" data-count-suffix="&#9733;">0&#9733;</b><span>58,811 verified reviews</span></div>
+          <div class="vc__stat"><b data-count-to="15000" data-count-format="comma">0</b><span>Sq ft &middot; Gilbert, AZ</span></div>
+        </div>
+      </div>
+    </section>
 
-    <!-- ============ 2 · WHY WE EXIST =======================================
-         Brief: "image block of a build beside a bold statement about why we
-         started. this isn't the full backstory. this is the problem and how we
-         solved it and what we're doing to continue to solve that."
-         The headline is the founders' own framing, recovered from the 2004
-         timeline entry before that section was cut — see about-facts.md §7.
-         The old .ab__story backstory block is deleted, not moved. ======= -->
     <div class="vc__wrap">
-      <section class="vc__band" aria-labelledby="abn-why-h">
+      <div class="vc__quote">
+        <p>&ldquo;To fuel the passion of enthusiast vehicle owners.&rdquo;</p>
+        <cite>The mission</cite>
+      </div>
+
+      <section class="vc__band">
         <div class="vc__band-media">
-          <img src="real-photos/workshop.jpg" alt="Workshop bay with a car under an open hood and an engine on a hoist" width="1920" height="1280" loading="lazy" decoding="async">
+          <img src="real-photos/workshop.jpg" alt="Dimly lit car repair workshop with a dark-red classic American car under an open hood and an engine on a hoist" width="1200" height="900" loading="lazy">
         </div>
         <div class="vc__band-copy">
-          <p class="vc__kicker">Why we exist</p>
-          <h2 id="abn-why-h">If it works for Subaru and Evo, why not every car?</h2>
-          <p>That was the question in 2004, and the honest answer was that nobody had done
-            the work. Fitment knowledge lived in forum threads and in the heads of a few
-            people who had already made the expensive mistake. Drive something common and
-            you were fine. Drive anything else and you were guessing with your own money.</p>
-          <p>So the work got done one chassis at a time &mdash; specs confirmed against real
-            cars on real lifts, and on a dyno in Arizona, instead of copied off a
-            manufacturer sheet and hoped for. When a spec turned out wrong, it came back to
-            us rather than to the customer.</p>
-          <p>That is still the job. Every platform we add gets the same treatment, which is
-            why a tech will still pick up the phone and call you before a questionable
-            order ships.</p>
+          <p class="vc__kicker">The story</p>
+          <h2>From a Tempe garage unit to two million parts.</h2>
+          <p>Fresh out of Arizona State, Rob and Dan started VividRacing.com in a 1,500 sq ft unit selling Subaru performance parts. Project cars, magazine features, road rallies and SEMA builds made the name; the catalog did the rest.</p>
+          <p>Today it spans performance cars, trucks, Jeeps, UTVs and motorcycles, plus five house brands: <strong>VR Forged, VR Performance, VR Aero, VR Tuned</strong> and <strong>Agency Power</strong>.</p>
         </div>
       </section>
+
+      <section class="vc__band vc__band--flip">
+        <div class="vc__band-media">
+          <img src="real-photos/corvette.jpg" alt="Red Chevrolet Corvette on display, three-quarter rear view" width="1920" height="1001" loading="lazy">
+        </div>
+        <div class="vc__band-copy">
+          <p class="vc__kicker">The proof</p>
+          <h2>Customers keep the receipts.</h2>
+          <p>A 4.7-star average across 58,811 verified reviews, collected by Shopper Approved and Google &mdash; earned one fitment call at a time.</p>
+          <p><a href='waiting-to-build/reviews.html'>Read the reviews</a> or <a href='waiting-to-build/gallery.html'>see the builds</a>.</p>
+        </div>
+      </section>
+
     </div>
 
-    <!-- ============ 3 · FULL-BLEED BAND ====================================
-         Brief: "another build image with a bold statement we solve for." =-->
-    <section class="abn__bleed" aria-labelledby="abn-bleed-h">
-      <img src="real-photos/dyno.jpg" alt="" width="1920" height="1280" loading="lazy" decoding="async">
-      <div class="abn__bleed-inner">
-        <h2 id="abn-bleed-h">The part that fits is the cheapest part you will ever buy.</h2>
-        <p>Everything else costs you twice &mdash; once at checkout, and again in freight,
-          restocking and the weekend you had set aside to install it.</p>
+    <section class="ab__story" aria-labelledby="story2-h">
+      <div class="ab__story-inner">
+        <p class="ab__story-eyebrow">We started this</p>
+        <h2 id="story2-h">From a garage unit to the Gilbert build.</h2>
+
+        <div class="ab__story-compare" role="group" aria-label="Then and now, by square footage">
+          <div class="ab__story-cell ab__story-cell--then">
+            <span class="ab__story-then">Then</span>
+            <span class="ab__story-badge">2001 &middot; Tempe, AZ</span>
+            <b>1,500</b>
+            <span class="ab__story-unit">sq ft</span>
+          </div>
+          <div class="ab__story-divider" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" focusable="false"><path d="M4 12h15m0 0l-6-6m6 6l-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="ab__story-cell ab__story-cell--now">
+            <span class="ab__story-now">Now</span>
+            <span class="ab__story-badge">Today &middot; Gilbert, AZ</span>
+            <b>15,000</b>
+            <span class="ab__story-unit">sq ft</span>
+          </div>
+        </div>
+
+        <div class="ab__story-body">
+          <div class="ab__story-copy">
+            <p>Fresh out of Arizona State, Rob and Dan started VividRacing.com in a 1,500 sq ft unit in Tempe with $500 cash and a $1,500 loan. They weren&rsquo;t trying to build a company &mdash; they were building a resource that actually helped enthusiasts get the right parts the first time.</p>
+            <p>Project cars, magazine features, road rallies and SEMA builds made the name; the catalog did the rest. Today it spans performance cars, trucks, Jeeps, UTVs and motorcycles across five house brands.</p>
+            <p>The operation now runs out of a custom-built facility in Gilbert, Arizona &mdash; in-ground dyno, the fabrication shop, and the phones, all under one roof. The garage mentality never left.</p>
+          </div>
+          <ul class="ab__story-stats">
+            <li><span>Founded</span><b>2001</b></li>
+            <li><span>Gilbert, AZ</span><b>15,000 sq ft</b></li>
+            <li><span>Parts in the catalog</span><b>2M+</b></li>
+            <li><span>Verified reviews</span><b>4.7&#9733;</b></li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <!-- ============ 4 · PARTNER BRANDS =====================================
-         Brief: "logos mosaic style with copy about why we work with the brands
-         we do and ownership of the exclusive relationships we have."
-         The exclusivity claims name their counterparties on purpose. A general
-         "we hold exclusive relationships" is the same unsubstantiated-claim
-         exposure flagged in commit 7fd1f7b; naming Prior Design and ArmyTrix
-         is what makes it defensible.
-         VERIFY BEFORE LAUNCH: both relationships are dated 2017-2018 in the
-         source material (about-facts.md §1). Confirm they are still current. -->
+    <section class="ab__info" aria-labelledby="info-h">
+      <div class="ab__info-inner">
+        <p class="ab__info-eyebrow">Information so you can decide</p>
+        <h2 id="info-h">You make smarter choices when you know more.</h2>
+        <p class="ab__info-lead">We&rsquo;re not here to just sell parts &mdash; we&rsquo;re here to help you pick the right ones.</p>
+
+        <ul class="ab__info-grid">
+          <li>
+            <div class="ab__info-grid-body">
+              <span class="ab__info-icon"><img src="assets/icons/fitment.svg" alt="" width="22" height="22"></span>
+              <b>Verified</b>
+              <span class="ab__info-sub">Every order, checked</span>
+              <h3>Fitment Promise</h3>
+              <p>Modified ride? A tech confirms fit by phone before you buy &mdash; wrong-fit is on us.</p>
+            </div>
+            <a class="ab__info-link" href="waiting-to-build/fitment-promise.html">How fitment works &rarr;</a>
+          </li>
+          <li>
+            <div class="ab__info-grid-body">
+              <span class="ab__info-icon"><img src="assets/icons/co-phone.svg" alt="" width="22" height="22"></span>
+              <b>Mon&ndash;Sat</b>
+              <span class="ab__info-sub">Real experts available</span>
+              <h3>Expert Advice</h3>
+              <p>Real techs on the phone &mdash; no scripts, no upsell, just straight answers on offset and fitment.</p>
+            </div>
+            <a class="ab__info-link" href="tel:+14809663040">Call our experts &rarr;</a>
+          </li>
+          <li>
+            <div class="ab__info-grid-body">
+              <span class="ab__info-icon"><img src="assets/icons/car-build.svg" alt="" width="22" height="22"></span>
+              <b>Nearly 100</b>
+              <span class="ab__info-sub">Magazine features</span>
+              <h3>Project Car Builds</h3>
+              <p>SEMA builds and magazine features since the first Project WRX made the map in 2003.</p>
+            </div>
+            <a class="ab__info-link" href="waiting-to-build/gallery.html">See the builds &rarr;</a>
+          </li>
+          <li>
+            <div class="ab__info-grid-body">
+              <span class="ab__info-icon"><img src="assets/icons/brands.svg" alt="" width="22" height="22"></span>
+              <b>Five</b>
+              <span class="ab__info-sub">House brands</span>
+              <h3>Built In-House</h3>
+              <p>VR Forged, VR Performance, VR Aero, VR Tuned and Agency Power &mdash; all under one roof.</p>
+            </div>
+            <a class="ab__info-link" href="#family">Meet the brands &rarr;</a>
+          </li>
+          <li>
+            <div class="ab__info-grid-body">
+              <span class="ab__info-icon"><img src="assets/icons/wrench.svg" alt="" width="22" height="22"></span>
+              <b>Instant</b>
+              <span class="ab__info-sub">Fitment results</span>
+              <h3>Wheel Fitment Tool</h3>
+              <p>Punch in your specs. The tool checks backspacing, offset and lift combinations instantly.</p>
+            </div>
+            <a class="ab__info-link" href="waiting-to-build/wheel-fitment.html">Try the tool &rarr;</a>
+          </li>
+          <li>
+            <div class="ab__info-grid-body">
+              <span class="ab__info-icon"><img src="assets/icons/dollar.svg" alt="" width="22" height="22"></span>
+              <b>0% APR</b>
+              <span class="ab__info-sub">Pre-qualify in 60s</span>
+              <h3>Transparent Financing</h3>
+              <p>Affirm and Katapult financing, shown up front &mdash; no surprise fees at checkout.</p>
+            </div>
+            <a class="ab__info-link" href="waiting-to-build/financing.html">See financing &rarr;</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="ab__strip" aria-labelledby="ab-strip-h">
+      <div class="ab__strip-inner">
+        <div class="ab__strip-head">
+          <p class="vc__kicker">The platforms</p>
+          <h2 id="ab-strip-h">Built for these, and everything else.</h2>
+          <p>Porsche, BMW M, Audi RS, AMG, GT-R, Corvette &mdash; if it takes a coilover or a wheel, the catalog covers it. Scroll for a few of the platforms that come through the shop.</p>
+        </div>
+        <div class="ab__strip-track" role="group" aria-label="Platforms Vivid Racing builds for">
+          <div class="ab__strip-item"><img src="real-photos/porsche-gt3.jpg" alt="Red Porsche 911 GT3, rear three-quarter view" width="1920" height="1097" loading="lazy"><span>Porsche</span></div>
+          <div class="ab__strip-item"><img src="real-photos/bmw-m4.jpg" alt="White BMW M4 coupe, front three-quarter view" width="1920" height="1055" loading="lazy"><span>BMW M</span></div>
+          <div class="ab__strip-item"><img src="real-photos/audi-rs.jpg" alt="Gray Audi RS6 Avant wagon, front three-quarter view" width="1920" height="1005" loading="lazy"><span>Audi RS</span></div>
+          <div class="ab__strip-item"><img src="real-photos/amg-gt.jpg" alt="Matte blue Mercedes-AMG GT coupe, front three-quarter view" width="1920" height="1005" loading="lazy"><span>Mercedes-AMG</span></div>
+          <div class="ab__strip-item"><img src="real-photos/nissan-gtr.jpg" alt="White Nissan GT-R in motion, front three-quarter view" width="1920" height="1005" loading="lazy"><span>Nissan GT-R</span></div>
+          <div class="ab__strip-item"><img src="real-photos/corvette.jpg" alt="Red Chevrolet Corvette, front three-quarter view" width="1920" height="1001" loading="lazy"><span>Corvette</span></div>
+          <div class="ab__strip-item"><img src="real-photos/lamborghini.jpg" alt="Blue Lamborghini Huracan, front three-quarter view" width="1920" height="1005" loading="lazy"><span>Lamborghini</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ab__tl-band" aria-labelledby="tl-h">
+      <div class="vc__wrap">
+        <p class="vc__kicker">The record</p>
+        <h2 id="tl-h" style="font-family:var(--display);font-weight:800;letter-spacing:-.015em;font-size:clamp(1.5rem,3.6vw,2.25rem);line-height:1.12;margin:0 0 8px">Twenty-five years, year by year.</h2>
+        <p style="color:var(--graphite);max-width:64ch;margin:0 0 6px;line-height:1.7">Every
+          entry below is from the company's own history.</p>
+        <ol class="vc__timeline">
+        <li>
+          <span class="vc__tl-year">2025</span>
+          <div class="vc__tl-body"><h3>Joins Enthusiast Enterprises</h3><p>Vivid Racing joins EEI, cementing its position in automotive aftermarket e-commerce.</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2024</span>
+          <div class="vc__tl-body"><h3>New platform</h3><p>A new version of vividracing.com launches in May; 23 years in.</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2022</span>
+          <div class="vc__tl-body"><h3>VR Forged &middot; $100M goal</h3><p>VR Forged wheels launch to a strong reception; a CRO joins to drive toward the $100M sales goal. 21 years of business.</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2021</span>
+          <div class="vc__tl-body"><h3>Twenty years</h3><p>Two decades in, built on the same customer base that started it.</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2020</span>
+          <div class="vc__tl-body"><h3>Record year</h3><p>Pandemic year ends in sales records; customer service team expands, a CFO joins, warehouse reconfigured.</p></div>
+        </li>
+        <li>
+          <span class="vc__tl-year">2018</span>
+          <div class="vc__tl-body"><h3>New website &middot; Prior Design</h3><p>Faster storefront ships; Vivid becomes exclusive distributor for Prior Design. Sales pass eight figures.</p></div>
+        </li>
+        <li class="ab__tl-extra" hidden>
+          <span class="vc__tl-year">2017</span>
+          <div class="vc__tl-body"><h3>Automation &middot; ArmyTrix</h3><p>Big investment in vendor-data automation; exclusive North American distributor for ArmyTrix. Second straight SEMA Top Dealer award with Mackin Industries.</p></div>
+        </li>
+        <li class="ab__tl-extra" hidden>
+          <span class="vc__tl-year">2016</span>
+          <div class="vc__tl-body"><h3>Fifteen years &middot; UTV</h3><p>SEMA Top Dealer award; expansion into the fast-growing Polaris / Can-Am UTV market.</p></div>
+        </li>
+        <li class="ab__tl-extra" hidden>
+          <span class="vc__tl-year">2015</span>
+          <div class="vc__tl-body"><h3>Eight figures</h3><p>Annual sales pass eight digits while much of the industry is still recovering.</p></div>
+        </li>
+        <li class="ab__tl-extra" hidden>
+          <span class="vc__tl-year">2014</span>
+          <div class="vc__tl-body"><h3>VR Tuned launches</h3><p>After years of selling other people's tuning, VRTuned.com launches: flash tuning, plug-and-play boxes, TCU tuning and throttle controllers.</p></div>
+        </li>
+        <li class="ab__tl-extra" hidden>
+          <span class="vc__tl-year">2013</span>
+          <div class="vc__tl-body"><h3>HorsepowerFreaks acquired</h3><p>A competitor catalog site is acquired and folded into the Vivid infrastructure; Project SRT Viper debuts at SEMA.</p></div>
+        </li>
+        <li class="ab__tl-extra" hidden>
+          <span class="vc__tl-year">2012</span>
+          <div class="vc__tl-body"><h3>CNC in-house</h3><p>A CNC machine shop is integrated into the facility for Agency Power production; Targa Newfoundland road rally in the Project 997.2 Turbo S.</p></div>
+        </li>
+        <li class="ab__tl-extra" hidden>
+          <span class="vc__tl-year">2011</span>
+          <div class="vc__tl-body"><h3>Status Racing</h3><p>Rob and Dan acquire the FIA-certified seat maker (sold on to PRP Seats in 2016).</p></div>
+        </li>
+        <li class="ab__tl-extra" hidden>
+          <span class="vc__tl-year">2010</span>
+          <div class="vc__tl-body"><h3>206 mph</h3><p>The Project 997 Turbo runs 206.2 mph at the Texas Mile on a stock engine; two SEMA feature cars.</p></div>
+        </li>
+        <li class="ab__tl-extra" hidden>
+          <span class="vc__tl-year">2008</span>
+          <div class="vc__tl-body"><h3>The Gilbert building</h3><p>A custom-built 15,000 sq ft facility in Gilbert, Arizona: in-ground Mustang Dyno, lifts, Agency Power fabrication and the call center under one roof.</p></div>
+        </li>
+        <li class="ab__tl-extra" hidden>
+          <span class="vc__tl-year">2005</span>
+          <div class="vc__tl-body"><h3>Chandler &middot; first dyno</h3><p>10,000 sq ft building in Chandler; a Mustang AWD dyno - one of two in the state - starts the tuning program. Pepsi/DUB/Mazda RX-8 project builds.</p></div>
+        </li>
+        <li class="ab__tl-extra" hidden>
+          <span class="vc__tl-year">2004</span>
+          <div class="vc__tl-body"><h3>Agency Power founded</h3><p>In-house manufacturing begins under its own brand; the catalog-database business starts: if it works for Subaru and Evo, why not every car?</p></div>
+        </li>
+        <li class="ab__tl-extra" hidden>
+          <span class="vc__tl-year">2003</span>
+          <div class="vc__tl-body"><h3>First magazine feature</h3><p>Super Street features the Project WRX - the first of nearly a hundred; Gumball 3000 from San Francisco to Miami.</p></div>
+        </li>
+        <li class="ab__tl-extra" hidden>
+          <span class="vc__tl-year">2002</span>
+          <div class="vc__tl-body"><h3>First SEMA</h3><p>Project Subaru WRX I - full JDM build on Volk wheels - puts Vivid Racing on the map.</p></div>
+        </li>
+        <li class="ab__tl-extra" hidden>
+          <span class="vc__tl-year">2001</span>
+          <div class="vc__tl-body"><h3>Founded</h3><p>Fresh out of Arizona State, Rob and Dan start VividRacing.com from a 1,500 sq ft unit in Tempe with $500 cash and a $1,500 loan, selling Subaru performance parts.</p></div>
+        </li>
+      </ol>
+      <button class="ab__tl-toggle" type="button" aria-expanded="false">
+        <span>View the full 25-year timeline</span>
+        <svg viewBox="0 0 12 8" aria-hidden="true" focusable="false"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      </div>
+    </section>
+
     <div class="vc__wrap">
-      <section class="abn__brands" aria-labelledby="abn-brands-h">
-        <div class="abn__brands-split">
-          <div class="abn__brands-lede">
-            <p class="vc__kicker">Partner brands</p>
-            <h2 id="abn-brands-h">We don&rsquo;t carry everything. We carry what we&rsquo;d bolt to our own cars.</h2>
-            <p>A catalog that lists every brand on earth is a catalog nobody vetted. These are
-              the lines we stock because we have fitted them, warrantied them, and had to
-              stand behind them on the phone at 4pm on a Friday &mdash; KW and &Ouml;hlins for
-              suspension, Brembo for brakes, BBS and HRE for wheels, Akrapovi&#269; and
-              Fabspeed for exhaust, Manthey for Porsche.</p>
-            <p>Some of these we are the only route to in North America. That is not a badge for
-              our own benefit: it means warranty questions, fitment disputes and honest
-              back-order dates come to us directly, instead of bouncing between a marketplace
-              seller and a manufacturer who has never heard of your car.</p>
-            <!-- The exclusivity callout sits in the copy column rather than in the
-                 logo grid: it's a text claim, and with the layout split left/right
-                 a full-width text cell inside the mosaic would break the grid. -->
-            <div class="abn__excl">
-              <b>Exclusive distribution</b>
-              <span>Vivid is the exclusive distributor for <strong>Prior Design</strong>, and the
-                exclusive North American distributor for <strong>ArmyTrix</strong>.</span>
-            </div>
-          </div>
-          <ul class="abn__mosaic">
-            <li class="abn__m-kw"><img src="assets/img/brands/kw.png" alt="KW Suspension" width="297" height="170" loading="lazy" decoding="async"><span class="abn__mosaic-cat">Suspension</span></li>
-            <li class="abn__m-ohlins"><img src="assets/img/brands/ohlins.png" alt="&Ouml;hlins" width="3840" height="2160" loading="lazy" decoding="async"><span class="abn__mosaic-cat">Suspension</span></li>
-            <li class="abn__m-brembo"><img src="assets/img/brands/brembo.webp" alt="Brembo" width="2240" height="1260" loading="lazy" decoding="async"><span class="abn__mosaic-cat">Brakes</span></li>
-            <li class="abn__m-bbs"><img src="assets/img/brands/bbs.png" alt="BBS" width="3840" height="2160" loading="lazy" decoding="async"><span class="abn__mosaic-cat">Wheels</span></li>
-            <li class="abn__m-hre"><img src="assets/img/brands/hre.webp" alt="HRE Performance Wheels" width="900" height="900" loading="lazy" decoding="async"><span class="abn__mosaic-cat">Wheels</span></li>
-            <li class="abn__m-akrapovic"><img src="assets/img/brands/akrapovic.png" alt="Akrapovi&#269;" width="3000" height="2000" loading="lazy" decoding="async"><span class="abn__mosaic-cat">Exhaust</span></li>
-            <li class="abn__m-fabspeed"><img src="assets/img/brands/fabspeed.png" alt="Fabspeed Motorsport" width="2292" height="580" loading="lazy" decoding="async"><span class="abn__mosaic-cat">Exhaust</span></li>
-            <li class="abn__m-manthey"><img src="assets/img/brands/manthey.jpg" alt="Manthey Racing" width="798" height="216" loading="lazy" decoding="async"><span class="abn__mosaic-cat">Porsche</span></li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- ============ 5 · CHASSIS OWNERSHIP =================================
-           Brief: "3 car garage (suv, car, truck) we take ownership over your
-           full garage of builds and flex our expertise in chassis knowledge."
-           The three cards link to the sub-brand pages that already exist
-           rather than introducing a fourth way to slice the catalog. ===== -->
-      <section class="abn__garage" aria-labelledby="abn-garage-h">
-        <div class="abn__garage-inner">
-          <div class="abn__garage-head">
-            <p class="vc__kicker">Chassis ownership</p>
-            <h2 id="abn-garage-h">Most of you don&rsquo;t have one car.</h2>
-            <p>The daily, the weekend car and the thing that tows it are three separate
-              fitment problems, and most shops only know one of them properly. We hold specs
-              across all three &mdash; same techs, same verification, whichever one is in the
-              driveway when you call.</p>
-          </div>
-          <ul class="abn__garage-grid">
-            <li class="abn__gcard">
-              <img src="real-photos/chevrolet-tahoe.jpg" alt="Black Chevrolet Tahoe, front three-quarter view" width="1920" height="1065" loading="lazy" decoding="async">
-              <div class="abn__gcard-body">
-                <span class="abn__gcard-kind">The SUV</span>
-                <h3><a class="abn__gcard-link" href="vivid-crossover.html">Crossovers &amp; SUVs</a></h3>
-                <p>Load ratings, hub bores and the staggered setups that only work on one
-                  trim. Family duty during the week, still your car on the weekend.</p>
-              </div>
-            </li>
-            <li class="abn__gcard">
-              <img src="real-photos/bmw-m4.jpg" alt="White BMW M4 coupe, front three-quarter view" width="1920" height="999" loading="lazy" decoding="async">
-              <div class="abn__gcard-body">
-                <span class="abn__gcard-kind">The car</span>
-                <h3><a class="abn__gcard-link" href="index.html">Performance cars</a></h3>
-                <p>Chassis codes, big-brake clearance and the offset that fills an arch
-                  without eating a fender liner at full lock.</p>
-              </div>
-            </li>
-            <li class="abn__gcard">
-              <img src="real-photos/ford-raptor.jpg" alt="Ford Raptor pickup parked on grass, front three-quarter view" width="1920" height="1360" loading="lazy" decoding="async">
-              <div class="abn__gcard-body">
-                <span class="abn__gcard-kind">The truck</span>
-                <h3><a class="abn__gcard-link" href="vivid-trucks.html">Trucks &amp; off-road</a></h3>
-                <p>Lift and level combinations, backspacing and what actually rubs at full
-                  articulation rather than in the driveway.</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- ============ 6 · WHY US ============================================
-           Brief: "Header text concedes who we're not then below 4 blocks
-           either 2x2 or row of 4 that touch on part fitment confidence, brand
-           authority (exclusive and authorized brands), lead times/in stock
-           transparency, cost of getting it wrong - and how we prevent that."
-           Blocks 1, 2 and 4 are backed by existing policy/relationships.
-           Block 3 has no source facts behind it anywhere on the site and is
-           marked accordingly — see about-facts.md §"Content gaps". ======= -->
-      <section class="abn__sec" aria-labelledby="abn-whyus-h">
-        <div class="abn__sec-head">
-          <p class="vc__kicker">Why us</p>
-          <h2 id="abn-whyus-h">We&rsquo;re not the cheapest, and we&rsquo;re not the biggest.</h2>
-          <p>Both of those are easy to be, and neither one puts the right wheel on your car.
-            Here is what we would rather be right about.</p>
-        </div>
-        <!-- Each card leads with the part the claim is actually about: a wheel
-             for fitment, an exhaust for brand authority (ArmyTrix, one of the
-             two named exclusives, is an exhaust brand), a parts shot for stock,
-             and a big brake kit for the cost-of-wrong copy, which cites brake
-             clearance. All four come from the existing category set, so they
-             share one lighting treatment and read as a set. -->
-        <ul class="vc__cards abn__why-cards">
-          <li class="vc__card">
-            <img src="assets/img/category/wheels.jpg" alt="" width="400" height="400" loading="lazy" decoding="async">
-            <div class="abn__why-body">
-              <b>Fitment confidence</b>
-              <h3>A tech clears it before it ships</h3>
-              <p>Modified ride height, big brakes, spacers already on it &mdash; a tech confirms
-                the spec by phone before a questionable order leaves. If we clear it and it
-                still doesn&rsquo;t fit, wrong-fit is on us, not on your card.</p>
-              <!-- Shortened from "How the fitment promise works" and the arrow
-                   glued on with &nbsp;. In the 4-up desktop row each card is
-                   only ~210px of usable width, and the longer label wrapped to
-                   two lines with the arrow stranded alone on the second. The
-                   shorter wording is what about.html already used for this same
-                   link, so it's consistent rather than newly invented. -->
-              <p><a href="waiting-to-build/fitment-promise.html">How fitment works&nbsp;&rarr;</a></p>
-            </div>
-          </li>
-          <li class="vc__card">
-            <img src="assets/img/category/exhaust.jpg" alt="" width="400" height="400" loading="lazy" decoding="async">
-            <div class="abn__why-body">
-              <b>Brand authority</b>
-              <h3>Authorized, and in two cases the only route</h3>
-              <p>We&rsquo;re authorized on the lines we stock, and the exclusive North American
-                distributor for ArmyTrix and the exclusive distributor for Prior Design.
-                Warranty claims stop with us rather than bouncing back to you.</p>
-            </div>
-          </li>
-          <li class="vc__card">
-            <img src="assets/img/category/oem-parts.jpg" alt="" width="400" height="400" loading="lazy" decoding="async">
-            <div class="abn__why-body">
-              <b>Lead times</b>
-              <h3>Stock status before you order, not after</h3>
-              <p class="abn__ph">Needs source facts</p>
-              <p>Placeholder copy. The intent is to state the real stock-status and lead-time
-                commitment here, but no such figures exist anywhere in the current site
-                content. Confirm with the business what can actually be promised &mdash; and
-                whether live stock status is available to display &mdash; before this ships.</p>
-            </div>
-          </li>
-          <li class="vc__card">
-            <img src="assets/img/category/brakes.jpg" alt="" width="400" height="400" loading="lazy" decoding="async">
-            <div class="abn__why-body">
-              <b>Cost of getting it wrong</b>
-              <h3>The asymmetry is the whole point</h3>
-              <p>A wheel that rubs costs you the tire, freight both directions and a restocking
-                fee. Checking the spec first costs one phone call. That gap is the entire
-                reason the fitment desk exists, and why we would rather lose the order than
-                sell you the wrong one.</p>
-            </div>
-          </li>
-        </ul>
-      </section>
-
-      <!-- ============ 7 · THREE REVIEWS =====================================
-           Brief: "3 Google reviews."
-           These are the three real Google reviews already running on
-           index.html — same reviewer names, review/photo counts and timestamps
-           as Google shows them, source text supplied by the user (see the
-           REVIEWS comment in index.html). index.html keeps its copy; this page
-           shows the same three rather than inventing any.
-           Component is .revs__grid/.rev from css/style.css, which this page
-           already loads, so there is no new styling here — and the .dashes
-           pair below is the mobile scroll indicator js/script.js drives for
-           any .revs__grid it finds.
-           Star ratings were not supplied with the source text and are shown as
-           5 per the reviews' own wording; confirm against the live Google
-           listing if exact scores matter. ============================== -->
-      <section class="abn__sec" aria-labelledby="abn-rev-h">
-        <div class="abn__sec-head">
-          <p class="vc__kicker">What customers say</p>
-          <h2 id="abn-rev-h">The fitment desk, in other people&rsquo;s words.</h2>
-          <p>Three reviews from our Google listing, unedited.</p>
-        </div>
-        <ul class="revs__grid">
-          <li class="rev">
-            <div class="rev__head">
-              <span class="rev__avatar" aria-hidden="true">A</span>
-              <span class="rev__id">
-                <span class="rev__name">Adrienne Taylor</span>
-                <span class="rev__stat">Local Guide &middot; 91 reviews &middot; 41 photos</span>
-              </span>
-              <span class="rev__src"><img src="assets/icons/google-logo-color.svg" alt="" aria-hidden="true" width="15" height="15">Google</span>
-            </div>
-            <div class="rev__rating">
-              <span class="rev__stars" role="img" aria-label="Rated 5 out of 5"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"></span>
-              <span class="rev__time">2 months ago</span>
-            </div>
-            <blockquote class="rev__quote">Placed a order for RCV axles that only Vivid had in stock. Called to confirm stock and customer service was great. Took care of everything over the phone and didn&rsquo;t sit on hold for half the day. They shipped same day and I will not hesitate to order from these dudes again!</blockquote>
-          </li>
-          <li class="rev">
-            <div class="rev__head">
-              <span class="rev__avatar" aria-hidden="true">C</span>
-              <span class="rev__id">
-                <span class="rev__name">Craig Wilcox</span>
-                <span class="rev__stat">7 reviews &middot; 2 photos</span>
-              </span>
-              <span class="rev__src"><img src="assets/icons/google-logo-color.svg" alt="" aria-hidden="true" width="15" height="15">Google</span>
-            </div>
-            <div class="rev__rating">
-              <span class="rev__stars" role="img" aria-label="Rated 5 out of 5"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"></span>
-              <span class="rev__time">a year ago</span>
-            </div>
-            <blockquote class="rev__quote">Excellent customer service, quick shipping on short notice. Highly recommend! The ultra low profile 90-degree 16AN fitting was a lifesaver and allowed me to finish my custom build, thanks Vivid!</blockquote>
-          </li>
-          <li class="rev">
-            <div class="rev__head">
-              <span class="rev__avatar" aria-hidden="true">H</span>
-              <span class="rev__id">
-                <span class="rev__name">Howard Floyd</span>
-                <span class="rev__stat">2 reviews &middot; 2 photos</span>
-              </span>
-              <span class="rev__src"><img src="assets/icons/google-logo-color.svg" alt="" aria-hidden="true" width="15" height="15">Google</span>
-            </div>
-            <div class="rev__rating">
-              <span class="rev__stars" role="img" aria-label="Rated 5 out of 5"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"></span>
-              <span class="rev__time">Edited a year ago</span>
-            </div>
-            <blockquote class="rev__quote">Once again Vivid Racing does an awesome job! Your products are always great quality, they&rsquo;re very responsive and my parts always get here quickly. I&rsquo;ve used Vivid Racing at least four times just with this build and many other times in the past. I would definitely recommend them for your motorcycle and ATV needs.</blockquote>
-          </li>
-        </ul>
-        <div class="dashes" aria-hidden="true"><span class="is-active"></span><span></span></div>
-      </section>
-
-      <!-- ============ 8 · GALLERY ===========================================
-           Brief: "Mosaic of builds from VR gallery with named parts (this will
-           be based on CO gallery since it houses all ymm's). Button CTA to see
-           builds."
-           Using the 12 build photos already in assets/img/builds/. Wheel
-           brands below are the ones the asset names actually carry; anything
-           deeper (suspension, exhaust, full part lists) needs the real
-           CO-gallery data, which isn't in this repo. ==================== -->
-      <section class="abn__sec" aria-labelledby="abn-gal-h">
-        <div class="abn__sec-head">
-          <p class="vc__kicker">Customer builds</p>
-          <h2 id="abn-gal-h">Cars that left here with the right spec.</h2>
-          <p>Every one of these went out after a fitment check. Wheel fitments named where
-            we have them on record.</p>
-          <p class="abn__ph">Part lists need CO gallery data</p>
-        </div>
-        <ul class="vc__gal">
-          <li class="vc__build">
-            <span class="vc__tag">Porsche</span>
-            <img src="assets/img/builds/911-forgelite.jpg" alt="Porsche 911 on Forgelite wheels" width="1000" height="749" loading="lazy" decoding="async">
-            <div class="vc__build-body">
-              <h3><a href="waiting-to-build/gallery.html">Porsche 911</a></h3>
-              <ul class="vc__build-spec">
-                <li>Wheels &middot; <b>Forgelite</b></li>
-              </ul>
-              <p class="vc__build-by">@forgelitewheels</p>
-            </div>
-          </li>
-          <li class="vc__build">
-            <span class="vc__tag">BMW</span>
-            <img src="assets/img/builds/m3-ferrada.jpg" alt="BMW M3 on Ferrada wheels" width="860" height="645" loading="lazy" decoding="async">
-            <div class="vc__build-body">
-              <h3><a href="waiting-to-build/gallery.html">BMW M3</a></h3>
-              <ul class="vc__build-spec">
-                <li>Wheels &middot; <b>Ferrada</b></li>
-              </ul>
-              <p class="vc__build-by">@branden_ferradawheels</p>
-            </div>
-          </li>
-          <li class="vc__build">
-            <span class="vc__tag">Mercedes-AMG</span>
-            <img src="assets/img/builds/amg-gtr-vossen.jpg" alt="Mercedes-AMG GT R on Vossen wheels" width="831" height="624" loading="lazy" decoding="async">
-            <div class="vc__build-body">
-              <h3><a href="waiting-to-build/gallery.html">Mercedes-AMG GT R</a></h3>
-              <ul class="vc__build-spec">
-                <li>Wheels &middot; <b>Vossen</b></li>
-              </ul>
-              <p class="vc__build-by">@mr_motorsports</p>
-            </div>
-          </li>
-          <li class="vc__build">
-            <span class="vc__tag">BMW</span>
-            <img src="assets/img/builds/m2-ferrada.jpg" alt="BMW M2 on Ferrada wheels" width="919" height="689" loading="lazy" decoding="async">
-            <div class="vc__build-body">
-              <h3><a href="waiting-to-build/gallery.html">BMW M2</a></h3>
-              <ul class="vc__build-spec">
-                <li>Wheels &middot; <b>Ferrada</b></li>
-              </ul>
-              <p class="vc__build-by">@pramikphoto</p>
-            </div>
-          </li>
-          <li class="vc__build">
-            <span class="vc__tag">Porsche</span>
-            <img src="assets/img/builds/911-mrr.jpg" alt="Porsche 911 on MRR wheels" width="999" height="749" loading="lazy" decoding="async">
-            <div class="vc__build-body">
-              <h3><a href="waiting-to-build/gallery.html">Porsche 911</a></h3>
-              <ul class="vc__build-spec">
-                <li>Wheels &middot; <b>MRR</b></li>
-              </ul>
-            </div>
-          </li>
-          <li class="vc__build">
-            <span class="vc__tag">Chevrolet</span>
-            <img src="assets/img/builds/corvette-z06.jpg" alt="Chevrolet Corvette Z06" width="999" height="749" loading="lazy" decoding="async">
-            <div class="vc__build-body">
-              <h3><a href="waiting-to-build/gallery.html">Corvette Z06</a></h3>
-              <ul class="vc__build-spec">
-                <li>Wheel fitment on record &mdash; part list pending</li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-        <p class="abn__gal-foot">
-          <a class="vc__btn" href="waiting-to-build/gallery.html">See all builds</a>
-        </p>
-      </section>
-
-    </div>
-
-    <!-- ============ 9 · CLOSING CTA BAR ==================================== -->
-    <section class="abn__cta-bar" aria-labelledby="abn-cta-h">
-      <div class="abn__cta-inner">
+      <div class="vc__cta" id="family" style="margin-top:var(--section);scroll-margin-top:96px">
         <div>
-          <h2 id="abn-cta-h">Tell us what you drive. We&rsquo;ll tell you what fits.</h2>
-          <p>Year, make, model and anything already modified. A tech will come back with a
-            spec that clears &mdash; or tell you straight that we don&rsquo;t have it.</p>
+          <h2>Part of a family of brands</h2>
+          <p>Custom Offsets, Only Tires, Function Powersports, MAPerformance and Anovia
+            Wheels &mdash; each with its own lane, all enthusiast-run.</p>
         </div>
-        <div class="abn__cta-actions">
-          <a class="vc__btn" href="tel:+14809663040">Call 480-966-3040</a>
-          <a class="abn__cta-ghost" href="waiting-to-build/vehicle-picker.html">Shop by vehicle</a>
-        </div>
+        <p><a class="vc__btn--ghost" style="display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 12px 22px; background: transparent; color: var(--ink); border: 1.5px solid var(--rule); border-radius: 2px; font-family: var(--ui); font-size: 0.9375rem; font-weight: 700; text-decoration: none;" href="waiting-to-build/careers.html">Work here</a>
+           <a class="vc__btn" href="waiting-to-build/contact.html">Talk to us</a></p>
       </div>
-    </section>
-
+    </div>
   </div>
 
   <!-- ============ EMAIL CAPTURE · node 251:6199 ============ -->
@@ -5918,9 +5785,69 @@ document.addEventListener('click', function (e) {
 });
 </script>
 
-<!-- The stat count-up and timeline expand/collapse scripts were removed here
-     on 2026-09-03 with the .ab__stats-band and .ab__tl-band markup they drove.
-     Both were already null-guarded, so they were inert rather than broken —
-     deleted so nobody goes looking for the components they animate. -->
+<script>
+/* ===== Stat count-up — runs once, the first time .ab__stats-band scrolls
+   into view. Respects prefers-reduced-motion by jumping straight to the
+   final value instead of animating. ===== */
+(function () {
+  var band = document.querySelector('.ab__stats-band');
+  if (!band) return;
+  var nums = band.querySelectorAll('[data-count-to]');
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function format(el, value) {
+    var decimals = parseInt(el.getAttribute('data-count-decimals') || '0', 10);
+    var suffix = el.getAttribute('data-count-suffix') || '';
+    var comma = el.getAttribute('data-count-format') === 'comma';
+    var text = comma ? Math.round(value).toLocaleString('en-US') : value.toFixed(decimals);
+    return text + suffix;
+  }
+
+  function run() {
+    nums.forEach(function (el) {
+      var to = parseFloat(el.getAttribute('data-count-to'));
+      if (reduced) { el.textContent = format(el, to); return; }
+      var start = null;
+      var duration = 1200;
+      function tick(now) {
+        if (start === null) start = now;
+        var progress = Math.min(1, (now - start) / duration);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = format(el, to * eased);
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    var seen = false;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && !seen) { seen = true; run(); io.disconnect(); }
+      });
+    }, { threshold: 0.4 });
+    io.observe(band);
+  } else {
+    run();
+  }
+})();
+
+/* ===== Timeline expand/collapse — 6 recent milestones show by default,
+   the remaining 19 (2001–2017) stay behind this toggle. ===== */
+(function () {
+  var toggle = document.querySelector('.ab__tl-toggle');
+  var extras = document.querySelectorAll('.ab__tl-extra');
+  if (!toggle || !extras.length) return;
+  var labelMore = toggle.querySelector('span').textContent;
+  var labelLess = 'Show fewer milestones';
+  toggle.addEventListener('click', function () {
+    var open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', open ? 'false' : 'true');
+    extras.forEach(function (li) { li.hidden = open; });
+    toggle.querySelector('span').textContent = open ? labelMore : labelLess;
+  });
+})();
+</script>
 </body>
 </html>
