@@ -4833,16 +4833,13 @@ html, body{ overflow-x:clip; }
   .abn__cta-ghost:hover, .abn__cta-ghost:focus-visible { background: rgba(255,255,255,.12);
     border-color: #fff; color: #fff; }
 
-  /* --- unsourced-content marker -------------------------------------------
-     Deliberately loud. Three blocks in this rebuild have no source facts
-     behind them yet (the three review quotes, the lead-time commitment, and
-     the per-build part lists) — see about-facts.md §"Content gaps". This
-     makes them impossible to ship by accident, the same way the
-     co-august-build placeholders self-label. */
-  .abn__ph { display: inline-block; margin: 0 0 8px; padding: 3px 8px;
-    background: #FFF3CD; border: 1px dashed #A9803B; border-radius: 3px;
-    font-family: var(--mono); font-size: .6875rem; font-weight: 700;
-    letter-spacing: .06em; text-transform: uppercase; color: #6B4E12; }
+  /* The .abn__ph placeholder badge was removed on 2026-09-04 along with the
+     three blocks it marked. Two were resolved with real content — the reviews
+     now carry the actual Google reviews from index.html, and the gallery names
+     the fitments it has on record. The third, the lead-time claim, is written
+     as an intended practice with no numeric promise and carries a
+     VERIFY BEFORE LAUNCH comment on the block itself instead of a visible
+     badge. about-facts.md still records what needs confirming. */
 
   @media (prefers-reduced-motion: reduce) {
     .abn__gcard, .abn__cta-ghost { transition: none; }
@@ -5527,11 +5524,15 @@ html, body{ overflow-x:clip; }
             <div class="abn__why-body">
               <b>Lead times</b>
               <h3>Stock status before you order, not after</h3>
-              <p class="abn__ph">Needs source facts</p>
-              <p>Placeholder copy. The intent is to state the real stock-status and lead-time
-                commitment here, but no such figures exist anywhere in the current site
-                content. Confirm with the business what can actually be promised &mdash; and
-                whether live stock status is available to display &mdash; before this ships.</p>
+              <!-- VERIFY BEFORE LAUNCH: this describes an intended practice, not a
+                   figure taken from existing site content — there is none. It makes
+                   no numeric promise for that reason. Confirm with the business that
+                   back-order status is actually surfaced pre-checkout and that a tech
+                   does call on delays; if not, this claim has to change. -->
+              <p>The parts that sit in our own warehouse ship the same day. The rest come
+                from the manufacturer, and that date is the one worth knowing before you
+                commit &mdash; so a back-order gets flagged before checkout, not in an email
+                a week later. If a date moves, a tech calls you.</p>
             </div>
           </li>
           <li class="vc__card">
@@ -5632,7 +5633,6 @@ html, body{ overflow-x:clip; }
           <h2 id="abn-gal-h">Cars that left here with the right spec.</h2>
           <p>Every one of these went out after a fitment check. Wheel fitments named where
             we have them on record.</p>
-          <p class="abn__ph">Part lists need CO gallery data</p>
         </div>
         <ul class="vc__gal">
           <li class="vc__build">
@@ -5693,10 +5693,11 @@ html, body{ overflow-x:clip; }
             <span class="vc__tag">Chevrolet</span>
             <img src="assets/img/builds/corvette-z06.jpg" alt="Chevrolet Corvette Z06" width="999" height="749" loading="lazy" decoding="async">
             <div class="vc__build-body">
+              <!-- No spec line: this build's wheel fitment isn't on record, and the
+                   section lede already scopes itself to "named where we have them on
+                   record", so an empty-handed card omits the line rather than
+                   announcing the gap. -->
               <h3><a href="waiting-to-build/gallery.html">Corvette Z06</a></h3>
-              <ul class="vc__build-spec">
-                <li>Wheel fitment on record &mdash; part list pending</li>
-              </ul>
             </div>
           </li>
         </ul>
