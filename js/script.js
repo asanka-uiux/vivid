@@ -145,10 +145,14 @@
 })();
 
 /* Category mega menus (Suspension, Brakes, Exhaust, Aero & Body, Engine &
-   Turbo) — CSS :hover/:focus-within already reveal each one, so this works
-   with no JS at all. This only keeps aria-expanded accurate for assistive
-   tech and lets Escape close the open one and return focus to its trigger. */
+   Turbo) — CSS :hover/:focus-within already reveal each one on desktop, so
+   the hover/focus listeners below only keep aria-expanded accurate for
+   assistive tech and let Escape close the open one. Below 1025px .subnav
+   becomes the full-screen mobile menu (see MOBILE FULL-SCREEN MENU in
+   shared.css) and there's no hover, so the same trigger becomes a tap
+   accordion instead: one panel open at a time, click again to collapse. */
 (function () {
+  var mq = window.matchMedia('(max-width:1024px)');
   var items = [].slice.call(document.querySelectorAll('.subnav__item'));
   items.forEach(function (item) {
     var link = item.querySelector('.subnav__link');
@@ -156,16 +160,72 @@
     if (!link || !mega) return;
     function open() { link.setAttribute('aria-expanded', 'true'); }
     function close() { link.setAttribute('aria-expanded', 'false'); }
-    item.addEventListener('mouseenter', open);
-    item.addEventListener('mouseleave', close);
-    item.addEventListener('focusin', open);
+    item.addEventListener('mouseenter', function () { if (!mq.matches) open(); });
+    item.addEventListener('mouseleave', function () { if (!mq.matches) close(); });
+    item.addEventListener('focusin', function () { if (!mq.matches) open(); });
     item.addEventListener('focusout', function (e) {
-      if (!item.contains(e.relatedTarget)) close();
+      if (!mq.matches && !item.contains(e.relatedTarget)) close();
     });
     item.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') { close(); link.focus(); }
     });
+    link.addEventListener('click', function (e) {
+      if (!mq.matches) return;
+      e.preventDefault();
+      var willOpen = link.getAttribute('aria-expanded') !== 'true';
+      items.forEach(function (other) {
+        if (other === item) return;
+        var otherLink = other.querySelector('.subnav__link');
+        if (otherLink) otherLink.setAttribute('aria-expanded', 'false');
+      });
+      if (willOpen) open(); else close();
+    });
   });
+})();
+
+/* Mobile full-screen menu — the burger opens .subnav (see above) as a
+   full-screen overlay. Scoped to the same max-width:1024px query the CSS
+   uses, so resizing past it while open force-closes rather than leaving a
+   stuck fixed-position, scroll-locked body. */
+(function () {
+  var burger = document.querySelector('.burger');
+  var subnav = document.querySelector('.subnav');
+  if (!burger || !subnav) return;
+  var closeBtn = subnav.querySelector('.mobmenu__close');
+  var mq = window.matchMedia('(max-width:1024px)');
+
+  burger.setAttribute('aria-haspopup', 'true');
+  burger.setAttribute('aria-expanded', 'false');
+  if (subnav.id) burger.setAttribute('aria-controls', subnav.id);
+
+  function collapseAccordion() {
+    [].slice.call(subnav.querySelectorAll('.subnav__link')).forEach(function (l) {
+      l.setAttribute('aria-expanded', 'false');
+    });
+  }
+  function onKeydown(e) { if (e.key === 'Escape') closeMenu(true); }
+  function openMenu() {
+    document.body.classList.add('mobmenu-open');
+    burger.setAttribute('aria-expanded', 'true');
+    document.addEventListener('keydown', onKeydown);
+    if (closeBtn) closeBtn.focus();
+  }
+  function closeMenu(returnFocus) {
+    document.body.classList.remove('mobmenu-open');
+    burger.setAttribute('aria-expanded', 'false');
+    collapseAccordion();
+    document.removeEventListener('keydown', onKeydown);
+    if (returnFocus) burger.focus();
+  }
+
+  burger.addEventListener('click', function () {
+    if (document.body.classList.contains('mobmenu-open')) closeMenu(true);
+    else openMenu();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', function () { closeMenu(true); });
+  mq.addEventListener
+    ? mq.addEventListener('change', function (e) { if (!e.matches) closeMenu(false); })
+    : mq.addListener(function (e) { if (!e.matches) closeMenu(false); });
 })();
 
 /* Carousel arrows — Videos and Blog both use .vids__carousel; right-only at

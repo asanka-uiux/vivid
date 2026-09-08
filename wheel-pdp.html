@@ -4936,8 +4936,14 @@ html, body{ overflow-x:clip; }
   </div>
 
   <!-- row 3 · categories + promos -->
-  <nav class="subnav" aria-label="Product categories">
+  <nav class="subnav" aria-label="Product categories" id="mobMenu">
     <div class="shell subnav__inner">
+      <div class="mobmenu__head">
+        <span class="mobmenu__title">Menu</span>
+        <button type="button" class="mobmenu__close" aria-label="Close menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
       <ul class="subnav__list">
         <li class="subnav__item">
           <a class="subnav__link" href="waiting-to-build/suspension.html" aria-haspopup="true" aria-expanded="false" aria-controls="mega-suspension">Suspension <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M2 3L4 5L6 3"/></svg></a>
@@ -5271,6 +5277,30 @@ html, body{ overflow-x:clip; }
           </div>
         </li>
       </ul>
+      <div class="mobmenu__extra">
+        <form class="mobmenu__search" role="search" action="#" method="get">
+          <label class="vh" for="mobMenuSearch">Search parts</label>
+          <input class="mobmenu__search-field" id="mobMenuSearch" name="q" type="search" placeholder="Search parts&hellip;">
+          <button class="mobmenu__search-submit" type="submit" aria-label="Search">
+            <svg viewBox="0 0 15 15" aria-hidden="true" focusable="false"><path d="M5.25 0C2.35939 0 0 2.35939 0 5.25C0 8.14061 2.35939 10.5 5.25 10.5C6.561 10.5 7.75876 10.011 8.68066 9.21094L9 9.53027V10.5L13.5 15L15 13.5L10.5 9H9.53027L9.21094 8.68066C10.011 7.75876 10.5 6.561 10.5 5.25C10.5 2.35939 8.14061 0 5.25 0ZM5.25 1.5C7.32995 1.5 9 3.17005 9 5.25C9 7.32995 7.32995 9 5.25 9C3.17005 9 1.5 7.32995 1.5 5.25C1.5 3.17005 3.17005 1.5 5.25 1.5Z"/></svg>
+          </button>
+        </form>
+        <ul class="mobmenu__links">
+          <li><a href="tel:+14809663040">Call our experts &mdash; 480-966-3040</a></li>
+          <li><a href="waiting-to-build/signin.html">Account &mdash; Sign In</a></li>
+          <li><a href="waiting-to-build/wishlist.html">Wishlist &mdash; 3 Saved</a></li>
+          <li><a href="waiting-to-build/cart.html">Cart &mdash; $11,310</a></li>
+        </ul>
+        <p class="mobmenu__subhead">Shop by Vivid Family</p>
+        <ul class="mobmenu__brands">
+          <li><a href="index.html">Vivid Racing</a></li>
+          <li><a href="vivid-trucks.html">VR Trucks</a></li>
+          <li><a href="vivid-crossover.html">VR Crossover</a></li>
+          <li><a href="vivid-classics.html">VR Muscle</a></li>
+          <li><a href="vividx.html">VR Powersports</a></li>
+        </ul>
+      </div>
+
       <!-- spacer moved here (was between promo and fin) so it pushes BOTH
            Spring Event and 0% APR right, as one group, instead of just fin.
            Affirm/Katapult logos removed per request — .subnav__finlogos and
@@ -5292,9 +5322,8 @@ html, body{ overflow-x:clip; }
         <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1C4.1 1 1 3.7 1 7c0 1.9 1 3.5 2.6 4.6L3 15l3.4-1.8c.5.1 1 .2 1.6.2 3.9 0 7-2.7 7-6S11.9 1 8 1z"/></svg>
         Live Chat
       </button>
-      <!-- When the drawer is wired up, add aria-expanded + aria-controls here and
-           keep aria-expanded in sync. Omitted for now: an aria-expanded that never
-           changes misreports state, which is worse than not having it. -->
+      <!-- aria-expanded/aria-haspopup/aria-controls are set by js/script.js at
+           load and kept in sync on open/close -- see MOBILE FULL-SCREEN MENU. -->
       <button class="burger" type="button" aria-label="Open menu">
         <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
       </button>

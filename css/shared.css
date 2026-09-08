@@ -99,7 +99,8 @@ button{font:inherit;color:inherit}
   flex-direction:row;align-content:stretch;justify-content:space-evenly}
 .brandbar__list::-webkit-scrollbar{display:none}
 @media (min-width:1025px){
-  .brandbar__list{overflow-x:visible;scrollbar-width:auto;-ms-overflow-style:auto}
+  .brandbar__list{overflow-x:visible;scrollbar-width:auto;-ms-overflow-style:auto;
+    justify-content:left}
 }
 /* min-height:44px keeps the tab a real touch target on mobile (2.5.8); desktop's
    own padding (11/18/13) already clears 44px so the explicit floor isn't needed */
@@ -501,7 +502,86 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .chat svg{width:16px;height:16px;fill:#fff}
 .burger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;
   height:44px;padding:0 8px;background:transparent;border:0;cursor:pointer}
-.burger span{display:block;height:3px;background:#fff}
+.burger span{display:block;height:3px;background:#fff;
+  transition:transform .2s ease,opacity .2s ease}
+/* open state morphs the three bars into an X instead of adding a second icon —
+   8px is the bar pitch (5px gap + 3px height) so the outer two land exactly on
+   the middle bar's original position */
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+/* ===== MOBILE FULL-SCREEN MENU =====
+   The burger promotes .subnav itself into a full-screen overlay rather than
+   a second, hand-built menu tree — .subnav already carries every page's
+   category links, sub-links and top-brands (see the .mega rules above), so
+   reusing it means the mobile menu can never drift out of sync with the
+   desktop one. Below 1024px the mega panels switch from hover reveals to tap
+   accordions (there's no hover on touch) and the row stacks vertically.
+   Open/close, the accordion, and Escape-to-close live in js/script.js. */
+body.mobmenu-open{overflow:hidden}
+.mobmenu__head{display:none}
+.mobmenu__title{font:700 13px/1 var(--font-ui);letter-spacing:.08em;
+  text-transform:uppercase;color:var(--text-primary)}
+.mobmenu__close{display:flex;align-items:center;justify-content:center;
+  width:44px;height:44px;padding:0;background:transparent;border:0;
+  cursor:pointer;color:var(--text-primary)}
+.mobmenu__close svg{width:18px;height:18px}
+.mobmenu__extra{display:none}
+@media (max-width:1024px){
+  body.mobmenu-open .subnav{display:block;position:fixed;inset:0;z-index:900;
+    background:var(--bg-surface);overflow-y:auto;-webkit-overflow-scrolling:touch}
+  body.mobmenu-open .mobmenu__head{display:flex;align-items:center;
+    justify-content:space-between;height:56px;padding-inline:var(--gutter);
+    border-bottom:1px solid var(--border-default);position:sticky;top:0;
+    background:var(--bg-surface);z-index:1}
+  .subnav__inner{display:block;height:auto}
+  .subnav__list{flex-direction:column;align-items:stretch;gap:0;padding:4px 0}
+  .subnav__item{border-bottom:1px solid var(--hairline)}
+  .subnav__link{width:100%;justify-content:space-between;padding:16px 4px;
+    font-size:16px}
+  .subnav__link:hover{border-bottom:0;padding-bottom:16px}
+  .subnav__link svg{transition:transform .2s ease}
+  .subnav__link[aria-expanded="true"] svg{transform:rotate(180deg)}
+  .subnav__spacer,.subnav__promo,.subnav__divider,.subnav__fin{display:none}
+  /* desktop reveals .mega on hover via opacity/transform (see above); mobile
+     swaps that for a hard display cut driven by the trigger's aria-expanded,
+     which the accordion click handler now owns instead of :hover */
+  .mega{position:static;opacity:1;visibility:visible;pointer-events:auto;
+    transform:none;transition:none;display:none;box-shadow:none;
+    border-bottom:0;background:var(--surface-sunken)}
+  .subnav__link[aria-expanded="true"] ~ .mega{display:block}
+  .mega .shell{padding-inline:0}
+  .mega__inner{display:block;padding:4px var(--gutter) 20px;gap:0}
+  .mega__cols{flex-direction:column;gap:20px}
+  .mega__col{flex:none}
+  .mega__col--brands{border-left:0;padding-left:0;border-top:1px solid var(--hairline);
+    padding-top:20px}
+  .mega__feature{display:none}
+  body.mobmenu-open .mobmenu__extra{display:block;
+    border-top:8px solid var(--surface-sunken);padding:20px var(--gutter) 40px}
+}
+.mobmenu__search{display:flex;gap:8px;margin-bottom:20px}
+.mobmenu__search-field{flex:1 1 auto;min-width:0;padding:0 14px;height:44px;
+  border:2px solid var(--ink);font:400 15px/22px var(--font-ui);
+  color:var(--text-primary)}
+.mobmenu__search-field::placeholder{color:var(--text-muted)}
+.mobmenu__search-submit{flex:none;width:44px;height:44px;display:flex;
+  align-items:center;justify-content:center;background:var(--action-primary);
+  border:0;cursor:pointer}
+.mobmenu__search-submit svg{width:16px;height:16px;fill:#fff}
+.mobmenu__links{list-style:none;margin:0 0 24px;padding:0;
+  border-top:1px solid var(--hairline)}
+.mobmenu__links li{border-bottom:1px solid var(--hairline)}
+.mobmenu__links a{display:block;padding:14px 4px;min-height:44px;
+  font:600 14px/20px var(--font-ui);color:var(--text-primary)}
+.mobmenu__subhead{margin:0 0 10px;font:700 11px/14px var(--font-ui);
+  letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)}
+.mobmenu__brands{list-style:none;margin:0;padding:0;display:flex;
+  flex-direction:column;gap:2px}
+.mobmenu__brands a{display:flex;align-items:center;padding:10px 4px;
+  min-height:44px;font:600 13px/18px var(--font-ui);color:var(--text-primary)}
+.mobmenu__brands a[aria-current="page"]{color:var(--action-primary)}
 
 
 /* Shop by vehicle card */
