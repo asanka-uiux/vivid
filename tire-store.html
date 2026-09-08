@@ -5124,7 +5124,7 @@
      dark uppercase Saira title ribbon, chevron-down.svg selects, --action-primary button. */
   .ymm-modal__title { margin: -36px -36px 20px; padding: 14px 36px; background: var(--bg-inverse); border-bottom: 2px solid var(--heat-deep); text-align: center; font-family: var(--font-form); font-weight: 600; font-size: 16px; line-height: 24px; text-transform: uppercase; color: #fff; }
   .ymm-modal__sub { font-family: var(--ui); font-size: 13.5px; color: var(--steel); line-height: 1.5; margin: 0 0 24px; text-align: center; }
-  .ymm-modal__fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+  .ymm-modal__fields { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
   .ymm-modal__field { display: flex; flex-direction: column; gap: 6px; }
   .ymm-modal__select { width: 100%; appearance: none; -webkit-appearance: none; padding: 10px 40px 10px 14px; background-color: var(--paper); background-image: url("assets/icons/chevron-down.svg"); background-repeat: no-repeat; background-position: right 15px center; background-size: 11px 7px; border: 1px solid var(--rule); border-radius: 4px; font-family: var(--font-form); font-weight: 600; font-size: 16px; line-height: 24px; text-transform: uppercase; color: var(--field-ink); cursor: pointer; min-height: 48px; transition: border-color .15s; }
   .ymm-modal__select:hover { border-color: var(--steel); }
@@ -5876,6 +5876,20 @@ html, body{ overflow-x:clip; }
                   <option>Base</option><option>Sport</option><option>Premium</option><option>Performance</option>
                 </select>
               </div>
+              <div class="ymm-modal__field">
+                <label class="vh" for="ymmModalDrive">Drive</label>
+                <select class="ymm-modal__select" id="ymmModalDrive">
+                  <option value="">Drive</option>
+                  <option>RWD</option><option>AWD</option><option>4WD</option><option>FWD</option>
+                </select>
+              </div>
+              <div class="ymm-modal__field">
+                <label class="vh" for="ymmModalSusp">Suspension</label>
+                <select class="ymm-modal__select" id="ymmModalSusp">
+                  <option value="">Suspension</option>
+                  <option>Stock</option><option>Lowered</option><option>Leveled</option><option>2&Prime; Lift</option><option>4&Prime; Lift</option><option>6&Prime; Lift</option>
+                </select>
+              </div>
             </div>
             <button type="submit" class="ymm-modal__submit">Find My Fit<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
           </form>
@@ -6591,10 +6605,13 @@ html, body{ overflow-x:clip; }
     var make = document.getElementById('ymmModalMake').value;
     var model = document.getElementById('ymmModalModel').value;
     var trim = document.getElementById('ymmModalTrim').value;
+    var drive = document.getElementById('ymmModalDrive').value;
+    var susp = document.getElementById('ymmModalSusp').value;
     if (!year || !make || !model) return;
     var name = year + ' ' + make + ' ' + model + (trim ? ' ' + trim : '');
     var shortName = 'your ' + model;
-    var spec = 'Tire size & load rating confirmed for your ' + model + '.';
+    var spec = 'Tire size & load rating confirmed for your ' + model
+      + (drive ? ', ' + drive : '') + (susp ? ', ' + susp.toLowerCase() : '') + '.';
     selectVehicle(name, shortName, spec);
     closeYmmModal();
   }
