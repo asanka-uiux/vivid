@@ -40,7 +40,20 @@
 @media (min-width:901px){
   .hero__stage{height:75vh;min-height:560px;display:flex}
 }
-.hero__photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+/* object-position:bottom (mobile only) -- hero-main-mobile.webp is a 390x953
+   portrait crop that's solid black for its top ~500px (a built-in safe zone
+   for the title text) with the actual photo only in the bottom ~450px.
+   .hero__stage's mobile height is auto (driven by the stacked title/lede/YMM
+   card content), which on most phones comes out shorter than 953px, so
+   object-fit:cover has to crop -- centered (the default) split that crop
+   evenly top/bottom and left most of the visible frame as the image's own
+   dead zone, with only a sliver of actual photo peeking through at the very
+   bottom. Anchoring to the bottom instead crops only from the top, so the
+   full photo band stays visible. Desktop's hero-main.webp has no dead zone
+   (a normal photo throughout), so it resets to the default center crop. */
+.hero__photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:center bottom;z-index:-2}
+@media (min-width:901px){ .hero__photo{object-position:center} }
 /* the Figma "Left Fade Overlay" layer exports empty — reproduced as a gradient.
    Mobile's version reads top-to-bottom (the stage stacks vertically); desktop's
    reads left-to-right, fading out toward the YMM card's side of the photo.
@@ -51,8 +64,8 @@
    washed-out, unreadable text. -1 puts it back level with .hero__photo
    (z-index:-2), so photo -> overlay -> text is the actual paint order. */
 .hero__stage::before{content:"";position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(180deg,rgba(0,0,0,.95) 0%,rgba(0,0,0,.90) 45%,
-               rgba(0,0,0,.88) 72%,rgba(0,0,0,.92) 100%);pointer-events:none}
+  background:linear-gradient(180deg,rgba(0,0,0,.90) 0%,rgba(0,0,0,.80) 45%,
+               rgba(0,0,0,.74) 72%,rgba(0,0,0,.84) 100%);pointer-events:none}
 @media (min-width:901px){
   .hero__stage::before{
     background:linear-gradient(90deg,rgba(0,0,0,.90) 0%,rgba(0,0,0,.78) 32%,
