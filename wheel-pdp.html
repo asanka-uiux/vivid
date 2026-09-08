@@ -23,7 +23,7 @@
     --heat: #E10600;
     --heat-deep: #B30500;
     --signal: #0066CC;
-    --green: #16A34A;
+    --green: #0D6A3E; /* darkened for WCAG 4.5:1 contrast on white backgrounds */
     --gold: #F59E0B;
     --display: 'Inter Tight', -apple-system, sans-serif;
     --ui: 'Inter', -apple-system, sans-serif;
@@ -5447,9 +5447,9 @@ html, body{ overflow-x:clip; }
                     </span>
                     <svg class="sizesel__chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
                   </button>
-                  <ul class="sizesel__list" role="listbox" aria-label="Front wheel size options" hidden>
-                    <li class="sizesel__opt sizesel__opt--active" role="option" aria-selected="true" tabindex="0" data-value="390" data-label="20x10 &nbsp;|&nbsp; -25mm Offset" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>20x10 &nbsp;|&nbsp; -25mm Offset</span><span class="sizesel__opt-tag">$390/ea</span></li>
-                  </ul>
+                  <div class="sizesel__list" role="listbox" aria-label="Front wheel size options" hidden>
+                    <button class="sizesel__opt sizesel__opt--active" role="option" aria-selected="true" tabindex="0" data-value="390" data-label="20x10 &nbsp;|&nbsp; -25mm Offset" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)" type="button"><span>20x10 &nbsp;|&nbsp; -25mm Offset</span><span class="sizesel__opt-tag">$390/ea</span></button>
+                  </div>
                 </div>
               </div>
               <div class="stag__axle">
@@ -5462,10 +5462,10 @@ html, body{ overflow-x:clip; }
                     </span>
                     <svg class="sizesel__chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
                   </button>
-                  <ul class="sizesel__list" role="listbox" aria-label="Rear wheel size options" hidden>
-                    <li class="sizesel__opt sizesel__opt--active" role="option" aria-selected="true" tabindex="0" data-value="390" data-label="20x10 &nbsp;|&nbsp; -25mm Offset" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>20x10 &nbsp;|&nbsp; -25mm Offset</span><span class="sizesel__opt-tag">$390/ea</span></li>
-                    <li class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="0" data-label="22x12 &nbsp;|&nbsp; -51mm Offset" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>22x12 &nbsp;|&nbsp; -51mm Offset</span><span class="sizesel__opt-tag">Call for pricing</span></li>
-                  </ul>
+                  <div class="sizesel__list" role="listbox" aria-label="Rear wheel size options" hidden>
+                    <button class="sizesel__opt sizesel__opt--active" role="option" aria-selected="true" tabindex="0" data-value="390" data-label="20x10 &nbsp;|&nbsp; -25mm Offset" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)" type="button"><span>20x10 &nbsp;|&nbsp; -25mm Offset</span><span class="sizesel__opt-tag">$390/ea</span></button>
+                    <button class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="0" data-label="22x12 &nbsp;|&nbsp; -51mm Offset" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)" type="button"><span>22x12 &nbsp;|&nbsp; -51mm Offset</span><span class="sizesel__opt-tag">Call for pricing</span></button>
+                  </div>
                 </div>
               </div>
               <div class="stag__sum">

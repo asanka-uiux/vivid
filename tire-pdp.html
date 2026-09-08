@@ -23,7 +23,7 @@
     --heat: #E10600;
     --heat-deep: #B30500;
     --signal: #0066CC;
-    --green: #16A34A;
+    --green: #0D6A3E; /* darkened for WCAG 4.5:1 contrast on white backgrounds */
     --gold: #F59E0B;
     --display: 'Inter Tight', -apple-system, sans-serif;
     --ui: 'Inter', -apple-system, sans-serif;
@@ -5328,16 +5328,16 @@ html, body{ overflow-x:clip; }
               </span>
               <svg class="sizesel__chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
             </button>
-            <ul class="sizesel__list" id="otherSizeList" role="listbox" aria-labelledby="otherSizeLabel" hidden>
-              <li class="sizesel__opt sizesel__opt--active" role="option" aria-selected="true" tabindex="0" data-value="current" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>225/40ZR18XL</span><span class="sizesel__opt-tag">In Stock</span></li>
-              <li class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="215/45R17" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>215/45R17</span></li>
-              <li class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="215/35R18" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>215/35R18</span></li>
-              <li class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="235/40R18" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>235/40R18</span></li>
-              <li class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="245/40R18" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>245/40R18</span></li>
-              <li class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="255/35R18" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>255/35R18</span></li>
-              <li class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="245/40R19" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>245/40R19</span></li>
-              <li class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="245/35R20" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)"><span>245/35R20</span></li>
-            </ul>
+            <div class="sizesel__list" id="otherSizeList" role="listbox" aria-labelledby="otherSizeLabel" hidden>
+              <button class="sizesel__opt sizesel__opt--active" role="option" aria-selected="true" tabindex="0" data-value="current" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)" type="button"><span>225/40ZR18XL</span><span class="sizesel__opt-tag">In Stock</span></button>
+              <button class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="215/45R17" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)" type="button"><span>215/45R17</span></button>
+              <button class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="215/35R18" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)" type="button"><span>215/35R18</span></button>
+              <button class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="235/40R18" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)" type="button"><span>235/40R18</span></button>
+              <button class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="245/40R18" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)" type="button"><span>245/40R18</span></button>
+              <button class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="255/35R18" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)" type="button"><span>255/35R18</span></button>
+              <button class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="245/40R19" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)" type="button"><span>245/40R19</span></button>
+              <button class="sizesel__opt" role="option" aria-selected="false" tabindex="-1" data-value="245/35R20" onclick="sizePick(this)" onkeydown="sizeSelOptKey(event,this)" type="button"><span>245/35R20</span></button>
+            </div>
           </div>
           <p class="bp__size-note" id="sizeNote" style="display:none;">Call <a href="tel:+14809663040">480-966-3040</a> for pricing &amp; availability on this size.</p>
         </div>

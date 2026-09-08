@@ -82,17 +82,19 @@
 
 .hero__title{margin:0;font-family:var(--font-display);font-weight:900;
   font-size:34px;line-height:38px;letter-spacing:-.8px;text-transform:uppercase;
-  color:var(--text-on-dark);font-variation-settings:"YTLC" 500,"wdth" 100;order:1}
-@media (min-width:361px){ .hero__title{font-size:52px;line-height:48px;font-weight:600} }
+  color:var(--text-on-dark);font-variation-settings:"YTLC" 500,"wdth" 100;order:1;
+  text-shadow:0 2px 8px rgba(0,0,0,0.5)}
+@media (min-width:361px){ .hero__title{font-size:52px;line-height:48px;font-weight:600;text-shadow:0 2px 8px rgba(0,0,0,0.5)} }
 @media (min-width:901px){
   .hero__title{margin:14px 0 0;font-size:64px;line-height:64px;letter-spacing:-1.3px;order:0;
-    font-weight:900}
+    font-weight:900;text-shadow:0 2px 8px rgba(0,0,0,0.5)}
 }
 
 .hero__lede{margin:22px auto 0;max-width:34em;
-  font:14px/22px var(--font-ui);color:var(--text-on-dark);order:3;margin-inline:auto}
+  font:14px/22px var(--font-ui);color:var(--text-on-dark);order:3;margin-inline:auto;
+  text-shadow:0 1px 4px rgba(0,0,0,0.4)}
 @media (min-width:901px){
-  .hero__lede{margin:14px 0 0;max-width:550px;order:0;margin-inline:0}
+  .hero__lede{margin:14px 0 0;max-width:550px;order:0;margin-inline:0;text-shadow:0 1px 4px rgba(0,0,0,0.4)}
 }
 
 .finance{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px;
@@ -103,7 +105,7 @@
     flex-direction:row;background:none;padding:0}
 }
 .finance__text{font:500 12px/14px var(--font-ui);letter-spacing:.66px;
-  text-transform:uppercase;color:var(--text-on-dark)}
+  text-transform:uppercase;color:var(--text-on-dark);text-shadow:0 1px 3px rgba(0,0,0,0.3)}
 .finance__text b{color:#fff;font-weight:500}
 .finance__text em{font-style:normal;color:var(--accent-red-on-dark)}
 .finance__logos{display:flex;align-items:center;gap:12px}
@@ -900,10 +902,10 @@
 /* highlighted red on mobile to match .experts__eyebrow's own label treatment
    two lines up (same size/tracking, same token) — desktop keeps its existing
    muted grey via its own fully self-contained override below */
-.experts__label{margin:0;font:700 11px/15px var(--font-ui);text-transform:uppercase;
-  color:var(--action-primary)}
-@media (min-width:901px){ .experts__label{font:600 14px/21px var(--font-ui);color:#6b6b6b} }
-.experts__value{margin:0;font:500 12px/17px var(--font-ui);color:#4b5563}
+.experts__label{margin:0;font:700 14px/15px var(--font-ui);text-transform:uppercase;
+  padding-bottom:6px;color:var(--action-primary)}
+@media (min-width:901px){ .experts__label{font:600 14px/21px var(--font-ui);color:#6b6b6b;padding-bottom:0} }
+.experts__value{margin:0;font:500 14px/17px var(--font-ui);color:#4b5563}
 @media (min-width:901px){ .experts__value{font-size:14px;line-height:21px;color:#6b6b6b;font-weight:400} }
 .experts__phone a{display:inline-flex;align-items:center;min-height:24px}
 /* sized up to match .foot__phone's own "prominent phone number" treatment
