@@ -5033,6 +5033,7 @@
   .wcard__img { position: relative; background: #fff; border-bottom: 1px solid var(--line); }
   .wcard__img img { display: block; width: 100%; aspect-ratio: 1/1; object-fit: cover; padding: 14px; }
   .wcard__badge { position: absolute; top: 10px; left: 10px; font-family: var(--ui); font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 4px; background: #FCE9E8; color: var(--heat-deep); box-shadow: 0 1px 4px rgba(0,0,0,.15); }
+  @media (min-width: 701px) { .wcard__badge { padding: 3px 6px; border-radius: 2px; } }
   .wcard__body { padding: 14px 16px 16px; display: flex; flex-direction: column; flex: 1; }
   .wcard__brand-row { display: flex; justify-content: space-between; align-items: center; }
   .wcard__brand { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--steel); }
@@ -5121,7 +5122,7 @@
   .ymm-modal { position: fixed; inset: 0; z-index: 500; display: flex; align-items: center; justify-content: center; padding: 20px; }
   .ymm-modal__overlay { position: absolute; inset: 0; background: rgba(10,10,10,.65); }
   .ymm-modal__panel { position: relative; background: var(--paper); max-width: 480px; width: 100%; padding: 36px; border-radius: 6px; box-shadow: 0 24px 70px rgba(0,0,0,.35); max-height: 90vh; overflow-y: auto; }
-  .ymm-modal__close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line); background: var(--paper); font-size: 18px; line-height: 1; cursor: pointer; color: var(--steel); transition: all .15s; z-index: 1; }
+  .ymm-modal__close { position: absolute; top: 8px; right: 8px; width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line); background: var(--paper); font-size: 18px; line-height: 1; cursor: pointer; color: var(--steel); transition: all .15s; z-index: 1; }
   .ymm-modal__close:hover { background: var(--bone); border-color: var(--steel); color: var(--ink); }
   /* Title/select/submit styled to match index.html's "Shop by vehicle" .ymm card (css/shared.css) —
      dark uppercase Saira title ribbon, chevron-down.svg selects, --action-primary button. */
