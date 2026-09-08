@@ -514,11 +514,11 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 /* ===== MOBILE FULL-SCREEN MENU =====
    The burger promotes .subnav itself into a full-screen overlay rather than
    a second, hand-built menu tree — .subnav already carries every page's
-   category links, sub-links and top-brands (see the .mega rules above), so
-   reusing it means the mobile menu can never drift out of sync with the
-   desktop one. Below 1024px the mega panels switch from hover reveals to tap
-   accordions (there's no hover on touch) and the row stacks vertically.
-   Open/close, the accordion, and Escape-to-close live in js/script.js. */
+   category links (see the .mega rules above, which never render here). On
+   mobile this is a flat, direct-navigate list: tapping a category goes
+   straight to its page, same as the link already does — no accordion, no
+   sub-links surfaced in the menu itself. Open/close and Escape-to-close live
+   in js/script.js. */
 body.mobmenu-open{overflow:hidden}
 .mobmenu__head{display:none}
 .mobmenu__title{font:700 13px/1 var(--font-ui);letter-spacing:.08em;
@@ -541,23 +541,11 @@ body.mobmenu-open{overflow:hidden}
   .subnav__link{width:100%;justify-content:space-between;padding:16px 4px;
     font-size:16px}
   .subnav__link:hover{border-bottom:0;padding-bottom:16px}
-  .subnav__link svg{transition:transform .2s ease}
-  .subnav__link[aria-expanded="true"] svg{transform:rotate(180deg)}
+  /* desktop's chevron is a dropdown-open hint (points down); mobile rotates
+     it to point right instead, since here it just hints "goes to a page" */
+  .subnav__link svg{transform:rotate(-90deg)}
+  .mega{display:none}
   .subnav__spacer,.subnav__promo,.subnav__divider,.subnav__fin{display:none}
-  /* desktop reveals .mega on hover via opacity/transform (see above); mobile
-     swaps that for a hard display cut driven by the trigger's aria-expanded,
-     which the accordion click handler now owns instead of :hover */
-  .mega{position:static;opacity:1;visibility:visible;pointer-events:auto;
-    transform:none;transition:none;display:none;box-shadow:none;
-    border-bottom:0;background:var(--surface-sunken)}
-  .subnav__link[aria-expanded="true"] ~ .mega{display:block}
-  .mega .shell{padding-inline:0}
-  .mega__inner{display:block;padding:4px var(--gutter) 20px;gap:0}
-  .mega__cols{flex-direction:column;gap:20px}
-  .mega__col{flex:none}
-  .mega__col--brands{border-left:0;padding-left:0;border-top:1px solid var(--hairline);
-    padding-top:20px}
-  .mega__feature{display:none}
   body.mobmenu-open .mobmenu__extra{display:block;
     border-top:8px solid var(--surface-sunken);padding:20px var(--gutter) 40px}
 }
@@ -582,6 +570,22 @@ body.mobmenu-open{overflow:hidden}
 .mobmenu__brands a{display:flex;align-items:center;padding:10px 4px;
   min-height:44px;font:600 13px/18px var(--font-ui);color:var(--text-primary)}
 .mobmenu__brands a[aria-current="page"]{color:var(--action-primary)}
+.mobmenu__contact{margin-top:24px;padding-top:20px;
+  border-top:1px solid var(--hairline);text-align:center}
+.mobmenu__contact-label{margin:0 0 12px;font:700 11px/14px var(--font-ui);
+  letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)}
+.mobmenu__contact-btn{display:flex;align-items:center;justify-content:center;
+  padding:14px;min-height:48px;background:var(--ink);border:0;
+  font:700 13px/1 var(--font-ui);letter-spacing:.04em;text-transform:uppercase;
+  color:#fff;text-align:center}
+/* the social glyphs are solid-white assets (built for the dark footer) —
+   giving each its own dark tile here, rather than a filter hack, keeps them
+   legible on this section's light ground */
+.mobmenu__social{list-style:none;margin:20px 0 0;padding:0;display:flex;
+  justify-content:center;gap:12px}
+.mobmenu__social a{display:flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:50%;background:var(--ink)}
+.mobmenu__social img{width:16px;height:16px;display:block}
 
 
 /* Shop by vehicle card */

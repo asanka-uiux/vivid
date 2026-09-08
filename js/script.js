@@ -145,14 +145,13 @@
 })();
 
 /* Category mega menus (Suspension, Brakes, Exhaust, Aero & Body, Engine &
-   Turbo) — CSS :hover/:focus-within already reveal each one on desktop, so
-   the hover/focus listeners below only keep aria-expanded accurate for
-   assistive tech and let Escape close the open one. Below 1025px .subnav
-   becomes the full-screen mobile menu (see MOBILE FULL-SCREEN MENU in
-   shared.css) and there's no hover, so the same trigger becomes a tap
-   accordion instead: one panel open at a time, click again to collapse. */
+   Turbo) — CSS :hover/:focus-within already reveal each one, so this works
+   with no JS at all. This only keeps aria-expanded accurate for assistive
+   tech and lets Escape close the open one and return focus to its trigger.
+   Below 1025px .subnav becomes the full-screen mobile menu (see MOBILE
+   FULL-SCREEN MENU in shared.css) as a flat, direct-navigate list — .mega
+   never renders there, so no accordion/click handling is needed on mobile. */
 (function () {
-  var mq = window.matchMedia('(max-width:1024px)');
   var items = [].slice.call(document.querySelectorAll('.subnav__item'));
   items.forEach(function (item) {
     var link = item.querySelector('.subnav__link');
@@ -160,25 +159,14 @@
     if (!link || !mega) return;
     function open() { link.setAttribute('aria-expanded', 'true'); }
     function close() { link.setAttribute('aria-expanded', 'false'); }
-    item.addEventListener('mouseenter', function () { if (!mq.matches) open(); });
-    item.addEventListener('mouseleave', function () { if (!mq.matches) close(); });
-    item.addEventListener('focusin', function () { if (!mq.matches) open(); });
+    item.addEventListener('mouseenter', open);
+    item.addEventListener('mouseleave', close);
+    item.addEventListener('focusin', open);
     item.addEventListener('focusout', function (e) {
-      if (!mq.matches && !item.contains(e.relatedTarget)) close();
+      if (!item.contains(e.relatedTarget)) close();
     });
     item.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') { close(); link.focus(); }
-    });
-    link.addEventListener('click', function (e) {
-      if (!mq.matches) return;
-      e.preventDefault();
-      var willOpen = link.getAttribute('aria-expanded') !== 'true';
-      items.forEach(function (other) {
-        if (other === item) return;
-        var otherLink = other.querySelector('.subnav__link');
-        if (otherLink) otherLink.setAttribute('aria-expanded', 'false');
-      });
-      if (willOpen) open(); else close();
     });
   });
 })();
