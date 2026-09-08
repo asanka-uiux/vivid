@@ -68,7 +68,7 @@
 
   /* Full width to match wheel-store.html / tire-store.html / packages.html —
      steps out past the header's 1320px shell same as those pages already do. */
-  .wrap { max-width: 1800px; margin: 0 auto; padding: 0 32px; }
+  .wrap { max-width: 1440px; margin: 0 auto; padding: 0 32px; }
   @media (max-width: 900px) { .wrap { padding: 0 16px; } }
 
   .eyebrow { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); }
@@ -94,6 +94,7 @@
   .tier-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--steel); margin-bottom: 8px; }
   .tiers { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; }
   .tier { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: var(--paper); border: 1px solid var(--line); border-left: 3px solid var(--rule); cursor: pointer; text-align: left; transition: all .15s; box-shadow: 0 1px 3px rgba(0,0,0,.06); min-width: 0; }
+  @media (min-width: 701px) { .tier { padding: 8px; } }
   .tier > div { min-width: 0; }
   .tier__name, .tier__sub { overflow-wrap: break-word; }
   .tier:hover { border-color: var(--steel); box-shadow: 0 4px 12px rgba(0,0,0,.1); transform: translateY(-1px); }
@@ -109,6 +110,7 @@
   .tier--gold.tier--active { background: rgba(245,158,11,.08); border-color: var(--gold); box-shadow: 0 2px 10px rgba(245,158,11,.2); }
   .tier--red.tier--active { background: rgba(225,6,0,.06); border-color: var(--heat); box-shadow: 0 2px 10px rgba(225,6,0,.18); }
   .cat-delivery { border: 1px solid var(--line); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  @media (min-width: 1440px) { .cat-delivery { max-width: 400px; } }
   .cat-delivery__label { font-family: var(--mono); font-size: 12px; letter-spacing: 0; text-transform: uppercase; color: var(--steel); }
   .cat-delivery__date { font-family: var(--display); font-size: 14px; font-weight: 800; color: var(--ink); }
   .cat-delivery__ziplink { font-family: var(--ui); font-size: 12px; color: var(--heat); font-weight: 600; text-decoration: none; background: none; border: 0; padding: 0; cursor: pointer; }
@@ -185,8 +187,7 @@
     .dd--fitment-mobile { display: block; }
   }
 
-  .wgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
-  @media (min-width: 1441px) { .wgrid { grid-template-columns: repeat(5,1fr); } }
+  .wgrid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
   .wcard { position: relative; display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--line); box-shadow: 0 1px 3px rgba(0,0,0,.05); transition: all .15s; }
   .wcard:hover { border-color: var(--ink); box-shadow: 0 6px 20px rgba(0,0,0,.1); }
   .wcard__imglink { display: block; }
@@ -266,7 +267,7 @@
   }
 
   /* cat-head v2 */
-  .cat-head__panel { display: grid; grid-template-columns: 1fr 520px; grid-template-rows: auto auto; gap: 12px 16px; margin-top: 4px; }
+  .cat-head__panel { display: grid; grid-template-columns: 1fr 400px; grid-template-rows: auto auto; gap: 12px 16px; margin-top: 4px; }
   .veh-card { border: 1px solid var(--line); padding: 16px 20px; display: flex; gap: 14px; align-items: flex-start; }
   .veh-card__check { flex-shrink: 0; margin-top: 2px; }
   .veh-card__name-row { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
@@ -307,6 +308,7 @@
   .veh-card__chip { display: flex; align-items: center; gap: 5px; font-family: var(--ui); font-size: 12px; font-weight: 600; color: var(--graphite); }
   .veh-card__chip svg { flex-shrink: 0; }
   .expert-card { border: 1px solid var(--line); background: var(--bone); padding: 14px 16px; display: flex; flex-direction: column; justify-content: center; gap: 11px; }
+  @media (min-width: 1440px) { .expert-card { max-width: 400px; } }
   .expert-card__head { display: flex; align-items: center; gap: 12px; }
   .expert-card__head img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
   .expert-card__title { font-family: var(--display); font-size: 14px; font-weight: 800; color: var(--ink); }
