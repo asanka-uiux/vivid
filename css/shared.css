@@ -43,7 +43,7 @@
 
   --font-ui:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
   --font-display:'Nunito Sans','Inter',system-ui,sans-serif;
-  --font-form:'Saira','Inter',system-ui,sans-serif;
+  --font-form:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
 }
 @media (min-width:901px){
   :root{ --gutter:28px }

@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Nunito+Sans:wght@800;900&family=Saira:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Nunito+Sans:wght@800;900&display=swap" rel="stylesheet">
 <style>
   :root {
     --paper: #FFFFFF;
@@ -4993,6 +4993,8 @@
   /* generic custom dropdown (sort control + mobile fitment picker) */
   .dd { position: relative; }
   .dd__trigger { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; min-width: 240px; padding: 10px 14px; border: 1px solid var(--rule); border-radius: 2px; background: var(--paper); font-family: var(--ui); font-size: 13px; font-weight: 600; color: var(--ink); cursor: pointer; transition: border-color .15s; }
+  .dd__trigger-main { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .dd__trigger-icon { flex-shrink: 0; }
   .dd__trigger-label { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .dd__trigger:hover { border-color: var(--steel); }
   .dd__trigger:focus-visible { outline: 2px solid var(--heat); outline-offset: 1px; }
@@ -5176,6 +5178,7 @@
     .wgrid { grid-template-columns: minmax(0,1fr); }
     .cat-head__title { font-size: 30px; }
     .sortbar { flex-wrap: wrap; gap: 10px; }
+    .sortbar__count { font-size: 12px; }
     .expert-card { display: none; }
   }
   /* --- Mobile store header, laid out after CO Updates node 750:100905.
@@ -5277,6 +5280,7 @@
     .wcard__imglink { grid-column: 1; grid-row: 1 / 8; align-self: start; }
     .wcard__img { border: 0; aspect-ratio: 1 / 1; height: auto; }
     .wcard__img img { width: 100%; height: 100%; aspect-ratio: auto; padding: 8px; }
+    .wcard__badge { font-size: 12px; font-weight: 500; padding: 3px 6px; }
     .wcard__body { display: contents; }
 
     .wcard__brand-row, .wcard__name, .wcard__spec, .wcard__stars,
@@ -5930,7 +5934,10 @@ html, body{ overflow-x:clip; }
 
         <div class="dd dd--fitment-mobile" id="fitmentDropdownM">
           <button type="button" class="dd__trigger" aria-haspopup="listbox" aria-expanded="false" onclick="toggleDropdown('fitmentDropdownM')">
-            <span class="dd__trigger-label">No Rub Fit</span>
+            <span class="dd__trigger-main">
+              <svg class="dd__trigger-icon" viewBox="0 0 24 24" width="18" height="18" fill="#16A34A" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+              <span class="dd__trigger-label">No Rub Fit</span>
+            </span>
             <svg class="dd__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <ul class="dd__menu" role="listbox" aria-label="Select fitment" hidden>
@@ -6658,6 +6665,13 @@ html, body{ overflow-x:clip; }
       items.forEach(function(li,k){ li.setAttribute('aria-selected', k===i ? 'true' : 'false'); });
       var label = mdd.querySelector('.dd__trigger-label');
       if (label && items[i]) label.textContent = items[i].textContent.trim();
+      var icon = mdd.querySelector('.dd__trigger-icon');
+      var srcIcon = items[i] && items[i].querySelector('svg');
+      if (icon && srcIcon) {
+        var clone = srcIcon.cloneNode(true);
+        clone.classList.add('dd__trigger-icon');
+        icon.replaceWith(clone);
+      }
     }
   }
 
