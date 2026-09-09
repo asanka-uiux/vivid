@@ -4703,12 +4703,7 @@ html, body{ overflow-x:clip; }
   .abn__garage-head p { font-size: 1.0313rem; line-height: 1.7;
     color: rgba(255,255,255,.72); margin: 0; }
   .abn__garage-grid { display: grid; gap: var(--stack); margin: 0; padding: 0; list-style: none; }
-  /* Four divisions since powersports joined the lineup. Four across at 780px would
-     leave ~180px per card, too narrow for a photo plus a platform list, so the
-     tablet tier is 2x2 and the row of four only opens at 1080px (a breakpoint this
-     file already uses elsewhere). */
-  @media (min-width: 780px) { .abn__garage-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (min-width: 1080px) { .abn__garage-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  @media (min-width: 780px) { .abn__garage-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   /* Cards lift off the ground with a 5% white wash rather than a second flat
      colour, so they stay tied to --ink whatever it's set to. */
   .abn__gcard { position: relative; display: flex; flex-direction: column;
@@ -5391,12 +5386,11 @@ html, body{ overflow-x:clip; }
     <img src="real-photos/night-car.jpg" alt="" width="1920" height="837" fetchpriority="high">
     <div class="vc__hero__scrim" aria-hidden="true"></div>
     <div class="vc__hero__inner">
-      <h1>Nobody orders the wrong parts on purpose.</h1>
-      <p>They order them because the listing said it fit. The bolt pattern matched, the
-        offset looked close enough, and nothing flagged the quarter-inch that puts a tire
-        into a fender liner at full lock. Then the freight arrives, the wheel doesn&rsquo;t
-        clear, and the return shipping is yours. That is the problem this company exists
-        to take off your hands.</p>
+      <h1>Everything fits. Not everything belongs.</h1>
+      <p>The listing says it fits. The bolt pattern matches, the offset looks close, and
+        nothing flags the quarter inch that puts a tire into a fender liner at full lock.
+        On the platforms we serve, there is no room for that call to go wrong. Vivid
+        Racing exists so it never has to.</p>
     </div>
   </header>
 
@@ -5416,18 +5410,19 @@ html, body{ overflow-x:clip; }
         </div>
         <div class="vc__band-copy">
           <p class="vc__kicker">Why we exist</p>
-          <h2 id="abn-why-h">If it works for Subaru and Evo, why not every car?</h2>
+          <h2 id="abn-why-h">If it works for the Blobeye and Evo, why not every car?</h2>
           <p>That was the question in 2004, and the honest answer was that nobody had done
-            the work. Fitment knowledge lived in forum threads and in the heads of a few
-            people who had already made the expensive mistake. Drive something common and
-            you were fine. Drive anything else and you were guessing with your own money.</p>
-          <p>So the work got done one chassis at a time &mdash; specs confirmed against real
-            cars on real lifts, and on a dyno in Arizona, instead of copied off a
-            manufacturer sheet and hoped for. When a spec turned out wrong, it came back to
-            us rather than to the customer.</p>
+            the work. Fitment knowledge lived in forum threads and in the heads of people
+            who had already paid for the mistake. Drive something common and you were fine.
+            Drive anything else and you were guessing with your own money.</p>
+          <p>So the work got done one chassis at a time. Our founders made the decision to
+            import parts straight from Japan that they knew would fit on the best
+            platforms, and that knowledge was dropped in every top car forum in the game.
+            We were so far ahead of the curve that we ended up becoming the standard for
+            how the aftermarket should behave.</p>
           <p>That is still the job. Every platform we add gets the same treatment, which is
-            why a tech will still pick up the phone and call you before a questionable
-            order ships.</p>
+            why a questionable order earns a phone call from us before it ships, not an
+            apology after.</p>
         </div>
       </section>
     </div>
@@ -5437,9 +5432,9 @@ html, body{ overflow-x:clip; }
     <section class="abn__bleed" aria-labelledby="abn-bleed-h">
       <img src="real-photos/dyno.jpg" alt="" width="1920" height="1280" loading="lazy" decoding="async">
       <div class="abn__bleed-inner">
-        <h2 id="abn-bleed-h">The part that fits is the cheapest part you will ever buy.</h2>
-        <p>Everything else costs you twice &mdash; once at checkout, and again in freight,
-          restocking and the weekend you had set aside to install it.</p>
+        <h2 id="abn-bleed-h">The right part is a decision, not a default.</h2>
+        <p>Anyone can list what fits your car. The work is knowing what belongs on it, and
+          standing behind that answer after it ships.</p>
       </div>
     </section>
 
@@ -5457,16 +5452,19 @@ html, body{ overflow-x:clip; }
         <div class="abn__brands-split">
           <div class="abn__brands-lede">
             <p class="vc__kicker">Partner brands</p>
-            <h2 id="abn-brands-h">We don&rsquo;t carry everything. We carry what we&rsquo;d bolt to our own cars.</h2>
-            <p>A catalog that lists every brand on earth is a catalog nobody vetted. These are
-              the lines we stock because we have fitted them, warrantied them, and had to
-              stand behind them on the phone at 4pm on a Friday &mdash; KW and &Ouml;hlins for
-              suspension, Brembo for brakes, BBS and HRE for wheels, Akrapovi&#269; and
-              Fabspeed for exhaust, Manthey for Porsche.</p>
-            <p>Some of these we are the only route to in North America. That is not a badge for
-              our own benefit: it means warranty questions, fitment disputes and honest
-              back-order dates come to us directly, instead of bouncing between a marketplace
-              seller and a manufacturer who has never heard of your car.</p>
+            <h2 id="abn-brands-h">Carried because we can stand behind them.</h2>
+            <p>Every line we stock is one we have fitted, warrantied, and defended on the
+              phone at 4pm on a Friday. KW and &Ouml;hlins for suspension. Brembo for
+              brakes. BBS and HRE for wheels. Akrapovi&#269; and Fabspeed for exhaust.
+              Manthey for Porsche. These brands do not partner with everyone, and that is
+              the point.</p>
+            <p>Some of them you can only reach through us. That is not a trophy for our own
+              shelf. It means warranty questions, fitment disputes, and honest back-order
+              dates come to us directly, instead of bouncing between a marketplace seller
+              and a manufacturer who has never heard of your car.</p>
+            <p>We&rsquo;ve been working with exclusive brands since we started, which
+              basically makes us The Racer&rsquo;s Edge &mdash; from The Fast and The
+              Furious &mdash; in real life.</p>
             <!-- The exclusivity callout sits in the copy column rather than in the
                  logo grid: it's a text claim, and with the layout split left/right
                  a full-width text cell inside the mosaic would break the grid. -->
@@ -5498,11 +5496,11 @@ html, body{ overflow-x:clip; }
         <div class="abn__garage-inner">
           <div class="abn__garage-head">
             <p class="vc__kicker">Chassis ownership</p>
-            <h2 id="abn-garage-h">Most of you don&rsquo;t have one car.</h2>
-            <p>The daily, the weekend car, the thing that tows it and the toy on the trailer
-              are four separate fitment problems, and most shops only know one of them
-              properly. We hold specs across all four &mdash; same techs, same verification,
-              whichever one is in the driveway when you call.</p>
+            <h2 id="abn-garage-h">Most of you don&rsquo;t have just one car.</h2>
+            <p>The daily, the weekend car, and the thing that tows it are three separate
+              fitment problems, and most shops only know one of them properly. We hold the
+              specs across all three. Same desk, same verification, whichever one is in the
+              driveway when you call.</p>
           </div>
           <ul class="abn__garage-grid">
             <li class="abn__gcard">
@@ -5510,7 +5508,7 @@ html, body{ overflow-x:clip; }
               <div class="abn__gcard-body">
                 <span class="abn__gcard-kind">The SUV</span>
                 <h3><a class="abn__gcard-link" href="vivid-crossover.html">Crossovers &amp; SUVs</a></h3>
-                <p>Load ratings, hub bores and the staggered setups that only work on one
+                <p>Load ratings, hub bores, and the staggered setups that only work on one
                   trim. Family duty during the week, still your car on the weekend.</p>
                 <ul class="abn__gplat">
                   <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Audi&amp;model=RS%20Q8">Audi RS Q8</a></li>
@@ -5524,8 +5522,8 @@ html, body{ overflow-x:clip; }
               <div class="abn__gcard-body">
                 <span class="abn__gcard-kind">The car</span>
                 <h3><a class="abn__gcard-link" href="index.html">Performance cars</a></h3>
-                <p>Chassis codes, big-brake clearance and the offset that fills an arch
-                  without eating a fender liner at full lock.</p>
+                <p>Chassis codes, big-brake clearance, and the offset that fills an arch
+                  without touching a fender liner at full lock.</p>
                 <ul class="abn__gplat">
                   <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=BMW&amp;model=M3">BMW M3</a></li>
                   <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Porsche&amp;model=911">Porsche 911</a></li>
@@ -5538,26 +5536,12 @@ html, body{ overflow-x:clip; }
               <div class="abn__gcard-body">
                 <span class="abn__gcard-kind">The truck</span>
                 <h3><a class="abn__gcard-link" href="vivid-trucks.html">Trucks &amp; off-road</a></h3>
-                <p>Lift and level combinations, backspacing and what actually rubs at full
+                <p>Lift and level combinations, backspacing, and what actually rubs at full
                   articulation rather than in the driveway.</p>
                 <ul class="abn__gplat">
                   <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Ford&amp;model=F-150">Ford F-150</a></li>
                   <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Ram&amp;model=1500">Ram 1500</a></li>
                   <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Jeep&amp;model=Wrangler">Jeep Wrangler</a></li>
-                </ul>
-              </div>
-            </li>
-            <li class="abn__gcard">
-              <img src="real-photos/polaris-rzr.jpg" alt="Polaris RZR side-by-side on a desert trail" width="1620" height="1080" loading="lazy" decoding="async">
-              <div class="abn__gcard-body">
-                <span class="abn__gcard-kind">The toy</span>
-                <h3><a class="abn__gcard-link" href="vividx.html">Powersports</a></h3>
-                <p>Beadlocks, bolt patterns and the tyre that survives a rock garden without
-                  costing you a wheel on the way home.</p>
-                <ul class="abn__gplat">
-                  <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Polaris&amp;model=RZR">Polaris RZR</a></li>
-                  <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Can-Am&amp;model=Maverick%20X3">Can-Am Maverick X3</a></li>
-                  <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Polaris&amp;model=Ranger">Polaris Ranger</a></li>
                 </ul>
               </div>
             </li>
@@ -5576,9 +5560,10 @@ html, body{ overflow-x:clip; }
       <section class="abn__sec" aria-labelledby="abn-whyus-h">
         <div class="abn__sec-head">
           <p class="vc__kicker">Why us</p>
-          <h2 id="abn-whyus-h">We&rsquo;re not the cheapest, and we&rsquo;re not the biggest.</h2>
-          <p>Both of those are easy to be, and neither one puts the right wheel on your car.
-            Here is what we would rather be right about.</p>
+          <h2 id="abn-whyus-h">This is literally who we are.</h2>
+          <p>You&rsquo;ll hear so many shops talking about how they&rsquo;re built with the
+            enthusiast in mind. With Vivid Racing, it&rsquo;s different. We aren&rsquo;t
+            &ldquo;like&rdquo; you. We are you, and we know what you want before you do.</p>
         </div>
         <!-- Each card leads with the part the claim is actually about: a wheel
              for fitment, an exhaust for brand authority (ArmyTrix, one of the
@@ -5591,10 +5576,11 @@ html, body{ overflow-x:clip; }
             <img src="assets/img/category/wheels.jpg" alt="" width="400" height="400" loading="lazy" decoding="async">
             <div class="abn__why-body">
               <b>Fitment confidence</b>
-              <h3>A tech clears it before it ships</h3>
-              <p>Modified ride height, big brakes, spacers already on it &mdash; a tech confirms
-                the spec by phone before a questionable order leaves. If we clear it and it
-                still doesn&rsquo;t fit, wrong-fit is on us, not on your card.</p>
+              <h3>Cleared before it ships</h3>
+              <p>Modified ride height, big brakes, spacers already on the car. A questionable
+                order can be challenged by our team, and the spec gets confirmed against
+                what you actually drive. If we clear it and it still doesn&rsquo;t fit, the
+                wrong fit is on us.</p>
               <!-- Shortened from "How the fitment promise works" and the arrow
                    glued on with &nbsp;. In the 4-up desktop row each card is
                    only ~210px of usable width, and the longer label wrapped to
@@ -5609,9 +5595,9 @@ html, body{ overflow-x:clip; }
             <div class="abn__why-body">
               <b>Brand authority</b>
               <h3>Authorized, and in two cases the only route</h3>
-              <p>We&rsquo;re authorized on the lines we stock, and the exclusive North American
-                distributor for ArmyTrix and the exclusive distributor for Prior Design.
-                Warranty claims stop with us rather than bouncing back to you.</p>
+              <p>We&rsquo;re authorized on every line we stock, and we&rsquo;re the exclusive
+                distributor of some of the top performance brands in the world. Warranty
+                claims stop with us rather than bouncing back to you.</p>
             </div>
           </li>
           <li class="vc__card">
@@ -5619,15 +5605,9 @@ html, body{ overflow-x:clip; }
             <div class="abn__why-body">
               <b>Lead times</b>
               <h3>Stock status before you order, not after</h3>
-              <!-- VERIFY BEFORE LAUNCH: this describes an intended practice, not a
-                   figure taken from existing site content — there is none. It makes
-                   no numeric promise for that reason. Confirm with the business that
-                   back-order status is actually surfaced pre-checkout and that a tech
-                   does call on delays; if not, this claim has to change. -->
-              <p>The parts that sit in our own warehouse ship the same day. The rest come
-                from the manufacturer, and that date is the one worth knowing before you
-                commit &mdash; so a back-order gets flagged before checkout, not in an email
-                a week later. If a date moves, a tech calls you.</p>
+              <p>We work with the manufacturers to ensure that your parts get shipped out as
+                soon as possible. A back-order gets flagged before checkout, not in an
+                email a week later. If a date moves, you hear it from us first.</p>
             </div>
           </li>
           <li class="vc__card">
@@ -5635,10 +5615,11 @@ html, body{ overflow-x:clip; }
             <div class="abn__why-body">
               <b>Cost of getting it wrong</b>
               <h3>The asymmetry is the whole point</h3>
-              <p>A wheel that rubs costs you the tire, freight both directions and a restocking
-                fee. Checking the spec first costs one phone call. That gap is the entire
-                reason the fitment desk exists, and why we would rather lose the order than
-                sell you the wrong one.</p>
+              <p>A wheel that rubs costs you the tire, freight in both directions, a
+                restocking fee, and the install date you now have to rebook. Confirming
+                the spec first costs one phone call. That gap is the entire reason the
+                fitment desk exists, and why we would rather lose the order than sell you
+                the wrong one.</p>
             </div>
           </li>
         </ul>
@@ -5655,9 +5636,9 @@ html, body{ overflow-x:clip; }
       <section class="abn__sec" aria-labelledby="abn-gal-h">
         <div class="abn__sec-head">
           <p class="vc__kicker">Customer builds</p>
-          <h2 id="abn-gal-h">Cars that left here with the right spec.</h2>
-          <p>Every one of these went out after a fitment check. Wheel fitments named where
-            we have them on record.</p>
+          <h2 id="abn-gal-h">Cars that left here with the right look.</h2>
+          <p>Every build here was made the way our community wanted. Wheel fitments named
+            where we have them on record.</p>
         </div>
         <ul class="vc__gal">
           <li class="vc__build">
@@ -5763,8 +5744,8 @@ html, body{ overflow-x:clip; }
                  that line, since this is the real heading now. -->
             <div class="abn__sec-head">
               <p class="vc__kicker">What customers say</p>
-              <h2 id="abn-rev-h">The fitment desk, in other people&rsquo;s words.</h2>
-              <p>Three reviews from our Google listing, unedited.</p>
+              <h2 id="abn-rev-h">The VR Experience, in other people&rsquo;s words.</h2>
+              <p>Real reviews from our community.</p>
             </div>
             <div class="rbar__row">
               <div class="rbar__score">
@@ -5863,9 +5844,9 @@ html, body{ overflow-x:clip; }
     <section class="abn__cta-bar" aria-labelledby="abn-cta-h">
       <div class="abn__cta-inner">
         <div>
-          <h2 id="abn-cta-h">Tell us what you drive. We&rsquo;ll tell you what fits.</h2>
-          <p>Year, make, model and anything already modified. A tech will come back with a
-            spec that clears &mdash; or tell you straight that we don&rsquo;t have it.</p>
+          <h2 id="abn-cta-h">Tell us what you drive. We&rsquo;ll tell you what belongs on it.</h2>
+          <p>Year, make, model, and anything already modified. You&rsquo;ll get back a spec
+            that clears, or a straight answer that we don&rsquo;t have it.</p>
         </div>
         <div class="abn__cta-actions">
           <a class="vc__btn" href="tel:+14809663040">Call 480-966-3040</a>
@@ -6046,7 +6027,6 @@ html, body{ overflow-x:clip; }
       </div>
 
       <div class="v2-footer__family">
-        <p class="v2-footer__family-label">Part of the Vivid Racing family of brands</p>
         <!-- Same 5 brands + hrefs as the .brandbar switcher up top (node 251:3115) —
              these are ViViD's own sub-brands, not third-party partners, so the
              logos keep their real style rather than the greyscale/knockout
