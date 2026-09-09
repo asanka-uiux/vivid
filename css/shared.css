@@ -818,7 +818,7 @@ body.mobmenu-open{overflow:hidden}
 .v2-footer__news-label{color:rgba(255,255,255,.7);font-family:var(--font-ui);
   font-size:12px;line-height:14px;font-weight:600;letter-spacing:1.248px;text-transform:uppercase}
 .v2-footer__news-form{display:flex;gap:8px;justify-content:flex-start}
-.v2-footer__news-input{flex:1 1 auto;min-width:0;max-width:220px;height:44px;
+.v2-footer__news-input{flex:1 1 auto;min-width:0;height:44px;
   padding:0 14px;background:transparent;border:1px solid rgba(255,255,255,.3);
   color:#fff;font-family:var(--font-ui);font-size:13px}
 /* .5 alpha on #333 measured 4.43:1, just under WCAG's 4.5:1 for normal text */
@@ -869,6 +869,7 @@ body.mobmenu-open{overflow:hidden}
   .v2-footer__stars span{font-size:16px}
   .v2-footer__body{flex-direction:row;align-items:stretch;padding:24px 0}
   .v2-footer__brand{width:300px;min-width:260px;flex-shrink:0;padding-right:24px;border-right:1px solid rgba(255,255,255,.08)}
+  .v2-footer__news-input{max-width:220px}
   .v2-footer__logo{align-self:auto}
   .v2-footer__desc{text-align:left}
   .v2-footer__socials{justify-content:flex-start}
