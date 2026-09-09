@@ -854,7 +854,6 @@ body.mobmenu-open{overflow:hidden}
 .v2-footer__col-links a:hover{color:rgba(255,255,255,.9)}
 
 .v2-footer__family{display:flex;flex-direction:column;gap:8px;padding:20px 0 4px;border-top:1px solid rgba(255,255,255,.08);margin-top:8px}
-.v2-footer__family-label{color:#fff;font-family:var(--font-ui);font-size:14px;font-weight:400;letter-spacing:1.32px;text-transform:uppercase;margin:0}
 .v2-footer__family-logos{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:20px}
 .v2-footer__family-logo{display:flex;align-items:center;line-height:0}
 .v2-footer__family-logo img{height:20px;width:auto}
