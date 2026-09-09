@@ -1306,30 +1306,43 @@
 .rbar__facts{margin:0;font:400 11px/16px var(--font-ui);color:var(--text-muted)}
 .rbar__facts b{font-weight:400;color:var(--text-muted)}
 
-.rbar__sources{display:flex;align-items:center;justify-content:space-between;gap:24px;
-  flex:1 1 100%;min-width:0;margin:0;padding:0;list-style:none;flex-wrap:wrap;
+/* Mobile keeps all three sources on one line rather than wrapping SEMA to
+   its own row: gap/icon/type sizes shrink below 901px, restored to their
+   original values at 901px+ where there's room to breathe. */
+.rbar__sources{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  flex:1 1 100%;min-width:0;margin:0;padding:0;list-style:none;flex-wrap:nowrap;
   row-gap:16px;width:100%}
-@media (min-width:901px){ .rbar__sources{width:auto;justify-content:flex-start} }
+@media (min-width:901px){ .rbar__sources{width:auto;justify-content:flex-start;gap:24px;flex-wrap:wrap} }
 @media (min-width:1181px){ .rbar__sources{justify-content:space-between;flex:1 1 auto} }
-.rbar__source{display:flex;align-items:center;gap:10px;white-space:nowrap}
-.rbar__source > img{flex:none;width:24px;height:24px}
+.rbar__source{display:flex;align-items:center;gap:6px;white-space:nowrap;min-width:0}
+@media (min-width:901px){ .rbar__source{gap:10px} }
+.rbar__source > img{flex:none;width:18px;height:18px}
+@media (min-width:901px){ .rbar__source > img{width:24px;height:24px} }
 /* Trustpilot swaps its wordmark logo for the same icon+name+score shape as
    Google, so the two read as one consistent pattern instead of a logo next
    to a label -- a small colour tile (Trustpilot's own brand green, no
    token for a one-off third-party colour) standing in for the icon. */
-.rbar__source-icon--trustpilot{flex:none;width:24px;height:24px;border-radius:4px;
+.rbar__source-icon--trustpilot{flex:none;width:18px;height:18px;border-radius:4px;
   background:#00b67a;display:grid;place-items:center}
-.rbar__source-icon--trustpilot img{width:14px;height:14px}
-.rbar__source-badge{flex:none;display:flex;align-items:center;height:22px;
-  padding:4px 8px;border-radius:2px;border:1px solid var(--hairline);
-  font:800 10px/1 var(--font-ui);letter-spacing:.6px;text-transform:uppercase;
+@media (min-width:901px){ .rbar__source-icon--trustpilot{width:24px;height:24px} }
+.rbar__source-icon--trustpilot img{width:10px;height:10px}
+@media (min-width:901px){ .rbar__source-icon--trustpilot img{width:14px;height:14px} }
+.rbar__source-badge{flex:none;display:flex;align-items:center;height:18px;
+  padding:3px 6px;border-radius:2px;border:1px solid var(--hairline);
+  font:800 9px/1 var(--font-ui);letter-spacing:.4px;text-transform:uppercase;
   color:var(--ink)}
-.rbar__source-body{display:flex;flex-direction:column;justify-content:center;gap:2px}
-.rbar__source-name{font:700 13px/16px var(--font-ui);color:var(--ink)}
-.rbar__source-rating{display:flex;align-items:center;gap:4px;
-  font:400 11px/14px var(--font-ui);color:var(--text-muted)}
-.rbar__source-rating img{width:10px;height:10px}
-.rbar__source-sema{font:600 13px/16px var(--font-ui);color:var(--ink)}
+@media (min-width:901px){ .rbar__source-badge{height:22px;padding:4px 8px;
+  font:800 10px/1 var(--font-ui);letter-spacing:.6px} }
+.rbar__source-body{display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0}
+.rbar__source-name{font:700 11px/13px var(--font-ui);color:var(--ink)}
+@media (min-width:901px){ .rbar__source-name{font:700 13px/16px var(--font-ui)} }
+.rbar__source-rating{display:flex;align-items:center;gap:3px;
+  font:400 10px/12px var(--font-ui);color:var(--text-muted)}
+@media (min-width:901px){ .rbar__source-rating{gap:4px;font:400 11px/14px var(--font-ui)} }
+.rbar__source-rating img{width:9px;height:9px}
+@media (min-width:901px){ .rbar__source-rating img{width:10px;height:10px} }
+.rbar__source-sema{font:600 11px/13px var(--font-ui);color:var(--ink)}
+@media (min-width:901px){ .rbar__source-sema{font:600 13px/16px var(--font-ui)} }
 
 .rbar__cta{flex:none;width:100%}
 @media (min-width:901px){ .rbar__cta{width:auto} }
