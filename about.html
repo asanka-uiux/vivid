@@ -4555,15 +4555,21 @@ html, body{ overflow-x:clip; }
     min-height: clamp(320px, 46vw, 520px); display: grid; place-items: center;
     overflow: hidden; background: var(--ink); }
   .abn__bleed > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  /* Centre-weighted scrim, re-tuned when the copy moved from the bottom of the
-     band to the middle: a bottom-weighted ramp put its darkest stop where there
-     is no longer any text and its lightest where the headline now sits.
-     Measured against the worst case of a blown-out white pixel under the text,
-     the middle stop composites to 7.8:1 — clear for both the 26-48px headline
-     and the 16.5px lede. The .50 end stops fall to ~3.6:1, which is why they
-     are end stops: no text reaches the band's top or bottom edge. */
+  /* Flat scrim, not a gradient. The previous version was tuned to protect only
+     the band's exact middle (where the headline was assumed to sit), with weak
+     .50-alpha stops at the top/bottom edges on the theory that "no text reaches
+     the band's edges" — true at one width, not at others: the 3-line lede wraps
+     lower in the band on narrow viewports, and dyno.jpg's object-fit:cover crop
+     shows more of the car's bright white door there too. Measured on real
+     screenshots at 500px: the lede's rgba(255,255,255,.82) text fell to 1.94:1
+     over that panel (needs 4.5:1) — a real, visible failure, not a theoretical
+     one. A flat overlay has no "safe zone" to get wrong: .70 alpha of this
+     colour composites even a worst-case blown-out (255,255,255) source pixel
+     down to rgb(87,89,92), which keeps the lede at 5.38:1 and the solid-white
+     H2 at 7.03:1 (needs 3:1 as large text) — margin against JPEG highlight
+     clipping, not just the nominal case. */
   .abn__bleed::after { content: ""; position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(15,18,22,.50) 0%, rgba(15,18,22,.74) 50%, rgba(15,18,22,.50) 100%); }
+    background: rgba(15,18,22,.70); }
   .abn__bleed-inner { position: relative; z-index: 1; width: 100%;
     max-width: calc(1120px + (var(--gutter) * 2)); margin: 0 auto;
     padding: clamp(28px, 5vw, 64px) var(--gutter); text-align: center; }
