@@ -793,6 +793,7 @@ body.mobmenu-open{overflow:hidden}
 .v2-footer__desc{color:rgba(255,255,255,.7);margin:0;text-align:center;font-family:var(--font-ui);font-size:12px;font-weight:400;line-height:1.5}
 .v2-footer__contact{display:flex;flex-direction:column;gap:15px;padding-bottom:6px;border-bottom:1px solid #6b6b6b}
 .v2-footer__contact-top{display:flex;flex-direction:row;gap:70px}
+@media (min-width:901px){ .v2-footer__contact-top{gap:36px} }
 .v2-footer__contact-col{display:flex;flex-direction:column;gap:3.5px;flex:1}
 .v2-footer__contact-col>.v2-footer__contact-phone{margin-top:6px}
 .v2-footer__contact-link{font-family:var(--font-ui);font-size:13px;font-weight:600;color:rgba(255,255,255,.8);text-decoration:underline;text-underline-offset:2px;width:fit-content;transition:color .2s ease}
