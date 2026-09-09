@@ -98,7 +98,7 @@
    Faithfully reproduced, not "fixed". */
 @media (min-width:901px){ .eyebrow{display:inline-flex;order:0;align-self:auto;margin-top:revert} }
 .eyebrow::before{content:"";width:6px;height:6px;border-radius:3px;
-  background:var(--action-primary);opacity:.41;flex:none}
+  background:#fff;opacity:.41;flex:none}
 
 .hero__title{margin:0;font-family:var(--font-display);font-weight:900;
   font-size:34px;line-height:38px;letter-spacing:-.8px;text-transform:uppercase;
