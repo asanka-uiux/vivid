@@ -305,8 +305,8 @@ button{font:inherit;color:inherit}
    it here (even to the same `block`) is equal-specificity and later in the
    file, so it silently overrides their `display:none` and shows both icons
    stacked at once, which also breaks the grid centering on .util__tile. */
-.cart-icon{width:32px;height:18px;object-fit:contain}
-@media (min-width:901px){ .cart-icon{width:24px;height:14px} }
+.cart-icon{width:29px;height:23px;object-fit:contain}
+@media (min-width:901px){ .cart-icon{width:21px;height:17px} }
 .util__glyph{flex:none;display:grid;place-items:center;width:44px;height:44px}
 @media (min-width:901px){ .util__glyph{width:34px;height:34px} }
 @media (min-width:1025px){ .util__glyph{width:30px;height:30px} }
