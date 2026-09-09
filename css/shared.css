@@ -300,8 +300,12 @@ button{font:inherit;color:inherit}
 /* Raster cart icon: unlike the other util svgs above, it can't be recoloured
    with `fill`, so black/white is baked into two separate files (cart-black.png
    for the transparent tile below 1025px, cart-white.png for the dark tile at
-   1025px+) and swapped via the existing .icon-mobile/.icon-desktop toggle. */
-.cart-icon{display:block;width:32px;height:18px;object-fit:contain}
+   1025px+) and swapped via the existing .icon-mobile/.icon-desktop toggle.
+   No `display` here — .icon-mobile/.icon-desktop already own that, and setting
+   it here (even to the same `block`) is equal-specificity and later in the
+   file, so it silently overrides their `display:none` and shows both icons
+   stacked at once, which also breaks the grid centering on .util__tile. */
+.cart-icon{width:32px;height:18px;object-fit:contain}
 @media (min-width:901px){ .cart-icon{width:24px;height:14px} }
 .util__glyph{flex:none;display:grid;place-items:center;width:44px;height:44px}
 @media (min-width:901px){ .util__glyph{width:34px;height:34px} }
