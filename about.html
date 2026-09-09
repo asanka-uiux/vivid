@@ -4697,7 +4697,12 @@ html, body{ overflow-x:clip; }
   .abn__garage-head p { font-size: 1.0313rem; line-height: 1.7;
     color: rgba(255,255,255,.72); margin: 0; }
   .abn__garage-grid { display: grid; gap: var(--stack); margin: 0; padding: 0; list-style: none; }
-  @media (min-width: 780px) { .abn__garage-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  /* Four divisions since powersports joined the lineup. Four across at 780px would
+     leave ~180px per card, too narrow for a photo plus a platform list, so the
+     tablet tier is 2x2 and the row of four only opens at 1080px (a breakpoint this
+     file already uses elsewhere). */
+  @media (min-width: 780px) { .abn__garage-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1080px) { .abn__garage-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
   /* Cards lift off the ground with a 5% white wash rather than a second flat
      colour, so they stay tied to --ink whatever it's set to. */
   .abn__gcard { position: relative; display: flex; flex-direction: column;
@@ -4726,6 +4731,22 @@ html, body{ overflow-x:clip; }
   .abn__gcard h3 .abn__gcard-link:hover { text-decoration: underline; }
   .abn__gcard p { margin: 0; font-size: .9375rem; line-height: 1.6;
     color: rgba(255,255,255,.72); }
+  /* Platform links, one row per division. Two non-obvious requirements:
+     1. z-index lifts them above .abn__gcard-link::after — the stretched overlay
+        that makes the whole card a link to the division page. Without it these
+        sit underneath it and cannot be clicked at all.
+     2. They carry a class for exactly the reason .abn__gcard-link does (see the
+        note above it): vr-content.css styles unclassed links inside an li in
+        --heat red with an underline, and these live inside .abn__gcard. */
+  .abn__gplat { position: relative; z-index: 1; display: flex; flex-wrap: wrap;
+    gap: 6px; margin: 4px 0 0; padding: 0; list-style: none; }
+  .abn__gplat-link { display: inline-block; font-family: var(--mono); font-size: .75rem;
+    font-weight: 700; letter-spacing: .03em; text-decoration: none; white-space: nowrap;
+    color: rgba(255,255,255,.88); background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.18); border-radius: 999px; padding: 4px 10px;
+    transition: background-color .16s ease, border-color .16s ease, color .16s ease; }
+  .abn__gplat-link:hover { background: rgba(255,255,255,.15);
+    border-color: rgba(255,255,255,.45); color: #fff; }
   /* The global focus ring is red, which is too close to this ground — the
      shared chrome already solves this for .brandbar/.ymm the same way. */
   .abn__garage a:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
@@ -5472,10 +5493,10 @@ html, body{ overflow-x:clip; }
           <div class="abn__garage-head">
             <p class="vc__kicker">Chassis ownership</p>
             <h2 id="abn-garage-h">Most of you don&rsquo;t have one car.</h2>
-            <p>The daily, the weekend car and the thing that tows it are three separate
-              fitment problems, and most shops only know one of them properly. We hold specs
-              across all three &mdash; same techs, same verification, whichever one is in the
-              driveway when you call.</p>
+            <p>The daily, the weekend car, the thing that tows it and the toy on the trailer
+              are four separate fitment problems, and most shops only know one of them
+              properly. We hold specs across all four &mdash; same techs, same verification,
+              whichever one is in the driveway when you call.</p>
           </div>
           <ul class="abn__garage-grid">
             <li class="abn__gcard">
@@ -5485,6 +5506,11 @@ html, body{ overflow-x:clip; }
                 <h3><a class="abn__gcard-link" href="vivid-crossover.html">Crossovers &amp; SUVs</a></h3>
                 <p>Load ratings, hub bores and the staggered setups that only work on one
                   trim. Family duty during the week, still your car on the weekend.</p>
+                <ul class="abn__gplat">
+                  <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Audi&amp;model=RS%20Q8">Audi RS Q8</a></li>
+                  <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Porsche&amp;model=Cayenne">Porsche Cayenne</a></li>
+                  <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Jeep&amp;model=Grand%20Cherokee">Jeep Grand Cherokee</a></li>
+                </ul>
               </div>
             </li>
             <li class="abn__gcard">
@@ -5494,6 +5520,11 @@ html, body{ overflow-x:clip; }
                 <h3><a class="abn__gcard-link" href="index.html">Performance cars</a></h3>
                 <p>Chassis codes, big-brake clearance and the offset that fills an arch
                   without eating a fender liner at full lock.</p>
+                <ul class="abn__gplat">
+                  <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=BMW&amp;model=M3">BMW M3</a></li>
+                  <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Porsche&amp;model=911">Porsche 911</a></li>
+                  <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Nissan&amp;model=GT-R">Nissan GT-R</a></li>
+                </ul>
               </div>
             </li>
             <li class="abn__gcard">
@@ -5503,6 +5534,25 @@ html, body{ overflow-x:clip; }
                 <h3><a class="abn__gcard-link" href="vivid-trucks.html">Trucks &amp; off-road</a></h3>
                 <p>Lift and level combinations, backspacing and what actually rubs at full
                   articulation rather than in the driveway.</p>
+                <ul class="abn__gplat">
+                  <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Ford&amp;model=F-150">Ford F-150</a></li>
+                  <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Ram&amp;model=1500">Ram 1500</a></li>
+                  <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Jeep&amp;model=Wrangler">Jeep Wrangler</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="abn__gcard">
+              <img src="real-photos/polaris-rzr.jpg" alt="Polaris RZR side-by-side on a desert trail" width="1620" height="1080" loading="lazy" decoding="async">
+              <div class="abn__gcard-body">
+                <span class="abn__gcard-kind">The toy</span>
+                <h3><a class="abn__gcard-link" href="vividx.html">Powersports</a></h3>
+                <p>Beadlocks, bolt patterns and the tyre that survives a rock garden without
+                  costing you a wheel on the way home.</p>
+                <ul class="abn__gplat">
+                  <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Polaris&amp;model=RZR">Polaris RZR</a></li>
+                  <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Can-Am&amp;model=Maverick%20X3">Can-Am Maverick X3</a></li>
+                  <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Polaris&amp;model=Ranger">Polaris Ranger</a></li>
+                </ul>
               </div>
             </li>
           </ul>
@@ -5588,77 +5638,7 @@ html, body{ overflow-x:clip; }
         </ul>
       </section>
 
-      <!-- ============ 7 · THREE REVIEWS =====================================
-           Brief: "3 Google reviews."
-           These are the three real Google reviews already running on
-           index.html — same reviewer names, review/photo counts and timestamps
-           as Google shows them, source text supplied by the user (see the
-           REVIEWS comment in index.html). index.html keeps its copy; this page
-           shows the same three rather than inventing any.
-           Component is .revs__grid/.rev from css/style.css, which this page
-           already loads, so there is no new styling here — and the .dashes
-           pair below is the mobile scroll indicator js/script.js drives for
-           any .revs__grid it finds.
-           Star ratings were not supplied with the source text and are shown as
-           5 per the reviews' own wording; confirm against the live Google
-           listing if exact scores matter. ============================== -->
-      <section class="abn__sec" aria-labelledby="abn-rev-h">
-        <div class="abn__sec-head">
-          <p class="vc__kicker">What customers say</p>
-          <h2 id="abn-rev-h">The fitment desk, in other people&rsquo;s words.</h2>
-          <p>Three reviews from our Google listing, unedited.</p>
-        </div>
-        <ul class="revs__grid">
-          <li class="rev">
-            <div class="rev__head">
-              <span class="rev__avatar" aria-hidden="true">A</span>
-              <span class="rev__id">
-                <span class="rev__name">Adrienne Taylor</span>
-                <span class="rev__stat">Local Guide &middot; 91 reviews &middot; 41 photos</span>
-              </span>
-              <span class="rev__src"><img src="assets/icons/google-logo-color.svg" alt="" aria-hidden="true" width="15" height="15">Google</span>
-            </div>
-            <div class="rev__rating">
-              <span class="rev__stars" role="img" aria-label="Rated 5 out of 5"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"></span>
-              <span class="rev__time">2 months ago</span>
-            </div>
-            <blockquote class="rev__quote">Placed a order for RCV axles that only Vivid had in stock. Called to confirm stock and customer service was great. Took care of everything over the phone and didn&rsquo;t sit on hold for half the day. They shipped same day and I will not hesitate to order from these dudes again!</blockquote>
-          </li>
-          <li class="rev">
-            <div class="rev__head">
-              <span class="rev__avatar" aria-hidden="true">C</span>
-              <span class="rev__id">
-                <span class="rev__name">Craig Wilcox</span>
-                <span class="rev__stat">7 reviews &middot; 2 photos</span>
-              </span>
-              <span class="rev__src"><img src="assets/icons/google-logo-color.svg" alt="" aria-hidden="true" width="15" height="15">Google</span>
-            </div>
-            <div class="rev__rating">
-              <span class="rev__stars" role="img" aria-label="Rated 5 out of 5"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"></span>
-              <span class="rev__time">a year ago</span>
-            </div>
-            <blockquote class="rev__quote">Excellent customer service, quick shipping on short notice. Highly recommend! The ultra low profile 90-degree 16AN fitting was a lifesaver and allowed me to finish my custom build, thanks Vivid!</blockquote>
-          </li>
-          <li class="rev">
-            <div class="rev__head">
-              <span class="rev__avatar" aria-hidden="true">H</span>
-              <span class="rev__id">
-                <span class="rev__name">Howard Floyd</span>
-                <span class="rev__stat">2 reviews &middot; 2 photos</span>
-              </span>
-              <span class="rev__src"><img src="assets/icons/google-logo-color.svg" alt="" aria-hidden="true" width="15" height="15">Google</span>
-            </div>
-            <div class="rev__rating">
-              <span class="rev__stars" role="img" aria-label="Rated 5 out of 5"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"></span>
-              <span class="rev__time">Edited a year ago</span>
-            </div>
-            <blockquote class="rev__quote">Once again Vivid Racing does an awesome job! Your products are always great quality, they&rsquo;re very responsive and my parts always get here quickly. I&rsquo;ve used Vivid Racing at least four times just with this build and many other times in the past. I would definitely recommend them for your motorcycle and ATV needs.</blockquote>
-          </li>
-        </ul>
-        <div class="dashes" aria-hidden="true"><span class="is-active"></span><span></span></div>
-      </section>
-
-      <!-- ============ 8 · GALLERY ===========================================
+      <!-- ============ 7 · GALLERY ===========================================
            Brief: "Mosaic of builds from VR gallery with named parts (this will
            be based on CO gallery since it houses all ymm's). Button CTA to see
            builds."
@@ -5743,6 +5723,76 @@ html, body{ overflow-x:clip; }
         <p class="abn__gal-foot">
           <a class="vc__btn" href="waiting-to-build/gallery.html">See all builds</a>
         </p>
+      </section>
+
+      <!-- ============ 8 · THREE REVIEWS =====================================
+           Brief: "3 Google reviews."
+           These are the three real Google reviews already running on
+           index.html — same reviewer names, review/photo counts and timestamps
+           as Google shows them, source text supplied by the user (see the
+           REVIEWS comment in index.html). index.html keeps its copy; this page
+           shows the same three rather than inventing any.
+           Component is .revs__grid/.rev from css/style.css, which this page
+           already loads, so there is no new styling here — and the .dashes
+           pair below is the mobile scroll indicator js/script.js drives for
+           any .revs__grid it finds.
+           Star ratings were not supplied with the source text and are shown as
+           5 per the reviews' own wording; confirm against the live Google
+           listing if exact scores matter. ============================== -->
+      <section class="abn__sec" aria-labelledby="abn-rev-h">
+        <div class="abn__sec-head">
+          <p class="vc__kicker">What customers say</p>
+          <h2 id="abn-rev-h">The fitment desk, in other people&rsquo;s words.</h2>
+          <p>Three reviews from our Google listing, unedited.</p>
+        </div>
+        <ul class="revs__grid">
+          <li class="rev">
+            <div class="rev__head">
+              <span class="rev__avatar" aria-hidden="true">A</span>
+              <span class="rev__id">
+                <span class="rev__name">Adrienne Taylor</span>
+                <span class="rev__stat">Local Guide &middot; 91 reviews &middot; 41 photos</span>
+              </span>
+              <span class="rev__src"><img src="assets/icons/google-logo-color.svg" alt="" aria-hidden="true" width="15" height="15">Google</span>
+            </div>
+            <div class="rev__rating">
+              <span class="rev__stars" role="img" aria-label="Rated 5 out of 5"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"></span>
+              <span class="rev__time">2 months ago</span>
+            </div>
+            <blockquote class="rev__quote">Placed a order for RCV axles that only Vivid had in stock. Called to confirm stock and customer service was great. Took care of everything over the phone and didn&rsquo;t sit on hold for half the day. They shipped same day and I will not hesitate to order from these dudes again!</blockquote>
+          </li>
+          <li class="rev">
+            <div class="rev__head">
+              <span class="rev__avatar" aria-hidden="true">C</span>
+              <span class="rev__id">
+                <span class="rev__name">Craig Wilcox</span>
+                <span class="rev__stat">7 reviews &middot; 2 photos</span>
+              </span>
+              <span class="rev__src"><img src="assets/icons/google-logo-color.svg" alt="" aria-hidden="true" width="15" height="15">Google</span>
+            </div>
+            <div class="rev__rating">
+              <span class="rev__stars" role="img" aria-label="Rated 5 out of 5"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"></span>
+              <span class="rev__time">a year ago</span>
+            </div>
+            <blockquote class="rev__quote">Excellent customer service, quick shipping on short notice. Highly recommend! The ultra low profile 90-degree 16AN fitting was a lifesaver and allowed me to finish my custom build, thanks Vivid!</blockquote>
+          </li>
+          <li class="rev">
+            <div class="rev__head">
+              <span class="rev__avatar" aria-hidden="true">H</span>
+              <span class="rev__id">
+                <span class="rev__name">Howard Floyd</span>
+                <span class="rev__stat">2 reviews &middot; 2 photos</span>
+              </span>
+              <span class="rev__src"><img src="assets/icons/google-logo-color.svg" alt="" aria-hidden="true" width="15" height="15">Google</span>
+            </div>
+            <div class="rev__rating">
+              <span class="rev__stars" role="img" aria-label="Rated 5 out of 5"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"></span>
+              <span class="rev__time">Edited a year ago</span>
+            </div>
+            <blockquote class="rev__quote">Once again Vivid Racing does an awesome job! Your products are always great quality, they&rsquo;re very responsive and my parts always get here quickly. I&rsquo;ve used Vivid Racing at least four times just with this build and many other times in the past. I would definitely recommend them for your motorcycle and ATV needs.</blockquote>
+          </li>
+        </ul>
+        <div class="dashes" aria-hidden="true"><span class="is-active"></span><span></span></div>
       </section>
 
     </div>

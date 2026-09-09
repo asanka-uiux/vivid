@@ -797,11 +797,25 @@ body.mobmenu-open{overflow:hidden}
 .v2-footer__contact-col>.v2-footer__contact-phone{margin-top:6px}
 .v2-footer__contact-link{font-family:var(--font-ui);font-size:13px;font-weight:600;color:rgba(255,255,255,.8);text-decoration:underline;text-underline-offset:2px;width:fit-content;transition:color .2s ease}
 .v2-footer__contact-link:hover{color:rgba(255,255,255,.75)}
-.v2-footer__contact-label{color:rgba(255,255,255,.7);font-family:var(--font-ui);font-size:12px;font-weight:600;letter-spacing:1.248px;text-transform:uppercase;margin-bottom:2px}
+.v2-footer__contact-label{color:rgba(255,255,255,.7);font-family:var(--font-ui);font-size:12px;font-weight:600;letter-spacing:1.248px;text-transform:uppercase;margin-bottom:2px;white-space:nowrap}
 .v2-footer__contact-phone{transition:color .2s ease;width:fit-content;white-space:nowrap;color:rgba(255,255,255,.8);font-family:var(--font-ui);font-size:16px;font-weight:600}
 .v2-footer__contact-phone:hover{color:rgba(255,255,255,.75)}
 .v2-footer__contact-hours,.v2-footer__contact-address{color:rgba(255,255,255,.7);font-family:var(--font-ui);font-size:12px;font-weight:400;line-height:16px}
 .v2-footer__contact-address{font-style:normal}
+
+.v2-footer__news{display:flex;flex-direction:column;gap:8px;text-align:left}
+.v2-footer__news-label{color:rgba(255,255,255,.7);font-family:var(--font-ui);
+  font-size:12px;line-height:14px;font-weight:600;letter-spacing:1.248px;text-transform:uppercase}
+.v2-footer__news-form{display:flex;gap:8px;justify-content:flex-start}
+.v2-footer__news-input{flex:1 1 auto;min-width:0;max-width:220px;height:44px;
+  padding:0 14px;background:transparent;border:1px solid rgba(255,255,255,.3);
+  color:#fff;font-family:var(--font-ui);font-size:13px}
+/* .5 alpha on #333 measured 4.43:1, just under WCAG's 4.5:1 for normal text */
+.v2-footer__news-input::placeholder{color:rgba(255,255,255,.55)}
+.v2-footer__news-submit{flex:none;height:44px;padding:0 20px;
+  background:var(--action-primary);border:0;color:#fff;font-family:var(--font-ui);
+  font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+  cursor:pointer}
 
 .v2-footer__socials{display:flex;gap:8px;justify-content:center;list-style:none;padding:0;margin:0}
 .v2-footer__social{display:flex;width:30px;height:30px;justify-content:center;align-items:center;border:1px solid rgba(255,255,255,.5);transition:border-color .2s ease}
