@@ -5725,74 +5725,119 @@ html, body{ overflow-x:clip; }
         </p>
       </section>
 
-      <!-- ============ 8 · THREE REVIEWS =====================================
+      <!-- ============ 8 · REVIEWS BANNER =====================================
            Brief: "3 Google reviews."
-           These are the three real Google reviews already running on
-           index.html — same reviewer names, review/photo counts and timestamps
-           as Google shows them, source text supplied by the user (see the
-           REVIEWS comment in index.html). index.html keeps its copy; this page
-           shows the same three rather than inventing any.
-           Component is .revs__grid/.rev from css/style.css, which this page
-           already loads, so there is no new styling here — and the .dashes
-           pair below is the mobile scroll indicator js/script.js drives for
-           any .revs__grid it finds.
+           Full block from index.html's REVIEWS BANNER (node 251:6048 / 251:6088),
+           copied wholesale rather than reduced to just .revs__grid — this brings
+           the trust bar (4.9 aggregate, Google/Trustpilot/SEMA badges, "Read all
+           reviews" CTA) that index.html got in its 2026-08-19 redesign, which the
+           previous version of this section here predated. Same reviewer names,
+           review/photo counts and timestamps as Google shows them, source text
+           supplied by the user (see the REVIEWS comment in index.html) —
+           index.html keeps its own copy of this block; this is a duplicate, not
+           a shared partial, so the two will need updating together if the
+           figures change.
+           Every class here (.revs-combined, .revs, .rbar__*, .revs__grid, .rev,
+           .dashes) resolves from css/style.css, which this page already loads —
+           no new CSS was needed. id="revs-title" renamed to "abn-rev-h" to match
+           this file's own heading-id convention; nothing selects on that id, so
+           the rename is style-inert. .dashes is the mobile scroll indicator
+           js/script.js drives for any .revs__grid it finds — already loaded here.
            Star ratings were not supplied with the source text and are shown as
            5 per the reviews' own wording; confirm against the live Google
            listing if exact scores matter. ============================== -->
-      <section class="abn__sec" aria-labelledby="abn-rev-h">
-        <div class="abn__sec-head">
-          <p class="vc__kicker">What customers say</p>
-          <h2 id="abn-rev-h">The fitment desk, in other people&rsquo;s words.</h2>
-          <p>Three reviews from our Google listing, unedited.</p>
+      <section class="revs-combined" aria-labelledby="abn-rev-h">
+        <div class="revs">
+          <div class="shell">
+            <div class="rbar__row">
+              <div class="rbar__score">
+                <p class="rbar__num">4.9</p>
+                <span class="rbar__stars" role="img" aria-label="Rated 4.9 out of 5"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="16" height="16"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="16" height="16"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="16" height="16"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="16" height="16"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="16" height="16"></span>
+                <p class="rbar__facts"><b>14,000+</b> verified buyers &middot; <b>&lt;1.4%</b> return rate</p>
+              </div>
+              <ul class="rbar__sources">
+                <li class="rbar__source">
+                  <img src="assets/icons/google-logo-color.svg" alt="" aria-hidden="true">
+                  <span class="rbar__source-body">
+                    <span class="rbar__source-name">Google</span>
+                    <span class="rbar__source-rating">4.9 <img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"></span>
+                  </span>
+                </li>
+                <li class="rbar__source">
+                  <span class="rbar__source-icon--trustpilot">
+                    <img src="assets/icons/star-small.svg" alt="" aria-hidden="true">
+                  </span>
+                  <span class="rbar__source-body">
+                    <span class="rbar__source-name">Trustpilot</span>
+                    <span class="rbar__source-rating">4.8 <img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"></span>
+                  </span>
+                </li>
+                <li class="rbar__source">
+                  <span class="rbar__source-badge">SEMA</span>
+                  <span class="rbar__source-body">
+                    <span class="rbar__source-sema">Top 5 Reseller</span>
+                  </span>
+                </li>
+              </ul>
+              <div class="rbar__cta">
+                <a class="rbar__cta-btn" href="waiting-to-build/reviews.html">Read all reviews
+                  <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+              </div>
+            </div>
+            <div class="revs__head">
+              <img src="assets/icons/google-logo-color.svg" alt="" aria-hidden="true" width="26" height="26">
+              <h2 class="revs__title" id="abn-rev-h">Reviews from Google</h2>
+            </div>
+            <ul class="revs__grid">
+              <li class="rev">
+                <div class="rev__head">
+                  <span class="rev__avatar" aria-hidden="true">A</span>
+                  <span class="rev__id">
+                    <span class="rev__name">Adrienne Taylor</span>
+                    <span class="rev__stat">Local Guide &middot; 91 reviews &middot; 41 photos</span>
+                  </span>
+                  <span class="rev__src"><img src="assets/icons/google-logo-color.svg" alt="" aria-hidden="true" width="15" height="15">Google</span>
+                </div>
+                <div class="rev__rating">
+                  <span class="rev__stars" role="img" aria-label="Rated 5 out of 5"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"></span>
+                  <span class="rev__time">2 months ago</span>
+                </div>
+                <blockquote class="rev__quote">Placed a order for RCV axles that only Vivid had in stock. Called to confirm stock and customer service was great. Took care of everything over the phone and didn&rsquo;t sit on hold for half the day. They shipped same day and I will not hesitate to order from these dudes again!</blockquote>
+              </li>
+              <li class="rev">
+                <div class="rev__head">
+                  <span class="rev__avatar" aria-hidden="true">C</span>
+                  <span class="rev__id">
+                    <span class="rev__name">Craig Wilcox</span>
+                    <span class="rev__stat">7 reviews &middot; 2 photos</span>
+                  </span>
+                  <span class="rev__src"><img src="assets/icons/google-logo-color.svg" alt="" aria-hidden="true" width="15" height="15">Google</span>
+                </div>
+                <div class="rev__rating">
+                  <span class="rev__stars" role="img" aria-label="Rated 5 out of 5"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"></span>
+                  <span class="rev__time">a year ago</span>
+                </div>
+                <blockquote class="rev__quote">Excellent customer service, quick shipping on short notice. Highly recommend! The ultra low profile 90-degree 16AN fitting was a lifesaver and allowed me to finish my custom build, thanks Vivid!</blockquote>
+              </li>
+              <li class="rev">
+                <div class="rev__head">
+                  <span class="rev__avatar" aria-hidden="true">H</span>
+                  <span class="rev__id">
+                    <span class="rev__name">Howard Floyd</span>
+                    <span class="rev__stat">2 reviews &middot; 2 photos</span>
+                  </span>
+                  <span class="rev__src"><img src="assets/icons/google-logo-color.svg" alt="" aria-hidden="true" width="15" height="15">Google</span>
+                </div>
+                <div class="rev__rating">
+                  <span class="rev__stars" role="img" aria-label="Rated 5 out of 5"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"></span>
+                  <span class="rev__time">Edited a year ago</span>
+                </div>
+                <blockquote class="rev__quote">Once again Vivid Racing does an awesome job! Your products are always great quality, they&rsquo;re very responsive and my parts always get here quickly. I&rsquo;ve used Vivid Racing at least four times just with this build and many other times in the past. I would definitely recommend them for your motorcycle and ATV needs.</blockquote>
+              </li>
+            </ul>
+            <div class="dashes" aria-hidden="true"><span class="is-active"></span><span></span></div>
+          </div>
         </div>
-        <ul class="revs__grid">
-          <li class="rev">
-            <div class="rev__head">
-              <span class="rev__avatar" aria-hidden="true">A</span>
-              <span class="rev__id">
-                <span class="rev__name">Adrienne Taylor</span>
-                <span class="rev__stat">Local Guide &middot; 91 reviews &middot; 41 photos</span>
-              </span>
-              <span class="rev__src"><img src="assets/icons/google-logo-color.svg" alt="" aria-hidden="true" width="15" height="15">Google</span>
-            </div>
-            <div class="rev__rating">
-              <span class="rev__stars" role="img" aria-label="Rated 5 out of 5"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"></span>
-              <span class="rev__time">2 months ago</span>
-            </div>
-            <blockquote class="rev__quote">Placed a order for RCV axles that only Vivid had in stock. Called to confirm stock and customer service was great. Took care of everything over the phone and didn&rsquo;t sit on hold for half the day. They shipped same day and I will not hesitate to order from these dudes again!</blockquote>
-          </li>
-          <li class="rev">
-            <div class="rev__head">
-              <span class="rev__avatar" aria-hidden="true">C</span>
-              <span class="rev__id">
-                <span class="rev__name">Craig Wilcox</span>
-                <span class="rev__stat">7 reviews &middot; 2 photos</span>
-              </span>
-              <span class="rev__src"><img src="assets/icons/google-logo-color.svg" alt="" aria-hidden="true" width="15" height="15">Google</span>
-            </div>
-            <div class="rev__rating">
-              <span class="rev__stars" role="img" aria-label="Rated 5 out of 5"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"></span>
-              <span class="rev__time">a year ago</span>
-            </div>
-            <blockquote class="rev__quote">Excellent customer service, quick shipping on short notice. Highly recommend! The ultra low profile 90-degree 16AN fitting was a lifesaver and allowed me to finish my custom build, thanks Vivid!</blockquote>
-          </li>
-          <li class="rev">
-            <div class="rev__head">
-              <span class="rev__avatar" aria-hidden="true">H</span>
-              <span class="rev__id">
-                <span class="rev__name">Howard Floyd</span>
-                <span class="rev__stat">2 reviews &middot; 2 photos</span>
-              </span>
-              <span class="rev__src"><img src="assets/icons/google-logo-color.svg" alt="" aria-hidden="true" width="15" height="15">Google</span>
-            </div>
-            <div class="rev__rating">
-              <span class="rev__stars" role="img" aria-label="Rated 5 out of 5"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"></span>
-              <span class="rev__time">Edited a year ago</span>
-            </div>
-            <blockquote class="rev__quote">Once again Vivid Racing does an awesome job! Your products are always great quality, they&rsquo;re very responsive and my parts always get here quickly. I&rsquo;ve used Vivid Racing at least four times just with this build and many other times in the past. I would definitely recommend them for your motorcycle and ATV needs.</blockquote>
-          </li>
-        </ul>
-        <div class="dashes" aria-hidden="true"><span class="is-active"></span><span></span></div>
       </section>
 
     </div>
