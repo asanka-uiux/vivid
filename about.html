@@ -5749,6 +5749,17 @@ html, body{ overflow-x:clip; }
       <section class="revs-combined" aria-labelledby="abn-rev-h">
         <div class="revs">
           <div class="shell">
+            <!-- This page's own kicker/H2/intro, ahead of the trust bar — marketing's
+                 copy pass gave About a distinct headline here ("The fitment desk, in
+                 other people's words.") rather than reusing index.html's plain "Reviews
+                 from Google" line, so that line below now serves as a small in-card
+                 label rather than the section's heading. id="abn-rev-h" moved here from
+                 that line, since this is the real heading now. -->
+            <div class="abn__sec-head">
+              <p class="vc__kicker">What customers say</p>
+              <h2 id="abn-rev-h">The fitment desk, in other people&rsquo;s words.</h2>
+              <p>Three reviews from our Google listing, unedited.</p>
+            </div>
             <div class="rbar__row">
               <div class="rbar__score">
                 <p class="rbar__num">4.9</p>
@@ -5786,7 +5797,7 @@ html, body{ overflow-x:clip; }
             </div>
             <div class="revs__head">
               <img src="assets/icons/google-logo-color.svg" alt="" aria-hidden="true" width="26" height="26">
-              <h2 class="revs__title" id="abn-rev-h">Reviews from Google</h2>
+              <p class="revs__title">Reviews from Google</p>
             </div>
             <ul class="revs__grid">
               <li class="rev">
@@ -5874,14 +5885,14 @@ html, body{ overflow-x:clip; }
             <span class="v2-footer__finance-sub">As low as</span>
             <span class="v2-footer__finance-price"><strong>0%</strong> APR</span>
           </div>
-          <span class="v2-footer__finance-badge">Affirm</span>
+          <span class="v2-footer__finance-badge"><img src="assets/img/logos/affirm.png" alt="Affirm" width="356" height="141" loading="lazy" decoding="async"></span>
         </div>
         <div class="v2-footer__finance">
           <div class="v2-footer__finance-text">
             <span class="v2-footer__finance-sub">As low as</span>
             <span class="v2-footer__finance-price"><strong>$1</strong> Down</span>
           </div>
-          <span class="v2-footer__finance-badge">Katapult</span>
+          <span class="v2-footer__finance-badge"><img src="assets/img/logos/katapult.webp" alt="Katapult" width="477" height="146" loading="lazy" decoding="async"></span>
         </div>
       </div>
       <div class="v2-footer__stat">
