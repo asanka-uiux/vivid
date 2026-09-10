@@ -162,19 +162,23 @@
 .hp-ticker:hover .hp-ticker__set,.hp-ticker:focus-within .hp-ticker__set{
   animation-play-state:paused}
 .hp-ticker__item{flex:none;display:grid;place-items:center}
-.hp-ticker__logo{max-height:30px;width:auto;max-width:120px;object-fit:contain;
-  opacity:.7;transition:transform .18s ease}
-@media (min-width:901px){ .hp-ticker__logo{max-height:44px;max-width:160px} }
-.hp-ticker__item:hover .hp-ticker__logo,.hp-ticker__item:focus-visible .hp-ticker__logo{
-  transform:scale(1.12)}
+/* Brand marks here are names, not logo files -- the roster (up to 27 per
+   page) is real but we don't hold cleared logo assets for most of these yet.
+   Plain text keeps the trust-bar honest until real marks are supplied,
+   rather than hotlinking logos from other companies' CDNs (the previous
+   placeholder content did exactly that, borrowing bandwidth from two other
+   businesses' live sites) or guessing at ones we can't verify. */
+.hp-ticker__name{font:700 14px/1 var(--font-ui);letter-spacing:.4px;
+  white-space:nowrap;color:var(--text-muted);transition:color .18s ease}
+@media (min-width:901px){ .hp-ticker__name{font-size:16px} }
+.hp-ticker__item:hover .hp-ticker__name,.hp-ticker__item:focus-visible .hp-ticker__name{
+  color:var(--text-primary)}
 @media (prefers-reduced-motion:reduce){
   .hp-ticker{overflow-x:auto;-webkit-mask-image:none;mask-image:none;
     scrollbar-width:none;-ms-overflow-style:none}
   .hp-ticker::-webkit-scrollbar{display:none}
   .hp-ticker__set{animation:none}
   .hp-ticker__set[aria-hidden]{display:none}
-  .hp-ticker__item:hover .hp-ticker__logo,.hp-ticker__item:focus-visible .hp-ticker__logo{
-    transform:none}
 }
 
 
