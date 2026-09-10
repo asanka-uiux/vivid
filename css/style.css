@@ -887,12 +887,19 @@
     scrollbar-width:none;-ms-overflow-style:none}
   .dealer__brands::-webkit-scrollbar{display:none}
 }
+/* Desktop: one row, no scroll -- the base rule's flex-wrap:wrap was only ever
+   meant to be a mobile fallback, but nothing had overridden it above 900px,
+   so 9 logos of wildly different aspect ratios (Spoon Sports ~7:1 down to
+   Techart ~0.8:1) wrapped to a second line well into desktop widths. Forcing
+   nowrap here means the img sizing below has to guarantee a fit instead of
+   just looking right -- tuned against the narrowest desktop viewport (901px). */
+@media (min-width:901px){ .dealer__brands{flex-wrap:nowrap;gap:16px 14px} }
 .dealer__brands li{flex:none;display:flex;align-items:center;justify-content:center;
   font:700 15px/1 var(--font-ui);letter-spacing:.4px;color:rgba(255,255,255,.6);
   white-space:nowrap}
 .dealer__brands img{display:block;height:36px;width:auto;max-width:170px;
   object-fit:contain}
-@media (min-width:901px){ .dealer__brands img{height:44px;max-width:210px} }
+@media (min-width:901px){ .dealer__brands img{height:40px;max-width:100px} }
 
 .dealer__foot{display:flex;flex-direction:column;gap:12px;padding-top:20px;
   border-top:1px solid rgba(255,255,255,.12)}
