@@ -1619,6 +1619,7 @@
   border:1px solid var(--hairline);border-radius:4px;
   font:600 14px/18px var(--font-ui);color:var(--ink);
   transition:border-color .16s ease,background-color .16s ease}
+@media (min-width:901px){ .jump__chip{font:600 16px/18px var(--font-ui)} }
 .jump__chip:hover,.jump__chip:focus-visible{border-color:var(--action-primary);background:#fff}
 @media (prefers-reduced-motion:reduce){ .jump__chip{transition:none} }
 
