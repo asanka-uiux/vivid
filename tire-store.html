@@ -4991,7 +4991,7 @@
   .filters__clear { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--heat); text-decoration: none; }
 
   .sortbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-  .sortbar__count { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--steel); }
+  .sortbar__count { font-family: var(--mono); font-size: 16px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--steel); }
   .sortbar__count strong { color: var(--ink); }
   .sortbar__controls { display: flex; align-items: center; gap: 10px; }
 
@@ -5031,7 +5031,7 @@
   }
 
   .wgrid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
-  @media (min-width: 1024px) { .wgrid { grid-template-columns: repeat(4,minmax(0,1fr)); } }
+  @media (min-width: 1024px) { .wgrid { grid-template-columns: repeat(4,minmax(0,1fr)); row-gap: 14px; } }
   .wcard { position: relative; display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--line); box-shadow: 0 1px 3px rgba(0,0,0,.05); transition: all .15s; }
   .wcard:hover { border-color: var(--ink); box-shadow: 0 6px 20px rgba(0,0,0,.1); }
   .wcard__imglink { display: block; }
@@ -5039,22 +5039,22 @@
   .wcard__img img { display: block; width: 100%; aspect-ratio: 1/1; object-fit: cover; padding: 14px; }
   .wcard__badge { position: absolute; top: 10px; left: 10px; font-family: var(--ui); font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 4px; background: #FCE9E8; color: var(--heat-deep); box-shadow: 0 1px 4px rgba(0,0,0,.15); }
   @media (min-width: 701px) { .wcard__badge { padding: 3px 6px; border-radius: 2px; } }
-  .wcard__body { padding: 14px 16px 16px; display: flex; flex-direction: column; flex: 1; }
+  .wcard__body { padding: 6px 12px 8px; display: flex; flex-direction: column; flex: 1; }
   .wcard__brand-row { display: flex; justify-content: space-between; align-items: center; }
   .wcard__brand { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--steel); }
   .wcard__stock { display: flex; align-items: center; gap: 5px; font-family: var(--ui); font-size: 11px; color: var(--green); font-weight: 600; }
   .wcard__stock::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
   .wcard__name { display: block; font-family: var(--display); font-size: 16.5px; font-weight: 800; letter-spacing: -0.01em; color: var(--ink); text-decoration: none; margin: 6px 0 2px; }
   .wcard:hover .wcard__name { color: var(--heat); }
-  .wcard__spec { font-family: var(--ui); font-size: 12.5px; color: var(--steel); margin-bottom: 8px; }
-  .wcard__stars { display: flex; align-items: center; gap: 5px; font-size: 13px; color: #A85F05; margin-bottom: 9px; }
+  .wcard__spec { font-family: var(--ui); font-size: 12.5px; color: var(--steel); }
+  .wcard__stars { display: flex; align-items: center; gap: 5px; font-size: 13px; color: #A85F05; }
   .wcard__stars .rating { font-family: var(--ui); font-size: 12.5px; font-weight: 800; color: var(--ink); }
   .wcard__stars .count { font-family: var(--ui); font-size: 11.5px; color: var(--steel); }
   .wcard__fin-row { font-family: var(--mono); font-size: 10px; letter-spacing: 0.02em; text-transform: uppercase; color: var(--steel); display: flex; align-items: baseline; gap: 5px; margin-bottom: 3px; }
   .wcard__fin-row strong { font-family: var(--ui); font-size: 12.5px; font-weight: 800; text-transform: none; letter-spacing: 0; color: var(--ink); }
   .wcard__fin-brand { display: inline-flex; align-items: center; margin-left: 4px; }
   .wcard__fin-brand img { height: 13px; width: auto; display: block; }
-  .wcard__buyrow { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); }
+  .wcard__buyrow { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 6px; border-top: 1px solid var(--line); }
   .wcard__qty { display: flex; align-items: center; border: 1px solid var(--rule); }
   .wcard__qty button { width: 26px; height: 26px; border: 0; background: var(--bone); color: var(--ink); font-size: 14px; font-weight: 700; cursor: pointer; }
   .wcard__qty button:hover { background: var(--line); }
@@ -5066,7 +5066,7 @@
   .wcard__cta { display: block; text-align: center; background: var(--heat-deep); color: var(--paper); font-family: var(--display); font-size: 13px; font-weight: 800; letter-spacing: 0.03em; text-transform: uppercase; text-decoration: none; padding: 12px; margin-top: 10px; transition: background .15s; }
   .wcard__cta:hover { background: var(--heat); }
   .wcard__perks { margin-top: 10px; display: flex; flex-direction: column; }
-  .wcard__perk { display: flex; align-items: flex-start; gap: 8px; font-family: var(--ui); font-size: 11.5px; line-height: 1.35; color: var(--graphite); padding: 8px 0; border-top: 1px solid var(--line); }
+  .wcard__perk { display: flex; align-items: flex-start; gap: 8px; font-family: var(--ui); font-size: 11.5px; line-height: 1.35; color: var(--graphite); padding: 6px 0; border-top: 1px solid var(--line); }
   .wcard__perk svg { flex-shrink: 0; margin-top: 1px; }
   .wcard__perk strong { font-weight: 800; }
   .wcard__perk--g strong { color: var(--green); }
@@ -6718,6 +6718,32 @@ html, body{ overflow-x:clip; }
         icon.replaceWith(clone);
       }
     }
+    applyFitFilter(i);
+  }
+
+  /* Filters the product cards to match the selected fitment tier:
+     0 No Rub Fit -> only cards flagged .wcard__perk--g (no rub/no trim)
+     1 CO Choice  -> specialist picks, read off the existing wcard__badge
+                     text (Staff Pick / Best Seller) since there's no
+                     separate "recommended" flag in the card data
+     2 Aggressive -> everything up to and including minor trim (--g or --a),
+                     excluding lift-required (--x)
+     3 Show All   -> no filtering */
+  function applyFitFilter(i) {
+    var cards = document.querySelectorAll('.wgrid > .wcard');
+    cards.forEach(function(card){
+      var show = true;
+      if (i === 0) {
+        show = !!card.querySelector('.wcard__perk--g');
+      } else if (i === 1) {
+        var badge = card.querySelector('.wcard__badge');
+        var label = badge ? badge.textContent.trim() : '';
+        show = (label === 'Staff Pick' || label === 'Best Seller');
+      } else if (i === 2) {
+        show = !!card.querySelector('.wcard__perk--g') || !!card.querySelector('.wcard__perk--a');
+      }
+      card.style.display = show ? '' : 'none';
+    });
   }
 
   /* generic custom dropdown (sort control + mobile fitment picker) */
@@ -6791,6 +6817,7 @@ html, body{ overflow-x:clip; }
     if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     if (open) panel.scrollIntoView({behavior:'smooth', block:'start'});
   }
+  applyFitFilter(0);
   (function(){
     var bar=document.getElementById('vfb'), head=document.querySelector('.cat-head');
     if(!bar||!head) return;
