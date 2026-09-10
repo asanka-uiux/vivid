@@ -1501,6 +1501,29 @@
 .jump__families{display:flex;flex-direction:column;gap:40px;padding-top:8px}
 @media (min-width:901px){ .jump__families{gap:56px} }
 
+/* ===== category banner: full-bleed photo with the family name overlaid ===
+   2026-09-10. Sits above the plain-text intro so the section reads at a
+   glance while scrolling; the eyebrow/title/lede underneath still carry
+   the actual detail. Same >10:1 scrim approach the old .jump__band (and
+   the .jump__photo caption it replaces) used. */
+.jump__banner{position:relative;margin:0 0 24px;height:180px;border-radius:4px;
+  overflow:hidden;background:var(--surface-sunken)}
+@media (min-width:641px){ .jump__banner{height:240px} }
+@media (min-width:901px){ .jump__banner{height:320px;margin-bottom:32px} }
+.jump__banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.jump__banner::before{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,10,10,.2),rgba(10,10,10,.55))}
+.jump__banner-label{position:absolute;inset:0;z-index:1;margin:0;
+  display:flex;align-items:center;justify-content:center;padding:0 16px;
+  font-family:var(--font-display);font-weight:900;text-transform:uppercase;
+  color:#fff;letter-spacing:-1px;font-size:clamp(32px,9vw,56px);line-height:1;
+  text-align:center;font-variation-settings:"YTLC" 500,"wdth" 100}
+@media (min-width:901px){ .jump__banner-label{font-size:80px;letter-spacing:-2px} }
+.jump__banner-caption{position:absolute;left:12px;bottom:12px;z-index:1;
+  padding:8px 12px;background:rgba(10,10,10,.85);border-radius:2px;
+  font:600 12px/1 var(--font-ui);letter-spacing:.4px;text-transform:uppercase;
+  color:#fff}
+
 /* ===== per-family intro: eyebrow + headline + lede, title off the photo ===
    2026-09-03. Each family used to carry its name as text overlaid on a photo
    banner (.jump__band, now gone). Moved to plain top-of-block text instead —
@@ -1546,11 +1569,7 @@
 .jump__all-btn{width:100%;margin-top:16px}
 @media (min-width:901px){ .jump__all-btn{display:none} }
 
-/* ===== split: model list left, hero photo right =========================
-   align-items:stretch (the flex default) is doing the work here: neither
-   child has a natural height on its own — the photo's <img> is
-   position:absolute so the <figure> carries none — so both stretch to
-   whichever is taller, almost always the row list. */
+/* ===== split: model rows, plus the mobile-only "all vehicles" button ===== */
 .jump__split{display:flex;flex-direction:column;gap:16px}
 @media (min-width:901px){ .jump__split{flex-direction:row;gap:24px} }
 
@@ -1602,16 +1621,4 @@
   transition:border-color .16s ease,background-color .16s ease}
 .jump__chip:hover,.jump__chip:focus-visible{border-color:var(--action-primary);background:#fff}
 @media (prefers-reduced-motion:reduce){ .jump__chip{transition:none} }
-
-.jump__photo{position:relative;flex:none;margin:0;height:220px;
-  border-radius:4px;overflow:hidden;background:var(--surface-sunken)}
-@media (min-width:901px){ .jump__photo{flex:0 0 380px;height:auto} }
-.jump__photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-/* .85 alpha near-black holds >10:1 for white text against this caption pill
-   even over a blown-out-white patch of photo underneath — same reasoning as
-   the old .jump__band scrim it replaces. */
-.jump__photo figcaption{position:absolute;left:12px;bottom:12px;z-index:1;
-  padding:8px 12px;background:rgba(10,10,10,.85);border-radius:2px;
-  font:600 12px/1 var(--font-ui);letter-spacing:.4px;text-transform:uppercase;
-  color:#fff}
 
