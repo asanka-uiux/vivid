@@ -4936,7 +4936,7 @@
   .cat-head__grid { display: grid; grid-template-columns: 1fr 320px; gap: 24px; margin-top: 20px; align-items: end; }
   .tier-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--steel); margin-bottom: 8px; }
   .tiers { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; }
-  .tier { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: var(--paper); border: 1px solid var(--line); border-left: 3px solid var(--rule); cursor: pointer; text-align: left; transition: all .15s; box-shadow: 0 1px 3px rgba(0,0,0,.06); min-width: 0; }
+  .tier { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: var(--bone); border: 1px solid var(--line); border-left: 3px solid var(--rule); cursor: pointer; text-align: left; transition: all .15s; box-shadow: 0 1px 3px rgba(0,0,0,.06); min-width: 0; }
   @media (min-width: 701px) { .tier { padding: 8px; } }
   .tier > div { min-width: 0; }
   .tier__name, .tier__sub { overflow-wrap: break-word; }
@@ -4952,7 +4952,7 @@
   .tier--green.tier--active { background: rgba(22,163,74,.07); border-color: var(--green); box-shadow: 0 2px 10px rgba(22,163,74,.18); }
   .tier--gold.tier--active { background: rgba(245,158,11,.08); border-color: var(--gold); box-shadow: 0 2px 10px rgba(245,158,11,.2); }
   .tier--red.tier--active { background: rgba(225,6,0,.06); border-color: var(--heat); box-shadow: 0 2px 10px rgba(225,6,0,.18); }
-  .cat-delivery { border: 1px solid var(--line); padding: 12px 16px; display: flex; flex-direction: column; justify-content: center; }
+  .cat-delivery { background: var(--bone); border: 1px solid var(--line); padding: 12px 16px; display: flex; flex-direction: column; justify-content: center; }
   @media (min-width: 1440px) { .cat-delivery { max-width: 480px; } }
   .cat-delivery__fin { display: flex; flex-direction: column; gap: 10px; }
   .cat-delivery__fin-row { display: flex; align-items: center; gap: 9px; }
@@ -4989,6 +4989,62 @@
   .filters label .n { margin-left: auto; font-family: var(--mono); font-size: 10px; color: var(--steel); }
   .filters input[type=checkbox] { accent-color: var(--heat); }
   .filters__clear { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--heat); text-decoration: none; }
+
+  /* --- collapsible filter accordion (closed by default) --------------------- */
+  .ffilter { list-style: none; margin: 0; padding: 0; }
+  .ffilter__item { border-bottom: 1px solid var(--line); }
+  .ffilter__item:last-child { border-bottom: 0; }
+  .ffilter__summary { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 13px 1px; font-family: var(--ui); font-size: 13.5px; font-weight: 600; color: var(--ink); cursor: pointer; list-style: none; }
+  .ffilter__summary::-webkit-details-marker { display: none; }
+  .ffilter__label-info { display: inline-flex; align-items: center; gap: 6px; }
+  .ffilter__info { flex: none; width: 14px; height: 14px; border-radius: 50%; border: 1px solid var(--rule); background: none; display: inline-flex; align-items: center; justify-content: center; font-size: 9px; font-family: var(--ui); color: var(--steel); cursor: pointer; padding: 0; }
+  .ffilter__chevron { flex: none; color: var(--steel); transition: transform .18s ease; }
+  .ffilter__item details[open] > .ffilter__summary { color: var(--heat); }
+  .ffilter__item details[open] > .ffilter__summary .ffilter__chevron { color: var(--heat); transform: rotate(180deg); }
+  .ffilter__item summary:focus-visible { outline: 2px solid var(--heat); outline-offset: -2px; }
+  .ffilter__panel { padding: 0 1px 14px; }
+  .ffilter__stars { font-size: 14px; letter-spacing: 1px; }
+  .ffilter__stars .on { color: #F59E0B; }
+  .ffilter__stars .off { color: var(--rule); }
+  .ffilter__star-label { display: flex; align-items: center; gap: 8px; }
+
+  .ffilter__keyword { padding: 16px 1px; border-bottom: 1px solid var(--line); margin-bottom: 2px; }
+  .ffilter__keyword-label { font-family: var(--ui); font-size: 12.5px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+  .ffilter__keyword-form { display: flex; flex-direction: column; gap: 10px; }
+  .ffilter__keyword-input { padding: 9px 10px; border: 1px solid var(--rule); font-family: var(--ui); font-size: 12.5px; color: var(--ink); }
+  .ffilter__keyword-input::placeholder { color: var(--steel); }
+  .ffilter__keyword-btn { align-self: flex-start; padding: 9px 22px; background: var(--heat); color: var(--paper); border: 1px solid var(--heat); font-family: var(--display); font-size: 11px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: all .15s; box-shadow: 0 2px 6px rgba(225,6,0,.25); }
+  .ffilter__keyword-btn:hover { background: var(--heat-deep); border-color: var(--heat-deep); box-shadow: 0 3px 10px rgba(225,6,0,.35); }
+
+  .ffilter__additional { padding-top: 4px; }
+  .ffilter__additional-label { text-align: center; font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); margin-bottom: 6px; }
+  .ffilter__additional .ffilter__summary { font-family: var(--mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* --- deliver-to box --------------------------------------------------- */
+  .deliver-to { border: 1px solid var(--line); padding: 14px 16px; margin-bottom: 16px; }
+  .deliver-to__row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; font-family: var(--ui); font-size: 13.5px; font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+  .deliver-to__row svg { flex: none; align-self: center; color: var(--ink); }
+  .deliver-to__link { background: none; border: 0; padding: 0; margin: 0; font: inherit; color: var(--heat); text-decoration: underline; text-underline-offset: 2px; font-weight: 700; cursor: pointer; text-align: left; }
+  .deliver-to__link:hover { color: var(--heat-deep); }
+  .deliver-to__editform:not([hidden]) { display: flex; gap: 6px; margin-bottom: 12px; }
+  .deliver-to__editinput { flex: 1; min-width: 0; padding: 8px 10px; border: 1px solid var(--rule); font-family: var(--ui); font-size: 12.5px; color: var(--ink); }
+  .deliver-to__editbtn { flex: none; padding: 8px 14px; background: var(--heat); color: var(--paper); border: 1px solid var(--heat); font-family: var(--display); font-size: 11px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: background .15s; }
+  .deliver-to__editbtn:hover { background: var(--heat-deep); border-color: var(--heat-deep); }
+  .deliver-to__dates { display: flex; flex-direction: column; gap: 10px; }
+  .deliver-to__date { display: flex; align-items: center; gap: 9px; font-family: var(--ui); font-size: 13px; color: var(--ink); cursor: pointer; }
+  .deliver-to__date input[type=checkbox] { accent-color: var(--heat); width: 15px; height: 15px; }
+
+  /* --- sales toggle -------------------------------------------------------- */
+  .sale-filter { border: 1px solid var(--line); padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .sale-filter__label { display: flex; align-items: center; gap: 9px; font-family: var(--ui); font-size: 14px; font-weight: 700; color: var(--ink); cursor: pointer; }
+  .sale-filter__label svg { flex: none; color: var(--heat); }
+  .tgl-switch { position: relative; flex: none; display: inline-block; width: 38px; height: 22px; }
+  .tgl-switch__input { position: absolute; inset: 0; opacity: 0; margin: 0; width: 100%; height: 100%; cursor: pointer; }
+  .tgl-switch__track { position: absolute; inset: 0; background: var(--rule); border: 1px solid var(--rule); border-radius: 999px; transition: background .15s, border-color .15s; }
+  .tgl-switch__track::before { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; background: var(--paper); border-radius: 50%; box-shadow: 0 1px 2px rgba(0,0,0,.25); transition: transform .15s; }
+  .tgl-switch__input:checked + .tgl-switch__track { background: var(--heat); border-color: var(--heat); }
+  .tgl-switch__input:checked + .tgl-switch__track::before { transform: translateX(16px); }
+  .tgl-switch__input:focus-visible + .tgl-switch__track { outline: 2px solid var(--heat); outline-offset: 2px; }
 
   .sortbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
   .sortbar__count { font-family: var(--mono); font-size: 16px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--steel); }
@@ -5111,7 +5167,7 @@
 
   /* cat-head v2 */
   .cat-head__panel { display: grid; grid-template-columns: 1fr 480px; grid-template-rows: auto auto; gap: 12px 16px; margin-top: 4px; }
-  .veh-card { border: 1px solid var(--line); padding: 16px 20px; display: flex; gap: 14px; align-items: flex-start; }
+  .veh-card { background: var(--bone); border: 1px solid var(--line); padding: 16px 20px; display: flex; gap: 14px; align-items: flex-start; }
   .veh-card__check { flex-shrink: 0; margin-top: 2px; }
   .veh-card__name-row { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
   .veh-card__name { font-family: var(--display); font-size: 24px; font-weight: 900; letter-spacing: -0.01em; text-transform: uppercase; color: var(--ink); line-height: 1.1; letter-spacing: 1.14px; }
@@ -6049,67 +6105,226 @@ html, body{ overflow-x:clip; }
             <span class="applied-chip">All-Season <button type="button" class="applied-chip__x" aria-label="Remove All-Season filter">&times;</button></span>
           </div>
         </div>
-        <div class="zip-filter">
-          <div class="ai-filter__label" id="zipFilterLabel">Shipping Zip Code</div>
-          <form class="ai-filter__form" onsubmit="return zipFilterSubmit(event)">
-            <label class="vh" for="zipFilterInput">Zip code</label>
-            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="5" id="zipFilterInput" class="ai-filter__input" placeholder="Zip code" aria-label="Shipping zip code" value="85281">
-            <button type="submit" class="ai-filter__submit">Update</button>
+        <div class="deliver-to">
+          <div class="deliver-to__row" id="deliverToRow">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h13v13H1z"/><path d="M14 8h4l3 3v5h-7V8z"/><circle cx="6" cy="18" r="2"/><circle cx="17.5" cy="18" r="2"/></svg>
+            <span>Deliver to:</span>
+            <button type="button" class="deliver-to__link" id="deliverToZip" onclick="showDeliverToEdit()">54115 Ashwaubenon, WI</button>
+          </div>
+          <form class="deliver-to__editform" id="deliverToEditForm" onsubmit="return submitDeliverToZip(event)" hidden>
+            <label class="vh" for="deliverToInput">New zip code</label>
+            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="5" id="deliverToInput" class="deliver-to__editinput" placeholder="Zip code">
+            <button type="submit" class="deliver-to__editbtn">Update</button>
           </form>
-          <div class="zip-filter__ship" id="zipFilterShip" hidden>
-            <label class="zip-filter__ship-opt">
-              <input type="radio" name="zipShipSpeed" value="free" checked>
-              <span>Free Shipping on <strong id="zipFreeDate"></strong></span>
-            </label>
-            <label class="zip-filter__ship-opt">
-              <input type="radio" name="zipShipSpeed" value="fast">
-              <span>Fast Shipping <strong id="zipFastDate"></strong></span>
-            </label>
+          <div class="deliver-to__dates">
+            <label class="deliver-to__date"><input type="checkbox"/> Monday, Sep 14</label>
+            <label class="deliver-to__date"><input type="checkbox"/> Tuesday, Sep 15</label>
           </div>
         </div>
+
+        <div class="sale-filter">
+          <label class="sale-filter__label" for="saleOnlyToggle">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41 12 22 2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82Z"/><circle cx="7" cy="7" r="1.5" fill="currentColor" stroke="none"/></svg>
+            Sales
+          </label>
+          <span class="tgl-switch">
+            <input type="checkbox" id="saleOnlyToggle" class="tgl-switch__input">
+            <span class="tgl-switch__track" aria-hidden="true"></span>
+          </span>
+        </div>
+
         <div class="filters__group" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--line); padding-bottom:12px;">
           <span class="filters__title" style="margin:0;">Filters</span>
           <a href="#" class="filters__clear">Clear All</a>
         </div>
-        <div class="filters__group">
-          <div class="filters__title">Diameter</div>
-          <label><input type="checkbox" checked/> 17&Prime; <span class="n">6,204</span></label>
-          <label><input type="checkbox"/> 18&Prime; <span class="n">5,912</span></label>
-          <label><input type="checkbox" checked/> 20&Prime; <span class="n">4,388</span></label>
-          <label><input type="checkbox"/> 22&Prime; <span class="n">2,713</span></label>
-          <label><input type="checkbox"/> 24&Prime; <span class="n">1,028</span></label>
+
+        <ul class="ffilter">
+          <li class="ffilter__item">
+            <details>
+              <summary class="ffilter__summary">Wheel Diameter<svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="ffilter__panel">
+                <label><input type="checkbox" checked/> 17&Prime; <span class="n">6,204</span></label>
+                <label><input type="checkbox"/> 18&Prime; <span class="n">5,912</span></label>
+                <label><input type="checkbox" checked/> 20&Prime; <span class="n">4,388</span></label>
+                <label><input type="checkbox"/> 22&Prime; <span class="n">2,713</span></label>
+                <label><input type="checkbox"/> 24&Prime; <span class="n">1,028</span></label>
+              </div>
+            </details>
+          </li>
+          <li class="ffilter__item">
+            <details>
+              <summary class="ffilter__summary">Tire Height<svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="ffilter__panel">
+                <label><input type="checkbox"/> 55 <span class="n">2,240</span></label>
+                <label><input type="checkbox" checked/> 60 <span class="n">3,206</span></label>
+                <label><input type="checkbox" checked/> 65 <span class="n">4,920</span></label>
+                <label><input type="checkbox"/> 70 <span class="n">3,485</span></label>
+              </div>
+            </details>
+          </li>
+          <li class="ffilter__item">
+            <details>
+              <summary class="ffilter__summary">Tire Width<svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="ffilter__panel">
+                <label><input type="checkbox"/> 265 <span class="n">3,485</span></label>
+                <label><input type="checkbox" checked/> 275 <span class="n">4,920</span></label>
+                <label><input type="checkbox" checked/> 285 <span class="n">3,206</span></label>
+                <label><input type="checkbox"/> 305 <span class="n">1,654</span></label>
+              </div>
+            </details>
+          </li>
+          <li class="ffilter__item">
+            <details>
+              <summary class="ffilter__summary"><span class="ffilter__label-info">Tire Type<button type="button" class="ffilter__info" aria-label="What is Tire Type?">i</button></span><svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="ffilter__panel">
+                <label><input type="checkbox" checked/> All-Terrain <span class="n">7,118</span></label>
+                <label><input type="checkbox"/> Mud-Terrain <span class="n">3,914</span></label>
+                <label><input type="checkbox" checked/> All-Season <span class="n">6,830</span></label>
+                <label><input type="checkbox"/> Summer <span class="n">1,275</span></label>
+                <label><input type="checkbox"/> Winter <span class="n">1,558</span></label>
+              </div>
+            </details>
+          </li>
+          <li class="ffilter__item">
+            <details>
+              <summary class="ffilter__summary"><span class="ffilter__label-info">Load Range<button type="button" class="ffilter__info" aria-label="What is Load Range?">i</button></span><svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="ffilter__panel">
+                <label><input type="checkbox" checked/> SL &mdash; Standard Load <span class="n">6,912</span></label>
+                <label><input type="checkbox"/> C <span class="n">1,204</span></label>
+                <label><input type="checkbox"/> D <span class="n">1,840</span></label>
+                <label><input type="checkbox" checked/> E <span class="n">5,306</span></label>
+              </div>
+            </details>
+          </li>
+          <li class="ffilter__item">
+            <details>
+              <summary class="ffilter__summary"><span class="ffilter__label-info">Load Index<button type="button" class="ffilter__info" aria-label="What is Load Index?">i</button></span><svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="ffilter__panel">
+                <label><input type="checkbox"/> 110 <span class="n">2,614</span></label>
+                <label><input type="checkbox" checked/> 116 <span class="n">3,940</span></label>
+                <label><input type="checkbox" checked/> 121 <span class="n">4,802</span></label>
+                <label><input type="checkbox"/> 125 <span class="n">2,118</span></label>
+              </div>
+            </details>
+          </li>
+          <li class="ffilter__item">
+            <details>
+              <summary class="ffilter__summary"><span class="ffilter__label-info">Speed Rating<button type="button" class="ffilter__info" aria-label="What is Speed Rating?">i</button></span><svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="ffilter__panel">
+                <label><input type="checkbox"/> Q &mdash; 99 mph <span class="n">2,108</span></label>
+                <label><input type="checkbox" checked/> R &mdash; 106 mph <span class="n">3,485</span></label>
+                <label><input type="checkbox" checked/> S &mdash; 112 mph <span class="n">4,920</span></label>
+                <label><input type="checkbox"/> T &mdash; 118 mph <span class="n">2,236</span></label>
+                <label><input type="checkbox"/> H &mdash; 130 mph <span class="n">1,417</span></label>
+              </div>
+            </details>
+          </li>
+          <li class="ffilter__item">
+            <details>
+              <summary class="ffilter__summary"><span class="ffilter__label-info">Warranty<button type="button" class="ffilter__info" aria-label="What is the Warranty filter?">i</button></span><svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="ffilter__panel">
+                <label><input type="checkbox"/> 50,000 mi <span class="n">3,204</span></label>
+                <label><input type="checkbox" checked/> 60,000 mi <span class="n">4,610</span></label>
+                <label><input type="checkbox"/> 70,000 mi <span class="n">2,318</span></label>
+                <label><input type="checkbox"/> 80,000 mi <span class="n">1,406</span></label>
+              </div>
+            </details>
+          </li>
+          <li class="ffilter__item">
+            <details>
+              <summary class="ffilter__summary"><span class="ffilter__label-info">3PMS<button type="button" class="ffilter__info" aria-label="What is 3PMS?">i</button></span><svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="ffilter__panel">
+                <label><input type="checkbox"/> 3PMS Certified <span class="n">2,940</span></label>
+                <label><input type="checkbox"/> Not Certified <span class="n">5,902</span></label>
+              </div>
+            </details>
+          </li>
+          <li class="ffilter__item">
+            <details>
+              <summary class="ffilter__summary">Brand<svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="ffilter__panel">
+                <label><input type="checkbox" checked/> Michelin <span class="n">4,388</span></label>
+                <label><input type="checkbox" checked/> Pirelli <span class="n">3,206</span></label>
+                <label><input type="checkbox"/> BFGoodrich <span class="n">2,941</span></label>
+                <label><input type="checkbox"/> Toyo <span class="n">1,940</span></label>
+                <label><input type="checkbox"/> Nitto <span class="n">1,654</span></label>
+                <label><input type="checkbox"/> Falken <span class="n">1,212</span></label>
+              </div>
+            </details>
+          </li>
+          <li class="ffilter__item">
+            <details>
+              <summary class="ffilter__summary">Model<svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="ffilter__panel">
+                <label><input type="checkbox"/> Defender LTX M/S <span class="n">1,340</span></label>
+                <label><input type="checkbox"/> Wildpeak A/T3W <span class="n">1,116</span></label>
+                <label><input type="checkbox"/> Open Country A/T III <span class="n">988</span></label>
+                <label><input type="checkbox"/> Ridge Grappler <span class="n">2,204</span></label>
+                <label><input type="checkbox"/> All-Terrain T/A KO2 <span class="n">1,612</span></label>
+              </div>
+            </details>
+          </li>
+          <li class="ffilter__item">
+            <details>
+              <summary class="ffilter__summary">Price<svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="ffilter__panel">
+                <label><input type="checkbox"/> Under $250 <span class="n">2,406</span></label>
+                <label><input type="checkbox"/> $250 &ndash; $300 <span class="n">3,812</span></label>
+                <label><input type="checkbox"/> $300 &ndash; $350 <span class="n">2,940</span></label>
+                <label><input type="checkbox"/> $350 &ndash; $400 <span class="n">1,518</span></label>
+                <label><input type="checkbox"/> $400+ <span class="n">766</span></label>
+              </div>
+            </details>
+          </li>
+          <li class="ffilter__item">
+            <details>
+              <summary class="ffilter__summary"><span class="ffilter__label-info">Avg. Customer Review<button type="button" class="ffilter__info" aria-label="How is Average Customer Review calculated?">i</button></span><svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="ffilter__panel">
+                <label class="ffilter__star-label"><input type="checkbox" aria-label="4 stars and up"/><span class="ffilter__stars" aria-hidden="true"><span class="on">&#9733;&#9733;&#9733;&#9733;</span><span class="off">&#9733;</span></span><span aria-hidden="true">&amp; up</span></label>
+                <label class="ffilter__star-label"><input type="checkbox" aria-label="3 stars and up"/><span class="ffilter__stars" aria-hidden="true"><span class="on">&#9733;&#9733;&#9733;</span><span class="off">&#9733;&#9733;</span></span><span aria-hidden="true">&amp; up</span></label>
+                <label class="ffilter__star-label"><input type="checkbox" aria-label="2 stars and up"/><span class="ffilter__stars" aria-hidden="true"><span class="on">&#9733;&#9733;</span><span class="off">&#9733;&#9733;&#9733;</span></span><span aria-hidden="true">&amp; up</span></label>
+                <label class="ffilter__star-label"><input type="checkbox" aria-label="1 star and up"/><span class="ffilter__stars" aria-hidden="true"><span class="on">&#9733;</span><span class="off">&#9733;&#9733;&#9733;&#9733;</span></span><span aria-hidden="true">&amp; up</span></label>
+              </div>
+            </details>
+          </li>
+        </ul>
+
+        <div class="ffilter__keyword">
+          <div class="ffilter__keyword-label">Search by Keyword</div>
+          <form class="ffilter__keyword-form" onsubmit="return false;">
+            <label class="vh" for="tireFilterKeyword">Search by keyword</label>
+            <input type="text" id="tireFilterKeyword" class="ffilter__keyword-input" placeholder="Search...">
+            <button type="submit" class="ffilter__keyword-btn">Search</button>
+          </form>
         </div>
-        <div class="filters__group">
-          <div class="filters__title">Width / Aspect Ratio</div>
-          <label><input type="checkbox"/> 265/70 <span class="n">3,485</span></label>
-          <label><input type="checkbox" checked/> 275/65 <span class="n">4,920</span></label>
-          <label><input type="checkbox" checked/> 285/60 <span class="n">3,206</span></label>
-          <label><input type="checkbox"/> 305/55 <span class="n">1,654</span></label>
-        </div>
-        <div class="filters__group">
-          <div class="filters__title">Type</div>
-          <label><input type="checkbox" checked/> All-Terrain <span class="n">7,118</span></label>
-          <label><input type="checkbox"/> Mud-Terrain <span class="n">3,914</span></label>
-          <label><input type="checkbox" checked/> All-Season <span class="n">6,830</span></label>
-          <label><input type="checkbox"/> Summer <span class="n">1,275</span></label>
-          <label><input type="checkbox"/> Winter <span class="n">1,558</span></label>
-        </div>
-        <div class="filters__group">
-          <div class="filters__title">Speed Rating</div>
-          <label><input type="checkbox"/> Q &mdash; 99 mph <span class="n">2,108</span></label>
-          <label><input type="checkbox" checked/> R &mdash; 106 mph <span class="n">3,485</span></label>
-          <label><input type="checkbox" checked/> S &mdash; 112 mph <span class="n">4,920</span></label>
-          <label><input type="checkbox"/> T &mdash; 118 mph <span class="n">2,236</span></label>
-          <label><input type="checkbox"/> H &mdash; 130 mph <span class="n">1,417</span></label>
-        </div>
-        <div class="filters__group">
-          <div class="filters__title">Brand</div>
-          <label><input type="checkbox" checked/> Michelin <span class="n">4,388</span></label>
-          <label><input type="checkbox" checked/> Pirelli <span class="n">3,206</span></label>
-          <label><input type="checkbox"/> BFGoodrich <span class="n">2,941</span></label>
-          <label><input type="checkbox"/> Toyo <span class="n">1,940</span></label>
-          <label><input type="checkbox"/> Nitto <span class="n">1,654</span></label>
-          <label><input type="checkbox"/> Falken <span class="n">1,212</span></label>
+
+        <div class="ffilter__additional">
+          <div class="ffilter__additional-label">Additional Filtering</div>
+          <ul class="ffilter">
+            <li class="ffilter__item">
+              <details>
+                <summary class="ffilter__summary">Shop by Tire Size<svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+                <div class="ffilter__panel">
+                  <label><input type="checkbox"/> 265/70R17 <span class="n">2,940</span></label>
+                  <label><input type="checkbox"/> 275/65R18 <span class="n">3,406</span></label>
+                  <label><input type="checkbox"/> 285/60R20 <span class="n">2,118</span></label>
+                  <label><input type="checkbox"/> 305/55R20 <span class="n">1,214</span></label>
+                </div>
+              </details>
+            </li>
+            <li class="ffilter__item">
+              <details>
+                <summary class="ffilter__summary">Shop by Tire Type<svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+                <div class="ffilter__panel">
+                  <label><input type="checkbox" checked/> All-Terrain <span class="n">7,118</span></label>
+                  <label><input type="checkbox"/> Mud-Terrain <span class="n">3,914</span></label>
+                  <label><input type="checkbox" checked/> All-Season <span class="n">6,830</span></label>
+                  <label><input type="checkbox"/> Summer <span class="n">1,275</span></label>
+                  <label><input type="checkbox"/> Winter <span class="n">1,558</span></label>
+                </div>
+              </details>
+            </li>
+          </ul>
         </div>
       </aside>
 
@@ -6697,6 +6912,26 @@ html, body{ overflow-x:clip; }
     confirmed.style.display = '';
     confirmed.scrollIntoView({behavior:'smooth', block:'center'});
   }
+  function showDeliverToEdit() {
+    document.getElementById('deliverToRow').hidden = true;
+    var form = document.getElementById('deliverToEditForm');
+    form.hidden = false;
+    var input = document.getElementById('deliverToInput');
+    input.value = '';
+    input.focus();
+  }
+  function submitDeliverToZip(e) {
+    e.preventDefault();
+    var input = document.getElementById('deliverToInput');
+    var val = input.value.trim();
+    if (!/^\d{5}$/.test(val)) return false;
+    var zipEl = document.getElementById('deliverToZip');
+    var cityPart = zipEl.textContent.replace(/^\d{5}\s*/, '');
+    zipEl.textContent = val + ' ' + cityPart;
+    document.getElementById('deliverToEditForm').hidden = true;
+    document.getElementById('deliverToRow').hidden = false;
+    return false;
+  }
   function tierIdx(i) {
     document.querySelectorAll('.tiers .tier').forEach(function(t,k){
       var on = k===i;
@@ -6721,7 +6956,8 @@ html, body{ overflow-x:clip; }
     applyFitFilter(i);
   }
 
-  /* Filters the product cards to match the selected fitment tier:
+  /* Fitment tier tests, applied together with the "Sales" toggle in
+     applyFilters() below:
      0 No Rub Fit -> only cards flagged .wcard__perk--g (no rub/no trim)
      1 CO Choice  -> specialist picks, read off the existing wcard__badge
                      text (Staff Pick / Best Seller) since there's no
@@ -6729,18 +6965,29 @@ html, body{ overflow-x:clip; }
      2 Aggressive -> everything up to and including minor trim (--g or --a),
                      excluding lift-required (--x)
      3 Show All   -> no filtering */
+  var activeFitTier = 0;
+  function fitMatches(card, i) {
+    if (i === 0) return !!card.querySelector('.wcard__perk--g');
+    if (i === 1) {
+      var badge = card.querySelector('.wcard__badge');
+      var label = badge ? badge.textContent.trim() : '';
+      return (label === 'Staff Pick' || label === 'Best Seller');
+    }
+    if (i === 2) return !!card.querySelector('.wcard__perk--g') || !!card.querySelector('.wcard__perk--a');
+    return true;
+  }
   function applyFitFilter(i) {
-    var cards = document.querySelectorAll('.wgrid > .wcard');
-    cards.forEach(function(card){
-      var show = true;
-      if (i === 0) {
-        show = !!card.querySelector('.wcard__perk--g');
-      } else if (i === 1) {
+    activeFitTier = i;
+    applyFilters();
+  }
+  function applyFilters() {
+    var saleToggle = document.getElementById('saleOnlyToggle');
+    var saleOnly = !!(saleToggle && saleToggle.checked);
+    document.querySelectorAll('.wgrid > .wcard').forEach(function(card){
+      var show = fitMatches(card, activeFitTier);
+      if (show && saleOnly) {
         var badge = card.querySelector('.wcard__badge');
-        var label = badge ? badge.textContent.trim() : '';
-        show = (label === 'Staff Pick' || label === 'Best Seller');
-      } else if (i === 2) {
-        show = !!card.querySelector('.wcard__perk--g') || !!card.querySelector('.wcard__perk--a');
+        show = !!badge && badge.textContent.trim() === 'On Sale';
       }
       card.style.display = show ? '' : 'none';
     });
@@ -6818,6 +7065,8 @@ html, body{ overflow-x:clip; }
     if (open) panel.scrollIntoView({behavior:'smooth', block:'start'});
   }
   applyFitFilter(0);
+  var saleOnlyToggleEl = document.getElementById('saleOnlyToggle');
+  if (saleOnlyToggleEl) saleOnlyToggleEl.addEventListener('change', applyFilters);
   (function(){
     var bar=document.getElementById('vfb'), head=document.querySelector('.cat-head');
     if(!bar||!head) return;
