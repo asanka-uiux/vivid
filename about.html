@@ -4819,6 +4819,11 @@ html, body{ overflow-x:clip; }
       scroll-padding-inline-start: var(--gutter); scrollbar-width: none; }
     .vc__gal::-webkit-scrollbar { display: none; }
     .vc__gal > li { flex: 0 0 84%; max-width: 340px; scroll-snap-align: start; }
+    /* "See all builds" only -- full-width on mobile, left at its natural
+       content width everywhere else. Scoped to .abn__gal-foot rather than
+       the shared .vc__btn base, which the closing CTA bar's "Call" button
+       also uses and which should stay unaffected. */
+    .abn__gal-foot .vc__btn { width: 100%; }
   }
 
   /* --- closing CTA bar ---------------------------------------------------- */
