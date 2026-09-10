@@ -4486,7 +4486,7 @@
   .crumbs__inner .cur { color: var(--ink); font-weight: 600; }
 
   .pdp { background: var(--paper); padding: 8px 0 56px; }
-  .pdp__grid { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,0.95fr); gap: 56px; align-items: start;
+  .pdp__grid { display: grid; grid-template-columns: minmax(0,0.9fr) minmax(0,1.1fr); gap: 56px; align-items: start;
     grid-template-areas: "gallery buybox" "info buybox"; }
   .pdp__gallery { grid-area: gallery; }
   .pdp__info { grid-area: info; min-width: 0; }
@@ -4626,10 +4626,6 @@
   .fin__provider-badge { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel); }
   .fin__trust { font-family: var(--ui); font-size: 11.5px; color: var(--steel); text-align: center; margin-top: 10px; }
 
-  .bp__delivery { display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--line); padding: 12px 14px; margin-top: 14px; }
-  .bp__delivery-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--steel); }
-  .bp__delivery-date { font-family: var(--display); font-size: 15px; font-weight: 800; color: var(--ink); }
-  .bp__delivery a { font-family: var(--ui); font-size: 12px; color: var(--heat); font-weight: 600; text-decoration: none; }
 
   .opt { border: 1px solid var(--line); margin-top: 14px; }
   .opt__head { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; cursor: pointer; }
@@ -5448,16 +5444,6 @@ html, body{ overflow-x:clip; }
           <div class="fin__trust">No hard credit check &middot; Instant decision &middot; Won&rsquo;t affect your score</div>
         </div>
 
-        <div class="bp__delivery">
-          <div>
-            <div class="bp__delivery-label">Estimated Delivery</div>
-            <div class="bp__delivery-date">Arrives Jun 16 &ndash; 18</div>
-          </div>
-          <div style="text-align:right;">
-            <div class="bp__delivery-label">Shipping to 85281</div>
-            <a href="#">Change ZIP</a>
-          </div>
-        </div>
 
         <div class="opt" id="optBox">
           <div class="opt__head" role="button" tabindex="0" aria-expanded="false" aria-controls="optBox" onclick="var b=document.getElementById('optBox');b.classList.toggle('open');this.setAttribute('aria-expanded',b.classList.contains('open'))">

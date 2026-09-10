@@ -4952,16 +4952,14 @@
   .tier--green.tier--active { background: rgba(22,163,74,.07); border-color: var(--green); box-shadow: 0 2px 10px rgba(22,163,74,.18); }
   .tier--gold.tier--active { background: rgba(245,158,11,.08); border-color: var(--gold); box-shadow: 0 2px 10px rgba(245,158,11,.2); }
   .tier--red.tier--active { background: rgba(225,6,0,.06); border-color: var(--heat); box-shadow: 0 2px 10px rgba(225,6,0,.18); }
-  .cat-delivery { border: 1px solid var(--line); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-  @media (min-width: 1440px) { .cat-delivery { max-width: 400px; } }
-  .cat-delivery__label { font-family: var(--mono); font-size: 12px; letter-spacing: 0; text-transform: uppercase; color: var(--steel); }
-  .cat-delivery__date { font-family: var(--display); font-size: 14px; font-weight: 800; color: var(--ink); }
-  .cat-delivery__ziplink { font-family: var(--ui); font-size: 12px; color: var(--heat); font-weight: 600; text-decoration: none; background: none; border: 0; padding: 0; cursor: pointer; }
-  .cat-delivery__ziplink:hover { color: var(--heat-deep); }
-  .cat-delivery__zipform { display: flex; gap: 6px; justify-content: flex-end; }
-  .cat-delivery__zipinput { width: 80px; padding: 6px 8px; border: 1px solid var(--rule); font-family: var(--ui); font-size: 12px; color: var(--ink); }
-  .cat-delivery__zipsubmit { padding: 6px 10px; background: var(--heat); color: var(--paper); border: 0; font-family: var(--display); font-size: 10px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; transition: background .15s; }
-  .cat-delivery__zipsubmit:hover { background: var(--heat-deep); }
+  .cat-delivery { border: 1px solid var(--line); padding: 12px 16px; display: flex; flex-direction: column; justify-content: center; }
+  @media (min-width: 1440px) { .cat-delivery { max-width: 480px; } }
+  .cat-delivery__fin { display: flex; flex-direction: column; gap: 10px; }
+  .cat-delivery__fin-row { display: flex; align-items: center; gap: 9px; }
+  .cat-delivery__fin-logo { height: 16px; width: auto; flex: none; display: block; }
+  .cat-delivery__fin-text { font-family: var(--ui); font-size: 12px; color: var(--steel); line-height: 1.4; }
+  .cat-delivery__fin-link { color: var(--heat); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+  .cat-delivery__fin-link:hover { color: var(--heat-deep); }
 
   .listing { padding: 36px 0 56px; }
   .listing__grid { display: grid; grid-template-columns: 300px 1fr; gap: 28px; align-items: start; }
@@ -4974,6 +4972,11 @@
   .ai-filter__submit { flex: none; padding: 9px 16px; background: var(--heat); color: var(--paper); border: 1px solid var(--heat); font-family: var(--display); font-size: 11px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: all .15s; box-shadow: 0 2px 6px rgba(225,6,0,.25); }
   .ai-filter__submit:hover { background: var(--heat-deep); border-color: var(--heat-deep); box-shadow: 0 3px 10px rgba(225,6,0,.35); }
   .zip-filter { padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
+  .zip-filter__zipval { color: var(--ink); font-weight: 700; letter-spacing: 0; margin-left: 6px; }
+  .zip-filter__ship { margin-top: 12px; }
+  .zip-filter__ship-opt { display: flex; align-items: center; gap: 8px; font-family: var(--ui); font-size: 12.5px; color: #444; padding: 4px 0; cursor: pointer; }
+  .zip-filter__ship-opt input[type=radio] { accent-color: var(--heat); }
+  .zip-filter__ship-opt strong { color: var(--ink); font-weight: 700; }
   .applied-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 12px; }
   .applied-filters__label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--steel); margin-right: 2px; }
   .applied-chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 4px 4px 10px; background: var(--bone); border: 1px solid var(--line); font-family: var(--ui); font-size: 11.5px; font-weight: 600; color: var(--ink); }
@@ -5107,7 +5110,7 @@
   }
 
   /* cat-head v2 */
-  .cat-head__panel { display: grid; grid-template-columns: 1fr 400px; grid-template-rows: auto auto; gap: 12px 16px; margin-top: 4px; }
+  .cat-head__panel { display: grid; grid-template-columns: 1fr 480px; grid-template-rows: auto auto; gap: 12px 16px; margin-top: 4px; }
   .veh-card { border: 1px solid var(--line); padding: 16px 20px; display: flex; gap: 14px; align-items: flex-start; }
   .veh-card__check { flex-shrink: 0; margin-top: 2px; }
   .veh-card__name-row { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
@@ -5146,7 +5149,7 @@
   .veh-card__chip { display: flex; align-items: center; gap: 5px; font-family: var(--ui); font-size: 12px; font-weight: 600; color: var(--graphite); }
   .veh-card__chip svg { flex-shrink: 0; }
   .expert-card { border: 1px solid var(--line); background: var(--bone); padding: 14px 16px; display: flex; flex-direction: column; justify-content: center; gap: 11px; }
-  @media (min-width: 1440px) { .expert-card { max-width: 400px; } }
+  @media (min-width: 1440px) { .expert-card { max-width: 480px; } }
   .expert-card__head { display: flex; align-items: center; gap: 12px; }
   .expert-card__head img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
   .expert-card__title { font-family: var(--display); font-size: 14px; font-weight: 800; color: var(--ink); }
@@ -6008,20 +6011,15 @@ html, body{ overflow-x:clip; }
       </div>
 
       <div class="cat-delivery">
-        <div>
-          <div class="cat-delivery__label">Estimated Delivery</div>
-          <div class="cat-delivery__date">Arrives Jun 16 &ndash; 18</div>
-        </div>
-        <div style="text-align:right;">
-          <div id="zipDisplay">
-            <div class="cat-delivery__label">Shipping to <span id="zipValue">85281</span></div>
-            <button type="button" class="cat-delivery__ziplink" onclick="showZipInput()">Change ZIP</button>
+        <div class="cat-delivery__fin">
+          <div class="cat-delivery__fin-row">
+            <img src="assets/img/logos/affirm.png" alt="Affirm" class="cat-delivery__fin-logo">
+            <span class="cat-delivery__fin-text">Pay at your own pace with no hidden fees. <a href="#" class="cat-delivery__fin-link">Prequalify Now</a></span>
           </div>
-          <form id="zipForm" class="cat-delivery__zipform" style="display:none;" onsubmit="submitZip(event)">
-            <label class="vh" for="zipInput">New zip code</label>
-            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="5" id="zipInput" class="cat-delivery__zipinput" placeholder="Zip code" value="85281">
-            <button type="submit" class="cat-delivery__zipsubmit">Update</button>
-          </form>
+          <div class="cat-delivery__fin-row">
+            <img src="assets/img/logos/katapult.webp" alt="Katapult" class="cat-delivery__fin-logo">
+            <span class="cat-delivery__fin-text">Pay over time. No credit required. <a href="#" class="cat-delivery__fin-link">Get Pre-Approved</a></span>
+          </div>
         </div>
       </div>
 
@@ -6052,11 +6050,22 @@ html, body{ overflow-x:clip; }
           </div>
         </div>
         <div class="zip-filter">
-          <div class="ai-filter__label">Shipping Zip Code</div>
-          <form class="ai-filter__form" onsubmit="return false;">
-            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="5" class="ai-filter__input" placeholder="Zip code" aria-label="Shipping zip code" value="85281">
+          <div class="ai-filter__label" id="zipFilterLabel">Shipping Zip Code</div>
+          <form class="ai-filter__form" onsubmit="return zipFilterSubmit(event)">
+            <label class="vh" for="zipFilterInput">Zip code</label>
+            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="5" id="zipFilterInput" class="ai-filter__input" placeholder="Zip code" aria-label="Shipping zip code" value="85281">
             <button type="submit" class="ai-filter__submit">Update</button>
           </form>
+          <div class="zip-filter__ship" id="zipFilterShip" hidden>
+            <label class="zip-filter__ship-opt">
+              <input type="radio" name="zipShipSpeed" value="free" checked>
+              <span>Free Shipping on <strong id="zipFreeDate"></strong></span>
+            </label>
+            <label class="zip-filter__ship-opt">
+              <input type="radio" name="zipShipSpeed" value="fast">
+              <span>Fast Shipping <strong id="zipFastDate"></strong></span>
+            </label>
+          </div>
         </div>
         <div class="filters__group" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--line); padding-bottom:12px;">
           <span class="filters__title" style="margin:0;">Filters</span>
@@ -6676,20 +6685,6 @@ html, body{ overflow-x:clip; }
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape' && document.getElementById('ymmModal').style.display !== 'none') closeYmmModal();
   });
-  function showZipInput(){
-    document.getElementById('zipDisplay').style.display = 'none';
-    var form = document.getElementById('zipForm');
-    form.style.display = 'flex';
-    document.getElementById('zipInput').focus();
-  }
-  function submitZip(e){
-    e.preventDefault();
-    var val = document.getElementById('zipInput').value.trim();
-    if (!/^\d{5}$/.test(val)) return;
-    document.getElementById('zipValue').textContent = val;
-    document.getElementById('zipForm').style.display = 'none';
-    document.getElementById('zipDisplay').style.display = 'block';
-  }
   function selectVehicle(name, shortName, spec){
     document.getElementById('vehName').textContent = name;
     document.getElementById('vehShort').textContent = shortName;
@@ -6765,6 +6760,28 @@ html, body{ overflow-x:clip; }
   });
 
   /* mobile "Filter" toggle for the .filters sidebar */
+  function zipFilterSubmit(e) {
+    e.preventDefault();
+    var input = document.getElementById('zipFilterInput');
+    var val = input.value.trim();
+    if (!/^\d{5}$/.test(val)) return false;
+    document.getElementById('zipFilterLabel').innerHTML = 'Shipping Zip Code<span class="zip-filter__zipval">' + val + '</span>';
+    var monthFmt = function(d){ return d.toLocaleDateString('en-US', {month:'short'}); };
+    var dayFmt = function(d){ return d.getDate(); };
+    var formatRange = function(start, end){
+      if (monthFmt(start) === monthFmt(end)) return monthFmt(start) + ' ' + dayFmt(start) + ' – ' + dayFmt(end);
+      return monthFmt(start) + ' ' + dayFmt(start) + ' – ' + monthFmt(end) + ' ' + dayFmt(end);
+    };
+    var today = new Date();
+    var freeStart = new Date(today); freeStart.setDate(today.getDate() + 7);
+    var freeEnd = new Date(today); freeEnd.setDate(today.getDate() + 9);
+    var fastStart = new Date(today); fastStart.setDate(today.getDate() + 2);
+    var fastEnd = new Date(today); fastEnd.setDate(today.getDate() + 3);
+    document.getElementById('zipFreeDate').textContent = formatRange(freeStart, freeEnd);
+    document.getElementById('zipFastDate').textContent = formatRange(fastStart, fastEnd);
+    document.getElementById('zipFilterShip').hidden = false;
+    return false;
+  }
   function toggleFilters(forceState) {
     var panel = document.getElementById('filtersPanel');
     var btn = document.getElementById('filterToggleBtn');
