@@ -12,38 +12,46 @@
    ========================================================================== */
 
 :root{
-  /* colour tokens, as bound in Figma */
-  --action-primary:#b31414;
-  --bg-premium:#021f43;
+  /* BRAND COLOUR SYSTEM — ViViD Racing 2026 */
+  /* Primary: Heritage Red (3 shades for depth) */
+  --heritage-red:#b31414;           /* primary action, CTAs */
+  --heritage-red-light:#e10600;     /* light red for dark backgrounds */
+  --heritage-red-dark:#8a0f0f;      /* deep red for hover/press states */
+
+  /* Neutrals: greys from Avorio Creme to Circuit Black */
+  --avorio-creme:#f5f3f0;           /* light neutral background, secondary surface */
+  --gt-silver:#d1d5da;              /* light grey for borders, dividers, accents */
+  --paddock-grey:#6f7780;           /* mid grey for tertiary text, disabled states */
+  --circuit-black:#1a1a1a;          /* deep black for premium sections, type contrast */
+
+  /* Accents: Marque Navy & Senna Yellow from brand guide */
+  --marque-navy:#021f43;            /* dark blue accent, premium bands */
+  --senna-yellow:#ffd300;           /* bright yellow for urgency, callouts, highlights */
+
+  /* Semantic aliases (backward compatible with existing code) */
+  --action-primary:var(--heritage-red);
+  --accent-red:var(--heritage-red-light);
+  --accent-red-on-dark:#e04a4a;     /* 5.25:1 on black, for text on dark surfaces */
+  --bg-premium:var(--marque-navy);
   --bg-inverse:#000;
   --bg-surface:#fff;
-  --border-default:#a3acb3;      /* decorative rules only — never text */
-  /* Added 2026-08-19. The .browse section had grown a family of one-off greys
-     doing two jobs between them — #e5e7eb and #e5e5eb for card hairlines,
-     #f9fafb and #f7f8fa for sunken fills, plus #eef0f2 for a divider. Two
-     points of grey apart is invisible; what showed was the absence of a system.
-     One token each, both lighter than --border-default (which is a rules-only
-     mid grey and too heavy to draw a card with). */
-  --hairline:#e5e7eb;            /* card + chip borders on light ground */
-  --surface-sunken:#f9fafb;      /* section ground and chip fill */
-  --text-primary:#000;
-  /* Figma has --text-muted at #a3acb3, which is 2.31:1 on white and fails
-     WCAG 1.4.3. Darkened to the lightest passing neutral: 4.54:1. */
-  --text-muted:#6f7780;
+  --text-primary:var(--circuit-black);
+  --text-muted:var(--paddock-grey); /* 4.54:1 on white, WCAG AA compliant */
   --text-on-dark:#fff;
-  --accent-red:#e10600;
-  /* #e10600 and #b31414 both fail as text on black (4.23:1 / 3.03:1).
-     This is the red to use for text on dark surfaces: 5.25:1 on #000. */
-  --accent-red-on-dark:#e04a4a;
   --ink:#0a0a0a;
   --field-ink:#1e1e1e;
+  --border-default:var(--gt-silver);
+  --hairline:#e5e7eb;               /* card + chip borders on light ground */
+  --surface-sunken:var(--avorio-creme); /* section ground and chip fill */
 
-  --shell:1320px;      /* centred content box */
-  --gutter:16px;        /* inner padding of that box — 28px from tablet up */
+  --shell:1320px;                   /* centred content box */
+  --gutter:16px;                    /* inner padding of that box — 28px from tablet up */
 
-  --font-ui:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --font-display:'Nunito Sans','Inter',system-ui,sans-serif;
-  --font-form:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  /* FONT SYSTEM — Nunito Sans for brand UI, Inter for body readability */
+  --font-display:'Nunito Sans','Inter',system-ui,sans-serif;      /* headings, identity */
+  --font-ui:'Nunito Sans',system-ui,-apple-system,'Segoe UI',sans-serif; /* nav, buttons, labels */
+  --font-form:'Nunito Sans',system-ui,-apple-system,'Segoe UI',sans-serif; /* form UI */
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif; /* paragraphs, descriptions */
 }
 @media (min-width:901px){
   :root{ --gutter:28px }
@@ -55,11 +63,12 @@ body{
   margin:0;
   background:var(--bg-surface);
   color:var(--text-primary);
-  font:400 15px/22px var(--font-ui);
+  font:400 15px/22px var(--font-body);
 }
+p { font-family:var(--font-body) }
 img,svg{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
-button{font:inherit;color:inherit}
+button{font:inherit;color:inherit;font-family:var(--font-ui)}
 
 .shell{width:100%;max-width:var(--shell);margin-inline:auto;padding-inline:var(--gutter)}
 
