@@ -111,7 +111,7 @@
 }
 
 .hero__lede{margin:22px auto 0;max-width:34em;
-  font:14px/22px var(--font-ui);color:var(--text-on-dark);order:3;margin-inline:auto;
+  font:14px/22px var(--font-body);color:var(--text-on-dark);order:3;margin-inline:auto;
   text-shadow:0 1px 4px rgba(0,0,0,0.4)}
 @media (min-width:901px){
   .hero__lede{margin:14px 0 0;max-width:550px;order:0;margin-inline:0;text-shadow:0 1px 4px rgba(0,0,0,0.4)}
@@ -518,7 +518,7 @@
   letter-spacing:1px;text-transform:uppercase;color:var(--text-on-dark);
   font-variation-settings:"YTLC" 500,"wdth" 100}
 @media (min-width:641px){ .acard__tag{font-size:24px;padding:6px 12px;line-height:1.15;font-weight:900} }
-.acard__head{margin:0;font:400 12px/15px var(--font-ui);color:var(--ink)}
+.acard__head{margin:0;font:400 12px/15px var(--font-body);color:var(--ink)}
 @media (min-width:641px){ .acard__head{font-size:16px;line-height:20px;font-weight:500} }
 /* chevron is visible at every width per Figma — it used to drop below ~640px
    from the old wrap fallback, which no longer applies */
@@ -906,7 +906,7 @@
 @media (min-width:901px){
   .dealer__foot{flex-direction:row;align-items:center;justify-content:space-between}
 }
-.dealer__note{margin:0;font:400 13px/19px var(--font-ui);color:rgba(255,255,255,.6)}
+.dealer__note{margin:0;font:400 13px/19px var(--font-body);color:rgba(255,255,255,.6)}
 .dealer__cta{display:inline-flex;align-items:center;gap:6px;width:fit-content;
   padding-bottom:2px;border-bottom:2px solid var(--accent-red-on-dark);
   font:700 12px/1 var(--font-ui);letter-spacing:1px;text-transform:uppercase;
@@ -936,9 +936,9 @@
 @media (min-width:901px){ .experts__title{font-size:40px;line-height:44px;letter-spacing:-.8px;
   text-transform:uppercase} }
 .experts__title em{font-style:normal;color:var(--action-primary)}
-.experts__lede{margin:8px 0 0;max-width:490px;font:400 14px/20px var(--font-ui);
+.experts__lede{margin:8px 0 0;max-width:490px;font:400 14px/20px var(--font-body);
   color:var(--text-primary)}
-@media (min-width:901px){ .experts__lede{font:400 16px/25px var(--font-ui)} }
+@media (min-width:901px){ .experts__lede{font:400 16px/25px var(--font-body)} }
 .experts__faces{flex:none;display:flex;margin-inline:auto}
 @media (min-width:1181px){ .experts__faces{margin-inline:0} }
 .experts__faces img{width:88px;height:88px;border-radius:44px;object-fit:cover;
@@ -1171,7 +1171,7 @@
   font-size:26px;line-height:30px;letter-spacing:-.4px;text-transform:uppercase;
   color:#fff;font-variation-settings:"YTLC" 500,"wdth" 100}
 @media (min-width:901px){ .guides__title{font-size:40px;line-height:44px;letter-spacing:-.8px} }
-.guides__sub{margin:8px auto 0;max-width:34em;font:400 14px/21px var(--font-ui);
+.guides__sub{margin:8px auto 0;max-width:34em;font:400 14px/21px var(--font-body);
   color:#d1d5db;margin-inline:auto}
 @media (min-width:901px){ .guides__sub{max-width:900px} }
 .guides__grid{display:flex;grid-template-columns:none;gap:12px;margin:40px 0 0;
@@ -1451,7 +1451,7 @@
 .rev__time{font:500 12px/14px var(--font-ui);color:var(--text-muted)}
 
 .rev__quote{margin:10px 0 0;padding-left:14px;border-left:2px solid var(--action-primary);
-  font:400 15px/23px var(--font-ui);color:var(--text-primary)}
+  font:400 15px/23px var(--font-body);color:var(--text-primary)}
 
 
 /* pagination dashes — mobile-carousel indicator, hidden once the grids
@@ -1509,9 +1509,9 @@
 @media (min-width:901px){
   .jump__intro-row{flex-direction:row;align-items:flex-end;justify-content:space-between;gap:24px}
 }
-.jump__family-lede{margin:0;max-width:800px;font:400 14px/20px var(--font-ui);
+.jump__family-lede{margin:0;max-width:800px;font:400 14px/20px var(--font-body);
   color:var(--text-primary)}
-@media (min-width:901px){ .jump__family-lede{font:400 16px/24px var(--font-ui)} }
+@media (min-width:901px){ .jump__family-lede{font:400 16px/24px var(--font-body)} }
 /* Underline, not a button — this is a secondary way out of the section
    (straight to the family's full catalog), not competing with the model
    chips below for attention. Desktop only: below 901px this link is hidden

@@ -809,7 +809,7 @@ body.mobmenu-open{overflow:hidden}
 .v2-footer__brand{display:flex;flex-direction:column;gap:16px}
 .v2-footer__logo{display:block;width:180px;line-height:0;align-self:center}
 .v2-footer__logo img{display:block;width:100%;height:auto}
-.v2-footer__desc{color:rgba(255,255,255,.7);margin:0;text-align:center;font-family:var(--font-ui);font-size:12px;font-weight:400;line-height:1.5}
+.v2-footer__desc{color:rgba(255,255,255,.7);margin:0;text-align:center;font-family:var(--font-body);font-size:12px;font-weight:400;line-height:1.5}
 .v2-footer__contact{display:flex;flex-direction:column;gap:15px;padding-bottom:6px;border-bottom:1px solid #6b6b6b}
 .v2-footer__contact-top{display:flex;flex-direction:row;gap:70px}
 @media (min-width:901px){ .v2-footer__contact-top{gap:36px} }
