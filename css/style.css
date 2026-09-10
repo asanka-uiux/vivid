@@ -861,10 +861,14 @@
    Stakeholder brief: "This is where we take ownership of being an
    authorized dealer for hard to get brands. Keep the black to break up the
    massive white from the make/model section [above] and the white sections
-   that follow." Logos are the vendors' real marks (mixed formats/colours/
-   backgrounds -- some flat PNG on white, some transparent), so each sits on
-   its own small white chip rather than being colour-filtered; that keeps
-   every mark legible and true to its brand colours on the black ground. */
+   that follow." Second pass: swapped the fitment-brand logos (KW, BBS, etc.)
+   for the semi-exclusive tuner marks (1016 Industries, Brabus, Liberty Walk,
+   Novitec, Ryft, Brilliant, AimGain, Spoon Sports, Techart). These are
+   already white-on-transparent cutouts made for a dark ground, so they sit
+   directly on --bg-inverse -- no white chip, no colour-filter. Aspect
+   ratios vary a lot (Spoon Sports ~7:1 wordmark, Techart ~0.8:1 shield), so
+   sizing is height + max-width with object-fit:contain rather than a fixed
+   box, letting narrow/tall marks run smaller rather than distorting. */
 .dealer{background:var(--bg-inverse);padding:48px 0 40px}
 @media (min-width:901px){ .dealer{padding:64px 0 48px} }
 .dealer__eyebrow{margin:0;font:700 11px/14px var(--font-ui);letter-spacing:1.5px;
@@ -886,9 +890,9 @@
 .dealer__brands li{flex:none;display:flex;align-items:center;justify-content:center;
   font:700 15px/1 var(--font-ui);letter-spacing:.4px;color:rgba(255,255,255,.6);
   white-space:nowrap}
-.dealer__brands img{display:block;height:42px;width:auto;max-width:140px;
-  object-fit:contain;background:#fff;border-radius:6px;padding:8px 14px}
-@media (min-width:901px){ .dealer__brands img{height:52px;max-width:170px} }
+.dealer__brands img{display:block;height:36px;width:auto;max-width:170px;
+  object-fit:contain}
+@media (min-width:901px){ .dealer__brands img{height:44px;max-width:210px} }
 
 .dealer__foot{display:flex;flex-direction:column;gap:12px;padding-top:20px;
   border-top:1px solid rgba(255,255,255,.12)}
