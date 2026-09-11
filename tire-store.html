@@ -5903,8 +5903,8 @@ html, body{ overflow-x:clip; }
     </div>
     <div class="vfb__pills" id="vfbPills">
       <button class="vfb__pill vfb__pill--g vfb__pill--active" onclick="tierIdx(0)"><svg viewBox="0 0 24 24" width="14" height="14" fill="#16A34A"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg> No Rub</button>
-      <button class="vfb__pill vfb__pill--x" onclick="tierIdx(1)"><svg viewBox="0 0 24 24" width="14" height="14" fill="#E10600"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> CO Choice</button>
-      <button class="vfb__pill vfb__pill--a" onclick="tierIdx(2)"><svg viewBox="0 0 24 24" width="14" height="14" fill="#F59E0B"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> Aggressive</button>
+      <button class="vfb__pill vfb__pill--x" onclick="tierIdx(1)"><svg viewBox="0 0 24 24" width="14" height="14" fill="#E10600"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> OEM+</button>
+      <button class="vfb__pill vfb__pill--a" onclick="tierIdx(2)"><svg viewBox="0 0 24 24" width="14" height="14" fill="#F59E0B"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> Flush</button>
       <button class="vfb__pill" onclick="tierIdx(3)"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#6B7280" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Show All</button>
     </div>
   </div>
@@ -6045,19 +6045,19 @@ html, body{ overflow-x:clip; }
           <button type="button" class="dd__trigger" aria-haspopup="listbox" aria-expanded="false" onclick="toggleDropdown('fitmentDropdownM')">
             <span class="dd__trigger-main">
               <svg class="dd__trigger-icon" viewBox="0 0 24 24" width="18" height="18" fill="#16A34A" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-              <span class="dd__trigger-label">No Rub Fit</span>
+              <span class="dd__trigger-label">No Rub</span>
             </span>
             <svg class="dd__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <ul class="dd__menu" role="listbox" aria-label="Select fitment" hidden>
             <li role="option" aria-selected="true" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="tierIdx(0); toggleDropdown('fitmentDropdownM', false);">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="#16A34A" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg> No Rub Fit
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="#16A34A" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg> No Rub
             </li>
             <li role="option" aria-selected="false" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="tierIdx(1); toggleDropdown('fitmentDropdownM', false);">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="#E10600" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> CO Choice
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="#E10600" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> OEM+
             </li>
             <li role="option" aria-selected="false" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="tierIdx(2); toggleDropdown('fitmentDropdownM', false);">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="#F59E0B" aria-hidden="true"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> Aggressive
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="#F59E0B" aria-hidden="true"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> Flush
             </li>
             <li role="option" aria-selected="false" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="tierIdx(3); toggleDropdown('fitmentDropdownM', false);">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#6B7280" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Show All
@@ -6958,11 +6958,11 @@ html, body{ overflow-x:clip; }
 
   /* Fitment tier tests, applied together with the "Sales" toggle in
      applyFilters() below:
-     0 No Rub Fit -> only cards flagged .wcard__perk--g (no rub/no trim)
-     1 CO Choice  -> specialist picks, read off the existing wcard__badge
+     0 No Rub -> only cards flagged .wcard__perk--g (no rub/no trim)
+     1 OEM+  -> specialist picks, read off the existing wcard__badge
                      text (Staff Pick / Best Seller) since there's no
                      separate "recommended" flag in the card data
-     2 Aggressive -> everything up to and including minor trim (--g or --a),
+     2 Flush -> everything up to and including minor trim (--g or --a),
                      excluding lift-required (--x)
      3 Show All   -> no filtering */
   var activeFitTier = 0;
