@@ -1506,9 +1506,9 @@
    glance while scrolling; the eyebrow/title/lede underneath still carry
    the actual detail. Same >10:1 scrim approach the old .jump__band (and
    the .jump__photo caption it replaces) used. */
-.jump__banner{position:relative;margin:0 0 24px;height:180px;border-radius:4px;
+.jump__banner{position:relative;margin:0 0 24px;height:150px;border-radius:4px;
   overflow:hidden;background:var(--surface-sunken)}
-@media (min-width:641px){ .jump__banner{height:240px} }
+@media (min-width:641px){ .jump__banner{height:190px} }
 @media (min-width:901px){ .jump__banner{height:250px;margin-bottom:32px} }
 .jump__banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .jump__banner::before{content:"";position:absolute;inset:0;z-index:1;
