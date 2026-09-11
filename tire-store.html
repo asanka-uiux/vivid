@@ -5032,7 +5032,7 @@
   .deliver-to__editbtn:hover { background: var(--heat-deep); border-color: var(--heat-deep); }
   .deliver-to__dates { display: flex; flex-direction: column; gap: 10px; }
   .deliver-to__date { display: flex; align-items: center; gap: 9px; font-family: var(--ui); font-size: 13px; color: var(--ink); cursor: pointer; }
-  .deliver-to__date input[type=checkbox] { accent-color: var(--heat); width: 15px; height: 15px; }
+  .deliver-to__date input[type=radio] { accent-color: var(--heat); width: 15px; height: 15px; }
 
   /* --- sales toggle -------------------------------------------------------- */
   .sale-filter { border: 1px solid var(--line); padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
@@ -6117,8 +6117,8 @@ html, body{ overflow-x:clip; }
             <button type="submit" class="deliver-to__editbtn">Update</button>
           </form>
           <div class="deliver-to__dates">
-            <label class="deliver-to__date"><input type="checkbox"/> Monday, Sep 14</label>
-            <label class="deliver-to__date"><input type="checkbox"/> Tuesday, Sep 15</label>
+            <label class="deliver-to__date"><input type="radio" name="deliverToDate" checked/> Monday, Sep 14</label>
+            <label class="deliver-to__date"><input type="radio" name="deliverToDate"/> Tuesday, Sep 15</label>
           </div>
         </div>
 
