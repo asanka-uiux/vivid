@@ -1001,6 +1001,8 @@
   font-size:28px;line-height:32px;letter-spacing:-.5px;text-transform:uppercase;
   color:var(--ink);font-variation-settings:"YTLC" 500,"wdth" 100}
 @media (min-width:901px){ .builds__title{font-size:40px;line-height:44px;letter-spacing:-.8px} }
+.builds__sub{margin:8px 0 0;font:500 12px/21px var(--font-ui);color:var(--text-muted)}
+@media (min-width:901px){ .builds__sub{font-size:14px;font-weight:400} }
 .link-ul{display:inline-flex;align-items:center;min-height:44px;gap:6px;padding-bottom:6px;
   border:1px solid transparent;border-bottom:2px solid var(--ink);font:500 12px/14px var(--font-ui);
   letter-spacing:1.32px;text-transform:uppercase;color:var(--text-primary);
