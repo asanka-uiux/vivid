@@ -440,6 +440,14 @@
 @media (min-width:901px){
   .browse__title{font-size:40px;line-height:44px;letter-spacing:-.8px}
 }
+.browse__sub{margin:8px auto 0;max-width:640px;font:400 14px/20px var(--font-body);
+  color:var(--text-primary)}
+@media (min-width:901px){ .browse__sub{font-size:16px;line-height:24px} }
+
+/* Small label above each tabpanel's brand list — same job .browse__eyebrow
+   does for the section as a whole, one level down. */
+.fam__label{margin:0;font-family:var(--font-display);font-weight:800;font-size:15px;
+  text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted)}
 
 .browse__grid{display:flex;gap:24px;padding-top:24px;flex-direction:column}
 @media (min-width:1025px){ .browse__grid{flex-direction:row} }
