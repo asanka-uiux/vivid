@@ -4775,11 +4775,15 @@ html, body{ overflow-x:clip; }
   /* .vc__card p carries a 14px bottom margin from the shared library; with the
      body now a flex column with its own gap, that doubled the spacing. */
   .abn__why-body p { margin: 0; }
-  /* :has(a) so this only bottom-anchors a trailing CTA link (card 1). Applied
-     to every :last-child paragraph it also pushed the body copy of the three
-     cards that have no link down to the card floor, leaving a gap under their
-     headings. The codebase already relies on :has() (vr-content.css:825). */
-  .abn__why-body p:last-child:has(a) { margin-top: auto; padding-top: 12px; }
+  /* :has(> a:only-child) so this only bottom-anchors a trailing CTA-only
+     paragraph (card 1's "How fitment works" link). Plain :has(a) also
+     matched card 2's body paragraph once it grew inline brand links
+     (2026-09-11), shoving that whole paragraph to the card floor instead of
+     leaving it under the heading. :only-child scopes to element children,
+     so it ignores the surrounding whitespace text nodes and still requires
+     the paragraph's entire content to BE the link, not just contain one.
+     The codebase already relies on :has() (vr-content.css:825). */
+  .abn__why-body p:last-child:has(> a:only-child) { margin-top: auto; padding-top: 12px; }
 
   /* The brandbar's five-items-in-a-four-item-row fix moved to css/shared.css
      on 2026-09-04 so all pages get it, not just this one. */
@@ -5600,10 +5604,15 @@ html, body{ overflow-x:clip; }
             <div class="abn__why-body">
               <b>Brand authority</b>
               <h3>Authorized for every manufacturer</h3>
-              <p>We have confidence in every brand that we stock &mdash; including AWE,
-                Eventuri, Vorsteiner, Volk Racing, and Ryft &mdash; and we&rsquo;re the
-                exclusive distributor of some of the top performance brands in the world.
-                Warranty claims stop with us rather than bouncing back to you.</p>
+              <p>We have confidence in every brand that we stock &mdash; including
+                <a href="https://www.vividracing.com/index.php?keywords=awe" target="_blank" rel="noopener noreferrer">AWE</a>,
+                <a href="https://www.vividracing.com/index.php?keywords=eventuri" target="_blank" rel="noopener noreferrer">Eventuri</a>,
+                <a href="https://www.vividracing.com/index.php?keywords=vorsteiner" target="_blank" rel="noopener noreferrer">Vorsteiner</a>,
+                <a href="https://www.vividracing.com/index.php?keywords=volk+racing" target="_blank" rel="noopener noreferrer">Volk Racing</a>, and
+                <a href="https://www.vividracing.com/index.php?keywords=ryft" target="_blank" rel="noopener noreferrer">Ryft</a>
+                &mdash; and we&rsquo;re the exclusive distributor of some of the top
+                performance brands in the world. Warranty claims stop with us rather than
+                bouncing back to you.</p>
             </div>
           </li>
           <li class="vc__card">
