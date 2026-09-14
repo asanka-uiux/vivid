@@ -23,7 +23,7 @@
     --heat: #E10600;
     --heat-deep: #B30500;
     --signal: #0066CC;
-    --green: #16A34A;
+    --green: #0D6A3E; /* darkened for WCAG 4.5:1 contrast on white backgrounds */
     --gold: #F59E0B;
     --display: 'Inter Tight', -apple-system, sans-serif;
     --ui: 'Inter', -apple-system, sans-serif;
@@ -4936,7 +4936,7 @@
      in its own white .cat-head__body band under the dark hero instead of directly on it, so
      the boundary between "marketing hero" and "working page controls" reads as two distinct,
      clearly separated zones instead of the plain white hero the page had before. */
-  .cat-head { position: relative; background: var(--ink); padding: 0 0 26px; overflow: hidden; }
+  .cat-head { position: relative; background: var(--ink); overflow: hidden; }
   .cat-head__row { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
   .cat-head__wall { position: absolute; inset: 0 0 auto 0; height: 300px; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); grid-auto-rows: 170px; gap: 2px; z-index: 0; }
   .cat-head__wall img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) brightness(.4) contrast(1.05); }
@@ -4950,12 +4950,12 @@
   .cat-head__badge { display: flex; align-items: center; gap: 7px; font-family: var(--display); font-size: 12px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; color: #fff; padding-right: 20px; border-right: 1px solid rgba(255,255,255,.22); }
   .cat-head__badge:last-child { padding-right: 0; border-right: 0; }
   .cat-head__badge svg { flex: none; }
-  .cat-head__body { position: relative; z-index: 2; background: var(--paper); padding-top: 26px; }
+  .cat-head__body { position: relative; z-index: 2; background: var(--paper); padding: 26px 0; }
   .cat-head__count { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel); }
   .cat-head__grid { display: grid; grid-template-columns: 1fr 320px; gap: 24px; margin-top: 20px; align-items: end; }
   .tier-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--steel); margin-bottom: 8px; }
   .tiers { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; }
-  .tier { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: var(--paper); border: 1px solid var(--line); border-left: 3px solid var(--rule); cursor: pointer; text-align: left; transition: all .15s; box-shadow: 0 1px 3px rgba(0,0,0,.06); min-width: 0; }
+  .tier { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: var(--bone); border: 1px solid var(--line); border-left: 3px solid var(--rule); cursor: pointer; text-align: left; transition: all .15s; box-shadow: 0 1px 3px rgba(0,0,0,.06); min-width: 0; }
   @media (min-width: 701px) { .tier { padding: 8px; } }
   .tier > div { min-width: 0; }
   .tier__name, .tier__sub { overflow-wrap: break-word; }
@@ -4971,16 +4971,14 @@
   .tier--green.tier--active { background: rgba(22,163,74,.07); border-color: var(--green); box-shadow: 0 2px 10px rgba(22,163,74,.18); }
   .tier--gold.tier--active { background: rgba(245,158,11,.08); border-color: var(--gold); box-shadow: 0 2px 10px rgba(245,158,11,.2); }
   .tier--red.tier--active { background: rgba(225,6,0,.06); border-color: var(--heat); box-shadow: 0 2px 10px rgba(225,6,0,.18); }
-  .cat-delivery { border: 1px solid var(--line); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-  @media (min-width: 1440px) { .cat-delivery { max-width: 400px; } }
-  .cat-delivery__label { font-family: var(--mono); font-size: 12px; letter-spacing: 0; text-transform: uppercase; color: var(--steel); }
-  .cat-delivery__date { font-family: var(--display); font-size: 14px; font-weight: 800; color: var(--ink); }
-  .cat-delivery__ziplink { font-family: var(--ui); font-size: 12px; color: var(--heat); font-weight: 600; text-decoration: none; background: none; border: 0; padding: 0; cursor: pointer; }
-  .cat-delivery__ziplink:hover { color: var(--heat-deep); }
-  .cat-delivery__zipform { display: flex; gap: 6px; justify-content: flex-end; }
-  .cat-delivery__zipinput { width: 80px; padding: 6px 8px; border: 1px solid var(--rule); font-family: var(--ui); font-size: 12px; color: var(--ink); }
-  .cat-delivery__zipsubmit { padding: 6px 10px; background: var(--heat-deep); color: var(--paper); border: 0; font-family: var(--display); font-size: 10px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; transition: background .15s; }
-  .cat-delivery__zipsubmit:hover { background: var(--heat); }
+  .cat-delivery { background: var(--bone); border: 1px solid var(--line); padding: 12px 16px; display: flex; flex-direction: column; justify-content: center; }
+  @media (min-width: 1440px) { .cat-delivery { max-width: 480px; } }
+  .cat-delivery__fin { display: flex; flex-direction: column; gap: 10px; }
+  .cat-delivery__fin-row { display: flex; align-items: center; gap: 9px; }
+  .cat-delivery__fin-logo { height: 16px; width: auto; flex: none; display: block; }
+  .cat-delivery__fin-text { font-family: var(--ui); font-size: 12px; color: var(--steel); line-height: 1.4; }
+  .cat-delivery__fin-link { color: var(--heat); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+  .cat-delivery__fin-link:hover { color: var(--heat-deep); }
 
   .listing { padding: 36px 0 56px; }
   /* .filters, .sortbar, .wgrid, .pgn are 4 direct siblings here (no wrapping
@@ -4998,6 +4996,21 @@
   .ai-filter__submit { flex: none; padding: 9px 16px; background: var(--heat-deep); color: var(--paper); border: 0; font-family: var(--display); font-size: 11px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: background .15s; }
   .ai-filter__submit:hover { background: var(--heat); }
   .zip-filter { padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
+  .zip-filter__zipval { color: var(--ink); font-weight: 700; letter-spacing: 0; margin-left: 6px; }
+  .zip-filter__ship { margin-top: 12px; }
+  .zip-filter__ship-opt { display: flex; align-items: center; gap: 8px; font-family: var(--ui); font-size: 12.5px; color: #444; padding: 4px 0; cursor: pointer; }
+  .zip-filter__ship-opt input[type=radio] { accent-color: var(--heat); }
+  .zip-filter__ship-opt strong { color: var(--ink); font-weight: 700; }
+  .sale-filter { padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
+  .sale-filter__row { display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer; }
+  .sale-filter__label { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink); font-weight: 600; }
+  .tgl-switch { position: relative; flex: none; display: inline-block; width: 38px; height: 22px; }
+  .tgl-switch__input { position: absolute; inset: 0; opacity: 0; margin: 0; width: 100%; height: 100%; cursor: pointer; z-index: 1; }
+  .tgl-switch__track { position: absolute; inset: 0; background: var(--rule); border: 1px solid var(--rule); border-radius: 999px; transition: background .15s, border-color .15s; pointer-events: none; }
+  .tgl-switch__track::before { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; background: var(--paper); border-radius: 50%; box-shadow: 0 1px 2px rgba(0,0,0,.25); transition: transform .15s; }
+  .tgl-switch__input:checked + .tgl-switch__track { background: var(--heat); border-color: var(--heat); }
+  .tgl-switch__input:checked + .tgl-switch__track::before { transform: translateX(16px); }
+  .tgl-switch__input:focus-visible + .tgl-switch__track { outline: 2px solid var(--heat); outline-offset: 2px; }
   .applied-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 12px; }
   .applied-filters__label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--steel); margin-right: 2px; }
   .applied-chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 4px 4px 10px; background: var(--bone); border: 1px solid var(--line); font-family: var(--ui); font-size: 11.5px; font-weight: 600; color: var(--ink); }
@@ -5011,8 +5024,32 @@
   .filters input[type=checkbox] { accent-color: var(--heat); }
   .filters__clear { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--heat); text-decoration: none; }
 
+  /* --- collapsible filter accordion (closed by default) --------------------- */
+  .ffilter { list-style: none; margin: 0; padding: 0; }
+  .ffilter__item { border-bottom: 1px solid var(--line); }
+  .ffilter__item:last-child { border-bottom: 0; }
+  .ffilter__summary { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 13px 1px; font-family: var(--ui); font-size: 13.5px; font-weight: 600; color: var(--ink); cursor: pointer; list-style: none; }
+  .ffilter__summary::-webkit-details-marker { display: none; }
+  .ffilter__chevron { flex: none; color: var(--steel); transition: transform .18s ease; }
+  .ffilter__item details[open] > .ffilter__summary { color: var(--heat); }
+  .ffilter__item details[open] > .ffilter__summary .ffilter__chevron { color: var(--heat); transform: rotate(180deg); }
+  .ffilter__item summary:focus-visible { outline: 2px solid var(--heat); outline-offset: -2px; }
+  .ffilter__panel { padding: 0 1px 14px; }
+
+  .ffilter__keyword { padding: 16px 1px; border-bottom: 1px solid var(--line); margin-bottom: 2px; }
+  .ffilter__keyword-label { font-family: var(--ui); font-size: 12.5px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+  .ffilter__keyword-form { display: flex; flex-direction: column; gap: 10px; }
+  .ffilter__keyword-input { padding: 9px 10px; border: 1px solid var(--rule); font-family: var(--ui); font-size: 12.5px; color: var(--ink); }
+  .ffilter__keyword-input::placeholder { color: var(--steel); }
+  .ffilter__keyword-btn { align-self: flex-start; padding: 9px 22px; background: var(--heat-deep); color: var(--paper); border: 0; font-family: var(--display); font-size: 11px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: background .15s; }
+  .ffilter__keyword-btn:hover { background: var(--heat); }
+
+  .ffilter__additional { padding-top: 4px; }
+  .ffilter__additional-label { text-align: center; font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); margin-bottom: 6px; }
+  .ffilter__additional .ffilter__summary { font-family: var(--mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+
   .sortbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-  .sortbar__count { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--steel); }
+  .sortbar__count { font-family: var(--mono); font-size: 16px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--steel); }
   .sortbar__count strong { color: var(--ink); }
   .sortbar__controls { display: flex; align-items: center; gap: 10px; }
 
@@ -5020,6 +5057,8 @@
   .dd { position: relative; }
   .dd__trigger { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; min-width: 240px; padding: 10px 14px; border: 1px solid var(--rule); border-radius: 2px; background: var(--paper); font-family: var(--ui); font-size: 13px; font-weight: 600; color: var(--ink); cursor: pointer; transition: border-color .15s; }
   .dd__trigger-label { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .dd__trigger-main { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .dd__trigger-icon { flex-shrink: 0; }
   .dd__trigger:hover { border-color: var(--steel); }
   .dd__trigger:focus-visible { outline: 2px solid var(--heat); outline-offset: 1px; }
   .dd.is-open .dd__trigger { border-color: var(--heat); }
@@ -5050,7 +5089,7 @@
   }
 
   .wgrid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
-  @media (min-width: 1024px) { .wgrid { grid-template-columns: repeat(4,minmax(0,1fr)); } }
+  @media (min-width: 1024px) { .wgrid { grid-template-columns: repeat(4,minmax(0,1fr)); row-gap: 14px; } }
   .wcard { position: relative; display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--line); box-shadow: 0 1px 3px rgba(0,0,0,.05); transition: all .15s; }
   .wcard:hover { border-color: var(--ink); box-shadow: 0 6px 20px rgba(0,0,0,.1); }
   .wcard__imglink { display: block; }
@@ -5058,22 +5097,22 @@
   .wcard__img img { display: block; width: 100%; aspect-ratio: 1/1; object-fit: cover; padding: 14px; }
   .wcard__badge { position: absolute; top: 10px; left: 10px; font-family: var(--ui); font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 4px; background: #FCE9E8; color: var(--heat-deep); box-shadow: 0 1px 4px rgba(0,0,0,.15); }
   @media (min-width: 701px) { .wcard__badge { padding: 3px 6px; border-radius: 2px; } }
-  .wcard__body { padding: 14px 16px 16px; display: flex; flex-direction: column; flex: 1; }
+  .wcard__body { padding: 6px 12px 8px; display: flex; flex-direction: column; flex: 1; }
   .wcard__brand-row { display: flex; justify-content: space-between; align-items: center; }
   .wcard__brand { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--steel); }
-  .wcard__stock { display: flex; align-items: center; gap: 5px; font-family: var(--ui); font-size: 11px; color: #166534; font-weight: 600; } /* was var(--green) #16A34A = 3.30:1 on white; #166534 = 6.4:1 */
+  .wcard__stock { display: flex; align-items: center; gap: 5px; font-family: var(--ui); font-size: 11px; color: var(--green); font-weight: 600; }
   .wcard__stock::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
   .wcard__name { display: block; font-family: var(--display); font-size: 16.5px; font-weight: 800; letter-spacing: -0.01em; color: var(--ink); text-decoration: none; margin: 6px 0 2px; }
   .wcard:hover .wcard__name { color: var(--heat); }
-  .wcard__spec { font-family: var(--ui); font-size: 12.5px; color: var(--steel); margin-bottom: 8px; }
-  .wcard__stars { display: flex; align-items: center; gap: 5px; font-size: 13px; color: #A85F05; margin-bottom: 9px; }
+  .wcard__spec { font-family: var(--ui); font-size: 12.5px; color: var(--steel); }
+  .wcard__stars { display: flex; align-items: center; gap: 5px; font-size: 13px; color: #A85F05; }
   .wcard__stars .rating { font-family: var(--ui); font-size: 12.5px; font-weight: 800; color: var(--ink); }
   .wcard__stars .count { font-family: var(--ui); font-size: 11.5px; color: var(--steel); }
   .wcard__fin-row { font-family: var(--mono); font-size: 10px; letter-spacing: 0.02em; text-transform: uppercase; color: var(--steel); display: flex; align-items: baseline; gap: 5px; margin-bottom: 3px; }
   .wcard__fin-row strong { font-family: var(--ui); font-size: 12.5px; font-weight: 800; text-transform: none; letter-spacing: 0; color: var(--ink); }
   .wcard__fin-brand { display: inline-flex; align-items: center; margin-left: 4px; }
   .wcard__fin-brand img { height: 13px; width: auto; display: block; }
-  .wcard__buyrow { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); }
+  .wcard__buyrow { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 6px; border-top: 1px solid var(--line); }
   .wcard__qty { display: flex; align-items: center; border: 1px solid var(--rule); }
   .wcard__qty button { width: 26px; height: 26px; border: 0; background: var(--bone); color: var(--ink); font-size: 14px; font-weight: 700; cursor: pointer; }
   .wcard__qty button:hover { background: var(--line); }
@@ -5085,14 +5124,15 @@
   .wcard__cta { display: block; text-align: center; background: var(--heat-deep); color: var(--paper); font-family: var(--display); font-size: 13px; font-weight: 800; letter-spacing: 0.03em; text-transform: uppercase; text-decoration: none; padding: 12px; margin-top: 10px; transition: background .15s; }
   .wcard__cta:hover { background: var(--heat); }
   .wcard__perks { margin-top: 10px; display: flex; flex-direction: column; }
-  .wcard__perk { display: flex; align-items: flex-start; gap: 8px; font-family: var(--ui); font-size: 11.5px; line-height: 1.35; color: var(--graphite); padding: 8px 0; border-top: 1px solid var(--line); }
+  .wcard__perk { display: flex; align-items: flex-start; gap: 8px; font-family: var(--ui); font-size: 11.5px; line-height: 1.35; color: var(--graphite); padding: 6px 0; border-top: 1px solid var(--line); }
   .wcard__perk svg { flex-shrink: 0; margin-top: 1px; }
   .wcard__perk strong { font-weight: 800; }
-  .wcard__perk--g strong { color: #166534; }
-  .wcard__perk--a strong { color: #B45309; }
+  .wcard__perk--g strong { color: var(--green); }
+  .wcard__perk--a strong { color: var(--gold); }
   .wcard__perk--x strong { color: var(--heat); }
   .wcard__perk-info { margin-left: auto; flex-shrink: 0; width: 15px; height: 15px; border-radius: 50%; border: 1px solid var(--rule); background: none; display: flex; align-items: center; justify-content: center; font-size: 9.5px; font-family: var(--ui); color: var(--steel); cursor: pointer; }
   .pgn { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 20px; }
+  @media (min-width: 1081px) { .pgn { margin-top: 48px; } }
   .pgn__btn { display: flex; align-items: center; gap: 8px; padding: 12px 22px; border: 1px solid var(--rule); background: var(--paper); font-family: var(--display); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink); cursor: pointer; transition: all .15s; }
   .pgn__btn--next { background: var(--ink); color: var(--paper); border-color: var(--ink); }
   .pgn__btn--next:hover { background: var(--heat); border-color: var(--heat); }
@@ -5133,8 +5173,8 @@
   }
 
   /* cat-head v2 */
-  .cat-head__panel { display: grid; grid-template-columns: 1fr 400px; grid-template-rows: auto auto; gap: 12px 16px; margin-top: 4px; }
-  .veh-card { border: 1px solid var(--line); padding: 16px 20px; display: flex; gap: 14px; align-items: flex-start; }
+  .cat-head__panel { display: grid; grid-template-columns: 1fr 480px; grid-template-rows: auto auto; gap: 12px 16px; margin-top: 4px; }
+  .veh-card { background: var(--bone); border: 1px solid var(--line); padding: 16px 20px; display: flex; gap: 14px; align-items: flex-start; }
   .veh-card__check { flex-shrink: 0; margin-top: 2px; }
   .veh-card__name-row { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
   .veh-card__name { font-family: var(--display); font-size: 24px; font-weight: 900; letter-spacing: -0.01em; text-transform: uppercase; color: var(--ink); line-height: 1.1; letter-spacing: 1.14px; }
@@ -5172,7 +5212,7 @@
   .veh-card__chip { display: flex; align-items: center; gap: 5px; font-family: var(--ui); font-size: 12px; font-weight: 600; color: var(--graphite); }
   .veh-card__chip svg { flex-shrink: 0; }
   .expert-card { border: 1px solid var(--line); background: var(--bone); padding: 14px 16px; display: flex; flex-direction: column; justify-content: center; gap: 11px; }
-  @media (min-width: 1440px) { .expert-card { max-width: 400px; } }
+  @media (min-width: 1440px) { .expert-card { max-width: 480px; } }
   .expert-card__head { display: flex; align-items: center; gap: 12px; }
   .expert-card__head img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
   .expert-card__title { font-family: var(--display); font-size: 14px; font-weight: 800; color: var(--ink); }
@@ -6081,7 +6121,10 @@ html, body{ overflow-x:clip; }
 
         <div class="dd dd--fitment-mobile" id="fitmentDropdownM">
           <button type="button" class="dd__trigger" aria-haspopup="listbox" aria-expanded="false" onclick="toggleDropdown('fitmentDropdownM')">
-            <span class="dd__trigger-label">No Rub</span>
+            <span class="dd__trigger-main">
+              <svg class="dd__trigger-icon" viewBox="0 0 24 24" width="18" height="18" fill="#16A34A" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+              <span class="dd__trigger-label">No Rub</span>
+            </span>
             <svg class="dd__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <ul class="dd__menu" role="listbox" aria-label="Select fitment" hidden>
@@ -6102,20 +6145,15 @@ html, body{ overflow-x:clip; }
       </div>
 
       <div class="cat-delivery">
-        <div>
-          <div class="cat-delivery__label">Estimated Delivery</div>
-          <div class="cat-delivery__date">Arrives Sep 10 &ndash; 12</div>
-        </div>
-        <div style="text-align:right;">
-          <div id="zipDisplay">
-            <div class="cat-delivery__label">Shipping to <span id="zipValue">85281</span></div>
-            <button type="button" class="cat-delivery__ziplink" onclick="showZipInput()">Change ZIP</button>
+        <div class="cat-delivery__fin">
+          <div class="cat-delivery__fin-row">
+            <img src="assets/img/logos/affirm.png" alt="Affirm" class="cat-delivery__fin-logo">
+            <span class="cat-delivery__fin-text">Pay at your own pace with no hidden fees. <a href="#" class="cat-delivery__fin-link">Prequalify Now</a></span>
           </div>
-          <form id="zipForm" class="cat-delivery__zipform" style="display:none;" onsubmit="submitZip(event)">
-            <label class="vh" for="zipInput">New zip code</label>
-            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="5" id="zipInput" class="cat-delivery__zipinput" placeholder="Zip code" value="85281">
-            <button type="submit" class="cat-delivery__zipsubmit">Update</button>
-          </form>
+          <div class="cat-delivery__fin-row">
+            <img src="assets/img/logos/katapult.webp" alt="Katapult" class="cat-delivery__fin-logo">
+            <span class="cat-delivery__fin-text">Pay over time. No credit required. <a href="#" class="cat-delivery__fin-link">Get Pre-Approved</a></span>
+          </div>
         </div>
       </div>
 
@@ -6155,68 +6193,191 @@ html, body{ overflow-x:clip; }
           </div>
         </div>
         <div class="zip-filter">
-          <div class="ai-filter__label">Shipping Zip Code</div>
-          <form class="ai-filter__form" onsubmit="return false;">
-            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="5" class="ai-filter__input" placeholder="Zip code" aria-label="Shipping zip code" value="85281">
+          <div class="ai-filter__label" id="zipFilterLabel">Shipping Zip Code</div>
+          <form class="ai-filter__form" onsubmit="return zipFilterSubmit(event)">
+            <label class="vh" for="zipFilterInput">Zip code</label>
+            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="5" id="zipFilterInput" class="ai-filter__input" placeholder="Zip code" aria-label="Shipping zip code" value="85281">
             <button type="submit" class="ai-filter__submit">Update</button>
           </form>
+          <div class="zip-filter__ship" id="zipFilterShip" hidden>
+            <label class="zip-filter__ship-opt">
+              <input type="radio" name="zipShipSpeed" value="free" checked>
+              <span>Free Shipping on <strong id="zipFreeDate"></strong></span>
+            </label>
+            <label class="zip-filter__ship-opt">
+              <input type="radio" name="zipShipSpeed" value="fast">
+              <span>Fast Shipping <strong id="zipFastDate"></strong></span>
+            </label>
+          </div>
+        </div>
+        <div class="sale-filter">
+          <label class="sale-filter__row" for="saleOnlyToggle">
+            <span class="sale-filter__label">On Sale Only</span>
+            <span class="tgl-switch">
+              <input type="checkbox" id="saleOnlyToggle" class="tgl-switch__input">
+              <span class="tgl-switch__track" aria-hidden="true"></span>
+            </span>
+          </label>
         </div>
         <div class="filters__group" style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--line); padding-bottom:12px;">
           <span class="filters__title" style="margin:0;">Filters</span>
           <a href="#" class="filters__clear">Clear All</a>
         </div>
-        <div class="filters__group">
-          <div class="filters__title">Diameter</div>
-          <label><input type="checkbox" checked/> 17&Prime; <span class="n">9,406</span></label>
-          <label><input type="checkbox"/> 18&Prime; <span class="n">7,118</span></label>
-          <label><input type="checkbox" checked/> 20&Prime; <span class="n">12,492</span></label>
-          <label><input type="checkbox"/> 22&Prime; <span class="n">6,830</span></label>
-          <label><input type="checkbox"/> 24&Prime; <span class="n">2,566</span></label>
+
+        <ul class="ffilter">
+          <li class="ffilter__item">
+            <details>
+              <summary class="ffilter__summary">Wheel Diameter<svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="ffilter__panel">
+                <label><input type="checkbox" checked/> 17&Prime; <span class="n">9,406</span></label>
+                <label><input type="checkbox"/> 18&Prime; <span class="n">7,118</span></label>
+                <label><input type="checkbox" checked/> 20&Prime; <span class="n">12,492</span></label>
+                <label><input type="checkbox"/> 22&Prime; <span class="n">6,830</span></label>
+                <label><input type="checkbox"/> 24&Prime; <span class="n">2,566</span></label>
+              </div>
+            </details>
+          </li>
+          <li class="ffilter__item">
+            <details>
+              <summary class="ffilter__summary">Wheel Width<svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="ffilter__panel">
+                <label><input type="checkbox"/> 8.5&Prime; <span class="n">3,212</span></label>
+                <label><input type="checkbox" checked/> 9&Prime; <span class="n">11,388</span></label>
+                <label><input type="checkbox" checked/> 10&Prime; <span class="n">9,914</span></label>
+                <label><input type="checkbox"/> 12&Prime; <span class="n">5,672</span></label>
+              </div>
+            </details>
+          </li>
+          <li class="ffilter__item">
+            <details>
+              <summary class="ffilter__summary">Wheel Offset<svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="ffilter__panel">
+                <label><input type="checkbox"/> -44mm <span class="n">2,108</span></label>
+                <label><input type="checkbox"/> -24mm <span class="n">3,485</span></label>
+                <label><input type="checkbox" checked/> -12mm <span class="n">4,920</span></label>
+                <label><input type="checkbox" checked/> 0mm <span class="n">6,204</span></label>
+                <label><input type="checkbox"/> +18mm <span class="n">5,113</span></label>
+              </div>
+            </details>
+          </li>
+          <li class="ffilter__item">
+            <details>
+              <summary class="ffilter__summary">Wheel Brand<svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="ffilter__panel">
+                <label><input type="checkbox"/> VR Forged <span class="n">214</span></label>
+                <label><input type="checkbox"/> Fuel Off-Road <span class="n">4,388</span></label>
+                <label><input type="checkbox"/> Method <span class="n">1,275</span></label>
+                <label><input type="checkbox"/> Moto Metal <span class="n">2,941</span></label>
+                <label><input type="checkbox"/> XD Series <span class="n">1,654</span></label>
+              </div>
+            </details>
+          </li>
+          <li class="ffilter__item">
+            <details>
+              <summary class="ffilter__summary">Tire Brand<svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="ffilter__panel">
+                <label><input type="checkbox"/> Toyo <span class="n">296</span></label>
+                <label><input type="checkbox"/> Nitto <span class="n">318</span></label>
+                <label><input type="checkbox"/> BFGoodrich <span class="n">204</span></label>
+                <label><input type="checkbox"/> Falken <span class="n">162</span></label>
+              </div>
+            </details>
+          </li>
+          <li class="ffilter__item">
+            <details>
+              <summary class="ffilter__summary">Tire Size<svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="ffilter__panel">
+                <label><input type="checkbox"/> 33&Prime; <span class="n">302</span></label>
+                <label><input type="checkbox" checked/> 35&Prime; <span class="n">611</span></label>
+                <label><input type="checkbox" checked/> 37&Prime; <span class="n">248</span></label>
+                <label><input type="checkbox"/> 38&Prime;+ <span class="n">56</span></label>
+              </div>
+            </details>
+          </li>
+          <li class="ffilter__item">
+            <details>
+              <summary class="ffilter__summary">Finish<svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="ffilter__panel">
+                <label><input type="checkbox"/> Satin Bronze <span class="n">812</span></label>
+                <label><input type="checkbox"/> Matte Black <span class="n">9,346</span></label>
+                <label><input type="checkbox"/> Gloss Black <span class="n">8,118</span></label>
+                <label><input type="checkbox"/> Machined <span class="n">4,872</span></label>
+                <label><input type="checkbox"/> Gunmetal <span class="n">2,236</span></label>
+              </div>
+            </details>
+          </li>
+          <li class="ffilter__item">
+            <details>
+              <summary class="ffilter__summary">Price<svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="ffilter__panel">
+                <label><input type="checkbox"/> Under $1,500 <span class="n">2,318</span></label>
+                <label><input type="checkbox"/> $1,500 &ndash; $2,500 <span class="n">4,972</span></label>
+                <label><input type="checkbox"/> $2,500 &ndash; $3,500 <span class="n">3,806</span></label>
+                <label><input type="checkbox"/> $3,500+ <span class="n">1,940</span></label>
+              </div>
+            </details>
+          </li>
+          <li class="ffilter__item">
+            <details>
+              <summary class="ffilter__summary">Avg. Customer Review<svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+              <div class="ffilter__panel">
+                <label><input type="checkbox"/> 4&#9733; &amp; Up <span class="n">11,802</span></label>
+                <label><input type="checkbox"/> 3&#9733; &amp; Up <span class="n">12,940</span></label>
+                <label><input type="checkbox"/> 2&#9733; &amp; Up <span class="n">13,020</span></label>
+                <label><input type="checkbox"/> 1&#9733; &amp; Up <span class="n">13,090</span></label>
+              </div>
+            </details>
+          </li>
+        </ul>
+
+        <div class="ffilter__keyword">
+          <div class="ffilter__keyword-label">Search by Keyword</div>
+          <form class="ffilter__keyword-form" onsubmit="return false;">
+            <label class="vh" for="pkgFilterKeyword">Search by keyword</label>
+            <input type="text" id="pkgFilterKeyword" class="ffilter__keyword-input" placeholder="Search...">
+            <button type="submit" class="ffilter__keyword-btn">Search</button>
+          </form>
         </div>
-        <div class="filters__group">
-          <div class="filters__title">Width</div>
-          <label><input type="checkbox"/> 8.5&Prime; <span class="n">3,212</span></label>
-          <label><input type="checkbox" checked/> 9&Prime; <span class="n">11,388</span></label>
-          <label><input type="checkbox" checked/> 10&Prime; <span class="n">9,914</span></label>
-          <label><input type="checkbox"/> 12&Prime; <span class="n">5,672</span></label>
-        </div>
-        <div class="filters__group">
-          <div class="filters__title">Offset</div>
-          <label><input type="checkbox"/> -44mm <span class="n">2,108</span></label>
-          <label><input type="checkbox"/> -24mm <span class="n">3,485</span></label>
-          <label><input type="checkbox" checked/> -12mm <span class="n">4,920</span></label>
-          <label><input type="checkbox" checked/> 0mm <span class="n">6,204</span></label>
-          <label><input type="checkbox"/> +18mm <span class="n">5,113</span></label>
-        </div>
-        <div class="filters__group">
-          <div class="filters__title">Wheel Brand</div>
-          <label><input type="checkbox"/> VR Forged <span class="n">214</span></label>
-          <label><input type="checkbox"/> Fuel Off-Road <span class="n">4,388</span></label>
-          <label><input type="checkbox"/> Method <span class="n">1,275</span></label>
-          <label><input type="checkbox"/> Moto Metal <span class="n">2,941</span></label>
-          <label><input type="checkbox"/> XD Series <span class="n">1,654</span></label>
-        </div>
-        <div class="filters__group">
-          <div class="filters__title">Tire Brand</div>
-          <label><input type="checkbox"/> Toyo <span class="n">296</span></label>
-          <label><input type="checkbox"/> Nitto <span class="n">318</span></label>
-          <label><input type="checkbox"/> BFGoodrich <span class="n">204</span></label>
-          <label><input type="checkbox"/> Falken <span class="n">162</span></label>
-        </div>
-        <div class="filters__group">
-          <div class="filters__title">Tire Size</div>
-          <label><input type="checkbox"/> 33&Prime; <span class="n">302</span></label>
-          <label><input type="checkbox" checked/> 35&Prime; <span class="n">611</span></label>
-          <label><input type="checkbox" checked/> 37&Prime; <span class="n">248</span></label>
-          <label><input type="checkbox"/> 38&Prime;+ <span class="n">56</span></label>
-        </div>
-        <div class="filters__group">
-          <div class="filters__title">Finish</div>
-          <label><input type="checkbox"/> Satin Bronze <span class="n">812</span></label>
-          <label><input type="checkbox"/> Matte Black <span class="n">9,346</span></label>
-          <label><input type="checkbox"/> Gloss Black <span class="n">8,118</span></label>
-          <label><input type="checkbox"/> Machined <span class="n">4,872</span></label>
-          <label><input type="checkbox"/> Gunmetal <span class="n">2,236</span></label>
+
+        <div class="ffilter__additional">
+          <div class="ffilter__additional-label">Additional Filtering</div>
+          <ul class="ffilter">
+            <li class="ffilter__item">
+              <details>
+                <summary class="ffilter__summary">Wheel Diameter<svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+                <div class="ffilter__panel">
+                  <label><input type="checkbox" checked/> 17&Prime; <span class="n">9,406</span></label>
+                  <label><input type="checkbox"/> 18&Prime; <span class="n">7,118</span></label>
+                  <label><input type="checkbox" checked/> 20&Prime; <span class="n">12,492</span></label>
+                  <label><input type="checkbox"/> 22&Prime; <span class="n">6,830</span></label>
+                  <label><input type="checkbox"/> 24&Prime; <span class="n">2,566</span></label>
+                </div>
+              </details>
+            </li>
+            <li class="ffilter__item">
+              <details>
+                <summary class="ffilter__summary">Tire Size<svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+                <div class="ffilter__panel">
+                  <label><input type="checkbox"/> 33&Prime; <span class="n">302</span></label>
+                  <label><input type="checkbox" checked/> 35&Prime; <span class="n">611</span></label>
+                  <label><input type="checkbox" checked/> 37&Prime; <span class="n">248</span></label>
+                  <label><input type="checkbox"/> 38&Prime;+ <span class="n">56</span></label>
+                </div>
+              </details>
+            </li>
+            <li class="ffilter__item">
+              <details>
+                <summary class="ffilter__summary">Finish<svg class="ffilter__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+                <div class="ffilter__panel">
+                  <label><input type="checkbox"/> Satin Bronze <span class="n">812</span></label>
+                  <label><input type="checkbox"/> Matte Black <span class="n">9,346</span></label>
+                  <label><input type="checkbox"/> Gloss Black <span class="n">8,118</span></label>
+                  <label><input type="checkbox"/> Machined <span class="n">4,872</span></label>
+                  <label><input type="checkbox"/> Gunmetal <span class="n">2,236</span></label>
+                </div>
+              </details>
+            </li>
+          </ul>
         </div>
       </aside>
 
@@ -6789,19 +6950,27 @@ html, body{ overflow-x:clip; }
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape' && document.getElementById('ymmModal').style.display !== 'none') closeYmmModal();
   });
-  function showZipInput(){
-    document.getElementById('zipDisplay').style.display = 'none';
-    var form = document.getElementById('zipForm');
-    form.style.display = 'flex';
-    document.getElementById('zipInput').focus();
-  }
-  function submitZip(e){
+  function zipFilterSubmit(e) {
     e.preventDefault();
-    var val = document.getElementById('zipInput').value.trim();
-    if (!/^\d{5}$/.test(val)) return;
-    document.getElementById('zipValue').textContent = val;
-    document.getElementById('zipForm').style.display = 'none';
-    document.getElementById('zipDisplay').style.display = 'block';
+    var input = document.getElementById('zipFilterInput');
+    var val = input.value.trim();
+    if (!/^\d{5}$/.test(val)) return false;
+    document.getElementById('zipFilterLabel').innerHTML = 'Shipping Zip Code<span class="zip-filter__zipval">' + val + '</span>';
+    var monthFmt = function(d){ return d.toLocaleDateString('en-US', {month:'short'}); };
+    var dayFmt = function(d){ return d.getDate(); };
+    var formatRange = function(start, end){
+      if (monthFmt(start) === monthFmt(end)) return monthFmt(start) + ' ' + dayFmt(start) + ' – ' + dayFmt(end);
+      return monthFmt(start) + ' ' + dayFmt(start) + ' – ' + monthFmt(end) + ' ' + dayFmt(end);
+    };
+    var today = new Date();
+    var freeStart = new Date(today); freeStart.setDate(today.getDate() + 7);
+    var freeEnd = new Date(today); freeEnd.setDate(today.getDate() + 9);
+    var fastStart = new Date(today); fastStart.setDate(today.getDate() + 2);
+    var fastEnd = new Date(today); fastEnd.setDate(today.getDate() + 3);
+    document.getElementById('zipFreeDate').textContent = formatRange(freeStart, freeEnd);
+    document.getElementById('zipFastDate').textContent = formatRange(fastStart, fastEnd);
+    document.getElementById('zipFilterShip').hidden = false;
+    return false;
   }
   function selectVehicle(name, shortName, spec){
     document.getElementById('vehName').textContent = name;
@@ -6828,7 +6997,40 @@ html, body{ overflow-x:clip; }
       items.forEach(function(li,k){ li.setAttribute('aria-selected', k===i ? 'true' : 'false'); });
       var label = mdd.querySelector('.dd__trigger-label');
       if (label && items[i]) label.textContent = items[i].textContent.trim();
+      var icon = mdd.querySelector('.dd__trigger-icon');
+      var srcIcon = items[i] && items[i].querySelector('svg');
+      if (icon && srcIcon) {
+        var clone = srcIcon.cloneNode(true);
+        clone.classList.add('dd__trigger-icon');
+        icon.replaceWith(clone);
+      }
     }
+    applyFitFilter(i);
+  }
+
+  /* Filters the product cards to match the selected fitment tier:
+     0 No Rub -> only cards flagged .wcard__perk--g (no rub/no trim)
+     1 OEM+  -> specialist picks, read off the existing wcard__badge
+                     text (VR House Brand / Best Seller) since there's no
+                     separate "recommended" flag in the card data
+     2 Flush -> everything up to and including minor trim (--g or --a),
+                     excluding lift-required (--x)
+     3 Show All   -> no filtering */
+  function applyFitFilter(i) {
+    var cards = document.querySelectorAll('.wgrid > .wcard');
+    cards.forEach(function(card){
+      var show = true;
+      if (i === 0) {
+        show = !!card.querySelector('.wcard__perk--g');
+      } else if (i === 1) {
+        var badge = card.querySelector('.wcard__badge');
+        var label = badge ? badge.textContent.trim() : '';
+        show = (label === 'VR House Brand' || label === 'Best Seller');
+      } else if (i === 2) {
+        show = !!card.querySelector('.wcard__perk--g') || !!card.querySelector('.wcard__perk--a');
+      }
+      card.style.display = show ? '' : 'none';
+    });
   }
 
   /* generic custom dropdown (sort control + mobile fitment picker) */
@@ -6880,6 +7082,7 @@ html, body{ overflow-x:clip; }
     if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     if (open) panel.scrollIntoView({behavior:'smooth', block:'start'});
   }
+  applyFitFilter(0);
   (function(){
     var bar=document.getElementById('vfb'), head=document.querySelector('.cat-head');
     if(!bar||!head) return;
