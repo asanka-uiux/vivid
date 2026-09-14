@@ -4935,7 +4935,7 @@
   .cat-head__count { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel); }
   .cat-head__grid { display: grid; grid-template-columns: 1fr 320px; gap: 24px; margin-top: 20px; align-items: end; }
   .tier-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--steel); margin-bottom: 8px; }
-  .tiers { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; }
+  .tiers { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
   .tier { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: var(--bone); border: 1px solid var(--line); border-left: 3px solid var(--rule); cursor: pointer; text-align: left; transition: all .15s; box-shadow: 0 1px 3px rgba(0,0,0,.06); min-width: 0; }
   @media (min-width: 701px) { .tier { padding: 8px; } }
   .tier > div { min-width: 0; }
@@ -4946,12 +4946,10 @@
   .tier__name { font-family: var(--display); font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.02em; color: var(--ink); }
   .tier__sub { font-family: var(--ui); font-size: 12px; color: var(--steel); }
   .tier--green { border-left-color: var(--green); }
-  .tier--gold { border-left-color: var(--gold); }
-  .tier--red { border-left-color: var(--heat); }
+  .tier--blue { border-left-color: var(--signal); }
   .tier--active { background: var(--bone); border-color: var(--ink); box-shadow: 0 2px 8px rgba(0,0,0,.1); }
   .tier--green.tier--active { background: rgba(22,163,74,.07); border-color: var(--green); box-shadow: 0 2px 10px rgba(22,163,74,.18); }
-  .tier--gold.tier--active { background: rgba(245,158,11,.08); border-color: var(--gold); box-shadow: 0 2px 10px rgba(245,158,11,.2); }
-  .tier--red.tier--active { background: rgba(225,6,0,.06); border-color: var(--heat); box-shadow: 0 2px 10px rgba(225,6,0,.18); }
+  .tier--blue.tier--active { background: rgba(0,102,204,.07); border-color: var(--signal); box-shadow: 0 2px 10px rgba(0,102,204,.18); }
   .cat-delivery { background: var(--bone); border: 1px solid var(--line); padding: 12px 16px; display: flex; flex-direction: column; justify-content: center; }
   @media (min-width: 1440px) { .cat-delivery { max-width: 480px; } }
   .cat-delivery__fin { display: flex; flex-direction: column; gap: 10px; }
@@ -5318,10 +5316,8 @@
   .tier--active .tier__radio::after { transform: scale(1); }
   .tier--green.tier--active .tier__radio { border-color: var(--green); }
   .tier--green.tier--active .tier__radio::after { background: var(--green); }
-  .tier--gold.tier--active .tier__radio { border-color: var(--gold); }
-  .tier--gold.tier--active .tier__radio::after { background: var(--gold); }
-  .tier--red.tier--active .tier__radio { border-color: var(--heat); }
-  .tier--red.tier--active .tier__radio::after { background: var(--heat); }
+  .tier--blue.tier--active .tier__radio { border-color: var(--signal); }
+  .tier--blue.tier--active .tier__radio::after { background: var(--signal); }
 
   /* sticky vehicle bar */
   .vfb { position: fixed; top: 0; left: 0; right: 0; background: var(--paper); border-bottom: 2px solid var(--ink); padding: 9px 0; z-index: 200; transform: translateY(-100%); opacity: 0; transition: transform .25s ease, opacity .25s ease; }
@@ -5331,7 +5327,7 @@
   .vfb__veh-name { font-family: var(--display); font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.01em; color: var(--ink); }
   .vfb__pills { display: flex; gap: 8px; }
   .vfb__pill { display: flex; align-items: center; gap: 6px; padding: 6px 13px; background: var(--paper); border: 1px solid var(--line); border-left: 3px solid var(--rule); font-family: var(--mono); font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--graphite); cursor: pointer; transition: all .15s; }
-  .vfb__pill--g { border-left-color: var(--green); } .vfb__pill--a { border-left-color: var(--gold); } .vfb__pill--x { border-left-color: var(--heat); }
+  .vfb__pill--g { border-left-color: var(--green); } .vfb__pill--b { border-left-color: var(--signal); }
   .vfb__pill--active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
   @media (max-width: 1080px) { .cat-head__panel { grid-template-columns: minmax(0,1fr); } .vfb__pills { display: none; } }
 
@@ -6015,10 +6011,9 @@ html, body{ overflow-x:clip; }
       <button type="button" class="veh-card__change" onclick="openYmmModal()">Change &rsaquo;</button>
     </div>
     <div class="vfb__pills" id="vfbPills">
-      <button class="vfb__pill vfb__pill--g vfb__pill--active" onclick="tierIdx(0)"><svg viewBox="0 0 24 24" width="14" height="14" fill="#16A34A"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg> No Rub</button>
-      <button class="vfb__pill vfb__pill--x" onclick="tierIdx(1)"><svg viewBox="0 0 24 24" width="14" height="14" fill="#E10600"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> OEM+</button>
-      <button class="vfb__pill vfb__pill--a" onclick="tierIdx(2)"><svg viewBox="0 0 24 24" width="14" height="14" fill="#F59E0B"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> Flush</button>
-      <button class="vfb__pill" onclick="tierIdx(3)"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#6B7280" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Show All</button>
+      <button class="vfb__pill vfb__pill--g vfb__pill--active" onclick="tierIdx(0)"><svg viewBox="0 0 24 24" width="14" height="14" fill="#16A34A"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg> Factory Original</button>
+      <button class="vfb__pill vfb__pill--b" onclick="tierIdx(1)"><svg viewBox="0 0 24 24" width="14" height="14" fill="#0066CC"><path d="M22 3h-7l2.6 2.6-4.6 4.6 1.8 1.8 4.6-4.6L22 10V3zM2 21h7l-2.6-2.6 4.6-4.6-1.8-1.8-4.6 4.6L2 14v7z"/></svg> Custom Sizes</button>
+      <button class="vfb__pill" onclick="tierIdx(2)"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#6B7280" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Show All</button>
     </div>
   </div>
 </div>
@@ -6207,15 +6202,12 @@ html, body{ overflow-x:clip; }
         <div class="tier-label">Select Your Tire Fitment</div>
         <div class="tiers">
           <button class="tier tier--green tier--active" onclick="tierIdx(0)" aria-pressed="true">
-            <svg class="tier__icon" viewBox="0 0 24 24" width="22" height="22" fill="#16A34A"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg><div><div class="tier__name">No Rub</div><div class="tier__sub">Bolts on. No rub, no trim.</div></div><span class="tier__radio" aria-hidden="true"></span>
+            <svg class="tier__icon" viewBox="0 0 24 24" width="22" height="22" fill="#16A34A"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg><div><div class="tier__name">Factory Original</div><div class="tier__sub">Matches your stock tire size</div></div><span class="tier__radio" aria-hidden="true"></span>
           </button>
-          <button class="tier tier--red" onclick="tierIdx(1)" aria-pressed="false">
-            <svg class="tier__icon" viewBox="0 0 24 24" width="22" height="22" fill="#E10600"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><div><div class="tier__name">OEM+</div><div class="tier__sub">Recommended by our specialists</div></div><span class="tier__radio" aria-hidden="true"></span>
+          <button class="tier tier--blue" onclick="tierIdx(1)" aria-pressed="false">
+            <svg class="tier__icon" viewBox="0 0 24 24" width="22" height="22" fill="#0066CC"><path d="M22 3h-7l2.6 2.6-4.6 4.6 1.8 1.8 4.6-4.6L22 10V3zM2 21h7l-2.6-2.6 4.6-4.6-1.8-1.8-4.6 4.6L2 14v7z"/></svg><div><div class="tier__name">Custom Sizes</div><div class="tier__sub">Plus-sized &amp; custom fitments</div></div><span class="tier__radio" aria-hidden="true"></span>
           </button>
-          <button class="tier tier--gold" onclick="tierIdx(2)" aria-pressed="false">
-            <svg class="tier__icon" viewBox="0 0 24 24" width="22" height="22" fill="#F59E0B"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg><div><div class="tier__name">Flush</div><div class="tier__sub">Minor trimming possible</div></div><span class="tier__radio" aria-hidden="true"></span>
-          </button>
-          <button class="tier" onclick="tierIdx(3)" aria-pressed="false">
+          <button class="tier" onclick="tierIdx(2)" aria-pressed="false">
             <svg class="tier__icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#6B7280" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><div><div class="tier__name">Show All</div><div class="tier__sub">All 8,400+ listings</div></div><span class="tier__radio" aria-hidden="true"></span>
           </button>
         </div>
@@ -6224,21 +6216,18 @@ html, body{ overflow-x:clip; }
           <button type="button" class="dd__trigger" aria-haspopup="listbox" aria-expanded="false" onclick="toggleDropdown('fitmentDropdownM')">
             <span class="dd__trigger-main">
               <svg class="dd__trigger-icon" viewBox="0 0 24 24" width="18" height="18" fill="#16A34A" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-              <span class="dd__trigger-label">No Rub</span>
+              <span class="dd__trigger-label">Factory Original</span>
             </span>
             <svg class="dd__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <ul class="dd__menu" role="listbox" aria-label="Select fitment" hidden>
             <li role="option" aria-selected="true" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="tierIdx(0); toggleDropdown('fitmentDropdownM', false);">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="#16A34A" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg> No Rub
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="#16A34A" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg> Factory Original
             </li>
             <li role="option" aria-selected="false" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="tierIdx(1); toggleDropdown('fitmentDropdownM', false);">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="#E10600" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> OEM+
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="#0066CC" aria-hidden="true"><path d="M22 3h-7l2.6 2.6-4.6 4.6 1.8 1.8 4.6-4.6L22 10V3zM2 21h7l-2.6-2.6 4.6-4.6-1.8-1.8-4.6 4.6L2 14v7z"/></svg> Custom Sizes
             </li>
             <li role="option" aria-selected="false" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="tierIdx(2); toggleDropdown('fitmentDropdownM', false);">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="#F59E0B" aria-hidden="true"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg> Flush
-            </li>
-            <li role="option" aria-selected="false" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="tierIdx(3); toggleDropdown('fitmentDropdownM', false);">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#6B7280" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Show All
             </li>
           </ul>
@@ -7169,22 +7158,15 @@ html, body{ overflow-x:clip; }
 
   /* Fitment tier tests, applied together with the "Sales" toggle in
      applyFilters() below:
-     0 No Rub -> only cards flagged .wcard__perk--g (no rub/no trim)
-     1 OEM+  -> specialist picks, read off the existing wcard__badge
-                     text (Staff Pick / Best Seller) since there's no
-                     separate "recommended" flag in the card data
-     2 Flush -> everything up to and including minor trim (--g or --a),
-                     excluding lift-required (--x)
-     3 Show All   -> no filtering */
+     0 Factory Original -> only cards flagged .wcard__perk--g (matches the
+                     stock/OEM size, no rub or trim)
+     1 Custom Sizes     -> everything else -- plus-sized or otherwise
+                     non-stock (.wcard__perk--a or --x)
+     2 Show All         -> no filtering */
   var activeFitTier = 0;
   function fitMatches(card, i) {
     if (i === 0) return !!card.querySelector('.wcard__perk--g');
-    if (i === 1) {
-      var badge = card.querySelector('.wcard__badge');
-      var label = badge ? badge.textContent.trim() : '';
-      return (label === 'Staff Pick' || label === 'Best Seller');
-    }
-    if (i === 2) return !!card.querySelector('.wcard__perk--g') || !!card.querySelector('.wcard__perk--a');
+    if (i === 1) return !!card.querySelector('.wcard__perk--a') || !!card.querySelector('.wcard__perk--x');
     return true;
   }
   function applyFitFilter(i) {

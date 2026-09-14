@@ -600,14 +600,13 @@ html, body{ overflow-x:clip; }
   /* Fitment-level picker — carried over from this page's earlier F-250 version */
   .yfit { border: 1px solid rgba(255,255,255,.18); background: rgba(10,10,10,.45); backdrop-filter: blur(8px); padding: 12px 14px; display: block; width: 100%; }
   .yfit__label { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,.62); display: block; margin-bottom: 8px; }
-  .yfit__row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .yfit__row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .yfit__btn { display: flex; align-items: center; gap: 9px; padding: 9px 13px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.16); cursor: pointer; transition: all .15s; text-align: left; color: #fff; min-height: 44px; }
   .yfit__btn:hover { border-color: rgba(255,255,255,.5); }
   .yfit__btn--active { border-color: var(--heat); background: rgba(225,6,0,.14); }
   .yfit__ico { width: 27px; height: 27px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .yfit__ico--g { background: rgba(22,163,74,.18); }
-  .yfit__ico--a { background: rgba(245,158,11,.16); }
-  .yfit__ico--x { background: rgba(225,6,0,.16); }
+  .yfit__ico--b { background: rgba(0,102,204,.16); }
   .yfit__ico--s { background: rgba(107,114,128,.16); }
   .yfit__name { font-family: var(--display); font-size: 12px; font-weight: 800; color: #fff; display: block; line-height: 1.2; }
   .yfit__sub { font-family: var(--ui); font-size: 10.5px; color: rgba(255,255,255,.62); }
@@ -1392,17 +1391,13 @@ html, body{ overflow-x:clip; }
           <div class="yfit__row" id="heroFit">
             <button type="button" class="yfit__btn yfit__btn--active" aria-pressed="true" data-tier="0">
               <span class="yfit__ico yfit__ico--g" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="#16A34A"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></span>
-              <span><span class="yfit__name">No Rub</span><span class="yfit__sub">No rubbing</span></span>
+              <span><span class="yfit__name">Factory Original</span><span class="yfit__sub">Matches your stock size</span></span>
             </button>
             <button type="button" class="yfit__btn" aria-pressed="false" data-tier="1">
-              <span class="yfit__ico yfit__ico--x" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="#E10600"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></span>
-              <span><span class="yfit__name">CO Choice</span><span class="yfit__sub">Our top pick</span></span>
+              <span class="yfit__ico yfit__ico--b" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="#0066CC"><path d="M22 3h-7l2.6 2.6-4.6 4.6 1.8 1.8 4.6-4.6L22 10V3zM2 21h7l-2.6-2.6 4.6-4.6-1.8-1.8-4.6 4.6L2 14v7z"/></svg></span>
+              <span><span class="yfit__name">Custom Sizes</span><span class="yfit__sub">Plus-sized &amp; custom</span></span>
             </button>
             <button type="button" class="yfit__btn" aria-pressed="false" data-tier="2">
-              <span class="yfit__ico yfit__ico--a" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="#F59E0B"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg></span>
-              <span><span class="yfit__name">Aggressive</span><span class="yfit__sub">Minor mods possible</span></span>
-            </button>
-            <button type="button" class="yfit__btn" aria-pressed="false" data-tier="3">
               <span class="yfit__ico yfit__ico--s" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#6B7280" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
               <span><span class="yfit__name">Show All</span><span class="yfit__sub">Every listing</span></span>
             </button>
