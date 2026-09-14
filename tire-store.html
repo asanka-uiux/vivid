@@ -5206,8 +5206,12 @@
   .ymm-modal__field { display: flex; flex-direction: column; gap: 6px; }
   .ymm-modal__select { width: 100%; appearance: none; -webkit-appearance: none; padding: 10px 40px 10px 14px; background-color: var(--paper); background-image: url("assets/icons/chevron-down.svg"); background-repeat: no-repeat; background-position: right 15px center; background-size: 11px 7px; border: 1px solid var(--rule); border-radius: 4px; font-family: var(--font-form); font-weight: 600; font-size: 16px; line-height: 24px; text-transform: uppercase; color: var(--field-ink); cursor: pointer; min-height: 48px; transition: border-color .15s; }
   .ymm-modal__select:hover { border-color: var(--steel); }
-  .ymm-modal__submit { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px; min-height: 48px; background: var(--action-primary); color: #fff; border: 0; border-radius: 4px; font-family: var(--font-form); font-weight: 600; font-size: 16px; line-height: 24px; text-transform: uppercase; cursor: pointer; transition: background .15s; }
-  .ymm-modal__submit:hover { background: var(--heat-deep); }
+  .ymm-modal__submit { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px; min-height: 48px; background: var(--action-primary); color: #fff; border: 0; border-radius: 4px; font-family: var(--font-form); font-weight: 600; font-size: 16px; line-height: 24px; text-transform: uppercase; cursor: pointer; transition: background .15s, box-shadow .15s; }
+  /* was var(--heat-deep) -- #b31414 to #b30500 is a ~15-unit shift in two
+     channels, invisible on a small button. --heat is #e10600: a genuinely
+     brighter red, so the hover actually reads, plus the glow already used
+     on this page's other submit buttons (.ai-filter__submit etc). */
+  .ymm-modal__submit:hover { background: var(--heat); box-shadow: 0 3px 10px rgba(225,6,0,.35); }
   @media (max-width: 700px) {
     .ymm-modal__panel { padding: 16px; }
     .ymm-modal__title { margin: -16px -16px 20px; padding: 14px 16px; }
