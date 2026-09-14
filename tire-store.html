@@ -5044,8 +5044,12 @@
   .sale-filter__label { display: flex; align-items: center; gap: 9px; font-family: var(--ui); font-size: 14px; font-weight: 700; color: var(--ink); cursor: pointer; }
   .sale-filter__label svg { flex: none; color: var(--heat); }
   .tgl-switch { position: relative; flex: none; display: inline-block; width: 38px; height: 22px; }
-  .tgl-switch__input { position: absolute; inset: 0; opacity: 0; margin: 0; width: 100%; height: 100%; cursor: pointer; }
-  .tgl-switch__track { position: absolute; inset: 0; background: var(--rule); border: 1px solid var(--rule); border-radius: 999px; transition: background .15s, border-color .15s; }
+  .tgl-switch__input { position: absolute; inset: 0; opacity: 0; margin: 0; width: 100%; height: 100%; cursor: pointer; z-index: 1; }
+  /* track paints later in DOM order than the input, so with no z-index of
+     its own it sat on top and silently ate every real click -- the input's
+     :checked state changed the track's look but nothing ever reached it.
+     pointer-events:none lets clicks pass through to the actual input. */
+  .tgl-switch__track { position: absolute; inset: 0; background: var(--rule); border: 1px solid var(--rule); border-radius: 999px; transition: background .15s, border-color .15s; pointer-events: none; }
   .tgl-switch__track::before { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; background: var(--paper); border-radius: 50%; box-shadow: 0 1px 2px rgba(0,0,0,.25); transition: transform .15s; }
   .tgl-switch__input:checked + .tgl-switch__track { background: var(--heat); border-color: var(--heat); }
   .tgl-switch__input:checked + .tgl-switch__track::before { transform: translateX(16px); }
