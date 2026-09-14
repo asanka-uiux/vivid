@@ -5039,6 +5039,13 @@
   .deliver-to__date { display: flex; align-items: center; gap: 9px; font-family: var(--ui); font-size: 13px; color: var(--ink); cursor: pointer; }
   .deliver-to__date input[type=radio] { accent-color: var(--heat); width: 15px; height: 15px; }
 
+  /* mobile-only quick strip inside .cat-head__panel, see @media(max-width:700px) below */
+  .cat-mobile-quick { display: none; }
+  .cat-mobile-quick__fin { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-family: var(--ui); font-size: 12.5px; font-weight: 700; color: var(--heat-deep); text-decoration: none; background: var(--bone); border: 1px solid var(--line); padding: 12px 14px; margin-bottom: 12px; }
+  .cat-mobile-quick__fin:hover { color: var(--heat); border-color: var(--heat); }
+  .cat-mobile-quick > .deliver-to { margin-bottom: 12px; }
+  .cat-mobile-quick > .ai-filter { border: 1px solid var(--line); padding: 12px 14px; margin: 0; }
+
   /* --- sales toggle -------------------------------------------------------- */
   .sale-filter { border: 1px solid var(--line); padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   .sale-filter__label { display: flex; align-items: center; gap: 9px; font-family: var(--ui); font-size: 14px; font-weight: 700; color: var(--ink); cursor: pointer; }
@@ -5280,8 +5287,12 @@
      scroller so no trust signal ends up hidden off-screen. --- */
   @media (max-width: 700px) {
     .cat-head__panel > .veh-card { order: 1; }
-    .cat-delivery                { order: 2; }
+    .cat-mobile-quick            { display: block; order: 2; }
+    .cat-delivery                { order: 2; display: none; }
     .cat-head__fitment           { order: 3; }
+    /* originals now duplicated above in .cat-mobile-quick; hide so the
+       Filter drawer doesn't show them twice at this width */
+    .filters > .ai-filter, .filters > .deliver-to { display: none; }
 
     /* Vehicle card after node 171:11983 ("Change vehicle", 358x111): 8px/12px
        padding, an 8px gap between the text block and the chip row, the
@@ -6035,6 +6046,39 @@ html, body{ overflow-x:clip; }
         <div class="expert-card__btns">
           <a href="waiting-to-build/contact.html" class="expert-card__btn"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg> Chat with us</a>
           <a href="tel:14809663040" class="expert-card__btn"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg> 480-966-3040</a>
+        </div>
+      </div>
+
+      <!-- ===== Mobile-only (<=700px): financing link + delivery estimate +
+           AI search, pulled up here from .filters so they're visible without
+           opening the Filter drawer. Own ids (M suffix) so they don't collide
+           with the originals, which stay in .filters for desktop/tablet and
+           are hidden there at this width by the .filters > .ai-filter /
+           .filters > .deliver-to rules below. ===== -->
+      <div class="cat-mobile-quick">
+        <a href="#" class="cat-mobile-quick__fin">0% APR &amp; flexible financing available &rarr;</a>
+        <div class="deliver-to">
+          <div class="deliver-to__row" id="deliverToRowM">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h13v13H1z"/><path d="M14 8h4l3 3v5h-7V8z"/><circle cx="6" cy="18" r="2"/><circle cx="17.5" cy="18" r="2"/></svg>
+            <span>Deliver to:</span>
+            <button type="button" class="deliver-to__link" id="deliverToZipM" onclick="showDeliverToEditMobile()">54115 Ashwaubenon, WI</button>
+          </div>
+          <form class="deliver-to__editform" id="deliverToEditFormM" onsubmit="return submitDeliverToZipMobile(event)" hidden>
+            <label class="vh" for="deliverToInputM">New zip code</label>
+            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="5" id="deliverToInputM" class="deliver-to__editinput" placeholder="Zip code">
+            <button type="submit" class="deliver-to__editbtn">Update</button>
+          </form>
+          <div class="deliver-to__dates">
+            <label class="deliver-to__date"><input type="radio" name="deliverToDateM" checked/> Monday, Sep 14</label>
+            <label class="deliver-to__date"><input type="radio" name="deliverToDateM"/> Tuesday, Sep 15</label>
+          </div>
+        </div>
+        <div class="ai-filter">
+          <div class="ai-filter__label">Filter with Vivid Racing AI</div>
+          <form class="ai-filter__form" onsubmit="return false;">
+            <input type="text" class="ai-filter__input" placeholder="Filter with Vivid Racing AI" aria-label="Filter with Vivid Racing AI">
+            <button type="submit" class="ai-filter__submit">Go</button>
+          </form>
         </div>
       </div>
 
@@ -6941,6 +6985,26 @@ html, body{ overflow-x:clip; }
     zipEl.textContent = val + ' ' + cityPart;
     document.getElementById('deliverToEditForm').hidden = true;
     document.getElementById('deliverToRow').hidden = false;
+    return false;
+  }
+  function showDeliverToEditMobile() {
+    document.getElementById('deliverToRowM').hidden = true;
+    var form = document.getElementById('deliverToEditFormM');
+    form.hidden = false;
+    var input = document.getElementById('deliverToInputM');
+    input.value = '';
+    input.focus();
+  }
+  function submitDeliverToZipMobile(e) {
+    e.preventDefault();
+    var input = document.getElementById('deliverToInputM');
+    var val = input.value.trim();
+    if (!/^\d{5}$/.test(val)) return false;
+    var zipEl = document.getElementById('deliverToZipM');
+    var cityPart = zipEl.textContent.replace(/^\d{5}\s*/, '');
+    zipEl.textContent = val + ' ' + cityPart;
+    document.getElementById('deliverToEditFormM').hidden = true;
+    document.getElementById('deliverToRowM').hidden = false;
     return false;
   }
   function tierIdx(i) {

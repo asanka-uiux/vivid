@@ -4978,6 +4978,12 @@
   .ai-filter__submit:hover { background: var(--heat); }
   .zip-filter { padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
   .zip-filter__zipval { color: var(--ink); font-weight: 700; letter-spacing: 0; margin-left: 6px; }
+  /* mobile-only quick strip inside .cat-head__panel, see @media(max-width:700px) below */
+  .cat-mobile-quick { display: none; }
+  .cat-mobile-quick__fin { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-family: var(--ui); font-size: 12.5px; font-weight: 700; color: var(--heat-deep); text-decoration: none; background: var(--bone); border: 1px solid var(--line); padding: 12px 14px; margin-bottom: 12px; }
+  .cat-mobile-quick__fin:hover { color: var(--heat); border-color: var(--heat); }
+  .cat-mobile-quick > .zip-filter, .cat-mobile-quick > .ai-filter { border: 1px solid var(--line); padding: 12px 14px; margin: 0 0 12px; }
+  .cat-mobile-quick > .ai-filter:last-child { margin-bottom: 0; }
   .zip-filter__ship { margin-top: 12px; }
   .zip-filter__ship-opt { display: flex; align-items: center; gap: 8px; font-family: var(--ui); font-size: 12.5px; color: #444; padding: 4px 0; cursor: pointer; }
   .zip-filter__ship-opt input[type=radio] { accent-color: var(--heat); }
@@ -5265,8 +5271,12 @@
      scroller so no trust signal ends up hidden off-screen. --- */
   @media (max-width: 700px) {
     .cat-head__panel > .veh-card { order: 1; }
-    .cat-delivery                { order: 2; }
+    .cat-mobile-quick            { display: block; order: 2; }
+    .cat-delivery                { order: 2; display: none; }
     .cat-head__fitment           { order: 3; }
+    /* originals now duplicated above in .cat-mobile-quick; hide so the
+       Filter drawer doesn't show them twice at this width */
+    .filters > .ai-filter, .filters > .zip-filter { display: none; }
 
     /* Vehicle card after node 171:11983 ("Change vehicle", 358x111): 8px/12px
        padding, an 8px gap between the text block and the chip row, the
@@ -6020,6 +6030,41 @@ html, body{ overflow-x:clip; }
         <div class="expert-card__btns">
           <a href="waiting-to-build/contact.html" class="expert-card__btn"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg> Chat with us</a>
           <a href="tel:14809663040" class="expert-card__btn"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg> 480-966-3040</a>
+        </div>
+      </div>
+
+      <!-- ===== Mobile-only (<=700px): financing link + delivery estimate +
+           AI search, pulled up here from .filters so they're visible without
+           opening the Filter drawer. Own ids (M suffix) so they don't collide
+           with the originals, which stay in .filters for desktop/tablet and
+           are hidden there at this width by the .filters > .ai-filter /
+           .filters > .zip-filter rules below. ===== -->
+      <div class="cat-mobile-quick">
+        <a href="#" class="cat-mobile-quick__fin">0% APR &amp; flexible financing available &rarr;</a>
+        <div class="zip-filter">
+          <div class="ai-filter__label" id="zipFilterLabelM">Shipping Zip Code</div>
+          <form class="ai-filter__form" onsubmit="return zipFilterSubmitMobile(event)">
+            <label class="vh" for="zipFilterInputM">Zip code</label>
+            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="5" id="zipFilterInputM" class="ai-filter__input" placeholder="Zip code" aria-label="Shipping zip code" value="85281">
+            <button type="submit" class="ai-filter__submit">Update</button>
+          </form>
+          <div class="zip-filter__ship" id="zipFilterShipM" hidden>
+            <label class="zip-filter__ship-opt">
+              <input type="radio" name="zipShipSpeedM" value="free" checked>
+              <span>Free Shipping on <strong id="zipFreeDateM"></strong></span>
+            </label>
+            <label class="zip-filter__ship-opt">
+              <input type="radio" name="zipShipSpeedM" value="fast">
+              <span>Fast Shipping <strong id="zipFastDateM"></strong></span>
+            </label>
+          </div>
+        </div>
+        <div class="ai-filter">
+          <div class="ai-filter__label">Filter with Vivid Racing AI</div>
+          <form class="ai-filter__form" onsubmit="return false;">
+            <input type="text" class="ai-filter__input" placeholder="Filter with Vivid Racing AI" aria-label="Filter with Vivid Racing AI">
+            <button type="submit" class="ai-filter__submit">Go</button>
+          </form>
         </div>
       </div>
 
@@ -7059,6 +7104,28 @@ html, body{ overflow-x:clip; }
     document.getElementById('zipFreeDate').textContent = formatRange(freeStart, freeEnd);
     document.getElementById('zipFastDate').textContent = formatRange(fastStart, fastEnd);
     document.getElementById('zipFilterShip').hidden = false;
+    return false;
+  }
+  function zipFilterSubmitMobile(e) {
+    e.preventDefault();
+    var input = document.getElementById('zipFilterInputM');
+    var val = input.value.trim();
+    if (!/^\d{5}$/.test(val)) return false;
+    document.getElementById('zipFilterLabelM').innerHTML = 'Shipping Zip Code<span class="zip-filter__zipval">' + val + '</span>';
+    var monthFmt = function(d){ return d.toLocaleDateString('en-US', {month:'short'}); };
+    var dayFmt = function(d){ return d.getDate(); };
+    var formatRange = function(start, end){
+      if (monthFmt(start) === monthFmt(end)) return monthFmt(start) + ' ' + dayFmt(start) + ' – ' + dayFmt(end);
+      return monthFmt(start) + ' ' + dayFmt(start) + ' – ' + monthFmt(end) + ' ' + dayFmt(end);
+    };
+    var today = new Date();
+    var freeStart = new Date(today); freeStart.setDate(today.getDate() + 7);
+    var freeEnd = new Date(today); freeEnd.setDate(today.getDate() + 9);
+    var fastStart = new Date(today); fastStart.setDate(today.getDate() + 2);
+    var fastEnd = new Date(today); fastEnd.setDate(today.getDate() + 3);
+    document.getElementById('zipFreeDateM').textContent = formatRange(freeStart, freeEnd);
+    document.getElementById('zipFastDateM').textContent = formatRange(fastStart, fastEnd);
+    document.getElementById('zipFilterShipM').hidden = false;
     return false;
   }
   function toggleFilters(forceState) {
