@@ -5048,7 +5048,8 @@
      dead gap under the label. Flowing both lines left is what actually
      collapses that gap. */
   .zip-filter__confirmed:not([hidden]) { display: block; }
-  .zip-filter__confirmed-label { display: block; font-family: var(--ui); font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+  .zip-filter__confirmed-label { display: flex; align-items: center; gap: 6px; font-family: var(--ui); font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+  .zip-filter__confirmed-label svg { flex: none; }
   .zip-filter__confirmed-zip { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; }
   .zip-filter__confirmed-caption { font-family: var(--ui); font-size: 12px; color: var(--ink); }
   .zip-filter__confirmed-value { font-family: var(--ui); font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
@@ -6092,7 +6093,10 @@ html, body{ overflow-x:clip; }
           <!-- Figma node 2602:21525 ("Enter Shipping Date"), stacked left
                (see the comment on .zip-filter__confirmed in <style>). -->
           <div class="zip-filter__confirmed" id="deliverToRowM">
-            <span class="zip-filter__confirmed-label">Estimate Your Delivery Time</span>
+            <span class="zip-filter__confirmed-label">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h13v13H1z"/><path d="M14 8h4l3 3v5h-7V8z"/><circle cx="6" cy="18" r="2"/><circle cx="17.5" cy="18" r="2"/></svg>
+              Estimate Your Delivery Time
+            </span>
             <p class="zip-filter__confirmed-zip">
               <span class="zip-filter__confirmed-caption">Shipping to:</span>
               <span class="zip-filter__confirmed-value" id="deliverToZipM">54115 Ashwaubenon, WI</span>
