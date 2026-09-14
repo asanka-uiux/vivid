@@ -267,7 +267,7 @@
   }
   .header__search input::placeholder { color: var(--steel); font-weight: 400; }
   .header__search button {
-    background: var(--heat);
+    background: var(--heat-deep);
     color: var(--paper);
     border: 0;
     height: 100%;
@@ -283,7 +283,7 @@
     text-transform: uppercase;
     transition: background 0.15s;
   }
-  .header__search button:hover { background: var(--heat-deep); }
+  .header__search button:hover { background: var(--heat); }
   .header__search button svg { width: 18px; height: 18px; }
 
   /* Utility blocks — heavier, intentional, CO-style */
@@ -507,7 +507,7 @@
     cursor: pointer;
   }
   .vp__btn {
-    background: var(--heat);
+    background: var(--heat-deep);
     color: var(--paper);
     border: 0;
     padding: 11px 22px;
@@ -521,7 +521,7 @@
     align-items: center;
     gap: 8px;
   }
-  .vp__btn:hover { background: var(--heat-deep); }
+  .vp__btn:hover { background: var(--heat); }
   .vp__saved {
     font-family: var(--mono);
     font-size: 11px;
@@ -692,8 +692,8 @@
     gap: 10px;
     text-decoration: none;
   }
-  .btn--heat { background: var(--heat); color: var(--paper); border-color: var(--heat); }
-  .btn--heat:hover { background: var(--heat-deep); border-color: var(--heat-deep); }
+  .btn--heat { background: var(--heat-deep); color: var(--paper); border-color: var(--heat-deep); }
+  .btn--heat:hover { background: var(--heat); }
   .btn--ink { background: var(--ink); color: var(--paper); border-color: var(--ink); }
   .btn--ink:hover { background: var(--graphite); border-color: var(--graphite); }
   .btn--paper { background: var(--paper); color: var(--ink); border-color: var(--paper); }
@@ -2681,7 +2681,7 @@
   .deal__finance strong { color: var(--ink); font-weight: 700; }
   .deal__cta {
     margin-top: auto;
-    background: var(--heat);
+    background: var(--heat-deep);
     color: var(--paper);
     border: 0;
     padding: 11px 14px;
@@ -2693,7 +2693,7 @@
     transition: background 0.15s;
     width: 100%;
   }
-  .deal__cta:hover { background: var(--heat-deep); }
+  .deal__cta:hover { background: var(--heat); }
 
   /* Standard deal badges */
   .deal__media .badge {
@@ -3078,7 +3078,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--heat);
+    background: var(--heat-deep);
     color: var(--paper);
     padding: 11px 18px;
     font-family: var(--ui);
@@ -3091,7 +3091,7 @@
     cursor: pointer;
     transition: background 0.15s;
   }
-  .deals-midbanner__cta:hover { background: var(--heat-deep); }
+  .deals-midbanner__cta:hover { background: var(--heat); }
 
   /* Cross-sell line on featured card */
   .deals-feature__crosssell {
@@ -3556,7 +3556,7 @@
   .product__finance strong { color: var(--ink); font-weight: 700; }
   .product__cta {
     margin-top: auto;
-    background: var(--heat);
+    background: var(--heat-deep);
     color: var(--paper);
     border: 0;
     padding: 11px 14px;
@@ -3568,7 +3568,7 @@
     transition: background 0.15s;
     width: 100%;
   }
-  .product__cta:hover { background: var(--heat-deep); }
+  .product__cta:hover { background: var(--heat); }
 
   /* ===== SHOP BY VEHICLE ===== */
   .vehicles {
@@ -4401,7 +4401,7 @@
   }
   .email__input::placeholder { color: var(--steel); }
   .email__submit {
-    background: var(--heat);
+    background: var(--heat-deep);
     color: var(--paper);
     border: 0;
     padding: 14px 22px;
@@ -4412,7 +4412,7 @@
     cursor: pointer;
     transition: background 0.15s;
   }
-  .email__submit:hover { background: var(--heat-deep); }
+  .email__submit:hover { background: var(--heat); }
   .email__legal { margin-top: 12px; font-family: var(--mono); font-size: 10px; color: var(--steel); letter-spacing: 0.06em; }
 
   /* ===== FOOTER ===== */
@@ -4445,8 +4445,8 @@
   .footer__email-input { flex: 1; min-width: 0; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.18); border-right: 0; color: var(--paper); padding: 10px 14px; font-family: 'Inter', sans-serif; font-size: 12px; outline: none; }
   .footer__email-input::placeholder { color: rgba(255,255,255,0.4); }
   .footer__email-input:focus { border-color: var(--heat); }
-  .footer__email-btn { background: var(--heat); color: var(--paper); border: 0; padding: 0 18px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; font-weight: 800; cursor: pointer; transition: background 0.15s; }
-  .footer__email-btn:hover { background: var(--paper); color: var(--ink); }
+  .footer__email-btn { background: var(--heat-deep); color: var(--paper); border: 0; padding: 0 18px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; font-weight: 800; cursor: pointer; transition: background 0.15s; }
+  .footer__email-btn:hover { background: var(--heat); }
   .footer__col-title {
     font-family: var(--mono);
     font-size: 10px;
@@ -4974,8 +4974,8 @@
   .ai-filter__form { display: flex; gap: 6px; }
   .ai-filter__input { flex: 1; min-width: 0; padding: 9px 10px; border: 1px solid var(--rule); font-family: var(--ui); font-size: 12.5px; color: var(--ink); }
   .ai-filter__input::placeholder { color: var(--steel); }
-  .ai-filter__submit { flex: none; padding: 9px 16px; background: var(--heat); color: var(--paper); border: 1px solid var(--heat); font-family: var(--display); font-size: 11px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: all .15s; box-shadow: 0 2px 6px rgba(225,6,0,.25); }
-  .ai-filter__submit:hover { background: var(--heat-deep); border-color: var(--heat-deep); box-shadow: 0 3px 10px rgba(225,6,0,.35); }
+  .ai-filter__submit { flex: none; padding: 9px 16px; background: var(--heat-deep); color: var(--paper); border: 0; font-family: var(--display); font-size: 11px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: background .15s; }
+  .ai-filter__submit:hover { background: var(--heat); }
   .zip-filter { padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
   .zip-filter__zipval { color: var(--ink); font-weight: 700; letter-spacing: 0; margin-left: 6px; }
   .zip-filter__ship { margin-top: 12px; }
@@ -5018,8 +5018,8 @@
   .ffilter__keyword-form { display: flex; flex-direction: column; gap: 10px; }
   .ffilter__keyword-input { padding: 9px 10px; border: 1px solid var(--rule); font-family: var(--ui); font-size: 12.5px; color: var(--ink); }
   .ffilter__keyword-input::placeholder { color: var(--steel); }
-  .ffilter__keyword-btn { align-self: flex-start; padding: 9px 22px; background: var(--heat); color: var(--paper); border: 1px solid var(--heat); font-family: var(--display); font-size: 11px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: all .15s; box-shadow: 0 2px 6px rgba(225,6,0,.25); }
-  .ffilter__keyword-btn:hover { background: var(--heat-deep); border-color: var(--heat-deep); box-shadow: 0 3px 10px rgba(225,6,0,.35); }
+  .ffilter__keyword-btn { align-self: flex-start; padding: 9px 22px; background: var(--heat-deep); color: var(--paper); border: 0; font-family: var(--display); font-size: 11px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: background .15s; }
+  .ffilter__keyword-btn:hover { background: var(--heat); }
 
   .ffilter__additional { padding-top: 4px; }
   .ffilter__additional-label { text-align: center; font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); margin-bottom: 6px; }
@@ -5033,8 +5033,8 @@
   .deliver-to__link:hover { color: var(--heat-deep); }
   .deliver-to__editform:not([hidden]) { display: flex; gap: 6px; margin-bottom: 12px; }
   .deliver-to__editinput { flex: 1; min-width: 0; padding: 8px 10px; border: 1px solid var(--rule); font-family: var(--ui); font-size: 12.5px; color: var(--ink); }
-  .deliver-to__editbtn { flex: none; padding: 8px 14px; background: var(--heat); color: var(--paper); border: 1px solid var(--heat); font-family: var(--display); font-size: 11px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: background .15s; }
-  .deliver-to__editbtn:hover { background: var(--heat-deep); border-color: var(--heat-deep); }
+  .deliver-to__editbtn { flex: none; padding: 8px 14px; background: var(--heat-deep); color: var(--paper); border: 0; font-family: var(--display); font-size: 11px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: background .15s; }
+  .deliver-to__editbtn:hover { background: var(--heat); }
   .deliver-to__dates { display: flex; flex-direction: column; gap: 10px; }
   .deliver-to__date { display: flex; align-items: center; gap: 9px; font-family: var(--ui); font-size: 13px; color: var(--ink); cursor: pointer; }
   .deliver-to__date input[type=radio] { accent-color: var(--heat); width: 15px; height: 15px; }
@@ -5206,12 +5206,8 @@
   .ymm-modal__field { display: flex; flex-direction: column; gap: 6px; }
   .ymm-modal__select { width: 100%; appearance: none; -webkit-appearance: none; padding: 10px 40px 10px 14px; background-color: var(--paper); background-image: url("assets/icons/chevron-down.svg"); background-repeat: no-repeat; background-position: right 15px center; background-size: 11px 7px; border: 1px solid var(--rule); border-radius: 4px; font-family: var(--font-form); font-weight: 600; font-size: 16px; line-height: 24px; text-transform: uppercase; color: var(--field-ink); cursor: pointer; min-height: 48px; transition: border-color .15s; }
   .ymm-modal__select:hover { border-color: var(--steel); }
-  .ymm-modal__submit { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px; min-height: 48px; background: var(--action-primary); color: #fff; border: 0; border-radius: 4px; font-family: var(--font-form); font-weight: 600; font-size: 16px; line-height: 24px; text-transform: uppercase; cursor: pointer; transition: background .15s, box-shadow .15s; }
-  /* was var(--heat-deep) -- #b31414 to #b30500 is a ~15-unit shift in two
-     channels, invisible on a small button. --heat is #e10600: a genuinely
-     brighter red, so the hover actually reads, plus the glow already used
-     on this page's other submit buttons (.ai-filter__submit etc). */
-  .ymm-modal__submit:hover { background: var(--heat); box-shadow: 0 3px 10px rgba(225,6,0,.35); }
+  .ymm-modal__submit { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px; min-height: 48px; background: var(--heat-deep); color: #fff; border: 0; border-radius: 4px; font-family: var(--font-form); font-weight: 600; font-size: 16px; line-height: 24px; text-transform: uppercase; cursor: pointer; transition: background .15s; }
+  .ymm-modal__submit:hover { background: var(--heat); }
   @media (max-width: 700px) {
     .ymm-modal__panel { padding: 16px; }
     .ymm-modal__title { margin: -16px -16px 20px; padding: 14px 16px; }
