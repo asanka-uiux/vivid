@@ -5041,11 +5041,16 @@
 
   /* confirmed-zip row, after Figma node 2602:21525 ("Enter Shipping Date") --
      shared layout with wheel-store.html's mobile zip-filter widget */
-  .zip-filter__confirmed:not([hidden]) { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 4px 10px; }
-  .zip-filter__confirmed-label { font-family: var(--ui); font-size: 12px; font-weight: 600; color: var(--ink); flex: 1 1 auto; min-width: 130px; }
-  .zip-filter__confirmed-zip { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; text-align: right; flex: 0 1 auto; min-width: 0; max-width: 100%; }
+  /* stacked, left-aligned: Figma's side-by-side two-column layout assumed a
+     short zip ("54130") in a fixed 118px column, which doesn't hold up with
+     our real content (wheel-store's zip, tire-store's zip+city) at mobile
+     widths -- it wrapped to its own line but stayed right-aligned, leaving a
+     dead gap under the label. Flowing both lines left is what actually
+     collapses that gap. */
+  .zip-filter__confirmed:not([hidden]) { display: block; }
+  .zip-filter__confirmed-label { display: block; font-family: var(--ui); font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+  .zip-filter__confirmed-zip { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; }
   .zip-filter__confirmed-caption { font-family: var(--ui); font-size: 12px; color: var(--ink); }
-  .zip-filter__confirmed-row2 { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 4px 6px; }
   .zip-filter__confirmed-value { font-family: var(--ui); font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
   .zip-filter__confirmed-change { background: none; border: 0; padding: 0; font-family: var(--ui); font-size: 12px; font-weight: 600; color: var(--heat-deep); cursor: pointer; }
   .zip-filter__confirmed-change:hover { color: var(--heat); }
@@ -6082,17 +6087,15 @@ html, body{ overflow-x:clip; }
       <div class="cat-mobile-quick">
         <a href="#" class="cat-mobile-quick__fin"><span>0% APR &amp; flexible financing available</span> &rarr;</a>
         <div class="deliver-to">
-          <!-- Figma node 2602:21525 ("Enter Shipping Date"): label left,
-               confirmed zip + Change stacked on the right. -->
+          <!-- Figma node 2602:21525 ("Enter Shipping Date"), stacked left
+               (see the comment on .zip-filter__confirmed in <style>). -->
           <div class="zip-filter__confirmed" id="deliverToRowM">
             <span class="zip-filter__confirmed-label">Estimate Your Delivery Time</span>
-            <div class="zip-filter__confirmed-zip">
+            <p class="zip-filter__confirmed-zip">
               <span class="zip-filter__confirmed-caption">Shipping to:</span>
-              <span class="zip-filter__confirmed-row2">
-                <span class="zip-filter__confirmed-value" id="deliverToZipM">54115 Ashwaubenon, WI</span>
-                <button type="button" class="zip-filter__confirmed-change" onclick="showDeliverToEditMobile()">Change &rsaquo;</button>
-              </span>
-            </div>
+              <span class="zip-filter__confirmed-value" id="deliverToZipM">54115 Ashwaubenon, WI</span>
+              <button type="button" class="zip-filter__confirmed-change" onclick="showDeliverToEditMobile()">Change &rsaquo;</button>
+            </p>
           </div>
           <form class="deliver-to__editform" id="deliverToEditFormM" onsubmit="return submitDeliverToZipMobile(event)" hidden>
             <label class="vh" for="deliverToInputM">New zip code</label>
