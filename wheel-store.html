@@ -4962,8 +4962,13 @@
   .cat-delivery__fin-link:hover { color: var(--heat-deep); }
 
   .listing { padding: 36px 0 56px; }
+  /* .filters, .sortbar, .wgrid, .loadmore, .pgn are 5 direct siblings here
+     (no wrapping div around the last 4) so mobile can reorder them below
+     with plain `order` -- .filters spanning 4 rows in column 1 is what lets
+     the other 4 auto-place into column 2 without needing their own explicit
+     grid-row. */
   .listing__grid { display: grid; grid-template-columns: 300px 1fr; gap: 28px; align-items: start; }
-  .filters { background: var(--paper); border: 1px solid var(--line); padding: 8px; position: sticky; top: 130px; }
+  .filters { grid-row: span 4; background: var(--paper); border: 1px solid var(--line); padding: 8px; position: sticky; top: 130px; }
   .ai-filter { padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
   .ai-filter__label { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink); font-weight: 600; margin-bottom: 8px; white-space: nowrap; }
   .ai-filter__form { display: flex; gap: 6px; }
@@ -5138,8 +5143,16 @@
   @media (max-width: 1080px) {
     .listing { padding: 12px 0 56px; }
     .listing__grid { grid-template-columns: minmax(0,1fr); }
-    .filters { position: static; display: none; }
+    /* Single column now, so source order alone decides stacking -- reorder
+       so tapping "Filter" (in .sortbar) reveals the panel directly beneath
+       it, not above the whole listing (.filters was first in the DOM, which
+       used to put the opened panel above .sortbar and everything else). */
+    .filters { grid-row: auto; position: static; display: none; order: 2; }
     .filters.is-open { display: block; }
+    .sortbar { order: 1; }
+    .wgrid { order: 3; }
+    .loadmore { order: 4; }
+    .pgn { order: 5; }
     .tiers { grid-template-columns: repeat(2, minmax(0,1fr)); }
     .cat-head__grid { grid-template-columns: 1fr; }
   }
@@ -6349,7 +6362,6 @@ html, body{ overflow-x:clip; }
         </div>
       </aside>
 
-      <div>
         <div class="sortbar">
           <span class="sortbar__count"><strong>1&ndash;20</strong> of <strong>1,217</strong> guaranteed-fit wheels</span>
           <div class="sortbar__controls">
@@ -6844,7 +6856,6 @@ html, body{ overflow-x:clip; }
             Next <svg viewBox="0 0 8 12" width="7" height="11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 1l5 5-5 5"/></svg>
           </button>
         </nav>
-      </div>
     </div>
   </div>
 </section>
