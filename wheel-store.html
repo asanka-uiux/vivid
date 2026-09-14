@@ -4969,6 +4969,8 @@
      grid-row. */
   .listing__grid { display: grid; grid-template-columns: 300px 1fr; gap: 28px; align-items: start; }
   .filters { grid-row: span 3; background: var(--paper); border: 1px solid var(--line); padding: 8px; position: sticky; top: 130px; }
+  /* drawer-only chrome, unused on the persistent desktop sidebar */
+  .filters__overlay, .filters__head { display: none; }
   .ai-filter { padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
   .ai-filter__label { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink); font-weight: 600; margin-bottom: 8px; white-space: nowrap; }
   .ai-filter__form { display: flex; gap: 6px; }
@@ -5211,15 +5213,31 @@
   @media (max-width: 1080px) {
     .listing { padding: 12px 0 56px; }
     .listing__grid { grid-template-columns: minmax(0,1fr); }
-    /* Single column now, so source order alone decides stacking -- reorder
-       so tapping "Filter" (in .sortbar) reveals the panel directly beneath
-       it, not above the whole listing (.filters was first in the DOM, which
-       used to put the opened panel above .sortbar and everything else). */
-    .filters { grid-row: auto; position: static; display: none; order: 2; }
-    .filters.is-open { display: block; }
+    /* Single column now, so source order alone decides stacking for the
+       siblings that stay in normal flow (.filters itself is taken out of
+       flow below -- it opens as a fixed right-side drawer instead of
+       reordering inline). */
     .sortbar { order: 1; }
     .wgrid { order: 3; }
     .pgn { order: 4; }
+    /* Filter drawer: slides in from the right over a dimmed overlay,
+       80vw wide, instead of the old inline reveal-below-the-button panel. */
+    .filters__overlay { display: block; position: fixed; inset: 0; z-index: 699; background: rgba(10,10,10,.5); opacity: 0; visibility: hidden; transition: opacity .25s ease, visibility .25s ease; }
+    .filters__overlay.is-open { opacity: 1; visibility: visible; }
+    .filters {
+      grid-row: auto; order: 2;
+      position: fixed; top: 0; right: 0; bottom: 0; z-index: 700;
+      width: 80vw; max-width: 80vw;
+      display: block; overflow-y: auto; visibility: hidden;
+      padding: 16px; box-shadow: -8px 0 32px rgba(0,0,0,.22);
+      transform: translateX(100%);
+      transition: transform .3s cubic-bezier(.32,.72,0,1), visibility 0s linear .3s;
+    }
+    .filters.is-open { transform: translateX(0); visibility: visible; transition: transform .3s cubic-bezier(.32,.72,0,1); }
+    .filters__head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid var(--line); }
+    .filters__head-title { font-family: var(--display); font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: .01em; color: var(--ink); }
+    .filters__close { flex: none; width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line); background: var(--paper); font-size: 18px; line-height: 1; cursor: pointer; color: var(--steel); transition: all .15s; }
+    .filters__close:hover { background: var(--bone); color: var(--ink); }
     .tiers { grid-template-columns: repeat(2, minmax(0,1fr)); }
     .cat-head__grid { grid-template-columns: 1fr; }
   }
@@ -6245,7 +6263,12 @@ html, body{ overflow-x:clip; }
   <div class="wrap">
     <div class="listing__grid">
 
+      <div class="filters__overlay" id="filtersOverlay" onclick="toggleFilters(false)"></div>
       <aside class="filters" id="filtersPanel">
+        <div class="filters__head">
+          <span class="filters__head-title">Filters</span>
+          <button type="button" class="filters__close" onclick="toggleFilters(false)" aria-label="Close filters">&times;</button>
+        </div>
         <div class="ai-filter">
           <div class="ai-filter__label">Filter with Vivid Racing AI</div>
           <form class="ai-filter__form" onsubmit="return false;">
@@ -7104,6 +7127,7 @@ html, body{ overflow-x:clip; }
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape' && document.getElementById('ymmModal').style.display !== 'none') closeYmmModal();
     if (e.key === 'Escape' && document.getElementById('finSheet').classList.contains('is-open')) closeFinSheet();
+    if (e.key === 'Escape' && document.getElementById('filtersPanel').classList.contains('is-open')) toggleFilters(false);
   });
   function selectVehicle(name, shortName, spec){
     document.getElementById('vehName').textContent = name;
@@ -7266,11 +7290,13 @@ html, body{ overflow-x:clip; }
   function toggleFilters(forceState) {
     var panel = document.getElementById('filtersPanel');
     var btn = document.getElementById('filterToggleBtn');
+    var overlay = document.getElementById('filtersOverlay');
     if (!panel) return;
     var open = forceState !== undefined ? forceState : !panel.classList.contains('is-open');
     panel.classList.toggle('is-open', open);
+    if (overlay) overlay.classList.toggle('is-open', open);
     if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    if (open) panel.scrollIntoView({behavior:'smooth', block:'start'});
+    document.body.style.overflow = open ? 'hidden' : '';
   }
   applyFitFilter(0);
   (function(){
