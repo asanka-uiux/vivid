@@ -4988,8 +4988,14 @@
   .cat-mobile-quick__fin { display: flex; align-items: center; justify-content: space-between; gap: 7px; font-family: var(--ui); font-size: 12px; font-weight: 700; letter-spacing: -0.01em; color: #991B1B; text-decoration: none; background: #FEF2F2; border: 1px solid #FEE2E2; border-radius: 3px; padding: 8px 16px; margin-bottom: 4px; }
   .cat-mobile-quick__fin svg { flex: none; }
   .cat-mobile-quick__fin:hover { color: #7A1515; border-color: #FECACA; }
-  .cat-mobile-quick__fin-copy { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 4px; }
-  .cat-mobile-quick__fin-logo { height: 13px; width: auto; flex: none; }
+  .cat-mobile-quick__fin-copy { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+  .cat-mobile-quick__fin-logo { width: auto; flex: none; }
+  /* affirm's mark includes a tall arc above the wordmark that katapult's
+     doesn't have, so equal heights read as mismatched sizes -- these are
+     tuned so the actual lettering looks the same size, not the images. */
+  .cat-mobile-quick__fin-logo--affirm { height: 16px; }
+  .cat-mobile-quick__fin-logo--katapult { height: 10px; }
+  .cat-mobile-quick__fin-chevron { flex: none; }
   .cat-mobile-quick > .zip-filter, .cat-mobile-quick > .ai-filter { border: 1px solid var(--line); padding: 6px 10px; margin: 0 0 4px; }
   .cat-mobile-quick > .ai-filter:last-child { margin-bottom: 0; }
   .cat-mobile-quick .ai-filter__label { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
@@ -6079,9 +6085,10 @@ html, body{ overflow-x:clip; }
       <div class="cat-mobile-quick">
         <a href="#" class="cat-mobile-quick__fin">
           <span class="cat-mobile-quick__fin-copy">Flexible financing available with
-            <img src="assets/img/logos/affirm.png" alt="Affirm" class="cat-mobile-quick__fin-logo">
-            / <img src="assets/img/logos/katapult.webp" alt="Katapult" class="cat-mobile-quick__fin-logo">
-          </span>&gt;
+            <img src="assets/img/logos/affirm-transparent.png" alt="Affirm" class="cat-mobile-quick__fin-logo cat-mobile-quick__fin-logo--affirm">
+            <img src="assets/img/logos/katapult.webp" alt="Katapult" class="cat-mobile-quick__fin-logo cat-mobile-quick__fin-logo--katapult">
+          </span>
+          <svg class="cat-mobile-quick__fin-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
         </a>
         <div class="zip-filter">
           <div class="ai-filter__label" id="zipFilterLabelWrapM">
