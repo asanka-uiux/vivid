@@ -5060,10 +5060,12 @@
      label line) so the first product card still lands inside the first
      mobile viewport. */
   .cat-mobile-quick { display: none; }
-  .cat-mobile-quick__fin { display: flex; align-items: center; gap: 7px; font-family: var(--ui); font-size: 12px; font-weight: 700; color: var(--heat-deep); text-decoration: none; background: var(--bone); border: 1px solid var(--line); padding: 6px 10px; margin-bottom: 4px; }
+  /* Figma node 2601:21371 ("promo-financing") -- mobile only, see
+     @media(max-width:700px) where .cat-mobile-quick is switched on; desktop
+     never sees this element. */
+  .cat-mobile-quick__fin { display: flex; align-items: center; justify-content: space-between; gap: 7px; font-family: var(--ui); font-size: 12px; font-weight: 700; letter-spacing: -0.01em; color: #991B1B; text-decoration: none; background: #FEF2F2; border: 1px solid #FEE2E2; border-radius: 3px; padding: 8px 16px; margin-bottom: 4px; }
   .cat-mobile-quick__fin svg { flex: none; }
-  .cat-mobile-quick__fin span { flex: 1; }
-  .cat-mobile-quick__fin:hover { color: var(--heat); border-color: var(--heat); }
+  .cat-mobile-quick__fin:hover { color: #7A1515; border-color: #FECACA; }
   .cat-mobile-quick > .deliver-to { padding: 6px 10px; margin-bottom: 4px; }
   .cat-mobile-quick > .ai-filter { border: 1px solid var(--line); padding: 6px 10px; margin: 0; }
   .cat-mobile-quick .zip-filter__confirmed:not([hidden]) { margin-bottom: 4px; }
@@ -6085,7 +6087,7 @@ html, body{ overflow-x:clip; }
            are hidden there at this width by the .filters > .ai-filter /
            .filters > .deliver-to rules below. ===== -->
       <div class="cat-mobile-quick">
-        <a href="#" class="cat-mobile-quick__fin"><span>0% APR &amp; flexible financing available</span> &rarr;</a>
+        <a href="#" class="cat-mobile-quick__fin"><span>Flexible financing available with Affirm / Katapult</span>&gt;</a>
         <div class="deliver-to">
           <!-- Figma node 2602:21525 ("Enter Shipping Date"), stacked left
                (see the comment on .zip-filter__confirmed in <style>). -->
