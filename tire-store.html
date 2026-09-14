@@ -5067,6 +5067,8 @@
   .cat-mobile-quick__fin { display: flex; align-items: center; justify-content: space-between; gap: 7px; font-family: var(--ui); font-size: 12px; font-weight: 700; letter-spacing: -0.01em; color: #991B1B; text-decoration: none; background: #FEF2F2; border: 1px solid #FEE2E2; border-radius: 3px; padding: 8px 16px; margin-bottom: 4px; }
   .cat-mobile-quick__fin svg { flex: none; }
   .cat-mobile-quick__fin:hover { color: #7A1515; border-color: #FECACA; }
+  .cat-mobile-quick__fin-copy { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 4px; }
+  .cat-mobile-quick__fin-logo { height: 13px; width: auto; flex: none; }
   .cat-mobile-quick > .deliver-to { padding: 6px 10px; margin-bottom: 4px; }
   .cat-mobile-quick > .ai-filter { border: 1px solid var(--line); padding: 6px 10px; margin: 0; }
   .cat-mobile-quick .zip-filter__confirmed:not([hidden]) { margin-bottom: 4px; }
@@ -5325,6 +5327,7 @@
     .cat-head__panel { gap: 6px; }
     .listing { padding-top: 0; }
     .sortbar { margin-bottom: 6px; }
+    .crumbs__inner { padding: 6px 0; }
 
     /* Vehicle card after node 171:11983 ("Change vehicle", 358x111): 8px/12px
        padding, an 8px gap between the text block and the chip row, the
@@ -5348,7 +5351,7 @@
     .veh-card__name-row { flex-direction: column; align-items: flex-start; gap: 0; }
     .veh-card__name { font-size: 18px; letter-spacing: .5px; }
     .veh-card__change { font-size: 12px; }
-    .veh-card__sub { font-size: 14px; line-height: 20px; margin: 0; }
+    .veh-card__sub { font-size: 12px; line-height: 20px; margin: 0; }
     .veh-card__spec { display: none; }
     /* In the frame the chip row is a sibling of the icon+text row, so it spans
        the full card width. Here it is nested inside the text column, which
@@ -6088,7 +6091,12 @@ html, body{ overflow-x:clip; }
            are hidden there at this width by the .filters > .ai-filter /
            .filters > .deliver-to rules below. ===== -->
       <div class="cat-mobile-quick">
-        <a href="#" class="cat-mobile-quick__fin"><span>Flexible financing available with Affirm / Katapult</span>&gt;</a>
+        <a href="#" class="cat-mobile-quick__fin">
+          <span class="cat-mobile-quick__fin-copy">Flexible financing available with
+            <img src="assets/img/logos/affirm.png" alt="Affirm" class="cat-mobile-quick__fin-logo">
+            / <img src="assets/img/logos/katapult.webp" alt="Katapult" class="cat-mobile-quick__fin-logo">
+          </span>&gt;
+        </a>
         <div class="deliver-to">
           <!-- Figma node 2602:21525 ("Enter Shipping Date"), stacked left
                (see the comment on .zip-filter__confirmed in <style>). -->

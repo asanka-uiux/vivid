@@ -859,13 +859,18 @@ footer .footer__col a{display:inline-block;padding:4px 0;min-height:24px}
 
 /* ============================================================
    WCAG 2.5.8 — 24px minimum target size on template micro-links.
-   Hit areas grow via inline-flex + min-height; visual size unchanged.
+   Hit area grows via min-height; display is intentionally left alone
+   (some of these need to stay plain inline text within a sentence, e.g.
+   the financing links inside .cat-delivery__fin-text) -- forcing
+   inline-flex on all of them broke that. align-items:center is inert
+   without a flex/grid display, which is fine: it only helps the ones
+   that already are one via their own component rules.
    ============================================================ */
 .superheader__tab,.ee-brand,.footer__info-phone,.footer__legal a,
 .crumbs__inner a,.vp__saved a,.vfb__change,.veh-card__change,
 .vrstd__brand,.section-head__action,.pz-chip,.yhero__change,
 .ysec__link,.stance__cta,.qs__all,.bp__fit-link,.bp__fin-link a,
-main a[href="#"]{display:inline-flex;align-items:center;min-height:24px}
+main a[href="#"]{/* display: inline-flex; */align-items:center;min-height:24px}
 /* filter-rail checkboxes: label is the target; make it 24px+ and touch-friendly */
 .filters__group label{display:flex;align-items:center;gap:8px;min-height:24px;
   padding:2px 0;cursor:pointer}
