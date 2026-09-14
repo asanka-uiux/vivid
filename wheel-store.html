@@ -5368,6 +5368,12 @@
     .veh-card__change { font-size: 12px; }
     .veh-card__sub { font-size: 12px; line-height: 20px; margin: 0; }
     .veh-card__spec { display: none; }
+    /* "Showing wheels that fit your M4" + the trust chips dropped on mobile
+       only; the grid/display:contents rules below still apply but are inert
+       once these are hidden (display:none items don't consume grid tracks),
+       so the icon + title row lays out the same either way. */
+    #vehCardConfirmed .veh-card__sub { display: none; }
+    #vehCardConfirmed .veh-card__chips { display: none; }
     /* In the frame the chip row is a sibling of the icon+text row, so it spans
        the full card width. Here it is nested inside the text column, which
        costs it the icon's 30px + 14px gap -- at 390px that left 290px for a
