@@ -537,7 +537,7 @@ button:disabled,input:disabled{opacity:.5;cursor:not-allowed}
 .stickyhead.show{transform:translateY(0);opacity:1;visibility:visible}
 
 .stickyhead__brands{background:var(--bg-inverse)}
-.stickyhead__brands ul{display:flex;list-style:none;margin:0;padding:0}
+.stickyhead__brands ul{display:flex;list-style:none;margin:0;padding:6px 0}
 .stickyhead__brands a{display:flex;align-items:center;gap:6px;padding:7px 14px;
   font:600 12px/1 var(--font-ui);letter-spacing:.02em;color:rgba(255,255,255,.65);
   white-space:nowrap;transition:color 150ms,background-color 150ms}
