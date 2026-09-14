@@ -10,6 +10,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Nunito+Sans:wght@800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/shared.css">
 <link rel="stylesheet" href="css/style.css">
+<style>
+  /* Crossover-only: drop the red underline rule under "All [Family] SUV
+     Vehicles" in the Jump section — user's call, this page only. */
+  .jump__all { border-bottom: 0; padding-bottom: 0; }
+</style>
 </head>
 <body>
 
@@ -886,17 +891,19 @@
   <!-- ============ BROWSE BY FAMILY / AUTOMAKER · node 1746:11122 ============ -->
   <!-- NB: in Figma the Porsche card carries the Volkswagen headline. Reproduced
        as designed — flagged for copy review. -->
-  <!-- Hidden 2026-09-03, not deleted: unmodified clone of index.html's Euro/
-       Exotic/JDM sports-car accordion (Porsche, Ferrari, Lexus...), never
-       themed to this page's actual Crossover identity. Superseded by .jump
-       ("Jump straight to your model") below. Remove the hidden attribute to
-       restore. -->
-  <section class="browse" aria-labelledby="browse-title">
+  <!-- Hidden again 2026-09-14: re-themed to SUV brands/trims (Porsche Cayenne,
+       BMW X5, etc., 20 brands across Euro/JDM-APAC/Luxury/American) and given
+       the same acard/apanel disclosure structure as index.html, matching that
+       page's actual current markup — but the user decided against this pattern
+       for this page in favor of .jump's simpler banner + brand/model-chip table
+       below, which already covers the same 4 families non-redundantly. Kept,
+       not deleted, in case the disclosure pattern is wanted again later.
+       Remove the hidden attribute to restore. -->
+  <section class="browse" aria-labelledby="browse-title" hidden>
     <!-- heading · node 251:3167 — was a section of its own (.headband) -->
     <div class="shell browse__band">
       <p class="browse__eyebrow">200+ brand partners · 1M+ parts</p>
       <h2 class="browse__title" id="browse-title">The Brands That Made the SUV Worth Building</h2>
-      <p class="browse__sub">Authorized parts for the fast family era, from Cayenne to Cullinan to Yukon.</p>
     </div>
     <div class="shell browse__grid">
       <!-- The four family tiles select which marque list shows, as a mutually
@@ -950,216 +957,1408 @@
       </div>
       <div class="browse__main">
         <div class="fam" id="fam-euro" role="tabpanel" aria-labelledby="tab-euro" tabindex="0">
-          <p class="fam__label">Euro Brands</p>
-          <ul class="jump__rows">
-          <li class="jump__row">
-            <span class="jump__brand">Porsche</span>
-            <ul class="jump__models" role="list" aria-label="Porsche models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Cayenne">Cayenne</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Cayenne%20Coupe">Cayenne Coupe</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Macan">Macan</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Macan%20GTS">Macan GTS</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Cayenne%20Turbo%20GT">Cayenne Turbo GT</a></li>
-            </ul>
-          </li>
-          <li class="jump__row">
-            <span class="jump__brand">BMW</span>
-            <ul class="jump__models" role="list" aria-label="BMW models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=BMW&model=X3">X3</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=BMW&model=X5">X5</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=BMW&model=X6">X6</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=BMW&model=X7">X7</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=BMW&model=XM">XM</a></li>
-            </ul>
-          </li>
-          <li class="jump__row">
-            <span class="jump__brand">INEOS</span>
-            <ul class="jump__models" role="list" aria-label="INEOS models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=INEOS&model=Grenadier">Grenadier</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=INEOS&model=Grenadier%20Quartermaster">Grenadier Quartermaster</a></li>
-            </ul>
-          </li>
-          <li class="jump__row">
-            <span class="jump__brand jump__brand--xlong">Mercedes-Benz</span>
-            <ul class="jump__models" role="list" aria-label="Mercedes-Benz models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mercedes-Benz&model=GLC">GLC</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mercedes-Benz&model=GLE">GLE</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mercedes-Benz&model=GLS">GLS</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mercedes-Benz&model=GLA">GLA</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mercedes-Benz&model=EQE%20SUV">EQE SUV</a></li>
-            </ul>
-          </li>
-          <li class="jump__row">
-            <span class="jump__brand jump__brand--long">Land Rover</span>
-            <ul class="jump__models" role="list" aria-label="Land Rover models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Land%20Rover&model=Range%20Rover">Range Rover</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Land%20Rover&model=Range%20Rover%20Sport">Range Rover Sport</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Land%20Rover&model=Defender">Defender</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Land%20Rover&model=Discovery">Discovery</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Land%20Rover&model=Evoque">Evoque</a></li>
-            </ul>
-          </li>
-          </ul>
+          <div class="afeat">
+            <button type="button" class="acard acard--toggle" aria-expanded="false" aria-controls="porsche-panel">
+              <img class="acard__thumb" src="assets/img/browse/porsche.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
+              <span class="acard__body">
+                <span class="acard__tag">Porsche</span>
+                <span class="acard__head">Refined by repetition, never reinvention. The Cayenne sharpens every generation without losing the plot.</span>
+              </span>
+              <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
+            </button>
+            <div class="apanel" id="porsche-panel" hidden>
+              <div class="apanel__head">
+                <h3 class="apanel__title">Built for the cars from <em>Stuttgart.</em></h3>
+              </div>
+              <div class="apanel__body">
+                <div class="apanel__col">
+                  <div class="apanel__flagship">
+                    <p class="apanel__flagship-label">Cayenne Turbo GT</p>
+                    <ul class="apanel__subs">
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Cayenne&trim=Cayenne">Cayenne</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Cayenne&trim=Cayenne%20S">Cayenne S</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Cayenne&trim=Cayenne%20GTS">Cayenne GTS</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Cayenne&trim=Cayenne%20Turbo%20E-Hybrid">Cayenne Turbo E-Hybrid</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Cayenne&trim=Cayenne%20Turbo%20GT">Cayenne Turbo GT</a></li>
+                    </ul>
+                  </div>
+                  <ul class="apanel__models">
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Cayenne"><span class="vh">Porsche </span>Cayenne</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Cayenne%20Coupe"><span class="vh">Porsche </span>Cayenne Coupe</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Macan"><span class="vh">Porsche </span>Macan</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Macan%20GTS"><span class="vh">Porsche </span>Macan GTS</a></li>
+                  </ul>
+                  <p class="apanel__cta">
+                    <a class="btn-outline btn-outline--compact" href="waiting-to-build/vehicle-picker.html?make=Porsche">Shop all Porsche
+                      <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+                  </p>
+                </div>
+                <ul class="apanel__grid">
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/suspension.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">KW</span>
+                        <span class="pcard__name">HAS Height-Adjustable Spring Kit &middot; Cayenne</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $220</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$1,395</span>
+                          <s class="pcard__was"><span class="vh">was </span>$1,615</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">VR Forged</span>
+                        <span class="pcard__name">D02-8 22&Prime; Set &middot; Cayenne Turbo GT</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $340</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$3,196</span>
+                          <s class="pcard__was"><span class="vh">was </span>$3,536</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="afeat">
+            <button type="button" class="acard acard--toggle" aria-expanded="false" aria-controls="bmw-panel">
+              <img class="acard__thumb" src="assets/img/browse/bmw.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
+              <span class="acard__body">
+                <span class="acard__tag">BMW</span>
+                <span class="acard__head">Chassis balance is the whole argument, even at ride height. The X5 M just proves it from higher up.</span>
+              </span>
+              <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
+            </button>
+            <div class="apanel" id="bmw-panel" hidden>
+              <div class="apanel__head">
+                <h3 class="apanel__title">Built for the cars from <em>Munich.</em></h3>
+              </div>
+              <div class="apanel__body">
+                <div class="apanel__col">
+                  <div class="apanel__flagship">
+                    <p class="apanel__flagship-label">X5 M Competition</p>
+                    <ul class="apanel__subs">
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=BMW&model=X5&trim=X5">X5</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=BMW&model=X5&trim=X5%20M60i">X5 M60i</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=BMW&model=X5&trim=X5%20M">X5 M</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=BMW&model=X5&trim=X5%20M%20Competition">X5 M Competition</a></li>
+                    </ul>
+                  </div>
+                  <ul class="apanel__models">
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=BMW&model=X3"><span class="vh">BMW </span>X3</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=BMW&model=X6"><span class="vh">BMW </span>X6</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=BMW&model=X7"><span class="vh">BMW </span>X7</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=BMW&model=XM"><span class="vh">BMW </span>XM</a></li>
+                  </ul>
+                  <p class="apanel__cta">
+                    <a class="btn-outline btn-outline--compact" href="waiting-to-build/vehicle-picker.html?make=BMW">Shop all BMW
+                      <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+                  </p>
+                </div>
+                <ul class="apanel__grid">
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/exhaust.webp" alt="" width="1200" height="800" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Akrapovi&#269;</span>
+                        <span class="pcard__name">Evolution Line Ti &middot; X5 M Competition</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $610</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$8,390</span>
+                          <s class="pcard__was"><span class="vh">was </span>$9,000</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/brakes.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Brembo</span>
+                        <span class="pcard__name">GT 6-Piston Big Brake Kit &middot; X5</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $410</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$3,890</span>
+                          <s class="pcard__was"><span class="vh">was </span>$4,300</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="afeat">
+            <button type="button" class="acard acard--toggle" aria-expanded="false" aria-controls="ineos-panel">
+              <img class="acard__thumb" src="real-photos/dyno.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
+              <span class="acard__body">
+                <span class="acard__tag">INEOS</span>
+                <span class="acard__head">Built like the utilitarian 4x4s it was designed to replace &mdash; no soft edges, no shortcuts.</span>
+              </span>
+              <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
+            </button>
+            <div class="apanel" id="ineos-panel" hidden>
+              <div class="apanel__head">
+                <h3 class="apanel__title">Built for the <em>Grenadier.</em></h3>
+              </div>
+              <div class="apanel__body">
+                <div class="apanel__col">
+                  <div class="apanel__flagship">
+                    <p class="apanel__flagship-label">Grenadier Trialmaster</p>
+                    <ul class="apanel__subs">
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=INEOS&model=Grenadier&trim=Grenadier">Grenadier</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=INEOS&model=Grenadier&trim=Grenadier%20Fieldmaster">Grenadier Fieldmaster</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=INEOS&model=Grenadier&trim=Grenadier%20Trialmaster">Grenadier Trialmaster</a></li>
+                    </ul>
+                  </div>
+                  <ul class="apanel__models">
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=INEOS&model=Grenadier%20Quartermaster"><span class="vh">INEOS </span>Grenadier Quartermaster</a></li>
+                  </ul>
+                  <p class="apanel__cta">
+                    <a class="btn-outline btn-outline--compact" href="waiting-to-build/vehicle-picker.html?make=INEOS">Shop all INEOS
+                      <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+                  </p>
+                </div>
+                <ul class="apanel__grid">
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/suspension.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Bilstein</span>
+                        <span class="pcard__name">B8 5100 Lift Kit &middot; Grenadier</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $180</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$1,120</span>
+                          <s class="pcard__was"><span class="vh">was </span>$1,300</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/tires.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">BFGoodrich</span>
+                        <span class="pcard__name">All-Terrain T/A KO2 Set &middot; Grenadier</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $160</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$1,436</span>
+                          <s class="pcard__was"><span class="vh">was </span>$1,596</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="afeat">
+            <button type="button" class="acard acard--toggle" aria-expanded="false" aria-controls="mercedes-panel">
+              <img class="acard__thumb" src="assets/img/browse/mercedes.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
+              <span class="acard__body">
+                <span class="acard__tag">Mercedes-Benz</span>
+                <span class="acard__head">Presence first, then performance. The badge alone has always done half the work.</span>
+              </span>
+              <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
+            </button>
+            <div class="apanel" id="mercedes-panel" hidden>
+              <div class="apanel__head">
+                <h3 class="apanel__title">Built for the cars from <em>Stuttgart.</em></h3>
+              </div>
+              <div class="apanel__body">
+                <div class="apanel__col">
+                  <div class="apanel__flagship">
+                    <p class="apanel__flagship-label">GLE 63 S AMG</p>
+                    <ul class="apanel__subs">
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Mercedes-Benz&model=GLE&trim=GLE%20450">GLE 450</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Mercedes-Benz&model=GLE&trim=GLE%2053%20AMG">GLE 53 AMG</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Mercedes-Benz&model=GLE&trim=GLE%2063%20S%20AMG">GLE 63 S AMG</a></li>
+                    </ul>
+                  </div>
+                  <ul class="apanel__models">
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Mercedes-Benz&model=GLC"><span class="vh">Mercedes-Benz </span>GLC</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Mercedes-Benz&model=GLS"><span class="vh">Mercedes-Benz </span>GLS</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Mercedes-Benz&model=GLA"><span class="vh">Mercedes-Benz </span>GLA</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Mercedes-Benz&model=EQE%20SUV"><span class="vh">Mercedes-Benz </span>EQE SUV</a></li>
+                  </ul>
+                  <p class="apanel__cta">
+                    <a class="btn-outline btn-outline--compact" href="waiting-to-build/vehicle-picker.html?make=Mercedes-Benz">Shop all Mercedes-Benz
+                      <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+                  </p>
+                </div>
+                <ul class="apanel__grid">
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Brabus</span>
+                        <span class="pcard__name">Monoblock Z 22&Prime; Set &middot; GLE 63 S</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $560</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$5,240</span>
+                          <s class="pcard__was"><span class="vh">was </span>$5,800</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/aero.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Mansory</span>
+                        <span class="pcard__name">Carbon Front Lip &middot; GLE Coupe</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $280</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$2,190</span>
+                          <s class="pcard__was"><span class="vh">was </span>$2,470</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="afeat">
+            <button type="button" class="acard acard--toggle" aria-expanded="false" aria-controls="landrover-panel">
+              <img class="acard__thumb" src="real-photos/workshop.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
+              <span class="acard__body">
+                <span class="acard__tag">Land Rover</span>
+                <span class="acard__head">Go-anywhere credibility, built in on day one &mdash; everything since has just added polish.</span>
+              </span>
+              <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
+            </button>
+            <div class="apanel" id="landrover-panel" hidden>
+              <div class="apanel__head">
+                <h3 class="apanel__title">Built for the <em>Range Rover.</em></h3>
+              </div>
+              <div class="apanel__body">
+                <div class="apanel__col">
+                  <div class="apanel__flagship">
+                    <p class="apanel__flagship-label">Range Rover Sport SV</p>
+                    <ul class="apanel__subs">
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Land%20Rover&model=Range%20Rover%20Sport&trim=Range%20Rover%20Sport">Range Rover Sport</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Land%20Rover&model=Range%20Rover%20Sport&trim=Range%20Rover%20Sport%20Autobiography">Range Rover Sport Autobiography</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Land%20Rover&model=Range%20Rover%20Sport&trim=Range%20Rover%20Sport%20SV">Range Rover Sport SV</a></li>
+                    </ul>
+                  </div>
+                  <ul class="apanel__models">
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Land%20Rover&model=Range%20Rover"><span class="vh">Land Rover </span>Range Rover</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Land%20Rover&model=Defender"><span class="vh">Land Rover </span>Defender</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Land%20Rover&model=Discovery"><span class="vh">Land Rover </span>Discovery</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Land%20Rover&model=Evoque"><span class="vh">Land Rover </span>Evoque</a></li>
+                  </ul>
+                  <p class="apanel__cta">
+                    <a class="btn-outline btn-outline--compact" href="waiting-to-build/vehicle-picker.html?make=Land%20Rover">Shop all Land Rover
+                      <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+                  </p>
+                </div>
+                <ul class="apanel__grid">
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/suspension.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Eibach</span>
+                        <span class="pcard__name">Pro-Lift-Kit &middot; Defender</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $140</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$860</span>
+                          <s class="pcard__was"><span class="vh">was </span>$1,000</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/tuning.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Unicorn</span>
+                        <span class="pcard__name">Performance ECU Flash &middot; Range Rover Sport SV</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $200</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$1,395</span>
+                          <s class="pcard__was"><span class="vh">was </span>$1,595</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="fam" id="fam-jdm" role="tabpanel" aria-labelledby="tab-jdm" tabindex="0" hidden>
-          <p class="fam__label">JDM Brands</p>
-          <ul class="jump__rows">
-          <li class="jump__row">
-            <span class="jump__brand">Toyota</span>
-            <ul class="jump__models" role="list" aria-label="Toyota models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=RAV4">RAV4</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=Highlander">Highlander</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=4Runner">4Runner</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=Land%20Cruiser">Land Cruiser</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=Sequoia">Sequoia</a></li>
-            </ul>
-          </li>
-          <li class="jump__row">
-            <span class="jump__brand">Honda</span>
-            <ul class="jump__models" role="list" aria-label="Honda models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Honda&model=CR-V">CR-V</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Honda&model=Pilot">Pilot</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Honda&model=Passport">Passport</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Honda&model=HR-V">HR-V</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Honda&model=ZR-V">ZR-V</a></li>
-            </ul>
-          </li>
-          <li class="jump__row">
-            <span class="jump__brand">Mazda</span>
-            <ul class="jump__models" role="list" aria-label="Mazda models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mazda&model=CX-5">CX-5</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mazda&model=CX-50">CX-50</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mazda&model=CX-70">CX-70</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mazda&model=CX-90">CX-90</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Mazda&model=CX-30">CX-30</a></li>
-            </ul>
-          </li>
-          <li class="jump__row">
-            <span class="jump__brand">Lexus</span>
-            <ul class="jump__models" role="list" aria-label="Lexus models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lexus&model=RX">RX</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lexus&model=GX">GX</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lexus&model=LX">LX</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lexus&model=NX">NX</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lexus&model=TX">TX</a></li>
-            </ul>
-          </li>
-          <li class="jump__row">
-            <span class="jump__brand">Genesis</span>
-            <ul class="jump__models" role="list" aria-label="Genesis models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Genesis&model=GV60">GV60</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Genesis&model=GV70">GV70</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Genesis&model=GV80">GV80</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Genesis&model=GV70%20Electrified">GV70 Electrified</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Genesis&model=GV80%20Coupe">GV80 Coupe</a></li>
-            </ul>
-          </li>
-          </ul>
+          <div class="afeat">
+            <button type="button" class="acard acard--toggle" aria-expanded="false" aria-controls="toyota-panel">
+              <img class="acard__thumb" src="assets/img/browse/toyota.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
+              <span class="acard__body">
+                <span class="acard__tag">Toyota</span>
+                <span class="acard__head">Quiet competence, decades deep. The Land Cruiser outlasts the argument for anything flashier.</span>
+              </span>
+              <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
+            </button>
+            <div class="apanel" id="toyota-panel" hidden>
+              <div class="apanel__head">
+                <h3 class="apanel__title">Built for the <em>Land Cruiser.</em></h3>
+              </div>
+              <div class="apanel__body">
+                <div class="apanel__col">
+                  <div class="apanel__flagship">
+                    <p class="apanel__flagship-label">Land Cruiser First Edition</p>
+                    <ul class="apanel__subs">
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=Land%20Cruiser&trim=Land%20Cruiser%201958">Land Cruiser 1958</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=Land%20Cruiser&trim=Land%20Cruiser%20Land">Land Cruiser Land</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=Land%20Cruiser&trim=Land%20Cruiser%20First%20Edition">Land Cruiser First Edition</a></li>
+                    </ul>
+                  </div>
+                  <ul class="apanel__models">
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=RAV4"><span class="vh">Toyota </span>RAV4</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=Highlander"><span class="vh">Toyota </span>Highlander</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=4Runner"><span class="vh">Toyota </span>4Runner</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=Sequoia"><span class="vh">Toyota </span>Sequoia</a></li>
+                  </ul>
+                  <p class="apanel__cta">
+                    <a class="btn-outline btn-outline--compact" href="waiting-to-build/vehicle-picker.html?make=Toyota">Shop all Toyota
+                      <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+                  </p>
+                </div>
+                <ul class="apanel__grid">
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/suspension.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Old Man Emu</span>
+                        <span class="pcard__name">BP-51 Suspension Kit &middot; Land Cruiser</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $260</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$2,340</span>
+                          <s class="pcard__was"><span class="vh">was </span>$2,600</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Method</span>
+                        <span class="pcard__name">105 Beadlock 17&Prime; Set &middot; 4Runner</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $240</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$2,356</span>
+                          <s class="pcard__was"><span class="vh">was </span>$2,596</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="afeat">
+            <button type="button" class="acard acard--toggle" aria-expanded="false" aria-controls="honda-panel">
+              <img class="acard__thumb" src="assets/img/browse/honda.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
+              <span class="acard__body">
+                <span class="acard__tag">Honda</span>
+                <span class="acard__head">Practical engineering that still rewards a heavy right foot &mdash; the Pilot TrailSport proves it off-road too.</span>
+              </span>
+              <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
+            </button>
+            <div class="apanel" id="honda-panel" hidden>
+              <div class="apanel__head">
+                <h3 class="apanel__title">Built for the <em>Pilot.</em></h3>
+              </div>
+              <div class="apanel__body">
+                <div class="apanel__col">
+                  <div class="apanel__flagship">
+                    <p class="apanel__flagship-label">Pilot TrailSport</p>
+                    <ul class="apanel__subs">
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Honda&model=Pilot&trim=Pilot%20EX-L">Pilot EX-L</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Honda&model=Pilot&trim=Pilot%20TrailSport">Pilot TrailSport</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Honda&model=Pilot&trim=Pilot%20Elite">Pilot Elite</a></li>
+                    </ul>
+                  </div>
+                  <ul class="apanel__models">
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Honda&model=CR-V"><span class="vh">Honda </span>CR-V</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Honda&model=Passport"><span class="vh">Honda </span>Passport</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Honda&model=HR-V"><span class="vh">Honda </span>HR-V</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Honda&model=ZR-V"><span class="vh">Honda </span>ZR-V</a></li>
+                  </ul>
+                  <p class="apanel__cta">
+                    <a class="btn-outline btn-outline--compact" href="waiting-to-build/vehicle-picker.html?make=Honda">Shop all Honda
+                      <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+                  </p>
+                </div>
+                <ul class="apanel__grid">
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/tuning.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Hondata</span>
+                        <span class="pcard__name">FlashPro Tuning Kit &middot; Pilot TrailSport</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $90</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$625</span>
+                          <s class="pcard__was"><span class="vh">was </span>$715</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/brakes.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">EBC</span>
+                        <span class="pcard__name">Redstuff Brake Pad Set &middot; CR-V</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $40</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$189</span>
+                          <s class="pcard__was"><span class="vh">was </span>$229</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="afeat">
+            <button type="button" class="acard acard--toggle" aria-expanded="false" aria-controls="mazda-panel">
+              <img class="acard__thumb" src="assets/img/browse/mazda.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
+              <span class="acard__body">
+                <span class="acard__tag">Mazda</span>
+                <span class="acard__head">Design language that reads expensive before you check the badge &mdash; the CX-90 wears it best.</span>
+              </span>
+              <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
+            </button>
+            <div class="apanel" id="mazda-panel" hidden>
+              <div class="apanel__head">
+                <h3 class="apanel__title">Built for the <em>CX-90.</em></h3>
+              </div>
+              <div class="apanel__body">
+                <div class="apanel__col">
+                  <div class="apanel__flagship">
+                    <p class="apanel__flagship-label">CX-90 Turbo S</p>
+                    <ul class="apanel__subs">
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Mazda&model=CX-90&trim=CX-90%20Turbo">CX-90 Turbo</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Mazda&model=CX-90&trim=CX-90%20Turbo%20S">CX-90 Turbo S</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Mazda&model=CX-90&trim=CX-90%20PHEV">CX-90 PHEV</a></li>
+                    </ul>
+                  </div>
+                  <ul class="apanel__models">
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Mazda&model=CX-5"><span class="vh">Mazda </span>CX-5</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Mazda&model=CX-50"><span class="vh">Mazda </span>CX-50</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Mazda&model=CX-70"><span class="vh">Mazda </span>CX-70</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Mazda&model=CX-30"><span class="vh">Mazda </span>CX-30</a></li>
+                  </ul>
+                  <p class="apanel__cta">
+                    <a class="btn-outline btn-outline--compact" href="waiting-to-build/vehicle-picker.html?make=Mazda">Shop all Mazda
+                      <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+                  </p>
+                </div>
+                <ul class="apanel__grid">
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/exhaust.webp" alt="" width="1200" height="800" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Corksport</span>
+                        <span class="pcard__name">Cat-Back Exhaust &middot; CX-90 Turbo S</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $130</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$920</span>
+                          <s class="pcard__was"><span class="vh">was </span>$1,050</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/aero.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Corksport</span>
+                        <span class="pcard__name">Rear Lip Spoiler &middot; CX-5</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $50</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$249</span>
+                          <s class="pcard__was"><span class="vh">was </span>$299</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="afeat">
+            <button type="button" class="acard acard--toggle" aria-expanded="false" aria-controls="lexus-panel">
+              <img class="acard__thumb" src="assets/img/browse/lexus.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
+              <span class="acard__body">
+                <span class="acard__tag">Lexus</span>
+                <span class="acard__head">Toyota reliability with a finishing layer of restraint. The LX takes that formula off-road.</span>
+              </span>
+              <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
+            </button>
+            <div class="apanel" id="lexus-panel" hidden>
+              <div class="apanel__head">
+                <h3 class="apanel__title">Built for the <em>LX.</em></h3>
+              </div>
+              <div class="apanel__body">
+                <div class="apanel__col">
+                  <div class="apanel__flagship">
+                    <p class="apanel__flagship-label">LX 600 Ultra Luxury</p>
+                    <ul class="apanel__subs">
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Lexus&model=LX&trim=LX%20600">LX 600</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Lexus&model=LX&trim=LX%20600%20F%20Sport">LX 600 F Sport</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Lexus&model=LX&trim=LX%20600%20Ultra%20Luxury">LX 600 Ultra Luxury</a></li>
+                    </ul>
+                  </div>
+                  <ul class="apanel__models">
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Lexus&model=RX"><span class="vh">Lexus </span>RX</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Lexus&model=GX"><span class="vh">Lexus </span>GX</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Lexus&model=NX"><span class="vh">Lexus </span>NX</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Lexus&model=TX"><span class="vh">Lexus </span>TX</a></li>
+                  </ul>
+                  <p class="apanel__cta">
+                    <a class="btn-outline btn-outline--compact" href="waiting-to-build/vehicle-picker.html?make=Lexus">Shop all Lexus
+                      <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+                  </p>
+                </div>
+                <ul class="apanel__grid">
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Fuel Off-Road</span>
+                        <span class="pcard__name">Rebel 20&Prime; Set &middot; LX 600</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $320</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$3,080</span>
+                          <s class="pcard__was"><span class="vh">was </span>$3,400</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/suspension.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">ICON</span>
+                        <span class="pcard__name">Stage 3 Suspension &middot; GX</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $410</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$3,690</span>
+                          <s class="pcard__was"><span class="vh">was </span>$4,100</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="afeat">
+            <button type="button" class="acard acard--toggle" aria-expanded="false" aria-controls="genesis-panel">
+              <img class="acard__thumb" src="real-photos/genesis-gv80.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
+              <span class="acard__body">
+                <span class="acard__tag">Genesis</span>
+                <span class="acard__head">Newest name at this table, least willing to act like it &mdash; the GV80 Coupe out-designs cars twice its price.</span>
+              </span>
+              <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
+            </button>
+            <div class="apanel" id="genesis-panel" hidden>
+              <div class="apanel__head">
+                <h3 class="apanel__title">Built for the <em>GV80.</em></h3>
+              </div>
+              <div class="apanel__body">
+                <div class="apanel__col">
+                  <div class="apanel__flagship">
+                    <p class="apanel__flagship-label">GV80 Coupe 3.5T Sport</p>
+                    <ul class="apanel__subs">
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Genesis&model=GV80%20Coupe&trim=GV80%20Coupe%202.5T">GV80 Coupe 2.5T</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Genesis&model=GV80%20Coupe&trim=GV80%20Coupe%203.5T">GV80 Coupe 3.5T</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Genesis&model=GV80%20Coupe&trim=GV80%20Coupe%203.5T%20Sport">GV80 Coupe 3.5T Sport</a></li>
+                    </ul>
+                  </div>
+                  <ul class="apanel__models">
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Genesis&model=GV60"><span class="vh">Genesis </span>GV60</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Genesis&model=GV70"><span class="vh">Genesis </span>GV70</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Genesis&model=GV70%20Electrified"><span class="vh">Genesis </span>GV70 Electrified</a></li>
+                  </ul>
+                  <p class="apanel__cta">
+                    <a class="btn-outline btn-outline--compact" href="waiting-to-build/vehicle-picker.html?make=Genesis">Shop all Genesis
+                      <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+                  </p>
+                </div>
+                <ul class="apanel__grid">
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Vossen</span>
+                        <span class="pcard__name">HF6-3 22&Prime; Set &middot; GV80 Coupe</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $380</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$3,620</span>
+                          <s class="pcard__was"><span class="vh">was </span>$4,000</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/brakes.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">StopTech</span>
+                        <span class="pcard__name">Sport Brake Kit &middot; GV70</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $210</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$1,590</span>
+                          <s class="pcard__was"><span class="vh">was </span>$1,800</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="fam" id="fam-luxury" role="tabpanel" aria-labelledby="tab-luxury" tabindex="0" hidden>
-          <p class="fam__label">Luxury Brands</p>
-          <ul class="jump__rows">
-          <li class="jump__row">
-            <span class="jump__brand">Ferrari</span>
-            <ul class="jump__models" role="list" aria-label="Ferrari models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ferrari&model=Purosangue">Purosangue</a></li>
-            </ul>
-          </li>
-          <li class="jump__row">
-            <span class="jump__brand jump__brand--long">Lamborghini</span>
-            <ul class="jump__models" role="list" aria-label="Lamborghini models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lamborghini&model=Urus">Urus</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lamborghini&model=Urus%20S">Urus S</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lamborghini&model=Urus%20Performante">Urus Performante</a></li>
-            </ul>
-          </li>
-          <li class="jump__row">
-            <span class="jump__brand jump__brand--long">Rolls-Royce</span>
-            <ul class="jump__models" role="list" aria-label="Rolls-Royce models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Rolls-Royce&model=Cullinan">Cullinan</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Rolls-Royce&model=Cullinan%20Black%20Badge">Cullinan Black Badge</a></li>
-            </ul>
-          </li>
-          <li class="jump__row">
-            <span class="jump__brand jump__brand--xlong">Aston Martin</span>
-            <ul class="jump__models" role="list" aria-label="Aston Martin models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Aston%20Martin&model=DBX">DBX</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Aston%20Martin&model=DBX707">DBX707</a></li>
-            </ul>
-          </li>
-          <li class="jump__row">
-            <span class="jump__brand">Bentley</span>
-            <ul class="jump__models" role="list" aria-label="Bentley models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Bentley&model=Bentayga">Bentayga</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Bentley&model=Bentayga%20EWB">Bentayga EWB</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Bentley&model=Bentayga%20S">Bentayga S</a></li>
-            </ul>
-          </li>
-          </ul>
+          <div class="afeat">
+            <button type="button" class="acard acard--toggle" aria-expanded="false" aria-controls="ferrari-panel">
+              <img class="acard__thumb" src="assets/img/browse/ferrari.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
+              <span class="acard__body">
+                <span class="acard__tag">Ferrari</span>
+                <span class="acard__head">The one SUV Maranello said it would never build &mdash; then built anyway, on its own terms.</span>
+              </span>
+              <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
+            </button>
+            <div class="apanel" id="ferrari-panel" hidden>
+              <div class="apanel__head">
+                <h3 class="apanel__title">Built for the <em>Purosangue.</em></h3>
+              </div>
+              <div class="apanel__body">
+                <div class="apanel__col">
+                  <div class="apanel__flagship">
+                    <p class="apanel__flagship-label">Purosangue</p>
+                    <ul class="apanel__subs">
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Ferrari&model=Purosangue&trim=Purosangue">Purosangue</a></li>
+                    </ul>
+                  </div>
+                  <p class="apanel__cta">
+                    <a class="btn-outline btn-outline--compact" href="waiting-to-build/vehicle-picker.html?make=Ferrari">Shop all Ferrari
+                      <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+                  </p>
+                </div>
+                <ul class="apanel__grid">
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/exhaust.webp" alt="" width="1200" height="800" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Capristo</span>
+                        <span class="pcard__name">Valved Exhaust System &middot; Purosangue</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $1,100</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$9,890</span>
+                          <s class="pcard__was"><span class="vh">was </span>$10,990</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/aero.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Novitec</span>
+                        <span class="pcard__name">Carbon Aero Kit &middot; Purosangue</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $2,200</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$18,400</span>
+                          <s class="pcard__was"><span class="vh">was </span>$20,600</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="afeat">
+            <button type="button" class="acard acard--toggle" aria-expanded="false" aria-controls="lamborghini-panel">
+              <img class="acard__thumb" src="assets/img/browse/lamborghini.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
+              <span class="acard__body">
+                <span class="acard__tag">Lamborghini</span>
+                <span class="acard__head">Presence, unapologetic. The Urus doesn&rsquo;t whisper about what it is.</span>
+              </span>
+              <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
+            </button>
+            <div class="apanel" id="lamborghini-panel" hidden>
+              <div class="apanel__head">
+                <h3 class="apanel__title">Built for the <em>Urus.</em></h3>
+              </div>
+              <div class="apanel__body">
+                <div class="apanel__col">
+                  <div class="apanel__flagship">
+                    <p class="apanel__flagship-label">Urus Performante</p>
+                    <ul class="apanel__subs">
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Lamborghini&model=Urus&trim=Urus">Urus</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Lamborghini&model=Urus&trim=Urus%20S">Urus S</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Lamborghini&model=Urus&trim=Urus%20Performante">Urus Performante</a></li>
+                    </ul>
+                  </div>
+                  <p class="apanel__cta">
+                    <a class="btn-outline btn-outline--compact" href="waiting-to-build/vehicle-picker.html?make=Lamborghini">Shop all Lamborghini
+                      <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+                  </p>
+                </div>
+                <ul class="apanel__grid">
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Vorsteiner</span>
+                        <span class="pcard__name">VFN-511 23&Prime; Set &middot; Urus Performante</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $920</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$8,780</span>
+                          <s class="pcard__was"><span class="vh">was </span>$9,700</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/exhaust.webp" alt="" width="1200" height="800" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Akrapovi&#269;</span>
+                        <span class="pcard__name">Slip-On Line Ti &middot; Urus S</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $780</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$6,990</span>
+                          <s class="pcard__was"><span class="vh">was </span>$7,770</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="afeat">
+            <button type="button" class="acard acard--toggle" aria-expanded="false" aria-controls="rollsroyce-panel">
+              <img class="acard__thumb" src="real-photos/interior-detail.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
+              <span class="acard__body">
+                <span class="acard__tag">Rolls-Royce</span>
+                <span class="acard__head">The Cullinan doesn&rsquo;t compete on a spec sheet. It was never meant to.</span>
+              </span>
+              <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
+            </button>
+            <div class="apanel" id="rollsroyce-panel" hidden>
+              <div class="apanel__head">
+                <h3 class="apanel__title">Built for the <em>Cullinan.</em></h3>
+              </div>
+              <div class="apanel__body">
+                <div class="apanel__col">
+                  <div class="apanel__flagship">
+                    <p class="apanel__flagship-label">Cullinan Black Badge</p>
+                    <ul class="apanel__subs">
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Rolls-Royce&model=Cullinan&trim=Cullinan">Cullinan</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Rolls-Royce&model=Cullinan&trim=Cullinan%20Black%20Badge">Cullinan Black Badge</a></li>
+                    </ul>
+                  </div>
+                  <p class="apanel__cta">
+                    <a class="btn-outline btn-outline--compact" href="waiting-to-build/vehicle-picker.html?make=Rolls-Royce">Shop all Rolls-Royce
+                      <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+                  </p>
+                </div>
+                <ul class="apanel__grid">
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Forgiato</span>
+                        <span class="pcard__name">Maglia-ECL 24&Prime; Set &middot; Cullinan Black Badge</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $1,340</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$12,760</span>
+                          <s class="pcard__was"><span class="vh">was </span>$14,100</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/aero.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Mansory</span>
+                        <span class="pcard__name">Carbon Body Kit &middot; Cullinan</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $2,900</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$24,600</span>
+                          <s class="pcard__was"><span class="vh">was </span>$27,500</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="afeat">
+            <button type="button" class="acard acard--toggle" aria-expanded="false" aria-controls="astonmartin-panel">
+              <img class="acard__thumb" src="assets/img/browse/aston-martin.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
+              <span class="acard__body">
+                <span class="acard__tag">Aston Martin</span>
+                <span class="acard__head">The DBX707 is proof a grand tourer can grow a third row and lose nothing in the corners.</span>
+              </span>
+              <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
+            </button>
+            <div class="apanel" id="astonmartin-panel" hidden>
+              <div class="apanel__head">
+                <h3 class="apanel__title">Built for the <em>DBX.</em></h3>
+              </div>
+              <div class="apanel__body">
+                <div class="apanel__col">
+                  <div class="apanel__flagship">
+                    <p class="apanel__flagship-label">DBX707</p>
+                    <ul class="apanel__subs">
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Aston%20Martin&model=DBX&trim=DBX">DBX</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Aston%20Martin&model=DBX&trim=DBX707">DBX707</a></li>
+                    </ul>
+                  </div>
+                  <p class="apanel__cta">
+                    <a class="btn-outline btn-outline--compact" href="waiting-to-build/vehicle-picker.html?make=Aston%20Martin">Shop all Aston Martin
+                      <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+                  </p>
+                </div>
+                <ul class="apanel__grid">
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/brakes.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Brembo</span>
+                        <span class="pcard__name">Carbon Ceramic Big Brake Kit &middot; DBX707</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $1,600</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$14,400</span>
+                          <s class="pcard__was"><span class="vh">was </span>$16,000</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">HRE</span>
+                        <span class="pcard__name">S200 Forged 22&Prime; Set &middot; DBX</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $1,050</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$9,990</span>
+                          <s class="pcard__was"><span class="vh">was </span>$11,040</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="afeat">
+            <button type="button" class="acard acard--toggle" aria-expanded="false" aria-controls="bentley-panel">
+              <img class="acard__thumb" src="real-photos/garage-car.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
+              <span class="acard__body">
+                <span class="acard__tag">Bentley</span>
+                <span class="acard__head">Handbuilt weight everywhere it matters. The Bentayga makes silence feel like an engineering feat.</span>
+              </span>
+              <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
+            </button>
+            <div class="apanel" id="bentley-panel" hidden>
+              <div class="apanel__head">
+                <h3 class="apanel__title">Built for the <em>Bentayga.</em></h3>
+              </div>
+              <div class="apanel__body">
+                <div class="apanel__col">
+                  <div class="apanel__flagship">
+                    <p class="apanel__flagship-label">Bentayga S</p>
+                    <ul class="apanel__subs">
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Bentley&model=Bentayga&trim=Bentayga">Bentayga</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Bentley&model=Bentayga&trim=Bentayga%20EWB">Bentayga EWB</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Bentley&model=Bentayga&trim=Bentayga%20S">Bentayga S</a></li>
+                    </ul>
+                  </div>
+                  <p class="apanel__cta">
+                    <a class="btn-outline btn-outline--compact" href="waiting-to-build/vehicle-picker.html?make=Bentley">Shop all Bentley
+                      <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+                  </p>
+                </div>
+                <ul class="apanel__grid">
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/suspension.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">KW</span>
+                        <span class="pcard__name">Height-Adjustable Coilovers &middot; Bentayga S</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $820</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$7,380</span>
+                          <s class="pcard__was"><span class="vh">was </span>$8,200</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Vossen</span>
+                        <span class="pcard__name">HF-5 22&Prime; Set &middot; Bentayga EWB</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $960</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$9,140</span>
+                          <s class="pcard__was"><span class="vh">was </span>$10,100</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="fam" id="fam-american" role="tabpanel" aria-labelledby="tab-american" tabindex="0" hidden>
-          <p class="fam__label">American Brands</p>
-          <ul class="jump__rows">
-          <li class="jump__row">
-            <span class="jump__brand">Chevrolet</span>
-            <ul class="jump__models" role="list" aria-label="Chevrolet models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Chevrolet&model=Tahoe">Tahoe</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Chevrolet&model=Suburban">Suburban</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Chevrolet&model=Blazer">Blazer</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Chevrolet&model=Trailblazer">Trailblazer</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Chevrolet&model=Traverse">Traverse</a></li>
-            </ul>
-          </li>
-          <li class="jump__row">
-            <span class="jump__brand">GMC</span>
-            <ul class="jump__models" role="list" aria-label="GMC models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=GMC&model=Yukon">Yukon</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=GMC&model=Yukon%20XL">Yukon XL</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=GMC&model=Acadia">Acadia</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=GMC&model=Terrain">Terrain</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=GMC&model=Hummer%20EV%20SUV">Hummer EV SUV</a></li>
-            </ul>
-          </li>
-          <li class="jump__row">
-            <span class="jump__brand">Ford</span>
-            <ul class="jump__models" role="list" aria-label="Ford models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Explorer">Explorer</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Expedition">Expedition</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Edge">Edge</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Bronco%20Sport">Bronco Sport</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Escape">Escape</a></li>
-            </ul>
-          </li>
-          <li class="jump__row">
-            <span class="jump__brand">Lincoln</span>
-            <ul class="jump__models" role="list" aria-label="Lincoln models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lincoln&model=Navigator">Navigator</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lincoln&model=Aviator">Aviator</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lincoln&model=Nautilus">Nautilus</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lincoln&model=Corsair">Corsair</a></li>
-            </ul>
-          </li>
-          <li class="jump__row">
-            <span class="jump__brand">Rivian</span>
-            <ul class="jump__models" role="list" aria-label="Rivian models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Rivian&model=R1S">R1S</a></li>
-            </ul>
-          </li>
-          </ul>
+          <div class="afeat">
+            <button type="button" class="acard acard--toggle" aria-expanded="false" aria-controls="chevrolet-panel">
+              <img class="acard__thumb" src="real-photos/chevrolet-tahoe.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
+              <span class="acard__body">
+                <span class="acard__tag">Chevrolet</span>
+                <span class="acard__head">Scale, done properly. The Tahoe has hauled the American family for three generations running.</span>
+              </span>
+              <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
+            </button>
+            <div class="apanel" id="chevrolet-panel" hidden>
+              <div class="apanel__head">
+                <h3 class="apanel__title">Built for the <em>Tahoe.</em></h3>
+              </div>
+              <div class="apanel__body">
+                <div class="apanel__col">
+                  <div class="apanel__flagship">
+                    <p class="apanel__flagship-label">Tahoe Z71</p>
+                    <ul class="apanel__subs">
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Chevrolet&model=Tahoe&trim=Tahoe%20RST">Tahoe RST</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Chevrolet&model=Tahoe&trim=Tahoe%20Z71">Tahoe Z71</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Chevrolet&model=Tahoe&trim=Tahoe%20High%20Country">Tahoe High Country</a></li>
+                    </ul>
+                  </div>
+                  <ul class="apanel__models">
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Chevrolet&model=Suburban"><span class="vh">Chevrolet </span>Suburban</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Chevrolet&model=Blazer"><span class="vh">Chevrolet </span>Blazer</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Chevrolet&model=Trailblazer"><span class="vh">Chevrolet </span>Trailblazer</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Chevrolet&model=Traverse"><span class="vh">Chevrolet </span>Traverse</a></li>
+                  </ul>
+                  <p class="apanel__cta">
+                    <a class="btn-outline btn-outline--compact" href="waiting-to-build/vehicle-picker.html?make=Chevrolet">Shop all Chevrolet
+                      <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+                  </p>
+                </div>
+                <ul class="apanel__grid">
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/suspension.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Fabtech</span>
+                        <span class="pcard__name">6&Prime; Lift Kit &middot; Tahoe Z71</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $340</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$2,860</span>
+                          <s class="pcard__was"><span class="vh">was </span>$3,200</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Fuel Off-Road</span>
+                        <span class="pcard__name">Rebel 22&Prime; Set &middot; Suburban</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $360</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$3,440</span>
+                          <s class="pcard__was"><span class="vh">was </span>$3,800</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="afeat">
+            <button type="button" class="acard acard--toggle" aria-expanded="false" aria-controls="gmc-panel">
+              <img class="acard__thumb" src="real-photos/night-car.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
+              <span class="acard__body">
+                <span class="acard__tag">GMC</span>
+                <span class="acard__head">Chevrolet&rsquo;s platform, GMC&rsquo;s finish &mdash; the Yukon Denali spends the difference on cabin and chrome.</span>
+              </span>
+              <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
+            </button>
+            <div class="apanel" id="gmc-panel" hidden>
+              <div class="apanel__head">
+                <h3 class="apanel__title">Built for the <em>Yukon.</em></h3>
+              </div>
+              <div class="apanel__body">
+                <div class="apanel__col">
+                  <div class="apanel__flagship">
+                    <p class="apanel__flagship-label">Yukon Denali Ultimate</p>
+                    <ul class="apanel__subs">
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=GMC&model=Yukon&trim=Yukon%20AT4">Yukon AT4</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=GMC&model=Yukon&trim=Yukon%20Denali">Yukon Denali</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=GMC&model=Yukon&trim=Yukon%20Denali%20Ultimate">Yukon Denali Ultimate</a></li>
+                    </ul>
+                  </div>
+                  <ul class="apanel__models">
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=GMC&model=Yukon%20XL"><span class="vh">GMC </span>Yukon XL</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=GMC&model=Acadia"><span class="vh">GMC </span>Acadia</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=GMC&model=Terrain"><span class="vh">GMC </span>Terrain</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=GMC&model=Hummer%20EV%20SUV"><span class="vh">GMC </span>Hummer EV SUV</a></li>
+                  </ul>
+                  <p class="apanel__cta">
+                    <a class="btn-outline btn-outline--compact" href="waiting-to-build/vehicle-picker.html?make=GMC">Shop all GMC
+                      <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+                  </p>
+                </div>
+                <ul class="apanel__grid">
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">American Racing</span>
+                        <span class="pcard__name">Mainline 22&Prime; Set &middot; Yukon Denali</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $290</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$2,690</span>
+                          <s class="pcard__was"><span class="vh">was </span>$2,980</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/brakes.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Wilwood</span>
+                        <span class="pcard__name">TX6R Big Brake Kit &middot; Yukon AT4</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $460</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$3,680</span>
+                          <s class="pcard__was"><span class="vh">was </span>$4,140</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="afeat">
+            <button type="button" class="acard acard--toggle" aria-expanded="false" aria-controls="ford-panel">
+              <img class="acard__thumb" src="real-photos/ford-raptor.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
+              <span class="acard__body">
+                <span class="acard__tag">Ford</span>
+                <span class="acard__head">Blue Oval durability with an off-road streak &mdash; the Expedition Timberline borrows it straight from the trucks.</span>
+              </span>
+              <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
+            </button>
+            <div class="apanel" id="ford-panel" hidden>
+              <div class="apanel__head">
+                <h3 class="apanel__title">Built for the <em>Expedition.</em></h3>
+              </div>
+              <div class="apanel__body">
+                <div class="apanel__col">
+                  <div class="apanel__flagship">
+                    <p class="apanel__flagship-label">Expedition Timberline</p>
+                    <ul class="apanel__subs">
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Expedition&trim=Expedition">Expedition</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Expedition&trim=Expedition%20ST">Expedition ST</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Expedition&trim=Expedition%20Timberline">Expedition Timberline</a></li>
+                    </ul>
+                  </div>
+                  <ul class="apanel__models">
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Explorer"><span class="vh">Ford </span>Explorer</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Edge"><span class="vh">Ford </span>Edge</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Bronco%20Sport"><span class="vh">Ford </span>Bronco Sport</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Escape"><span class="vh">Ford </span>Escape</a></li>
+                  </ul>
+                  <p class="apanel__cta">
+                    <a class="btn-outline btn-outline--compact" href="waiting-to-build/vehicle-picker.html?make=Ford">Shop all Ford
+                      <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+                  </p>
+                </div>
+                <ul class="apanel__grid">
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/suspension.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Bilstein</span>
+                        <span class="pcard__name">B8 6112/5160 Kit &middot; Expedition Timberline</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $220</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$1,780</span>
+                          <s class="pcard__was"><span class="vh">was </span>$2,000</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/tires.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Nitto</span>
+                        <span class="pcard__name">Ridge Grappler Set &middot; Bronco Sport</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $130</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$1,076</span>
+                          <s class="pcard__was"><span class="vh">was </span>$1,206</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="afeat">
+            <button type="button" class="acard acard--toggle" aria-expanded="false" aria-controls="lincoln-panel">
+              <img class="acard__thumb" src="real-photos/car-meet.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
+              <span class="acard__body">
+                <span class="acard__tag">Lincoln</span>
+                <span class="acard__head">Quiet luxury, American accent. The Navigator Black Label is the least-shouty way to arrive in a full-size SUV.</span>
+              </span>
+              <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
+            </button>
+            <div class="apanel" id="lincoln-panel" hidden>
+              <div class="apanel__head">
+                <h3 class="apanel__title">Built for the <em>Navigator.</em></h3>
+              </div>
+              <div class="apanel__body">
+                <div class="apanel__col">
+                  <div class="apanel__flagship">
+                    <p class="apanel__flagship-label">Navigator Black Label</p>
+                    <ul class="apanel__subs">
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Lincoln&model=Navigator&trim=Navigator%20Reserve">Navigator Reserve</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Lincoln&model=Navigator&trim=Navigator%20Black%20Label">Navigator Black Label</a></li>
+                    </ul>
+                  </div>
+                  <ul class="apanel__models">
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Lincoln&model=Aviator"><span class="vh">Lincoln </span>Aviator</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Lincoln&model=Nautilus"><span class="vh">Lincoln </span>Nautilus</a></li>
+                    <li><a class="mchip" href="waiting-to-build/vehicle-picker.html?make=Lincoln&model=Corsair"><span class="vh">Lincoln </span>Corsair</a></li>
+                  </ul>
+                  <p class="apanel__cta">
+                    <a class="btn-outline btn-outline--compact" href="waiting-to-build/vehicle-picker.html?make=Lincoln">Shop all Lincoln
+                      <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+                  </p>
+                </div>
+                <ul class="apanel__grid">
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Lexani</span>
+                        <span class="pcard__name">Wraith 24&Prime; Set &middot; Navigator Black Label</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $410</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$3,890</span>
+                          <s class="pcard__was"><span class="vh">was </span>$4,300</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/aero.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">3D Carbon</span>
+                        <span class="pcard__name">Lower Body Trim Kit &middot; Aviator</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $150</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$890</span>
+                          <s class="pcard__was"><span class="vh">was </span>$1,040</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="afeat">
+            <button type="button" class="acard acard--toggle" aria-expanded="false" aria-controls="rivian-panel">
+              <img class="acard__thumb" src="real-photos/dyno.jpg" alt="" width="208" height="126" loading="lazy" decoding="async">
+              <span class="acard__body">
+                <span class="acard__tag">Rivian</span>
+                <span class="acard__head">No badge history to lean on, so the R1S just wins on numbers &mdash; quad motors, real ground clearance.</span>
+              </span>
+              <img class="acard__go" src="assets/icons/chevron-right-dark.svg" alt="" aria-hidden="true" width="12" height="24">
+            </button>
+            <div class="apanel" id="rivian-panel" hidden>
+              <div class="apanel__head">
+                <h3 class="apanel__title">Built for the <em>R1S.</em></h3>
+              </div>
+              <div class="apanel__body">
+                <div class="apanel__col">
+                  <div class="apanel__flagship">
+                    <p class="apanel__flagship-label">R1S Performance</p>
+                    <ul class="apanel__subs">
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Rivian&model=R1S&trim=R1S%20Adventure">R1S Adventure</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Rivian&model=R1S&trim=R1S%20Performance">R1S Performance</a></li>
+                      <li><a class="apanel__sub" href="waiting-to-build/vehicle-picker.html?make=Rivian&model=R1S&trim=R1S%20Quad">R1S Quad</a></li>
+                    </ul>
+                  </div>
+                  <p class="apanel__cta">
+                    <a class="btn-outline btn-outline--compact" href="waiting-to-build/vehicle-picker.html?make=Rivian">Shop all Rivian
+                      <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+                  </p>
+                </div>
+                <ul class="apanel__grid">
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/suspension.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">ReadyLift</span>
+                        <span class="pcard__name">2&Prime; Leveling Kit &middot; R1S Quad</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $110</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$690</span>
+                          <s class="pcard__was"><span class="vh">was </span>$800</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                  <li><a class="pcard" href="wheel-pdp.html">
+                    <img class="pcard__img" src="assets/img/product/wheels.webp" alt="" width="1200" height="960" loading="lazy" decoding="async">
+                    <span class="pcard__body">
+                      <span>
+                        <span class="pcard__brand">Method</span>
+                        <span class="pcard__name">MR317 20&Prime; Set &middot; R1S Performance</span>
+                      </span>
+                      <span class="pcard__price">
+                        <span class="pcard__save">Save $260</span>
+                        <span class="pcard__row">
+                          <span class="pcard__now"><span class="vh">Now </span>$2,540</span>
+                          <s class="pcard__was"><span class="vh">was </span>$2,800</s>
+                        </span>
+                      </span>
+                    </span>
+                  </a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
   <!-- ============ QUICK JUMP · vehicle model index =========================
-       Four families — Euro / JDM-APAC / Luxury / American SUV — per the
-       user's own 2026-07-22 Top-5-by-region reference list, not an invented
-       roster. Same .jump/.jump__* components and CSS as index.html/
-       vivid-trucks.html/vivid-classics.html/vividx.html; nothing new to
-       style here, just markup. Each family repeats the "We know your
-       chassis code." headline verbatim (same motif as every other Jump
-       section), so each <h3> carries a visually-hidden family prefix —
-       otherwise four identical headings on one page are indistinguishable
-       to a screen-reader user navigating by heading. ==== -->
+       2026-09-14: down to three families — Euro / Asia / American SUV.
+       Luxury (Ferrari/Lamborghini/Rolls-Royce/Aston Martin/Bentley) dropped
+       per the user's call; Lamborghini (Urus) moved into Euro rather than
+       cut. "JDM/APAC" renamed to "Asia" — enthusiast community doesn't use
+       "APAC" for makes/models. Honda swapped for Acura (MDX/RDX/ZDX); Toyota
+       trimmed to Land Cruiser/Sequoia/4Runner; Lexus trimmed to RX/GX/LX;
+       Cadillac added to American (Escalade/XT4/XT5/XT6); Ford's Bronco Sport
+       swapped for the full-size Bronco. Same .jump/.jump__* components and
+       CSS as index.html/vivid-trucks.html/vivid-classics.html/vividx.html;
+       nothing new to style here, just markup. Each family repeats the "We
+       know your chassis code." headline verbatim (same motif as every other
+       Jump section), so each <h3> carries a visually-hidden family prefix —
+       otherwise identical headings on one page are indistinguishable to a
+       screen-reader user navigating by heading. ==== -->
   <section class="jump" aria-labelledby="jump-title">
     <div class="shell jump__band-intro">
       <p class="jump__eyebrow">Know your crossover?</p>
@@ -1190,6 +2389,14 @@
               <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Macan">Macan</a></li>
               <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Macan%20GTS">Macan GTS</a></li>
               <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Porsche&model=Cayenne%20Turbo%20GT">Cayenne Turbo GT</a></li>
+            </ul>
+          </li>
+          <li class="jump__row">
+            <span class="jump__brand jump__brand--long">Lamborghini</span>
+            <ul class="jump__models" role="list" aria-label="Lamborghini models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lamborghini&model=Urus">Urus</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lamborghini&model=Urus%20S">Urus S</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lamborghini&model=Urus%20Performante">Urus Performante</a></li>
             </ul>
           </li>
           <li class="jump__row">
@@ -1237,14 +2444,14 @@
       <article class="jump__family">
         <figure class="jump__banner">
           <img src="real-photos/banner-jdm-apac-suv.webp" alt="" loading="lazy" width="1920" height="250" decoding="async">
-          <p class="jump__banner-label">JDM/APAC</p>
+          <p class="jump__banner-label">Asia</p>
         </figure>
         <div class="jump__intro">
-          <p class="jump__family-eyebrow">Core JDM/APAC SUV Platforms</p>
-          <h3 class="jump__family-title"><span class="vh">JDM/APAC SUV: </span>The choice for every adventurer.</h3>
+          <p class="jump__family-eyebrow">Core Asia SUV Platforms</p>
+          <h3 class="jump__family-title"><span class="vh">Asia SUV: </span>The choice for every adventurer.</h3>
           <div class="jump__intro-row">
             <p class="jump__family-lede">They already don&rsquo;t die. Keep them going longer.</p>
-            <a class="jump__all" href="waiting-to-build/vehicle-picker.html">All JDM/APAC SUV Vehicles
+            <a class="jump__all" href="waiting-to-build/vehicle-picker.html">All Asia SUV Vehicles
               <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
           </div>
         </div>
@@ -1253,21 +2460,17 @@
           <li class="jump__row">
             <span class="jump__brand">Toyota</span>
             <ul class="jump__models" role="list" aria-label="Toyota models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=RAV4">RAV4</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=Highlander">Highlander</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=4Runner">4Runner</a></li>
               <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=Land%20Cruiser">Land Cruiser</a></li>
               <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=Sequoia">Sequoia</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Toyota&model=4Runner">4Runner</a></li>
             </ul>
           </li>
           <li class="jump__row">
-            <span class="jump__brand">Honda</span>
-            <ul class="jump__models" role="list" aria-label="Honda models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Honda&model=CR-V">CR-V</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Honda&model=Pilot">Pilot</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Honda&model=Passport">Passport</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Honda&model=HR-V">HR-V</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Honda&model=ZR-V">ZR-V</a></li>
+            <span class="jump__brand">Acura</span>
+            <ul class="jump__models" role="list" aria-label="Acura models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Acura&model=MDX">MDX</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Acura&model=RDX">RDX</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Acura&model=ZDX">ZDX</a></li>
             </ul>
           </li>
           <li class="jump__row">
@@ -1286,8 +2489,6 @@
               <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lexus&model=RX">RX</a></li>
               <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lexus&model=GX">GX</a></li>
               <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lexus&model=LX">LX</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lexus&model=NX">NX</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lexus&model=TX">TX</a></li>
             </ul>
           </li>
           <li class="jump__row">
@@ -1301,64 +2502,7 @@
             </ul>
           </li>
         </ul>
-        <a class="btn-outline jump__all-btn" href="waiting-to-build/vehicle-picker.html">All JDM/APAC SUV Vehicles
-          <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
-        </div>
-      </article>
-      <article class="jump__family">
-        <figure class="jump__banner">
-          <img src="real-photos/banner-luxury-suv.webp" alt="" loading="lazy" width="1920" height="250" decoding="async">
-          <p class="jump__banner-label">Luxury</p>
-        </figure>
-        <div class="jump__intro">
-          <p class="jump__family-eyebrow">Core Luxury SUV Platforms</p>
-          <h3 class="jump__family-title"><span class="vh">Luxury SUV: </span>Absolute class from all brands.</h3>
-          <div class="jump__intro-row">
-            <p class="jump__family-lede">Parts only for the top of the class.</p>
-            <a class="jump__all" href="waiting-to-build/vehicle-picker.html">All Luxury SUV Vehicles
-              <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
-          </div>
-        </div>
-        <div class="jump__split">
-        <ul class="jump__rows">
-          <li class="jump__row">
-            <span class="jump__brand">Ferrari</span>
-            <ul class="jump__models" role="list" aria-label="Ferrari models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ferrari&model=Purosangue">Purosangue</a></li>
-            </ul>
-          </li>
-          <li class="jump__row">
-            <span class="jump__brand jump__brand--long">Lamborghini</span>
-            <ul class="jump__models" role="list" aria-label="Lamborghini models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lamborghini&model=Urus">Urus</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lamborghini&model=Urus%20S">Urus S</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Lamborghini&model=Urus%20Performante">Urus Performante</a></li>
-            </ul>
-          </li>
-          <li class="jump__row">
-            <span class="jump__brand jump__brand--long">Rolls-Royce</span>
-            <ul class="jump__models" role="list" aria-label="Rolls-Royce models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Rolls-Royce&model=Cullinan">Cullinan</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Rolls-Royce&model=Cullinan%20Black%20Badge">Cullinan Black Badge</a></li>
-            </ul>
-          </li>
-          <li class="jump__row">
-            <span class="jump__brand jump__brand--xlong">Aston Martin</span>
-            <ul class="jump__models" role="list" aria-label="Aston Martin models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Aston%20Martin&model=DBX">DBX</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Aston%20Martin&model=DBX707">DBX707</a></li>
-            </ul>
-          </li>
-          <li class="jump__row">
-            <span class="jump__brand">Bentley</span>
-            <ul class="jump__models" role="list" aria-label="Bentley models">
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Bentley&model=Bentayga">Bentayga</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Bentley&model=Bentayga%20EWB">Bentayga EWB</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Bentley&model=Bentayga%20S">Bentayga S</a></li>
-            </ul>
-          </li>
-        </ul>
-        <a class="btn-outline jump__all-btn" href="waiting-to-build/vehicle-picker.html">All Luxury SUV Vehicles
+        <a class="btn-outline jump__all-btn" href="waiting-to-build/vehicle-picker.html">All Asia SUV Vehicles
           <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
         </div>
       </article>
@@ -1399,12 +2543,21 @@
             </ul>
           </li>
           <li class="jump__row">
+            <span class="jump__brand">Cadillac</span>
+            <ul class="jump__models" role="list" aria-label="Cadillac models">
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Cadillac&model=Escalade">Escalade</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Cadillac&model=XT4">XT4</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Cadillac&model=XT5">XT5</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Cadillac&model=XT6">XT6</a></li>
+            </ul>
+          </li>
+          <li class="jump__row">
             <span class="jump__brand">Ford</span>
             <ul class="jump__models" role="list" aria-label="Ford models">
               <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Explorer">Explorer</a></li>
               <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Expedition">Expedition</a></li>
               <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Edge">Edge</a></li>
-              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Bronco%20Sport">Bronco Sport</a></li>
+              <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Bronco">Bronco</a></li>
               <li><a class="jump__chip" href="waiting-to-build/vehicle-picker.html?make=Ford&model=Escape">Escape</a></li>
             </ul>
           </li>

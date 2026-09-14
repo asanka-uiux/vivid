@@ -447,7 +447,7 @@
 /* Small label above each tabpanel's brand list — same job .browse__eyebrow
    does for the section as a whole, one level down. */
 .fam__label{margin:0;font-family:var(--font-display);font-weight:800;font-size:15px;
-  text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted)}
+  text-transform:uppercase;letter-spacing:.04em;color:#5a6169} /* var(--text-muted) is only 4.1:1 on .browse's sunken/cream ground (it was tuned for white); darkened to clear 4.5:1 there */
 
 .browse__grid{display:flex;gap:24px;padding-top:24px;flex-direction:column}
 @media (min-width:1025px){ .browse__grid{flex-direction:row} }
