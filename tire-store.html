@@ -5039,6 +5039,17 @@
   .deliver-to__date { display: flex; align-items: center; gap: 9px; font-family: var(--ui); font-size: 13px; color: var(--ink); cursor: pointer; }
   .deliver-to__date input[type=radio] { accent-color: var(--heat); width: 15px; height: 15px; }
 
+  /* confirmed-zip row, after Figma node 2602:21525 ("Enter Shipping Date") --
+     shared layout with wheel-store.html's mobile zip-filter widget */
+  .zip-filter__confirmed:not([hidden]) { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 4px 10px; }
+  .zip-filter__confirmed-label { font-family: var(--ui); font-size: 12px; font-weight: 600; color: var(--ink); flex: 1 1 auto; min-width: 130px; }
+  .zip-filter__confirmed-zip { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; text-align: right; flex: 0 1 auto; min-width: 0; max-width: 100%; }
+  .zip-filter__confirmed-caption { font-family: var(--ui); font-size: 12px; color: var(--ink); }
+  .zip-filter__confirmed-row2 { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 4px 6px; }
+  .zip-filter__confirmed-value { font-family: var(--ui); font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
+  .zip-filter__confirmed-change { background: none; border: 0; padding: 0; font-family: var(--ui); font-size: 12px; font-weight: 600; color: var(--heat-deep); cursor: pointer; }
+  .zip-filter__confirmed-change:hover { color: var(--heat); }
+
   /* mobile-only quick strip inside .cat-head__panel, see @media(max-width:700px) below.
      Kept deliberately tight (8px padding/gaps, inline date row, no AI-search
      label line) so the first product card still lands inside the first
@@ -5050,7 +5061,7 @@
   .cat-mobile-quick__fin:hover { color: var(--heat); border-color: var(--heat); }
   .cat-mobile-quick > .deliver-to { padding: 6px 10px; margin-bottom: 4px; }
   .cat-mobile-quick > .ai-filter { border: 1px solid var(--line); padding: 6px 10px; margin: 0; }
-  .cat-mobile-quick .deliver-to__row { margin-bottom: 4px; }
+  .cat-mobile-quick .zip-filter__confirmed:not([hidden]) { margin-bottom: 4px; }
   .cat-mobile-quick .deliver-to__dates { flex-direction: row; flex-wrap: wrap; gap: 4px 16px; }
   .cat-mobile-quick .deliver-to__editform:not([hidden]) { margin-bottom: 4px; }
 
@@ -6071,10 +6082,17 @@ html, body{ overflow-x:clip; }
       <div class="cat-mobile-quick">
         <a href="#" class="cat-mobile-quick__fin"><span>0% APR &amp; flexible financing available</span> &rarr;</a>
         <div class="deliver-to">
-          <div class="deliver-to__row" id="deliverToRowM">
-            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h13v13H1z"/><path d="M14 8h4l3 3v5h-7V8z"/><circle cx="6" cy="18" r="2"/><circle cx="17.5" cy="18" r="2"/></svg>
-            <span>Deliver to:</span>
-            <button type="button" class="deliver-to__link" id="deliverToZipM" onclick="showDeliverToEditMobile()">54115 Ashwaubenon, WI</button>
+          <!-- Figma node 2602:21525 ("Enter Shipping Date"): label left,
+               confirmed zip + Change stacked on the right. -->
+          <div class="zip-filter__confirmed" id="deliverToRowM">
+            <span class="zip-filter__confirmed-label">Estimate Your Delivery Time</span>
+            <div class="zip-filter__confirmed-zip">
+              <span class="zip-filter__confirmed-caption">Shipping to:</span>
+              <span class="zip-filter__confirmed-row2">
+                <span class="zip-filter__confirmed-value" id="deliverToZipM">54115 Ashwaubenon, WI</span>
+                <button type="button" class="zip-filter__confirmed-change" onclick="showDeliverToEditMobile()">Change &rsaquo;</button>
+              </span>
+            </div>
           </div>
           <form class="deliver-to__editform" id="deliverToEditFormM" onsubmit="return submitDeliverToZipMobile(event)" hidden>
             <label class="vh" for="deliverToInputM">New zip code</label>

@@ -4996,6 +4996,19 @@
   .zip-filter__ship-opt { display: flex; align-items: center; gap: 8px; font-family: var(--ui); font-size: 12.5px; color: #444; padding: 4px 0; cursor: pointer; }
   .zip-filter__ship-opt input[type=radio] { accent-color: var(--heat); }
   .zip-filter__ship-opt strong { color: var(--ink); font-weight: 700; }
+  /* confirmed-zip state, after Figma node 2602:21525 ("Enter Shipping Date") */
+  .zip-filter__confirmed:not([hidden]) { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 4px 10px; }
+  .zip-filter__confirmed-label { font-family: var(--ui); font-size: 12px; font-weight: 600; color: var(--ink); flex: 1 1 auto; min-width: 130px; }
+  .zip-filter__confirmed-zip { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; text-align: right; flex: 0 1 auto; min-width: 0; max-width: 100%; }
+  .zip-filter__confirmed-caption { font-family: var(--ui); font-size: 12px; color: var(--ink); }
+  .zip-filter__confirmed-row2 { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 4px 6px; }
+  .zip-filter__confirmed-value { font-family: var(--ui); font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
+  .zip-filter__confirmed-change { background: none; border: 0; padding: 0; font-family: var(--ui); font-size: 12px; font-weight: 600; color: var(--heat-deep); cursor: pointer; }
+  .zip-filter__confirmed-change:hover { color: var(--heat); }
+  /* .ai-filter__label/.ai-filter__form set display:flex unconditionally
+     elsewhere, which beats the UA [hidden]{display:none} rule at equal
+     specificity -- these two id overrides are what actually hides them. */
+  #zipFilterLabelWrapM[hidden], #zipFilterFormM[hidden] { display: none; }
   .sale-filter { padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
   .sale-filter__row { display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer; }
   .sale-filter__label { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink); font-weight: 600; }
@@ -6055,15 +6068,27 @@ html, body{ overflow-x:clip; }
       <div class="cat-mobile-quick">
         <a href="#" class="cat-mobile-quick__fin"><span>0% APR &amp; flexible financing available</span> &rarr;</a>
         <div class="zip-filter">
-          <div class="ai-filter__label">
+          <div class="ai-filter__label" id="zipFilterLabelWrapM">
             <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h13v13H1z"/><path d="M14 8h4l3 3v5h-7V8z"/><circle cx="6" cy="18" r="2"/><circle cx="17.5" cy="18" r="2"/></svg>
             <span id="zipFilterLabelM">Shipping Zip Code</span>
           </div>
-          <form class="ai-filter__form" onsubmit="return zipFilterSubmitMobile(event)">
+          <form class="ai-filter__form" id="zipFilterFormM" onsubmit="return zipFilterSubmitMobile(event)">
             <label class="vh" for="zipFilterInputM">Zip code</label>
             <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="5" id="zipFilterInputM" class="ai-filter__input" placeholder="Zip code" aria-label="Shipping zip code" value="85281">
             <button type="submit" class="ai-filter__submit">Update</button>
           </form>
+          <!-- Figma node 2602:21525 ("Enter Shipping Date"): shown once a zip is
+               confirmed, replacing the label+form above. -->
+          <div class="zip-filter__confirmed" id="zipFilterConfirmedM" hidden>
+            <span class="zip-filter__confirmed-label">Estimate Your Delivery Time</span>
+            <div class="zip-filter__confirmed-zip">
+              <span class="zip-filter__confirmed-caption">Shipping to:</span>
+              <span class="zip-filter__confirmed-row2">
+                <span class="zip-filter__confirmed-value" id="zipFilterConfirmedValueM">85281</span>
+                <button type="button" class="zip-filter__confirmed-change" onclick="zipFilterEditMobile()">Change &rsaquo;</button>
+              </span>
+            </div>
+          </div>
           <div class="zip-filter__ship" id="zipFilterShipM" hidden>
             <label class="zip-filter__ship-opt">
               <input type="radio" name="zipShipSpeedM" value="free" checked>
@@ -7126,7 +7151,10 @@ html, body{ overflow-x:clip; }
     var input = document.getElementById('zipFilterInputM');
     var val = input.value.trim();
     if (!/^\d{5}$/.test(val)) return false;
-    document.getElementById('zipFilterLabelM').innerHTML = 'Shipping Zip Code<span class="zip-filter__zipval">' + val + '</span>';
+    document.getElementById('zipFilterLabelWrapM').hidden = true;
+    document.getElementById('zipFilterFormM').hidden = true;
+    document.getElementById('zipFilterConfirmedValueM').textContent = val;
+    document.getElementById('zipFilterConfirmedM').hidden = false;
     var monthFmt = function(d){ return d.toLocaleDateString('en-US', {month:'short'}); };
     var dayFmt = function(d){ return d.getDate(); };
     var formatRange = function(start, end){
@@ -7142,6 +7170,16 @@ html, body{ overflow-x:clip; }
     document.getElementById('zipFastDateM').textContent = formatRange(fastStart, fastEnd);
     document.getElementById('zipFilterShipM').hidden = false;
     return false;
+  }
+  function zipFilterEditMobile() {
+    document.getElementById('zipFilterConfirmedM').hidden = true;
+    document.getElementById('zipFilterShipM').hidden = true;
+    document.getElementById('zipFilterLabelWrapM').hidden = false;
+    var form = document.getElementById('zipFilterFormM');
+    form.hidden = false;
+    var input = document.getElementById('zipFilterInputM');
+    input.value = document.getElementById('zipFilterConfirmedValueM').textContent;
+    input.focus();
   }
   function toggleFilters(forceState) {
     var panel = document.getElementById('filtersPanel');
