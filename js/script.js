@@ -246,3 +246,17 @@
     update();
   });
 })();
+
+/* Sticky header (.stickyhead) — desktop only, matching its own CSS
+   display:none below 1025px. Same technique as .vfb on the store/PDP
+   pages: position:fixed at all times, a .show class flipped by a plain
+   scroll listener once you've scrolled past the real header. */
+(function () {
+  var bar = document.getElementById('stickyhead');
+  var header = document.querySelector('header');
+  if (!bar || !header) return;
+  window.addEventListener('scroll', function () {
+    var past = window.scrollY > header.offsetHeight;
+    bar.classList.toggle('show', past);
+  }, { passive: true });
+})();

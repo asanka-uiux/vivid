@@ -499,6 +499,47 @@
     </div>
   </div>
 </header>
+
+<!-- ===== STICKY HEADER (scrolled state, desktop only) =====================
+     Separate, purpose-built duplicate — see the big comment on .stickyhead
+     in css/shared.css for why this isn't just .brandbar/.subnav repositioned.
+     Always in the DOM; hidden via CSS/opacity until js/script.js adds
+     .show once the real header has scrolled out of view. ===================== -->
+<div class="stickyhead" id="stickyhead">
+  <nav class="stickyhead__brands" aria-label="Vivid family of brands">
+    <div class="shell">
+      <ul>
+        <li><a href="index.html"><span class="stickyhead__dot" aria-hidden="true"></span>Vivid Racing</a></li>
+        <li><a href="vivid-trucks.html"><span class="stickyhead__dot" aria-hidden="true"></span>VR Trucks</a></li>
+        <li><a href="vivid-crossover.html"><span class="stickyhead__dot" aria-hidden="true"></span>VR Crossover</a></li>
+        <li><a href="vivid-classics.html" aria-current="page"><span class="stickyhead__dot" aria-hidden="true"></span>VR Muscle</a></li>
+        <li><a href="vividx.html"><span class="stickyhead__dot" aria-hidden="true"></span>VR Powersports</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="stickyhead__main">
+    <div class="shell stickyhead__inner">
+      <a class="stickyhead__logo" href="vivid-classics.html" aria-label="Vivid Racing — home">
+        <img src="logos/flat-system/vivid-master-red.svg" alt="" width="140" height="29">
+      </a>
+        <ul class="stickyhead__links">
+          <li><a href="waiting-to-build/suspension.html">Suspension</a></li>
+          <li><a href="wheel-store.html">Wheels &amp; Tires</a></li>
+          <li><a href="waiting-to-build/brakes.html">Brakes</a></li>
+          <li><a href="waiting-to-build/exhaust.html">Exhaust</a></li>
+          <li><a href="waiting-to-build/aero-body.html">Aero &amp; Body</a></li>
+          <li><a href="waiting-to-build/engine-turbo.html">Engine &amp; Turbo</a></li>
+        </ul>
+      <span class="stickyhead__spacer"></span>
+      <a class="stickyhead__promo" href="waiting-to-build/deal-machine.html">Spring Event &mdash; 25% Off</a>
+      <span class="stickyhead__divider" aria-hidden="true">|</span>
+      <a class="stickyhead__fin" href="waiting-to-build/financing.html">
+        <em>0% APR</em> <span>/ Pre-qualify in 60s</span>
+      </a>
+    </div>
+  </div>
+</div>
+
 <main id="main">
   <section class="hero" aria-labelledby="hero-title">
 
