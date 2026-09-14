@@ -5013,13 +5013,16 @@
      widths -- it wrapped to its own line but stayed right-aligned, leaving a
      dead gap under the label. Flowing both lines left is what actually
      collapses that gap. */
-  .zip-filter__confirmed:not([hidden]) { display: block; }
-  .zip-filter__confirmed-label { display: flex; align-items: center; gap: 6px; font-family: var(--ui); font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+  /* one row per the latest Figma pass on 2602:21525: "Estimate Your Delivery
+     Time to" flows straight into the zip, no separate "Shipping to:"
+     caption. Wraps only as a fallback (tire-store's zip+city is longer than
+     Figma's bare "54130"), with the value+Change kept together as a unit. */
+  .zip-filter__confirmed:not([hidden]) { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px 8px; }
+  .zip-filter__confirmed-label { display: flex; align-items: center; gap: 6px; font-family: var(--ui); font-size: 12px; font-weight: 600; color: var(--ink); }
   .zip-filter__confirmed-label svg { flex: none; }
-  .zip-filter__confirmed-zip { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; }
-  .zip-filter__confirmed-caption { font-family: var(--ui); font-size: 12px; color: var(--ink); }
-  .zip-filter__confirmed-value { font-family: var(--ui); font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
-  .zip-filter__confirmed-change { background: none; border: 0; padding: 0; font-family: var(--ui); font-size: 12px; font-weight: 600; color: var(--heat-deep); cursor: pointer; }
+  .zip-filter__confirmed-zip { display: flex; align-items: center; gap: 6px; flex: none; }
+  .zip-filter__confirmed-value { font-family: var(--ui); font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+  .zip-filter__confirmed-change { background: none; border: 0; padding: 0; font-family: var(--ui); font-size: 12px; font-weight: 600; color: var(--heat-deep); cursor: pointer; white-space: nowrap; }
   .zip-filter__confirmed-change:hover { color: var(--heat); }
   /* .ai-filter__label/.ai-filter__form set display:flex unconditionally
      elsewhere, which beats the UA [hidden]{display:none} rule at equal
@@ -6105,13 +6108,12 @@ html, body{ overflow-x:clip; }
           <div class="zip-filter__confirmed" id="zipFilterConfirmedM" hidden>
             <span class="zip-filter__confirmed-label">
               <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h13v13H1z"/><path d="M14 8h4l3 3v5h-7V8z"/><circle cx="6" cy="18" r="2"/><circle cx="17.5" cy="18" r="2"/></svg>
-              Estimate Your Delivery Time
+              Estimate Your Delivery Time to
             </span>
-            <p class="zip-filter__confirmed-zip">
-              <span class="zip-filter__confirmed-caption">Shipping to:</span>
+            <span class="zip-filter__confirmed-zip">
               <span class="zip-filter__confirmed-value" id="zipFilterConfirmedValueM">85281</span>
               <button type="button" class="zip-filter__confirmed-change" onclick="zipFilterEditMobile()">Change &rsaquo;</button>
-            </p>
+            </span>
           </div>
           <div class="zip-filter__ship" id="zipFilterShipM" hidden>
             <label class="zip-filter__ship-opt">
