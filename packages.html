@@ -4928,31 +4928,12 @@
   .crumbs__inner .sep { color: var(--rule); }
   .crumbs__inner .cur { color: var(--ink); font-weight: 600; }
 
-  /* ===== CAT-HEAD HERO — tiled wheel wall + headline, matching the marketing hero on
-     wheel-tire-packages.html (see that file's HERO comment for the reference this was built
-     from and why the floating "Featured Build" card there was replaced with a plain photo).
-     The functional vehicle/fitment/delivery panel below (.cat-head__panel and everything in
-     it) is untouched — same markup, same ids, same onclick hooks, same CSS — it just now sits
-     in its own white .cat-head__body band under the dark hero instead of directly on it, so
-     the boundary between "marketing hero" and "working page controls" reads as two distinct,
-     clearly separated zones instead of the plain white hero the page had before. */
-  .cat-head { position: relative; background: var(--ink); overflow: hidden; }
-  .cat-head__row { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
-  .cat-head__wall { position: absolute; inset: 0 0 auto 0; height: 300px; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); grid-auto-rows: 170px; gap: 2px; z-index: 0; }
-  .cat-head__wall img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) brightness(.4) contrast(1.05); }
-  .cat-head__scrim { position: absolute; inset: 0 0 auto 0; height: 300px; z-index: 1; background: linear-gradient(180deg, rgba(10,10,10,.72) 0%, rgba(10,10,10,.88) 68%, rgba(10,10,10,.94) 100%); }
-  .cat-head__scrim::after { content: ""; position: absolute; inset: auto 0 0 0; height: 4px; background: linear-gradient(90deg, var(--heat) 0%, var(--heat) 30%, transparent 30%); }
-  .cat-head__hero { position: relative; z-index: 2; padding: 34px 28px 30px; }
-  .cat-head__title { font-family: var(--display); font-size: clamp(28px, 3.4vw, 42px); font-weight: 900; letter-spacing: -0.02em; line-height: 1.1; text-transform: uppercase; color: #fff; margin: 0 0 14px; }
+  /* ===== CAT-HEAD — same minimal panel as wheel-store.html: no marketing hero,
+     just a visually-hidden <h1> straight into .cat-head__panel (vehicle card,
+     fitment tiers, financing). Kept in sync with wheel-store.html on purpose. */
+  .cat-head { background: var(--paper); padding: 0 0 26px; }
+  .cat-head__title { font-family: var(--display); font-size: 38px; font-weight: 900; letter-spacing: -0.02em; color: var(--ink); margin: 0; }
   .cat-head__title .heat { color: var(--heat); }
-  .cat-head__lede { font-family: var(--ui); font-size: 13px; font-weight: 500; letter-spacing: 0.01em; text-transform: uppercase; line-height: 1.6; color: rgba(255,255,255,.8); max-width: 640px; margin: 0 0 18px; }
-  .cat-head__badges { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; list-style: none; margin: 0; padding: 0; }
-  .cat-head__badge { display: flex; align-items: center; gap: 7px; font-family: var(--display); font-size: 12px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; color: #fff; padding-right: 20px; border-right: 1px solid rgba(255,255,255,.22); }
-  .cat-head__badge:last-child { padding-right: 0; border-right: 0; }
-  .cat-head__badge svg { flex: none; }
-  .cat-head__body { position: relative; z-index: 2; background: var(--paper); padding: 26px 0; }
-  .cat-head__count { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel); }
-  .cat-head__grid { display: grid; grid-template-columns: 1fr 320px; gap: 24px; margin-top: 20px; align-items: end; }
   .tier-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--steel); margin-bottom: 8px; }
   .tiers { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; }
   .tier { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: var(--bone); border: 1px solid var(--line); border-left: 3px solid var(--rule); cursor: pointer; text-align: left; transition: all .15s; box-shadow: 0 1px 3px rgba(0,0,0,.06); min-width: 0; }
@@ -4988,6 +4969,8 @@
      grid-row. */
   .listing__grid { display: grid; grid-template-columns: 300px 1fr; gap: 28px; align-items: start; }
   .filters { grid-row: span 3; background: var(--paper); border: 1px solid var(--line); padding: 8px; position: sticky; top: 130px; }
+  /* drawer-only chrome, unused on the persistent desktop sidebar */
+  .filters__overlay, .filters__head { display: none; }
   .ai-filter { padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
   .ai-filter__label { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink); font-weight: 600; margin-bottom: 8px; white-space: nowrap; }
   .ai-filter__form { display: flex; gap: 6px; }
@@ -5001,6 +4984,62 @@
   .zip-filter__ship-opt { display: flex; align-items: center; gap: 8px; font-family: var(--ui); font-size: 12.5px; color: #444; padding: 4px 0; cursor: pointer; }
   .zip-filter__ship-opt input[type=radio] { accent-color: var(--heat); }
   .zip-filter__ship-opt strong { color: var(--ink); font-weight: 700; }
+  /* mobile-only quick strip inside .cat-head__panel, see @media(max-width:700px) below.
+     Kept deliberately tight (8px padding/gaps, no label lines) so the first
+     product card still lands inside the first mobile viewport. */
+  .cat-mobile-quick { display: none; }
+  /* Figma node 2601:21371 ("promo-financing") -- mobile only, see
+     @media(max-width:700px) where .cat-mobile-quick is switched on; desktop
+     never sees this element. */
+  .cat-mobile-quick__fin { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; font-family: var(--ui); font-size: 12px; font-weight: 600; letter-spacing: -0.01em; color: #991B1B; text-decoration: none; text-align: left; background: #FEF2F2; border: 1px solid #FEE2E2; border-radius: 3px; padding: 9px 14px; margin-bottom: 4px; cursor: pointer; }
+  .cat-mobile-quick__fin svg { flex: none; }
+  .cat-mobile-quick__fin:hover { color: #7A1515; border-color: #FECACA; }
+  .cat-mobile-quick__fin-copy { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .cat-mobile-quick__fin-logo { width: auto; flex: none; }
+  /* affirm's mark includes a tall arc above the wordmark that katapult's
+     doesn't have, so equal heights read as mismatched sizes -- these are
+     tuned so the actual lettering looks the same size, not the images. */
+  .cat-mobile-quick__fin-logo--affirm { height: 15px; }
+  .cat-mobile-quick__fin-logo--katapult { height: 11px; }
+  .cat-mobile-quick__fin-chevron { flex: none; }
+
+  /* ===== financing bottom sheet, opened from .cat-mobile-quick__fin ===== */
+  .fin-sheet { position: fixed; inset: 0; z-index: 600; visibility: hidden; }
+  .fin-sheet.is-open { visibility: visible; }
+  .fin-sheet__overlay { position: absolute; inset: 0; background: rgba(10,10,10,.5); opacity: 0; transition: opacity .25s ease; }
+  .fin-sheet.is-open .fin-sheet__overlay { opacity: 1; }
+  .fin-sheet__panel { position: absolute; left: 0; right: 0; bottom: 0; background: var(--paper); border-radius: 16px 16px 0 0; padding: 10px 20px 28px; max-height: 85vh; overflow-y: auto; transform: translateY(100%); transition: transform .3s cubic-bezier(.32,.72,0,1); box-shadow: 0 -8px 32px rgba(0,0,0,.18); }
+  .fin-sheet.is-open .fin-sheet__panel { transform: translateY(0); }
+  .fin-sheet__handle { width: 36px; height: 4px; border-radius: 999px; background: var(--rule); margin: 0 auto 14px; }
+  .fin-sheet__close { position: absolute; top: 12px; right: 16px; width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line); background: var(--paper); font-size: 18px; line-height: 1; cursor: pointer; color: var(--steel); transition: all .15s; }
+  .fin-sheet__close:hover { background: var(--bone); color: var(--ink); }
+  .fin-sheet__title { font-family: var(--display); font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: .01em; color: var(--ink); margin: 0 0 16px; }
+  .fin-sheet__card { border: 1px solid var(--line); border-radius: 6px; padding: 16px; margin-bottom: 12px; }
+  .fin-sheet__card:last-child { margin-bottom: 0; }
+  .fin-sheet__logo { height: 18px; width: auto; display: block; margin-bottom: 10px; }
+  .fin-sheet__logo--affirm { height: 20px; }
+  .fin-sheet__logo--katapult { height: 14px; }
+  .fin-sheet__text { font-family: var(--ui); font-size: 13.5px; color: var(--steel); line-height: 1.5; margin: 0 0 12px; }
+  .fin-sheet__btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 12px; background: var(--heat-deep); color: var(--paper); font-family: var(--display); font-size: 12px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; text-decoration: none; border-radius: 3px; transition: background .15s; }
+  .fin-sheet__btn:hover { background: var(--heat); }
+  .cat-mobile-quick > .zip-filter, .cat-mobile-quick > .ai-filter { border: 1px solid var(--line); padding: 6px 10px; margin: 0 0 4px; background: var(--bone); }
+  .cat-mobile-quick > .ai-filter:last-child { margin-bottom: 0; }
+  .cat-mobile-quick .ai-filter__label { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+  .cat-mobile-quick .ai-filter__label svg { flex: none; }
+  .cat-mobile-quick .zip-filter__ship { margin-top: 6px; }
+  .cat-mobile-quick .zip-filter__ship-opt { padding: 2px 0; }
+  /* confirmed-zip state, after Figma node 2602:21525 ("Enter Shipping Date") */
+  .zip-filter__confirmed:not([hidden]) { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px 8px; }
+  .zip-filter__confirmed-label { display: flex; align-items: center; gap: 6px; font-family: var(--ui); font-size: 12px; font-weight: 600; color: var(--ink); }
+  .zip-filter__confirmed-label svg { flex: none; }
+  .zip-filter__confirmed-zip { display: flex; align-items: center; gap: 6px; flex: none; }
+  .zip-filter__confirmed-value { font-family: var(--ui); font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+  .zip-filter__confirmed-change { background: none; border: 0; padding: 0; font-family: var(--ui); font-size: 12px; font-weight: 600; color: var(--heat-deep); cursor: pointer; white-space: nowrap; }
+  .zip-filter__confirmed-change:hover { color: var(--heat); }
+  /* .ai-filter__label/.ai-filter__form set display:flex unconditionally
+     elsewhere, which beats the UA [hidden]{display:none} rule at equal
+     specificity -- these two id overrides are what actually hides them. */
+  #zipFilterLabelWrapM[hidden], #zipFilterFormM[hidden] { display: none; }
   .sale-filter { padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
   .sale-filter__row { display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer; }
   .sale-filter__label { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink); font-weight: 600; }
@@ -5158,18 +5197,34 @@
   .section-sub { font-family: var(--ui); font-size: 14px; color: var(--steel); margin: 0; }
 
   @media (max-width: 1080px) {
+    .listing { padding: 12px 0 56px; }
     .listing__grid { grid-template-columns: minmax(0,1fr); }
-    /* Single column now, so source order alone decides stacking -- reorder
-       so tapping "Filter" (in .sortbar) reveals the panel directly beneath
-       it, not above the whole listing (.filters was first in the DOM, which
-       used to put the opened panel above .sortbar and everything else). */
-    .filters { grid-row: auto; position: static; display: none; order: 2; }
-    .filters.is-open { display: block; }
+    /* Single column now, so source order alone decides stacking for the
+       siblings that stay in normal flow (.filters itself is taken out of
+       flow below -- it opens as a fixed right-side drawer instead of
+       reordering inline). */
     .sortbar { order: 1; }
     .wgrid { order: 3; }
     .pgn { order: 4; }
+    /* Filter drawer: slides in from the right over a dimmed overlay,
+       80vw wide, instead of the old inline reveal-below-the-button panel. */
+    .filters__overlay { display: block; position: fixed; inset: 0; z-index: 699; background: rgba(10,10,10,.5); opacity: 0; visibility: hidden; transition: opacity .25s ease, visibility .25s ease; }
+    .filters__overlay.is-open { opacity: 1; visibility: visible; }
+    .filters {
+      grid-row: auto; order: 2;
+      position: fixed; top: 0; right: 0; bottom: 0; z-index: 700;
+      width: 80vw; max-width: 80vw;
+      display: block; overflow-y: auto; visibility: hidden;
+      padding: 16px; box-shadow: -8px 0 32px rgba(0,0,0,.22);
+      transform: translateX(100%);
+      transition: transform .3s cubic-bezier(.32,.72,0,1), visibility 0s linear .3s;
+    }
+    .filters.is-open { transform: translateX(0); visibility: visible; transition: transform .3s cubic-bezier(.32,.72,0,1); }
+    .filters__head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid var(--line); }
+    .filters__head-title { font-family: var(--display); font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: .01em; color: var(--ink); }
+    .filters__close { flex: none; width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line); background: var(--paper); font-size: 18px; line-height: 1; cursor: pointer; color: var(--steel); transition: all .15s; }
+    .filters__close:hover { background: var(--bone); color: var(--ink); }
     .tiers { grid-template-columns: repeat(2, minmax(0,1fr)); }
-    .cat-head__grid { grid-template-columns: 1fr; }
   }
 
   /* cat-head v2 */
@@ -5250,14 +5305,13 @@
 
   @media (max-width: 700px) {
     .wgrid { grid-template-columns: minmax(0,1fr); }
-    .cat-head__title { font-size: clamp(24px, 7vw, 30px); }
-    .cat-head__wall { height: 220px; grid-auto-rows: 110px; }
-    .cat-head__scrim { height: 220px; }
-    .cat-head__hero { padding: 22px 16px 20px; }
-    .cat-head__lede { font-size: 12px; }
+    .cat-head__title { font-size: 30px; }
     .sortbar { flex-wrap: wrap; gap: 10px; }
     .sortbar__count { font-size: 12px; }
     .expert-card { display: none; }
+  }
+  @media (max-width: 700px) {
+    .cat-head { padding-bottom: 8px; }
   }
   /* --- Mobile store header, laid out after CO Updates node 750:100905.
      LAYOUT ONLY: ViViD type, colour and copy are unchanged; none of the CO
@@ -5277,8 +5331,12 @@
      scroller so no trust signal ends up hidden off-screen. --- */
   @media (max-width: 700px) {
     .cat-head__panel > .veh-card { order: 1; }
-    .cat-delivery                { order: 2; }
+    .cat-mobile-quick            { display: block; order: 2; }
+    .cat-delivery                { order: 2; display: none; }
     .cat-head__fitment           { order: 3; }
+    /* originals now duplicated above in .cat-mobile-quick; hide so the
+       Filter drawer doesn't show them twice at this width */
+    .filters > .ai-filter, .filters > .zip-filter { display: none; }
 
     /* Vehicle card after node 171:11983 ("Change vehicle", 358x111): 8px/12px
        padding, an 8px gap between the text block and the chip row, the
@@ -5443,14 +5501,17 @@ html, body{ overflow-x:clip; }
   /* ===== PACKAGES — listing head + 1-2-3 stepper (Figma CO Updates 750:121019, "Section / Product Grid") ===== */
   .listing__head { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 22px; }
   .listing__title { font-family: var(--display); font-size: clamp(22px, 2.4vw, 28px); font-weight: 900; letter-spacing: -0.02em; color: var(--ink); margin: 0; }
-  .steps { display: flex; align-items: stretch; list-style: none; margin: 0; padding: 0; border: 1px solid var(--line); background: var(--paper); }
-  .steps__item { display: flex; align-items: center; gap: 10px; padding: 10px 18px 10px 14px; position: relative; color: var(--steel); font-family: var(--display); font-size: 12.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
-  .steps__item + .steps__item { border-left: 1px solid var(--line); }
-  .steps__num { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--rule); font-family: var(--display); font-size: 12px; font-weight: 900; color: var(--steel); }
+  .steps { display: flex; align-items: stretch; list-style: none; margin: 0; padding: 0; background: var(--paper); }
+  .steps__item { display: flex; align-items: center; gap: 10px; padding: 10px 24px 10px 20px; position: relative; color: var(--steel); font-family: var(--display); font-size: 12.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; background: var(--bone); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%); }
+  .steps__item:first-child { padding-left: 16px; border-left: 1px solid var(--line); }
+  .steps__item:not(:first-child) { margin-left: -12px; padding-left: 26px; z-index: 1; clip-path: polygon(0 0, 12px 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 12px 100%, 0 50%); }
+  .steps__item:nth-child(2) { z-index: 2; }
+  .steps__item:nth-child(3) { z-index: 3; }
+  .steps__item:last-child { border-right: 1px solid var(--line); }
+  .steps__num { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--rule); font-family: var(--display); font-size: 12px; font-weight: 900; color: var(--steel); flex: none; }
   .steps__item--current { background: var(--heat-deep); color: var(--paper); }
   .steps__item--current .steps__num { background: var(--paper); border-color: var(--paper); color: var(--heat-deep); }
-  .steps__item--current::after { content: ""; position: absolute; right: -9px; top: 50%; width: 18px; height: 18px; transform: translateY(-50%) rotate(45deg); background: var(--heat-deep); z-index: 1; clip-path: polygon(0 0, 100% 0, 100% 100%); }
-  @media (max-width: 900px) { .steps { width: 100%; } .steps__item { flex: 1 1 0; justify-content: center; padding: 10px 8px; font-size: 11px; } .steps__item--current::after { display: none; } }
+  @media (max-width: 900px) { .steps { width: 100%; } .steps__item { flex: 1 1 0; justify-content: center; padding: 10px 16px 10px 20px; font-size: 11px; } .steps__item:not(:first-child) { padding-left: 22px; } }
 </style>
   <link rel="stylesheet" href="assets/vr-content.css">
   <link rel="stylesheet" href="css/shared.css">
@@ -5975,33 +6036,8 @@ html, body{ overflow-x:clip; }
 
 <!-- ===== CATEGORY HEAD ===== -->
 <section class="cat-head">
-  <div class="cat-head__wall" aria-hidden="true">
-    <img src="product-images/wheels.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr23/1892/1/Fuel__D67320908250.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr23/1810/1/hMO9703.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr/1768/2022/Method_MR_401_UTV_Beadlock_Matte_Black.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr23/835/1/VN1055165.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr23/1810/1/MO970890873A18.webp" alt="" loading="eager">
-    <img src="product-images/wheels.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr23/1892/1/Fuel__D67320908250.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr23/1810/1/hMO9703.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr/1768/2022/Method_MR_401_UTV_Beadlock_Matte_Black.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr23/835/1/VN1055165.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr23/1810/1/MO970890873A18.webp" alt="" loading="eager">
-  </div>
-  <div class="cat-head__scrim" aria-hidden="true"></div>
-  <div class="wrap cat-head__hero">
-    <h1 class="cat-head__title" id="cat-head-title">2023 Ford F-250 Wheel &amp; Tire Packages</h1>
-    <p class="cat-head__lede">No rub fit wheels and tires for your 2023 Ford F-250 Super Duty &bull; Stock &ndash; 6&Prime; lifted. Mounted, balanced, and shipped free.</p>
-    <ul class="cat-head__badges" aria-label="Package guarantees">
-      <li class="cat-head__badge"><svg viewBox="0 0 24 24" width="15" height="15" fill="#4ADE80" aria-hidden="true" focusable="false"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg> No Rub</li>
-      <li class="cat-head__badge"><svg viewBox="0 0 24 24" width="15" height="15" fill="#4ADE80" aria-hidden="true" focusable="false"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1 .1-1.4z"/></svg> Free Mounting &amp; Balancing</li>
-      <li class="cat-head__badge"><svg viewBox="0 0 24 24" width="15" height="15" fill="#4ADE80" aria-hidden="true" focusable="false"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg> 9,000+ Real Builds</li>
-      <li class="cat-head__badge"><svg viewBox="0 0 24 24" width="15" height="15" fill="#4ADE80" aria-hidden="true" focusable="false"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg> Free Shipping</li>
-    </ul>
-  </div>
-  <div class="cat-head__body">
   <div class="wrap">
+    <h1 class="cat-head__title vh">2023 Ford F-250 Wheel &amp; Tire Packages</h1>
     <div class="cat-head__panel">
 
       <div class="veh-card" id="vehCardConfirmed">
@@ -6102,6 +6138,82 @@ html, body{ overflow-x:clip; }
         </div>
       </div>
 
+      <!-- ===== Mobile-only (<=700px): financing link + delivery estimate +
+           AI search, pulled up here from .filters so they're visible without
+           opening the Filter drawer. Own ids (M suffix) so they don't collide
+           with the originals, which stay in .filters for desktop/tablet and
+           are hidden there at this width by the .filters > .ai-filter /
+           .filters > .zip-filter rules below. ===== -->
+      <div class="cat-mobile-quick">
+        <button type="button" class="cat-mobile-quick__fin" onclick="openFinSheet()">
+          <span class="cat-mobile-quick__fin-copy">Flexible financing available with
+            <img src="assets/img/logos/affirm-transparent.png" alt="Affirm" class="cat-mobile-quick__fin-logo cat-mobile-quick__fin-logo--affirm">
+            <img src="assets/img/logos/katapult.webp" alt="Katapult" class="cat-mobile-quick__fin-logo cat-mobile-quick__fin-logo--katapult">
+          </span>
+          <svg class="cat-mobile-quick__fin-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+        <div class="zip-filter">
+          <div class="ai-filter__label" id="zipFilterLabelWrapM">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h13v13H1z"/><path d="M14 8h4l3 3v5h-7V8z"/><circle cx="6" cy="18" r="2"/><circle cx="17.5" cy="18" r="2"/></svg>
+            <span id="zipFilterLabelM">Shipping Zip Code</span>
+          </div>
+          <form class="ai-filter__form" id="zipFilterFormM" onsubmit="return zipFilterSubmitMobile(event)">
+            <label class="vh" for="zipFilterInputM">Zip code</label>
+            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="5" id="zipFilterInputM" class="ai-filter__input" placeholder="Zip code" aria-label="Shipping zip code" value="85281">
+            <button type="submit" class="ai-filter__submit">Update</button>
+          </form>
+          <!-- Figma node 2602:21525 ("Enter Shipping Date"): shown once a zip is
+               confirmed, replacing the label+form above. -->
+          <div class="zip-filter__confirmed" id="zipFilterConfirmedM" hidden>
+            <span class="zip-filter__confirmed-label">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h13v13H1z"/><path d="M14 8h4l3 3v5h-7V8z"/><circle cx="6" cy="18" r="2"/><circle cx="17.5" cy="18" r="2"/></svg>
+              Estimate Your Delivery Time to
+            </span>
+            <span class="zip-filter__confirmed-zip">
+              <span class="zip-filter__confirmed-value" id="zipFilterConfirmedValueM">85281</span>
+              <button type="button" class="zip-filter__confirmed-change" onclick="zipFilterEditMobile()">Change &rsaquo;</button>
+            </span>
+          </div>
+          <div class="zip-filter__ship" id="zipFilterShipM" hidden>
+            <label class="zip-filter__ship-opt">
+              <input type="radio" name="zipShipSpeedM" value="free" checked>
+              <span>Free Shipping on <strong id="zipFreeDateM"></strong></span>
+            </label>
+            <label class="zip-filter__ship-opt">
+              <input type="radio" name="zipShipSpeedM" value="fast">
+              <span>Fast Shipping <strong id="zipFastDateM"></strong></span>
+            </label>
+          </div>
+        </div>
+        <div class="ai-filter">
+          <form class="ai-filter__form" onsubmit="return false;">
+            <input type="text" class="ai-filter__input" placeholder="Filter with Vivid Racing AI" aria-label="Filter with Vivid Racing AI">
+            <button type="submit" class="ai-filter__submit">Go</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Financing bottom sheet: opened from .cat-mobile-quick__fin (mobile
+           only, same trigger). Always in the DOM so .is-open can transition it. -->
+      <div class="fin-sheet" id="finSheet" role="dialog" aria-modal="true" aria-labelledby="finSheetTitle">
+        <div class="fin-sheet__overlay" onclick="closeFinSheet()" role="button" tabindex="0" aria-label="Close" onkeydown="if(event.key==='Enter'||event.key===' ')closeFinSheet()"></div>
+        <div class="fin-sheet__panel">
+          <div class="fin-sheet__handle" aria-hidden="true"></div>
+          <button type="button" class="fin-sheet__close" onclick="closeFinSheet()" aria-label="Close">&times;</button>
+          <h2 class="fin-sheet__title" id="finSheetTitle">Flexible Financing</h2>
+          <div class="fin-sheet__card">
+            <img src="assets/img/logos/affirm-transparent.png" alt="Affirm" class="fin-sheet__logo fin-sheet__logo--affirm">
+            <p class="fin-sheet__text">Pay at your own pace with no hidden fees.</p>
+            <a href="#" class="fin-sheet__btn">Prequalify Now</a>
+          </div>
+          <div class="fin-sheet__card">
+            <img src="assets/img/logos/katapult.webp" alt="Katapult" class="fin-sheet__logo fin-sheet__logo--katapult">
+            <p class="fin-sheet__text">Pay over time. No credit required.</p>
+            <a href="#" class="fin-sheet__btn">Get Pre-Approved</a>
+          </div>
+        </div>
+      </div>
+
       <div class="cat-head__fitment">
         <div class="tier-label">Select Your Package Fitment</div>
         <div class="tiers">
@@ -6159,7 +6271,6 @@ html, body{ overflow-x:clip; }
 
     </div>
   </div>
-  </div>
 </section>
 
 <!-- ===== ALL PACKAGES · Figma CO Updates 750:121019 "Section / Product Grid" — stepper + listing ===== -->
@@ -6175,7 +6286,12 @@ html, body{ overflow-x:clip; }
     </div>
     <div class="listing__grid">
 
+      <div class="filters__overlay" id="filtersOverlay" onclick="toggleFilters(false)"></div>
       <aside class="filters" id="filtersPanel">
+        <div class="filters__head">
+          <span class="filters__head-title">Filters</span>
+          <button type="button" class="filters__close" onclick="toggleFilters(false)" aria-label="Close filters">&times;</button>
+        </div>
         <div class="ai-filter">
           <div class="ai-filter__label">Filter with Vivid Racing AI</div>
           <form class="ai-filter__form" onsubmit="return false;">
@@ -6923,6 +7039,14 @@ html, body{ overflow-x:clip; }
     document.getElementById('ymmModal').style.display = 'none';
     document.body.style.overflow = '';
   }
+  function openFinSheet(){
+    document.getElementById('finSheet').classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeFinSheet(){
+    document.getElementById('finSheet').classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
   function populateYmmModels(){
     var make = document.getElementById('ymmModalMake').value;
     var modelSelect = document.getElementById('ymmModalModel');
@@ -6949,6 +7073,8 @@ html, body{ overflow-x:clip; }
   }
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape' && document.getElementById('ymmModal').style.display !== 'none') closeYmmModal();
+    if (e.key === 'Escape' && document.getElementById('finSheet').classList.contains('is-open')) closeFinSheet();
+    if (e.key === 'Escape' && document.getElementById('filtersPanel').classList.contains('is-open')) toggleFilters(false);
   });
   function zipFilterSubmit(e) {
     e.preventDefault();
@@ -6971,6 +7097,41 @@ html, body{ overflow-x:clip; }
     document.getElementById('zipFastDate').textContent = formatRange(fastStart, fastEnd);
     document.getElementById('zipFilterShip').hidden = false;
     return false;
+  }
+  function zipFilterSubmitMobile(e) {
+    e.preventDefault();
+    var input = document.getElementById('zipFilterInputM');
+    var val = input.value.trim();
+    if (!/^\d{5}$/.test(val)) return false;
+    document.getElementById('zipFilterLabelWrapM').hidden = true;
+    document.getElementById('zipFilterFormM').hidden = true;
+    document.getElementById('zipFilterConfirmedValueM').textContent = val;
+    document.getElementById('zipFilterConfirmedM').hidden = false;
+    var monthFmt = function(d){ return d.toLocaleDateString('en-US', {month:'short'}); };
+    var dayFmt = function(d){ return d.getDate(); };
+    var formatRange = function(start, end){
+      if (monthFmt(start) === monthFmt(end)) return monthFmt(start) + ' ' + dayFmt(start) + ' – ' + dayFmt(end);
+      return monthFmt(start) + ' ' + dayFmt(start) + ' – ' + monthFmt(end) + ' ' + dayFmt(end);
+    };
+    var today = new Date();
+    var freeStart = new Date(today); freeStart.setDate(today.getDate() + 7);
+    var freeEnd = new Date(today); freeEnd.setDate(today.getDate() + 9);
+    var fastStart = new Date(today); fastStart.setDate(today.getDate() + 2);
+    var fastEnd = new Date(today); fastEnd.setDate(today.getDate() + 3);
+    document.getElementById('zipFreeDateM').textContent = formatRange(freeStart, freeEnd);
+    document.getElementById('zipFastDateM').textContent = formatRange(fastStart, fastEnd);
+    document.getElementById('zipFilterShipM').hidden = false;
+    return false;
+  }
+  function zipFilterEditMobile() {
+    document.getElementById('zipFilterConfirmedM').hidden = true;
+    document.getElementById('zipFilterShipM').hidden = true;
+    document.getElementById('zipFilterLabelWrapM').hidden = false;
+    var form = document.getElementById('zipFilterFormM');
+    form.hidden = false;
+    var input = document.getElementById('zipFilterInputM');
+    input.value = document.getElementById('zipFilterConfirmedValueM').textContent;
+    input.focus();
   }
   function selectVehicle(name, shortName, spec){
     document.getElementById('vehName').textContent = name;
@@ -7076,11 +7237,13 @@ html, body{ overflow-x:clip; }
   function toggleFilters(forceState) {
     var panel = document.getElementById('filtersPanel');
     var btn = document.getElementById('filterToggleBtn');
+    var overlay = document.getElementById('filtersOverlay');
     if (!panel) return;
     var open = forceState !== undefined ? forceState : !panel.classList.contains('is-open');
     panel.classList.toggle('is-open', open);
+    if (overlay) overlay.classList.toggle('is-open', open);
     if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    if (open) panel.scrollIntoView({behavior:'smooth', block:'start'});
+    document.body.style.overflow = open ? 'hidden' : '';
   }
   applyFitFilter(0);
   (function(){

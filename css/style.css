@@ -1581,7 +1581,7 @@
 
 .jump__rows{margin:0;padding:0;list-style:none;background:#fff;flex:1 1 auto;min-width:0;
   border:1px solid var(--hairline);border-radius:4px}
-.jump__row{display:flex;flex-direction:column;gap:12px;padding:16px 20px;
+.jump__row{display:flex;flex-direction:column;gap:12px;padding:8px 12px;
   border-bottom:1px solid var(--hairline)}
 .jump__row:last-child{border-bottom:0}
 @media (min-width:641px){
