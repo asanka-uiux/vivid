@@ -4978,12 +4978,20 @@
   .ai-filter__submit:hover { background: var(--heat); }
   .zip-filter { padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
   .zip-filter__zipval { color: var(--ink); font-weight: 700; letter-spacing: 0; margin-left: 6px; }
-  /* mobile-only quick strip inside .cat-head__panel, see @media(max-width:700px) below */
+  /* mobile-only quick strip inside .cat-head__panel, see @media(max-width:700px) below.
+     Kept deliberately tight (8px padding/gaps, no label lines) so the first
+     product card still lands inside the first mobile viewport. */
   .cat-mobile-quick { display: none; }
-  .cat-mobile-quick__fin { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-family: var(--ui); font-size: 12.5px; font-weight: 700; color: var(--heat-deep); text-decoration: none; background: var(--bone); border: 1px solid var(--line); padding: 12px 14px; margin-bottom: 12px; }
+  .cat-mobile-quick__fin { display: flex; align-items: center; gap: 7px; font-family: var(--ui); font-size: 12px; font-weight: 700; color: var(--heat-deep); text-decoration: none; background: var(--bone); border: 1px solid var(--line); padding: 6px 10px; margin-bottom: 4px; }
+  .cat-mobile-quick__fin svg { flex: none; }
+  .cat-mobile-quick__fin span { flex: 1; }
   .cat-mobile-quick__fin:hover { color: var(--heat); border-color: var(--heat); }
-  .cat-mobile-quick > .zip-filter, .cat-mobile-quick > .ai-filter { border: 1px solid var(--line); padding: 12px 14px; margin: 0 0 12px; }
+  .cat-mobile-quick > .zip-filter, .cat-mobile-quick > .ai-filter { border: 1px solid var(--line); padding: 6px 10px; margin: 0 0 4px; }
   .cat-mobile-quick > .ai-filter:last-child { margin-bottom: 0; }
+  .cat-mobile-quick .ai-filter__label { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+  .cat-mobile-quick .ai-filter__label svg { flex: none; }
+  .cat-mobile-quick .zip-filter__ship { margin-top: 6px; }
+  .cat-mobile-quick .zip-filter__ship-opt { padding: 2px 0; }
   .zip-filter__ship { margin-top: 12px; }
   .zip-filter__ship-opt { display: flex; align-items: center; gap: 8px; font-family: var(--ui); font-size: 12.5px; color: #444; padding: 4px 0; cursor: pointer; }
   .zip-filter__ship-opt input[type=radio] { accent-color: var(--heat); }
@@ -5277,6 +5285,11 @@
     /* originals now duplicated above in .cat-mobile-quick; hide so the
        Filter drawer doesn't show them twice at this width */
     .filters > .ai-filter, .filters > .zip-filter { display: none; }
+    /* trims the gap above the fold so a product card still clears it */
+    .cat-head { padding-bottom: 8px; }
+    .cat-head__panel { gap: 6px; }
+    .listing { padding-top: 0; }
+    .sortbar { margin-bottom: 6px; }
 
     /* Vehicle card after node 171:11983 ("Change vehicle", 358x111): 8px/12px
        padding, an 8px gap between the text block and the chip row, the
@@ -6040,9 +6053,12 @@ html, body{ overflow-x:clip; }
            are hidden there at this width by the .filters > .ai-filter /
            .filters > .zip-filter rules below. ===== -->
       <div class="cat-mobile-quick">
-        <a href="#" class="cat-mobile-quick__fin">0% APR &amp; flexible financing available &rarr;</a>
+        <a href="#" class="cat-mobile-quick__fin"><span>0% APR &amp; flexible financing available</span> &rarr;</a>
         <div class="zip-filter">
-          <div class="ai-filter__label" id="zipFilterLabelM">Shipping Zip Code</div>
+          <div class="ai-filter__label">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h13v13H1z"/><path d="M14 8h4l3 3v5h-7V8z"/><circle cx="6" cy="18" r="2"/><circle cx="17.5" cy="18" r="2"/></svg>
+            <span id="zipFilterLabelM">Shipping Zip Code</span>
+          </div>
           <form class="ai-filter__form" onsubmit="return zipFilterSubmitMobile(event)">
             <label class="vh" for="zipFilterInputM">Zip code</label>
             <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="5" id="zipFilterInputM" class="ai-filter__input" placeholder="Zip code" aria-label="Shipping zip code" value="85281">
@@ -6060,7 +6076,6 @@ html, body{ overflow-x:clip; }
           </div>
         </div>
         <div class="ai-filter">
-          <div class="ai-filter__label">Filter with Vivid Racing AI</div>
           <form class="ai-filter__form" onsubmit="return false;">
             <input type="text" class="ai-filter__input" placeholder="Filter with Vivid Racing AI" aria-label="Filter with Vivid Racing AI">
             <button type="submit" class="ai-filter__submit">Go</button>

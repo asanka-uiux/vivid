@@ -5039,12 +5039,20 @@
   .deliver-to__date { display: flex; align-items: center; gap: 9px; font-family: var(--ui); font-size: 13px; color: var(--ink); cursor: pointer; }
   .deliver-to__date input[type=radio] { accent-color: var(--heat); width: 15px; height: 15px; }
 
-  /* mobile-only quick strip inside .cat-head__panel, see @media(max-width:700px) below */
+  /* mobile-only quick strip inside .cat-head__panel, see @media(max-width:700px) below.
+     Kept deliberately tight (8px padding/gaps, inline date row, no AI-search
+     label line) so the first product card still lands inside the first
+     mobile viewport. */
   .cat-mobile-quick { display: none; }
-  .cat-mobile-quick__fin { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-family: var(--ui); font-size: 12.5px; font-weight: 700; color: var(--heat-deep); text-decoration: none; background: var(--bone); border: 1px solid var(--line); padding: 12px 14px; margin-bottom: 12px; }
+  .cat-mobile-quick__fin { display: flex; align-items: center; gap: 7px; font-family: var(--ui); font-size: 12px; font-weight: 700; color: var(--heat-deep); text-decoration: none; background: var(--bone); border: 1px solid var(--line); padding: 6px 10px; margin-bottom: 4px; }
+  .cat-mobile-quick__fin svg { flex: none; }
+  .cat-mobile-quick__fin span { flex: 1; }
   .cat-mobile-quick__fin:hover { color: var(--heat); border-color: var(--heat); }
-  .cat-mobile-quick > .deliver-to { margin-bottom: 12px; }
-  .cat-mobile-quick > .ai-filter { border: 1px solid var(--line); padding: 12px 14px; margin: 0; }
+  .cat-mobile-quick > .deliver-to { padding: 6px 10px; margin-bottom: 4px; }
+  .cat-mobile-quick > .ai-filter { border: 1px solid var(--line); padding: 6px 10px; margin: 0; }
+  .cat-mobile-quick .deliver-to__row { margin-bottom: 4px; }
+  .cat-mobile-quick .deliver-to__dates { flex-direction: row; flex-wrap: wrap; gap: 4px 16px; }
+  .cat-mobile-quick .deliver-to__editform:not([hidden]) { margin-bottom: 4px; }
 
   /* --- sales toggle -------------------------------------------------------- */
   .sale-filter { border: 1px solid var(--line); padding: 12px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
@@ -5293,6 +5301,11 @@
     /* originals now duplicated above in .cat-mobile-quick; hide so the
        Filter drawer doesn't show them twice at this width */
     .filters > .ai-filter, .filters > .deliver-to { display: none; }
+    /* trims the gap above the fold so a product card still clears it */
+    .cat-head { padding-bottom: 8px; }
+    .cat-head__panel { gap: 6px; }
+    .listing { padding-top: 0; }
+    .sortbar { margin-bottom: 6px; }
 
     /* Vehicle card after node 171:11983 ("Change vehicle", 358x111): 8px/12px
        padding, an 8px gap between the text block and the chip row, the
@@ -6056,7 +6069,7 @@ html, body{ overflow-x:clip; }
            are hidden there at this width by the .filters > .ai-filter /
            .filters > .deliver-to rules below. ===== -->
       <div class="cat-mobile-quick">
-        <a href="#" class="cat-mobile-quick__fin">0% APR &amp; flexible financing available &rarr;</a>
+        <a href="#" class="cat-mobile-quick__fin"><span>0% APR &amp; flexible financing available</span> &rarr;</a>
         <div class="deliver-to">
           <div class="deliver-to__row" id="deliverToRowM">
             <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h13v13H1z"/><path d="M14 8h4l3 3v5h-7V8z"/><circle cx="6" cy="18" r="2"/><circle cx="17.5" cy="18" r="2"/></svg>
@@ -6074,7 +6087,6 @@ html, body{ overflow-x:clip; }
           </div>
         </div>
         <div class="ai-filter">
-          <div class="ai-filter__label">Filter with Vivid Racing AI</div>
           <form class="ai-filter__form" onsubmit="return false;">
             <input type="text" class="ai-filter__input" placeholder="Filter with Vivid Racing AI" aria-label="Filter with Vivid Racing AI">
             <button type="submit" class="ai-filter__submit">Go</button>
