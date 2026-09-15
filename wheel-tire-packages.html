@@ -4927,6 +4927,9 @@
   .crumbs__inner a:hover { color: var(--heat); }
   .crumbs__inner .sep { color: var(--rule); }
   .crumbs__inner .cur { color: var(--ink); font-weight: 600; }
+  @media (max-width: 700px) {
+    .crumbs__inner { padding: 0px 0; }
+  }
 
   /* ===== CAT-HEAD — same minimal panel as wheel-store.html: no marketing hero,
      just a visually-hidden <h1> straight into .cat-head__panel (vehicle card,
@@ -5519,6 +5522,9 @@ html, body{ overflow-x:clip; }
   /* ===== PACKAGES — listing head + 1-2-3 stepper (Figma CO Updates 750:121019, "Section / Product Grid") ===== */
   .listing__head { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 22px; }
   .listing__title { font-family: var(--display); font-size: clamp(22px, 2.4vw, 28px); font-weight: 900; letter-spacing: -0.02em; color: var(--ink); margin: 0; }
+  @media (max-width: 700px) {
+    .listing__title { display: none; }
+  }
   /* Figma CO Updates 750:121019, "wheel tire package flow" instance (node 226:31353):
      light-gray track, only the current step gets a filled colour + chevron tip;
      the other steps are flat with a hairline divider. Icon colour follows text
