@@ -427,6 +427,12 @@
     .sortbar__count { font-size: 12px; line-height: 1.3em; }
     .expert-card { display: none; }
     .cat-head { padding: 0; }
+    /* #sortSel is forced to 16px by the global iOS-zoom guard (input, select,
+       textarea{font-size:16px!important} above); match Filter and the
+       fitment dropdown to it so the three sortbar controls read at the
+       same size instead of #sortSel standing out. */
+    .filter-toggle, .dd__trigger { font-size: 16px; }
+    .filter-toggle { padding: 10px; }
   }
   /* --- Mobile store header, laid out after CO Updates node 750:100905.
      LAYOUT ONLY: ViViD type, colour and copy are unchanged; none of the CO
@@ -683,7 +689,7 @@ html, body{ overflow-x:clip; }
   /* ===== 3 · PACKAGE GRID — stepper + fitment tiers + filters + cards (Figma "Section / Product Grid", "copy from wheels store page") ===== */
   .pkgrid { background: var(--paper); padding: 40px 0 56px; border-bottom: 1px solid var(--line); }
   @media (max-width: 700px) {
-    .pkgrid { padding: 8px 0 56px; }
+    .pkgrid { padding: 12px 0 56px; }
   }
   .pkgrid .listing { padding: 0; }
   .pkgrid .listing__grid { grid-template-columns: 280px 1fr; }
