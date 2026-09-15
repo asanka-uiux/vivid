@@ -208,6 +208,8 @@
   /* generic custom dropdown (sort control + mobile fitment picker) */
   .dd { position: relative; }
   .dd__trigger { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; min-width: 240px; padding: 10px 14px; border: 1px solid var(--rule); border-radius: 2px; background: var(--paper); font-family: var(--ui); font-size: 13px; font-weight: 600; color: var(--ink); cursor: pointer; transition: border-color .15s; }
+  .dd__trigger-main { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .dd__trigger-icon { flex-shrink: 0; }
   .dd__trigger-label { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .dd__trigger:hover { border-color: var(--steel); }
   .dd__trigger:focus-visible { outline: 2px solid var(--heat); outline-offset: 1px; }
@@ -218,22 +220,42 @@
      the browser's own arrow (which each OS renders differently and eats into the box beyond our
      padding) for a chevron matched to .dd__chevron's style, at the same 14px inset as the left
      padding so the box reads as evenly padded on both sides. */
-  #sortSel { appearance: none; -webkit-appearance: none; -moz-appearance: none; padding: 10px 14px; background-color: var(--paper); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='16' height='16' fill='none' stroke='%235F6975' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; background-size: 14px; }
+  #sortSel { appearance: none; -webkit-appearance: none; -moz-appearance: none; padding: 10px 14px; background-color: var(--paper); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='16' height='16' fill='none' stroke='%235F6975' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; background-size: 14px; min-width: 220px; }
   .dd__menu { position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 60; margin: 0; padding: 6px; list-style: none; background: var(--paper); border: 1px solid var(--rule); border-radius: 2px; box-shadow: 0 12px 32px rgba(0,0,0,.16); max-height: 300px; overflow-y: auto; }
   .dd__menu[hidden] { display: none; }
   .dd__menu li { display: flex; align-items: center; gap: 10px; padding: 10px 12px; font-family: var(--ui); font-size: 13px; font-weight: 600; color: var(--ink); cursor: pointer; border-radius: 2px; }
   .dd__menu li:hover, .dd__menu li:focus { background: var(--bone); outline: none; }
   .dd__menu li[aria-selected="true"] { color: var(--heat); }
 
+  /* mobile-only compact fitment dropdown (desktop keeps the 3-tile .tiers grid) */
+  .dd--fitment-mobile { display: none; }
+  @media (max-width: 700px) {
+    .dd--fitment-mobile { display: block; }
+  }
+
   .filter-toggle { display: none; align-items: center; justify-content: center; gap: 8px; padding: 10px 14px; border: 1px solid var(--rule); border-radius: 2px; background: var(--paper); font-family: var(--ui); font-size: 13px; font-weight: 600; color: var(--ink); cursor: pointer; transition: border-color .15s, color .15s; white-space: nowrap; }
   .filter-toggle:hover { border-color: var(--steel); }
   .filter-toggle[aria-expanded="true"] { border-color: var(--heat); color: var(--heat); }
   @media (max-width: 1080px) { .filter-toggle { display: flex; } }
   @media (max-width: 700px) {
-    .sortbar__controls { flex: 1 1 100%; }
+    /* min-width:0 here, not just on the children: a flex item's automatic
+       min-width is its content's min-content size by default, and with
+       Sort's nowrap label that min-content is its full unellipsized text --
+       without this, .sortbar__controls itself refuses to shrink below that
+       and the row overflows instead of Sort ellipsizing down to fit. */
+    .sortbar__controls { flex: 1 1 100%; flex-wrap: nowrap; min-width: 0; }
     .sortbar__controls > .filter-toggle { flex: 0 0 auto; }
     .sortbar__controls > .dd { flex: 1 1 auto; min-width: 0; }
-    .dd__trigger { min-width: 0; }
+    /* Factory Original / Custom Sizes / Show All don't need the same share
+       of the row as Sort's longer labels -- pin a compact basis here so
+       Filter | Factory Original | Sort fit on one line instead of Sort
+       getting squeezed to nothing. */
+    .sortbar__controls > .dd--fitment-mobile { flex: 1 1 150px; min-width: 118px; }
+    /* Factory Original's basis above leaves Sort almost nothing to shrink
+       into -- floor it so "Sort" itself is never squeezed past legibility,
+       even if that means Factory Original ellipsizes further. */
+    .sortbar__controls > #sortSel { flex: 1 1 auto; min-width: 78px; }
+    .dd__trigger { min-width: 0; padding-left: 10px; padding-right: 10px; }
   }
 
 
@@ -422,10 +444,10 @@
     .cat-head__panel > .veh-card { order: 1; }
     .cat-mobile-quick            { display: block; order: 2; }
     .cat-delivery                { order: 2; display: none; }
-    /* Unlike tire-store.html, .cat-head__fitment stays visible here (order 3)
-       instead of moving into a sortbar dropdown -- this page's sortbar/grid
-       is a separate, unmodified component with no such dropdown to host it. */
-    .cat-head__fitment           { order: 3; }
+    /* fitment control now lives in the sortbar row (Filter | Factory
+       Original | Sort) instead of its own row up here -- see
+       .dd--fitment-mobile above. */
+    .cat-head__fitment           { display: none; }
     .filters > .ai-filter, .filters > .deliver-to { display: none; }
 
     /* Vehicle card after node 171:11983 ("Change vehicle", 358x111): 8px/12px
@@ -1670,8 +1692,33 @@ html, body{ overflow-x:clip; }
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
               Filter
             </button>
+            <!-- Mobile-only (<=700px): same fitment control as .cat-head__fitment's
+                 .tiers grid, just relocated into the sortbar row so Filter | Factory
+                 Original | Sort read as one line instead of a separate row up in the
+                 header. Desktop/tablet keep .tiers unchanged; this stays
+                 display:none there (see .dd--fitment-mobile above). -->
+            <div class="dd dd--fitment-mobile" id="fitmentDropdownM">
+              <button type="button" class="dd__trigger" aria-haspopup="listbox" aria-expanded="false" onclick="toggleDropdown('fitmentDropdownM')">
+                <span class="dd__trigger-main">
+                  <svg class="dd__trigger-icon" viewBox="0 0 24 24" width="18" height="18" fill="#16A34A" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                  <span class="dd__trigger-label">Factory Original</span>
+                </span>
+                <svg class="dd__chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+              </button>
+              <ul class="dd__menu" role="listbox" aria-label="Select fitment" hidden>
+                <li role="option" aria-selected="true" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="tierIdx(0); toggleDropdown('fitmentDropdownM', false);">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="#16A34A" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg> Factory Original
+                </li>
+                <li role="option" aria-selected="false" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="tierIdx(1); toggleDropdown('fitmentDropdownM', false);">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="#0066CC" aria-hidden="true"><path d="M22 3h-7l2.6 2.6-4.6 4.6 1.8 1.8 4.6-4.6L22 10V3zM2 21h7l-2.6-2.6 4.6-4.6-1.8-1.8-4.6 4.6L2 14v7z"/></svg> Custom Sizes
+                </li>
+                <li role="option" aria-selected="false" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="tierIdx(2); toggleDropdown('fitmentDropdownM', false);">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#6B7280" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Show All
+                </li>
+              </ul>
+            </div>
             <label class="vh" for="sortSel">Sort tires</label>
-            <select id="sortSel" class="dd__trigger" style="min-width:220px;">
+            <select id="sortSel" class="dd__trigger">
               <option>Sort: Best Match</option>
               <option>Price: Low to High</option>
               <option>Price: High to Low</option>
@@ -2709,6 +2756,39 @@ html, body{ overflow-x:clip; }
     }
     applyFitFilter(i);
   }
+
+  /* Mobile fitment dropdown open/close (mirrors tire-store.html's .dd widget;
+     package-tires.html has no #sortDropdown -- Sort here is a native <select>
+     -- so this only drives #fitmentDropdownM). */
+  function toggleDropdown(id, forceState) {
+    var dd = document.getElementById(id);
+    if (!dd) return;
+    var trigger = dd.querySelector('.dd__trigger');
+    var menu = dd.querySelector('.dd__menu');
+    var open = forceState !== undefined ? forceState : menu.hidden;
+    menu.hidden = !open;
+    dd.classList.toggle('is-open', open);
+    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) {
+      var current = menu.querySelector('[aria-selected="true"]') || menu.querySelector('li');
+      if (current) current.focus();
+    }
+  }
+  document.addEventListener('click', function(e){
+    document.querySelectorAll('.dd.is-open').forEach(function(dd){
+      if (!dd.contains(e.target)) toggleDropdown(dd.id, false);
+    });
+  });
+  document.addEventListener('keydown', function(e){
+    var openDd = document.querySelector('.dd.is-open');
+    if (!openDd) return;
+    var items = Array.prototype.slice.call(openDd.querySelectorAll('.dd__menu li'));
+    var idx = items.indexOf(document.activeElement);
+    if (e.key === 'Escape') { toggleDropdown(openDd.id, false); openDd.querySelector('.dd__trigger').focus(); }
+    else if (e.key === 'ArrowDown') { e.preventDefault(); var n = items[idx+1] || items[0]; n.focus(); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); var p = items[idx-1] || items[items.length-1]; p.focus(); }
+    else if ((e.key === 'Enter' || e.key === ' ') && idx > -1) { e.preventDefault(); items[idx].click(); }
+  });
 
   /* Fitment tier tests, applied together with the "Sales" toggle in
      applyFilters() below:
