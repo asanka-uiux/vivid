@@ -5160,7 +5160,11 @@
        of the row as Sort's longer labels -- pin a compact basis here so
        Filter | Factory Original | Sort fit on one line instead of Sort
        getting squeezed to nothing. */
-    .sortbar__controls > .dd--fitment-mobile { flex: 0 0 190px; }
+    .sortbar__controls > .dd--fitment-mobile { flex: 1 1 150px; }
+    /* Factory Original's basis above leaves Sort almost nothing to shrink
+       into -- floor it so "Sort" itself is never squeezed past legibility,
+       even if that means Factory Original ellipsizes further. */
+    .sortbar__controls > #sortDropdown { min-width: 78px; }
     .dd__trigger { min-width: 0; padding-left: 10px; padding-right: 10px; }
   }
 
