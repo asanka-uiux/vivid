@@ -423,6 +423,7 @@
     .sortbar { flex-wrap: wrap; gap: 10px; }
     .sortbar__count { font-size: 12px; }
     .expert-card { display: none; }
+    .cat-head { padding: 0; }
   }
   /* --- Mobile store header, laid out after CO Updates node 750:100905.
      LAYOUT ONLY: ViViD type, colour and copy are unchanged; none of the CO
@@ -645,7 +646,6 @@ html, body{ overflow-x:clip; }
   :where(a,button,input,select,summary,[tabindex]):focus-visible { outline: 3px solid var(--heat); outline-offset: 2px; }
 
   /* ===== 2 · PACKAGE PROCESS — 1-2-3 stepper strip between the hero and the grid (steps__* copied from packages.html) ===== */
-  .pkg-process { padding: 20px 0; }
   .pkg-process__inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
   .pkg-process__title { font-family: var(--display); font-size: clamp(22px, 2.4vw, 28px); font-weight: 900; letter-spacing: -0.02em; color: var(--ink); margin: 0; }
   /* Figma CO Updates 750:121019, "wheel tire package flow" instance (node 226:31353):
@@ -1600,7 +1600,7 @@ html, body{ overflow-x:clip; }
 </section>
 
 <!-- ===== 2 · PACKAGE PROCESS · 1-2-3 stepper restored under the hero ===== -->
-<section class="pkg-process" aria-labelledby="pkg-process-title">
+<section aria-labelledby="pkg-process-title">
   <div class="wrap pkg-process__inner">
     <h2 class="pkg-process__title" id="pkg-process-title">All 2023 BMW M4 wheel &amp; tire packages</h2>
     <ol class="steps" aria-label="Package builder steps">
