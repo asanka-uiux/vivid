@@ -4972,7 +4972,8 @@
   /* drawer-only chrome, unused on the persistent desktop sidebar */
   .filters__overlay, .filters__head { display: none; }
   .ai-filter { padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
-  .ai-filter__label { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink); font-weight: 600; margin-bottom: 8px; white-space: nowrap; }
+  .ai-filter__label { display: flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink); font-weight: 600; margin-bottom: 8px; white-space: nowrap; }
+  .ai-filter__label-icon { flex: none; color: var(--heat); }
   .ai-filter__form { display: flex; gap: 6px; }
   .ai-filter__input { flex: 1; min-width: 0; padding: 9px 10px; border: 1px solid var(--rule); font-family: var(--ui); font-size: 12.5px; color: var(--ink); }
   .ai-filter__input::placeholder { color: var(--steel); }
@@ -6258,7 +6259,7 @@ html, body{ overflow-x:clip; }
           <button type="button" class="filters__close" onclick="toggleFilters(false)" aria-label="Close filters">&times;</button>
         </div>
         <div class="ai-filter">
-          <div class="ai-filter__label">Filter with Vivid Racing AI</div>
+          <div class="ai-filter__label">Filter with Vivid Racing AI <svg class="ai-filter__label-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg></div>
           <form class="ai-filter__form" onsubmit="return false;">
             <input type="text" class="ai-filter__input" placeholder="Filter with Vivid Racing AI" aria-label="Filter with Vivid Racing AI">
             <button type="submit" class="ai-filter__submit">Go</button>
