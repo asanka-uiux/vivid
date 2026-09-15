@@ -615,19 +615,31 @@ html, body{ overflow-x:clip; }
   .pkg-process { background: var(--paper); border-bottom: 1px solid var(--line); padding: 20px 0; }
   .pkg-process__inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
   .pkg-process__title { font-family: var(--display); font-size: clamp(18px, 2vw, 22px); font-weight: 900; letter-spacing: -0.02em; color: var(--ink); margin: 0; }
-  .steps { display: flex; align-items: stretch; list-style: none; margin: 0; padding: 0; border: 1px solid var(--line); background: var(--paper); }
-  .steps__item { display: flex; align-items: center; gap: 10px; padding: 10px 18px 10px 14px; position: relative; color: var(--steel); font-family: var(--display); font-size: 12.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
-  .steps__item + .steps__item { border-left: 1px solid var(--line); }
-  .steps__num { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--rule); font-family: var(--display); font-size: 12px; font-weight: 900; color: var(--steel); }
-  .steps__ico { flex-shrink: 0; }
-  .steps__item--current { background: var(--heat-deep); color: var(--paper); }
-  .steps__item--current .steps__num { background: var(--paper); border-color: var(--paper); color: var(--heat-deep); }
-  .steps__item--current::after { content: ""; position: absolute; right: -9px; top: 50%; width: 18px; height: 18px; transform: translateY(-50%) rotate(45deg); background: var(--heat-deep); z-index: 1; clip-path: polygon(0 0, 100% 0, 100% 100%); }
+  /* Figma CO Updates 750:121019, "wheel tire package flow" instance (node 226:31353):
+     light-gray track, only the current step gets a filled colour + chevron tip;
+     the other steps are flat with a hairline divider. Icon colour follows text
+     colour (currentColor) so the same markup works whichever step is current. */
+  .steps { display: flex; align-items: stretch; list-style: none; margin: 0; padding: 0; background: #f0f0f0; border: 1px solid #ddd; }
+  .steps__item { display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 20px; position: relative; color: #aaa; font-family: var(--display); font-size: 14px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; }
+  .steps__item + .steps__item { border-left: 0.5px solid #aaa; }
+  .steps__num { font-family: var(--display); font-size: 24px; font-weight: 600; line-height: 1; color: inherit; flex: none; }
+  .steps__ico, .steps__icon { flex: none; display: block; }
+  .steps__icon--wheel, .steps__icon--tire { width: 24px; height: 24px; background-color: currentColor; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; }
+  .steps__icon--wheel { -webkit-mask-image: url('assets/icons/step-wheel.png'); mask-image: url('assets/icons/step-wheel.png'); }
+  .steps__icon--tire { -webkit-mask-image: url('assets/icons/step-tire.png'); mask-image: url('assets/icons/step-tire.png'); }
+  .steps__item--current {
+    background: #790000; color: rgba(255,255,255,.6); border-left: 0; z-index: 2;
+    padding-right: 41px; margin-right: -21px;
+    clip-path: polygon(0 0, calc(100% - 21px) 0, 100% 50%, calc(100% - 21px) 100%, 0 100%);
+  }
+  .steps__item--current + .steps__item { border-left: 0; padding-left: 41px; }
   @media (max-width: 900px) {
     .pkg-process__inner { flex-direction: column; align-items: stretch; }
     .steps { width: 100%; }
-    .steps__item { flex: 1 1 0; justify-content: center; padding: 10px 8px; font-size: 11px; }
-    .steps__item--current::after { display: none; }
+    .steps__item { flex: 1 1 0; justify-content: center; padding: 0 14px; font-size: 11px; min-width: 0; }
+    .steps__item--current { padding-right: 30px; margin-right: -15px; clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 50%, calc(100% - 15px) 100%, 0 100%); }
+    .steps__item--current + .steps__item { padding-left: 30px; }
+    .steps__num { font-size: 18px; }
   }
 
   /* ===== 3 · PACKAGE GRID — stepper + fitment tiers + filters + cards (Figma "Section / Product Grid", "copy from wheels store page") ===== */
@@ -1417,9 +1429,9 @@ html, body{ overflow-x:clip; }
   <div class="wrap pkg-process__inner">
     <h2 class="pkg-process__title" id="pkg-process-title">Build your package in 3 steps</h2>
     <ol class="steps" aria-label="Package builder steps">
-      <li class="steps__item"><span class="steps__num" aria-hidden="true">1</span> <svg class="steps__ico" viewBox="0 0 30 30" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M 15 3 C 8.373 3 3 8.373 3 15 C 3 21.627 8.373 27 15 27 C 21.627 27 27 21.627 27 15 C 27 8.373 21.627 3 15 3 z M 14 7.0683594 L 14 11.142578 C 13.009482 11.399147 12.169134 12.015169 11.632812 12.855469 L 7.7675781 11.599609 C 8.9112737 9.1725621 11.232997 7.4141749 14 7.0683594 z M 16 7.0683594 C 18.767003 7.4141749 21.088726 9.1725621 22.232422 11.599609 L 18.367188 12.855469 C 17.830866 12.015169 16.990518 11.399147 16 11.142578 L 16 7.0683594 z M 7.1445312 13.5 L 11.023438 14.759766 C 11.018548 14.840739 11 14.917798 11 15 C 11 15.965177 11.356478 16.838244 11.925781 17.529297 L 9.53125 20.826172 C 7.9772183 19.366773 7 17.299893 7 15 C 7 14.486546 7.0520793 13.98656 7.1445312 13.5 z M 22.855469 13.5 C 22.947921 13.98656 23 14.486546 23 15 C 23 17.299893 22.022782 19.366773 20.46875 20.826172 L 18.074219 17.529297 C 18.643522 16.838244 19 15.965177 19 15 C 19 14.917798 18.981452 14.840739 18.976562 14.759766 L 22.855469 13.5 z M 14.945312 14.011719 A 1.0001 1.0001 0 0 0 15.056641 14.011719 C 15.437861 14.034301 15.761835 14.263777 15.910156 14.595703 A 1.0001 1.0001 0 0 0 15.941406 14.708984 C 15.970548 14.802772 16 14.896667 16 15 C 16 15.552 15.552 16 15 16 C 14.448 16 14 15.552 14 15 C 14 14.897333 14.029812 14.804196 14.058594 14.710938 A 1.0001 1.0001 0 0 0 14.089844 14.59375 C 14.238726 14.262038 14.563812 14.033569 14.945312 14.011719 z M 13.537109 18.714844 C 13.991226 18.893915 14.482291 19 15 19 C 15.517709 19 16.008774 18.893915 16.462891 18.714844 L 18.855469 22.009766 C 17.711633 22.640467 16.398449 23 15 23 C 13.601551 23 12.288367 22.640467 11.144531 22.009766 L 13.537109 18.714844 z"/></svg> Wheels</li>
-      <li class="steps__item steps__item--current" aria-current="step"><span class="steps__num" aria-hidden="true">2</span> <svg class="steps__ico" viewBox="0 0 30 30" width="24" height="24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M 11 3 C 7.134 3 4 8.373 4 15 C 4 21.627 7.134 27 11 27 L 15 27 C 12.858643 27 10.944176 25.346906 9.6601562 22.75 A 1 1 0 0 0 10 22 A 1 1 0 0 0 9 21 A 1 1 0 0 0 8.9453125 21.001953 C 8.440215 19.507709 8.1167686 17.812468 8.0292969 16 A 1 1 0 0 0 9 15 A 1 1 0 0 0 8.0292969 14.001953 C 8.0987991 12.559001 8.3191908 11.19237 8.6601562 9.9394531 A 1 1 0 0 0 9 10 A 1 1 0 0 0 10 9 A 1 1 0 0 0 9.3007812 8.046875 C 10.569965 4.995947 12.647522 3 15 3 L 11 3 z M 17 3 C 15.20879 3 13.579826 4.1633948 12.341797 6.0605469 A 1 1 0 0 0 12 6 A 1 1 0 0 0 11 7 A 1 1 0 0 0 11.40625 7.8046875 C 10.974166 8.7900102 10.630509 9.8904386 10.390625 11.078125 A 1 1 0 0 1 10.388672 11.078125 A 1 1 0 0 0 10 11 A 1 1 0 0 0 9 12 A 1 1 0 0 0 10 13 A 1 1 0 0 0 10.105469 12.994141 C 10.041136 13.647874 10 14.314912 10 15 C 10 15.685088 10.041136 16.352126 10.105469 17.005859 A 1 1 0 0 0 10 17 A 1 1 0 0 0 9 18 A 1 1 0 0 0 10 19 A 1 1 0 0 0 10.390625 18.919922 C 10.630582 20.108613 10.975745 21.209288 11.408203 22.195312 A 1 1 0 0 0 11 23 A 1 1 0 0 0 12 24 A 1 1 0 0 0 12.341797 23.939453 C 13.579826 25.836605 15.20879 27 17 27 L 19 27 C 22.866 27 26 21.627 26 15 C 26 8.373 22.866 3 19 3 L 17 3 z M 19 6 C 20.592 6 23 9.59 23 15 C 23 20.41 20.592 24 19 24 C 17.408 24 15 20.41 15 15 C 15 9.59 17.408 6 19 6 z"/></svg> Tires</li>
-      <li class="steps__item"><span class="steps__num" aria-hidden="true">3</span> Checkout</li>
+      <li class="steps__item"><span class="steps__num" aria-hidden="true">1</span><span class="steps__icon steps__icon--wheel" aria-hidden="true"></span> Wheels</li>
+      <li class="steps__item steps__item--current" aria-current="step"><span class="steps__num" aria-hidden="true">2</span><span class="steps__icon steps__icon--tire" aria-hidden="true"></span> Tires</li>
+      <li class="steps__item"><span class="steps__num" aria-hidden="true">3</span><svg class="steps__icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M1 5C0.448 5 4.57764e-07 5.448 4.57764e-07 6C4.57764e-07 6.552 0.448 7 1 7H6C6.552 7 7 7.448 7 8C7 8.552 6.552 9 6 9H2C1.448 9 1 9.448 1 10C1 10.552 1.448 11 2 11H4C4.552 11 5 11.448 5 12C5 12.552 4.552 13 4 13H2C1.448 13 1 13.448 1 14V17C1 17.552 1.448 18 2 18H3C3 19.657 4.343 21 6 21C7.657 21 9 19.657 9 18H14H15C15 19.657 16.343 21 18 21C19.657 21 21 19.657 21 18H22C22.138 18 22.269 17.9725 22.3887 17.9219C22.7475 17.77 23 17.414 23 17V13L20.2754 7.55273C20.1064 7.21373 19.7618 7 19.3828 7H16C16 5.895 15.105 5 14 5H1ZM16 8.75H18.918L21.043 13H16V8.75ZM6 16.75C6.689 16.75 7.25 17.311 7.25 18C7.25 18.689 6.689 19.25 6 19.25C5.311 19.25 4.75 18.689 4.75 18C4.75 17.311 5.311 16.75 6 16.75ZM18 16.75C18.689 16.75 19.25 17.311 19.25 18C19.25 18.689 18.689 19.25 18 19.25C17.311 19.25 16.75 18.689 16.75 18C16.75 17.311 17.311 16.75 18 16.75Z"/></svg> Checkout</li>
     </ol>
   </div>
 </section>

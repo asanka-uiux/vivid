@@ -5513,17 +5513,31 @@ html, body{ overflow-x:clip; }
   /* ===== PACKAGES — listing head + 1-2-3 stepper (Figma CO Updates 750:121019, "Section / Product Grid") ===== */
   .listing__head { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 22px; }
   .listing__title { font-family: var(--display); font-size: clamp(22px, 2.4vw, 28px); font-weight: 900; letter-spacing: -0.02em; color: var(--ink); margin: 0; }
-  .steps { display: flex; align-items: stretch; list-style: none; margin: 0; padding: 0; background: var(--paper); }
-  .steps__item { display: flex; align-items: center; gap: 10px; padding: 10px 24px 10px 20px; position: relative; color: var(--steel); font-family: var(--display); font-size: 12.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; background: var(--bone); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%); }
-  .steps__item:first-child { padding-left: 16px; border-left: 1px solid var(--line); }
-  .steps__item:not(:first-child) { margin-left: -12px; padding-left: 26px; z-index: 1; clip-path: polygon(0 0, 12px 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 12px 100%, 0 50%); }
-  .steps__item:nth-child(2) { z-index: 2; }
-  .steps__item:nth-child(3) { z-index: 3; }
-  .steps__item:last-child { border-right: 1px solid var(--line); }
-  .steps__num { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--rule); font-family: var(--display); font-size: 12px; font-weight: 900; color: var(--steel); flex: none; }
-  .steps__item--current { background: var(--heat-deep); color: var(--paper); }
-  .steps__item--current .steps__num { background: var(--paper); border-color: var(--paper); color: var(--heat-deep); }
-  @media (max-width: 900px) { .steps { width: 100%; } .steps__item { flex: 1 1 0; justify-content: center; padding: 10px 16px 10px 20px; font-size: 11px; } .steps__item:not(:first-child) { padding-left: 22px; } }
+  /* Figma CO Updates 750:121019, "wheel tire package flow" instance (node 226:31353):
+     light-gray track, only the current step gets a filled colour + chevron tip;
+     the other steps are flat with a hairline divider. Icon colour follows text
+     colour (currentColor) so the same markup works whichever step is current. */
+  .steps { display: flex; align-items: stretch; list-style: none; margin: 0; padding: 0; background: #f0f0f0; border: 1px solid #ddd; }
+  .steps__item { display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 20px; position: relative; color: #aaa; font-family: var(--display); font-size: 14px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; }
+  .steps__item + .steps__item { border-left: 0.5px solid #aaa; }
+  .steps__num { font-family: var(--display); font-size: 24px; font-weight: 600; line-height: 1; color: inherit; flex: none; }
+  .steps__icon { flex: none; display: block; }
+  .steps__icon--wheel, .steps__icon--tire { width: 24px; height: 24px; background-color: currentColor; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; }
+  .steps__icon--wheel { -webkit-mask-image: url('assets/icons/step-wheel.png'); mask-image: url('assets/icons/step-wheel.png'); }
+  .steps__icon--tire { -webkit-mask-image: url('assets/icons/step-tire.png'); mask-image: url('assets/icons/step-tire.png'); }
+  .steps__item--current {
+    background: #790000; color: rgba(255,255,255,.6); border-left: 0; z-index: 2;
+    padding-right: 41px; margin-right: -21px;
+    clip-path: polygon(0 0, calc(100% - 21px) 0, 100% 50%, calc(100% - 21px) 100%, 0 100%);
+  }
+  .steps__item--current + .steps__item { border-left: 0; padding-left: 41px; }
+  @media (max-width: 900px) {
+    .steps { width: 100%; }
+    .steps__item { flex: 1 1 0; justify-content: center; padding: 0 14px; font-size: 11px; min-width: 0; }
+    .steps__item--current { padding-right: 30px; margin-right: -15px; clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 50%, calc(100% - 15px) 100%, 0 100%); }
+    .steps__item--current + .steps__item { padding-left: 30px; }
+    .steps__num { font-size: 18px; }
+  }
 </style>
   <link rel="stylesheet" href="assets/vr-content.css">
   <link rel="stylesheet" href="css/shared.css">
@@ -6267,9 +6281,9 @@ html, body{ overflow-x:clip; }
     <div class="listing__head">
       <h2 class="listing__title">All 2023 F-250 wheel &amp; tire packages</h2>
       <ol class="steps" aria-label="Package builder steps">
-        <li class="steps__item steps__item--current" aria-current="step"><span class="steps__num" aria-hidden="true">1</span> Wheels</li>
-        <li class="steps__item"><span class="steps__num" aria-hidden="true">2</span> Tires</li>
-        <li class="steps__item"><span class="steps__num" aria-hidden="true">3</span> Checkout</li>
+        <li class="steps__item steps__item--current" aria-current="step"><span class="steps__num" aria-hidden="true">1</span><span class="steps__icon steps__icon--wheel" aria-hidden="true"></span> Wheels</li>
+        <li class="steps__item"><span class="steps__num" aria-hidden="true">2</span><span class="steps__icon steps__icon--tire" aria-hidden="true"></span> Tires</li>
+        <li class="steps__item"><span class="steps__num" aria-hidden="true">3</span><svg class="steps__icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M1 5C0.448 5 4.57764e-07 5.448 4.57764e-07 6C4.57764e-07 6.552 0.448 7 1 7H6C6.552 7 7 7.448 7 8C7 8.552 6.552 9 6 9H2C1.448 9 1 9.448 1 10C1 10.552 1.448 11 2 11H4C4.552 11 5 11.448 5 12C5 12.552 4.552 13 4 13H2C1.448 13 1 13.448 1 14V17C1 17.552 1.448 18 2 18H3C3 19.657 4.343 21 6 21C7.657 21 9 19.657 9 18H14H15C15 19.657 16.343 21 18 21C19.657 21 21 19.657 21 18H22C22.138 18 22.269 17.9725 22.3887 17.9219C22.7475 17.77 23 17.414 23 17V13L20.2754 7.55273C20.1064 7.21373 19.7618 7 19.3828 7H16C16 5.895 15.105 5 14 5H1ZM16 8.75H18.918L21.043 13H16V8.75ZM6 16.75C6.689 16.75 7.25 17.311 7.25 18C7.25 18.689 6.689 19.25 6 19.25C5.311 19.25 4.75 18.689 4.75 18C4.75 17.311 5.311 16.75 6 16.75ZM18 16.75C18.689 16.75 19.25 17.311 19.25 18C19.25 18.689 18.689 19.25 18 19.25C17.311 19.25 16.75 18.689 16.75 18C16.75 17.311 17.311 16.75 18 16.75Z"/></svg> Checkout</li>
       </ol>
     </div>
     <div class="listing__grid">
