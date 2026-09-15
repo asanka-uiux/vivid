@@ -84,6 +84,9 @@
   .crumbs__inner a:hover { color: var(--heat); }
   .crumbs__inner .sep { color: var(--rule); }
   .crumbs__inner .cur { color: var(--ink); font-weight: 600; }
+  @media (max-width: 700px) {
+    .crumbs__inner { padding: 0; }
+  }
 
   .cat-head { background: var(--paper); padding: 0 0 26px; }
   .cat-head__row { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
