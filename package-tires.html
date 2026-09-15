@@ -92,7 +92,7 @@
   .cat-head__count { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--steel); }
   .cat-head__grid { display: grid; grid-template-columns: 1fr 320px; gap: 24px; margin-top: 20px; align-items: end; }
   .tier-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--steel); margin-bottom: 8px; }
-  .tiers { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; }
+  .tiers { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
   .tier { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: var(--paper); border: 1px solid var(--line); border-left: 3px solid var(--rule); cursor: pointer; text-align: left; transition: all .15s; box-shadow: 0 1px 3px rgba(0,0,0,.06); min-width: 0; }
   @media (min-width: 701px) { .tier { padding: 8px; } }
   .tier > div { min-width: 0; }
@@ -109,16 +109,72 @@
   .tier--green.tier--active { background: rgba(22,163,74,.07); border-color: var(--green); box-shadow: 0 2px 10px rgba(22,163,74,.18); }
   .tier--gold.tier--active { background: rgba(245,158,11,.08); border-color: var(--gold); box-shadow: 0 2px 10px rgba(245,158,11,.2); }
   .tier--red.tier--active { background: rgba(225,6,0,.06); border-color: var(--heat); box-shadow: 0 2px 10px rgba(225,6,0,.18); }
-  .cat-delivery { border: 1px solid var(--line); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-  @media (min-width: 1440px) { .cat-delivery { max-width: 400px; } }
-  .cat-delivery__label { font-family: var(--mono); font-size: 12px; letter-spacing: 0; text-transform: uppercase; color: var(--steel); }
-  .cat-delivery__date { font-family: var(--display); font-size: 14px; font-weight: 800; color: var(--ink); }
-  .cat-delivery__ziplink { font-family: var(--ui); font-size: 12px; color: var(--heat); font-weight: 600; text-decoration: none; background: none; border: 0; padding: 0; cursor: pointer; }
-  .cat-delivery__ziplink:hover { color: var(--heat-deep); }
-  .cat-delivery__zipform { display: flex; gap: 6px; justify-content: flex-end; }
-  .cat-delivery__zipinput { width: 80px; padding: 6px 8px; border: 1px solid var(--rule); font-family: var(--ui); font-size: 12px; color: var(--ink); }
-  .cat-delivery__zipsubmit { padding: 6px 10px; background: var(--heat-deep); color: var(--paper); border: 0; font-family: var(--display); font-size: 10px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; transition: background .15s; }
-  .cat-delivery__zipsubmit:hover { background: var(--heat); }
+  .cat-delivery { background: var(--bone); border: 1px solid var(--line); padding: 12px 16px; display: flex; flex-direction: column; justify-content: center; }
+  @media (min-width: 1440px) { .cat-delivery { max-width: 480px; } }
+  .cat-delivery__fin { display: flex; flex-direction: column; gap: 10px; }
+  .cat-delivery__fin-row { display: flex; align-items: center; gap: 9px; }
+  .cat-delivery__fin-logo { height: 16px; width: auto; flex: none; display: block; }
+  .cat-delivery__fin-text { font-family: var(--ui); font-size: 12px; color: var(--steel); line-height: 1.4; }
+  .cat-delivery__fin-link { color: var(--heat); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+  .cat-delivery__fin-link:hover { color: var(--heat-deep); }
+
+  /* --- deliver-to box --------------------------------------------------- */
+  .deliver-to { border: 1px solid var(--line); padding: 14px 16px; margin-bottom: 16px; }
+  .deliver-to__row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; font-family: var(--ui); font-size: 13.5px; font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+  .deliver-to__row svg { flex: none; align-self: center; color: var(--ink); }
+  .deliver-to__link { background: none; border: 0; padding: 0; margin: 0; font: inherit; color: var(--heat); text-decoration: underline; text-underline-offset: 2px; font-weight: 700; cursor: pointer; text-align: left; }
+  .deliver-to__link:hover { color: var(--heat-deep); }
+  .deliver-to__editform:not([hidden]) { display: flex; gap: 6px; margin-bottom: 12px; }
+  .deliver-to__editinput { flex: 1; min-width: 0; padding: 8px 10px; border: 1px solid var(--rule); font-family: var(--ui); font-size: 12.5px; color: var(--ink); }
+  .deliver-to__editbtn { flex: none; padding: 8px 14px; background: var(--heat-deep); color: var(--paper); border: 0; font-family: var(--display); font-size: 11px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: background .15s; }
+  .deliver-to__editbtn:hover { background: var(--heat); }
+  .deliver-to__dates { display: flex; flex-direction: column; gap: 10px; }
+  .deliver-to__date { display: flex; align-items: center; gap: 9px; font-family: var(--ui); font-size: 13px; color: var(--ink); cursor: pointer; }
+  .deliver-to__date input[type=radio] { accent-color: var(--heat); width: 15px; height: 15px; }
+
+  .zip-filter__confirmed:not([hidden]) { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px 8px; }
+  .zip-filter__confirmed-label { display: flex; align-items: center; gap: 6px; font-family: var(--ui); font-size: 12px; font-weight: 600; color: var(--ink); }
+  .zip-filter__confirmed-label svg { flex: none; }
+  .zip-filter__confirmed-zip { display: flex; align-items: center; gap: 6px; flex: none; }
+  .zip-filter__confirmed-value { font-family: var(--ui); font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+  .zip-filter__confirmed-change { background: none; border: 0; padding: 0; font-family: var(--ui); font-size: 12px; font-weight: 600; color: var(--heat-deep); cursor: pointer; white-space: nowrap; }
+  .zip-filter__confirmed-change:hover { color: var(--heat); }
+
+  /* mobile-only quick strip inside .cat-head__panel, see @media(max-width:700px) below. */
+  .cat-mobile-quick { display: none; }
+  .cat-mobile-quick__fin { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; font-family: var(--ui); font-size: 12px; font-weight: 600; letter-spacing: -0.01em; color: #991B1B; text-decoration: none; text-align: left; background: #FEF2F2; border: 1px solid #FEE2E2; border-radius: 3px; padding: 9px 14px; margin-bottom: 4px; cursor: pointer; }
+  .cat-mobile-quick__fin svg { flex: none; }
+  .cat-mobile-quick__fin:hover { color: #7A1515; border-color: #FECACA; }
+  .cat-mobile-quick__fin-copy { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .cat-mobile-quick__fin-logo { width: auto; flex: none; }
+  .cat-mobile-quick__fin-logo--affirm { height: 15px; }
+  .cat-mobile-quick__fin-logo--katapult { height: 11px; }
+  .cat-mobile-quick__fin-chevron { flex: none; }
+
+  /* ===== financing bottom sheet, opened from .cat-mobile-quick__fin ===== */
+  .fin-sheet { position: fixed; inset: 0; z-index: 600; visibility: hidden; }
+  .fin-sheet.is-open { visibility: visible; }
+  .fin-sheet__overlay { position: absolute; inset: 0; background: rgba(10,10,10,.5); opacity: 0; transition: opacity .25s ease; }
+  .fin-sheet.is-open .fin-sheet__overlay { opacity: 1; }
+  .fin-sheet__panel { position: absolute; left: 0; right: 0; bottom: 0; background: var(--paper); border-radius: 16px 16px 0 0; padding: 10px 20px 28px; max-height: 85vh; overflow-y: auto; transform: translateY(100%); transition: transform .3s cubic-bezier(.32,.72,0,1); box-shadow: 0 -8px 32px rgba(0,0,0,.18); }
+  .fin-sheet.is-open .fin-sheet__panel { transform: translateY(0); }
+  .fin-sheet__handle { width: 36px; height: 4px; border-radius: 999px; background: var(--rule); margin: 0 auto 14px; }
+  .fin-sheet__close { position: absolute; top: 12px; right: 16px; width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line); background: var(--paper); font-size: 18px; line-height: 1; cursor: pointer; color: var(--steel); transition: all .15s; }
+  .fin-sheet__close:hover { background: var(--bone); color: var(--ink); }
+  .fin-sheet__title { font-family: var(--display); font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: .01em; color: var(--ink); margin: 0 0 16px; }
+  .fin-sheet__card { border: 1px solid var(--line); border-radius: 6px; padding: 16px; margin-bottom: 12px; }
+  .fin-sheet__card:last-child { margin-bottom: 0; }
+  .fin-sheet__logo { height: 18px; width: auto; display: block; margin-bottom: 10px; }
+  .fin-sheet__logo--affirm { height: 20px; }
+  .fin-sheet__logo--katapult { height: 14px; }
+  .fin-sheet__text { font-family: var(--ui); font-size: 13.5px; color: var(--steel); line-height: 1.5; margin: 0 0 12px; }
+  .fin-sheet__btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 12px; background: var(--heat-deep); color: var(--paper); font-family: var(--display); font-size: 12px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; text-decoration: none; border-radius: 3px; transition: background .15s; }
+  .fin-sheet__btn:hover { background: var(--heat); }
+  .cat-mobile-quick > .deliver-to { padding: 6px 10px; margin-bottom: 4px; background: var(--bone); }
+  .cat-mobile-quick > .ai-filter { border: 1px solid var(--line); padding: 6px 10px; margin: 0; background: var(--bone); }
+  .cat-mobile-quick .zip-filter__confirmed:not([hidden]) { margin-bottom: 4px; }
+  .cat-mobile-quick .deliver-to__dates { flex-direction: row; flex-wrap: wrap; gap: 4px 16px; }
+  .cat-mobile-quick .deliver-to__editform:not([hidden]) { margin-bottom: 4px; }
 
   .listing { padding: 36px 0 56px; }
   .listing__grid { display: grid; grid-template-columns: 300px 1fr; gap: 28px; align-items: start; }
@@ -180,12 +236,6 @@
     .dd__trigger { min-width: 0; }
   }
 
-  /* mobile-only compact fitment dropdown (desktop keeps the 4-tile .tiers grid) */
-  .dd--fitment-mobile { display: none; }
-  @media (max-width: 700px) {
-    .tiers { display: none; }
-    .dd--fitment-mobile { display: block; }
-  }
 
   .wgrid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
   @media (min-width: 1024px) { .wgrid { grid-template-columns: repeat(4,minmax(0,1fr)); } }
@@ -370,8 +420,13 @@
      scroller so no trust signal ends up hidden off-screen. --- */
   @media (max-width: 700px) {
     .cat-head__panel > .veh-card { order: 1; }
-    .cat-delivery                { order: 2; }
+    .cat-mobile-quick            { display: block; order: 2; }
+    .cat-delivery                { order: 2; display: none; }
+    /* Unlike tire-store.html, .cat-head__fitment stays visible here (order 3)
+       instead of moving into a sortbar dropdown -- this page's sortbar/grid
+       is a separate, unmodified component with no such dropdown to host it. */
     .cat-head__fitment           { order: 3; }
+    .filters > .ai-filter, .filters > .deliver-to { display: none; }
 
     /* Vehicle card after node 171:11983 ("Change vehicle", 358x111): 8px/12px
        padding, an 8px gap between the text block and the chip row, the
@@ -562,54 +617,6 @@ html, body{ overflow-x:clip; }
   .btn--block { width: 100%; }
 
   :where(a,button,input,select,summary,[tabindex]):focus-visible { outline: 3px solid var(--heat); outline-offset: 2px; }
-
-  /* ===== 1 · HERO — tiled wheel wall + inset vehicle photo (redesigned 2026-09-04 to match a
-     reference screenshot the user supplied: dark wall of wheel photos, plain white uppercase
-     headline, an outlined "Change Vehicle/Fitment" button, a small uppercase lede, a badge row,
-     and a single red-bordered inset photo — no floating "Featured Build" info card, which is
-     what the previous version had and what read as a stray product tile bleeding into the grid
-     section below it. Figma "Section / Breadcrumb & Featured Build" 750:121019 supplied the
-     copy/structure; this reference photo supplied the visual treatment. ===== */
-  .pkh { position: relative; background: var(--ink); color: var(--paper); overflow: hidden; }
-  /* The wall: the same product photos used elsewhere on this page (quick-ship + grid), tiled,
-     desaturated and darkened so they read as texture, not product shots. */
-  .pkh__wall { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); grid-auto-rows: 170px; gap: 2px; }
-  .pkh__wall img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) brightness(.4) contrast(1.05); }
-  .pkh__scrim { position: absolute; inset: 0; background: linear-gradient(100deg, rgba(10,10,10,.93) 0%, rgba(10,10,10,.86) 32%, rgba(10,10,10,.68) 56%, rgba(10,10,10,.55) 100%); }
-  .pkh__scrim::after { content: ""; position: absolute; inset: auto 0 0 0; height: 4px; background: linear-gradient(90deg, var(--heat) 0%, var(--heat) 30%, transparent 30%); }
-  .pkh__inner { position: relative; z-index: 2; padding: 14px 28px 34px; }
-  .pkh .crumbs { background: transparent; }
-  .pkh .crumbs__inner { padding: 0 0 22px; color: rgba(255,255,255,.62); }
-  .pkh .crumbs__inner a { color: rgba(255,255,255,.62); }
-  .pkh .crumbs__inner a:hover { color: #fff; }
-  .pkh .crumbs__inner .sep { color: rgba(255,255,255,.3); }
-  .pkh .crumbs__inner .cur { color: #fff; }
-  .pkh__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 460px); justify-content: space-between; align-items: center; gap: 40px; padding: 24px 0 8px; }
-  .pkh__title { font-family: var(--display); font-size: clamp(30px, 3.6vw, 46px); font-weight: 900; letter-spacing: -0.02em; line-height: 1.08; text-transform: uppercase; color: #fff; margin: 0 0 18px; }
-  .pkh__change { display: inline-flex; align-items: center; min-height: 42px; padding: 0 20px; border: 1px solid rgba(255,255,255,.4); background: rgba(255,255,255,.06); font-family: var(--display); font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; margin-bottom: 22px; transition: background .15s, border-color .15s; }
-  .pkh__change:hover, .pkh__change:focus-visible { background: rgba(255,255,255,.16); border-color: #fff; }
-  .pkh__lede { font-family: var(--ui); font-size: 13px; font-weight: 500; letter-spacing: 0.01em; text-transform: uppercase; line-height: 1.6; color: rgba(255,255,255,.8); max-width: 560px; margin: 0 0 20px; }
-  .pkh__badges { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; list-style: none; margin: 0 0 22px; padding: 0; }
-  .pkh__badge { display: flex; align-items: center; gap: 7px; font-family: var(--display); font-size: 12px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; color: #fff; padding-right: 20px; border-right: 1px solid rgba(255,255,255,.22); }
-  .pkh__badge:last-child { padding-right: 0; border-right: 0; }
-  .pkh__badge svg { flex: none; }
-  /* Inset vehicle photo — the reference's boxed, red-bordered inset shot in place of a full-bleed
-     background image or a floating info card. */
-  .pkh__photo { position: relative; align-self: center; aspect-ratio: 4 / 3; border: 3px solid var(--heat-deep); box-shadow: 0 24px 54px -16px rgba(0,0,0,.65); overflow: hidden; }
-  .pkh__photo img { width: 100%; height: 100%; object-fit: cover; }
-  /* Fitment-level picker — carried over from this page's earlier F-250 version */
-  .yfit { border: 1px solid rgba(255,255,255,.18); background: rgba(10,10,10,.45); backdrop-filter: blur(8px); padding: 12px 14px; display: block; width: 100%; }
-  .yfit__label { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,.62); display: block; margin-bottom: 8px; }
-  .yfit__row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .yfit__btn { display: flex; align-items: center; gap: 9px; padding: 9px 13px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.16); cursor: pointer; transition: all .15s; text-align: left; color: #fff; min-height: 44px; }
-  .yfit__btn:hover { border-color: rgba(255,255,255,.5); }
-  .yfit__btn--active { border-color: var(--heat); background: rgba(225,6,0,.14); }
-  .yfit__ico { width: 27px; height: 27px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .yfit__ico--g { background: rgba(22,163,74,.18); }
-  .yfit__ico--b { background: rgba(0,102,204,.16); }
-  .yfit__ico--s { background: rgba(107,114,128,.16); }
-  .yfit__name { font-family: var(--display); font-size: 12px; font-weight: 800; color: #fff; display: block; line-height: 1.2; }
-  .yfit__sub { font-family: var(--ui); font-size: 10.5px; color: rgba(255,255,255,.62); }
 
   /* ===== 2 · PACKAGE PROCESS — 1-2-3 stepper strip between the hero and the grid (steps__* copied from packages.html) ===== */
   .pkg-process { background: var(--paper); border-bottom: 1px solid var(--line); padding: 20px 0; }
@@ -803,8 +810,6 @@ html, body{ overflow-x:clip; }
     .pkgrid .listing__grid { grid-template-columns: minmax(0,1fr); }
   }
   @media (max-width: 1024px) {
-    .pkh__grid { grid-template-columns: 1fr; gap: 24px; }
-    .pkh__photo { max-width: 460px; aspect-ratio: 16 / 10; }
     .gal__inner { grid-template-columns: 1fr; }
     .gal__mosaic { grid-auto-rows: 150px; }
     .fg__cards { grid-template-columns: 1fr 1fr; }
@@ -814,10 +819,6 @@ html, body{ overflow-x:clip; }
     .bcta__btns { flex-direction: row; width: auto; }
   }
   @media (max-width: 900px) {
-    .pkh__inner { padding: 12px 16px 28px; }
-    .pkh__title { font-size: clamp(28px, 8vw, 38px); text-align: left; }
-    .pkh__wall { grid-auto-rows: 110px; }
-    .pkh__photo { aspect-ratio: 4 / 3; }
     .crew__inner { grid-template-columns: 1fr; text-align: center; justify-items: center; }
     .crew__faces { justify-content: center; }
     .crew__contact { text-align: left; width: 100%; }
@@ -830,10 +831,6 @@ html, body{ overflow-x:clip; }
     .btn { min-height: 48px; }
   }
   @media (max-width: 700px) {
-    .pkh__badges { gap: 10px 14px; }
-    .yfit { display: block; }
-    .yfit__row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-    .yfit__btn { flex-direction: column; align-items: flex-start; gap: 6px; padding: 9px 10px; }
     .gal__mosaic { grid-template-columns: 1fr 1fr; grid-auto-rows: 132px; }
     .gal__tile--wide { grid-column: span 2; }
     .gal__checks { grid-template-columns: 1fr; }
@@ -844,8 +841,6 @@ html, body{ overflow-x:clip; }
     .crew__contact { grid-template-columns: 1fr; }
   }
   @media (max-width: 480px) {
-    .yfit__row { grid-template-columns: 1fr; }
-    .yfit__btn { flex-direction: row; align-items: center; }
     .fg__tiles, .fg__tiles--3 { grid-template-columns: 1fr; }
     .fg__tile { aspect-ratio: 16 / 10; }
   }
@@ -1346,77 +1341,229 @@ html, body{ overflow-x:clip; }
 
 <main id="main">
 
-<!-- ===== 1 · HERO · breadcrumb, title, fitment level, featured build
-     Figma "Section / Breadcrumb & Featured Build" (desktop 1440×480, mobile 390×465).
-     Inset photo is real-photos/bmw-m4.jpg, the same car wheel-store.html is built around
-     (this page moved from a truck/F-250 landing page to a car page, matching that vehicle).
-     The fitment picker is the same .yfit component this page's grid used to use, kept for
-     the three fitment tiers (guaranteed / aggressive / extreme) that still apply to any car. ===== -->
-<section class="pkh" aria-labelledby="pkh-title">
-  <div class="pkh__wall" aria-hidden="true">
-    <img src="product-images/wheels.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr23/1892/1/Fuel__D67320908250.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr23/1810/1/hMO9703.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr/1768/2022/Method_MR_401_UTV_Beadlock_Matte_Black.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr23/835/1/VN1055165.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr23/1810/1/MO970890873A18.webp" alt="" loading="eager">
-    <img src="product-images/wheels.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr23/1892/1/Fuel__D67320908250.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr23/1810/1/hMO9703.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr/1768/2022/Method_MR_401_UTV_Beadlock_Matte_Black.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr23/835/1/VN1055165.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr23/1810/1/MO970890873A18.webp" alt="" loading="eager">
-    <img src="product-images/wheels.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr23/1892/1/Fuel__D67320908250.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr23/1810/1/hMO9703.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr/1768/2022/Method_MR_401_UTV_Beadlock_Matte_Black.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr23/835/1/VN1055165.webp" alt="" loading="eager">
-    <img src="https://cdn.vividracing.com/file/vr23/1810/1/MO970890873A18.webp" alt="" loading="eager">
+<!-- ===== STICKY VEHICLE + FITMENT BAR ===== -->
+<div class="vfb" id="vfb">
+  <div class="wrap vfb__inner">
+    <div class="vfb__veh">
+      <span class="vfb__veh-name" id="vfbVehName">2023 BMW M4 Competition</span>
+      <button type="button" class="veh-card__change" onclick="openYmmModal()">Change &rsaquo;</button>
+    </div>
+    <div class="vfb__pills" id="vfbPills">
+      <button class="vfb__pill vfb__pill--g vfb__pill--active" onclick="tierIdx(0)"><svg viewBox="0 0 24 24" width="14" height="14" fill="#16A34A"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg> Factory Original</button>
+      <button class="vfb__pill vfb__pill--b" onclick="tierIdx(1)"><svg viewBox="0 0 24 24" width="14" height="14" fill="#0066CC"><path d="M22 3h-7l2.6 2.6-4.6 4.6 1.8 1.8 4.6-4.6L22 10V3zM2 21h7l-2.6-2.6 4.6-4.6-1.8-1.8-4.6 4.6L2 14v7z"/></svg> Custom Sizes</button>
+      <button class="vfb__pill" onclick="tierIdx(2)"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#6B7280" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Show All</button>
+    </div>
   </div>
-  <div class="pkh__scrim" aria-hidden="true"></div>
-  <div class="wrap pkh__inner">
-    <nav class="crumbs" aria-label="Breadcrumb">
-      <div class="crumbs__inner">
-        <a href="index.html">Home</a><span class="sep" aria-hidden="true">/</span>
-        <a href="wheel-store.html">Wheels &amp; Tires</a><span class="sep" aria-hidden="true">/</span>
-        <span class="cur">BMW</span><span class="sep" aria-hidden="true">/</span>
-        <span class="cur">M4</span><span class="sep" aria-hidden="true">/</span>
-        <span class="cur" aria-current="page">2023</span>
+</div>
+
+<!-- ===== BREADCRUMBS ===== -->
+<div class="crumbs">
+  <div class="wrap">
+    <div class="crumbs__inner">
+      <a href="index.html">Home</a><span class="sep">/</span>
+      <span class="cur">Tires</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CATEGORY HEAD ===== -->
+<section class="cat-head">
+  <div class="wrap">
+    <h1 class="cat-head__title vh">All tires.</h1>
+    <div class="cat-head__panel">
+
+      <div class="veh-card" id="vehCardConfirmed">
+        <svg class="veh-card__check" viewBox="0 0 24 24" width="30" height="30" fill="#16A34A"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        <div>
+          <div class="veh-card__name-row">
+            <span class="veh-card__name" id="vehName">2023 BMW M4 Competition</span>
+            <button type="button" class="veh-card__change" onclick="openYmmModal()">Change Vehicle &rsaquo;</button>
+          </div>
+          <p class="veh-card__sub">Showing tires that fit <strong id="vehShort">your M4</strong> <span class="veh-card__spec">&mdash; <span id="vehSpec">265/40R19 stock size, load range SL, factory or lowered.</span></span></p>
+          <div class="veh-card__chips">
+            <span class="veh-card__chip"><svg viewBox="0 0 24 24" width="14" height="14" fill="#16A34A"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Verified fit</span>
+            <span class="veh-card__chip"><svg viewBox="0 0 24 24" width="14" height="14" fill="#16A34A"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> No rubbing</span>
+            <span class="veh-card__chip veh-card__chip--tech"><svg viewBox="0 0 24 24" width="14" height="14" fill="#16A34A"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Size + load rating confirmed</span>
+            <span class="veh-card__chip"><svg viewBox="0 0 24 24" width="14" height="14" fill="#16A34A"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> 89% pick No Rub</span>
+          </div>
+        </div>
       </div>
-    </nav>
-    <div class="pkh__grid">
-      <div class="pkh__copy">
-        <h1 class="pkh__title" id="pkh-title">2023 BMW M4 Wheels &amp; Tire Packages</h1>
-        <a class="pkh__change" href="waiting-to-build/vehicle-picker.html">Change Vehicle/Fitment</a>
-        <p class="pkh__lede">No rub fit wheels and tires for your 2023 BMW M4 Competition. Mounted, balanced, and shipped free.</p>
-        <ul class="pkh__badges" aria-label="Package guarantees">
-          <li class="pkh__badge"><svg viewBox="0 0 24 24" width="15" height="15" fill="#4ADE80" aria-hidden="true" focusable="false"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg> No Rub Fit</li>
-          <li class="pkh__badge"><svg viewBox="0 0 24 24" width="15" height="15" fill="#4ADE80" aria-hidden="true" focusable="false"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1 .1-1.4z"/></svg> Free Mounting &amp; Balancing</li>
-          <li class="pkh__badge"><svg viewBox="0 0 24 24" width="15" height="15" fill="#4ADE80" aria-hidden="true" focusable="false"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg> 2,400+ Real Builds</li>
-          <li class="pkh__badge"><svg viewBox="0 0 24 24" width="15" height="15" fill="#4ADE80" aria-hidden="true" focusable="false"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg> Free Shipping</li>
-        </ul>
-        <div class="yfit" role="group" aria-labelledby="yfit-label">
-          <span class="yfit__label" id="yfit-label">Select Fitment Level</span>
-          <div class="yfit__row" id="heroFit">
-            <button type="button" class="yfit__btn yfit__btn--active" aria-pressed="true" data-tier="0">
-              <span class="yfit__ico yfit__ico--g" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="#16A34A"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></span>
-              <span><span class="yfit__name">Factory Original</span><span class="yfit__sub">Matches your stock size</span></span>
-            </button>
-            <button type="button" class="yfit__btn" aria-pressed="false" data-tier="1">
-              <span class="yfit__ico yfit__ico--b" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="#0066CC"><path d="M22 3h-7l2.6 2.6-4.6 4.6 1.8 1.8 4.6-4.6L22 10V3zM2 21h7l-2.6-2.6 4.6-4.6-1.8-1.8-4.6 4.6L2 14v7z"/></svg></span>
-              <span><span class="yfit__name">Custom Sizes</span><span class="yfit__sub">Plus-sized &amp; custom</span></span>
-            </button>
-            <button type="button" class="yfit__btn" aria-pressed="false" data-tier="2">
-              <span class="yfit__ico yfit__ico--s" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#6B7280" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
-              <span><span class="yfit__name">Show All</span><span class="yfit__sub">Every listing</span></span>
-            </button>
+      <div class="veh-card veh-card--empty" id="vehCardEmpty" style="display:none;">
+        <svg class="veh-card__check" viewBox="0 0 24 24" width="30" height="30" fill="#5F6975"><path d="M 6.4707031 4 C 5.8307031 4 5.2597344 4.4076719 5.0527344 5.0136719 L 3 11 L 3 18 L 3 19 C 3 19.552 3.448 20 4 20 L 5 20 C 5.552 20 6 19.552 6 19 L 6 18 L 18 18 L 18 19 C 18 19.552 18.448 20 19 20 L 20 20 C 20.552 20 21 19.552 21 19 L 21 17 L 21 11 L 18.947266 5.0136719 C 18.740266 4.4076719 18.169297 4 17.529297 4 L 6.4707031 4 z M 6.828125 6 L 17.171875 6 L 18.201172 9 L 5.7988281 9 L 6.828125 6 z M 5.1132812 11 L 18.886719 11 L 19 11.332031 L 19 16 L 5 16 L 5 11.332031 L 5.1132812 11 z M 7.5 12 A 1.5 1.5 0 0 0 6 13.5 A 1.5 1.5 0 0 0 7.5 15 A 1.5 1.5 0 0 0 9 13.5 A 1.5 1.5 0 0 0 7.5 12 z M 16.5 12 A 1.5 1.5 0 0 0 15 13.5 A 1.5 1.5 0 0 0 16.5 15 A 1.5 1.5 0 0 0 18 13.5 A 1.5 1.5 0 0 0 16.5 12 z"/></svg>
+        <div>
+          <div class="veh-card__name-row">
+            <button type="button" class="veh-card__name veh-card__name--link" onclick="openYmmModal()">Add your vehicle for guaranteed fit</button>
+          </div>
+          <p class="veh-card__sub">Pick your ride below to unlock verified tires for your exact size and load rating.</p>
+          <div class="veh-card__quickpicks">
+            <button type="button" class="veh-quickpick" onclick="selectVehicle('2023 Ford F-250 Super Duty','your F-250','275/65R18 stock size, load range E rated, factory or lifted.')">2023 Ford F-250 Super Duty</button>
+            <button type="button" class="veh-quickpick" onclick="selectVehicle('2023 BMW M4 Competition','your M4','265/40R19 stock size, load range SL, factory or lowered.')">2023 BMW M4 Competition</button>
+            <a href="waiting-to-build/garage.html" class="veh-quickpick veh-quickpick--more">Search full picker &rsaquo;</a>
           </div>
         </div>
       </div>
 
-      <div class="pkh__photo">
-        <img src="real-photos/bmw-m4.jpg" alt="BMW M4 on performance wheels" width="1920" height="999" fetchpriority="high" decoding="async">
+      <div class="ymm-modal" id="ymmModal" role="dialog" aria-modal="true" aria-labelledby="ymmModalTitle" style="display:none;">
+        <div class="ymm-modal__overlay" onclick="closeYmmModal()" role="button" tabindex="0" aria-label="Close modal" onkeydown="if(event.key==='Enter'||event.key===' ')closeYmmModal()"></div>
+        <div class="ymm-modal__panel">
+          <button type="button" class="ymm-modal__close" onclick="closeYmmModal()" aria-label="Close">&times;</button>
+          <h2 class="ymm-modal__title" id="ymmModalTitle">Add Your Vehicle</h2>
+          <p class="ymm-modal__sub">Select your year, make &amp; model to see guaranteed-fit tires.</p>
+          <form class="ymm-modal__form" onsubmit="submitYmmModal(event)">
+            <div class="ymm-modal__fields">
+              <div class="ymm-modal__field">
+                <label class="vh" for="ymmModalYear">Year</label>
+                <select class="ymm-modal__select" id="ymmModalYear" required>
+                  <option value="">Year</option>
+                  <option>2025</option><option>2024</option><option>2023</option><option>2022</option><option>2021</option><option>2020</option>
+                </select>
+              </div>
+              <div class="ymm-modal__field">
+                <label class="vh" for="ymmModalMake">Make</label>
+                <select class="ymm-modal__select" id="ymmModalMake" onchange="populateYmmModels()" required>
+                  <option value="">Make</option>
+                  <option>Ford</option><option>Ram</option><option>Chevrolet</option><option>BMW</option><option>Porsche</option><option>Audi</option>
+                </select>
+              </div>
+              <div class="ymm-modal__field">
+                <label class="vh" for="ymmModalModel">Model</label>
+                <select class="ymm-modal__select" id="ymmModalModel" required><option value="">Make first</option></select>
+              </div>
+              <div class="ymm-modal__field">
+                <label class="vh" for="ymmModalTrim">Trim</label>
+                <select class="ymm-modal__select" id="ymmModalTrim">
+                  <option value="">Trim</option>
+                  <option>Base</option><option>Sport</option><option>Premium</option><option>Performance</option>
+                </select>
+              </div>
+              <div class="ymm-modal__field">
+                <label class="vh" for="ymmModalDrive">Drive</label>
+                <select class="ymm-modal__select" id="ymmModalDrive">
+                  <option value="">Drive</option>
+                  <option>RWD</option><option>AWD</option><option>4WD</option><option>FWD</option>
+                </select>
+              </div>
+              <div class="ymm-modal__field">
+                <label class="vh" for="ymmModalSusp">Suspension</label>
+                <select class="ymm-modal__select" id="ymmModalSusp">
+                  <option value="">Suspension</option>
+                  <option>Stock</option><option>Lowered</option><option>Leveled</option><option>2&Prime; Lift</option><option>4&Prime; Lift</option><option>6&Prime; Lift</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="ymm-modal__submit">Find My Fit<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </form>
+        </div>
       </div>
+
+      <div class="expert-card">
+        <div class="expert-card__head">
+          <img src="assets/img/experts/fitment-specialist.jpg" alt="Fitment specialist" width="240" height="240" fetchpriority="high" decoding="async"/>
+          <div>
+            <div class="expert-card__title">Questions about fitment?</div>
+            <div class="expert-card__sub">Talk to Our Tire Specialist</div>
+          </div>
+        </div>
+        <div class="expert-card__btns">
+          <a href="waiting-to-build/contact.html" class="expert-card__btn"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg> Chat with us</a>
+          <a href="tel:14809663040" class="expert-card__btn"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg> 480-966-3040</a>
+        </div>
+      </div>
+
+      <!-- ===== Mobile-only (<=700px): financing link + delivery estimate +
+           AI search, pulled up here from .filters so they're visible without
+           opening the Filter drawer. Own ids (M suffix) so they don't collide
+           with the originals, which stay in .filters for desktop/tablet and
+           are hidden there at this width by the .filters > .ai-filter /
+           .filters > .deliver-to rules below. ===== -->
+      <div class="cat-mobile-quick">
+        <button type="button" class="cat-mobile-quick__fin" onclick="openFinSheet()">
+          <span class="cat-mobile-quick__fin-copy">Flexible financing available with
+            <img src="assets/img/logos/affirm-transparent.png" alt="Affirm" class="cat-mobile-quick__fin-logo cat-mobile-quick__fin-logo--affirm">
+            <img src="assets/img/logos/katapult.webp" alt="Katapult" class="cat-mobile-quick__fin-logo cat-mobile-quick__fin-logo--katapult">
+          </span>
+          <svg class="cat-mobile-quick__fin-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+        <div class="deliver-to">
+          <!-- Figma node 2602:21525 ("Enter Shipping Date"), stacked left
+               (see the comment on .zip-filter__confirmed in <style>). -->
+          <div class="zip-filter__confirmed" id="deliverToRowM">
+            <span class="zip-filter__confirmed-label">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h13v13H1z"/><path d="M14 8h4l3 3v5h-7V8z"/><circle cx="6" cy="18" r="2"/><circle cx="17.5" cy="18" r="2"/></svg>
+              Estimate Your Delivery Time to
+            </span>
+            <span class="zip-filter__confirmed-zip">
+              <span class="zip-filter__confirmed-value" id="deliverToZipM">54115 Ashwaubenon, WI</span>
+              <button type="button" class="zip-filter__confirmed-change" onclick="showDeliverToEditMobile()">Change &rsaquo;</button>
+            </span>
+          </div>
+          <form class="deliver-to__editform" id="deliverToEditFormM" onsubmit="return submitDeliverToZipMobile(event)" hidden>
+            <label class="vh" for="deliverToInputM">New zip code</label>
+            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="5" id="deliverToInputM" class="deliver-to__editinput" placeholder="Zip code">
+            <button type="submit" class="deliver-to__editbtn">Update</button>
+          </form>
+          <div class="deliver-to__dates">
+            <label class="deliver-to__date"><input type="radio" name="deliverToDateM" checked/> Monday, Sep 14</label>
+            <label class="deliver-to__date"><input type="radio" name="deliverToDateM"/> Tuesday, Sep 15</label>
+          </div>
+        </div>
+        <div class="ai-filter">
+          <form class="ai-filter__form" onsubmit="return false;">
+            <input type="text" class="ai-filter__input" placeholder="Filter with Vivid Racing AI" aria-label="Filter with Vivid Racing AI">
+            <button type="submit" class="ai-filter__submit">Go</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Financing bottom sheet: opened from .cat-mobile-quick__fin (mobile
+           only, same trigger). Always in the DOM so .is-open can transition it. -->
+      <div class="fin-sheet" id="finSheet" role="dialog" aria-modal="true" aria-labelledby="finSheetTitle">
+        <div class="fin-sheet__overlay" onclick="closeFinSheet()" role="button" tabindex="0" aria-label="Close" onkeydown="if(event.key==='Enter'||event.key===' ')closeFinSheet()"></div>
+        <div class="fin-sheet__panel">
+          <div class="fin-sheet__handle" aria-hidden="true"></div>
+          <button type="button" class="fin-sheet__close" onclick="closeFinSheet()" aria-label="Close">&times;</button>
+          <h2 class="fin-sheet__title" id="finSheetTitle">Flexible Financing</h2>
+          <div class="fin-sheet__card">
+            <img src="assets/img/logos/affirm-transparent.png" alt="Affirm" class="fin-sheet__logo fin-sheet__logo--affirm">
+            <p class="fin-sheet__text">Pay at your own pace with no hidden fees.</p>
+            <a href="#" class="fin-sheet__btn">Prequalify Now</a>
+          </div>
+          <div class="fin-sheet__card">
+            <img src="assets/img/logos/katapult.webp" alt="Katapult" class="fin-sheet__logo fin-sheet__logo--katapult">
+            <p class="fin-sheet__text">Pay over time. No credit required.</p>
+            <a href="#" class="fin-sheet__btn">Get Pre-Approved</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="cat-head__fitment">
+        <div class="tier-label">Select Your Tire Fitment</div>
+        <div class="tiers">
+          <button class="tier tier--green tier--active" onclick="tierIdx(0)" aria-pressed="true">
+            <svg class="tier__icon" viewBox="0 0 24 24" width="22" height="22" fill="#16A34A"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg><div><div class="tier__name">Factory Original</div><div class="tier__sub">Matches your stock tire size</div></div><span class="tier__radio" aria-hidden="true"></span>
+          </button>
+          <button class="tier tier--blue" onclick="tierIdx(1)" aria-pressed="false">
+            <svg class="tier__icon" viewBox="0 0 24 24" width="22" height="22" fill="#0066CC"><path d="M22 3h-7l2.6 2.6-4.6 4.6 1.8 1.8 4.6-4.6L22 10V3zM2 21h7l-2.6-2.6 4.6-4.6-1.8-1.8-4.6 4.6L2 14v7z"/></svg><div><div class="tier__name">Custom Sizes</div><div class="tier__sub">Plus-sized &amp; custom fitments</div></div><span class="tier__radio" aria-hidden="true"></span>
+          </button>
+          <button class="tier" onclick="tierIdx(2)" aria-pressed="false">
+            <svg class="tier__icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#6B7280" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><div><div class="tier__name">Show All</div><div class="tier__sub">All 8,400+ listings</div></div><span class="tier__radio" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="cat-delivery">
+        <div class="cat-delivery__fin">
+          <div class="cat-delivery__fin-row">
+            <img src="assets/img/logos/affirm.png" alt="Affirm" class="cat-delivery__fin-logo">
+            <span class="cat-delivery__fin-text">Pay at your own pace with no hidden fees. <a href="#" class="cat-delivery__fin-link">Prequalify Now</a></span>
+          </div>
+          <div class="cat-delivery__fin-row">
+            <img src="assets/img/logos/katapult.webp" alt="Katapult" class="cat-delivery__fin-logo">
+            <span class="cat-delivery__fin-text">Pay over time. No credit required. <a href="#" class="cat-delivery__fin-link">Get Pre-Approved</a></span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -2453,20 +2600,144 @@ html, body{ overflow-x:clip; }
 
 <script src="js/script.js"></script>
 <script>
-  /* Fitment level — the hero picker (the grid below no longer has its own duplicate tier
-     chooser or sortbar count tied to it, so this just toggles the hero buttons themselves). */
-  (function () {
-    var btns = document.querySelectorAll('#heroFit .yfit__btn');
-    btns.forEach(function (b) {
-      b.addEventListener('click', function () {
-        btns.forEach(function (o, k) {
-          var on = o === b;
-          o.classList.toggle('yfit__btn--active', on);
-          o.setAttribute('aria-pressed', on ? 'true' : 'false');
-        });
-      });
+  var YMM_MODELS = {
+    'Ford': ['F-150','F-250 Super Duty','F-350 Super Duty','Mustang','Bronco'],
+    'Ram': ['1500','2500','3500'],
+    'Chevrolet': ['Silverado 1500','Silverado 2500HD','Corvette','Camaro'],
+    'BMW': ['M3','M4 Competition','M5','X5'],
+    'Porsche': ['911','Cayenne','Macan','Panamera'],
+    'Audi': ['RS6 Avant','Q7','A4','S4']
+  };
+  function openYmmModal(){
+    document.getElementById('ymmModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    document.getElementById('ymmModalYear').focus();
+  }
+  function closeYmmModal(){
+    document.getElementById('ymmModal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  function openFinSheet(){
+    document.getElementById('finSheet').classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeFinSheet(){
+    document.getElementById('finSheet').classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+  function populateYmmModels(){
+    var make = document.getElementById('ymmModalMake').value;
+    var modelSelect = document.getElementById('ymmModalModel');
+    if (!make) { modelSelect.innerHTML = '<option value="">Make first</option>'; return; }
+    var opts = '<option value="">Model</option>';
+    YMM_MODELS[make].forEach(function(m){ opts += '<option>' + m + '</option>'; });
+    modelSelect.innerHTML = opts;
+  }
+  function submitYmmModal(e){
+    e.preventDefault();
+    var year = document.getElementById('ymmModalYear').value;
+    var make = document.getElementById('ymmModalMake').value;
+    var model = document.getElementById('ymmModalModel').value;
+    var trim = document.getElementById('ymmModalTrim').value;
+    var drive = document.getElementById('ymmModalDrive').value;
+    var susp = document.getElementById('ymmModalSusp').value;
+    if (!year || !make || !model) return;
+    var name = year + ' ' + make + ' ' + model + (trim ? ' ' + trim : '');
+    var shortName = 'your ' + model;
+    var spec = 'Tire size & load rating confirmed for your ' + model
+      + (drive ? ', ' + drive : '') + (susp ? ', ' + susp.toLowerCase() : '') + '.';
+    selectVehicle(name, shortName, spec);
+    closeYmmModal();
+  }
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && document.getElementById('ymmModal').style.display !== 'none') closeYmmModal();
+    if (e.key === 'Escape' && document.getElementById('finSheet').classList.contains('is-open')) closeFinSheet();
+  });
+  function selectVehicle(name, shortName, spec){
+    document.getElementById('vehName').textContent = name;
+    document.getElementById('vehShort').textContent = shortName;
+    document.getElementById('vehSpec').textContent = spec;
+    document.getElementById('vfbVehName').textContent = name;
+    document.getElementById('vehCardEmpty').style.display = 'none';
+    var confirmed = document.getElementById('vehCardConfirmed');
+    /* '' not 'flex': the stylesheet picks the mode (grid on mobile, flex on
+       desktop). Hardcoding 'flex' here overrode the mobile grid layout. */
+    confirmed.style.display = '';
+    confirmed.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+  function showDeliverToEditMobile() {
+    document.getElementById('deliverToRowM').hidden = true;
+    var form = document.getElementById('deliverToEditFormM');
+    form.hidden = false;
+    var input = document.getElementById('deliverToInputM');
+    input.value = '';
+    input.focus();
+  }
+  function submitDeliverToZipMobile(e) {
+    e.preventDefault();
+    var input = document.getElementById('deliverToInputM');
+    var val = input.value.trim();
+    if (!/^\d{5}$/.test(val)) return false;
+    var zipEl = document.getElementById('deliverToZipM');
+    var cityPart = zipEl.textContent.replace(/^\d{5}\s*/, '');
+    zipEl.textContent = val + ' ' + cityPart;
+    document.getElementById('deliverToEditFormM').hidden = true;
+    document.getElementById('deliverToRowM').hidden = false;
+    return false;
+  }
+  function tierIdx(i) {
+    document.querySelectorAll('.tiers .tier').forEach(function(t,k){
+      var on = k===i;
+      t.classList.toggle('tier--active', on);
+      t.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
-  })();
+    document.querySelectorAll('#vfbPills .vfb__pill').forEach(function(p,k){p.classList.toggle('vfb__pill--active', k===i)});
+    var mdd = document.getElementById('fitmentDropdownM');
+    if (mdd) {
+      var items = mdd.querySelectorAll('.dd__menu li');
+      items.forEach(function(li,k){ li.setAttribute('aria-selected', k===i ? 'true' : 'false'); });
+      var label = mdd.querySelector('.dd__trigger-label');
+      if (label && items[i]) label.textContent = items[i].textContent.trim();
+      var icon = mdd.querySelector('.dd__trigger-icon');
+      var srcIcon = items[i] && items[i].querySelector('svg');
+      if (icon && srcIcon) {
+        var clone = srcIcon.cloneNode(true);
+        clone.classList.add('dd__trigger-icon');
+        icon.replaceWith(clone);
+      }
+    }
+    applyFitFilter(i);
+  }
+
+  /* Fitment tier tests, applied together with the "Sales" toggle in
+     applyFilters() below:
+     0 Factory Original -> only cards flagged .wcard__perk--g (matches the
+                     stock/OEM size, no rub or trim)
+     1 Custom Sizes     -> everything else -- plus-sized or otherwise
+                     non-stock (.wcard__perk--a or --x)
+     2 Show All         -> no filtering */
+  var activeFitTier = 0;
+  function fitMatches(card, i) {
+    if (i === 0) return !!card.querySelector('.wcard__perk--g');
+    if (i === 1) return !!card.querySelector('.wcard__perk--a') || !!card.querySelector('.wcard__perk--x');
+    return true;
+  }
+  function applyFitFilter(i) {
+    activeFitTier = i;
+    applyFilters();
+  }
+  function applyFilters() {
+    var saleToggle = document.getElementById('saleOnlyToggle');
+    var saleOnly = !!(saleToggle && saleToggle.checked);
+    document.querySelectorAll('.wgrid > .wcard').forEach(function(card){
+      var show = fitMatches(card, activeFitTier);
+      if (show && saleOnly) {
+        var badge = card.querySelector('.wcard__badge');
+        show = !!badge && badge.textContent.trim() === 'On Sale';
+      }
+      card.style.display = show ? '' : 'none';
+    });
+  }
 
   /* Mobile "Filter" toggle for the .filters rail (same behaviour as wheel-store.html) */
   (function () {
