@@ -497,6 +497,10 @@
       gap: 6px 8px; }
     .veh-card__chip { font-size: 12px; line-height: 18px; white-space: nowrap; }
     .veh-card__chip--tech { display: none; }
+    /* Drop the fit-confirmation copy and trust chips on mobile -- the card
+       reads as just title + Change Vehicle at this width. Scoped to
+       #vehCardConfirmed so #vehCardEmpty's own sub-copy is untouched. */
+    #vehCardConfirmed .veh-card__sub, #vehCardConfirmed .veh-card__chips { display: none; }
 
     /* --- Mobile product card: horizontal, per the reference screenshots.
        A 190x190 square image on the left, details stacked on the right, and
