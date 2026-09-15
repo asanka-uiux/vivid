@@ -5327,7 +5327,11 @@
     .listing__grid { gap: 12px; }
   }
   @media (max-width: 700px) {
-    .cat-head { padding-bottom: 8px; }
+    .cat-head { padding: 0; }
+    /* 4px matches the rhythm already used inside .cat-mobile-quick
+       (.cat-mobile-quick__fin and .zip-filter/.ai-filter both
+       margin-bottom: 4px) -- matches package-tires.html. */
+    .cat-head__panel { gap: 4px 16px; }
   }
   /* --- Mobile store header, laid out after CO Updates node 750:100905.
      LAYOUT ONLY: ViViD type, colour and copy are unchanged; none of the CO
