@@ -451,7 +451,10 @@
      title ran to two lines. Chips go to two columns rather than a nowrap
      scroller so no trust signal ends up hidden off-screen. --- */
   @media (max-width: 700px) {
-    .cat-head__panel { gap: 6px 16px; }
+    /* 4px matches the rhythm already used inside .cat-mobile-quick
+       (.cat-mobile-quick__fin and .deliver-to both margin-bottom: 4px) --
+       6px here was the one inconsistent gap in the stack. */
+    .cat-head__panel { gap: 4px 16px; }
     .cat-head__panel > .veh-card { order: 1; }
     .cat-mobile-quick            { display: block; order: 2; }
     .cat-delivery                { order: 2; display: none; }
