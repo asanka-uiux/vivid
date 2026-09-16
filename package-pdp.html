@@ -4560,6 +4560,7 @@
   .pg__half-img { position: relative; }
   .pg__half img { display: block; width: 100%; aspect-ratio: 1/1; object-fit: cover; }
   .pg__half-cap { font-family: var(--ui); font-size: 12px; font-weight: 600; color: var(--ink); border-top: 1px solid var(--line); padding: 9px 12px; background: var(--bone); }
+  .pg__half-sku { display: block; margin-top: 4px; font-family: var(--mono); font-size: 11px; font-weight: 400; letter-spacing: 0.04em; color: var(--steel); }
   /* narrower than the old full-width main image, so the arrows shrink to match */
   .pg__half .pg__nav { width: 32px; height: 32px; font-size: 18px; }
   /* .pg__row's own top margin would double up on the pair's grid gap */
@@ -5415,7 +5416,7 @@ html, body{ overflow-x:clip; }
               <span class="pg__tag">WHEEL</span>
               <img src="product-images/wheels.webp" alt="VR Forged D02-8 Satin Bronze wheel"  fetchpriority="high" decoding="async"/>
             </div>
-            <figcaption class="pg__half-cap">VR Forged D02-8 &middot; 17x9 &middot; -12mm</figcaption>
+            <figcaption class="pg__half-cap">VR Forged D02-8 &middot; 17x9 &middot; -12mm<span class="pg__half-sku">SKU: VRF-D0208-1709SB</span></figcaption>
           </figure>
           <figure class="pg__half">
             <div class="pg__half-img">
@@ -5424,7 +5425,7 @@ html, body{ overflow-x:clip; }
               <button class="pg__nav pg__nav--prev" onclick="pgStep(-1)" aria-label="Previous tire image">&#8249;</button>
               <button class="pg__nav pg__nav--next" onclick="pgStep(1)" aria-label="Next tire image">&#8250;</button>
             </div>
-            <figcaption class="pg__half-cap">Michelin Defender LTX M/S &middot; 275/65R18</figcaption>
+            <figcaption class="pg__half-cap">Michelin Defender LTX M/S &middot; 275/65R18<span class="pg__half-sku">SKU: MCH-DLTXMS-27565R18</span></figcaption>
           </figure>
           <div class="pg__row pg__row--finish">
             <span class="pg__row-label">Wheel Finish</span>
