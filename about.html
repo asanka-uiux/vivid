@@ -4805,6 +4805,11 @@ html, body{ overflow-x:clip; }
      here; this is the compliant value if that's ever unified. */
   .crumbs__inner .sep { color: var(--steel); }
   .crumbs__inner .cur { color: var(--ink); font-weight: 600; }
+  /* breadcrumb sits tight under the sticky header on mobile; 12px top+bottom
+     pushed the first content block too far down the fold */
+  @media (max-width: 700px) {
+    .crumbs__inner { padding: 6px 0; }
+  }
   .abn__gal-foot { margin: clamp(24px, 4vw, 36px) 0 0; display: flex; justify-content: center; }
 
   /* Customer builds: horizontal scroller on mobile only.
