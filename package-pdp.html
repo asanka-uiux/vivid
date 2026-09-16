@@ -4599,7 +4599,11 @@
   /* buy panel */
   .bp { border: 1px solid var(--line); padding: 20px; position: sticky; top: 24px; }
   .bp__title { font-family: var(--display); font-size: 30px; font-weight: 900; letter-spacing: -0.02em; line-height: 1.05; color: var(--ink); margin: 0 0 6px; }
-  .bp__sku-row { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; margin-bottom: 10px; }
+  .bp__sku-row { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: flex-start; margin-bottom: 10px; }
+  /* each half is its own two-line stack: size on top, SKU beneath it, so the
+     pair reads as two labelled blocks rather than one run-on line */
+  .bp__sku-col { display: flex; flex-direction: column; gap: 2px; }
+  .bp__sku-col--end { margin-left: auto; text-align: right; }
   .bp__sku { font-family: var(--mono); font-size: 14px; letter-spacing: 0.08em; color: var(--steel); }
   .bp__meta { display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--line); padding: 8px 14px; margin-bottom: 8px; }
   .bp__stock { display: flex; align-items: center; gap: 8px; font-family: var(--display); font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--green); }
@@ -5529,8 +5533,14 @@ html, body{ overflow-x:clip; }
       <div class="bp">
         <h1 class="bp__title">VR Forged D02-8 + Michelin Defender LTX M/S Package</h1>
         <div class="bp__sku-row">
-          <span class="bp__sku">Wheel SKU: VRF-D0208-1709SB</span>
-          <span class="bp__sku" style="margin-left:auto;">Tire SKU: MCH-DLTXMS-27565R18</span>
+          <div class="bp__sku-col">
+            <span class="bp__sku">Wheel: 17x9 &middot; -12mm</span>
+            <span class="bp__sku">SKU: VRF-D0208-1709SB</span>
+          </div>
+          <div class="bp__sku-col bp__sku-col--end">
+            <span class="bp__sku">Tire: 275/65R18</span>
+            <span class="bp__sku">SKU: MCH-DLTXMS-27565R18</span>
+          </div>
         </div>
 
         <div class="bp__meta">
