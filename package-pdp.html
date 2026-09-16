@@ -5758,73 +5758,122 @@ html, body{ overflow-x:clip; }
 
 <!-- ===== REVIEWS + POLICIES ===== -->
 <section id="reviews" style="background:var(--paper); border-top:3px solid var(--ink);">
-  <div class="wrap">
-    <div class="rev-grid">
-      <div>
-        <span class="pdp-block__num">VERIFIED OWNERS</span>
-        <h2 class="pdp-block__title">Product <span class="heat">reviews.</span></h2>
-        <div class="rev-summary">
-          <div style="text-align:center;">
-            <div class="rev-big">4.9</div>
-            <div style="color:#B45309; font-size:14px; margin:4px 0;" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-            <div style="font-family:var(--ui); font-size:12px; color:var(--signal); font-weight:600;">(61 reviews)</div>
-          </div>
-          <div class="rev-bars">
-            <div class="rev-bar"><span>5</span><div class="rev-bar__track"><div class="rev-bar__fill" style="width:82%"></div></div><span>50</span></div>
-            <div class="rev-bar"><span>4</span><div class="rev-bar__track"><div class="rev-bar__fill" style="width:13%"></div></div><span>8</span></div>
-            <div class="rev-bar"><span>3</span><div class="rev-bar__track"><div class="rev-bar__fill" style="width:3%"></div></div><span>2</span></div>
-            <div class="rev-bar"><span>2</span><div class="rev-bar__track"><div class="rev-bar__fill" style="width:2%"></div></div><span>1</span></div>
-            <div class="rev-bar"><span>1</span><div class="rev-bar__track"><div class="rev-bar__fill" style="width:0%"></div></div><span>0</span></div>
-          </div>
-        </div>
-        <div class="review-strip">
-        <div class="review">
-          <div class="review__head">
-            <div class="review__who">
-              <div class="review__avatar">CH</div>
-              <div class="review__id">
-                <div class="review__name-row">
-                  <span class="review__name">Cole H.</span>
-                </div>
-                <div class="review__vehicle">2023 BMW M4 Competition</div>
-              </div>
-            </div>
-            <span class="review__meta">May 28, 2026</span>
-          </div>
-          <p>Ordering the wheel and tire pre-matched saved me the guesswork of pairing offset to tire size myself. Bolted straight on with zero rubbing at stock height, and VR had the whole set mounted, balanced, and at my door in three days.</p>
-        </div>
-        <div class="review">
-          <div class="review__head">
-            <div class="review__who">
-              <div class="review__avatar">WT</div>
-              <div class="review__id">
-                <div class="review__name-row">
-                  <span class="review__name">Wyatt T.</span>
-                </div>
-                <div class="review__vehicle">2023 BMW M4 Competition</div>
-              </div>
-            </div>
-            <span class="review__meta">Apr 19, 2026</span>
-          </div>
-          <p>The bundle savings were the deciding factor over buying separately, but the Michelins have turned out to be the better all-season pick for daily driving than I expected &mdash; quiet, and plenty of grip in the rain.</p>
-        </div>
-        <div class="review">
-          <div class="review__head">
-            <div class="review__who">
-              <div class="review__avatar">MS</div>
-              <div class="review__id">
-                <div class="review__name-row">
-                  <span class="review__name">Mateo S.</span>
-                </div>
-                <div class="review__vehicle">2023 BMW M4 Competition</div>
-              </div>
-            </div>
-            <span class="review__meta">Mar 7, 2026</span>
-          </div>
-          <p>Second package I&rsquo;ve ordered from VR. The satin bronze on the D02-8 pairs perfectly with the M4&rsquo;s stock paint, and free mount &amp; balance made this cheaper than buying wheels and tires from two different shops.</p>
-        </div>
-        </div>
+  <!-- ============ REVIEWS ============================================
+       Replaced this page's product-review block (aggregate score, 1-5 star
+       distribution bars, three owner reviews) with index.html's REVIEWS
+       BANNER, per request. Brings the trust bar (4.9 aggregate, Google /
+       Trustpilot / SEMA badges, "Read all reviews" CTA) and three Google
+       reviews of the merchant.
+       Note these are store-wide Google reviews, not reviews of this product —
+       the per-product score and rating histogram that used to sit here are
+       gone with it.
+       Every class (.revs-combined, .revs, .rbar__*, .revs__grid, .rev,
+       .dashes) resolves from css/style.css and .dashes is driven by
+       js/script.js — this page already loads both, so no new CSS or JS.
+       index.html and about.html each keep their own copy of this markup;
+       these are duplicates, not a shared partial, so figures must be
+       updated together. ============================================== -->
+  <section class="revs-combined" aria-labelledby="pdp-revs-title">
+  <!-- ============ REVIEWS · node 251:6088 ============
+       Redesigned 2026-08-19: photo-led cards replaced with Google reviews
+       (source text supplied by the user). Star ratings weren't given with the
+       source text — shown as 5 stars per the reviews' own wording; confirm
+       against the live Google listing if exact scores matter. -->
+  <div class="revs">
+    <div class="shell">
+      <div class="rbar__row">
+      <div class="rbar__score">
+        <p class="rbar__num">4.9</p>
+        <span class="rbar__stars" role="img" aria-label="Rated 4.9 out of 5"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="16" height="16"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="16" height="16"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="16" height="16"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="16" height="16"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="16" height="16"></span>
+        <p class="rbar__facts"><b>14,000+</b> verified buyers</p>
       </div>
+      <ul class="rbar__sources">
+        <li class="rbar__source">
+          <img src="assets/icons/google-logo-color.svg" alt="" aria-hidden="true">
+          <span class="rbar__source-body">
+            <span class="rbar__source-name">Google</span>
+            <span class="rbar__source-rating">4.9 <img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"></span>
+          </span>
+        </li>
+        <li class="rbar__source">
+          <span class="rbar__source-icon--trustpilot">
+            <img src="assets/icons/star-small.svg" alt="" aria-hidden="true">
+          </span>
+          <span class="rbar__source-body">
+            <span class="rbar__source-name">Trustpilot</span>
+            <span class="rbar__source-rating">4.8 <img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"></span>
+          </span>
+        </li>
+        <li class="rbar__source">
+          <!-- not aria-hidden: hiding it left screen readers with a bare
+               "Top 5 Reseller" and no idea who ranked it -->
+          <span class="rbar__source-badge">SEMA</span>
+          <span class="rbar__source-body">
+            <span class="rbar__source-sema">Top 5 Reseller</span>
+          </span>
+        </li>
+      </ul>
+      <div class="rbar__cta">
+        <a class="rbar__cta-btn" href="waiting-to-build/reviews.html">Read all reviews
+          <img src="assets/icons/arrow.svg" alt="" aria-hidden="true" width="13" height="13"></a>
+      </div>
+      </div>
+      <div class="revs__head">
+        <img src="assets/icons/google-logo-color.svg" alt="" aria-hidden="true" width="26" height="26">
+        <h2 class="revs__title" id="pdp-revs-title">Reviews from Google</h2>
+      </div>
+      <ul class="revs__grid">
+        <li class="rev">
+          <div class="rev__head">
+            <span class="rev__avatar" aria-hidden="true">A</span>
+            <span class="rev__id">
+              <span class="rev__name">Adrienne Taylor</span>
+              <span class="rev__stat">Local Guide &middot; 91 reviews &middot; 41 photos</span>
+            </span>
+            <span class="rev__src"><img src="assets/icons/google-logo-color.svg" alt="" aria-hidden="true" width="15" height="15">Google</span>
+          </div>
+          <div class="rev__rating">
+            <span class="rev__stars" role="img" aria-label="Rated 5 out of 5"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"></span>
+            <span class="rev__time">2 months ago</span>
+          </div>
+          <blockquote class="rev__quote">Placed a order for RCV axles that only Vivid had in stock. Called to confirm stock and customer service was great. Took care of everything over the phone and didn&rsquo;t sit on hold for half the day. They shipped same day and I will not hesitate to order from these dudes again!</blockquote>
+        </li>
+        <li class="rev">
+          <div class="rev__head">
+            <span class="rev__avatar" aria-hidden="true">C</span>
+            <span class="rev__id">
+              <span class="rev__name">Craig Wilcox</span>
+              <span class="rev__stat">7 reviews &middot; 2 photos</span>
+            </span>
+            <span class="rev__src"><img src="assets/icons/google-logo-color.svg" alt="" aria-hidden="true" width="15" height="15">Google</span>
+          </div>
+          <div class="rev__rating">
+            <span class="rev__stars" role="img" aria-label="Rated 5 out of 5"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"></span>
+            <span class="rev__time">a year ago</span>
+          </div>
+          <blockquote class="rev__quote">Excellent customer service, quick shipping on short notice. Highly recommend! The ultra low profile 90-degree 16AN fitting was a lifesaver and allowed me to finish my custom build, thanks Vivid!</blockquote>
+        </li>
+        <li class="rev">
+          <div class="rev__head">
+            <span class="rev__avatar" aria-hidden="true">H</span>
+            <span class="rev__id">
+              <span class="rev__name">Howard Floyd</span>
+              <span class="rev__stat">2 reviews &middot; 2 photos</span>
+            </span>
+            <span class="rev__src"><img src="assets/icons/google-logo-color.svg" alt="" aria-hidden="true" width="15" height="15">Google</span>
+          </div>
+          <div class="rev__rating">
+            <span class="rev__stars" role="img" aria-label="Rated 5 out of 5"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"><img src="assets/icons/star-gold.svg" alt="" aria-hidden="true" width="14" height="14"></span>
+            <span class="rev__time">Edited a year ago</span>
+          </div>
+          <blockquote class="rev__quote">Once again Vivid Racing does an awesome job! Your products are always great quality, they&rsquo;re very responsive and my parts always get here quickly. I&rsquo;ve used Vivid Racing at least four times just with this build and many other times in the past. I would definitely recommend them for your motorcycle and ATV needs.</blockquote>
+        </li>
+      </ul>
+      <div class="dashes" aria-hidden="true"><span class="is-active"></span><span></span></div>
+    </div>
+  </div>
+  </section>
+  <div class="wrap">
       <div>
         <span class="pdp-block__num">THE FINE PRINT</span>
         <h2 class="pdp-block__title">Order details &amp; <span class="heat">policies.</span></h2>
@@ -5851,7 +5900,6 @@ html, body{ overflow-x:clip; }
           </div>
         </div>
       </div>
-    </div>
   </div>
 </section>
 
