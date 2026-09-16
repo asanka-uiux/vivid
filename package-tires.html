@@ -660,7 +660,7 @@ html, body{ overflow-x:clip; }
 
   /* ===== 2 · PACKAGE PROCESS — 1-2-3 stepper strip between the hero and the grid (steps__* copied from packages.html) ===== */
   .pkg-process__inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-  .pkg-process__title { font-family: var(--display); font-size: clamp(22px, 2.4vw, 28px); font-weight: 900; letter-spacing: -0.02em; color: var(--ink); margin: 0; display: none; }
+  .pkg-process__title { font-family: var(--display); font-size: clamp(22px, 2.4vw, 28px); font-weight: 900; letter-spacing: -0.02em; color: var(--ink); margin: 0; }
   /* Figma CO Updates 750:121019, "wheel tire package flow" instance (node 226:31353):
      light-gray track, only the current step gets a filled colour + chevron tip;
      the other steps are flat with a hairline divider. Icon colour follows text
@@ -677,6 +677,11 @@ html, body{ overflow-x:clip; }
   }
   .steps__item--current + .steps__item { border-left: 0; padding-left: 41px; }
   @media (max-width: 900px) {
+    /* Desktop-only heading: the stepper strip stacks on mobile and the H2
+       duplicates the hero copy directly above it, so it is hidden here rather
+       than removed — it still names this section for assistive tech via the
+       section's aria-labelledby, which resolves against hidden elements. */
+    .pkg-process__title { display: none; }
     .pkg-process__inner { flex-direction: column; align-items: stretch; padding-top: 8px; padding-bottom: 8px; }
     .steps { width: 100%; }
     /* Figma node 2615:21394 ("checkout-progress-indicator"): a shorter,
