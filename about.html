@@ -4696,22 +4696,31 @@ html, body{ overflow-x:clip; }
     padding: clamp(44px, 8vw, 92px) 0; background: var(--ink); }
   .abn__garage-inner { width: 100%; max-width: calc(1120px + (var(--gutter) * 2));
     margin-inline: auto; padding-inline: var(--gutter); }
-  .abn__garage-head { max-width: 62ch; margin-bottom: clamp(24px, 4vw, 40px); }
+  .abn__garage-head { max-width: 62ch; }
   .abn__garage .vc__kicker { color: #FFC9C2; }
   .abn__garage-head h2 { font-family: var(--display); font-weight: 800; letter-spacing: -.015em;
     font-size: clamp(1.5rem, 3.6vw, 2.25rem); line-height: 1.12; margin: 0 0 14px;
     color: #fff; text-wrap: balance; }
   .abn__garage-head p { font-size: 1.0313rem; line-height: 1.7;
     color: rgba(255,255,255,.72); margin: 0; }
-  /* Flex, not grid: with 5 cards a 3-column grid leaves the trailing row of 2
-     stuck at the left edge with a dead gap where the 3rd column would be.
-     A flex row that wraps can be centered instead — with exactly 3 per row
-     the centering is a no-op (the row already fills 100%), so it only ever
-     visibly affects the trailing partial row. */
+  /* Flex, not grid: a fixed-column grid can't absorb the intro tile without
+     either stretching it across multiple columns (grid-column: span) or
+     leaving a hole, and both read as a special case. A flex row that wraps
+     just needs 6 same-size items to fill two even rows of 3 -- the intro
+     tile is item 1 of 6, same sizing as every card, so it's a perfect 3x2
+     with no special-casing. justify-content: center is a no-op at exactly
+     6 items (both rows already fill 100%); it only earns its keep if a
+     platform is ever added or removed and the last row goes partial again. */
   .abn__garage-grid { display: flex; flex-wrap: wrap; justify-content: center;
     gap: var(--stack); margin: 0; padding: 0; list-style: none; }
   .abn__gcard { flex: 1 1 100%; }
   @media (min-width: 780px) { .abn__gcard { flex: 0 1 calc((100% - (2 * var(--stack))) / 3); min-width: 0; } }
+  /* Intro tile: same card box (border, wash, radius) as the other 5, just
+     text instead of a photo. Padding replaces the image + .abn__gcard-body
+     padding, and centering the head vertically keeps it from clinging to
+     the top of a box that's only as tall as its row-mate's photo+body. */
+  .abn__gcard--intro { padding: clamp(24px, 3vw, 32px); justify-content: center; }
+  .abn__gcard--intro .abn__garage-head { margin: 0; }
   /* Cards lift off the ground with a 5% white wash rather than a second flat
      colour, so they stay tied to --ink whatever it's set to. */
   .abn__gcard { position: relative; display: flex; flex-direction: column;
@@ -5516,19 +5525,25 @@ html, body{ overflow-x:clip; }
            Expanded to 5 (2026-09-16): muscle and powersports added alongside
            the original SUV/car/truck set, same card treatment. The cards link
            to the sub-brand pages that already exist rather than introducing
-           a new way to slice the catalog. ===== -->
+           a new way to slice the catalog.
+           Restructured (2026-09-16): the kicker/h2/intro paragraph moved from
+           its own row above the grid into the grid itself, as the first tile
+           (.abn__gcard--intro) -- 1 text tile + 5 card tiles makes a perfect
+           3x2, rather than a text block sitting on its own above a 5-card row. ===== -->
       <section class="abn__garage" aria-labelledby="abn-garage-h">
         <div class="abn__garage-inner">
-          <div class="abn__garage-head">
-            <p class="vc__kicker">Chassis ownership</p>
-            <h2 id="abn-garage-h">Most of you don&rsquo;t have just one car.</h2>
-            <p>From your daily driver truck or SUV, to the restomod muscle car in your
-              driveway, all the way to your weekend warrior UTV, you&rsquo;ll find different
-              fitment problems for each platform. And most shops only know one of them
-              properly. We hold the specs across all five. Same team, same verification,
-              whichever one is in the driveway when you call.</p>
-          </div>
           <ul class="abn__garage-grid">
+            <li class="abn__gcard abn__gcard--intro">
+              <div class="abn__garage-head">
+                <p class="vc__kicker">Chassis ownership</p>
+                <h2 id="abn-garage-h">Most of you don&rsquo;t have just one car.</h2>
+                <p>From your daily driver truck or SUV, to the restomod muscle car in your
+                  driveway, all the way to your weekend warrior UTV, you&rsquo;ll find different
+                  fitment problems for each platform. And most shops only know one of them
+                  properly. We hold the specs across all five. Same team, same verification,
+                  whichever one is in the driveway when you call.</p>
+              </div>
+            </li>
             <li class="abn__gcard">
               <img src="real-photos/mercedes-amg-g-wagon.webp" alt="Black Brabus-widebody Mercedes-AMG G-Wagon, front three-quarter view" width="1920" height="1065" loading="lazy" decoding="async">
               <div class="abn__gcard-body">
@@ -5575,7 +5590,7 @@ html, body{ overflow-x:clip; }
               <img src="real-photos/corvette.jpg" alt="Red Chevrolet Corvette, front three-quarter view" width="1920" height="1001" loading="lazy" decoding="async">
               <div class="abn__gcard-body">
                 <span class="abn__gcard-kind">The muscle car</span>
-                <h3><a class="abn__gcard-link" href="vivid-classics.html">Muscle &amp; classics</a></h3>
+                <h3><a class="abn__gcard-link" href="vivid-classics.html">Muscle</a></h3>
                 <p>Bolt patterns that changed twice across a single generation, backspacing
                   for a staggered stance, and brake clearance behind a wheel that still reads factory.</p>
                 <ul class="abn__gplat">
