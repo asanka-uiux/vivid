@@ -4551,8 +4551,12 @@
   .bp { grid-area: buybox; }
 
   /* gallery — the package shows its wheel and its tire side by side */
-  .pg__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .pg__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; grid-template-areas: "wheel tire" "finish thumbs"; }
   .pg__half { margin: 0; background: #fff; border: 1px solid var(--line); overflow: hidden; }
+  .pg__half:nth-child(1) { grid-area: wheel; }
+  .pg__half:nth-child(2) { grid-area: tire; }
+  .pg__row--finish { grid-area: finish; }
+  .pg__row--thumbs { grid-area: thumbs; }
   .pg__half-img { position: relative; }
   .pg__half img { display: block; width: 100%; aspect-ratio: 1/1; object-fit: cover; }
   .pg__half-cap { font-family: var(--ui); font-size: 12px; font-weight: 600; color: var(--ink); border-top: 1px solid var(--line); padding: 9px 12px; background: var(--bone); }
@@ -4813,7 +4817,11 @@
     .rev-grid { grid-template-columns: minmax(0,1fr); gap: 32px; }
   }
   @media (max-width: 700px) {
-    .pg__pair { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .pg__pair { grid-template-columns: 1fr 1fr; gap: 8px; grid-template-areas: "wheel tire" "finish thumbs"; }
+    .pg__half:nth-child(1) { grid-area: wheel; }
+    .pg__half:nth-child(2) { grid-area: tire; }
+    .pg__row--finish { grid-area: finish; }
+    .pg__row--thumbs { grid-area: thumbs; }
     .bp { padding: 12px; }
     .bp__title { font-size: 24px; font-weight: 800; }
     .bp__price { font-size: 30px; }
