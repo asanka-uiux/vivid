@@ -4703,8 +4703,15 @@ html, body{ overflow-x:clip; }
     color: #fff; text-wrap: balance; }
   .abn__garage-head p { font-size: 1.0313rem; line-height: 1.7;
     color: rgba(255,255,255,.72); margin: 0; }
-  .abn__garage-grid { display: grid; gap: var(--stack); margin: 0; padding: 0; list-style: none; }
-  @media (min-width: 780px) { .abn__garage-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  /* Flex, not grid: with 5 cards a 3-column grid leaves the trailing row of 2
+     stuck at the left edge with a dead gap where the 3rd column would be.
+     A flex row that wraps can be centered instead — with exactly 3 per row
+     the centering is a no-op (the row already fills 100%), so it only ever
+     visibly affects the trailing partial row. */
+  .abn__garage-grid { display: flex; flex-wrap: wrap; justify-content: center;
+    gap: var(--stack); margin: 0; padding: 0; list-style: none; }
+  .abn__gcard { flex: 1 1 100%; }
+  @media (min-width: 780px) { .abn__gcard { flex: 0 1 calc((100% - (2 * var(--stack))) / 3); min-width: 0; } }
   /* Cards lift off the ground with a 5% white wash rather than a second flat
      colour, so they stay tied to --ink whatever it's set to. */
   .abn__gcard { position: relative; display: flex; flex-direction: column;
@@ -5506,16 +5513,18 @@ html, body{ overflow-x:clip; }
       <!-- ============ 5 · CHASSIS OWNERSHIP =================================
            Brief: "3 car garage (suv, car, truck) we take ownership over your
            full garage of builds and flex our expertise in chassis knowledge."
-           The three cards link to the sub-brand pages that already exist
-           rather than introducing a fourth way to slice the catalog. ===== -->
+           Expanded to 5 (2026-09-16): muscle and powersports added alongside
+           the original SUV/car/truck set, same card treatment. The cards link
+           to the sub-brand pages that already exist rather than introducing
+           a new way to slice the catalog. ===== -->
       <section class="abn__garage" aria-labelledby="abn-garage-h">
         <div class="abn__garage-inner">
           <div class="abn__garage-head">
             <p class="vc__kicker">Chassis ownership</p>
             <h2 id="abn-garage-h">Most of you don&rsquo;t have just one car.</h2>
-            <p>The daily, the weekend car, and the thing that tows your toys come with three
+            <p>The daily, the weekend car, and the thing that tows your toys come with five
               separate fitment problems, and most shops only know one of them properly. We
-              hold the specs across all three. Same team, same verification, whichever one
+              hold the specs across all five. Same team, same verification, whichever one
               is in the driveway when you call.</p>
           </div>
           <ul class="abn__garage-grid">
@@ -5558,6 +5567,34 @@ html, body{ overflow-x:clip; }
                   <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Ford&amp;model=F-150">Ford F-150</a></li>
                   <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Ram&amp;model=1500">RAM 1500</a></li>
                   <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Jeep&amp;model=Wrangler">Jeep Wrangler</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="abn__gcard">
+              <img src="real-photos/corvette.jpg" alt="Red Chevrolet Corvette, front three-quarter view" width="1920" height="1001" loading="lazy" decoding="async">
+              <div class="abn__gcard-body">
+                <span class="abn__gcard-kind">The muscle car</span>
+                <h3><a class="abn__gcard-link" href="vivid-classics.html">Muscle &amp; classics</a></h3>
+                <p>Bolt patterns that changed twice across a single generation, backspacing
+                  for a staggered stance, and brake clearance behind a wheel that still reads factory.</p>
+                <ul class="abn__gplat">
+                  <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Ford&amp;model=Mustang">Ford Mustang</a></li>
+                  <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Dodge&amp;model=Challenger">Dodge Challenger</a></li>
+                  <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Chevrolet&amp;model=Camaro">Chevrolet Camaro</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="abn__gcard">
+              <img src="real-photos/polaris-rzr.jpg" alt="Polaris RZR Pro R side-by-side, front three-quarter view on a forest trail" width="1620" height="1080" loading="lazy" decoding="async">
+              <div class="abn__gcard-body">
+                <span class="abn__gcard-kind">The powersports rig</span>
+                <h3><a class="abn__gcard-link" href="vividx.html">ATVs &amp; UTVs</a></h3>
+                <p>Beadlock offsets, axle clearance at full droop, and the backspacing that
+                  keeps a trail tire off the a-arm.</p>
+                <ul class="abn__gplat">
+                  <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Polaris&amp;model=RZR%20Pro%20R">Polaris RZR Pro R</a></li>
+                  <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Can-Am&amp;model=Maverick%20R">Can-Am Maverick R</a></li>
+                  <li><a class="abn__gplat-link" href="waiting-to-build/vehicle-picker.html?make=Yamaha&amp;model=YXZ">Yamaha YXZ</a></li>
                 </ul>
               </div>
             </li>
