@@ -4826,10 +4826,13 @@
     .pg__half:nth-child(1) { grid-area: wheel; }
     .pg__half:nth-child(2) { grid-area: tire; }
     .pg__row--thumbs { grid-area: thumbs; }
+    /* the two captions wrap to 2-3 lines in a half-width column on mobile, so
+       they lighten a step and tighten their leading to stay readable */
+    .pg__half-cap { font-weight: 500; line-height: 1.2; }
     .bp { padding: 12px; }
     .bp__title { font-size: 24px; font-weight: 800; }
     .bp__price { font-size: 30px; }
-    .bp__sku, .bp__sku-row { font-size: 12px; }
+    .bp__sku, .bp__sku-row { font-size: 10px; }
     .bp__expert { flex-direction: column; align-items: stretch; }
     .bp__expert > div:last-child { margin-top: 4px; }
     .pdp-about p, .pdp-about li, .review p, .policy__desc, .opt__desc { font-size: 12px; }
@@ -5552,7 +5555,6 @@ html, body{ overflow-x:clip; }
           <div class="bp__fit-line">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="#16A34A"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
             <span><strong>Fits your</strong> <strong class="veh" id="vehName">2023 BMW M4 Competition</strong></span>
-            <span id="vehPattern" style="margin-left:auto; font-family:var(--mono); font-size:18px; color:var(--steel);">5x112</span>
           </div>
           <button type="button" class="bp__fit-link bp__fit-link--btn" onclick="openYmmModal()">Change Vehicle &rsaquo;</button>
         </div>
@@ -5930,7 +5932,6 @@ html, body{ overflow-x:clip; }
     var trim = document.getElementById('ymmModalTrim').value;
     if (!year || !make || !model) return;
     document.getElementById('vehName').textContent = year + ' ' + make + ' ' + model + (trim ? ' ' + trim : '');
-    document.getElementById('vehPattern').textContent = YMM_PATTERNS[make] || '';
     closeYmmModal();
   }
   document.addEventListener('keydown', function(e){
