@@ -4576,6 +4576,7 @@
   /* both rows stack: label on its own line above its controls, matching each
      other so the pair's two columns read the same way */
   .pg__row--thumbs, .pg__row--finish { flex-direction: column; align-items: stretch; gap: 8px; overflow-x: visible; }
+  .pg__row--finish { display: none; }
   .pg__finishes { display: flex; align-items: center; gap: 10px; min-width: 0; flex-wrap: wrap; }
   .pg__thumbs { display: flex; gap: 12px; min-width: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; }
   .pg__thumbs::-webkit-scrollbar { display: none; }
@@ -4820,7 +4821,6 @@
     .pg__pair { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; grid-template-areas: "wheel tire" "finish finish" "thumbs thumbs"; }
     .pg__half:nth-child(1) { grid-area: wheel; }
     .pg__half:nth-child(2) { grid-area: tire; }
-    .pg__row--finish { display: none; }
     .pg__row--thumbs { grid-area: thumbs; }
     .bp { padding: 12px; }
     .bp__title { font-size: 24px; font-weight: 800; }
@@ -5436,7 +5436,7 @@ html, body{ overflow-x:clip; }
             </div>
           </div>
           <div class="pg__row pg__row--thumbs">
-            <span class="pg__row-label">Tires on Vehicle</span>
+            <span class="pg__row-label">Gallery Photos</span>
             <div class="pg__thumbs">
               <img class="pg__thumb" role="button" tabindex="0" src="product-images/tires.webp" onclick="pgSet(this.src)" alt="Michelin Defender LTX M/S tire" aria-label="View Michelin Defender LTX M/S tire"  loading="lazy" decoding="async"/>
               <img class="pg__thumb" role="button" tabindex="0" src="https://images.unsplash.com/photo-1714859817907-210d1c922eea?fm=jpg&q=80&w=800&auto=format&fit=crop" onclick="pgSet(this.src)" alt="Tires on vehicle photo 1" aria-label="View tires on vehicle photo 1"  loading="lazy" decoding="async"/>
