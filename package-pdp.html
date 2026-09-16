@@ -4600,6 +4600,7 @@
   .bp { border: 1px solid var(--line); padding: 20px; position: sticky; top: 24px; }
   .bp__title { font-family: var(--display); font-size: 30px; font-weight: 900; letter-spacing: -0.02em; line-height: 1.05; color: var(--ink); margin: 0 0 6px; }
   .bp__sku-row { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; margin-bottom: 10px; }
+  .bp__sku-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; color: var(--steel); text-transform: uppercase; margin-bottom: 2px; }
   .bp__sku { font-family: var(--mono); font-size: 14px; letter-spacing: 0.08em; color: var(--steel); }
   .bp__meta { display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--line); padding: 8px 14px; margin-bottom: 8px; }
   .bp__stock { display: flex; align-items: center; gap: 8px; font-family: var(--display); font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--green); }
@@ -5529,8 +5530,14 @@ html, body{ overflow-x:clip; }
       <div class="bp">
         <h1 class="bp__title">VR Forged D02-8 + Michelin Defender LTX M/S Package</h1>
         <div class="bp__sku-row">
-          <span class="bp__sku">Wheel: VRF-D0208-1709SB</span>
-          <span class="bp__sku" style="margin-left:auto;">Tire: MCH-DLTXMS-27565R18</span>
+          <div>
+            <div class="bp__sku-label">Wheel</div>
+            <span class="bp__sku">VRF-D0208-1709SB</span>
+          </div>
+          <div style="margin-left:auto; text-align:right;">
+            <div class="bp__sku-label">Tire</div>
+            <span class="bp__sku">MCH-DLTXMS-27565R18</span>
+          </div>
         </div>
 
         <div class="bp__meta">
