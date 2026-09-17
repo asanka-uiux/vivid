@@ -199,13 +199,15 @@ button{font:inherit;color:inherit;font-family:var(--font-ui)}
    plain inline link sized entirely by its image (natural inline flow) */
 .logo{flex:none;display:flex;align-items:center;min-height:44px}
 @media (min-width:901px){ .logo{min-height:0;display:inline} }
-/* width:auto, not a fixed px value -- the fixed-width version silently
-   squished any logo whose aspect ratio didn't match the box (the flagship
-   wordmark happened to be close enough not to show it, but the wider
-   sub-brand wordmarks -- VR Crossover/Muscle/Powersports -- visibly did). */
-.logo img{width:auto;height:24px}
-@media (min-width:361px){ .logo img{width:auto;height:30px} }
-@media (min-width:1025px){ .logo img{width:auto;height:36px} }
+/* Fixed box (170x30 mobile, 200x36 desktop) so the header logo slot is the
+   same size regardless of which page's logo is showing. object-fit:contain
+   scales each logo to fit inside without stretching it off its own aspect
+   ratio (plain width+height with no object-fit would squish any logo whose
+   ratio doesn't match the box -- see the sub-brand wordmarks). left center
+   keeps it anchored to the same edge the old auto-width version had it at,
+   instead of contain's default centering leaving uneven space on both sides. */
+.logo img{width:170px;height:30px;object-fit:contain;object-position:left center}
+@media (min-width:1025px){ .logo img{width:200px;height:36px} }
 
 /* mobile/tablet: search collapses to a 44px icon-only tile, pushed to the end
    of the reordered row (order:2, margin-left:auto); desktop: the full
