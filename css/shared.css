@@ -199,9 +199,13 @@ button{font:inherit;color:inherit;font-family:var(--font-ui)}
    plain inline link sized entirely by its image (natural inline flow) */
 .logo{flex:none;display:flex;align-items:center;min-height:44px}
 @media (min-width:901px){ .logo{min-height:0;display:inline} }
-.logo img{width:118px;height:24px}
-@media (min-width:361px){ .logo img{width:173px;height:36px} }
-@media (min-width:1025px){ .logo img{width:183px;height:38px} }
+/* width:auto, not a fixed px value -- the fixed-width version silently
+   squished any logo whose aspect ratio didn't match the box (the flagship
+   wordmark happened to be close enough not to show it, but the wider
+   sub-brand wordmarks -- VR Crossover/Muscle/Powersports -- visibly did). */
+.logo img{width:auto;height:24px}
+@media (min-width:361px){ .logo img{width:auto;height:30px} }
+@media (min-width:1025px){ .logo img{width:auto;height:36px} }
 
 /* mobile/tablet: search collapses to a 44px icon-only tile, pushed to the end
    of the reordered row (order:2, margin-left:auto); desktop: the full
