@@ -6255,7 +6255,7 @@ html, body{ overflow-x:clip; }
   <div class="wrap">
     <div class="listing__grid">
 
-      <div class="filters__overlay" id="filtersOverlay" onclick="toggleFilters(false)"></div>
+      <div class="filters__overlay" id="filtersOverlay" onclick="toggleFilters(false)" role="button" tabindex="0" aria-label="Close filters" onkeydown="if(event.key==='Enter'||event.key===' ')toggleFilters(false)"></div>
       <aside class="filters" id="filtersPanel">
         <div class="filters__head">
           <span class="filters__head-title">Filters</span>
